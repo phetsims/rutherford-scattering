@@ -4,6 +4,7 @@
  * The 'Rutherford Atom' screen. Conforms to the contract specified in joist/Screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
+ * @author Jake Selig (PhET)
  */
 define( function( require ) {
   'use strict';
