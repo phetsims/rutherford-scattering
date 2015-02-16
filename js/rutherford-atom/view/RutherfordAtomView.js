@@ -15,6 +15,10 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
 
+  // views
+  var LegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/LegendPanel' );
+  var AlphaParticlePanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePanel' );
+
   /**
    * @param {RutherfordAtomModel} model
    * @constructor
@@ -31,6 +35,8 @@ define( function( require ) {
       fill: 'white',
       center: this.layoutBounds.center
     } ) );
+
+    this.addChild( new AlphaParticlePanel() );
   }
 
   return inherit( ScreenView, RutherfordAtomView );
