@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -36,7 +37,13 @@ define( function( require ) {
       center: this.layoutBounds.center
     } ) );
 
-    this.addChild( new AlphaParticlePanel() );
+    var legends = new LayoutBox( {
+      children: [ new LegendPanel(), new AlphaParticlePanel() ],
+      right: this.layoutBounds.maxX,
+      spacing: 3
+    } );
+
+    this.addChild( legends );
   }
 
   return inherit( ScreenView, RutherfordAtomView );

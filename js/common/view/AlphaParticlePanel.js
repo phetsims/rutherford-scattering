@@ -9,53 +9,53 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
+  var CheckBox = require( 'SUN/CheckBox' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
+  var RutherfordPanelBase = require( 'RUTHERFORD_SCATTERING/common/view/RutherfordPanelBase' );
+  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   var AlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
+  var TracesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.traces' );
 
   function AlphaParticlePanel( model, options ) {
 
     options = _.extend( {
-        align: 'left',
-        spacing: 1,
-        stroke: 'white',
-        fill: 'black',
-        lineWidth: 3,
-        headerFontSize: 18,
-        headerFontColor: 'yellow',
-        subtextFontSize: 15,
-        subtextFontColor: 'white',
-        rowOrientation: 'horizontal',
-        rowSpacing: 10,
-        xMargin: 10,
-        yMargin: 10
-      },
-      options );
+      align: 'left',
+      lineWidth: 3
+    }, options );
+
+    var TEST_PROPERTY = new Property( 1 );
 
     // Text elements for entries in Legend
     var alphaParticleText = new Text( AlphaParticleString, {
-      font: new PhetFont( options.headerFontSize ),
-      fill: options.headerFontColor
+      fill: RutherfordScatteringConstants.PANEL_HEADER_FONTCOLOR,
+      font: new PhetFont( RutherfordScatteringConstants.PANEL_HEADER_FONTSIZE )
     } );
 
-    var energySlider = new HSlider( new Property(1), {min: 0, max: 15} );
-
-    var content = new LayoutBox( {
-      align: options.align,
-      spacing: options.spacing,
-      children: [ alphaParticleText, energySlider ]
+    var energySlider = new HSlider( TEST_PROPERTY, {
+      max: RutherfordScatteringConstants.ALPHAPARTICLE_ENERGY_MAX,
+      min: RutherfordScatteringConstants.ALPHAPARTICLE_ENERGY_MIN
     } );
 
-    Panel.call( this, content, options );
+    var tracesText = new Text( TracesString, {
+      fill: RutherfordScatteringConstants.PANEL_CONTENT_FONTCOLOR,
+      font: new PhetFont( RutherfordScatteringConstants.PANEL_CONTENT_FONTSIZE )
+    } );
+
+    var checkBoxTraces = new CheckBox( tracesText, TEST_PROPERTY );
+
+    var content = new LayoutBox( _.extend( {
+      children: [ alphaParticleText, energySlider, checkBoxTraces ]
+    }, options ) );
+
+    RutherfordPanelBase.call( this, content, options );
   }
 
-  return inherit( Panel, AlphaParticlePanel );
+  return inherit( RutherfordPanelBase, AlphaParticlePanel );
 } );

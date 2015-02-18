@@ -9,12 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var RutherfordPanelBase = require( 'RUTHERFORD_SCATTERING/common/view/RutherfordPanelBase' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // images
@@ -44,7 +43,7 @@ define( function( require ) {
       subtextFontSize: 15,
       subtextFontColor: 'white',
       rowOrientation: 'horizontal',
-      rowSpacing: 10,
+      rowSpacing: 1,
       xMargin: 10,
       yMargin: 10
     },
@@ -101,15 +100,12 @@ define( function( require ) {
       children: [ new Image( LegendProtonImageSrc ), legendProtonText ]
     } );
 
-    var content = new LayoutBox( {
-      align: options.align,
-      spacing: options.spacing,
-      width: options.rectWidth,
+    var content = new LayoutBox( _.extend( {
       children: [ legendText, LegendElectronRow, LegendProtonRow, LegendNeutronRow, LegendAlphaParticleRow ]
-    } );
+    }, options ) );
 
-    Panel.call( this, content, options );
+    RutherfordPanelBase.call( this, content, options );
   }
 
-  return inherit( Panel, LegendPanel );
+  return inherit( RutherfordPanelBase, LegendPanel );
 } );
