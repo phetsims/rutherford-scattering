@@ -3,6 +3,7 @@
  */
 
 define( function() {
+  'use strict';
 
   return {
     "ALPHAPARTICLE_ENERGY_MAX": 15,
@@ -18,5 +19,5 @@ define( function() {
     "PANEL_WIDTH": 180,
     "PANEL_XMARGIN": 10,
     "PANEL_YMARGIN": 10
-  }
+  };
 } );
