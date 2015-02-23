@@ -9,103 +9,70 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var constants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RutherfordPanelBase = require( 'RUTHERFORD_SCATTERING/common/view/RutherfordPanelBase' );
+  var Panel = require( 'SUN/Panel' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // images
-  var LegendAlphaParticleImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
-  var LegendElectronImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
-  var LegendNeutronImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
-  var LegendProtonImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
+  var legendAlphaParticleImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
+  var legendElectronImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
+  var legendNeutronImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
+  var legendProtonImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
 
   // strings
-  var LegendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
-  var LegendAlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/legend.alphaParticle' );
-  var LegendElectronString = require( 'string!RUTHERFORD_SCATTERING/legend.electron' );
-  var LegendNeutronString = require( 'string!RUTHERFORD_SCATTERING/legend.neutron' );
-  var LegendProtonString = require( 'string!RUTHERFORD_SCATTERING/legend.proton' );
+  var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
+  var legendAlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/legend.alphaParticle' );
+  var legendElectronString = require( 'string!RUTHERFORD_SCATTERING/legend.electron' );
+  var legendNeutronString = require( 'string!RUTHERFORD_SCATTERING/legend.neutron' );
+  var legendProtonString = require( 'string!RUTHERFORD_SCATTERING/legend.proton' );
 
 
   function LegendPanel( model, options ) {
 
-    options = _.extend( {
-      align: 'left',
-      spacing: 1,
-      stroke: 'white',
-      fill: 'black',
-      lineWidth: 3,
-      headerFontSize: 18,
-      headerFontColor: 'yellow',
-      subtextFontSize: 15,
-      subtextFontColor: 'white',
-      rowOrientation: 'horizontal',
-      rowSpacing: 1,
-      xMargin: 10,
-      yMargin: 10
-    },
-    options );
+    options = _.extend( constants.PANEL_OPTIONS, options );
 
-    // Text elements for entries in Legend
-    var legendText = new Text( LegendString, {
-      font: new PhetFont( options.headerFontSize ),
-      fill: options.headerFontColor
-    } );
+    // Predefined options for a horizontal LayoutBox containing [icon, text]
+    var rowOptions = {
+      orientation: 'horizontal',
+      spacing: 4
+    };
 
-    var legendAlphaParticleText = new Text( LegendAlphaParticleString, {
-      font: new PhetFont( options.subtextFontSize ),
-      fill: options.subtextFontColor
-    } );
-
-    var legendElectronText = new Text( LegendElectronString, {
-      font: new PhetFont( options.subtextFontSize ),
-      fill: options.subtextFontColor
-    } );
-
-    var legendNeutronText = new Text( LegendNeutronString, {
-      font: new PhetFont( options.subtextFontSize ),
-      fill: options.subtextFontColor
-    } );
-
-    var legendProtonText = new Text( LegendProtonString, {
-      font: new PhetFont( options.subtextFontSize ),
-      fill: options.subtextFontColor
-    } );
+    // title for this panel
+    var legendText = new Text( legendString, constants.PANEL_TITLE_TEXT_OPTIONS );
 
     // rows contain an icon Image and label Text that create a legend description
-    var LegendAlphaParticleRow = new LayoutBox( {
-      orientation: options.rowOrientation,
-      spacing: options.rowSpacing,
-      children: [ new Image( LegendAlphaParticleImageSrc ), legendAlphaParticleText ]
-    } );
+    var legendAlphaParticleRow = new LayoutBox( _.extend( {
+      children: [ new Image( legendAlphaParticleImageSrc ), new Text( legendAlphaParticleString, constants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+    }, rowOptions ) );
 
-    var LegendElectronRow = new LayoutBox( {
-      orientation: options.rowOrientation,
-      spacing: options.rowSpacing,
-      children: [ new Image( LegendElectronImageSrc ), legendElectronText ]
-    } );
+    var legendElectronRow = new LayoutBox( _.extend( {
+      children: [ new Image( legendElectronImageSrc ), new Text( legendElectronString, constants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+    }, rowOptions ) );
 
-    var LegendNeutronRow = new LayoutBox( {
-      orientation: options.rowOrientation,
-      spacing: options.rowSpacing,
-      children: [ new Image( LegendNeutronImageSrc ), legendNeutronText ]
-    } );
+    var legendNeutronRow = new LayoutBox( _.extend( {
+      children: [ new Image( legendNeutronImageSrc ), new Text( legendNeutronString, constants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+    }, rowOptions ) );
 
-    var LegendProtonRow = new LayoutBox( {
-      orientation: options.rowOrientation,
-      spacing: options.rowSpacing,
-      children: [ new Image( LegendProtonImageSrc ), legendProtonText ]
-    } );
+    var legendProtonRow = new LayoutBox( _.extend( {
+      children: [ new Image( legendProtonImageSrc ), new Text( legendProtonString, constants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+    }, rowOptions ) );
 
+    /**
+     * "Legend"                 (legendText)
+     * <img> "Alpha Particle"   (legendAlphaParticleRow)
+     * <img> "Neutron"          (legendNeutronRow)
+     * <img> "Proton"           (legendProtonRow)
+     * <img> "Election"         (legendElectronRow)
+     */
     var content = new LayoutBox( _.extend( {
-      children: [ legendText, LegendElectronRow, LegendProtonRow, LegendNeutronRow, LegendAlphaParticleRow ]
+      children: [ legendText, legendElectronRow, legendProtonRow, legendNeutronRow, legendAlphaParticleRow ]
     }, options ) );
 
-    RutherfordPanelBase.call( this, content, options );
+    Panel.call( this, content, options );
   }
 
-  return inherit( RutherfordPanelBase, LegendPanel );
+  return inherit( Panel, LegendPanel );
 } );

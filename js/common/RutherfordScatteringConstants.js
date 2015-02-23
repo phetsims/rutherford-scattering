@@ -1,23 +1,71 @@
-/**
- * Created by selijac on 2/16/15.
- */
+// Copyright 2002-2015, University of Colorado Boulder
 
+/**
+ * constants for this simulation, Rutherford Scattering
+ *
+ * @author Jake Selig (PhET)
+ */
 define( function() {
   'use strict';
 
+  var Dimension2 = require( 'DOT/Dimension2' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+
+  // Standardize fonts, and group them together for easy viewing
+  var bigFont = new PhetFont( 18 );
+  var medFont = new PhetFont( 14 );
+  var smlFont = new PhetFont( 12 );
+
   return {
-    "ALPHAPARTICLE_ENERGY_MAX": 15,
-    "ALPHAPARTICLE_ENERGY_MIN": 1,
-    "PANEL_BACKGROUND_COLOR": "black",
-    "PANEL_CORNER_RADIUS": 3,
-    "PANEL_CONTENT_FONTCOLOR": "white",
-    "PANEL_CONTENT_FONTSIZE": 13,
-    "PANEL_HEADER_FONTCOLOR": "yellow",
-    "PANEL_HEADER_FONTSIZE": 17,
-    "PANEL_SPACING_VERTICAL": 10,
-    "PANEL_STROKE_COLOR": "white",
-    "PANEL_WIDTH": 180,
-    "PANEL_XMARGIN": 10,
-    "PANEL_YMARGIN": 10
+    "CHECKBOX_OPTIONS": {
+      checkBoxColor: 'white',
+      checkBoxColorBackground: 'black'
+    },
+    "ENERGY_RANGE": {
+      "min": 1,
+      "max": 30,
+    },
+    "PANEL_OPTIONS": {
+      "align": 'left',
+      "fill": 'black',
+      "spacing":  4,
+      "stroke": 'white',
+      "lineWidth": 3,
+      "minWidth": 180,
+      "xMargin": 16,
+      "yMargin": 16,
+      "resize": false
+    },
+    "PANEL_CONTENT_OPTIONS": {
+      "spacing": 10
+    },
+    "PANEL_TITLE_TEXT_OPTIONS": {
+      "fill": 'gold',
+      "font": bigFont
+    },
+    "PANEL_ENTRY_TEXT_OPTIONS": {
+      "fill": 'white',
+      "font": medFont
+    },
+    "PROTON_RANGE": {
+      min: 20,
+      max: 100
+    },
+    "NEUTRON_RANGE": {
+      min: 20,
+      max: 150
+    },
+    "SLIDER_OPTIONS": {
+      trackSize: new Dimension2( 130, 2 ),
+      tickLabelSpacing: 0,
+      majorTickLength: 12,
+      majorTickStroke: 'white',
+      majorTickFill: 'white',
+      thumbSize: new Dimension2( 14, 22 )
+    },
+    "SLIDER_TICK_TEXT_OPTIONS": {
+      fill: 'white',
+      font: smlFont
+    }
   };
 } );

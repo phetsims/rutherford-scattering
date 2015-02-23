@@ -19,13 +19,14 @@ define( function( require ) {
   // views
   var LegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/LegendPanel' );
   var AlphaParticlePanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePanel' );
+  var AtomPanel = require( 'RUTHERFORD_SCATTERING/common/view/AtomPanel' );
 
   /**
    * @param {RutherfordAtomModel} model
    * @constructor
    */
   function RutherfordAtomView( model ) {
-
+    
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 1024, 618 ) } );
 
     //TODO create view nodes and wire up to model
@@ -38,8 +39,9 @@ define( function( require ) {
     } ) );
 
     var legends = new LayoutBox( {
-      children: [ new LegendPanel(), new AlphaParticlePanel() ],
-      right: this.layoutBounds.maxX,
+      align: "right",
+      children: [ new LegendPanel(), new AlphaParticlePanel(), new AtomPanel ],
+      right: this.layoutBounds.maxX - 15,
       spacing: 3
     } );
 

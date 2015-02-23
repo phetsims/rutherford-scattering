@@ -10,52 +10,59 @@ define( function( require ) {
 
   // modules
   var CheckBox = require( 'SUN/CheckBox' );
+  var ControlSlider = require( 'RUTHERFORD_SCATTERING/common/view/ControlSlider' );
+  var constants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
-  var RutherfordPanelBase = require( 'RUTHERFORD_SCATTERING/common/view/RutherfordPanelBase' );
-  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var AlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
-  var TracesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.traces' );
+  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
+  var tracesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.traces' );
+  var energyMaxString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.max' );
+  var energyMinString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.min' );
+  var energyTitleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.energy' );
 
   function AlphaParticlePanel( model, options ) {
 
-    options = _.extend( {
-      align: 'left',
-      lineWidth: 3
-    }, options );
+    options = _.extend( constants.PANEL_OPTIONS, options );
 
-    var TEST_PROPERTY = new Property( 1 );
+    var controlOptions = {};
+    var energyRange = constants.ENERGY_RANGE;
+    energyRange.minLabel = energyMinString;
+    energyRange.maxLabel = energyMaxString;
+
+    // TODO: take the property from the model somewhere.
+    var energyProperty = new Property( 1 ); // model.alasdf
 
     // Text elements for entries in Legend
-    var alphaParticleText = new Text( AlphaParticleString, {
-      fill: RutherfordScatteringConstants.PANEL_HEADER_FONTCOLOR,
-      font: new PhetFont( RutherfordScatteringConstants.PANEL_HEADER_FONTSIZE )
-    } );
+    var alphaParticleText = new Text( alphaParticleString, constants.PANEL_TITLE_TEXT_OPTIONS );
+    var energyText = new Text( energyTitleString, constants.PANEL_ENTRY_TEXT_OPTIONS );
+    var tracesText = new Text( tracesString, constants.PANEL_ENTRY_TEXT_OPTIONS );
 
-    var energySlider = new HSlider( TEST_PROPERTY, {
-      max: RutherfordScatteringConstants.ALPHAPARTICLE_ENERGY_MAX,
-      min: RutherfordScatteringConstants.ALPHAPARTICLE_ENERGY_MIN
-    } );
 
-    var tracesText = new Text( TracesString, {
-      fill: RutherfordScatteringConstants.PANEL_CONTENT_FONTCOLOR,
-      font: new PhetFont( RutherfordScatteringConstants.PANEL_CONTENT_FONTSIZE )
-    } );
+    var energyController = new ControlSlider( energyText, energyProperty, constants.ENERGY_RANGE, 'rgb(50,145,184)', false, controlOptions );
 
-    var checkBoxTraces = new CheckBox( tracesText, TEST_PROPERTY );
 
+    // Checkbox to enable movement trails on alpha particles
+    var tracesCheckBox = new CheckBox( tracesText, energyProperty, constants.CHECKBOX_OPTIONS );
+
+    /**
+     * "Alpha Particle"   (alphaParticleText)
+     * "Energy"           (energyControl.energyTitleText)
+     * |------|           (energyControl.energySlider)
+     * [] "Traces"        (tracesCheckBox, tracesCheckBox.tracesText)
+     */
     var content = new LayoutBox( _.extend( {
-      children: [ alphaParticleText, energySlider, checkBoxTraces ]
+      children: [ alphaParticleText, energyController, tracesCheckBox ]
     }, options ) );
 
-    RutherfordPanelBase.call( this, content, options );
+    Panel.call( this, content, options );
   }
 
-  return inherit( RutherfordPanelBase, AlphaParticlePanel );
+  return inherit( Panel, AlphaParticlePanel );
 } );
