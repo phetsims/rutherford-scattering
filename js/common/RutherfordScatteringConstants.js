@@ -23,7 +23,7 @@ define( function() {
     },
     "ENERGY_RANGE": {
       "min": 1,
-      "max": 30,
+      "max": 30
     },
     "PANEL_OPTIONS": {
       "align": 'left',
@@ -31,9 +31,9 @@ define( function() {
       "spacing":  4,
       "stroke": 'white',
       "lineWidth": 3,
-      "minWidth": 180,
-      "xMargin": 16,
-      "yMargin": 16,
+      "minWidth": 150,
+      "xMargin": 10,
+      "yMargin": 10,
       "resize": false
     },
     "PANEL_CONTENT_OPTIONS": {

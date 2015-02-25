@@ -12,46 +12,51 @@ define( function( require ) {
 
   // modules
   var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
+  var Color = require( 'SCENERY/util/Color' );
   var constants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
+  var Property = require( 'AXON/Property' );
   var Rectangle = require('SCENERY/nodes/Rectangle');
-  var Text = require('SCENERY/nodes/Text');
   var SubSupText = require('SCENERY_PHET/SubSupText');
+  var Text = require('SCENERY/nodes/Text');
   var PhetFont = require('SCENERY_PHET/PhetFont');
   var HSlider = require('SUN/HSlider');
 
-  function ControlSlider( titleText, trackProperty, trackRange, thumbColor, hasPicker, options ) {
+  function ControlSlider( options ) {
 
     options = _.extend( {
-      align: 'center',
-      spacing: 2,
-      resize: false
+      title: new Text( "untitled" ),
+      property: new Property( 1 ),
+      color: new Color( 100, 200, 100 ),
+      withPicker: false,
+      range: { min: 0, max: 1 }
     }, options );
 
     // If there's no labels supplied, convert the range into text
-    var trackMaxString = trackRange.maxLabel ? trackRange.maxLabel : trackRange.max;
-    var trackMinString = trackRange.minLabel ? trackRange.minLabel : trackRange.min;
+    var trackMaxString = options.range.maxLabel !== undefined ? options.range.maxLabel : options.range.max;
+    var trackMinString = options.range.minLabel !== undefined ? options.range.minLabel : options.range.min;
 
     var BUTTON_CHANGE = 1;
     var BUTTON_SCALE = 0.6;
 
-    var slider = new HSlider( trackProperty, trackRange, _.extend( {
-      thumbFillEnabled: thumbColor
+    var slider = new HSlider( options.property, options.range, _.extend( {
+      thumbFillEnabled: options.color,
+      thumbFillHighlighted: options.color.brighterColor()
     }, constants.SLIDER_OPTIONS ) );
-    slider.addMajorTick( trackRange.min, new Text( trackMinString, constants.SLIDER_TICK_TEXT_OPTIONS ) );
-    slider.addMajorTick( trackRange.max, new Text( trackMaxString, constants.SLIDER_TICK_TEXT_OPTIONS ) );
+    slider.addMajorTick( options.range.min, new Text( trackMinString, constants.SLIDER_TICK_TEXT_OPTIONS ) );
+    slider.addMajorTick( options.range.max, new Text( trackMaxString, constants.SLIDER_TICK_TEXT_OPTIONS ) );
 
     var contentChildren;
-    if ( hasPicker ) {
+    if ( options.withPicker ) {
       var plusButton = new ArrowButton( 'right', function() {
-        trackProperty.set( Math.min( trackRange.max, trackProperty.get() + BUTTON_CHANGE ) );
+        options.property.set( Math.min( options.range.max, options.property.get() + BUTTON_CHANGE ) );
       }, {
         scale: BUTTON_SCALE
       } );
 
       var minusButton = new ArrowButton( 'left', function() {
-        trackProperty.set( Math.max( trackRange.min, trackProperty.get() - BUTTON_CHANGE ) );
+        options.property.set( Math.max( options.range.min, options.property.get() - BUTTON_CHANGE ) );
       }, {
         scale: BUTTON_SCALE
       } );
@@ -63,14 +68,17 @@ define( function( require ) {
         children: [ minusButton, plusButton ]
       } );
 
-      contentChildren = [ titleText, arrowPicker, slider ];
+      contentChildren = [ options.title, arrowPicker, slider ];
     } else {
-      contentChildren = [ titleText, slider ];
+      contentChildren = [ options.title, slider ];
     }
 
-    LayoutBox.call( this, _.extend( {
+    LayoutBox.call( this, {
+      align: 'center',
+      spacing: 2,
+      resize: false,
       children: contentChildren
-    }, options ) );
+    } );
   }
 
   return inherit( LayoutBox, ControlSlider );

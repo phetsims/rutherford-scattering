@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var CheckBox = require( 'SUN/CheckBox' );
+  var Color = require( 'SCENERY/util/Color' );
   var ControlSlider = require( 'RUTHERFORD_SCATTERING/common/view/ControlSlider' );
   var constants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var Dimension2 = require( 'DOT/Dimension2' );
@@ -31,7 +32,6 @@ define( function( require ) {
 
     options = _.extend( constants.PANEL_OPTIONS, options );
 
-    var controlOptions = {};
     var energyRange = constants.ENERGY_RANGE;
     energyRange.minLabel = energyMinString;
     energyRange.maxLabel = energyMaxString;
@@ -39,13 +39,22 @@ define( function( require ) {
     // TODO: take the property from the model somewhere.
     var energyProperty = new Property( 1 ); // model.alasdf
 
+    // Colors
+    var energyColor = new Color( 50, 145, 184 );
+
     // Text elements for entries in Legend
     var alphaParticleText = new Text( alphaParticleString, constants.PANEL_TITLE_TEXT_OPTIONS );
     var energyText = new Text( energyTitleString, constants.PANEL_ENTRY_TEXT_OPTIONS );
     var tracesText = new Text( tracesString, constants.PANEL_ENTRY_TEXT_OPTIONS );
 
 
-    var energyController = new ControlSlider( energyText, energyProperty, constants.ENERGY_RANGE, 'rgb(50,145,184)', false, controlOptions );
+    var energyController = new ControlSlider( {
+      title: energyText,
+      property: energyProperty,
+      range: energyRange,
+      color: energyColor,
+      withPicker: true
+    } );
 
 
     // Checkbox to enable movement trails on alpha particles

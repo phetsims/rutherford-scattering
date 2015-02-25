@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var ResetAllButton = require('SCENERY_PHET/buttons/ResetAllButton');
   var ScreenView = require( 'JOIST/ScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
 
@@ -30,6 +31,13 @@ define( function( require ) {
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 1024, 618 ) } );
 
     //TODO create view nodes and wire up to model
+    this.addChild( new ResetAllButton( {
+      right: this.layoutBounds.maxX - 10,
+      bottom: this.layoutBounds.maxY - 10,
+      listener: function() {
+        model.reset();
+      }
+    } ) );
 
     //TODO remove this
     this.addChild( new Text( 'Rutherford Atom: under construction', {
@@ -40,7 +48,7 @@ define( function( require ) {
 
     var legends = new LayoutBox( {
       align: "right",
-      children: [ new LegendPanel(), new AlphaParticlePanel(), new AtomPanel ],
+      children: [ new LegendPanel(), new AlphaParticlePanel(), new AtomPanel() ],
       right: this.layoutBounds.maxX - 15,
       spacing: 3
     } );
