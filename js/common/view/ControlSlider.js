@@ -17,10 +17,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Property = require( 'AXON/Property' );
-  var Rectangle = require('SCENERY/nodes/Rectangle');
-  var SubSupText = require('SCENERY_PHET/SubSupText');
+  var Range = require( 'DOT/Range' );
   var Text = require('SCENERY/nodes/Text');
-  var PhetFont = require('SCENERY_PHET/PhetFont');
   var HSlider = require('SUN/HSlider');
 
   function ControlSlider( options ) {
@@ -30,12 +28,13 @@ define( function( require ) {
       property: new Property( 1 ),
       color: new Color( 100, 200, 100 ),
       withPicker: false,
-      range: { min: 0, max: 1 }
+      range: new Range( 0, 1 ),
+      rangeLabels: {}
     }, options );
 
     // If there's no labels supplied, convert the range into text
-    var trackMaxString = options.range.maxLabel !== undefined ? options.range.maxLabel : options.range.max;
-    var trackMinString = options.range.minLabel !== undefined ? options.range.minLabel : options.range.min;
+    var trackMaxString = options.rangeLabels.maxLabel !== undefined ? options.rangeLabels.maxLabel : options.range.max;
+    var trackMinString = options.rangeLabels.minLabel !== undefined ? options.rangeLabels.minLabel : options.range.min;
 
     var BUTTON_CHANGE = 1;
     var BUTTON_SCALE = 0.6;

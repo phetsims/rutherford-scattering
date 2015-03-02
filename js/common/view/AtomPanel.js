@@ -12,10 +12,8 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color');
   var constants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var ControlSlider = require( 'RUTHERFORD_SCATTERING/common/view/ControlSlider' );
-  var HSlider = require( 'SUN/HSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -27,9 +25,7 @@ define( function( require ) {
 
   function AtomPanel( model, options ) {
 
-    options = _.extend( constants.PANEL_OPTIONS, options );
-
-    var controlOptions = {};
+    options = _.extend( {}, constants.PANEL_OPTIONS, options );
 
     // TODO: take the property from the model somewhere.
     var protonProperty = new Property( 1 ); // model.numProtons
@@ -42,11 +38,11 @@ define( function( require ) {
     // Text nodes
     var atomText = new Text( atomString, constants.PANEL_TITLE_TEXT_OPTIONS );
 
-    var protonText = new Text( protonString, _.extend( constants.PANEL_ENTRY_TEXT_OPTIONS, {
+    var protonText = new Text( protonString, _.extend( {}, constants.PANEL_ENTRY_TEXT_OPTIONS, {
       fill: protonColor
     } ) );
 
-    var neutronText = new Text( neutronString, _.extend( constants.PANEL_ENTRY_TEXT_OPTIONS, {
+    var neutronText = new Text( neutronString, _.extend( {}, constants.PANEL_ENTRY_TEXT_OPTIONS, {
       fill: neutronColor
     } ) );
 

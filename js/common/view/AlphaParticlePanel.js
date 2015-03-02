@@ -12,9 +12,7 @@ define( function( require ) {
   var CheckBox = require( 'SUN/CheckBox' );
   var Color = require( 'SCENERY/util/Color' );
   var ControlSlider = require( 'RUTHERFORD_SCATTERING/common/view/ControlSlider' );
-  var constants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var HSlider = require( 'SUN/HSlider' );
+  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Panel = require( 'SUN/Panel' );
@@ -30,11 +28,10 @@ define( function( require ) {
 
   function AlphaParticlePanel( model, options ) {
 
-    options = _.extend( constants.PANEL_OPTIONS, options );
+    options = _.extend( RutherfordScatteringConstants.PANEL_OPTIONS, options );
 
-    var energyRange = constants.ENERGY_RANGE;
-    energyRange.minLabel = energyMinString;
-    energyRange.maxLabel = energyMaxString;
+    var energyRange = RutherfordScatteringConstants.ENERGY_RANGE;
+    var energyRangeLabels = { minLabel: energyMinString, maxLabel: energyMaxString };
 
     // TODO: take the property from the model somewhere.
     var energyProperty = new Property( 1 ); // model.alasdf
@@ -43,22 +40,23 @@ define( function( require ) {
     var energyColor = new Color( 50, 145, 184 );
 
     // Text elements for entries in Legend
-    var alphaParticleText = new Text( alphaParticleString, constants.PANEL_TITLE_TEXT_OPTIONS );
-    var energyText = new Text( energyTitleString, constants.PANEL_ENTRY_TEXT_OPTIONS );
-    var tracesText = new Text( tracesString, constants.PANEL_ENTRY_TEXT_OPTIONS );
+    var alphaParticleText = new Text( alphaParticleString, RutherfordScatteringConstants.PANEL_TITLE_TEXT_OPTIONS );
+    var energyText = new Text( energyTitleString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS );
+    var tracesText = new Text( tracesString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS );
 
 
     var energyController = new ControlSlider( {
       title: energyText,
       property: energyProperty,
       range: energyRange,
+      rangeLabels: energyRangeLabels,
       color: energyColor,
       withPicker: true
     } );
 
 
     // Checkbox to enable movement trails on alpha particles
-    var tracesCheckBox = new CheckBox( tracesText, energyProperty, constants.CHECKBOX_OPTIONS );
+    var tracesCheckBox = new CheckBox( tracesText, energyProperty, RutherfordScatteringConstants.CHECKBOX_OPTIONS );
 
     /**
      * "Alpha Particle"   (alphaParticleText)
