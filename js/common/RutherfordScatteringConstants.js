@@ -5,7 +5,7 @@
  *
  * @author Jake Selig (PhET)
  */
-define( function() {
+define( function( require ) {
   'use strict';
 
   var Dimension2 = require( 'DOT/Dimension2' );
