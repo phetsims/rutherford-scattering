@@ -13,11 +13,11 @@ define( function( require ) {
   // modules
   var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
   var Color = require( 'SCENERY/util/Color' );
-  var constants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
+  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var Text = require('SCENERY/nodes/Text');
   var HSlider = require('SUN/HSlider');
 
@@ -42,9 +42,9 @@ define( function( require ) {
     var slider = new HSlider( options.property, options.range, _.extend( {
       thumbFillEnabled: options.color,
       thumbFillHighlighted: options.color.brighterColor()
-    }, constants.SLIDER_OPTIONS ) );
-    slider.addMajorTick( options.range.min, new Text( trackMinString, constants.SLIDER_TICK_TEXT_OPTIONS ) );
-    slider.addMajorTick( options.range.max, new Text( trackMaxString, constants.SLIDER_TICK_TEXT_OPTIONS ) );
+    }, RutherfordScatteringConstants.SLIDER_OPTIONS ) );
+    slider.addMajorTick( options.range.min, new Text( trackMinString, RutherfordScatteringConstants.SLIDER_TICK_TEXT_OPTIONS ) );
+    slider.addMajorTick( options.range.max, new Text( trackMaxString, RutherfordScatteringConstants.SLIDER_TICK_TEXT_OPTIONS ) );
 
     var contentChildren;
     if ( options.withPicker ) {

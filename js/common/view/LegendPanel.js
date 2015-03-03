@@ -9,11 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var constants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Panel = require( 'SUN/Panel' );
+  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // images
@@ -32,7 +32,7 @@ define( function( require ) {
 
   function LegendPanel( model, options ) {
 
-    options = _.extend( constants.PANEL_OPTIONS, options );
+    options = _.extend( {}, RutherfordScatteringConstants.PANEL_OPTIONS, options );
 
     // Predefined options for a horizontal LayoutBox containing [icon, text]
     var rowOptions = {
@@ -41,23 +41,23 @@ define( function( require ) {
     };
 
     // title for this panel
-    var legendText = new Text( legendString, constants.PANEL_TITLE_TEXT_OPTIONS );
+    var legendText = new Text( legendString, RutherfordScatteringConstants.PANEL_TITLE_TEXT_OPTIONS );
 
     // rows contain an icon Image and label Text that create a legend description
     var legendAlphaParticleRow = new LayoutBox( _.extend( {
-      children: [ new Image( legendAlphaParticleImageSrc ), new Text( legendAlphaParticleString, constants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+      children: [ new Image( legendAlphaParticleImageSrc ), new Text( legendAlphaParticleString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS ) ]
     }, rowOptions ) );
 
     var legendElectronRow = new LayoutBox( _.extend( {
-      children: [ new Image( legendElectronImageSrc ), new Text( legendElectronString, constants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+      children: [ new Image( legendElectronImageSrc ), new Text( legendElectronString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS ) ]
     }, rowOptions ) );
 
     var legendNeutronRow = new LayoutBox( _.extend( {
-      children: [ new Image( legendNeutronImageSrc ), new Text( legendNeutronString, constants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+      children: [ new Image( legendNeutronImageSrc ), new Text( legendNeutronString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS ) ]
     }, rowOptions ) );
 
     var legendProtonRow = new LayoutBox( _.extend( {
-      children: [ new Image( legendProtonImageSrc ), new Text( legendProtonString, constants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+      children: [ new Image( legendProtonImageSrc ), new Text( legendProtonString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS ) ]
     }, rowOptions ) );
 
     /**
