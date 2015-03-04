@@ -18,11 +18,13 @@ define( function( require ) {
   var SMALL_FONT = new PhetFont( 12 );
 
   return {
+    BIG_FONT: BIG_FONT,
     CHECKBOX_OPTIONS: {
       checkBoxColor: 'white',
       checkBoxColorBackground: 'black'
     },
     ENERGY_RANGE: new Range( 1, 30 ),
+    MEDIUM_FONT: MEDIUM_FONT,
     PANEL_OPTIONS: {
       align: 'left',
       fill: 'black',
@@ -58,6 +60,7 @@ define( function( require ) {
     SLIDER_TICK_TEXT_OPTIONS: {
       fill: 'white',
       font: SMALL_FONT
-    }
+    },
+    SMALL_FONT: SMALL_FONT
   };
 } );

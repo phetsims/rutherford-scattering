@@ -21,6 +21,7 @@ define( function( require ) {
   var LegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/LegendPanel' );
   var AlphaParticlePanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePanel' );
   var AtomPanel = require( 'RUTHERFORD_SCATTERING/common/view/AtomPanel' );
+  var ZoomView = require( 'RUTHERFORD_SCATTERING/common/view/ZoomView' );
 
   /**
    * @param {RutherfordAtomModel} model
@@ -39,11 +40,8 @@ define( function( require ) {
       }
     } ) );
 
-    //TODO remove this
-    this.addChild( new Text( 'Rutherford Atom: under construction', {
-      font: new PhetFont( 24 ),
-      fill: 'white',
-      center: this.layoutBounds.center
+    this.addChild( new ZoomView( "aAbBcCdDmM10 _ 12 ...", {
+      center: this.layoutBounds.center.plusXY(0, -40)
     } ) );
 
     var legends = new LayoutBox( {
