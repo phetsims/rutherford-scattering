@@ -29,8 +29,8 @@ define( function( require ) {
       fill: 'black',
       rectX: 0,
       rectY: 0,
-      rectWidth: 470,
-      rectHeight: 470
+      rectWidth: 490,
+      rectHeight: 490
     };
 
     var arrowOptions = {

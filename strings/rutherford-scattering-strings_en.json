@@ -1,25 +1,22 @@
 {
-  "_title": "Rutherford Scattering",
-
-  "alphaParticle": "Alpha Particle",
-  "alphaParticle.energy": "Energy",
-  "alphaParticle.max": "max",
-  "alphaParticle.min": "min",
-  "alphaParticle.traces": "Traces",
-
-  "atom": "Atom",
-  "atom.neutrons": "Neutrons",
-  "atom.protons": "Protons",
-
-  "legend": "Legend",
-  "legend.alphaParticle": "Alpha Particle",
-  "legend.electron": "Electron",
-  "legend.neutron": "Neutron",
-  "legend.proton": "Proton",
-
+  "rutherford-scattering.name": "Rutherford Scattering",
   "plumPuddingAtom": "Plum Pudding Atom",
-  "plumPuddingAtom.scale": "300 pm (atomic scale)",
-
   "rutherfordAtom": "Rutherford Atom",
-  "rutherfordAtom.scale": "150 fm (nuclear scale)"
+
+  "alphaParticleProperties": "Alpha Particle Properties",
+  "energy": "Energy:",
+  "atomProperties": "Atom Properties",
+  "numberOfProtons": "Number of protons:",
+  "numberOfNeutrons": "Number of neutrons:",
+  "minEnergy": "min",
+  "maxEnergy": "max",
+  "showTraces": "Show traces",
+  "alphaParticle": "alpha particle",
+  "proton": "proton",
+  "electron": "electron",
+  "neutron": "neutron",
+  "legend": "Legend",
+  "turnOnTheGun": "Turn on the gun",
+  "pattern.atomicScale": "? pm (atomic scale)",
+  "pattern.nuclearScale": "? fm (nuclear scale)"
 }
