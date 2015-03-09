@@ -1,9 +1,9 @@
 RUTHERFORD SCATTERING
 =====
 
-### Java Classes [0 of 40]
-- [ ] [RSConstants](#RSConstants)
-- [ ] [RSResources](#RSResources)
+### Java Classes > JavaScript Modules [0 of 40]
+- [x] [RSConstants.java :arrow_right: common/RSConstants.js](#constants)
+- [x] [RSResources.java :arrow_right: images/ and strings/](#resources)
 - [ ] [RutherfordScatteringApplication](#RutherfordScatteringApplication)
 - [ ] [control.PlumPuddingAtomControlPanel](#PlumPuddingAtomControlPanel)
 - [ ] [control.RSAbstractControlPanel](#RSAbstractControlPanel)
