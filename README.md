@@ -1,44 +1,15 @@
-RUTHERFORD SCATTERING
-=====
+Rutherford Scattering
+================
 
-### Java Classes > JavaScript Modules [0 of 40]
-- [x] [RSConstants.java :arrow_right: common/RSConstants.js](#constants)
-- [x] [RSResources.java :arrow_right: images/ and strings/](#resources)
-- [ ] [RutherfordScatteringApplication](#RutherfordScatteringApplication)
-- [ ] [control.PlumPuddingAtomControlPanel](#PlumPuddingAtomControlPanel)
-- [ ] [control.RSAbstractControlPanel](#RSAbstractControlPanel)
-- [ ] [control.RutherfordAtomControlPanel](#RutherfordAtomControlPanel)
-- [ ] [event.GunFiredEvent](#GunFiredEvent)
-- [ ] [event.GunFiredListener](#GunFiredListener)
-- [ ] [event.ParticleEvent](#ParticleEvent)
-- [ ] [event.ParticleListener](#ParticleListener)
-- [ ] [models.AbstractAtom](#AbstractAtom)
-- [ ] [models.AlphaParticle](#AlphaParticle)
-- [ ] [models.FixedObject](#FixedObject)
-- [ ] [models.Gun](#Gun)
-- [ ] [models.MovingObject](#MovingObject)
-- [ ] [models.PlumPuddingAtom](#PlumPuddingAtom)
-- [ ] [models.RSClock](#RSClock)
-- [ ] [models.RSModel](#RSModel)
-- [ ] [models.RSObservable](#RSObservable)
-- [ ] [models.RutherfordAtom](#RutherfordAtom)
-- [ ] [models.RutherfordScattering](#RutherfordScattering)
-- [ ] [models.Space](#Space)
-- [ ] [module.PlumPuddingAtomModule](#PlumPuddingAtomModule)
-- [ ] [module.RSAbstractModule](#RSAbstractModule)
-- [ ] [module.RutherfordAtomModule](#RutherfordAtomModule)
-- [ ] [views.AlphaParticleNode](#AlphaParticleNode)
-- [ ] [views.AnimationBoxNode](#AnimationBoxNode)
-- [ ] [views.BeamNode](#BeamNode)
-- [ ] [views.BoxLengthNode](#BoxLengthNode)
-- [ ] [views.BoxOfAtomsNode](#BoxOfAtomsNode)
-- [ ] [views.ElectronNode](#ElectronNode)
-- [ ] [views.GunNode](#GunNode)
-- [ ] [views.LegendPanel](#LegendPanel)
-- [ ] [views.NeutronNode](#NeutronNode)
-- [ ] [views.PlumPuddingAtomNode](#PlumPuddingAtomNode)
-- [ ] [views.ProtonNode](#ProtonNod)
-- [ ] [views.RSModelViewTransform](#RSModelViewTransform)
-- [ ] [views.RutherfordAtomNode](#RutherfordAtomNode)
-- [ ] [views.TracesNode](#TracesNode)
-- [ ] [views.ZoomIndicatorNode](#ZoomIndicatorNode)
+"Rutherford Scattering" is an educational simulation in HTML5, by <a href="http://phet.colorado.edu/" target="_blank">PhET Interactive Simulations</a>
+at the University of Colorado Boulder.
+
+*This simulation is under development and has not been published.*
+
+### Documentation
+The <a href="http://bit.ly/phet-development-overview" target="_blank">PhET Development Overview</a> is the most complete guide to PhET Simulation
+Development. This guide includes how to obtain simulation code and its dependencies, notes about architecture & design, how to test and build
+the sims, as well as other important issues.
+
+### License
+See the <a href="https://github.com/phetsims/rutherford-scattering/blob/master/LICENSE" target="_blank">LICENSE</a>
