@@ -15,7 +15,7 @@ define( function( require ) {
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var Text = require( 'SCENERY/nodes/Text' );
 
@@ -37,10 +37,12 @@ define( function( require ) {
     
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 1024, 618 ) } );
 
+    var tempX = 5, tempY = 5;
+
     //TODO create view nodes and wire up to model
     this.addChild( new ResetAllButton( {
-      right: this.layoutBounds.maxX - RutherfordScatteringConstants.BEZEL.x,
-      bottom: this.layoutBounds.maxY - RutherfordScatteringConstants.BEZEL.y,
+      right: this.layoutBounds.maxX - tempX,
+      bottom: this.layoutBounds.maxY - tempY,
       listener: function() {
         model.reset();
       }
@@ -48,19 +50,19 @@ define( function( require ) {
 
     this.addChild( new ZoomView( rutherfordAtomScaleString, {
       centerX: this.layoutBounds.center.x,
-      top: RutherfordScatteringConstants.BEZEL.y
+      top: tempY
     } ) );
 
     this.addChild( new AnimationControlView( model, {
       centerX: this.layoutBounds.center.x,
-      bottom: this.layoutBounds.maxY - RutherfordScatteringConstants.BEZEL.y
+      bottom: this.layoutBounds.maxY - tempY
     } ) );
 
     var legends = new LayoutBox( {
       align: "right",
       children: [ new LegendPanel(), new AlphaParticlePanel(), new AtomPanel() ],
-      right: this.layoutBounds.maxX - RutherfordScatteringConstants.BEZEL.x,
-      top: RutherfordScatteringConstants.BEZEL.y,
+      right: this.layoutBounds.maxX - tempX,
+      top: tempY,
       spacing: 3
     } );
 

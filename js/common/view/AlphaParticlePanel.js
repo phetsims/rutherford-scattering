@@ -12,7 +12,7 @@ define( function( require ) {
   var CheckBox = require( 'SUN/CheckBox' );
   var Color = require( 'SCENERY/util/Color' );
   var ControlSlider = require( 'RUTHERFORD_SCATTERING/common/view/ControlSlider' );
-  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Panel = require( 'SUN/Panel' );
@@ -20,17 +20,24 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
-  var tracesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.traces' );
-  var energyMaxString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.max' );
-  var energyMinString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.min' );
-  var energyTitleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle.energy' );
+  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
+  var tracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
+  var energyMaxString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' );
+  var energyMinString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
+  var energyTitleString = require( 'string!RUTHERFORD_SCATTERING/energy' );
 
   function AlphaParticlePanel( model, options ) {
 
-    options = _.extend( RutherfordScatteringConstants.PANEL_OPTIONS, options );
+    options = _.extend( {
 
-    var energyRange = RutherfordScatteringConstants.ENERGY_RANGE;
+    }, RSConstants.PANEL_OPTIONS, options );
+
+    var rowTextOptions = {
+      fill: 'white',
+      font: RSConstants.CONTROL_FONT
+    };
+
+    var energyRange = RSConstants.INITIAL_SPEED_RANGE;
     var energyRangeLabels = { minLabel: energyMinString, maxLabel: energyMaxString };
 
     // TODO: take the property from the model somewhere.
@@ -40,9 +47,9 @@ define( function( require ) {
     var energyColor = new Color( 50, 145, 184 );
 
     // Text elements for entries in Legend
-    var alphaParticleText = new Text( alphaParticleString, RutherfordScatteringConstants.PANEL_TITLE_TEXT_OPTIONS );
-    var energyText = new Text( energyTitleString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS );
-    var tracesText = new Text( tracesString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS );
+    var alphaParticleText = new Text( alphaParticleString, rowTextOptions );
+    var energyText = new Text( energyTitleString, rowTextOptions );
+    var tracesText = new Text( tracesString, rowTextOptions );
 
 
     var energyController = new ControlSlider( {
@@ -56,7 +63,7 @@ define( function( require ) {
 
 
     // Checkbox to enable movement trails on alpha particles
-    var tracesCheckBox = new CheckBox( tracesText, energyProperty, RutherfordScatteringConstants.CHECKBOX_OPTIONS );
+    var tracesCheckBox = new CheckBox( tracesText, energyProperty, RSConstants.CHECKBOX_OPTIONS );
 
     /**
      * "Alpha Particle"   (alphaParticleText)

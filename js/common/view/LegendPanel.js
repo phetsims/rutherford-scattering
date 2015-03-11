@@ -13,51 +13,62 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Panel = require( 'SUN/Panel' );
-  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // images
-  var legendAlphaParticleImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
-  var legendElectronImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
-  var legendNeutronImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
-  var legendProtonImageSrc = require( "image!RUTHERFORD_SCATTERING/testImage.png" );
+  var AlphaParticleNode = require( "RUTHERFORD_SCATTERING/common/view/AlphaParticleNode" );
+  var ElectronNode = require( "RUTHERFORD_SCATTERING/common/view/ElectronNode" );
+  var NeutronNode = require( "RUTHERFORD_SCATTERING/common/view/NeutronNode" );
+  var ProtonNode = require( "RUTHERFORD_SCATTERING/common/view/ProtonNode" );
 
   // strings
   var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
-  var legendAlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/legend.alphaParticle' );
-  var legendElectronString = require( 'string!RUTHERFORD_SCATTERING/legend.electron' );
-  var legendNeutronString = require( 'string!RUTHERFORD_SCATTERING/legend.neutron' );
-  var legendProtonString = require( 'string!RUTHERFORD_SCATTERING/legend.proton' );
+  var legendAlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
+  var legendElectronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
+  var legendNeutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
+  var legendProtonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
 
 
   function LegendPanel( model, options ) {
 
-    options = _.extend( {}, RutherfordScatteringConstants.PANEL_OPTIONS, options );
+    options = _.extend( {}, RSConstants.PANEL_OPTIONS, options );
 
     // Predefined options for a horizontal LayoutBox containing [icon, text]
     var rowOptions = {
+      align: 'left',
       orientation: 'horizontal',
       spacing: 4
     };
 
+    var headerTextOptions = {
+      fill: 'gold',
+      font: RSConstants.DEFAULT_FONT
+    };
+
+    var rowTextOptions = {
+      fill: 'white',
+      font: RSConstants.CONTROL_FONT
+    };
+
     // title for this panel
-    var legendText = new Text( legendString, RutherfordScatteringConstants.PANEL_TITLE_TEXT_OPTIONS );
+    var legendText = new Text( legendString, headerTextOptions );
 
     // rows contain an icon Image and label Text that create a legend description
     var legendAlphaParticleRow = new LayoutBox( _.extend( {
-      children: [ new Image( legendAlphaParticleImageSrc ), new Text( legendAlphaParticleString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+      children: [ new AlphaParticleNode(), new Text( legendAlphaParticleString, rowTextOptions ) ]
     }, rowOptions ) );
 
     var legendElectronRow = new LayoutBox( _.extend( {
-      children: [ new Image( legendElectronImageSrc ), new Text( legendElectronString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+      children: [ new ElectronNode(), new Text( legendElectronString, rowTextOptions ) ]
     }, rowOptions ) );
 
     var legendNeutronRow = new LayoutBox( _.extend( {
-      children: [ new Image( legendNeutronImageSrc ), new Text( legendNeutronString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+      children: [ new NeutronNode(), new Text( legendNeutronString, rowTextOptions ) ]
     }, rowOptions ) );
 
     var legendProtonRow = new LayoutBox( _.extend( {
-      children: [ new Image( legendProtonImageSrc ), new Text( legendProtonString, RutherfordScatteringConstants.PANEL_ENTRY_TEXT_OPTIONS ) ]
+      children: [ new ProtonNode(), new Text( legendProtonString, rowTextOptions ) ]
     }, rowOptions ) );
 
     /**

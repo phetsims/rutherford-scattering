@@ -14,7 +14,7 @@ define( function( require ) {
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle');
-  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   function ZoomView( scaleString, options ) {
@@ -56,7 +56,7 @@ define( function( require ) {
     var rightLine = new Line( arrowLineOptions );
     var scaleText = new Text( scaleString, {
       fill: 'white',
-      font: RutherfordScatteringConstants.BIG_FONT
+      font: RSConstants.BIG_FONT
     } );
 
     var arrowWidth = (viewAreaRectangle.width - scaleText.width)/2 - 10 - leftLine.width;

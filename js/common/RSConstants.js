@@ -10,7 +10,6 @@ define( function( require ) {
 
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Dimension3 = require( 'DOT/Dimension3' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -21,7 +20,8 @@ define( function( require ) {
   constants.CANVAS_RENDERING_SIZE = new Dimension2( 800, 800 );
   constants.ANIMATION_BOX_SIZE = new Dimension2( 700, 700 );
   constants.TINY_BOX_SIZE = new Dimension2( 10, 10 );
-  constants.BOX_OF_HYDROGEN_SIZE = new Dimension3( 70, 18, 10 );
+  constants.BOX_OF_HYDROGEN_SIZE = new Dimension2( 70, 18 );
+  constants.BOX_OF_HYDROGEN_DEPTH = 10;
   constants.BEAM_SIZE = new Dimension2( 0.75 * constants.BOX_OF_HYDROGEN_SIZE.width, 75 );
   constants.SHOW_BOX_LENGTH = true;
 
@@ -30,9 +30,9 @@ define( function( require ) {
   constants.CLOCK_STEP = 1;
 
   // Fonts
-  constants.DEFAULT_FONT = new PhetFont( { weight: 'bold', size: 16 } );
-  constants.CONTROL_FONT = new PhetFont( { weight: 'bold,', size: 14 } );
-  constants.TITLE_FONT = new PhetFont( { weight: 'bold', size: 14 } );
+  constants.DEFAULT_FONT = new PhetFont( { weight: 'bold', size: 18 } );
+  constants.CONTROL_FONT = new PhetFont( { weight: 'bold', size: 16 } );
+  constants.TITLE_FONT = new PhetFont( { weight: 'bold', size: 16 } );
   constants.SLIDER_FONT = new PhetFont( { size: 12 } );
 
   // Colors
@@ -54,7 +54,7 @@ define( function( require ) {
   constants.ELECTRON_ANGULAR_SPEED = 0.75 * ( 180 / Math.PI ); // degrees -> radians
 
   // Panels
-  constants.CONTROL_PANEL_OPTIONS = {
+  constants.PANEL_OPTIONS = {
     align: 'left',
     fill: 'black',
     spacing:  3,

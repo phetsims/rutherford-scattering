@@ -32,7 +32,7 @@ define( function( require ) {
       pickable: false
     }, options );
 
-    options.children = [ createAlphaParticleNode() ];
+    options.children = [ this.alphaParticleNode ];
 
     Node.call( this, options );
   }

@@ -17,7 +17,7 @@ define( function( require ) {
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var RutherfordScatteringConstants = require( 'RUTHERFORD_SCATTERING/common/RutherfordScatteringConstants' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Text = require('SCENERY/nodes/Text');
   var HSlider = require('SUN/HSlider');
 
@@ -32,6 +32,11 @@ define( function( require ) {
       rangeLabels: {}
     }, options );
 
+    var tickTextOptions = {
+      fill: 'white',
+      font: RSConstants.SLIDER_FONT
+    };
+
     // If there's no labels supplied, convert the range into text
     var trackMaxString = options.rangeLabels.maxLabel !== undefined ? options.rangeLabels.maxLabel : options.range.max;
     var trackMinString = options.rangeLabels.minLabel !== undefined ? options.rangeLabels.minLabel : options.range.min;
@@ -42,9 +47,9 @@ define( function( require ) {
     var slider = new HSlider( options.property, options.range, _.extend( {
       thumbFillEnabled: options.color,
       thumbFillHighlighted: options.color.brighterColor()
-    }, RutherfordScatteringConstants.SLIDER_OPTIONS ) );
-    slider.addMajorTick( options.range.min, new Text( trackMinString, RutherfordScatteringConstants.SLIDER_TICK_TEXT_OPTIONS ) );
-    slider.addMajorTick( options.range.max, new Text( trackMaxString, RutherfordScatteringConstants.SLIDER_TICK_TEXT_OPTIONS ) );
+    }, RSConstants.SLIDER_OPTIONS ) );
+    slider.addMajorTick( options.range.min, new Text( trackMinString, tickTextOptions ) );
+    slider.addMajorTick( options.range.max, new Text( trackMaxString, tickTextOptions ) );
 
     var contentChildren;
     if ( options.withPicker ) {
