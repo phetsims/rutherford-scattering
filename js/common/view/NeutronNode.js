@@ -16,7 +16,7 @@ define( function( require ) {
 
   /**
    * @constructor
-   * @param options
+   * @param {Object} [options]
    */
   function NeutronNode( options ) {
 
