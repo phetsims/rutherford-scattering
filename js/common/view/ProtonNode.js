@@ -24,6 +24,7 @@ define( function( require ) {
     var RED = new Color( 'red');
 
     options = _.extend( {
+      scale: 1,
       mainColor: RED,
       highlightColor: RED.brighterColor()
     }, options );

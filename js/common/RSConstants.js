@@ -61,8 +61,8 @@ define( function( require ) {
     stroke: 'white',
     lineWidth: 2,
     minWidth: 200,
-    xMargin: 3,
-    yMargin: 3,
+    xMargin: 6,
+    yMargin: 6,
     resize: false
   };
 

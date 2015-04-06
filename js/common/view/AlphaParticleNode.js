@@ -25,12 +25,13 @@ define( function( require ) {
    */
   function AlphaParticleNode( alphaParticle, options ) {
 
-    this.alphaParticleModel = alphaParticle;
-    this.alphaParticleNode = createAlphaParticleNode();
-
     options = _.extend( {
+      scale: 1,
       pickable: false
     }, options );
+
+    this.alphaParticleModel = alphaParticle;
+    this.alphaParticleNode = createAlphaParticleNode(options);
 
     options.children = [ this.alphaParticleNode ];
 
@@ -41,14 +42,18 @@ define( function( require ) {
    * Creates an alpha particle node
    * @returns {Node}
    */
-  function createAlphaParticleNode () {
-    var parent = new Node();
-    var p1 = new ProtonNode();
-    var p2 = new ProtonNode();
-    var n1 = new NeutronNode();
-    var n2 = new NeutronNode();
+  function createAlphaParticleNode (options) {
+    options = _.extend( {
 
-    parent.children = [ p2, n2, p1, n1 ];
+    }, options );
+
+    var parent = new Node();
+    var p1 = new ProtonNode( options );
+    var p2 = new ProtonNode( options );
+    var n1 = new NeutronNode( options );
+    var n2 = new NeutronNode( options );
+
+    parent.children = [ n1, n2, p1, p2 ];
 
     var xOffset = ( 1 - OVERLAP ) * p1.width;
     var yOffset = ( 1 - OVERLAP ) * p1.height;

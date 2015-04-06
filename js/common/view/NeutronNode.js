@@ -24,6 +24,7 @@ define( function( require ) {
     var GRAY = new Color( 'gray' );
 
     options = _.extend( {
+      scale: 1,
       mainColor: GRAY,
       highlightColor: GRAY.brighterColor()
     }, options );

@@ -13,9 +13,11 @@ define( function( require ) {
   // modules
   var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
   var Color = require( 'SCENERY/util/Color' );
+  var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var Property = require( 'AXON/Property' );
+  var NumberPicker = require( 'SCENERY_PHET/NumberPicker');
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Range = require( 'DOT/Range' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Text = require('SCENERY/nodes/Text');
@@ -23,9 +25,12 @@ define( function( require ) {
 
   function ControlSlider( options ) {
 
+    var BUTTON_CHANGE = 1;
+    var BUTTON_SCALE = 0.6;
+
     options = _.extend( {
       title: new Text( "untitled" ),
-      property: new Property( 1 ),
+      property: new NumberProperty( 1 ),
       color: new Color( 100, 200, 100 ),
       withPicker: false,
       range: new Range( 0, 1 ),
@@ -41,41 +46,55 @@ define( function( require ) {
     var trackMaxString = options.rangeLabels.maxLabel !== undefined ? options.rangeLabels.maxLabel : options.range.max;
     var trackMinString = options.rangeLabels.minLabel !== undefined ? options.rangeLabels.minLabel : options.range.min;
 
-    var BUTTON_CHANGE = 1;
-    var BUTTON_SCALE = 0.6;
-
-    var slider = new HSlider( options.property, options.range, _.extend( {
+    var slider = new HSlider( options.property, options.range, {
+      majorTickLength: 10,
+      majorTickLineWidth: 2,
+      majorTickStroke: 'white',
       thumbFillEnabled: options.color,
-      thumbFillHighlighted: options.color.brighterColor()
-    }, RSConstants.SLIDER_OPTIONS ) );
+      thumbFillHighlighted: options.color.brighterColor(),
+      thumbSize: new Dimension2( 14, 24 )
+    } );
     slider.addMajorTick( options.range.min, new Text( trackMinString, tickTextOptions ) );
     slider.addMajorTick( options.range.max, new Text( trackMaxString, tickTextOptions ) );
 
-    var contentChildren;
+    // Title at the top
+    var contentChildren = [ options.title ];
+
+    // Picker with arrows is an optional feature
     if ( options.withPicker ) {
+      /*
       var plusButton = new ArrowButton( 'right', function() {
         options.property.set( Math.min( options.range.max, options.property.get() + BUTTON_CHANGE ) );
       }, {
         scale: BUTTON_SCALE
       } );
+      */
 
+      var pickerValue = new NumberPicker( options.property, options.property, {
+        font: RSConstants.SLIDER_FONT
+      } );
+
+      /*
       var minusButton = new ArrowButton( 'left', function() {
         options.property.set( Math.max( options.range.min, options.property.get() - BUTTON_CHANGE ) );
       }, {
         scale: BUTTON_SCALE
       } );
 
+
       var arrowPicker = new LayoutBox( {
         align: 'center',
         orientation: 'horizontal',
         spacing: 3,
-        children: [ minusButton, plusButton ]
+        children: [ pickerValue ] // minusButton, pickerValue, plusButton ]
       } );
+      */
 
-      contentChildren = [ options.title, arrowPicker, slider ];
-    } else {
-      contentChildren = [ options.title, slider ];
+      contentChildren.push( pickerValue );
     }
+
+    // The slider is not optional
+    contentChildren.push( slider );
 
     LayoutBox.call( this, {
       align: 'center',

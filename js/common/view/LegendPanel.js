@@ -41,6 +41,10 @@ define( function( require ) {
       spacing: 4
     };
 
+    var particleNodeOptions = {
+      scale: 1.2
+    };
+
     var headerTextOptions = {
       fill: 'gold',
       font: RSConstants.DEFAULT_FONT
@@ -56,19 +60,19 @@ define( function( require ) {
 
     // rows contain an icon Image and label Text that create a legend description
     var legendAlphaParticleRow = new LayoutBox( _.extend( {
-      children: [ new AlphaParticleNode(), new Text( legendAlphaParticleString, rowTextOptions ) ]
+      children: [ new AlphaParticleNode( null, particleNodeOptions ), new Text( legendAlphaParticleString, rowTextOptions ) ]
     }, rowOptions ) );
 
     var legendElectronRow = new LayoutBox( _.extend( {
-      children: [ new ElectronNode(), new Text( legendElectronString, rowTextOptions ) ]
+      children: [ new ElectronNode( particleNodeOptions ), new Text( legendElectronString, rowTextOptions ) ]
     }, rowOptions ) );
 
     var legendNeutronRow = new LayoutBox( _.extend( {
-      children: [ new NeutronNode(), new Text( legendNeutronString, rowTextOptions ) ]
+      children: [ new NeutronNode( particleNodeOptions ), new Text( legendNeutronString, rowTextOptions ) ]
     }, rowOptions ) );
 
     var legendProtonRow = new LayoutBox( _.extend( {
-      children: [ new ProtonNode(), new Text( legendProtonString, rowTextOptions ) ]
+      children: [ new ProtonNode( particleNodeOptions ), new Text( legendProtonString, rowTextOptions ) ]
     }, rowOptions ) );
 
     /**

@@ -33,7 +33,7 @@ define( function( require ) {
     }, RSConstants.PANEL_OPTIONS, options );
 
     var rowTextOptions = {
-      fill: 'white',
+      fill: 'gold',
       font: RSConstants.CONTROL_FONT
     };
 
@@ -47,10 +47,20 @@ define( function( require ) {
     var energyColor = new Color( 50, 145, 184 );
 
     // Text elements for entries in Legend
-    var alphaParticleText = new Text( alphaParticleString, rowTextOptions );
-    var energyText = new Text( energyTitleString, rowTextOptions );
-    var tracesText = new Text( tracesString, rowTextOptions );
+    var alphaParticleText = new Text( alphaParticleString, {
+      fill: 'gold',
+      font: RSConstants.CONTROL_FONT
+    } );
 
+    var energyText = new Text( energyTitleString, {
+      fill: energyColor,
+      font: RSConstants.SLIDER_FONT
+    } );
+
+    var tracesText = new Text( tracesString, {
+      fill: 'white',
+      font: RSConstants.SLIDER_FONT
+    } );
 
     var energyController = new ControlSlider( {
       title: energyText,
@@ -63,7 +73,10 @@ define( function( require ) {
 
 
     // Checkbox to enable movement trails on alpha particles
-    var tracesCheckBox = new CheckBox( tracesText, energyProperty, RSConstants.CHECKBOX_OPTIONS );
+    var tracesCheckBox = new CheckBox( tracesText, energyProperty, {
+      checkBoxColor: 'white',
+      checkBoxColorBackground: 'black'
+    } );
 
     /**
      * "Alpha Particle"   (alphaParticleText)

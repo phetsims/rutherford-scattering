@@ -36,7 +36,10 @@ define( function( require ) {
     var neutronColor = new Color( 128, 128, 128 );
 
     // Text nodes
-    var atomText = new Text( atomString, RSConstants.PANEL_TITLE_TEXT_OPTIONS );
+    var atomText = new Text( atomString, {
+      fill: 'gold',
+      font: RSConstants.CONTROL_FONT
+    } );
 
     var protonText = new Text( protonString, _.extend( {}, RSConstants.PANEL_ENTRY_TEXT_OPTIONS, {
       fill: protonColor
