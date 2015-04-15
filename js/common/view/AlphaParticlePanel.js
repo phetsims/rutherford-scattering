@@ -12,6 +12,7 @@ define( function( require ) {
   var CheckBox = require( 'SUN/CheckBox' );
   var Color = require( 'SCENERY/util/Color' );
   var ControlSlider = require( 'RUTHERFORD_SCATTERING/common/view/ControlSlider' );
+  var HStrut = require( 'SUN/HStrut' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
@@ -28,14 +29,10 @@ define( function( require ) {
 
   function AlphaParticlePanel( model, options ) {
 
-    options = _.extend( {
+    options = _.extend( {}, RSConstants.PANEL_OPTIONS, options );
 
-    }, RSConstants.PANEL_OPTIONS, options );
-
-    var rowTextOptions = {
-      fill: 'gold',
-      font: RSConstants.CONTROL_FONT
-    };
+    // Yellow "ALPHA PARTICLE" text as first row
+    var panelTitleText = new Text( alphaParticleString, RSConstants.PANEL_TITLE_TEXT_OPTIONS );
 
     var energyRange = RSConstants.INITIAL_SPEED_RANGE;
     var energyRangeLabels = { minLabel: energyMinString, maxLabel: energyMaxString };
@@ -43,23 +40,11 @@ define( function( require ) {
     // TODO: take the property from the model somewhere.
     var energyProperty = new Property( 1 ); // model.alasdf
 
-    // Colors
-    var energyColor = new Color( 50, 145, 184 );
-
     // Text elements for entries in Legend
-    var alphaParticleText = new Text( alphaParticleString, {
-      fill: 'gold',
-      font: RSConstants.CONTROL_FONT
-    } );
 
     var energyText = new Text( energyTitleString, {
-      fill: energyColor,
-      font: RSConstants.SLIDER_FONT
-    } );
-
-    var tracesText = new Text( tracesString, {
-      fill: 'white',
-      font: RSConstants.SLIDER_FONT
+      fill: RSConstants.ENERGY_COLOR,
+      font: RSConstants.CONTROL_FONT
     } );
 
     var energyController = new ControlSlider( {
@@ -67,25 +52,29 @@ define( function( require ) {
       property: energyProperty,
       range: energyRange,
       rangeLabels: energyRangeLabels,
-      color: energyColor,
+      color: RSConstants.ENERGY_COLOR,
       withPicker: true
     } );
 
 
-    // Checkbox to enable movement trails on alpha particles
+    // Checkbox to enable movement trails on alpha particles.
+    // This text is like a <label> in that clicking it toggles the checkbox
+    var tracesText = new Text( tracesString, {
+      fill: 'white',
+      font: RSConstants.CONTROL_FONT
+    } );
+
     var tracesCheckBox = new CheckBox( tracesText, energyProperty, {
       checkBoxColor: 'white',
       checkBoxColorBackground: 'black'
     } );
 
-    /**
-     * "Alpha Particle"   (alphaParticleText)
-     * "Energy"           (energyControl.energyTitleText)
-     * |------|           (energyControl.energySlider)
-     * [] "Traces"        (tracesCheckBox, tracesCheckBox.tracesText)
-     */
     var content = new LayoutBox( _.extend( {
-      children: [ alphaParticleText, energyController, tracesCheckBox ]
+      children: [
+        panelTitleText,
+        energyController,
+        tracesCheckBox
+      ]
     }, options ) );
 
     Panel.call( this, content, options );

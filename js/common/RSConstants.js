@@ -31,7 +31,8 @@ define( function( require ) {
 
   // Fonts
   constants.DEFAULT_FONT = new PhetFont( { weight: 'bold', size: 18 } );
-  constants.CONTROL_FONT = new PhetFont( { weight: 'bold', size: 16 } );
+  constants.CONTROL_FONT = new PhetFont( { weight: 'bold', size: 14 } );
+  constants.LEGEND_FONT = new PhetFont( { size: 16 } );
   constants.TITLE_FONT = new PhetFont( { weight: 'bold', size: 16 } );
   constants.SLIDER_FONT = new PhetFont( { size: 12 } );
 
@@ -42,6 +43,10 @@ define( function( require ) {
   constants.CANVAS_BACKGROUND = new Color( 'black' );
   constants.CANVAS_LABELS_COLOR = new Color( 'white' );
   constants.COLOR_TRANSPARENT = new Color( 0, 0, 0, 0 );
+  constants.ENERGY_COLOR = new Color( 50, 145, 184 );
+  constants.PANEL_TITLE_TEXT_COLOR = new Color( '#FFFF66' );
+  constants.PROTON_COLOR = new Color( 255, 165, 0 );
+  constants.NEUTRON_COLOR = new Color( 128, 128, 128 );
 
   // State
   constants.CLOCK_PAUSED = false;
@@ -57,13 +62,35 @@ define( function( require ) {
   constants.PANEL_OPTIONS = {
     align: 'left',
     fill: 'black',
-    spacing:  3,
+    spacing:  5,
     stroke: 'white',
     lineWidth: 2,
-    minWidth: 200,
-    xMargin: 6,
-    yMargin: 6,
+    minWidth: 180,
+    xMargin: 8,
+    yMargin: 8,
     resize: false
+  };
+
+  constants.PANEL_TITLE_TEXT_OPTIONS = {
+    font: constants.TITLE_FONT,
+    fill: constants.PANEL_TITLE_TEXT_COLOR
+  };
+
+  constants.LEGEND_PANEL_LAYOUT_BOX_OPTIONS = {
+    align: 'left',
+    orientation: 'horizontal',
+    spacing: 4
+  };
+
+  // Texts
+  constants.PANEL_TITLE_TEXT_OPTIONS = {
+    font: constants.TITLE_FONT,
+    fill: constants.PANEL_TITLE_TEXT_COLOR
+  };
+
+  constants.PANEL_ENTRY_TEXT_OPTIONS = {
+    font: constants.CONTROL_FONT,
+    fill: 'white'
   };
 
   return constants;

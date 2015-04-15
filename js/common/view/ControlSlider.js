@@ -16,12 +16,15 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker');
   var NumberProperty = require( 'AXON/NumberProperty' );
   var Range = require( 'DOT/Range' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var Text = require('SCENERY/nodes/Text');
-  var HSlider = require('SUN/HSlider');
+  var Text = require( 'SCENERY/nodes/Text' );
+  var HStrut = require( 'SUN/HStrut' );
+  var HSlider = require( 'SUN/HSlider' );
 
   function ControlSlider( options ) {
 
@@ -29,7 +32,7 @@ define( function( require ) {
     var BUTTON_SCALE = 0.6;
 
     options = _.extend( {
-      title: new Text( "untitled" ),
+      title: new Text( "undefined", { fill: 'white' } ),
       property: new NumberProperty( 1 ),
       color: new Color( 100, 200, 100 ),
       withPicker: false,
@@ -37,71 +40,97 @@ define( function( require ) {
       rangeLabels: {}
     }, options );
 
-    var tickTextOptions = {
+    var sliderTickTextOptions = {
       fill: 'white',
       font: RSConstants.SLIDER_FONT
+    };
+
+    var arrowOptions = {
+      scale: 0.6
     };
 
     // If there's no labels supplied, convert the range into text
     var trackMaxString = options.rangeLabels.maxLabel !== undefined ? options.rangeLabels.maxLabel : options.range.max;
     var trackMinString = options.rangeLabels.minLabel !== undefined ? options.rangeLabels.minLabel : options.range.min;
 
+    // Add lines to end of slider. Major ticks just don't look right.
     var slider = new HSlider( options.property, options.range, {
-      majorTickLength: 10,
-      majorTickLineWidth: 2,
+      majorTickLength: 12,
+      majorTickLineWidth: 1,
       majorTickStroke: 'white',
       thumbFillEnabled: options.color,
       thumbFillHighlighted: options.color.brighterColor(),
-      thumbSize: new Dimension2( 14, 24 )
+      thumbSize: new Dimension2( 14, 24 ),
+      tickLabelSpacing: 2,
+      trackSize: new Dimension2( 160, 2 )
     } );
-    slider.addMajorTick( options.range.min, new Text( trackMinString, tickTextOptions ) );
-    slider.addMajorTick( options.range.max, new Text( trackMaxString, tickTextOptions ) );
 
-    // Title at the top
+    // Ticks on either side of the scale. Doesn't seem to be an easier way to do this...
+    slider.addMajorTick( options.range.min, new Text( trackMinString, sliderTickTextOptions ) );
+    slider.addMajorTick( options.range.max, new Text( trackMaxString, sliderTickTextOptions ) );
+
+    // first child is optional
     var contentChildren = [ options.title ];
 
     // Picker with arrows is an optional feature
     if ( options.withPicker ) {
-      /*
-      var plusButton = new ArrowButton( 'right', function() {
-        options.property.set( Math.min( options.range.max, options.property.get() + BUTTON_CHANGE ) );
-      }, {
-        scale: BUTTON_SCALE
-      } );
-      */
-
-      var pickerValue = new NumberPicker( options.property, options.property, {
-        font: RSConstants.SLIDER_FONT
-      } );
-
-      /*
-      var minusButton = new ArrowButton( 'left', function() {
-        options.property.set( Math.max( options.range.min, options.property.get() - BUTTON_CHANGE ) );
-      }, {
-        scale: BUTTON_SCALE
-      } );
-
-
-      var arrowPicker = new LayoutBox( {
-        align: 'center',
-        orientation: 'horizontal',
-        spacing: 3,
-        children: [ pickerValue ] // minusButton, pickerValue, plusButton ]
-      } );
-      */
-
-      contentChildren.push( pickerValue );
+      var pickerLayoutBox = _makePickerBox( options.property, function(){}, function(){} );
+      contentChildren.push( pickerLayoutBox );
     }
 
     // The slider is not optional
     contentChildren.push( slider );
 
     LayoutBox.call( this, {
-      align: 'center',
-      spacing: 2,
+      align: 'left',
+      spacing: 4,
       resize: false,
       children: contentChildren
     } );
+
+    // These need to be called after the parent is created to overwrite it
+    options.title.left = 0;
+    if ( options.withPicker ) {
+      pickerLayoutBox.centerX = slider.centerX;
+    }
+  }
+
+  function _makePickerBox( property, downListener, upListener ) {
+    var arrowOptions = {
+      scale: 0.6
+    };
+
+    var pickerLayoutBox = new LayoutBox( {
+      orientation: 'horizontal'
+    } );
+
+    var arrowLeft = new ArrowButton( 'left', downListener, arrowOptions );
+    var arrowRight = new ArrowButton( 'right', upListener, arrowOptions );
+
+    var pickerBox = new Rectangle( 0, 0, arrowLeft.width*1.7, arrowLeft.height, 2, 2, {
+      fill: 'white',
+      stroke: 'black'
+    } );
+
+    var pickerBoxText = new Text( Math.floor( property.get() ), {
+      centerX: pickerBox.width / 2,
+      centerY: pickerBox.height / 2,
+      font: RSConstants.SLIDER_FONT
+    });
+
+    // Listen for the property to change, then
+    property.link( function( propertyValue ) {
+      pickerBoxText.text = Math.floor( propertyValue );
+      pickerBoxText.centerX = pickerBox.width / 2;
+      pickerBoxText.centerY = pickerBox.height / 2;
+    } );
+
+    pickerBox.addChild( pickerBoxText );
+    pickerLayoutBox.addChild( arrowLeft );
+    pickerLayoutBox.addChild( pickerBox );
+    pickerLayoutBox.addChild( arrowRight );
+
+    return pickerLayoutBox;
   }
 
   return inherit( LayoutBox, ControlSlider );

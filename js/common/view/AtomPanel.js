@@ -31,29 +31,25 @@ define( function( require ) {
     var protonProperty = new Property( 1 ); // model.numProtons
     var neutronProperty = new Property( 1 ); // model.numNeutrons
 
-    // Colors
-    var protonColor = new Color( 255, 165, 0 );
-    var neutronColor = new Color( 128, 128, 128 );
+    // Yellow "ATOM PROPERTIES" text as first row
+    var panelTitleText = new Text( atomString, RSConstants.PANEL_TITLE_TEXT_OPTIONS );
 
-    // Text nodes
-    var atomText = new Text( atomString, {
-      fill: 'gold',
+    // Texts for sliders
+    var protonText = new Text( protonString, {
+      fill: RSConstants.PROTON_COLOR,
       font: RSConstants.CONTROL_FONT
     } );
 
-    var protonText = new Text( protonString, _.extend( {}, RSConstants.PANEL_ENTRY_TEXT_OPTIONS, {
-      fill: protonColor
-    } ) );
-
-    var neutronText = new Text( neutronString, _.extend( {}, RSConstants.PANEL_ENTRY_TEXT_OPTIONS, {
-      fill: neutronColor
-    } ) );
+    var neutronText = new Text( neutronString, {
+      fill: RSConstants.NEUTRON_COLOR,
+      font: RSConstants.CONTROL_FONT
+    } );
 
     var protonController = new ControlSlider( {
       title: protonText,
       property: protonProperty,
       range: RSConstants.NUMBER_OF_PROTONS_RANGE,
-      color: protonColor,
+      color: RSConstants.PROTON_COLOR,
       withPicker: true
     } );
 
@@ -61,12 +57,12 @@ define( function( require ) {
       title: neutronText,
       property: neutronProperty,
       range: RSConstants.NUMBER_OF_NEUTRONS_RANGE,
-      color: neutronColor,
+      color: RSConstants.NEUTRON_COLOR,
       withPicker: true
     } );
 
     var content = new LayoutBox( _.extend( {
-      children: [ atomText, protonController, neutronController ]
+      children: [ panelTitleText, protonController, neutronController ]
     }, options ) );
 
     Panel.call( this, content, options );
