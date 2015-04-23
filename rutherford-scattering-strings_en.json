@@ -1,0 +1,59 @@
+{
+  "rutherford-scattering.name": {
+    "value": "Rutherford Scattering"
+  },
+  "plumPuddingAtom": {
+    "value": "Plum Pudding Atom"
+  },
+  "rutherfordAtom": {
+    "value": "Rutherford Atom"
+  },
+  "alphaParticleProperties": {
+    "value": "Alpha Particle"
+  },
+  "energy": {
+    "value": "Energy"
+  },
+  "atomProperties": {
+    "value": "Atom Properties"
+  },
+  "numberOfProtons": {
+    "value": "Protons"
+  },
+  "numberOfNeutrons": {
+    "value": "Neutrons"
+  },
+  "minEnergy": {
+    "value": "min"
+  },
+  "maxEnergy": {
+    "value": "max"
+  },
+  "showTraces": {
+    "value": "Traces"
+  },
+  "alphaParticle": {
+    "value": "Alpha Particle"
+  },
+  "proton": {
+    "value": "Proton"
+  },
+  "electron": {
+    "value": "Electron"
+  },
+  "neutron": {
+    "value": "Neutron"
+  },
+  "legend": {
+    "value": "Legend"
+  },
+  "turnOnTheGun": {
+    "value": "Turn on the gun"
+  },
+  "pattern.atomicScale": {
+    "value": "? pm (atomic scale)"
+  },
+  "pattern.nuclearScale": {
+    "value": "? fm (nuclear scale)"
+  }
+}
