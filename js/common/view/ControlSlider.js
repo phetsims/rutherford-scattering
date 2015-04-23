@@ -18,7 +18,7 @@ define( function( require ) {
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Line = require( 'SCENERY/nodes/Line' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker');
-  var NumberProperty = require( 'AXON/NumberProperty' );
+  var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
@@ -33,7 +33,7 @@ define( function( require ) {
 
     options = _.extend( {
       title: new Text( "undefined", { fill: 'white' } ),
-      property: new NumberProperty( 1 ),
+      property: new Property( 1 ),
       color: new Color( 100, 200, 100 ),
       withPicker: false,
       range: new Range( 0, 1 ),
