@@ -9,18 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color');
-  var ControlSlider = require( 'RUTHERFORD_SCATTERING/common/view/ControlSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var Panel = require( 'SUN/Panel' );
-  var Property = require( 'AXON/Property' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var Text = require( 'SCENERY/nodes/Text' );
-
-  // globals
-  var MIN_NUCLEUS_RADIUS = 20;
-  var NUCLEUS_OUTLINE_COLOR = Color.GRAY;
+  var Node = require( 'SCENERY/nodes/Node' );
 
   function RutherfordAtomNode( rutherfordAtom, options ) {
 
@@ -29,7 +19,7 @@ define( function( require ) {
     }, options );
 
 
-    Node.call( this, options )
+    Node.call( this, options );
   }
 
   return inherit( Node, RutherfordAtomNode );

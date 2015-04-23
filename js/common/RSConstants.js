@@ -12,7 +12,6 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Range = require( 'DOT/Range' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   var constants = {};
 
@@ -57,6 +56,9 @@ define( function( require ) {
   constants.NUMBER_OF_PROTONS_RANGE = new Range( 20, 100, 79 );
   constants.NUMBER_OF_NEUTRONS_RANGE = new Range( 20, 150, 118 );
   constants.ELECTRON_ANGULAR_SPEED = 0.75 * ( 180 / Math.PI ); // degrees -> radians
+
+  // Scale
+  constants.NUCLEAR_SCALE_DEFAULT = 150;
 
   // Panels
   constants.PANEL_OPTIONS = {

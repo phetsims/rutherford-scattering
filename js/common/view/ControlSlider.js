@@ -16,20 +16,16 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var NumberPicker = require( 'SCENERY_PHET/NumberPicker');
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var HStrut = require( 'SUN/HStrut' );
   var HSlider = require( 'SUN/HSlider' );
 
   function ControlSlider( options ) {
 
-    var BUTTON_CHANGE = 1;
-    var BUTTON_SCALE = 0.6;
+    var pickerLayoutBox;
 
     options = _.extend( {
       title: new Text( "undefined", { fill: 'white' } ),
@@ -43,10 +39,6 @@ define( function( require ) {
     var sliderTickTextOptions = {
       fill: 'white',
       font: RSConstants.SLIDER_FONT
-    };
-
-    var arrowOptions = {
-      scale: 0.6
     };
 
     // If there's no labels supplied, convert the range into text
@@ -74,7 +66,7 @@ define( function( require ) {
 
     // Picker with arrows is an optional feature
     if ( options.withPicker ) {
-      var pickerLayoutBox = _makePickerBox( options.property, function(){}, function(){} );
+      pickerLayoutBox = _makePickerBox( options.property, function(){}, function(){} );
       contentChildren.push( pickerLayoutBox );
     }
 

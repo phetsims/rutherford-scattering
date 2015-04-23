@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color');
   var ControlSlider = require( 'RUTHERFORD_SCATTERING/common/view/ControlSlider' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
@@ -19,9 +18,9 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var atomString = require( 'string!RUTHERFORD_SCATTERING/atomProperties' );
-  var neutronString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
-  var protonString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
+  var atomString = require( 'string!RUTHERFORD_SCATTERING/atomProperties' ).value;
+  var neutronString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' ).value;
+  var protonString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' ).value;
 
   function AtomPanel( model, options ) {
 

@@ -56,7 +56,7 @@ define( function( require ) {
     var rightLine = new Line( arrowLineOptions );
     var scaleText = new Text( scaleString, {
       fill: 'white',
-      font: RSConstants.BIG_FONT
+      font: RSConstants.DEFAULT_FONT
     } );
 
     var arrowWidth = (viewAreaRectangle.width - scaleText.width)/2 - 10 - leftLine.width;

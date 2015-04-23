@@ -17,7 +17,7 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var rutherfordAtomString = require( 'string!RUTHERFORD_SCATTERING/rutherfordAtom' );
+  var rutherfordAtomString = require( 'string!RUTHERFORD_SCATTERING/rutherfordAtom' ).value;
 
   var createIcon = function() {
     return new Rectangle( 0, 0, 100, 100, { fill: 'red' } );

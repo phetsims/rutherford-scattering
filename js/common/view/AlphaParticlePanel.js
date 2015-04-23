@@ -10,9 +10,7 @@ define( function( require ) {
 
   // modules
   var CheckBox = require( 'SUN/CheckBox' );
-  var Color = require( 'SCENERY/util/Color' );
   var ControlSlider = require( 'RUTHERFORD_SCATTERING/common/view/ControlSlider' );
-  var HStrut = require( 'SUN/HStrut' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
@@ -21,11 +19,11 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
-  var tracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
-  var energyMaxString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' );
-  var energyMinString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
-  var energyTitleString = require( 'string!RUTHERFORD_SCATTERING/energy' );
+  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' ).value;
+  var tracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' ).value;
+  var energyMaxString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' ).value;
+  var energyMinString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' ).value;
+  var energyTitleString = require( 'string!RUTHERFORD_SCATTERING/energy' ).value;
 
   function AlphaParticlePanel( model, options ) {
 

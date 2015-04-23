@@ -13,7 +13,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var NeutronNode = require( 'RUTHERFORD_SCATTERING/common/view/NeutronNode' );
   var ProtonNode = require( 'RUTHERFORD_SCATTERING/common/view/ProtonNode' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var OVERLAP = 0.333;

@@ -13,14 +13,12 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var ScreenView = require( 'JOIST/ScreenView' );
-  var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var rutherfordAtomScaleString = require( "string!RUTHERFORD_SCATTERING/rutherfordAtom.scale" );
+  var scaleString = require( "string!RUTHERFORD_SCATTERING/pattern.nuclearScale" ).value;
 
   // views
   var LegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/LegendPanel' );
@@ -48,7 +46,9 @@ define( function( require ) {
       }
     } ) );
 
-    this.addChild( new ZoomView( rutherfordAtomScaleString, {
+    // GitHub Issue #2
+    scaleString = scaleString.replace('?', RSConstants.NUCLEAR_SCALE_DEFAULT);
+    this.addChild( new ZoomView( scaleString, {
       centerX: this.layoutBounds.center.x,
       top: tempY
     } ) );

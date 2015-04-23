@@ -23,7 +23,6 @@ define( function( require ) {
   var AlphaParticleNode = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticleNode' );
   var ElectronNode = require( 'RUTHERFORD_SCATTERING/common/view/ElectronNode' );
   var HStrut = require( 'SUN/HStrut' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var NeutronNode = require( 'RUTHERFORD_SCATTERING/common/view/NeutronNode' );
@@ -33,11 +32,11 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
-  var legendAlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
-  var legendElectronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
-  var legendNeutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
-  var legendProtonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
+  var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' ).value;
+  var legendAlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' ).value;
+  var legendElectronString = require( 'string!RUTHERFORD_SCATTERING/electron' ).value;
+  var legendNeutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' ).value;
+  var legendProtonString = require( 'string!RUTHERFORD_SCATTERING/proton' ).value;
 
   function LegendPanel( options ) {
 
