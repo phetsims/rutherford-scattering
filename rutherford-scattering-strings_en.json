@@ -55,5 +55,8 @@
   },
   "pattern.nuclearScale": {
     "value": "? fm (nuclear scale)"
+  },
+  "rutherfordAtom.scale": {
+    "value": "??????? What is this text supposed to be????"
   }
 }
