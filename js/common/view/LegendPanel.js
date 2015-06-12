@@ -22,7 +22,7 @@ define( function( require ) {
   // modules
   var AlphaParticleNode = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticleNode' );
   var ElectronNode = require( 'RUTHERFORD_SCATTERING/common/view/ElectronNode' );
-  var HStrut = require( 'SUN/HStrut' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var NeutronNode = require( 'RUTHERFORD_SCATTERING/common/view/NeutronNode' );
