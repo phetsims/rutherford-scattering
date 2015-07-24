@@ -1,1 +1,2 @@
-TODO document all image files, see simula-rasa/images/README for format
+{
+}
