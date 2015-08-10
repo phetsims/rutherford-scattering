@@ -2,6 +2,7 @@
   "name": "rutherford-scattering",
   "version": "1.0.0-dev.1",
   "license": "GPLv3",
+  "requirejsNamespace": "RUTHERFORD_SCATTERING",
   "simTitleStringKey": "RUTHERFORD_SCATTERING/rutherford-scattering.name",
   "phetLibs": [
     "rutherford-scattering"
