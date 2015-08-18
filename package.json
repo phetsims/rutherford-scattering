@@ -15,9 +15,6 @@
   },
   "phet": {
     "requirejsNamespace": "RUTHERFORD_SCATTERING",
-    "simTitleStringKey": "RUTHERFORD_SCATTERING/rutherford-scattering.name",
-    "phetLibs": [
-      "rutherford-scattering"
-    ]
+    "simTitleStringKey": "RUTHERFORD_SCATTERING/rutherford-scattering.name"
   }
 }
