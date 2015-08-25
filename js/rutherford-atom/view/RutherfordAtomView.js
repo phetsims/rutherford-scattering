@@ -18,7 +18,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
 
   // strings
-  var scaleString = require( "string!RUTHERFORD_SCATTERING/pattern.nuclearScale" ).value;
+  var scaleString = require( "string!RUTHERFORD_SCATTERING/pattern.nuclearScale" );
 
   // views
   var LegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/LegendPanel' );
