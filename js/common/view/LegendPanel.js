@@ -32,11 +32,11 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' ).value;
-  var legendAlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' ).value;
-  var legendElectronString = require( 'string!RUTHERFORD_SCATTERING/electron' ).value;
-  var legendNeutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' ).value;
-  var legendProtonString = require( 'string!RUTHERFORD_SCATTERING/proton' ).value;
+  var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
+  var legendAlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
+  var legendElectronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
+  var legendNeutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
+  var legendProtonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
 
   function LegendPanel( options ) {
 

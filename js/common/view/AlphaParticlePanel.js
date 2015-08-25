@@ -19,11 +19,11 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' ).value;
-  var tracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' ).value;
-  var energyMaxString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' ).value;
-  var energyMinString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' ).value;
-  var energyTitleString = require( 'string!RUTHERFORD_SCATTERING/energy' ).value;
+  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
+  var tracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
+  var energyMaxString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' );
+  var energyMinString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
+  var energyTitleString = require( 'string!RUTHERFORD_SCATTERING/energy' );
 
   function AlphaParticlePanel( model, options ) {
 

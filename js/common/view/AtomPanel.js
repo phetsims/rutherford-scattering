@@ -18,9 +18,9 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var atomString = require( 'string!RUTHERFORD_SCATTERING/atomProperties' ).value;
-  var neutronString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' ).value;
-  var protonString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' ).value;
+  var atomString = require( 'string!RUTHERFORD_SCATTERING/atomProperties' );
+  var neutronString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
+  var protonString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
 
   function AtomPanel( model, options ) {
 
