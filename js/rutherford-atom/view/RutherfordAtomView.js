@@ -47,7 +47,7 @@ define( function( require ) {
     } ) );
 
     // GitHub Issue #2
-    scaleString = scaleString.replace('?', RSConstants.NUCLEAR_SCALE_DEFAULT);
+    //scaleString = scaleString.replace('?', RSConstants.NUCLEAR_SCALE_DEFAULT);
     this.addChild( new ZoomView( scaleString, {
       centerX: this.layoutBounds.center.x,
       top: tempY
