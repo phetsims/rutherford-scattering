@@ -1,7 +1,7 @@
 // Copyright 2002-2015, University of Colorado Boulder
 
 /**
- * ProtonNode.js - view for a Proton
+ * AnimationBoxNode.js - Node containing animation area for alpha particles.
  *
  * @author Jake Selig (PhET)
  */
@@ -14,20 +14,28 @@ define( function( require ) {
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   // constants
-  var DIAMETER = 8.25;
-  var COLOR = new Color( 255, 0, 0 );
+  var STROKE_WIDTH = 2;
+  var STROKE_COLOR = Color.WHITE;
 
   /**
    * @constructor
    * @param {Object} [options]
    */
-  function ProtonNode( options ) {
+  function AnimationBoxNode( rutherfordScatteringModel, dimensions, options ) {
 
     options = _.extend( {
       scale: 1,
       mainColor: COLOR,
       highlightColor: COLOR.brighterColor()
     }, options );
+
+    this._model = rutherfordScatteringModel;
+    this._atomlayer;     // Contains atoms
+    this._traceLayer;    // Contains trails of particle motions
+    this._particleLayer; // Contains particles
+    this._topLayer;      // Contains all things that must be in the foreground
+
+    this._hashMap;       // Maps AlphaParticles to AlphaParticleNodes
 
     ShadedSphereNode.call( this, DIAMETER, options );
   }

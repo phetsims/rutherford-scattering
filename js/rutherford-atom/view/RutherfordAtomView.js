@@ -58,6 +58,9 @@ define( function( require ) {
       bottom: this.layoutBounds.maxY - tempY
     } ) );
 
+    // Legend
+    var legendPanel = new LegendPanel( 1.3, RSConstants.TITLE_FONT, RSConstants.LEGEND_FONT );
+
     var legends = new LayoutBox( {
       align: "right",
       children: [ new LegendPanel(), new AlphaParticlePanel(), new AtomPanel() ],

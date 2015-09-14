@@ -13,6 +13,9 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
+  // constants
+  var DIAMETER = 6.75;
+  var COLOR = new Color( 120, 120, 255 );
 
   /**
    * @constructor
@@ -20,13 +23,10 @@ define( function( require ) {
    */
   function ElectronNode( options ) {
 
-    var DIAMETER = 8.25;
-    var BLUE = new Color( 120, 120, 255 );
-
     options = _.extend( {
-      lineDash: [ 3, 6 ],
-      mainColor: BLUE,
-      highlightColor: BLUE.brighterColor()
+      scale: 1,
+      mainColor: COLOR,
+      highlightColor: COLOR.brighterColor()
     }, options );
 
     ShadedSphereNode.call( this, DIAMETER, options );

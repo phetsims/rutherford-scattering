@@ -78,12 +78,6 @@ define( function( require ) {
     fill: constants.PANEL_TITLE_TEXT_COLOR
   };
 
-  constants.LEGEND_PANEL_LAYOUT_BOX_OPTIONS = {
-    align: 'left',
-    orientation: 'horizontal',
-    spacing: 4
-  };
-
   // Texts
   constants.PANEL_TITLE_TEXT_OPTIONS = {
     font: constants.TITLE_FONT,
