@@ -14,7 +14,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var ScreenView = require( 'JOIST/ScreenView' );
 
   // strings
