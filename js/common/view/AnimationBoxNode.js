@@ -11,10 +11,10 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var Color = require( 'SCENERY/util/Color' );
-  var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+  var Node = require( 'SCENERY/nodes/Node' );
 
   // constants
-  var STROKE_WIDTH = 2;
+  //var STROKE_WIDTH = 2;
   var STROKE_COLOR = Color.WHITE;
 
   /**
@@ -25,8 +25,8 @@ define( function( require ) {
 
     options = _.extend( {
       scale: 1,
-      mainColor: COLOR,
-      highlightColor: COLOR.brighterColor()
+      mainColor: STROKE_COLOR,
+      highlightColor: STROKE_COLOR.brighterColor()
     }, options );
 
     this._model = rutherfordScatteringModel;
@@ -37,8 +37,7 @@ define( function( require ) {
 
     this._hashMap;       // Maps AlphaParticles to AlphaParticleNodes
 
-    ShadedSphereNode.call( this, DIAMETER, options );
   }
 
-  return inherit( ShadedSphereNode, ProtonNode );
+  return inherit( Node, AnimationBoxNode );
 } );

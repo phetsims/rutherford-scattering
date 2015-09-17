@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var ScreenView = require( 'JOIST/ScreenView' );
 
   // strings
@@ -62,7 +63,7 @@ define( function( require ) {
 
     var legends = new LayoutBox( {
       align: "right",
-      children: [ new LegendPanel(), new AlphaParticlePanel(), new AtomPanel() ],
+      children: [ legendPanel, new AlphaParticlePanel(), new AtomPanel() ],
       right: this.layoutBounds.maxX - tempX,
       top: tempY,
       spacing: 3

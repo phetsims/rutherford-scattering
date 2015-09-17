@@ -17,7 +17,6 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var IMAGE = null;                  // Common image used for all AlphaParticleNodes
   var OVERLAP = (1 / 3);             // Overlay % between protons and neutrons
   var ROTATE_TO_ORIENTATION = false; // Should the image rotate to match model orientation
 
@@ -32,10 +31,11 @@ define( function( require ) {
       pickable: false
     }, options );
 
+
     this._alphaParticle = alphaParticle;
     this._image = AlphaParticleNode.createImage();
 
-    // Move origin to center
+    // move origin to center
     this._image.center = new Vector2( 0, 0 );
 
     options.children = [ this._image ];
@@ -43,27 +43,22 @@ define( function( require ) {
     Node.call( this, options );
   }
 
-  /**
-   * Keeps the image in the same place (and possibly rotation) as the model
-   * @private
-   */
-  function updateImage() {
-    if ( ROTATE_TO_ORIENTATION ) {
-      this._image.rotation = this._alphaParticle.rotation;
-    }
-    
-    this._image.center = this._alphaParticle.center;
-  }
-
   return inherit( Node, AlphaParticleNode, {
 
     /**
+     * Update the image to reflect the model
      * @public
+     * @returns void
      */
-    update: function( observable ) {
-      updateImage();
+    update: function() {
+      if ( ROTATE_TO_ORIENTATION ) {
+        this._image.rotation = this._alphaParticle;
+      }
+
+      this._image.center = this._alphaParticle.center;
     }
   }, {
+
     /**
      * Creates the image for an alpha particle
      * @public

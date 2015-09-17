@@ -48,28 +48,28 @@ define( function( require ) {
 
     var labelIconOptions = {
       scale: iconScale
-    }
+    };
 
     var labelTextOptions = {
       font: labelFont,
       fill: TEXT_COLOR
-    }
+    };
 
     // Yellow "LEGEND" text as first row
     var panelTitleText = new Text( legendString, RSConstants.PANEL_TITLE_TEXT_OPTIONS );
 
     // Label rows
     var alphaParticleNode = AlphaParticleNode.createImage( labelIconOptions );
-    var alphaParticleText = new Text( legendAlphaParticleString  ); 
+    var alphaParticleText = new Text( legendAlphaParticleString, labelTextOptions ); 
 
     var electronNode = new ElectronNode( labelIconOptions );
-    var electronText = new Text( legendElectronString );
+    var electronText = new Text( legendElectronString, labelTextOptions );
 
     var neutronNode = new NeutronNode( labelIconOptions );
-    var neutronText = new Text( legendNeutronString );
+    var neutronText = new Text( legendNeutronString, labelTextOptions );
 
     var protonNode = new ProtonNode( labelIconOptions );
-    var protonText = new Text( legendProtonString );
+    var protonText = new Text( legendProtonString, labelTextOptions );
 
 
     // Prettying rows so they align to a grid
@@ -77,10 +77,10 @@ define( function( require ) {
     // Each icon will get a bounding box to make things pretty.
     var maxIconWidth = alphaParticleNode.width;
 
-    var alphaParticleRowLayoutBox = _makeLayoutBoxRow( alphaParticleNode, maxIconWidth, legendAlphaParticleString );
-    var electronRowLayoutBox = _makeLayoutBoxRow( electronNode, maxIconWidth, legendElectronString );
-    var neutronRowLayoutBox = _makeLayoutBoxRow( neutronNode, maxIconWidth, legendNeutronString );
-    var protonRowLayoutBox = _makeLayoutBoxRow( protonNode, maxIconWidth, legendProtonString );
+    var alphaParticleRowLayoutBox = _makeLayoutBoxRow( alphaParticleNode, maxIconWidth, alphaParticleText );
+    var electronRowLayoutBox = _makeLayoutBoxRow( electronNode, maxIconWidth, electronText );
+    var neutronRowLayoutBox = _makeLayoutBoxRow( neutronNode, maxIconWidth, neutronText );
+    var protonRowLayoutBox = _makeLayoutBoxRow( protonNode, maxIconWidth, protonText );
 
 
     // single container that fits in root Panel element
@@ -103,7 +103,7 @@ define( function( require ) {
    * @private
    * @returns LayoutBox
    */
-  function _makeLayoutBoxRow( iconNode, iconWidth, rowString ) {
+  function _makeLayoutBoxRow( iconNode, iconWidth, rowText ) {
     // Should look something like this, where [] is a LayoutBox and 0 is an icon.
     // [ [  0  ] "text" ]
     var iconLayoutBox = new LayoutBox( { 
@@ -118,8 +118,6 @@ define( function( require ) {
       orientation: 'horizontal',
       spacing: 4
     } );
-
-    var rowText = new Text( rowString, RSConstants.PANEL_ENTRY_TEXT_OPTIONS );
 
     iconLayoutBox.addChild( iconLayoutBoxHStrut );
     iconLayoutBox.addChild( iconNode );
