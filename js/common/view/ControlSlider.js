@@ -42,8 +42,8 @@ define( function( require ) {
     };
 
     // If there's no labels supplied, convert the range into text
-    var trackMaxString = options.rangeLabels.maxLabel !== undefined ? options.rangeLabels.maxLabel : options.range.max;
-    var trackMinString = options.rangeLabels.minLabel !== undefined ? options.rangeLabels.minLabel : options.range.min;
+    var trackMaxString = options.rangeLabels.maxLabel || options.range.max;
+    var trackMinString = options.rangeLabels.minLabel || options.range.min;
 
     // Add lines to end of slider. Major ticks just don't look right.
     var slider = new HSlider( options.property, options.range, {
@@ -96,6 +96,8 @@ define( function( require ) {
       orientation: 'horizontal'
     } );
 
+
+
     var arrowLeft = new ArrowButton( 'left', downListener, arrowOptions );
     var arrowRight = new ArrowButton( 'right', upListener, arrowOptions );
 
@@ -104,7 +106,12 @@ define( function( require ) {
       stroke: 'black'
     } );
 
-    var pickerBoxText = new Text( Math.floor( property.get() ), {
+    var formatPropertyValue = function(v) {
+      return Math.floor(v);
+    };
+
+    var pickerBoxText = new Text( formatPropertyValue( property.get() ), {
+      //center: pickerBox.center,
       centerX: pickerBox.width / 2,
       centerY: pickerBox.height / 2,
       font: RSConstants.SLIDER_FONT
@@ -112,7 +119,8 @@ define( function( require ) {
 
     // Listen for the property to change, then
     property.link( function( propertyValue ) {
-      pickerBoxText.text = Math.floor( propertyValue );
+      pickerBoxText.text = formatPropertyValue( property.get() );
+      //pickerBoxText.center = pickerBox.center;
       pickerBoxText.centerX = pickerBox.width / 2;
       pickerBoxText.centerY = pickerBox.height / 2;
     } );

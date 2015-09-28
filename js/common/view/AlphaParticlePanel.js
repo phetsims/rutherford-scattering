@@ -33,13 +33,16 @@ define( function( require ) {
     var panelTitleText = new Text( alphaParticleString, RSConstants.PANEL_TITLE_TEXT_OPTIONS );
 
     var energyRange = RSConstants.INITIAL_SPEED_RANGE;
-    var energyRangeLabels = { minLabel: energyMinString, maxLabel: energyMaxString };
+
+    var energyRangeLabels = { 
+      minLabel: energyMinString, 
+      maxLabel: energyMaxString
+    };
 
     // TODO: take the property from the model somewhere.
     var energyProperty = new Property( 1 ); // model.alasdf
 
     // Text elements for entries in Legend
-
     var energyText = new Text( energyTitleString, {
       fill: RSConstants.ENERGY_COLOR,
       font: RSConstants.CONTROL_FONT
