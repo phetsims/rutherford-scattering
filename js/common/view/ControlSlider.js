@@ -1,4 +1,4 @@
-// Copyright 2015, University of Colorado Boulder
+// Copyright 2012-2015, University of Colorado Boulder
 
 /**
  * A generic slider control that can be used to control a numeric property within a given range.
@@ -28,7 +28,7 @@ define( function( require ) {
     var pickerLayoutBox;
 
     options = _.extend( {
-      title: new Text( "undefined", { fill: 'white' } ),
+      title: new Text( 'undefined', { fill: 'white' } ),
       property: new Property( 1 ),
       color: new Color( 100, 200, 100 ),
       withPicker: false,
