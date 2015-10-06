@@ -18,7 +18,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
 
   // strings
-  var scaleString = require( "string!RUTHERFORD_SCATTERING/pattern.nuclearScale" );
+  var scaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.nuclearScale' );
 
   // views
   var LegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/LegendPanel' );
@@ -62,7 +62,7 @@ define( function( require ) {
     var legendPanel = new LegendPanel( 1.3, RSConstants.TITLE_FONT, RSConstants.LEGEND_FONT );
 
     var legends = new LayoutBox( {
-      align: "right",
+      align: 'right',
       children: [ legendPanel, new AlphaParticlePanel(), new AtomPanel() ],
       right: this.layoutBounds.maxX - tempX,
       top: tempY,

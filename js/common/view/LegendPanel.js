@@ -106,8 +106,8 @@ define( function( require ) {
   function _makeLayoutBoxRow( iconNode, iconWidth, rowText ) {
     // Should look something like this, where [] is a LayoutBox and 0 is an icon.
     // [ [  0  ] "text" ]
-    var iconLayoutBox = new LayoutBox( { 
-      align: 'center', 
+    var iconLayoutBox = new LayoutBox( {
+      align: 'center' 
     } );
 
     // Allow a bit of room to the side of the image
