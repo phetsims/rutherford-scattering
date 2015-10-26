@@ -32,10 +32,11 @@ define( function( require ) {
    * @constructor
    */
   function RutherfordAtomView( model ) {
-    
+
     ScreenView.call( this, { layoutBounds: new Bounds2( 0, 0, 1024, 618 ) } );
 
-    var tempX = 5, tempY = 5;
+    var tempX = 5;
+    var tempY = 5;
 
     //TODO create view nodes and wire up to model
     this.addChild( new ResetAllButton( {
