@@ -1,4 +1,4 @@
-// Copyright 2002-2015, University of Colorado Boulder
+// Copyright 2015, University of Colorado Boulder
 
 /**
  * The 'Plum Pudding Atom' screen. Conforms to the contract specified in joist/Screen.
