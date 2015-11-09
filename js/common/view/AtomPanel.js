@@ -18,9 +18,9 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var atomString = require( 'string!RUTHERFORD_SCATTERING/atomProperties' );
-  var neutronString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
-  var protonString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
+  var atomPropertiesString = require( 'string!RUTHERFORD_SCATTERING/atomProperties' );
+  var numberOfNeutronsString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
+  var numberOfProtonsString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
 
   function AtomPanel( model, options ) {
 
@@ -31,15 +31,15 @@ define( function( require ) {
     var neutronProperty = new Property( 1 ); // model.numNeutrons
 
     // Yellow "ATOM PROPERTIES" text as first row
-    var panelTitleText = new Text( atomString, RSConstants.PANEL_TITLE_TEXT_OPTIONS );
+    var panelTitleText = new Text( atomPropertiesString, RSConstants.PANEL_TITLE_TEXT_OPTIONS );
 
     // Texts for sliders
-    var protonText = new Text( protonString, {
+    var protonText = new Text( numberOfProtonsString, {
       fill: RSConstants.PROTON_COLOR,
       font: RSConstants.CONTROL_FONT
     } );
 
-    var neutronText = new Text( neutronString, {
+    var neutronText = new Text( numberOfNeutronsString, {
       fill: RSConstants.NEUTRON_COLOR,
       font: RSConstants.CONTROL_FONT
     } );

@@ -34,10 +34,10 @@ define( function( require ) {
 
   // strings
   var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
-  var legendAlphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
-  var legendElectronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
-  var legendNeutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
-  var legendProtonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
+  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
+  var electronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
+  var neutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
+  var protonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
 
   // constants
   var TEXT_COLOR = Color.WHITE;
@@ -60,16 +60,16 @@ define( function( require ) {
 
     // Label rows
     var alphaParticleNode = AlphaParticleNode.createImage( labelIconOptions );
-    var alphaParticleText = new Text( legendAlphaParticleString, labelTextOptions ); 
+    var alphaParticleText = new Text( alphaParticleString, labelTextOptions );
 
     var electronNode = new ElectronNode( labelIconOptions );
-    var electronText = new Text( legendElectronString, labelTextOptions );
+    var electronText = new Text( electronString, labelTextOptions );
 
     var neutronNode = new NeutronNode( labelIconOptions );
-    var neutronText = new Text( legendNeutronString, labelTextOptions );
+    var neutronText = new Text( neutronString, labelTextOptions );
 
     var protonNode = new ProtonNode( labelIconOptions );
-    var protonText = new Text( legendProtonString, labelTextOptions );
+    var protonText = new Text( protonString, labelTextOptions );
 
 
     // Prettying rows so they align to a grid

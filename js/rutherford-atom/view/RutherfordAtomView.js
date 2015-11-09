@@ -18,7 +18,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
 
   // strings
-  var scaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.nuclearScale' );
+  var patternNuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.nuclearScale' );
 
   // views
   var LegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/LegendPanel' );
@@ -48,8 +48,8 @@ define( function( require ) {
     } ) );
 
     // GitHub Issue #2
-    //scaleString = scaleString.replace('?', RSConstants.NUCLEAR_SCALE_DEFAULT);
-    this.addChild( new ZoomView( scaleString, {
+    //patternNuclearScaleString = patternNuclearScaleString.replace('?', RSConstants.NUCLEAR_SCALE_DEFAULT);
+    this.addChild( new ZoomView( patternNuclearScaleString, {
       centerX: this.layoutBounds.center.x,
       top: tempY
     } ) );

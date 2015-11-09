@@ -15,7 +15,7 @@ define( function( require ) {
   var SimLauncher = require( 'JOIST/SimLauncher' );
 
   // strings
-  var simTitle = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );
+  var rutherfordScatteringTitleString = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );
 
   var screens = [ new RutherfordAtomScreen(), new PlumPuddingAtomScreen() ];
 
@@ -26,7 +26,7 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
-    var sim = new Sim( simTitle, screens, simOptions );
+    var sim = new Sim( rutherfordScatteringTitleString, screens, simOptions );
     sim.start();
   } );
 } );

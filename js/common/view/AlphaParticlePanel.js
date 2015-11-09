@@ -19,31 +19,31 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
-  var tracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
-  var energyMaxString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' );
-  var energyMinString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
-  var energyTitleString = require( 'string!RUTHERFORD_SCATTERING/energy' );
+  var alphaParticlePropertiesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
+  var showTracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
+  var maxEnergyString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' );
+  var minEnergyString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
+  var energyString = require( 'string!RUTHERFORD_SCATTERING/energy' );
 
   function AlphaParticlePanel( model, options ) {
 
     options = _.extend( {}, RSConstants.PANEL_OPTIONS, options );
 
     // Yellow "ALPHA PARTICLE" text as first row
-    var panelTitleText = new Text( alphaParticleString, RSConstants.PANEL_TITLE_TEXT_OPTIONS );
+    var panelTitleText = new Text( alphaParticlePropertiesString, RSConstants.PANEL_TITLE_TEXT_OPTIONS );
 
     var energyRange = RSConstants.INITIAL_SPEED_RANGE;
 
     var energyRangeLabels = { 
-      minLabel: energyMinString, 
-      maxLabel: energyMaxString
+      minLabel: minEnergyString,
+      maxLabel: maxEnergyString
     };
 
     // TODO: take the property from the model somewhere.
     var energyProperty = new Property( 1 ); // model.alasdf
 
     // Text elements for entries in Legend
-    var energyText = new Text( energyTitleString, {
+    var energyText = new Text( energyString, {
       fill: RSConstants.ENERGY_COLOR,
       font: RSConstants.CONTROL_FONT
     } );
@@ -60,7 +60,7 @@ define( function( require ) {
 
     // Checkbox to enable movement trails on alpha particles.
     // This text is like a <label> in that clicking it toggles the checkbox
-    var tracesText = new Text( tracesString, {
+    var tracesText = new Text( showTracesString, {
       fill: 'white',
       font: RSConstants.CONTROL_FONT
     } );
