@@ -17,7 +17,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Vector2 = require( 'DOT/Vector2' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
@@ -43,12 +42,11 @@ define( function( require ) {
       align: 'left'
     }, options );
 
-    var font = new PhetFont( 12 );
-    var legendText = new Text( legendString, { font: font, fontWeight: 'bold' } );
-    var electronText = new Text( electronString, { font: font } );
-    var protonText = new Text( protonString, { font: font } );
-    var neutronText = new Text( neutronString, { font: font } );
-    var alphaParticleText = new Text( alphaParticleString, { font: font } );
+    var legendText = new Text( legendString, { font: options.titleFont, fontWeight: 'bold' } );
+    var electronText = new Text( electronString, { font: options.propertyFont } );
+    var protonText = new Text( protonString, { font: options.propertyFont } );
+    var neutronText = new Text( neutronString, { font: options.propertyFont } );
+    var alphaParticleText = new Text( alphaParticleString, { font: options.propertyFont } );
 
     var content = new VBox( {
       spacing: 8,

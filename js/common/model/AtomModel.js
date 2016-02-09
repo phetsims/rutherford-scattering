@@ -12,6 +12,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
   var Property = require( 'AXON/Property' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var Constants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   /**
    * @param {Tandem} tandem
@@ -20,9 +21,6 @@ define( function( require ) {
   function AtomModel( tandem, options ) {
 
     options = _.extend( {
-      minAlphaParticleEnergy: 6,
-      maxAlphaParticleEnergy: 12,
-      defaultAlphaParticleEnergy: 10,
       play: true // is the sim running or paused
     }, options );
 
@@ -33,8 +31,10 @@ define( function( require ) {
       }
     } );
 
-    //
-    this.alphaParticleEnergyProperty = new Property( this.defaultAlphaParticleEnergy );
+    // @public
+    // properties
+    this.alphaParticleEnergyProperty = new Property( Constants.DEFAULT_ALPHA_ENERGY );
+    this.showAlphaTraceProperty = new Property( Constants.DEFAULT_SHOW_TRACES );
 
   }
 
@@ -45,6 +45,7 @@ define( function( require ) {
     // @public
     reset: function() {
       this.alphaParticleEnergyProperty.reset();
+      this.showAlphaTraceProperty.reset();
     }
   } );
 

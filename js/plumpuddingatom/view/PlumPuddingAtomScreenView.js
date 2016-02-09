@@ -14,6 +14,7 @@ define( function( require ) {
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var PlumPuddingAtomModel = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomModel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -23,6 +24,9 @@ define( function( require ) {
   var PANEL_COLOR = '#eaeaea';
   var PANEL_STROKE = 'gray';
   var PANEL_LINE_WIDTH = 1;
+  var TITLE_FONT = new PhetFont( 16 );
+  var PROPERTY_FONT = new PhetFont( 12 );
+  var TICK_FONT = new PhetFont( 12 );
 
   /**
    * @param {AtomModel} plumPuddingAtomModel
@@ -33,24 +37,31 @@ define( function( require ) {
 
     ScreenView.call( this );
 
+    // fonts
+
     // Create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel(tandem, {
-      minWidth: 175,
-      rightTop: new Vector2( this.layoutBounds.right - 5, this.layoutBounds.top + 100 ),
+      minWidth: 255,
+      rightTop: new Vector2( this.layoutBounds.right - 10, this.layoutBounds.top + 25 ),
       fill: PANEL_COLOR,
       stroke: PANEL_STROKE,
       lineWidth: PANEL_LINE_WIDTH,
+      titleFont: TITLE_FONT,
+      propertyFont: PROPERTY_FONT,
       rresize: false
     } );
     this.addChild( particleLegendPanel );
 
     // Create the alpha particle properties control panel
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( plumPuddingAtomModel, tandem, {
-      minWidth: 175,
-      rightTop: new Vector2( this.layoutBounds.right - 5, particleLegendPanel.bottom + 5 ),
+      minWidth: 255,
+      rightTop: new Vector2( this.layoutBounds.right - 10, particleLegendPanel.bottom + 5 ),
       fill: PANEL_COLOR,
       stroke: PANEL_STROKE,
       lineWidth: PANEL_LINE_WIDTH,
+      titleFont: TITLE_FONT,
+      propertyFont: PROPERTY_FONT,
+      sliderTickfont: TICK_FONT,
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );

@@ -13,6 +13,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var AtomModel = require( 'RUTHERFORD_SCATTERING/common/model/AtomModel' );
+  var Constants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   /**
    * @param {Tandem} tandem
@@ -21,19 +22,13 @@ define( function( require ) {
   function RutherfordAtomModel( tandem, options ) {
 
     options = _.extend( {
-      minProtonCount: 20,
-      maxProtonCount: 100,
-      defaultProtonCount: 79,
-      minNeutronCount: 20,
-      maxNeutronCount: 150,
-      defaultNeutronCount: 118
     }, options );
 
     AtomModel.call( this, tandem, options);
 
     //
-    this.protonCountProperty = new Property( this.defaultProtonCount );
-    this.neutronCountProperty = new Property( this.defaultNeutronCount );
+    this.protonCountProperty = new Property( Constants.DEFAULT_PROTON_COUNT );
+    this.neutronCountProperty = new Property( Constants.DEFAULT_NEUTRON_COUNT );
   }
 
   rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );
@@ -42,8 +37,12 @@ define( function( require ) {
 
     // @public
     reset: function() {
+
       this.protonCountProperty.reset();
       this.neutronCountProperty.reset();
+
+      // base reset
+      AtomModel.prototype.reset.call(this);
     },
 
     //TODO Called by the animation loop. Optional, so if your model has no animation, please delete this.

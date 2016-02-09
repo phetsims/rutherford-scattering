@@ -23,12 +23,12 @@ define( function( require ) {
     }, options );
 
     AtomModel.call( this, tandem, options );
-
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomModel', PlumPuddingAtomModel );
 
-  return inherit( PropertySet, PlumPuddingAtomModel, {
+  return inherit( AtomModel, PlumPuddingAtomModel, {
+
 
     //TODO Called by the animation loop. Optional, so if your model has no animation, please delete this.
     // @public
