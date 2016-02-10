@@ -19,7 +19,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var HSlider = require( 'SUN/HSlider' );
   var CheckBox = require( 'SUN/CheckBox' );
-  var Vector2 = require( 'DOT/Vector2' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
@@ -36,11 +35,13 @@ define( function( require ) {
    * Constructor for a Alpha Particle Properties control panel.
    *
    * @param { AtomModel } model - The model controlled by this panel.
-   * @param {Tandem} tandem
    * @param { } options
    * @constructor
    */
-  function AlphaParticlePropertiesPanel( model, tandem, options ) {
+  function AlphaParticlePropertiesPanel( model, options ) {
+
+    // Smitty: assert missing model properties ?
+    //assert && assert( model.alphaParticleEnergyProperty === undefined, 'The rateProperty should be a Property' );
 
     options = _.extend( {
       xMargin: 5,
@@ -49,7 +50,10 @@ define( function( require ) {
     }, options );
 
     // strings
-    var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, { font: options.titleFont, fontWeight: 'bold' } );
+    var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
+      font: options.titleFont,
+      fontWeight: 'bold'
+    } );
     var energyText = new Text( energyString, { font: options.propertyFont, fontWeight: 'bold' } );
     var minEnergyText = new Text( minEnergyString, { font: options.sliderTickfont } );
     var maxEnergyText = new Text( maxEnergyString, { font: options.sliderTickfont } );
@@ -86,7 +90,6 @@ define( function( require ) {
     Panel.call( this, content, options );
   }
 
-  // Smitty: do I need this?
   rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
 
   return inherit( Panel, AlphaParticlePropertiesPanel );

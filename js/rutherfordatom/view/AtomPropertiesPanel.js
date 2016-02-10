@@ -16,17 +16,12 @@ define( function( require ) {
   var HSlider = require( 'SUN/HSlider' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var Color = require( 'SCENERY/util/Color' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
   var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var Range = require( 'DOT/Range' );
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var Vector2 = require( 'DOT/Vector2' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
@@ -39,10 +34,9 @@ define( function( require ) {
    * Constructor for a Atom Properties control panel.
    *
    * @param { AtomModel } model - The model controlled by this panel.
-   * @param {Tandem} tandem
    * @constructor
    */
-  function AtomPropertiesPanel( model, tandem, options ) {
+  function AtomPropertiesPanel( model, options ) {
 
     options = _.extend( {
       xMargin: 5,
@@ -54,10 +48,10 @@ define( function( require ) {
     var atomPropertiesText = new Text( atomPropertiesString, { font: options.titleFont, fontWeight: 'bold' } );
     var numProtonsText = new Text( numberOfProtonsString, { font: options.propertyFont, fontWeight: 'bold' } );
     var numNeutronsText = new Text( numberOfNeutronsString, { font: options.propertyFont, fontWeight: 'bold' } );
-    var minText = new Text( "min", { font: options.sliderTickfont } );
-    var maxText = new Text( "max", { font: options.sliderTickfont } );
+    var minText = new Text( 'min', { font: options.sliderTickfont } );
+    var maxText = new Text( 'max', { font: options.sliderTickfont } );
 
-    /* Smitty: use default control for this?
+    /* Smitty: use default control (add new layout) for this?
     var numberControlOptions = {
       titleMaxWidth: 200, // i18n, determined empirically
       titleFont: font,
@@ -92,7 +86,7 @@ define( function( require ) {
       arrowWidth: 25,
       touchAreaXDilation: 14,
       touchAreaYDilation: 14
-    }
+    };
     var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT, RSConstants.DEFAULT_PROTON_COUNT );
     var protonMinusButton = new ArrowButton( 'left', function protonCountPropertyMinus() {
       model.protonCountProperty.value  = Math.max(RSConstants.MIN_PROTON_COUNT, model.protonCountProperty.value - 1);
@@ -107,7 +101,6 @@ define( function( require ) {
       spacing: 8,
       top: 0,
       right: 0,
-      align: 'left',
       children: [ numProtonsText, protonMinusButton, protonNumberDisplay, protonPlusButton ]
     } );
 
@@ -141,7 +134,6 @@ define( function( require ) {
       spacing: 8,
       top: 0,
       right: 0,
-      align: 'left',
       children: [ numNeutronsText, neutronMinusButton, neutronNumberDisplay, neutronPlusButton ]
     } );
 
@@ -159,6 +151,7 @@ define( function( require ) {
     neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT, minText );
     neutronCountSlider.addMajorTick( RSConstants.MAX_NEUTRON_COUNT, maxText );
 
+    // main panel content
     var content = new VBox( {
       spacing: 12,
       top: 0,
@@ -170,7 +163,6 @@ define( function( require ) {
     Panel.call( this, content, options );
   }
 
-  // Smitty: do I need this?
   rutherfordScattering.register( 'AtomPropertiesPanel', AtomPropertiesPanel );
 
   return inherit( Panel, AtomPropertiesPanel );

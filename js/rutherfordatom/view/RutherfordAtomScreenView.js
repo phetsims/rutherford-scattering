@@ -31,15 +31,14 @@ define( function( require ) {
 
   /**
    * @param {RutherfordAtomModel} rutherfordAtomModel
-   * @param {Tandem} tandem
    * @constructor
    */
-  function RutherfordAtomScreenView( rutherfordAtomModel, tandem) {
+  function RutherfordAtomScreenView( rutherfordAtomModel ) {
 
     ScreenView.call( this );
 
     // Create the particles legend control panel
-    var particleLegendPanel = new ParticleLegendPanel(tandem, {
+    var particleLegendPanel = new ParticleLegendPanel( {
       minWidth: 255,
       rightTop: new Vector2( this.layoutBounds.right - 10, this.layoutBounds.top + 25 ),
       fill: PANEL_COLOR,
@@ -52,7 +51,7 @@ define( function( require ) {
     this.addChild( particleLegendPanel );
 
     // Create the alpha particle properties control panel
-    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( rutherfordAtomModel, tandem, {
+    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( rutherfordAtomModel, {
       minWidth: 255,
       rightTop: new Vector2( this.layoutBounds.right - 10, particleLegendPanel.bottom + 5 ),
       fill: PANEL_COLOR,
@@ -66,7 +65,7 @@ define( function( require ) {
     this.addChild( alphaParticlePropertiesPanel );
 
     // Create the atom properties control panel
-    var atomPropertiesPanel = new AtomPropertiesPanel( rutherfordAtomModel, tandem, {
+    var atomPropertiesPanel = new AtomPropertiesPanel( rutherfordAtomModel, {
       minWidth: 255,
       rightTop: new Vector2( this.layoutBounds.right - 10, alphaParticlePropertiesPanel.bottom + 5 ),
       fill: PANEL_COLOR,
@@ -83,8 +82,7 @@ define( function( require ) {
       {
         bottom: atomPropertiesPanel.bottom + 60,
         centerX: atomPropertiesPanel.centerX - 25,
-        radius: 23,
-        tandem: tandem.createTandem( 'playPauseButton' )
+        radius: 23
       } );
     this.addChild( playPauseButton );
 
@@ -95,8 +93,7 @@ define( function( require ) {
       rutherfordAtomModel.playProperty, {
         centerY: playPauseButton.centerY,
         centerX: atomPropertiesPanel.centerX + 25,
-        radius: 15,
-        tandem: tandem.createTandem( 'stepButton' )
+        radius: 15
     } );
     this.addChild( stepButton );
 

@@ -16,26 +16,25 @@ define( function( require ) {
   var PlumPuddingAtomScreenView = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomScreenView' );
 
   // strings
-  var plumPuddingAtomTitleString = require( 'string!RUTHERFORD_SCATTERING/screen.plumPuddingAtom' );
+  var plumPuddingAtomString = require( 'string!RUTHERFORD_SCATTERING/plumPuddingAtom' );
 
   // images
   var screenIcon = require( 'image!RUTHERFORD_SCATTERING/PlumPuddingAtom-screen-icon.jpg' );
 
   /**
-   * @param {Tandem} tandem
    * @constructor
    */
-  function PlumPuddingAtomScreen( tandem ) {
+  function PlumPuddingAtomScreen() {
+
+    var options = {
+      backgroundColor: '#EAEAEA'
+    };
 
     Screen.call( this,
-      plumPuddingAtomTitleString,
+      plumPuddingAtomString,
       new Image( screenIcon ),
-      function() { return new PlumPuddingAtomModel( tandem.createTandem( 'model' ) ); },
-      function( model ) { return new PlumPuddingAtomScreenView( model, tandem.createTandem( 'view' ) ); },
-      { tandem: tandem,
-        backgroundColor: '#EAEAEA'
-      }
-    );
+      function() { return new PlumPuddingAtomModel(); },
+      function( model ) { return new PlumPuddingAtomScreenView( model ); }, options );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreen', PlumPuddingAtomScreen );

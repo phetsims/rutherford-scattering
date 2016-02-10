@@ -9,26 +9,22 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var PropertySet = require( 'AXON/PropertySet' );
-  var Property = require( 'AXON/Property' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var AtomModel = require( 'RUTHERFORD_SCATTERING/common/model/AtomModel' );
-  var Constants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   /**
-   * @param {Tandem} tandem
+   * @param {Object} options
    * @constructor
    */
-  function RutherfordAtomModel( tandem, options ) {
+  function RutherfordAtomModel( options ) {
 
     options = _.extend( {
+      protonCount:  RSConstants.DEFAULT_PROTON_COUNT,
+      neutronCount: RSConstants.DEFAULT_NEUTRON_COUNT
     }, options );
 
-    AtomModel.call( this, tandem, options);
-
-    //
-    this.protonCountProperty = new Property( Constants.DEFAULT_PROTON_COUNT );
-    this.neutronCountProperty = new Property( Constants.DEFAULT_NEUTRON_COUNT );
+    AtomModel.call( this, options);
   }
 
   rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );

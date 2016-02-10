@@ -9,20 +9,19 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var AtomModel = require( 'RUTHERFORD_SCATTERING/common/model/AtomModel' );
 
   /**
-   * @param {Tandem} tandem
+   * @param {Object} options
    * @constructor
    */
-  function PlumPuddingAtomModel( tandem, options ) {
+  function PlumPuddingAtomModel( options ) {
 
     options = _.extend( {
     }, options );
 
-    AtomModel.call( this, tandem, options );
+    AtomModel.call( this, options );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomModel', PlumPuddingAtomModel );

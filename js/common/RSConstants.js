@@ -14,36 +14,50 @@
 define( function( require ) {
   'use strict';
 
+  // modules
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+
   // constants
+  var RSConstants = {
 
-  // alpha particle
-  var MIN_ALPHA_ENERGY      =  6;
-  var MAX_ALPHA_ENERGY      =  12;
-  var DEFAULT_ALPHA_ENERGY  =  10;
+    //----------------------------------------------------------------------------
+    // Model
+    //----------------------------------------------------------------------------
 
-  var DEFAULT_SHOW_TRACES   = false;
+    // alpha particle
+    MIN_ALPHA_ENERGY:       6,
+    MAX_ALPHA_ENERGY:       12,
+    DEFAULT_ALPHA_ENERGY:   10,
 
-  // protons
-  var MIN_PROTON_COUNT      =  20;
-  var MAX_PROTON_COUNT      =  100;
-  var DEFAULT_PROTON_COUNT  =  79;
+    DEFAULT_SHOW_TRACES:    false,
 
-  // neutrons
-  var MIN_NEUTRON_COUNT     =  20;
-  var MAX_NEUTRON_COUNT     =  150;
-  var DEFAULT_NEUTRON_COUNT =  118;
+    // protons
+    MIN_PROTON_COUNT:       20,
+    MAX_PROTON_COUNT:       100,
+    DEFAULT_PROTON_COUNT:   79,
 
-  return {
-    MIN_ALPHA_ENERGY: MIN_ALPHA_ENERGY,
-    MAX_ALPHA_ENERGY: MAX_ALPHA_ENERGY,
-    DEFAULT_ALPHA_ENERGY: DEFAULT_ALPHA_ENERGY,
-    DEFAULT_SHOW_TRACES: DEFAULT_SHOW_TRACES,
-    MIN_PROTON_COUNT: MIN_PROTON_COUNT,
-    MAX_PROTON_COUNT: MAX_PROTON_COUNT,
-    DEFAULT_PROTON_COUNT: DEFAULT_PROTON_COUNT,
-    MIN_NEUTRON_COUNT: MIN_NEUTRON_COUNT,
-    MAX_NEUTRON_COUNT: MAX_NEUTRON_COUNT,
-    DEFAULT_NEUTRON_COUNT: DEFAULT_NEUTRON_COUNT
+    // neutrons
+    MIN_NEUTRON_COUNT:      20,
+    MAX_NEUTRON_COUNT:      150,
+    DEFAULT_NEUTRON_COUNT:  118,
+
+    //----------------------------------------------------------------------------
+    // Views
+    //----------------------------------------------------------------------------
+
+
+    //----------------------------------------------------------------------------
+    // Dimensions
+    //----------------------------------------------------------------------------
+
+    // Animation space size, must be square!
+    SPACE_NODE_WIDTH:       700,
+    SPACE_NODE_HEIGHT:      700,
+
   };
+
+  rutherfordScattering.register( 'RSConstants', RSConstants );
+
+  return RSConstants;
 
 } );

@@ -2,10 +2,10 @@
   "rutherford-scattering.title": {
     "value": "Rutherford Scattering"
   },
-  "screen.rutherfordAtom": {
+  "rutherfordAtom": {
     "value": "Rutherford Atom"
   },
-  "screen.plumPuddingAtom": {
+  "plumPuddingAtom": {
     "value": "Plum Pudding Atom"
   },
   "alphaParticleProperties": {

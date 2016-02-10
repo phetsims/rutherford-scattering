@@ -17,7 +17,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var Vector2 = require( 'DOT/Vector2' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // strings
@@ -30,11 +29,10 @@ define( function( require ) {
   /**
    * Constructor for a Atom Properties control panel.
    *
-   * @param {Tandem} tandem
    * @param { } options
    * @constructor
    */
-  function ParticlesLegendPanel(tandem, options ) {
+  function ParticlesLegendPanel( options ) {
 
     options = _.extend( {
       xMargin: 5,
@@ -59,7 +57,6 @@ define( function( require ) {
     Panel.call( this, content, options );
   }
 
-  // Smitty: do I need this?
   rutherfordScattering.register( 'ParticlesLegendPanel', ParticlesLegendPanel );
 
   return inherit( Panel, ParticlesLegendPanel );

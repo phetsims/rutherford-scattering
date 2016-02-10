@@ -10,31 +10,25 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var Property = require( 'AXON/Property' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Constants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   /**
-   * @param {Tandem} tandem
+   * @param {Object} options
    * @constructor
    */
-  function AtomModel( tandem, options ) {
+  function AtomModel( options ) {
 
     options = _.extend( {
+      alphaParticleEnergy: RSConstants.DEFAULT_ALPHA_ENERGY,
+      showAlphaTrace: RSConstants.DEFAULT_SHOW_TRACES,
       play: true // is the sim running or paused
     }, options );
 
     // @public
     PropertySet.call( this, options, {
-      tandemSet: {
-        play: tandem.createTandem( 'running' )
-      }
+      play: 'running'
     } );
-
-    // @public
-    // properties
-    this.alphaParticleEnergyProperty = new Property( Constants.DEFAULT_ALPHA_ENERGY );
-    this.showAlphaTraceProperty = new Property( Constants.DEFAULT_SHOW_TRACES );
 
   }
 

@@ -14,30 +14,27 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RutherfordAtomModel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtomModel' );
   var RutherfordAtomScreenView = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomScreenView' );
-  var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
-  var rutherfordAtomTitleString = require( 'string!RUTHERFORD_SCATTERING/screen.rutherfordAtom' );
+  var rutherfordAtomString = require( 'string!RUTHERFORD_SCATTERING/rutherfordAtom' );
 
   // images
   var screenIcon = require( 'image!RUTHERFORD_SCATTERING/RutherfordAtom-screen-icon.jpg' );
 
   /**
-   * @param {Tandem} tandem
    * @constructor
    */
-  function RutherfordAtomScreen( tandem ) {
+  function RutherfordAtomScreen() {
 
     var options = {
-      tandem: tandem,
       backgroundColor: '#EAEAEA'
     };
 
     Screen.call( this,
-      rutherfordAtomTitleString,
+      rutherfordAtomString,
       new Image( screenIcon ),
-      function() { return new RutherfordAtomModel( tandem.createTandem( 'model' ) ); },
-      function( model ) { return new RutherfordAtomScreenView( model, tandem.createTandem( 'view' ) ); }, options );
+      function() { return new RutherfordAtomModel(); },
+      function( model ) { return new RutherfordAtomScreenView( model ); }, options );
   }
 
   rutherfordScattering.register( 'RutherfordAtomScreen', RutherfordAtomScreen );
