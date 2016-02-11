@@ -11,6 +11,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var AtomModel = require( 'RUTHERFORD_SCATTERING/common/model/AtomModel' );
+  var GunModel = require( 'RUTHERFORD_SCATTERING/common/model/GunModel' );
 
   /**
    * @param {Object} options
@@ -20,6 +21,8 @@ define( function( require ) {
 
     options = _.extend( {
     }, options );
+
+    this.gun = new GunModel();
 
     AtomModel.call( this, options );
   }

@@ -27,7 +27,7 @@ define( function( require ) {
   function RutherfordAtomScreen() {
 
     var options = {
-      backgroundColor: '#EAEAEA'
+      backgroundColor: 'black'
     };
 
     Screen.call( this,

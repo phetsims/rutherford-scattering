@@ -11,73 +11,115 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var BeamNode = require( 'RUTHERFORD_SCATTERING/common/view/BeamNode' );
+  var TargetMaterialNode = require( 'RUTHERFORD_SCATTERING/common/view/TargetMaterialNode' );
+  var TinyBox = require( 'RUTHERFORD_SCATTERING/common/view/TinyBox' );
+  var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
-  var SpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/SpaceNode' );
   var PlumPuddingAtomModel = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomModel' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  var Shape = require( 'KITE/Shape' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var PANEL_COLOR = '#eaeaea';
-  var PANEL_STROKE = 'gray';
-  var PANEL_LINE_WIDTH = 1;
-  var TITLE_FONT = new PhetFont( 16 );
-  var PROPERTY_FONT = new PhetFont( 12 );
-  var TICK_FONT = new PhetFont( 12 );
+  var PANEL_SPACE_MARGIN = 20;
+  var PANEL_TOP_MARGIN = 20;
+  var PANEL_INNER_MARGIN = 10;
 
   /**
-   * @param {AtomModel} plumPuddingAtomModel
+   * @param {AtomModel} model
    * @constructor
    */
-  function PlumPuddingAtomScreenView( plumPuddingAtomModel ) {
+  function PlumPuddingAtomScreenView( model ) {
 
     ScreenView.call( this );
 
-    // fonts
+    // Smitty: rearrage layout - Gun top as space centerX?
+
+    // Alpha particle source target
+    var targetMaterialNode = new TargetMaterialNode( {
+      left: this.layoutBounds.left + 10,
+      top: this.layoutBounds.top + 300
+    } );
+    this.addChild( targetMaterialNode );
+
+     // Tiny box that indicates what will be zoomed
+    var tinyBoxNode = new TinyBox();
+    tinyBoxNode.left = targetMaterialNode.centerX - tinyBoxNode.width/2.0;
+    tinyBoxNode.top = targetMaterialNode.centerY - tinyBoxNode.height/2.0;
+    this.addChild( tinyBoxNode );
+
+    // Alpha particle beam
+    var beamNode = new BeamNode( model.gun.onProperty, {
+      centerX: tinyBoxNode.centerX,
+      top: targetMaterialNode.bottom
+    } );
+    this.addChild( beamNode );
+
+    // Alpha particle gun
+    var gunNode = new LaserPointerNode( model.gun.onProperty, {
+      rotation: -Math.PI / 2, // pointing up
+      centerX: targetMaterialNode.centerX,
+      top: beamNode.bottom
+    } );
+    this.addChild( gunNode );
+
+    // Atom animation space
+    // Smitty: dynamic size based on layoutBounds?
+    var spaceNodeX = targetMaterialNode.right + 50;
+    var spaceNodeY = 15;
+    var particleSpaceNode = new ParticleSpaceNode( model, {
+      canvasBounds: new Bounds2( spaceNodeX, spaceNodeY, spaceNodeX + RSConstants.SPACE_NODE_WIDTH, spaceNodeY + RSConstants.SPACE_NODE_HEIGHT )
+    } );
+    this.addChild( particleSpaceNode );
+
+    // Dashed lines that connect the tiny box and space
+    var dashedLines = new Path( new Shape()
+      .moveTo( tinyBoxNode.left, tinyBoxNode.top )
+      .lineTo( particleSpaceNode.left, particleSpaceNode.top )
+      .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
+      .lineTo( particleSpaceNode.left, particleSpaceNode.bottom ), {
+      stroke: 'white',
+      lineDash: [ 5, 5 ]
+    } );
+    this.addChild( dashedLines );
 
     // Create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel({
       minWidth: 255,
-      rightTop: new Vector2( this.layoutBounds.right - 10, this.layoutBounds.top + 25 ),
-      fill: PANEL_COLOR,
-      stroke: PANEL_STROKE,
-      lineWidth: PANEL_LINE_WIDTH,
-      titleFont: TITLE_FONT,
-      propertyFont: PROPERTY_FONT,
+      leftTop: new Vector2( particleSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
+      fill: RSConstants.PANEL_COLOR,
+      stroke: RSConstants.PANEL_STROKE,
+      lineWidth: RSConstants.PANEL_LINE_WIDTH,
+      titleFont: RSConstants.PANEL_TITLE_FONT,
+      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
       rresize: false
     } );
     this.addChild( particleLegendPanel );
 
     // Create the alpha particle properties control panel
-    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( plumPuddingAtomModel, {
+    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, {
       minWidth: 255,
-      rightTop: new Vector2( this.layoutBounds.right - 10, particleLegendPanel.bottom + 5 ),
-      fill: PANEL_COLOR,
-      stroke: PANEL_STROKE,
-      lineWidth: PANEL_LINE_WIDTH,
-      titleFont: TITLE_FONT,
-      propertyFont: PROPERTY_FONT,
-      sliderTickfont: TICK_FONT,
+      leftTop: new Vector2( particleSpaceNode.right + PANEL_SPACE_MARGIN, particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
+      fill: RSConstants.PANEL_COLOR,
+      stroke: RSConstants.PANEL_STROKE,
+      lineWidth: RSConstants.PANEL_LINE_WIDTH,
+      titleFont: RSConstants.PANEL_TITLE_FONT,
+      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
+      sliderTickfont: RSConstants.PANEL_TICK_FONT,
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );
 
-    // Atom animation space
-    var spaceX = 10; // Smitty: FIXME
-    var spaceY = 10;
-    var spaceNode = new SpaceNode( plumPuddingAtomModel, {
-      canvasBounds: new Bounds2( spaceX, spaceY, spaceX + RSConstants.SPACE_NODE_WIDTH, RSConstants.SPACE_NODE_HEIGHT )
-    } );
-    this.addChild( spaceNode );
-
     // Add play/pause button.
-    var playPauseButton = new PlayPauseButton( plumPuddingAtomModel.playProperty, {
+    var playPauseButton = new PlayPauseButton( model.playProperty, {
       bottom: alphaParticlePropertiesPanel.bottom + 60,
       centerX: alphaParticlePropertiesPanel.centerX - 25,
       radius: 23
@@ -86,9 +128,9 @@ define( function( require ) {
 
     // Add step button to manually step the animation.
     var stepButton = new StepButton( function() {
-        plumPuddingAtomModel.manualStep();
+        model.manualStep();
       },
-      plumPuddingAtomModel.playProperty, {
+      model.playProperty, {
         centerY: playPauseButton.centerY,
         centerX: alphaParticlePropertiesPanel.centerX + 25,
         radius: 15
@@ -98,7 +140,7 @@ define( function( require ) {
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
-        plumPuddingAtomModel.reset();
+        model.reset();
       },
       right:  this.layoutBounds.maxX - 10,
       bottom: this.layoutBounds.maxY - 10

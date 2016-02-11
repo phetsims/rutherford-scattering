@@ -11,23 +11,17 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var RutherfordAtomModel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtomModel' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var PANEL_COLOR = '#eaeaea';
-  var PANEL_STROKE = 'gray';
-  var PANEL_LINE_WIDTH = 1;
-  var TITLE_FONT = new PhetFont( 16 );
-  var PROPERTY_FONT = new PhetFont( 12 );
-  var TICK_FONT = new PhetFont( 12 );
 
   /**
    * @param {RutherfordAtomModel} rutherfordAtomModel
@@ -40,12 +34,12 @@ define( function( require ) {
     // Create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel( {
       minWidth: 255,
-      rightTop: new Vector2( this.layoutBounds.right - 10, this.layoutBounds.top + 25 ),
-      fill: PANEL_COLOR,
-      stroke: PANEL_STROKE,
-      lineWidth: PANEL_LINE_WIDTH,
-      titleFont: TITLE_FONT,
-      propertyFont: PROPERTY_FONT,
+      rightTop: new Vector2( this.layoutBounds.right - 10, this.layoutBounds.top + 15 ),
+      fill: RSConstants.PANEL_COLOR,
+      stroke: RSConstants.PANEL_STROKE,
+      lineWidth: RSConstants.PANEL_LINE_WIDTH,
+      titleFont: RSConstants.PANEL_TITLE_FONT,
+      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
       resize: false
     } );
     this.addChild( particleLegendPanel );
@@ -54,12 +48,12 @@ define( function( require ) {
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( rutherfordAtomModel, {
       minWidth: 255,
       rightTop: new Vector2( this.layoutBounds.right - 10, particleLegendPanel.bottom + 5 ),
-      fill: PANEL_COLOR,
-      stroke: PANEL_STROKE,
-      lineWidth: PANEL_LINE_WIDTH,
-      titleFont: TITLE_FONT,
-      propertyFont: PROPERTY_FONT,
-      sliderTickfont: TICK_FONT,
+      fill: RSConstants.PANEL_COLOR,
+      stroke: RSConstants.PANEL_STROKE,
+      lineWidth: RSConstants.PANEL_LINE_WIDTH,
+      titleFont: RSConstants.PANEL_TITLE_FONT,
+      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
+      sliderTickfont: RSConstants.PANEL_TICK_FONT,
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );
@@ -68,12 +62,12 @@ define( function( require ) {
     var atomPropertiesPanel = new AtomPropertiesPanel( rutherfordAtomModel, {
       minWidth: 255,
       rightTop: new Vector2( this.layoutBounds.right - 10, alphaParticlePropertiesPanel.bottom + 5 ),
-      fill: PANEL_COLOR,
-      stroke: PANEL_STROKE,
-      lineWidth: PANEL_LINE_WIDTH,
-      titleFont: TITLE_FONT,
-      propertyFont: PROPERTY_FONT,
-      sliderTickfont: TICK_FONT,
+      fill: RSConstants.PANEL_COLOR,
+      stroke: RSConstants.PANEL_STROKE,
+      lineWidth: RSConstants.PANEL_LINE_WIDTH,
+      titleFont: RSConstants.PANEL_TITLE_FONT,
+      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
+      sliderTickfont: RSConstants.PANEL_TICK_FONT,
       resize: false } );
     this.addChild( atomPropertiesPanel );
 

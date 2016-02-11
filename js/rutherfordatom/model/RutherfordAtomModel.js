@@ -14,7 +14,7 @@ define( function( require ) {
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   /**
-   * @param {Object} options
+   * @param { } options
    * @constructor
    */
   function RutherfordAtomModel( options ) {

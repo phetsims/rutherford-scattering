@@ -15,13 +15,13 @@
     "value": "Energy:"
   },
   "atomProperties": {
-    "value": "Atom Properties"
+    "value": "Atom"
   },
   "numberOfProtons": {
-    "value": "Number of Protons:"
+    "value": "Protons:"
   },
   "numberOfNeutrons": {
-    "value": "Number of Neutrons:"
+    "value": "Neutrons:"
   },
   "minEnergy": {
     "value": "min"
@@ -30,7 +30,7 @@
     "value": "max"
   },
   "showTraces": {
-    "value": "Show Traces"
+    "value": "Traces"
   },
   "alphaParticle": {
     "value": "Alpha Particle"
@@ -46,9 +46,6 @@
   },
   "legend": {
     "value": "Legend"
-  },
-  "turnOnTheGun": {
-    "value": "Turn on the gun"
   },
   "pattern.atomicScale": {
     "value": "? pm (atomic scale)"

@@ -27,9 +27,11 @@ define( function( require ) {
     CanvasNode.call( this, options );
 
     var electron = new ElectronNode();
-    electron.translate( 350, 350 );
+    electron.translate( this.centerX, this.centerY );
 
     this.addChild( electron );
+    //this.removeChild( electron ); // Smitty: remove particles from space
+
 
     this.invalidatePaint();
   }
@@ -50,6 +52,7 @@ define( function( require ) {
         context.fillStyle = 'black';
         context.fillRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
 
+        // render atom/particles
 
         // border
         context.lineWidth = 2;

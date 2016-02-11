@@ -16,7 +16,7 @@ define( function( require ) {
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   /**
-   * @param {Object} [options], must contain a canvasBounds attribute of type Bounds2
+   * @param { } [options], must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
   function ElectronNode( options ) {
