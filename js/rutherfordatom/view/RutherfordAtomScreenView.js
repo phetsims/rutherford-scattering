@@ -22,6 +22,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
+  var PANEL_MIN_WIDTH = 225;
 
   /**
    * @param {RutherfordAtomModel} rutherfordAtomModel
@@ -33,41 +34,24 @@ define( function( require ) {
 
     // Create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel( {
-      minWidth: 255,
+      minWidth: PANEL_MIN_WIDTH,
       rightTop: new Vector2( this.layoutBounds.right - 10, this.layoutBounds.top + 15 ),
-      fill: RSConstants.PANEL_COLOR,
-      stroke: RSConstants.PANEL_STROKE,
-      lineWidth: RSConstants.PANEL_LINE_WIDTH,
-      titleFont: RSConstants.PANEL_TITLE_FONT,
-      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
       resize: false
     } );
     this.addChild( particleLegendPanel );
 
     // Create the alpha particle properties control panel
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( rutherfordAtomModel, {
-      minWidth: 255,
+      minWidth: PANEL_MIN_WIDTH,
       rightTop: new Vector2( this.layoutBounds.right - 10, particleLegendPanel.bottom + 5 ),
-      fill: RSConstants.PANEL_COLOR,
-      stroke: RSConstants.PANEL_STROKE,
-      lineWidth: RSConstants.PANEL_LINE_WIDTH,
-      titleFont: RSConstants.PANEL_TITLE_FONT,
-      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
-      sliderTickfont: RSConstants.PANEL_TICK_FONT,
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );
 
     // Create the atom properties control panel
     var atomPropertiesPanel = new AtomPropertiesPanel( rutherfordAtomModel, {
-      minWidth: 255,
+      minWidth: PANEL_MIN_WIDTH,
       rightTop: new Vector2( this.layoutBounds.right - 10, alphaParticlePropertiesPanel.bottom + 5 ),
-      fill: RSConstants.PANEL_COLOR,
-      stroke: RSConstants.PANEL_STROKE,
-      lineWidth: RSConstants.PANEL_LINE_WIDTH,
-      titleFont: RSConstants.PANEL_TITLE_FONT,
-      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
-      sliderTickfont: RSConstants.PANEL_TICK_FONT,
       resize: false } );
     this.addChild( atomPropertiesPanel );
 
@@ -97,7 +81,7 @@ define( function( require ) {
         rutherfordAtomModel.reset();
       },
       right:  this.layoutBounds.maxX - 10,
-      bottom: this.layoutBounds.maxY - 10
+      bottom: atomPropertiesPanel.bottom + 60
     } );
     this.addChild( resetAllButton );
 

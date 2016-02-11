@@ -17,6 +17,7 @@ define( function( require ) {
   // modules
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Dimension2 = require( 'DOT/Dimension2' );
 
   // constants
   var RSConstants = {
@@ -47,20 +48,23 @@ define( function( require ) {
     //----------------------------------------------------------------------------
 
     // property panels
-    PANEL_COLOR: '#eaeaea',
+    PANEL_COLOR: 'black',
     PANEL_STROKE: 'gray',
     PANEL_LINE_WIDTH: 1,
     PANEL_TITLE_FONT:  new PhetFont( 16 ),
-    PANEL_PROPERTY_FONT:  new PhetFont( 12 ),
-    PANEL_TICK_FONT:  new PhetFont( 12 ),
+    PANEL_TITLE_COLOR: 'rgb( 200, 200, 95 )',
+    PANEL_PROPERTY_FONT:  new PhetFont( 14 ),
+    PANEL_TICK_FONT:  new PhetFont( 14 ),
+    PANEL_SLIDER_FILL_COLOR: 'rgb( 180, 180, 180 )',
+    PANEL_SLIDER_THUMB_DIMENSION:new Dimension2( 15, 30 ),
 
     //----------------------------------------------------------------------------
     // Dimensions
     //----------------------------------------------------------------------------
 
     // Animation space size, must be square!
-    SPACE_NODE_WIDTH:       700,
-    SPACE_NODE_HEIGHT:      700
+    SPACE_NODE_WIDTH:       600,
+    SPACE_NODE_HEIGHT:      600
 
   };
 

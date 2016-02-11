@@ -56,7 +56,7 @@ define( function( require ) {
 
         // border
         context.lineWidth = 2;
-        context.strokeStyle = 'white';
+        context.strokeStyle = 'grey';
         context.strokeRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
     },
 

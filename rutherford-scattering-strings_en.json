@@ -12,7 +12,7 @@
     "value": "Alpha Particle"
   },
   "energy": {
-    "value": "Energy:"
+    "value": "Energy"
   },
   "atomProperties": {
     "value": "Atom"
@@ -21,7 +21,7 @@
     "value": "Protons:"
   },
   "numberOfNeutrons": {
-    "value": "Neutrons:"
+    "value": "Neutrons"
   },
   "minEnergy": {
     "value": "min"

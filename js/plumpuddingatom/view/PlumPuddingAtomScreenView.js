@@ -29,9 +29,11 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
+  var PANEL_MIN_WIDTH = 225;
   var PANEL_SPACE_MARGIN = 20;
   var PANEL_TOP_MARGIN = 20;
   var PANEL_INNER_MARGIN = 10;
+  var TARGET_SPACE_MARGIN = 50;
 
   /**
    * @param {AtomModel} model
@@ -41,39 +43,37 @@ define( function( require ) {
 
     ScreenView.call( this );
 
-    // Smitty: rearrage layout - Gun top as space centerX?
+    // Alpha particle gun
+    var gunNode = new LaserPointerNode( model.gun.onProperty, {
+      rotation: -Math.PI / 2, // pointing up
+      left: this.layoutBounds.left + 25,
+      top: this.layoutBounds.centerY
+    } );
+    this.addChild( gunNode );
+
+    // Alpha particle beam
+    var beamNode = new BeamNode( model.gun.onProperty, {
+      centerX: gunNode.centerX,
+      bottom: gunNode.top
+    } );
+    this.addChild( beamNode );
 
     // Alpha particle source target
     var targetMaterialNode = new TargetMaterialNode( {
-      left: this.layoutBounds.left + 10,
-      top: this.layoutBounds.top + 300
+      centerX: beamNode.centerX,
+      bottom: beamNode.top
     } );
     this.addChild( targetMaterialNode );
 
      // Tiny box that indicates what will be zoomed
     var tinyBoxNode = new TinyBox();
-    tinyBoxNode.left = targetMaterialNode.centerX - tinyBoxNode.width/2.0;
-    tinyBoxNode.top = targetMaterialNode.centerY - tinyBoxNode.height/2.0;
+    tinyBoxNode.centerX = targetMaterialNode.centerX;
+    tinyBoxNode.centerY = targetMaterialNode.centerY;
     this.addChild( tinyBoxNode );
-
-    // Alpha particle beam
-    var beamNode = new BeamNode( model.gun.onProperty, {
-      centerX: tinyBoxNode.centerX,
-      top: targetMaterialNode.bottom
-    } );
-    this.addChild( beamNode );
-
-    // Alpha particle gun
-    var gunNode = new LaserPointerNode( model.gun.onProperty, {
-      rotation: -Math.PI / 2, // pointing up
-      centerX: targetMaterialNode.centerX,
-      top: beamNode.bottom
-    } );
-    this.addChild( gunNode );
 
     // Atom animation space
     // Smitty: dynamic size based on layoutBounds?
-    var spaceNodeX = targetMaterialNode.right + 50;
+    var spaceNodeX = targetMaterialNode.right + TARGET_SPACE_MARGIN;
     var spaceNodeY = 15;
     var particleSpaceNode = new ParticleSpaceNode( model, {
       canvasBounds: new Bounds2( spaceNodeX, spaceNodeY, spaceNodeX + RSConstants.SPACE_NODE_WIDTH, spaceNodeY + RSConstants.SPACE_NODE_HEIGHT )
@@ -86,42 +86,31 @@ define( function( require ) {
       .lineTo( particleSpaceNode.left, particleSpaceNode.top )
       .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
       .lineTo( particleSpaceNode.left, particleSpaceNode.bottom ), {
-      stroke: 'white',
+      stroke: 'grey',
       lineDash: [ 5, 5 ]
     } );
     this.addChild( dashedLines );
 
     // Create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel({
-      minWidth: 255,
+      minWidth: PANEL_MIN_WIDTH,
       leftTop: new Vector2( particleSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
-      fill: RSConstants.PANEL_COLOR,
-      stroke: RSConstants.PANEL_STROKE,
-      lineWidth: RSConstants.PANEL_LINE_WIDTH,
-      titleFont: RSConstants.PANEL_TITLE_FONT,
-      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
       rresize: false
     } );
     this.addChild( particleLegendPanel );
 
     // Create the alpha particle properties control panel
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, {
-      minWidth: 255,
+      minWidth: PANEL_MIN_WIDTH,
       leftTop: new Vector2( particleSpaceNode.right + PANEL_SPACE_MARGIN, particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
-      fill: RSConstants.PANEL_COLOR,
-      stroke: RSConstants.PANEL_STROKE,
-      lineWidth: RSConstants.PANEL_LINE_WIDTH,
-      titleFont: RSConstants.PANEL_TITLE_FONT,
-      propertyFont: RSConstants.PANEL_PROPERTY_FONT,
-      sliderTickfont: RSConstants.PANEL_TICK_FONT,
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );
 
     // Add play/pause button.
     var playPauseButton = new PlayPauseButton( model.playProperty, {
-      bottom: alphaParticlePropertiesPanel.bottom + 60,
-      centerX: alphaParticlePropertiesPanel.centerX - 25,
+      bottom: particleSpaceNode.bottom + 60,
+      centerX: particleSpaceNode.centerX - 25,
       radius: 23
     } );
     this.addChild( playPauseButton );
@@ -132,7 +121,7 @@ define( function( require ) {
       },
       model.playProperty, {
         centerY: playPauseButton.centerY,
-        centerX: alphaParticlePropertiesPanel.centerX + 25,
+        centerX: particleSpaceNode.centerX + 25,
         radius: 15
     } );
     this.addChild( stepButton );
@@ -143,7 +132,7 @@ define( function( require ) {
         model.reset();
       },
       right:  this.layoutBounds.maxX - 10,
-      bottom: this.layoutBounds.maxY - 10
+      top: alphaParticlePropertiesPanel.bottom + 10
     } );
     this.addChild( resetAllButton );
 

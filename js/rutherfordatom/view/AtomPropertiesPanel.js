@@ -39,17 +39,19 @@ define( function( require ) {
   function AtomPropertiesPanel( model, options ) {
 
     options = _.extend( {
-      xMargin: 5,
+      xMargin: 15,
       yMargin: 5,
-      align: 'left'
+      align: 'left',
+      fill: RSConstants.PANEL_COLOR,
+      stroke: RSConstants.PANEL_STROKE
     }, options );
 
     // strings
-    var atomPropertiesText = new Text( atomPropertiesString, { font: options.titleFont, fontWeight: 'bold' } );
-    var numProtonsText = new Text( numberOfProtonsString, { font: options.propertyFont, fontWeight: 'bold' } );
-    var numNeutronsText = new Text( numberOfNeutronsString, { font: options.propertyFont, fontWeight: 'bold' } );
-    var minText = new Text( 'min', { font: options.sliderTickfont } );
-    var maxText = new Text( 'max', { font: options.sliderTickfont } );
+    var atomPropertiesText = new Text( atomPropertiesString, { font: RSConstants.PANEL_TITLE_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_TITLE_COLOR } );
+    var numProtonsText = new Text( numberOfProtonsString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: 'rgb( 185, 50, 8 )' } );
+    var numNeutronsText = new Text( numberOfNeutronsString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: 'rgb( 160, 160, 160 )' } );
+
+    // constants
 
     /* Smitty: use default control (add new layout) for this?
     var numberControlOptions = {
@@ -79,45 +81,52 @@ define( function( require ) {
 
     // proton count arrow/number display
     var arrowButtonOptions = {
-      scale: 0.7,
-      xMargin: 5,
-      yMargin: 5,
-      arrowHeight: 25,
-      arrowWidth: 25,
-      touchAreaXDilation: 14,
-      touchAreaYDilation: 14
+      scale: 1.0,
+      xMargin: 3,
+      yMargin: 3,
+      arrowHeight: 18,
+      arrowWidth: 18,
+      touchAreaXDilation: 9,
+      touchAreaYDilation: 9
     };
     var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT, RSConstants.DEFAULT_PROTON_COUNT );
     var protonMinusButton = new ArrowButton( 'left', function protonCountPropertyMinus() {
       model.protonCountProperty.value  = Math.max(RSConstants.MIN_PROTON_COUNT, model.protonCountProperty.value - 1);
     }, arrowButtonOptions );
-    var protonNumberDisplay = new NumberDisplay( model.protonCountProperty, protonCountRange,'', '{0}', {
+    var protonNumberDisplay = new NumberDisplay( model.protonCountProperty, protonCountRange, '', '{0}', {
       backgroundStroke: 'black' } );
     var protonPlusButton = new ArrowButton( 'right', function protonCountPropertyPlus() {
       model.protonCountProperty.value  = Math.min(RSConstants.MAX_PROTON_COUNT, model.protonCountProperty.value + 1);
     }, arrowButtonOptions);
 
-    var protonContent = new HBox( {
+    var protonCountContent = new HBox( {
       spacing: 8,
       top: 0,
       right: 0,
-      children: [ numProtonsText, protonMinusButton, protonNumberDisplay, protonPlusButton ]
+      children: [ protonMinusButton, protonNumberDisplay, protonPlusButton ]
     } );
 
     // proton count slider
-    var sliderWidth = options.minWidth*0.83;
+    var sliderWidth = options.minWidth*0.75;
     var protonCountSlider = new HSlider( model.protonCountProperty, {
       min: RSConstants.MIN_PROTON_COUNT,
       max: RSConstants.MAX_PROTON_COUNT
     }, {
-      trackFill: 'white',
+      trackFill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      trackStroke:RSConstants.PANEL_SSLIDER_FILL_COLOR,
+      majorTickStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      majorTickLength: 15,
+      tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
-      thumbSize: new Dimension2( 10, 20 ),
-      majorTickLength: 10,
-      tickLabelSpacing: 2
+      thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
+      thumbFillEnabled: 'rgb(220, 58, 10)',
+      thumbFillHighlighted: 'rgb(270, 108, 60)',
+      thumbCenterLineStroke: 'white'
     } );
-    protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT, minText );
-    protonCountSlider.addMajorTick( RSConstants.MAX_PROTON_COUNT, maxText );
+    protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT,
+      new Text( RSConstants.MIN_PROTON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
+    protonCountSlider.addMajorTick( RSConstants.MAX_PROTON_COUNT,
+      new Text( RSConstants.MAX_PROTON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
 
     // neutron count arrow/number display
     var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT );
@@ -130,11 +139,11 @@ define( function( require ) {
       model.neutronCountProperty.value  = Math.min(RSConstants.MAX_NEUTRON_COUNT, model.neutronCountProperty.value + 1);
     }, arrowButtonOptions);
 
-  var neutronContent = new HBox( {
+  var neutronCountContent = new HBox( {
       spacing: 8,
       top: 0,
       right: 0,
-      children: [ numNeutronsText, neutronMinusButton, neutronNumberDisplay, neutronPlusButton ]
+      children: [ neutronMinusButton, neutronNumberDisplay, neutronPlusButton ]
     } );
 
     // neutron count slider
@@ -142,14 +151,21 @@ define( function( require ) {
       min: RSConstants.MIN_NEUTRON_COUNT,
       max: RSConstants.MAX_NEUTRON_COUNT
     }, {
-      trackFill: 'white',
+      trackFill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      trackStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      majorTickStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      majorTickLength: 15,
+      tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
-      thumbSize: new Dimension2( 10, 20 ),
-      majorTickLength: 10,
-      tickLabelSpacing: 2
+      thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
+      thumbFillEnabled: 'rgb(130, 130, 130)',
+      thumbFillHighlighted: 'rgb(180, 180, 180)',
+      thumbCenterLineStroke: 'white'
     } );
-    neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT, minText );
-    neutronCountSlider.addMajorTick( RSConstants.MAX_NEUTRON_COUNT, maxText );
+    neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
+      new Text( RSConstants.MIN_NEUTRON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
+    neutronCountSlider.addMajorTick( RSConstants.MAX_NEUTRON_COUNT,
+      new Text( RSConstants.MAX_NEUTRON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
 
     // main panel content
     var content = new VBox( {
@@ -157,7 +173,7 @@ define( function( require ) {
       top: 0,
       right: 0,
       align: 'left',
-      children: [ atomPropertiesText, protonContent, protonCountSlider, neutronContent, neutronCountSlider ]
+      children: [ atomPropertiesText, numProtonsText, protonCountContent, protonCountSlider, numNeutronsText, neutronCountContent, neutronCountSlider ]
     } );
 
     Panel.call( this, content, options );

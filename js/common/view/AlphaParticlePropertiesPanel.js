@@ -44,38 +44,40 @@ define( function( require ) {
     //assert && assert( model.alphaParticleEnergyProperty === undefined, 'The rateProperty should be a Property' );
 
     options = _.extend( {
-      xMargin: 5,
+      xMargin: 15,
       yMargin: 5,
-      align: 'left'
+      align: 'left',
+      fill: RSConstants.PANEL_COLOR,
+      stroke: RSConstants.PANEL_STROKE
     }, options );
 
     // strings
     var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
-      font: options.titleFont,
-      fontWeight: 'bold'
-    } );
-    var energyText = new Text( energyString, { font: options.propertyFont, fontWeight: 'bold' } );
-    var minEnergyText = new Text( minEnergyString, { font: options.sliderTickfont } );
-    var maxEnergyText = new Text( maxEnergyString, { font: options.sliderTickfont } );
+      font: RSConstants.PANEL_TITLE_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_TITLE_COLOR } );
+    var energyText = new Text( energyString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
+    var minEnergyText = new Text( minEnergyString, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
+    var maxEnergyText = new Text( maxEnergyString, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
 
     // particle engery slider
-    var sliderWidth = options.minWidth*0.83;
+    var sliderWidth = options.minWidth*0.75;
     var particleEnergySlider = new HSlider( model.alphaParticleEnergyProperty, {
       min: RSConstants.MIN_ALPHA_ENERGY,
       max: RSConstants.MAX_ALPHA_ENERGY
     }, {
-      trackFill: 'white',
+      trackFill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      trackStroke:RSConstants.PANEL_SSLIDER_FILL_COLOR,
+      majorTickStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      majorTickLength: 15,
+      tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
-      thumbSize: new Dimension2( 10, 20 ),
-      majorTickLength: 10,
-      tickLabelSpacing: 2
+      thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
     particleEnergySlider.addMajorTick( RSConstants.MAX_ALPHA_ENERGY, maxEnergyText );
 
     // show traces
     var showTraceStrut = new HStrut(options.minWidth*0.05);
-    var showTraceText = new Text( showTracesString, { font: options.propertyFont, fontWeight: 'bold' } );
+    var showTraceText = new Text( showTracesString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
     var showTraceCheckBox = new CheckBox(showTraceText, model.showAlphaTraceProperty, { } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );
 

@@ -18,6 +18,7 @@ define( function( require ) {
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Text = require( 'SCENERY/nodes/Text' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   // strings
   var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
@@ -35,16 +36,18 @@ define( function( require ) {
   function ParticlesLegendPanel( options ) {
 
     options = _.extend( {
-      xMargin: 5,
+      xMargin: 15,
       yMargin: 5,
-      align: 'left'
+      align: 'left',
+      fill: RSConstants.PANEL_COLOR,
+      stroke: RSConstants.PANEL_STROKE
     }, options );
 
-    var legendText = new Text( legendString, { font: options.titleFont, fontWeight: 'bold' } );
-    var electronText = new Text( electronString, { font: options.propertyFont } );
-    var protonText = new Text( protonString, { font: options.propertyFont } );
-    var neutronText = new Text( neutronString, { font: options.propertyFont } );
-    var alphaParticleText = new Text( alphaParticleString, { font: options.propertyFont } );
+    var legendText = new Text( legendString, { font: RSConstants.PANEL_TITLE_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_TITLE_COLOR } );
+    var electronText = new Text( electronString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
+    var protonText = new Text( protonString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
+    var neutronText = new Text( neutronString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
+    var alphaParticleText = new Text( alphaParticleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
 
     var content = new VBox( {
       spacing: 8,
