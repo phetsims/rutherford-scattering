@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
  *
@@ -12,9 +12,10 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var AtomModel = require( 'RUTHERFORD_SCATTERING/common/model/AtomModel' );
   var GunModel = require( 'RUTHERFORD_SCATTERING/common/model/GunModel' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function PlumPuddingAtomModel( options ) {
@@ -22,20 +23,47 @@ define( function( require ) {
     options = _.extend( {
     }, options );
 
-    this.gun = new GunModel();
-
     AtomModel.call( this, options );
+
+    this.gun = new GunModel( this );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomModel', PlumPuddingAtomModel );
 
   return inherit( AtomModel, PlumPuddingAtomModel, {
 
+    /**
+     * @param {AlphaParticleModel} alphaParticle
+     * @param {double} dt
+     * @protected
+     */
+    moveParticle: function ( alphaParticle, dt ) {
+      /*
+      double speed = alphaParticle.getSpeed();
+      double distance = speed * dt;
+      double direction = alphaParticle.getOrientation();
+      double dx = Math.cos( direction ) * distance;
+      double dy = Math.sin( direction ) * distance;
+      double x = alphaParticle.getX() + dx;
+      double y = alphaParticle.getY() + dy;
+      alphaParticle.setPosition( x, y );
+      */
+      var speed = alphaParticle.speedProperty.get();
+      var distance = speed * dt;
+      var direction = alphaParticle.orientationProperty.get();
+      var dx = Math.cos( direction ) * distance;
+      var dy = Math.sin( direction ) * distance;
+      var position = alphaParticle.positionProperty.get();
+      var x = position.x + dx;
+      var y = position.y + dy;
+      alphaParticle.positionProperty.value = new Vector2( x, y );
+    },
 
-    //TODO Called by the animation loop. Optional, so if your model has no animation, please delete this.
     // @public
     step: function( dt ) {
-      //TODO Handle model animation here.
+      //console.log('step: ' + dt);
+      this.gun.step( dt );
+      this.moveParticles( dt );
     },
 
     /**

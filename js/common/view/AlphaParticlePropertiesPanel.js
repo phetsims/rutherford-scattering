@@ -1,7 +1,7 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Control panel for the "Ruthorford Scattering" sim.  Allows the user to adust the energy of alpha particles being simulated.
+ * Control panel for the "Ruthorford Scattering" sim. Allows the user to adjust the energy of alpha particles being simulated.
  *
  * @author Dave Schmitz (Schmitzware)
 
@@ -34,18 +34,19 @@ define( function( require ) {
   /**
    * Constructor for a Alpha Particle Properties control panel.
    *
-   * @param { AtomModel } model - The model controlled by this panel.
-   * @param { } options
+   * @param {AtomModel} model - The model controlled by this panel.
+   * @param {Property.<boolean>} showTracesProperty - show particle traces on/off
+   * @param {Object} [options]
    * @constructor
    */
-  function AlphaParticlePropertiesPanel( model, options ) {
+  function AlphaParticlePropertiesPanel( model, showTracesProperty, options ) {
 
-    // Smitty: assert missing model properties ?
-    //assert && assert( model.alphaParticleEnergyProperty === undefined, 'The rateProperty should be a Property' );
+    // FIXME: assert missing model properties ?
+    //assert && assert( model.alphaParticleEnergyProperty === undefined, 'alphaParticleEnergyProperty missing.' );
 
     options = _.extend( {
       xMargin: 15,
-      yMargin: 5,
+      yMargin: 8,
       align: 'left',
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE
@@ -78,7 +79,10 @@ define( function( require ) {
     // show traces
     var showTraceStrut = new HStrut(options.minWidth*0.05);
     var showTraceText = new Text( showTracesString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
-    var showTraceCheckBox = new CheckBox(showTraceText, model.showAlphaTraceProperty, { } );
+    var showTraceCheckBox = new CheckBox(showTraceText, showTracesProperty, {
+      checkBoxColor: 'white',
+      checkBoxColorBackground: 'black'
+       } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );
 
     var content = new VBox( {

@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
  *
@@ -63,8 +63,8 @@ define( function( require ) {
     //----------------------------------------------------------------------------
 
     // Animation space size, must be square!
-    SPACE_NODE_WIDTH:       600,
-    SPACE_NODE_HEIGHT:      600
+    SPACE_NODE_WIDTH:       500,
+    SPACE_NODE_HEIGHT:      500
 
   };
 

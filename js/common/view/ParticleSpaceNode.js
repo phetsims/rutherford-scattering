@@ -1,7 +1,7 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * SpaceNode is the space in which atoms and alpha particels are rendered.
+ * ParticleSpaceNode is the space in which atoms and alpha particels are rendered.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -11,34 +11,54 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var ElectronNode = require( 'RUTHERFORD_SCATTERING/common/view/ElectronNode' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var AlphaParticleNode = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticleNode' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
 
   /**
    * @param {AtomModel} model
-   * @param { } [options], must contain a canvasBounds attribute of type Bounds2
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
-  function SpaceNode( model, options ) {
+  function ParticleSpaceNode( model, modelViewTransform, options ) {
+
+    options = _.extend( {
+    }, options );
 
     assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvas bound specified.' );
 
     CanvasNode.call( this, options );
 
-    var electron = new ElectronNode();
-    electron.translate( this.centerX, this.centerY );
+    // register callbacks for particle additions/removals
+    var thisNode = this;
+    model.registerParticleCallback( function( alphaParticle ) {
+      console.log( 'particleCallback' );
 
-    this.addChild( electron );
-    //this.removeChild( electron ); // Smitty: remove particles from space
+      // add new alpha particle
+      var particle = new AlphaParticleNode( alphaParticle, modelViewTransform );
+      particle.translate( alphaParticle.position.x, alphaParticle.position.y );
 
+      thisNode.addChild( particle );
+    } );
 
     this.invalidatePaint();
   }
 
-  rutherfordScattering.register( 'SpaceNode', SpaceNode );
+  rutherfordScattering.register( 'ParticleSpaceNode', ParticleSpaceNode );
 
-  return inherit( CanvasNode, SpaceNode, {
+  return inherit( CanvasNode, ParticleSpaceNode, {
+
+    // @public
+    step: function( dt ) {
+      this.invalidatePaint();
+    },
+
+    /**
+     * @param {CanvasRenderingContext2D} context
+     * @protected
+     */
+    paintSpace: function( context ) {
+    },
 
     /**
      * @param {CanvasRenderingContext2D} context
@@ -52,18 +72,17 @@ define( function( require ) {
         context.fillStyle = 'black';
         context.fillRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
 
+        // render derivied space
+        this.paintSpace();
+
         // render atom/particles
 
         // border
         context.lineWidth = 2;
         context.strokeStyle = 'grey';
         context.strokeRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
-    },
-
-    // @public
-    step: function( dt ) {
-      this.invalidatePaint();
     }
 
-  } );
-} );
+  } ); // inherit
+
+} ); // define

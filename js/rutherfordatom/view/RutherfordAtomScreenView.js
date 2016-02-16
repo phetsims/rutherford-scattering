@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
  *
@@ -19,18 +19,22 @@ define( function( require ) {
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var PANEL_MIN_WIDTH = 225;
 
   /**
-   * @param {RutherfordAtomModel} rutherfordAtomModel
+   * @param {RutherfordAtomModel} model
    * @constructor
    */
-  function RutherfordAtomScreenView( rutherfordAtomModel ) {
+  function RutherfordAtomScreenView( model ) {
 
     ScreenView.call( this );
+
+    // FIXME: get devs input on this idea
+    var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
     // Create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel( {
@@ -41,7 +45,7 @@ define( function( require ) {
     this.addChild( particleLegendPanel );
 
     // Create the alpha particle properties control panel
-    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( rutherfordAtomModel, {
+    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
       minWidth: PANEL_MIN_WIDTH,
       rightTop: new Vector2( this.layoutBounds.right - 10, particleLegendPanel.bottom + 5 ),
       resize: false
@@ -49,14 +53,14 @@ define( function( require ) {
     this.addChild( alphaParticlePropertiesPanel );
 
     // Create the atom properties control panel
-    var atomPropertiesPanel = new AtomPropertiesPanel( rutherfordAtomModel, {
+    var atomPropertiesPanel = new AtomPropertiesPanel( model, {
       minWidth: PANEL_MIN_WIDTH,
       rightTop: new Vector2( this.layoutBounds.right - 10, alphaParticlePropertiesPanel.bottom + 5 ),
       resize: false } );
     this.addChild( atomPropertiesPanel );
 
     // Add play/pause button.
-    var playPauseButton = new PlayPauseButton( rutherfordAtomModel.playProperty,
+    var playPauseButton = new PlayPauseButton( model.playProperty,
       {
         bottom: atomPropertiesPanel.bottom + 60,
         centerX: atomPropertiesPanel.centerX - 25,
@@ -66,9 +70,9 @@ define( function( require ) {
 
     // Add step button to manually step the animation.
     var stepButton = new StepButton( function() {
-        rutherfordAtomModel.manualStep();
+        model.manualStep();
       },
-      rutherfordAtomModel.playProperty, {
+      model.playProperty, {
         centerY: playPauseButton.centerY,
         centerX: atomPropertiesPanel.centerX + 25,
         radius: 15
@@ -78,7 +82,8 @@ define( function( require ) {
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
-        rutherfordAtomModel.reset();
+        showAlphaTraceProperty.reset();
+        model.reset();
       },
       right:  this.layoutBounds.maxX - 10,
       bottom: atomPropertiesPanel.bottom + 60

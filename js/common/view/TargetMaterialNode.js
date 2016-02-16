@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
  * The material target which which the particle gun is directed towards.
@@ -18,9 +18,9 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
 
   // constants
-  var BACK_DEPTH = 20;
-  var BACK_OFFSET = 0.15;
-  var BOX_SIZE = new Dimension2( 100, 100 );
+  var BACK_DEPTH = 30;
+  var BACK_OFFSET = 0.10;
+  var BOX_SIZE = new Dimension2( 120, 120 );
   var BACK_COLOR = 'rgb( 126, 126, 52 )';
   var FRONT_COLOR = 'rgb( 168, 168, 69 )';
 

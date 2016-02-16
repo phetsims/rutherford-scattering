@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
  *
@@ -24,22 +24,12 @@ define( function( require ) {
       neutronCount: RSConstants.DEFAULT_NEUTRON_COUNT
     }, options );
 
-    AtomModel.call( this, options);
+    AtomModel.call( this, options );
   }
 
   rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );
 
   return inherit( AtomModel, RutherfordAtomModel, {
-
-    // @public
-    reset: function() {
-
-      this.protonCountProperty.reset();
-      this.neutronCountProperty.reset();
-
-      // base reset
-      AtomModel.prototype.reset.call(this);
-    },
 
     //TODO Called by the animation loop. Optional, so if your model has no animation, please delete this.
     // @public

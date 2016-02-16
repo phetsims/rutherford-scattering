@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Visual representation of an electron.
+ * Visual representation of an proton.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -17,19 +17,19 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function ElectronNode( options ) {
+  function ProtonNode( options ) {
 
     options = _.extend( {
-      mainColor: 'blue',
-      diameter: 6.75
+      mainColor: 'orange',
+      diameter: 8.25
     }, options );
 
     ShadedSphereNode.call( this, options.diameter, options );
   }
 
-  rutherfordScattering.register( 'ElectronNode', ElectronNode );
+  rutherfordScattering.register( 'ProtonNode', ProtonNode );
 
-  return inherit( ShadedSphereNode, ElectronNode, {
+  return inherit( ShadedSphereNode, ProtonNode, {
 
   } );
 } );

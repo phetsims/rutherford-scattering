@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
  * Control panel for the "Ruthorford Scattering" sim.  Allows the user to adust the energy of alpha particles being simulated.
@@ -19,6 +19,10 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var ElectronNode = require( 'RUTHERFORD_SCATTERING/common/view/ElectronNode' );
+  var ProtonNode = require( 'RUTHERFORD_SCATTERING/common/view/ProtonNode' );
+  var NeutronNode = require( 'RUTHERFORD_SCATTERING/common/view/NeutronNode' );
+  var AlphaParticleNode = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticleNode' );
 
   // strings
   var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
@@ -27,34 +31,64 @@ define( function( require ) {
   var neutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
   var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
 
+  // constants
+  var LEGEND_ITEM_SPACING = 10;
+
   /**
-   * Constructor for a Atom Properties control panel.
    *
-   * @param { } options
+   * @param {Object} [options]
    * @constructor
    */
   function ParticlesLegendPanel( options ) {
 
     options = _.extend( {
       xMargin: 15,
-      yMargin: 5,
+      yMargin: 8,
       align: 'left',
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE
     }, options );
 
-    var legendText = new Text( legendString, { font: RSConstants.PANEL_TITLE_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_TITLE_COLOR } );
-    var electronText = new Text( electronString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
-    var protonText = new Text( protonString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
-    var neutronText = new Text( neutronString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
-    var alphaParticleText = new Text( alphaParticleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
+    /**
+     * @param {string} title
+     * @param {Node} particleNode
+     * @returns {HBox}
+     * @private
+     */
+    function buildParticleBox( titleString, particleNode ) {
+
+      var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
+      var hStrut = new HStrut( LEGEND_ITEM_SPACING - particleNode.width/2 );
+
+      var hBox = new HBox( {
+        spacing: LEGEND_ITEM_SPACING,
+        top: 0,
+        right: 0,
+        align: 'center',
+        children: [ hStrut, particleNode, titleText ]
+      } );
+
+      return hBox;
+    }
+
+    var legendText = new Text( legendString, {
+      font: RSConstants.PANEL_TITLE_FONT,
+      fontWeight: 'bold',
+      fill: RSConstants.PANEL_TITLE_COLOR
+    } );
+
+    var children = [ legendText ];
+    children.push( buildParticleBox( electronString, new ElectronNode() ) );
+    children.push( buildParticleBox( protonString, new ProtonNode() ) );
+    children.push( buildParticleBox( neutronString, new NeutronNode() ) );
+    //children.push( buildParticleBox( alphaParticleString, new AlphaParticleNode() ) );
 
     var content = new VBox( {
       spacing: 8,
       top: 0,
       right: 0,
       align: 'left',
-      children: [ legendText , electronText, protonText, neutronText, alphaParticleText ]
+      children: children
     } );
 
     Panel.call( this, content, options );

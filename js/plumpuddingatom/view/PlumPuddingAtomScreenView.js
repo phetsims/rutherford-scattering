@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
  *
@@ -15,7 +15,7 @@ define( function( require ) {
   var BeamNode = require( 'RUTHERFORD_SCATTERING/common/view/BeamNode' );
   var TargetMaterialNode = require( 'RUTHERFORD_SCATTERING/common/view/TargetMaterialNode' );
   var TinyBox = require( 'RUTHERFORD_SCATTERING/common/view/TinyBox' );
-  var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
+  var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var PlumPuddingAtomModel = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomModel' );
@@ -24,7 +24,9 @@ define( function( require ) {
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Shape = require( 'KITE/Shape' );
+  var Property = require( 'AXON/Property' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -36,12 +38,15 @@ define( function( require ) {
   var TARGET_SPACE_MARGIN = 50;
 
   /**
-   * @param {AtomModel} model
+   * @param {PlumPuddingAtomModel} model
    * @constructor
    */
   function PlumPuddingAtomScreenView( model ) {
 
     ScreenView.call( this );
+
+    // FIXME: get devs input on this idea
+    var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
     // Alpha particle gun
     var gunNode = new LaserPointerNode( model.gun.onProperty, {
@@ -72,20 +77,24 @@ define( function( require ) {
     this.addChild( tinyBoxNode );
 
     // Atom animation space
-    // Smitty: dynamic size based on layoutBounds?
+    // FIXME: dynamic size based on layoutBounds?
     var spaceNodeX = targetMaterialNode.right + TARGET_SPACE_MARGIN;
     var spaceNodeY = 15;
-    var particleSpaceNode = new ParticleSpaceNode( model, {
-      canvasBounds: new Bounds2( spaceNodeX, spaceNodeY, spaceNodeX + RSConstants.SPACE_NODE_WIDTH, spaceNodeY + RSConstants.SPACE_NODE_HEIGHT )
+    var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
+                                       spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
+                                       spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
+    var modelViewTransform = new ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
+    var plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, modelViewTransform, {
+      canvasBounds: spaceNodeBounds
     } );
-    this.addChild( particleSpaceNode );
+    this.addChild( plumPuddingSpaceNode );
 
     // Dashed lines that connect the tiny box and space
     var dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.left, tinyBoxNode.top )
-      .lineTo( particleSpaceNode.left, particleSpaceNode.top )
+      .lineTo( plumPuddingSpaceNode.left, plumPuddingSpaceNode.top )
       .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
-      .lineTo( particleSpaceNode.left, particleSpaceNode.bottom ), {
+      .lineTo( plumPuddingSpaceNode.left, plumPuddingSpaceNode.bottom ), {
       stroke: 'grey',
       lineDash: [ 5, 5 ]
     } );
@@ -94,23 +103,24 @@ define( function( require ) {
     // Create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel({
       minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( particleSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
+      leftTop: new Vector2( plumPuddingSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
       rresize: false
     } );
     this.addChild( particleLegendPanel );
 
     // Create the alpha particle properties control panel
-    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, {
+    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
       minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( particleSpaceNode.right + PANEL_SPACE_MARGIN, particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
+      leftTop: new Vector2( plumPuddingSpaceNode.right + PANEL_SPACE_MARGIN,
+        particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );
 
     // Add play/pause button.
     var playPauseButton = new PlayPauseButton( model.playProperty, {
-      bottom: particleSpaceNode.bottom + 60,
-      centerX: particleSpaceNode.centerX - 25,
+      bottom: plumPuddingSpaceNode.bottom + 60,
+      centerX: plumPuddingSpaceNode.centerX - 25,
       radius: 23
     } );
     this.addChild( playPauseButton );
@@ -121,7 +131,7 @@ define( function( require ) {
       },
       model.playProperty, {
         centerY: playPauseButton.centerY,
-        centerX: particleSpaceNode.centerX + 25,
+        centerX: plumPuddingSpaceNode.centerX + 25,
         radius: 15
     } );
     this.addChild( stepButton );
@@ -129,23 +139,20 @@ define( function( require ) {
     // Reset All button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
+        showAlphaTraceProperty.reset();
         model.reset();
       },
-      right:  this.layoutBounds.maxX - 10,
+      right:  alphaParticlePropertiesPanel.right,
       top: alphaParticlePropertiesPanel.bottom + 10
     } );
     this.addChild( resetAllButton );
 
-}
+  }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
 
   return inherit( ScreenView, PlumPuddingAtomScreenView, {
 
-    //TODO Called by the animation loop. Optional, so if your view has no animation, please delete this.
-    // @public
-    step: function( dt ) {
-      //TODO Handle view animation here.
-    }
-  } );
-} );
+  } ); // inherit
+
+} ); // define

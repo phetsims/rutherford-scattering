@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
  * Control panel for the "Ruthorford Scattering" sim.  Allows the user to adust the number of protons and neutrons being simulated.
@@ -40,7 +40,7 @@ define( function( require ) {
 
     options = _.extend( {
       xMargin: 15,
-      yMargin: 5,
+      yMargin: 8,
       align: 'left',
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE
@@ -53,7 +53,7 @@ define( function( require ) {
 
     // constants
 
-    /* Smitty: use default control (add new layout) for this?
+    /* FIXME: use default control (add new layout) for this?
     var numberControlOptions = {
       titleMaxWidth: 200, // i18n, determined empirically
       titleFont: font,
@@ -139,7 +139,8 @@ define( function( require ) {
       model.neutronCountProperty.value  = Math.min(RSConstants.MAX_NEUTRON_COUNT, model.neutronCountProperty.value + 1);
     }, arrowButtonOptions);
 
-  var neutronCountContent = new HBox( {
+
+    var neutronCountContent = new HBox( {
       spacing: 8,
       top: 0,
       right: 0,

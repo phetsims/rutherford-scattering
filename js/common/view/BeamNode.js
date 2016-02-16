@@ -1,4 +1,4 @@
-// Copyright 2016, University of Colorado Boulder
+// Copyright 2002-2016, University of Colorado Boulder
 
 /**
  * BeamNode is the beam the comes out of the gun.
@@ -15,7 +15,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
 
   // constants
-  var BEAM_SIZE = new Dimension2( 50, 110 );
+  var BEAM_SIZE = new Dimension2( 10, 110 );
 
   /**
    * @param {Property.<boolean>} visibleProperty - is the beam visible?
