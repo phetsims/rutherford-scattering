@@ -84,7 +84,7 @@ define( function( require ) {
     //children.push( buildParticleBox( alphaParticleString, new AlphaParticleNode() ) );
 
     var content = new VBox( {
-      spacing: 8,
+      spacing: RSConstants.PANEL_CHILD_SPACING,
       top: 0,
       right: 0,
       align: 'left',

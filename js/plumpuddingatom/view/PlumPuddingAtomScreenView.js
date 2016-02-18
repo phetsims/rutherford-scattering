@@ -18,7 +18,6 @@ define( function( require ) {
   var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
-  var PlumPuddingAtomModel = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomModel' );
   var Path = require( 'SCENERY/nodes/Path' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
@@ -84,7 +83,7 @@ define( function( require ) {
                                        spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
                                        spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
     var modelViewTransform = new ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
-    var plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, modelViewTransform, {
+    var plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: spaceNodeBounds
     } );
     this.addChild( plumPuddingSpaceNode );

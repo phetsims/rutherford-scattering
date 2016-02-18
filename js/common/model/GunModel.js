@@ -17,9 +17,8 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
 
   // constants
-  var DEFAULT_MAX_PARTICLES = 20;
-  var DEFAULT_GUN_SPEED = 1;
-  var DEFAULT_GUN_INTENSITY = 1;
+  var MAX_PARTICLES = 20;
+  var GUN_INTENSITY = 1;
 
   /**
    * {AtomModel} model
@@ -29,44 +28,37 @@ define( function( require ) {
 
     this.model = model;
     this.dtSinceGunFired = 0;
-    this.dtPerGunFired = ( this.model.bounds.width / DEFAULT_GUN_SPEED ) / DEFAULT_MAX_PARTICLES; // FIXME: 500 = space height
 
     // @public
     PropertySet.call( this, {
-      on: false // {boolean} is the gun on?
+      on: true // {boolean} is the gun on?
     } );
   }
-
-  /*
-  public static final double GUN_INTENSITY = 1.0; // 0-1 (1=100%)
-  public static final DoubleRange INITIAL_SPEED_RANGE = new DoubleRange( 6, 12, 10, 1 );
-
-  // Pick a randon location along the gun's nozzle width
-  Point2D position = getRandomNozzlePoint();
-
-  // Direction of alpha particle is same as gun's orientation.
-  double orientation = getOrientation();
-
-  // Create the alpha particle
-  AlphaParticle alphaParticle = new AlphaParticle( position, orientation, _speed, _defaultSpeed );
-  */
 
   rutherfordScattering.register( 'GunModel', GunModel );
 
   return inherit( PropertySet, GunModel, {
 
-    // @public
+    /**
+     * {number} dt - time step
+     * @public
+     */
     step: function( dt ) {
 
-      this.dtSinceGunFired += ( DEFAULT_GUN_INTENSITY * dt );
+      var initialSpeed = this.model.alphaParticleEnergyProperty.get();
 
-      if ( this.dtSinceGunFired >= this.dtPerGunFired ) {
+      this.dtSinceGunFired += ( GUN_INTENSITY * dt );
+      this.dtPerGunFired = ( this.model.bounds.width / initialSpeed ) / MAX_PARTICLES;
+
+      if ( this.on && this.dtSinceGunFired >= this.dtPerGunFired ) {
 
           // random position withing model bounds
           var particleX = this.model.bounds.width * Math.random();
           var initialPosition = new Vector2( particleX, 0 );
-          var initialSpeed = this.model.alphaParticleEnergyProperty.get();
-          var alphaParticle = new AlphaParticleModel( initialPosition, initialSpeed, DEFAULT_GUN_SPEED );
+          var alphaParticle = new AlphaParticleModel( {
+            speed: initialSpeed,
+            position: initialPosition
+          } );
           this.model.addParticle( alphaParticle );
 
           this.dtSinceGunFired = this.dtSinceGunFired % this.dtPerGunFired;

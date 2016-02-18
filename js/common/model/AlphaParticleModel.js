@@ -11,38 +11,39 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
 
-  // var constants
-  var DEFAULT_ORIENTATION =  Util.toRadians(90);
+  // used to assign unique id to each object
+  var idCounter = 1;
 
   /**
-   * @param {Vector2} initialPosition - required by Rutherford Scattering algorithm
-   * @param {number} initialSpeed - required by Rutherford Scattering algorithm
-   * @param {number} defaultSpeed - required by Rutherford Scattering algorithm
-   * @param {Object} [options]
+   * @param {Object} options
    * @constructor
    */
-  function AlphaParticleModel( initialPosition, initialSpeed, defaultSpeed, options ) {
+  function AlphaParticleModel( options ) {
 
-    // @public (read-only)
-    this.defaultSpeed = defaultSpeed;
+    // @pubic (read-only) - unique id
+    this.id = idCounter++;
 
-    // FIXME: is this the correct thing to do here - create properties from values?
     options = _.extend( {
-      speed: initialSpeed,
-      position: initialPosition,
-      orientation: DEFAULT_ORIENTATION
+      speed: 0, // {number} in FIXME: units?
+      position: new Vector2( 0, 0 ),  // {Vector2} initial position
+      orientation: Math.PI / 2  // {number} in radians
     }, options );
 
     // @public
-    PropertySet.call( this, options );
-  }
+    PropertySet.call( this, {
+      speed: options.speed,
+      position: options.position,
+      orientation: options.orientation
+    } );
+
+  } // constructor
 
   rutherfordScattering.register( 'AlphaParticleModel', AlphaParticleModel );
 
   return inherit( PropertySet, AlphaParticleModel, {
 
-  } );
+  } );  // inherit
 
-} );
+} );  // define

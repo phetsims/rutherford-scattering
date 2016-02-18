@@ -86,7 +86,7 @@ define( function( require ) {
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );
 
     var content = new VBox( {
-      spacing: 12,
+      spacing: RSConstants.PANEL_CHILD_SPACING,
       top: 0,
       right: 0,
       align: 'left',

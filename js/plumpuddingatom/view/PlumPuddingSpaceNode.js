@@ -22,16 +22,19 @@ define( function( require ) {
 
   /**
    * @param {AtomModel} model
+   * @param {showAlphaTraceProperty} traceProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @param { } options, must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
-  function PlumPuddingSpaceNode( model, modelViewTransform, options ) {
+  function PlumPuddingSpaceNode( model, traceProperty, modelViewTransform, options ) {
+
+    assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvasBounds specified.' );
 
     options = _.extend( {
     }, options );
 
-    ParticleSpaceNode.call( this, model, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model, traceProperty, modelViewTransform, options );
 
     // add plum pudding image
     var plumPuddingImageNode = new Image( plumPuddingImage );
@@ -42,7 +45,7 @@ define( function( require ) {
     plumPuddingImageNode.scale( scale, scale );
     plumPuddingImageNode.centerX = this.centerX;
     plumPuddingImageNode.centerY = this.centerY;
-    this.addChild( plumPuddingImageNode );
+    this.viewportNode.addChild( plumPuddingImageNode );
 
     // FIXME: bake electron locations into image?
 

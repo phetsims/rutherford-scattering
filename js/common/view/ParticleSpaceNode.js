@@ -13,32 +13,62 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var AlphaParticleNode = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticleNode' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Shape = require( 'KITE/Shape' );
+
+  // constants
+  var SPACE_BORDER_WIDTH = 2;
 
   /**
    * @param {AtomModel} model
+   * @param {showAlphaTraceProperty} showTraceProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
-  function ParticleSpaceNode( model, modelViewTransform, options ) {
+  function ParticleSpaceNode( model, showTraceProperty, modelViewTransform, options ) {
+
+    assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvasBounds specified.' );
 
     options = _.extend( {
     }, options );
 
-    assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvas bound specified.' );
-
     CanvasNode.call( this, options );
 
-    // register callbacks for particle additions/removals
+    // @private
     var thisNode = this;
-    model.registerParticleCallback( function( alphaParticle ) {
-      console.log( 'particleCallback' );
+
+    // @private - active/visible particles/traces
+    this.particleNodes = { };
+
+    // @protected - visible area
+    this.viewportNode = new Node();
+    this.viewportNode.clipArea = Shape.rect(
+      this.canvasBounds.getX() + SPACE_BORDER_WIDTH/2,
+      this.canvasBounds.getY() + SPACE_BORDER_WIDTH/2,
+      this.canvasBounds.getWidth() - SPACE_BORDER_WIDTH,
+      this.canvasBounds.getHeight() - SPACE_BORDER_WIDTH);
+    this.addChild( this.viewportNode );
+
+    // register callbacks for particle addition
+    model.registerAddParticleCallback( function( alphaParticle ) {
 
       // add new alpha particle
-      var particle = new AlphaParticleNode( alphaParticle, modelViewTransform );
-      particle.translate( alphaParticle.position.x, alphaParticle.position.y );
+      var particleNode = new AlphaParticleNode( alphaParticle, showTraceProperty, modelViewTransform );
+      thisNode.viewportNode.addChild( particleNode );
 
-      thisNode.addChild( particle );
+      // Save particle node
+      thisNode.particleNodes[alphaParticle.id] = particleNode;
+    } );
+
+    // register callbacks for particle removal
+    model.registerRemoveParticleCallback( function( alphaParticle ) {
+
+      // remove alpha particle
+      var particleNode = thisNode.particleNodes[alphaParticle.id];
+      thisNode.viewportNode.removeChild( particleNode );
+      delete thisNode.particleNodes[alphaParticle.id];
+      particleNode.dispose();
     } );
 
     this.invalidatePaint();
@@ -69,16 +99,17 @@ define( function( require ) {
         var bounds = this.canvasBounds;
 
         // clear
-        context.fillStyle = 'black';
-        context.fillRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
+        context.clearRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
 
         // render derivied space
         this.paintSpace();
 
-        // render atom/particles
+        // FIXME: render particles/traces here if performance problems
+        // May have to rethink this.particleNodes additions/removals
+        // i.e. context.drawImage( ... )
 
         // border
-        context.lineWidth = 2;
+        context.lineWidth = SPACE_BORDER_WIDTH;
         context.strokeStyle = 'grey';
         context.strokeRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
     }

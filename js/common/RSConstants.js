@@ -57,6 +57,7 @@ define( function( require ) {
     PANEL_TICK_FONT:  new PhetFont( 14 ),
     PANEL_SLIDER_FILL_COLOR: 'rgb( 180, 180, 180 )',
     PANEL_SLIDER_THUMB_DIMENSION:new Dimension2( 15, 30 ),
+    PANEL_CHILD_SPACING: 8,
 
     //----------------------------------------------------------------------------
     // Dimensions

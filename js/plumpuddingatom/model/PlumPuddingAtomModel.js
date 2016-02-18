@@ -38,16 +38,6 @@ define( function( require ) {
      * @protected
      */
     moveParticle: function ( alphaParticle, dt ) {
-      /*
-      double speed = alphaParticle.getSpeed();
-      double distance = speed * dt;
-      double direction = alphaParticle.getOrientation();
-      double dx = Math.cos( direction ) * distance;
-      double dy = Math.sin( direction ) * distance;
-      double x = alphaParticle.getX() + dx;
-      double y = alphaParticle.getY() + dy;
-      alphaParticle.setPosition( x, y );
-      */
       var speed = alphaParticle.speedProperty.get();
       var distance = speed * dt;
       var direction = alphaParticle.orientationProperty.get();
@@ -56,23 +46,29 @@ define( function( require ) {
       var position = alphaParticle.positionProperty.get();
       var x = position.x + dx;
       var y = position.y + dy;
-      alphaParticle.positionProperty.value = new Vector2( x, y );
+      alphaParticle.positionProperty.value = new Vector2( x, y ); // FIXME: do I need to 'new'? how about edit values?
     },
+
 
     // @public
     step: function( dt ) {
-      //console.log('step: ' + dt);
-      this.gun.step( dt );
-      this.moveParticles( dt );
+
+      if( this.play ) {
+        this.gun.step( dt );
+        this.moveParticles( dt );
+        this.cullParticles();
+      }
     },
 
     /**
      * Step one frame manually.  Assuming 60 frames per second.
      */
     manualStep: function() {
-
-      console.log('manualStep');
+        this.gun.step( this.maunalStepDt );
+        this.moveParticles( this.maunalStepDt );
+        this.cullParticles();
     }
 
-  } );
-} );
+  } ); // inherit
+
+} ); // define

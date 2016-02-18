@@ -170,7 +170,7 @@ define( function( require ) {
 
     // main panel content
     var content = new VBox( {
-      spacing: 12,
+      spacing: RSConstants.PANEL_CHILD_SPACING,
       top: 0,
       right: 0,
       align: 'left',
