@@ -19,6 +19,7 @@ define( function( require ) {
   // constants
   var MAX_PARTICLES = 20;
   var GUN_INTENSITY = 1;
+  var X0_MIN = 10;
 
   /**
    * {AtomModel} model
@@ -52,11 +53,16 @@ define( function( require ) {
 
       if ( this.on && this.dtSinceGunFired >= this.dtPerGunFired ) {
 
+          var ySign = ( Math.random() < 0.5 ? 1 : -1 );
+
           // random position withing model bounds
-          var particleX = this.model.bounds.width * Math.random();
-          var initialPosition = new Vector2( particleX, 0 );
+          var particleX = ySign * ( X0_MIN + ( Math.random() * ( ( this.model.bounds.width / 2 ) - X0_MIN ) ) );
+          var particleY = this.model.bounds.minY;
+
+          var initialPosition = new Vector2( particleX, particleY );
           var alphaParticle = new AlphaParticleModel( {
             speed: initialSpeed,
+            defaultSpeed: initialSpeed,
             position: initialPosition
           } );
           this.model.addParticle( alphaParticle );

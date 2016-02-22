@@ -13,6 +13,7 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+  var Circle = require( 'SCENERY/nodes/Circle' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
 
@@ -34,10 +35,6 @@ define( function( require ) {
 
     var initialViewPosition = modelViewTransform.modelToViewPosition( model.position );
 
-    // @protected - particle representation - FIXME: replace with real rep
-    this.particleNode = new ShadedSphereNode ( 14.25, { mainColor: 'red'} );
-    this.addChild( this.particleNode );
-
     // @protected  - particle path shape
     this.traceShape = new Shape();
     this.traceShape.moveToPoint( initialViewPosition );
@@ -49,6 +46,11 @@ define( function( require ) {
       } );
     this.addChild( this.traceNode );
 
+    // @protected - particle representation - FIXME: replace with real rep
+    this.particleNode = new ShadedSphereNode( 14.25, { mainColor: 'red' } );
+    //this.particleNode = new Circle( 14.25, { fill: 'red' } );
+    this.addChild( this.particleNode );
+
     // @private - update particle location
     var positionListener = function( position ) {
 
@@ -56,7 +58,7 @@ define( function( require ) {
       var viewPosition = modelViewTransform.modelToViewPosition( position );
       thisNode.particleNode.translation = viewPosition;
 
-      // add new position to shape
+      // add new position to shape - FIXME: traces is SLOW
       thisNode.traceShape.lineToPoint( viewPosition );
     };
     model.positionProperty.link( positionListener );

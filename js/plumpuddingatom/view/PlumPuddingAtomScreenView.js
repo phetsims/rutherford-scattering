@@ -99,24 +99,7 @@ define( function( require ) {
     } );
     this.addChild( dashedLines );
 
-    // Create the particles legend control panel
-    var particleLegendPanel = new ParticleLegendPanel({
-      minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( plumPuddingSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
-      rresize: false
-    } );
-    this.addChild( particleLegendPanel );
-
-    // Create the alpha particle properties control panel
-    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
-      minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( plumPuddingSpaceNode.right + PANEL_SPACE_MARGIN,
-        particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
-      resize: false
-    } );
-    this.addChild( alphaParticlePropertiesPanel );
-
-    // Add play/pause button.
+     // Add play/pause button.
     var playPauseButton = new PlayPauseButton( model.playProperty, {
       bottom: plumPuddingSpaceNode.bottom + 60,
       centerX: plumPuddingSpaceNode.centerX - 25,
@@ -134,6 +117,23 @@ define( function( require ) {
         radius: 15
     } );
     this.addChild( stepButton );
+
+    // Create the particles legend control panel
+    var particleLegendPanel = new ParticleLegendPanel({
+      minWidth: PANEL_MIN_WIDTH,
+      leftTop: new Vector2( plumPuddingSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
+      rresize: false
+    } );
+    this.addChild( particleLegendPanel );
+
+    // Create the alpha particle properties control panel
+    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
+      minWidth: PANEL_MIN_WIDTH,
+      leftTop: new Vector2( plumPuddingSpaceNode.right + PANEL_SPACE_MARGIN,
+        particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
+      resize: false
+    } );
+    this.addChild( alphaParticlePropertiesPanel );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( {

@@ -27,9 +27,9 @@ define( function( require ) {
     //----------------------------------------------------------------------------
 
     // alpha particle
-    MIN_ALPHA_ENERGY:       6,
-    MAX_ALPHA_ENERGY:       12,
-    DEFAULT_ALPHA_ENERGY:   10,
+    MIN_ALPHA_ENERGY:       80,   // 6 - FIXME
+    MAX_ALPHA_ENERGY:       200,  // 12 - FIXME
+    DEFAULT_ALPHA_ENERGY:   165,  // 10 - FIXME - why different? dt differences? clock 25fps?
 
     DEFAULT_SHOW_TRACES:    false,
 

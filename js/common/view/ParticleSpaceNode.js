@@ -38,6 +38,9 @@ define( function( require ) {
     // @private
     var thisNode = this;
 
+    // @private
+    this.model = model;
+
     // @private - active/visible particles/traces
     this.particleNodes = { };
 
@@ -50,26 +53,27 @@ define( function( require ) {
       this.canvasBounds.getHeight() - SPACE_BORDER_WIDTH);
     this.addChild( this.viewportNode );
 
-    // register callbacks for particle addition
-    model.registerAddParticleCallback( function( alphaParticle ) {
-
+    // Callback for particle addition
+    var addCallback = function( alphaParticle ) {
       // add new alpha particle
       var particleNode = new AlphaParticleNode( alphaParticle, showTraceProperty, modelViewTransform );
       thisNode.viewportNode.addChild( particleNode );
 
       // Save particle node
       thisNode.particleNodes[alphaParticle.id] = particleNode;
-    } );
+    };
 
-    // register callbacks for particle removal
-    model.registerRemoveParticleCallback( function( alphaParticle ) {
-
+    // Callback for particle removal
+    var removeCallback = function( alphaParticle ) {
       // remove alpha particle
       var particleNode = thisNode.particleNodes[alphaParticle.id];
       thisNode.viewportNode.removeChild( particleNode );
       delete thisNode.particleNodes[alphaParticle.id];
       particleNode.dispose();
-    } );
+    };
+
+    // register callbacks for particle removal
+    model.registerCallbacks( addCallback, removeCallback );
 
     this.invalidatePaint();
   }

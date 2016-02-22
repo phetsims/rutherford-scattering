@@ -11,7 +11,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var AtomModel = require( 'RUTHERFORD_SCATTERING/common/model/AtomModel' );
-  var GunModel = require( 'RUTHERFORD_SCATTERING/common/model/GunModel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -24,8 +23,6 @@ define( function( require ) {
     }, options );
 
     AtomModel.call( this, options );
-
-    this.gun = new GunModel( this );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomModel', PlumPuddingAtomModel );
@@ -47,26 +44,6 @@ define( function( require ) {
       var x = position.x + dx;
       var y = position.y + dy;
       alphaParticle.positionProperty.value = new Vector2( x, y ); // FIXME: do I need to 'new'? how about edit values?
-    },
-
-
-    // @public
-    step: function( dt ) {
-
-      if( this.play ) {
-        this.gun.step( dt );
-        this.moveParticles( dt );
-        this.cullParticles();
-      }
-    },
-
-    /**
-     * Step one frame manually.  Assuming 60 frames per second.
-     */
-    manualStep: function() {
-        this.gun.step( this.maunalStepDt );
-        this.moveParticles( this.maunalStepDt );
-        this.cullParticles();
     }
 
   } ); // inherit

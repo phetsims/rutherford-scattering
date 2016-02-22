@@ -27,6 +27,7 @@ define( function( require ) {
 
     options = _.extend( {
       speed: 0, // {number} in FIXME: units?
+      defaultSpeed: 0,
       position: new Vector2( 0, 0 ),  // {Vector2} initial position
       orientation: Math.PI / 2  // {number} in radians
     }, options );
@@ -34,6 +35,7 @@ define( function( require ) {
     // @public
     PropertySet.call( this, {
       speed: options.speed,
+      defaultSpeed: options.defaultSpeed,
       position: options.position,
       orientation: options.orientation
     } );
