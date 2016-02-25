@@ -11,13 +11,14 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var AlphaParticleNode = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticleNode' );
+  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Shape = require( 'KITE/Shape' );
 
   // constants
   var SPACE_BORDER_WIDTH = 2;
+  var SPACE_BORDER_COLOR = 'grey';
+  var PARTICLE_TRACE_WIDTH = 1.5;
+  var PARTICLE_TRACE_COLOR = 'grey';
 
   /**
    * @param {AtomModel} model
@@ -36,44 +37,32 @@ define( function( require ) {
     CanvasNode.call( this, options );
 
     // @private
-    var thisNode = this;
+    var self = this;
 
     // @private
     this.model = model;
 
-    // @private - active/visible particles/traces
-    this.particleNodes = { };
+    // @private - model to view coordinate transform
+    this.modelViewTransform = modelViewTransform;
 
-    // @protected - visible area
-    this.viewportNode = new Node();
-    this.viewportNode.clipArea = Shape.rect(
-      this.canvasBounds.getX() + SPACE_BORDER_WIDTH/2,
-      this.canvasBounds.getY() + SPACE_BORDER_WIDTH/2,
-      this.canvasBounds.getWidth() - SPACE_BORDER_WIDTH,
-      this.canvasBounds.getHeight() - SPACE_BORDER_WIDTH);
-    this.addChild( this.viewportNode );
+    // @private
+    this.showTraceProperty = showTraceProperty;
 
-    // Callback for particle addition
-    var addCallback = function( alphaParticle ) {
-      // add new alpha particle
-      var particleNode = new AlphaParticleNode( alphaParticle, showTraceProperty, modelViewTransform );
-      thisNode.viewportNode.addChild( particleNode );
-
-      // Save particle node
-      thisNode.particleNodes[alphaParticle.id] = particleNode;
+    // @private - the area to be used as the 'viewport', border not included
+    this.clipRect = {
+      x: this.canvasBounds.getX() + SPACE_BORDER_WIDTH / 2,
+      y: this.canvasBounds.getY() + SPACE_BORDER_WIDTH / 2,
+      width: this.canvasBounds.getWidth() - SPACE_BORDER_WIDTH,
+      height: this.canvasBounds.getHeight() - SPACE_BORDER_WIDTH
     };
 
-    // Callback for particle removal
-    var removeCallback = function( alphaParticle ) {
-      // remove alpha particle
-      var particleNode = thisNode.particleNodes[alphaParticle.id];
-      thisNode.viewportNode.removeChild( particleNode );
-      delete thisNode.particleNodes[alphaParticle.id];
-      particleNode.dispose();
-    };
-
-    // register callbacks for particle removal
-    model.registerCallbacks( addCallback, removeCallback );
+    // create a single alpha particle image to use for rendering all particles
+    var alphaParticle = ParticleNodeFactory.alpha();
+    alphaParticle.toImage( function( image, x, y ) {
+      self.particleImage = image;
+      self.particleImageHalfWidth = self.particleImage.width / 2;
+      self.particleImageHalfHeight = self.particleImage.height / 2;
+    } );
 
     this.invalidatePaint();
   }
@@ -82,12 +71,8 @@ define( function( require ) {
 
   return inherit( CanvasNode, ParticleSpaceNode, {
 
-    // @public
-    step: function( dt ) {
-      this.invalidatePaint();
-    },
-
     /**
+     * A stub funtion to be implemented by derived objects (if needed)
      * @param {CanvasRenderingContext2D} context
      * @protected
      */
@@ -100,22 +85,63 @@ define( function( require ) {
      */
     paintCanvas: function( context ) {
 
-        var bounds = this.canvasBounds;
+      var self = this;
 
-        // clear
-        context.clearRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
+      var bounds = this.canvasBounds;
+      var renderTrace = self.showTraceProperty.value;
 
-        // render derivied space
-        this.paintSpace();
+      // clear
+      context.clearRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
 
-        // FIXME: render particles/traces here if performance problems
-        // May have to rethink this.particleNodes additions/removals
-        // i.e. context.drawImage( ... )
+      // border
+      context.beginPath();
+      context.lineWidth = SPACE_BORDER_WIDTH;
+      context.strokeStyle = SPACE_BORDER_COLOR;
+      context.rect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
+      context.stroke();
 
-        // border
-        context.lineWidth = SPACE_BORDER_WIDTH;
-        context.strokeStyle = 'grey';
-        context.strokeRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
+      // viewport clip
+      context.beginPath();
+      context.strokeStyle = 'transparent';
+      context.rect( this.clipRect.x, this.clipRect.y, this.clipRect.width, this.clipRect.height );
+      context.stroke();
+      context.clip();
+
+      // render derivied space
+      this.paintSpace( context );
+
+      // render all traces as one path for performance
+      if( renderTrace ) {
+        context.beginPath();
+        context.lineWidth = PARTICLE_TRACE_WIDTH;
+        context.strokeStyle = PARTICLE_TRACE_COLOR;
+      }
+
+      // render all alpha particles/traces
+      this.model.particles.forEach( function( particle ) {
+
+        // render the traces (if enabled)
+        if( renderTrace ) {
+
+          // render trace segments
+          for (var i = 1; i < particle.positions.length; i++) {
+            var segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[i-1] );
+            context.moveTo( segmentStartViewPosition.x, segmentStartViewPosition.y );
+            var segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[i] );
+            context.lineTo( segmentEndViewPosition.x, segmentEndViewPosition.y );
+          }
+        }
+
+        // render particle
+        var particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.position );
+        context.drawImage( self.particleImage,
+          particleViewPosition.x - self.particleImageHalfWidth,
+          particleViewPosition.y - self.particleImageHalfHeight );
+      } );
+
+      if( renderTrace ) {
+        context.stroke();
+      }
     }
 
   } ); // inherit

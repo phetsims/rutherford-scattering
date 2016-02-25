@@ -31,8 +31,8 @@ define( function( require ) {
 
   // constants
   var PANEL_MIN_WIDTH = 225;
-  var PANEL_SPACE_MARGIN = 20;
-  var PANEL_TOP_MARGIN = 20;
+  var PANEL_SPACE_MARGIN = 50;
+  var PANEL_TOP_MARGIN = 15;
   var PANEL_INNER_MARGIN = 10;
   var TARGET_SPACE_MARGIN = 50;
 
@@ -76,9 +76,8 @@ define( function( require ) {
     this.addChild( tinyBoxNode );
 
     // Atom animation space
-    // FIXME: dynamic size based on layoutBounds?
     var spaceNodeX = targetMaterialNode.right + TARGET_SPACE_MARGIN;
-    var spaceNodeY = 15;
+    var spaceNodeY = PANEL_TOP_MARGIN;
     var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
                                        spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
                                        spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
@@ -87,6 +86,11 @@ define( function( require ) {
       canvasBounds: spaceNodeBounds
     } );
     this.addChild( plumPuddingSpaceNode );
+
+    // Update spaceNode on model step
+    model.addStepListener( function() {
+      plumPuddingSpaceNode.invalidatePaint();
+    } );
 
     // Dashed lines that connect the tiny box and space
     var dashedLines = new Path( new Shape()
@@ -122,7 +126,7 @@ define( function( require ) {
     var particleLegendPanel = new ParticleLegendPanel({
       minWidth: PANEL_MIN_WIDTH,
       leftTop: new Vector2( plumPuddingSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
-      rresize: false
+      resize: false
     } );
     this.addChild( particleLegendPanel );
 
@@ -130,7 +134,7 @@ define( function( require ) {
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
       minWidth: PANEL_MIN_WIDTH,
       leftTop: new Vector2( plumPuddingSpaceNode.right + PANEL_SPACE_MARGIN,
-        particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
+      particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );

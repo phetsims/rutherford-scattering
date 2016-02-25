@@ -64,7 +64,7 @@ define( function( require ) {
       var initialPosition = alphaParticle.positionProperty.initialValue;
 
       var x0 = Math.abs( initialPosition.x );
-      if ( x0 == 0 ) {
+      if ( x0 === 0 ) {
           x0 = X0_MIN; // algorithm fails for x0 < X0_MIN
       }
 
@@ -123,7 +123,6 @@ define( function( require ) {
       // handle failures in the algorithm
       //-------------------------------------------------------------------------------
 
-      var error = false;
       if ( !( b > 0 ) || !( sNew > 0 ) ) {
         // Remove the problem particle
         this.removeParticle( alphaParticle );
@@ -133,7 +132,7 @@ define( function( require ) {
       // set the alpha particle's new properties
       //-------------------------------------------------------------------------------
 
-      alphaParticle.positionProperty.value = new Vector2( xNew, yNew ); // FIXME: new?
+      alphaParticle.positionProperty.value = new Vector2( xNew, yNew );
       alphaParticle.speedProperty.value = sNew;
       alphaParticle.orientationProperty.value = phiNew;
     }

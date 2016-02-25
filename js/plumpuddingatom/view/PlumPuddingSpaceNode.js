@@ -12,13 +12,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
-  var Image = require( 'SCENERY/nodes/Image' );
-
-  // images
-  var plumPuddingImage = require( 'image!RUTHERFORD_SCATTERING/plumPudding.png' );
+  var PlumPuddingAtomNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomNode' );
 
   // constants
-  var PLUM_PUDDING_IMAGE_MARGIN = 75;
+  var ATOM_IMAGE_MARGIN = 75;
 
   /**
    * @param {AtomModel} model
@@ -36,18 +33,15 @@ define( function( require ) {
 
     ParticleSpaceNode.call( this, model, traceProperty, modelViewTransform, options );
 
-    // add plum pudding image
-    var plumPuddingImageNode = new Image( plumPuddingImage );
-
-    // scale image to fill space & re-center - this is call order dependent
+    // plum pudding image - calc image scale and center positioning
+    this.atomNode = new PlumPuddingAtomNode();
     var scale = Math.min( this.width, this.height )/
-      ( Math.max( plumPuddingImageNode.width, plumPuddingImageNode.height ) + PLUM_PUDDING_IMAGE_MARGIN );
-    plumPuddingImageNode.scale( scale, scale );
-    plumPuddingImageNode.centerX = this.centerX;
-    plumPuddingImageNode.centerY = this.centerY;
-    this.viewportNode.addChild( plumPuddingImageNode );
-
-    // FIXME: bake electron locations into image?
+      ( Math.max( this.atomNode.width, this.atomNode.height ) + 2 * ATOM_IMAGE_MARGIN );
+    var imageWidth = this.atomNode.width * scale;
+    var imageHeight = this.atomNode.height * scale;
+    var imageX = this.bounds.centerX - imageWidth / 2;
+    var imageY = this.bounds.centerY - imageHeight / 2;
+    this.atomNodeRect = { x: imageX, y: imageY, width: imageWidth, height: imageHeight };
 
     this.invalidatePaint();
   }
@@ -59,14 +53,10 @@ define( function( require ) {
     /**
      * @param {CanvasRenderingContext2D} context
      * @protected
-    */
+     */
     paintSpace: function( context ) {
-
-    },
-
-    // @public
-    step: function( dt ) {
-      this.invalidatePaint();
+      context.drawImage( this.atomNode.image, this.atomNodeRect.x, this.atomNodeRect.y,
+        this.atomNodeRect.width, this.atomNodeRect.height );
     }
 
   } );

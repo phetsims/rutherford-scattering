@@ -12,6 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
+  var RutherfordAtomNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomNode' );
 
 
   /**
@@ -30,18 +31,8 @@ define( function( require ) {
 
     ParticleSpaceNode.call( this, model, traceProperty, modelViewTransform, options );
 
-    // @private - update proton count in atom node
-    var protonCountListener = function( protonCount ) {
-      console.log( 'protonCountListener' );
-    };
-    model.protonCountProperty.link( protonCountListener );
-
-    // @private - update neutron count in atom node
-    var neutronListener = function( neutron ) {
-      console.log( 'neutronListener' );
-    };
-    model.neutronCountProperty.link( neutronListener );
-
+    // @private - dynamic atom image generator
+    this.atomNode = new RutherfordAtomNode( model, options.canvasBounds );
 
     this.invalidatePaint();
   }
@@ -53,15 +44,15 @@ define( function( require ) {
     /**
      * @param {CanvasRenderingContext2D} context
      * @protected
-    */
+     */
     paintSpace: function( context ) {
 
-    },
-
-    // @public
-    step: function( dt ) {
-      this.invalidatePaint();
+      // FIXME
+      //var x = this.bounds.centerX - this.atomNode.image.width / 2;
+      //var y = this.bounds.centerY - this.atomNode.image.height / 2;
+      //context.drawImage( this.atomNode.image, x, y, this.atomNode.image.width, this.atomNode.image.height );
     }
 
-  } );
-} );
+  } ); // inherit
+
+} ); // define

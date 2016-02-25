@@ -13,17 +13,11 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // used to assign unique id to each object
-  var idCounter = 1;
-
   /**
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function AlphaParticleModel( options ) {
-
-    // @pubic (read-only) - unique id
-    this.id = idCounter++;
 
     options = _.extend( {
       speed: 0, // {number} in FIXME: units?
@@ -40,11 +34,31 @@ define( function( require ) {
       orientation: options.orientation
     } );
 
+    // @public (read-only) - the position coordinates used for trace rendering
+    this.positions = [ ];
+
+    // @private - update particle location
+    var self = this;
+    var positionListener = function( position ) {
+      self.positions.push( new Vector2( position.x, position.y ) );
+    };
+    this.positionProperty.link( positionListener );
+
+    // @private
+    this.disposeAlphaParticleModel = function() {
+      this.positionProperty.unlink( positionListener );
+    };
+
   } // constructor
 
   rutherfordScattering.register( 'AlphaParticleModel', AlphaParticleModel );
 
   return inherit( PropertySet, AlphaParticleModel, {
+
+       // @public
+    dispose: function() {
+      this.disposeAlphaParticleModel();
+    }
 
   } );  // inherit
 

@@ -43,7 +43,7 @@ define( function( require ) {
       var position = alphaParticle.positionProperty.get();
       var x = position.x + dx;
       var y = position.y + dy;
-      alphaParticle.positionProperty.value = new Vector2( x, y ); // FIXME: do I need to 'new'? how about edit values?
+      alphaParticle.positionProperty.value = new Vector2( x, y );
     }
 
   } ); // inherit

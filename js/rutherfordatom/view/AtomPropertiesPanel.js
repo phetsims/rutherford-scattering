@@ -87,16 +87,22 @@ define( function( require ) {
       arrowHeight: 18,
       arrowWidth: 18,
       touchAreaXDilation: 9,
-      touchAreaYDilation: 9
+      touchAreaYDilation: 9,
+      startCallback: function() { // called when the pointer is pressed
+        model.userInteraction = true;
+      },
+      endCallback: function() { // called when the pointer is pressed
+        model.userInteraction = false;
+      }
     };
     var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT, RSConstants.DEFAULT_PROTON_COUNT );
     var protonMinusButton = new ArrowButton( 'left', function protonCountPropertyMinus() {
-      model.protonCountProperty.value  = Math.max(RSConstants.MIN_PROTON_COUNT, model.protonCountProperty.value - 1);
+      model.protonCountProperty.set( Math.max(RSConstants.MIN_PROTON_COUNT, model.protonCountProperty.value - 1) );
     }, arrowButtonOptions );
     var protonNumberDisplay = new NumberDisplay( model.protonCountProperty, protonCountRange, '', '{0}', {
       backgroundStroke: 'black' } );
     var protonPlusButton = new ArrowButton( 'right', function protonCountPropertyPlus() {
-      model.protonCountProperty.value  = Math.min(RSConstants.MAX_PROTON_COUNT, model.protonCountProperty.value + 1);
+      model.protonCountProperty.set( Math.min(RSConstants.MAX_PROTON_COUNT, model.protonCountProperty.value + 1) );
     }, arrowButtonOptions);
 
     var protonCountContent = new HBox( {
@@ -121,7 +127,13 @@ define( function( require ) {
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       thumbFillEnabled: 'rgb(220, 58, 10)',
       thumbFillHighlighted: 'rgb(270, 108, 60)',
-      thumbCenterLineStroke: 'white'
+      thumbCenterLineStroke: 'white',
+      startDrag: function() {
+        model.userInteraction = true;
+      },
+      endDrag: function() {
+        model.userInteraction = false;
+      }
     } );
     protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT,
       new Text( RSConstants.MIN_PROTON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
@@ -161,7 +173,13 @@ define( function( require ) {
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       thumbFillEnabled: 'rgb(130, 130, 130)',
       thumbFillHighlighted: 'rgb(180, 180, 180)',
-      thumbCenterLineStroke: 'white'
+      thumbCenterLineStroke: 'white',
+      startDrag: function() {
+        model.userInteraction = true;
+      },
+      endDrag: function() {
+        model.userInteraction = false;
+      }
     } );
     neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
       new Text( RSConstants.MIN_NEUTRON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );

@@ -71,7 +71,13 @@ define( function( require ) {
       majorTickLength: 15,
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
-      thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION
+      thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
+      startDrag: function() {
+        model.userInteraction = true;
+      },
+      endDrag: function() {
+        model.userInteraction = false;
+      }
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
     particleEnergySlider.addMajorTick( RSConstants.MAX_ALPHA_ENERGY, maxEnergyText );

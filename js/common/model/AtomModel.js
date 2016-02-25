@@ -10,7 +10,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var ObservableArray = require( 'AXON/ObservableArray' );
+  var Emitter = require( 'AXON/Emitter' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var GunModel = require( 'RUTHERFORD_SCATTERING/common/model/GunModel' );
@@ -26,24 +26,38 @@ define( function( require ) {
     options = _.extend( {
       alphaParticleEnergy: RSConstants.DEFAULT_ALPHA_ENERGY,
       bounds: new Bounds2(
-        -RSConstants.SPACE_NODE_WIDTH/4,
-        -RSConstants.SPACE_NODE_HEIGHT/4,
-         RSConstants.SPACE_NODE_WIDTH/4,
-         RSConstants.SPACE_NODE_HEIGHT/4 ),
-      play: true // is the sim running or paused
+        -RSConstants.SPACE_NODE_WIDTH / 4,
+        -RSConstants.SPACE_NODE_HEIGHT / 4,
+         RSConstants.SPACE_NODE_WIDTH / 4,
+         RSConstants.SPACE_NODE_HEIGHT / 4 ),
+      play: true,    // is the sim running or paused
+      userInteraction: false  // is the user interacting with sim controls
     }, options );
 
     // @public
     PropertySet.call( this, options );
 
-    // @protected - all active alpha particle models, callback for particle is added/removed
-    this.particles = new ObservableArray();;
+    // @public (read-only) - all active alpha particle models
+    this.particles = [ ];
 
-    // @protected called when a alpha particle is removed
+    // @protected - manual step size used when sim is paused
     this.maunalStepDt = 1 / 60;
 
     // @protected
     this.gun = new GunModel( this );
+
+    // @protected - used to signal when a sim step has occurred
+    this.stepEmitter = new Emitter();
+
+    // @private - energy level changed
+    var self = this;
+    var userInteractionListener = function( userInteraction ) {
+      if( userInteraction ) {
+        self.removeAllParticles();
+      }
+    };
+    this.userInteractionProperty.link( userInteractionListener );
+
   }
 
   rutherfordScattering.register( 'AtomModel', AtomModel );
@@ -51,16 +65,12 @@ define( function( require ) {
   return inherit( PropertySet, AtomModel, {
 
     /**
-     * Registers a callback that will be called when a particle is added or removed from the model
-     * @param {function( AlphaParticleModel )} addCallback
-     * @param {function( AlphaParticleModel )} removeCallback
+     * Registers a listener to be called at each step of the model execution
+     * @param {function()} listener
      * @public
      */
-    registerCallbacks: function( addCallback, removeCallback ) {
-      assert && assert( typeof addCallback === 'function', 'addCallback should be a function' );
-      assert && assert( typeof removeCallback === 'function', 'removeCallback should be a function' );
-
-      this.particles.addListeners( addCallback, removeCallback );
+    addStepListener: function ( listener ) {
+      this.stepEmitter.addListener( listener );
     },
 
     /**
@@ -68,7 +78,7 @@ define( function( require ) {
      * @public
      */
     addParticle: function( alphaParticle ) {
-      this.particles.add( alphaParticle );
+      this.particles.push( alphaParticle );
     },
 
     /**
@@ -76,17 +86,22 @@ define( function( require ) {
      * @public
      */
     removeParticle: function( alphaParticle ) {
-      this.particles.remove( alphaParticle );
+      var index = this.particles.indexOf(alphaParticle);
+      if (index > -1) {
+        this.particles.splice(index, 1);
+      }
     },
 
     /**
      * @protected
      */
     removeAllParticles: function() {
-      this.particles.removeAll();
+      this.particles.length = 0;
+      this.stepEmitter.emit();
     },
 
     /**
+     * A stub funtion to be implemented by derived objects. This just makes certain one is implemented.
      * @param {AlphaParticleModel} alphaParticle
      * @param {double} dt
      * @protected
@@ -119,23 +134,30 @@ define( function( require ) {
       } );
     },
 
-    // @public
+    /**
+     * {number} dt - time step
+     * @public
+     */
     step: function( dt ) {
-
-      if( this.play ) {
+      if( this.play && !this.userInteraction && dt < 1) {
         this.gun.step( dt );
         this.moveParticles( dt );
         this.cullParticles();
+        this.stepEmitter.emit(dt);
       }
     },
 
     /**
      * Step one frame manually.  Assuming 60 frames per second.
+     * @public
      */
     manualStep: function() {
-        this.gun.step( this.maunalStepDt );
-        this.moveParticles( this.maunalStepDt );
-        this.cullParticles();
+        if( !this.userInteraction ) {
+          this.gun.step( this.maunalStepDt );
+          this.moveParticles( this.maunalStepDt );
+          this.cullParticles();
+          this.stepEmitter.emit();
+        }
     },
 
     /**

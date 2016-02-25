@@ -27,9 +27,9 @@ define( function( require ) {
     //----------------------------------------------------------------------------
 
     // alpha particle
-    MIN_ALPHA_ENERGY:       80,   // 6 - FIXME
-    MAX_ALPHA_ENERGY:       200,  // 12 - FIXME
-    DEFAULT_ALPHA_ENERGY:   165,  // 10 - FIXME - why different? dt differences? clock 25fps?
+    MIN_ALPHA_ENERGY:       50,
+    MAX_ALPHA_ENERGY:       100,
+    DEFAULT_ALPHA_ENERGY:   80,
 
     DEFAULT_SHOW_TRACES:    false,
 
@@ -57,7 +57,7 @@ define( function( require ) {
     PANEL_TICK_FONT:  new PhetFont( 14 ),
     PANEL_SLIDER_FILL_COLOR: 'rgb( 180, 180, 180 )',
     PANEL_SLIDER_THUMB_DIMENSION:new Dimension2( 15, 30 ),
-    PANEL_CHILD_SPACING: 8,
+    PANEL_CHILD_SPACING: 5,
 
     //----------------------------------------------------------------------------
     // Dimensions
