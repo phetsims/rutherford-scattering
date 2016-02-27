@@ -64,8 +64,8 @@ define( function( require ) {
     //----------------------------------------------------------------------------
 
     // Animation space size, must be square!
-    SPACE_NODE_WIDTH:       500,
-    SPACE_NODE_HEIGHT:      500
+    SPACE_NODE_WIDTH:       490,
+    SPACE_NODE_HEIGHT:      490
 
   };
 

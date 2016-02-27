@@ -16,6 +16,7 @@ define( function( require ) {
   var TargetMaterialNode = require( 'RUTHERFORD_SCATTERING/common/view/TargetMaterialNode' );
   var TinyBox = require( 'RUTHERFORD_SCATTERING/common/view/TinyBox' );
   var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
+  var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -24,6 +25,7 @@ define( function( require ) {
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Shape = require( 'KITE/Shape' );
   var Property = require( 'AXON/Property' );
   var Bounds2 = require( 'DOT/Bounds2' );
@@ -44,7 +46,10 @@ define( function( require ) {
 
     ScreenView.call( this );
 
-    // FIXME: get devs input on this idea
+    // strings
+    var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
+
+    // properties
     var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
     // Alpha particle gun
@@ -103,10 +108,17 @@ define( function( require ) {
     } );
     this.addChild( dashedLines );
 
+    // nuclear scale info
+    var scaleFormattedString = StringUtils.format( pattern0AtomicScaleString, '300' );
+    var scaleInfoNode = new ScaleInfoNode( scaleFormattedString, plumPuddingSpaceNode.getWidth() );
+    scaleInfoNode.centerX = plumPuddingSpaceNode.centerX;
+    scaleInfoNode.top = plumPuddingSpaceNode.bottom + 10;
+    this.addChild( scaleInfoNode );
+
      // Add play/pause button.
     var playPauseButton = new PlayPauseButton( model.playProperty, {
-      bottom: plumPuddingSpaceNode.bottom + 60,
-      centerX: plumPuddingSpaceNode.centerX - 25,
+      bottom: scaleInfoNode.bottom + 60,
+      centerX: scaleInfoNode.centerX - 25,
       radius: 23
     } );
     this.addChild( playPauseButton );
@@ -117,7 +129,7 @@ define( function( require ) {
       },
       model.playProperty, {
         centerY: playPauseButton.centerY,
-        centerX: plumPuddingSpaceNode.centerX + 25,
+        centerX: scaleInfoNode.centerX + 25,
         radius: 15
     } );
     this.addChild( stepButton );

@@ -16,14 +16,19 @@ define( function( require ) {
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
 
   // constants
-  var ELECTRON_COLOR = ' rgb(96,96,255) ';
-  var PROTON_COLOR = ' rgb(255,69,0) ';
-  var NEUTRON_COLOR = ' rgb(192,192,192) ';
+  var ELECTRON_COLOR = 'rgb(96,96,255)';
+  var PROTON_COLOR = 'rgb(255,69,0)';
+  var NEUTRON_COLOR = 'rgb(192,192,192)';
 
   var ELECTRON_RADIUS = 3;
   var PROTON_RADIUS = 4;
   var NEUTRON_RADIUS = 4;
 
+  /**
+    * Factory methods to generate nodes for specific particle types
+    * @returns {Node}
+    * @public
+    */
   var ParticleNodeFactory = {
 
     // Electron
@@ -61,7 +66,6 @@ define( function( require ) {
           new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, { x: -NEUTRON_RADIUS+1, y: NEUTRON_RADIUS } ),
           new ParticleNode( PROTON_RADIUS, PROTON_COLOR, { x: -PROTON_RADIUS+1, y: -PROTON_RADIUS+1 } ),
           new ParticleNode( PROTON_RADIUS, PROTON_COLOR, { x: PROTON_RADIUS-1, y: PROTON_RADIUS-1 } )
-
         ]
       } );
     }

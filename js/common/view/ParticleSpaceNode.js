@@ -36,11 +36,13 @@ define( function( require ) {
 
     CanvasNode.call( this, options );
 
-    // @private
     var self = this;
 
     // @private
     this.model = model;
+
+    // @private
+    this.alphaParticleImage = null;
 
     // @private - model to view coordinate transform
     this.modelViewTransform = modelViewTransform;
@@ -56,12 +58,12 @@ define( function( require ) {
       height: this.canvasBounds.getHeight() - SPACE_BORDER_WIDTH
     };
 
-    // create a single alpha particle image to use for rendering all particles
+    // create a single alpha particle image to use for rendering all particles - asynchronous
     var alphaParticle = ParticleNodeFactory.alpha();
     alphaParticle.toImage( function( image, x, y ) {
-      self.particleImage = image;
-      self.particleImageHalfWidth = self.particleImage.width / 2;
-      self.particleImageHalfHeight = self.particleImage.height / 2;
+      self.alphaParticleImage = image;
+      self.particleImageHalfWidth = self.alphaParticleImage.width / 2;
+      self.particleImageHalfHeight = self.alphaParticleImage.height / 2;
     } );
 
     this.invalidatePaint();
@@ -72,7 +74,7 @@ define( function( require ) {
   return inherit( CanvasNode, ParticleSpaceNode, {
 
     /**
-     * A stub funtion to be implemented by derived objects (if needed)
+     * A stub function to be implemented by derived objects (if needed)
      * @param {CanvasRenderingContext2D} context
      * @protected
      */
@@ -107,8 +109,12 @@ define( function( require ) {
       context.stroke();
       context.clip();
 
-      // render derivied space
+      // render derived space
       this.paintSpace( context );
+
+      if( self.alphaParticleImage === null ) {
+        return;
+      }
 
       // render all traces as one path for performance
       if( renderTrace ) {
@@ -134,7 +140,7 @@ define( function( require ) {
 
         // render particle
         var particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.position );
-        context.drawImage( self.particleImage,
+        context.drawImage( self.alphaParticleImage,
           particleViewPosition.x - self.particleImageHalfWidth,
           particleViewPosition.y - self.particleImageHalfHeight );
       } );

@@ -16,6 +16,7 @@ define( function( require ) {
   var TargetMaterialNode = require( 'RUTHERFORD_SCATTERING/common/view/TargetMaterialNode' );
   var TinyBox = require( 'RUTHERFORD_SCATTERING/common/view/TinyBox' );
   var RutherfordSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordSpaceNode' );
+  var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
@@ -25,6 +26,7 @@ define( function( require ) {
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Shape = require( 'KITE/Shape' );
   var Property = require( 'AXON/Property' );
   var Bounds2 = require( 'DOT/Bounds2' );
@@ -45,7 +47,10 @@ define( function( require ) {
 
     ScreenView.call( this );
 
-    // FIXME: get devs input on this idea
+    // strings
+    var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
+
+    // properties
     var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
     // Alpha particle gun
@@ -83,31 +88,38 @@ define( function( require ) {
                                        spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
                                        spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
     var modelViewTransform = new ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
-    var rsSpaceNode = new RutherfordSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+    var rutherfordSpaceNode = new RutherfordSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: spaceNodeBounds
     } );
-    this.addChild( rsSpaceNode );
+    this.addChild( rutherfordSpaceNode );
 
     // Update spaceNode on model step
     model.addStepListener( function(dt) {
-      rsSpaceNode.invalidatePaint();
+      rutherfordSpaceNode.invalidatePaint();
     } );
 
     // Dashed lines that connect the tiny box and space
     var dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.left, tinyBoxNode.top )
-      .lineTo( rsSpaceNode.left, rsSpaceNode.top )
+      .lineTo( rutherfordSpaceNode.left, rutherfordSpaceNode.top )
       .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
-      .lineTo( rsSpaceNode.left, rsSpaceNode.bottom ), {
+      .lineTo( rutherfordSpaceNode.left, rutherfordSpaceNode.bottom ), {
       stroke: 'grey',
       lineDash: [ 5, 5 ]
     } );
     this.addChild( dashedLines );
 
+    // nuclear scale info
+    var scaleFormattedString = StringUtils.format( pattern0NuclearScaleString, '150' );
+    var scaleInfoNode = new ScaleInfoNode( scaleFormattedString, rutherfordSpaceNode.getWidth() );
+    scaleInfoNode.centerX = rutherfordSpaceNode.centerX;
+    scaleInfoNode.top = rutherfordSpaceNode.bottom + 10;
+    this.addChild( scaleInfoNode );
+
     // Add play/pause button.
     var playPauseButton = new PlayPauseButton( model.playProperty, {
-      bottom: rsSpaceNode.bottom + 60,
-      centerX: rsSpaceNode.centerX - 25,
+      bottom: scaleInfoNode.bottom + 60,
+      centerX: scaleInfoNode.centerX - 25,
       radius: 23
     } );
     this.addChild( playPauseButton );
@@ -118,7 +130,7 @@ define( function( require ) {
       },
       model.playProperty, {
         centerY: playPauseButton.centerY,
-        centerX: rsSpaceNode.centerX + 25,
+        centerX: scaleInfoNode.centerX + 25,
         radius: 15
     } );
     this.addChild( stepButton );
@@ -126,7 +138,7 @@ define( function( require ) {
     // Create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel({
       minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( rsSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
+      leftTop: new Vector2( rutherfordSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
       resize: false
     } );
     this.addChild( particleLegendPanel );
@@ -134,7 +146,7 @@ define( function( require ) {
     // Create the alpha particle properties control panel
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
       minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( rsSpaceNode.right + PANEL_SPACE_MARGIN,
+      leftTop: new Vector2( rutherfordSpaceNode.right + PANEL_SPACE_MARGIN,
         particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
       resize: false
     } );
@@ -143,7 +155,7 @@ define( function( require ) {
     // Create the atom properties control panel
     var atomPropertiesPanel = new AtomPropertiesPanel( model, {
       minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( rsSpaceNode.right + PANEL_SPACE_MARGIN,
+      leftTop: new Vector2( rutherfordSpaceNode.right + PANEL_SPACE_MARGIN,
         alphaParticlePropertiesPanel.bottom + PANEL_INNER_MARGIN ),
       resize: false } );
     this.addChild( atomPropertiesPanel );

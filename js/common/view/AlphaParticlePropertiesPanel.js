@@ -59,6 +59,10 @@ define( function( require ) {
     var minEnergyText = new Text( minEnergyString, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
     var maxEnergyText = new Text( maxEnergyString, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
 
+    // slider title
+    var energyTextStrut = new HStrut(options.minWidth*0.05);
+    var energyTitleBox = new HBox( { children: [ energyTextStrut, energyText ] } );
+
     // particle engery slider
     var sliderWidth = options.minWidth*0.75;
     var particleEnergySlider = new HSlider( model.alphaParticleEnergyProperty, {
@@ -96,7 +100,7 @@ define( function( require ) {
       top: 0,
       right: 0,
       align: 'left',
-      children: [ alphaParticlePropertiesText, energyText, particleEnergySlider, showTraceBox ]
+      children: [ alphaParticlePropertiesText, energyTitleBox, particleEnergySlider, showTraceBox ]
     } );
 
     Panel.call( this, content, options );

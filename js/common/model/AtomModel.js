@@ -143,8 +143,9 @@ define( function( require ) {
         this.gun.step( dt );
         this.moveParticles( dt );
         this.cullParticles();
-        this.stepEmitter.emit(dt);
       }
+
+      this.stepEmitter.emit(dt);
     },
 
     /**
@@ -152,12 +153,13 @@ define( function( require ) {
      * @public
      */
     manualStep: function() {
-        if( !this.userInteraction ) {
-          this.gun.step( this.maunalStepDt );
-          this.moveParticles( this.maunalStepDt );
-          this.cullParticles();
-          this.stepEmitter.emit();
-        }
+      if( !this.userInteraction ) {
+        this.gun.step( this.maunalStepDt );
+        this.moveParticles( this.maunalStepDt );
+        this.cullParticles();
+      }
+
+      this.stepEmitter.emit();
     },
 
     /**

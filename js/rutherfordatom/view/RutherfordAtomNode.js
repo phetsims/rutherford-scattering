@@ -12,59 +12,114 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
 
   // constants
+  var MIN_NUCLEUS_RADIUS = 20; // view coordinates
   var OUTLINE_LINE_WIDTH = 1;
   var OUTLINE_STROKE_COLOR = 'orange';
 
   /**
    * @param {AtomModel} model
-   * @param {Bounds2} spaceBounds - the bounds of the space which contains the atom
-  * @param {Object} [options]
+   * @param {Object} [options]
    * @constructor
    */
-  function RutherfordAtomNode( model, spaceBounds, options ) {
+  function RutherfordAtomNode( model, options ) {
+
+    // FIXME:
+    //var maxParticles = RSConstants.MAX_PROTON_COUNT + RSConstants.MAX_NEUTRON_COUNT;
+    //var C = MIN_NUCLEUS_RADIUS / Math.pow( maxParticles, 0.333 );
+    //var maxRadius = C * Math.pow( currentParticles, 0.333 );
 
     options = _.extend( {
     }, options );
 
-    // FIXME: bounds to based on min radius of atom
-    var bounds = new Bounds2( 0, 0, spaceBounds.getWidth() / 10, spaceBounds.getHeight() / 10 );
+    // set canvasBounds based on max radius of atom
+    CanvasNode.call( this, {
+      canvasBounds: new Bounds2( 0, 0, 100, 100 )
+    } );
 
-    CanvasNode.call( this, { canvasBounds: bounds } );
+    var self = this;
 
+    // @private
     this.model = model;
 
-    // @private - update proton count in atom node
-    var self = this;
-    var protonCountListener = function( protonCount ) {
+    // @private - switch to render the outline or full atom
+    this.renderAtomOutline = false;
+
+    // @private - the final rendered Rutherford atom
+    this.image = null;
+
+    // @private - the image to use as the proton
+    self.protonImage = null;
+
+    // @private - the image to use as the neutron
+    self.neutronImage = null;
+
+    // @private
+    this.radius = MIN_NUCLEUS_RADIUS;
+
+    // @private
+    this.numberOfProtons = RSConstants.MIN_PROTON_COUNT;
+
+    // @private
+    this.numberOfNeutrons = RSConstants.MIN_NEUTRON_COUNT;
+
+    // renders a new atom image based on proton/neutron counts
+    var updateAtomImage = function() {
+
+      // Calculate the radius of the nucleus
+      var currentParticles = self.numberOfProtons + self.numberOfNeutrons;
+      var minParticles = RSConstants.MIN_PROTON_COUNT + RSConstants.MIN_NEUTRON_COUNT;
+      var C = MIN_NUCLEUS_RADIUS / Math.pow( minParticles, 0.333 );
+      self.radius = C * Math.pow( currentParticles, 0.333 );
+      assert && assert( self.radius > 0 , 'Rutherford atom radius <= 0' );
+
+      self.invalidatePaint();
+
+      // generate atom image - asynchronous
       self.toImage( function( image, x, y ) {
         self.image = image;
-        self.invalidatePaint();
       } );
     };
-    model.protonCountProperty.link( protonCountListener );
 
-    // @private - update neutron count in atom node
-    var neutronListener = function( neutronCount ) {
-      self.toImage( function( image, x, y ) {
-        self.image = image;
-        self.invalidatePaint();
-      } );
-    };
-    model.neutronCountProperty.link( neutronListener );
+    // generate proton image - asynchronous
+    var protonNode = ParticleNodeFactory.proton();
+    protonNode.toImage( function( image, x, y ) {
+      self.protonImage = image;
+      updateAtomImage();
+    } );
 
-    // FIXME:
-    // @private - update when user interaction occurs
-    var userInteractionListener = function( userInteraction ) {
-        self.toImage( function( image, x, y ) {
-        self.image = image;
-        self.invalidatePaint();
-      } );
-    };
-    model.userInteractionProperty.link( userInteractionListener );
+    // generate neutron image - asynchronous
+    var neutronNode = ParticleNodeFactory.neutron();
+    neutronNode.toImage( function( image, x, y ) {
+      self.neutronImage = image;
+      updateAtomImage();
+    } );
+
+    // update atom image when proton count changes
+    model.protonCountProperty.link( function( propertyValue ) {
+      self.numberOfProtons = propertyValue;
+      self.renderAtomOutline = self.model.userInteractionProperty.value;  // Only render the outline whne interacting
+      updateAtomImage();
+    } );
+
+    // update atom image when neutron count changes
+    model.neutronCountProperty.link( function( propertyValue ) {
+      self.numberOfNeutrons = propertyValue;
+      self.renderAtomOutline = self.model.userInteractionProperty.value; // Only render the outline whne interacting
+      updateAtomImage();
+    } );
+
+    // update atom image when user interaction stops
+    model.userInteractionProperty.link( function( propertyValue ) {
+      if( self.renderAtomOutline ) {
+        self.renderAtomOutline = false;
+        updateAtomImage();
+      }
+    } );
 
     this.invalidatePaint();
   }
@@ -85,13 +140,41 @@ define( function( require ) {
       context.clearRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
 
       // outline rendering
-      if ( this.model.userInteractionProperty.value ) {
+      if ( this.renderAtomOutline ) {
         context.beginPath();
         context.lineWidth = OUTLINE_LINE_WIDTH;
         context.strokeStyle = OUTLINE_STROKE_COLOR;
-        context.arc( bounds.centerX, bounds.centerY,
-          Math.min( bounds.getWidth() / 2, bounds.getHeight() / 2 ), 0, 2*Math.PI );
+        context.arc( this.centerX, this.centerY, this.radius, 0, 2*Math.PI );
         context.stroke();
+      }
+      else {
+
+        if( this.protonImage === null || this.neutronImage === null ) {
+          return;
+        }
+
+        // Randomly place protons and neutrons inside a circle
+        var maxProtonRadius = this.radius - ( this.protonImage.width / 2 );
+        var maxNeutronRadius = this.radius - ( this.neutronImage.width / 2 );
+        var maxParticles = Math.max( this.numberOfProtons, this.numberOfNeutrons );
+        for ( var i = 0; i < maxParticles; i++ ) {
+
+          if ( i < this.numberOfProtons ) {
+            var dP = maxProtonRadius * Math.sqrt( Math.random() ); // random from center distance
+            var thetaP = 2 * Math.PI * Math.random(); // random angle around center
+            var xP = (this.centerX - this.protonImage.width / 2 ) + ( dP * Math.cos( thetaP ) );
+            var yP = (this.centerY - this.protonImage.height / 2) + ( dP * Math.sin( thetaP ));
+            context.drawImage( this.protonImage, xP, yP, this.protonImage.width, this.protonImage.height );
+          }
+
+          if ( i < this.numberOfNeutrons ) {
+            var dN = maxNeutronRadius * Math.sqrt( Math.random() );  // random from center distance
+            var thetaN = 2 * Math.PI * Math.random();  // random angle around center
+            var xN = (this.centerX - this.neutronImage.width / 2 ) + ( dN * Math.cos( thetaN ) );
+            var yN = (this.centerY - this.neutronImage.height / 2) + ( dN * Math.sin( thetaN ) );
+            context.drawImage( this.neutronImage, xN, yN, this.neutronImage.width, this.neutronImage.height );
+          }
+        }
       }
     }
 

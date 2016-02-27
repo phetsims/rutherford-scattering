@@ -54,15 +54,16 @@ define( function( require ) {
      */
     function buildParticleBox( titleString, particleNode ) {
 
+      var hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width/2 );
       var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
-      var hStrut = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width/2 );
+      var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING );
 
       var hBox = new HBox( {
         spacing: LEGEND_ITEM_HORIZONTAL_SPACING,
         top: 0,
         right: 0,
         align: 'center',
-        children: [ hStrut, particleNode, titleText ]
+        children: [ hStrut1, particleNode, hStrut2, titleText ]
       } );
 
       return hBox;

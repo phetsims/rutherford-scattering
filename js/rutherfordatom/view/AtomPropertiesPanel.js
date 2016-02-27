@@ -16,6 +16,7 @@ define( function( require ) {
   var HSlider = require( 'SUN/HSlider' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Text = require( 'SCENERY/nodes/Text' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
@@ -51,7 +52,9 @@ define( function( require ) {
     var numProtonsText = new Text( numberOfProtonsString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: 'rgb( 185, 50, 8 )' } );
     var numNeutronsText = new Text( numberOfNeutronsString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: 'rgb( 160, 160, 160 )' } );
 
-    // constants
+    // proton count slider title
+    var protonCountStrut = new HStrut(options.minWidth*0.05);
+    var protonCountTitleBox = new HBox( { children: [ protonCountStrut, numProtonsText ] } );
 
     /* FIXME: use default control (add new layout) for this?
     var numberControlOptions = {
@@ -109,7 +112,7 @@ define( function( require ) {
       spacing: 8,
       top: 0,
       right: 0,
-      children: [ protonMinusButton, protonNumberDisplay, protonPlusButton ]
+      children: [ new HStrut( options.minWidth * 0.1), protonMinusButton, protonNumberDisplay, protonPlusButton ]
     } );
 
     // proton count slider
@@ -140,6 +143,10 @@ define( function( require ) {
     protonCountSlider.addMajorTick( RSConstants.MAX_PROTON_COUNT,
       new Text( RSConstants.MAX_PROTON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
 
+    // proton count slider title
+    var neutronCountStrut = new HStrut(options.minWidth*0.05);
+    var neutronCountTitleBox = new HBox( { children: [ neutronCountStrut, numNeutronsText ] } );
+
     // neutron count arrow/number display
     var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT );
     var neutronMinusButton = new ArrowButton( 'left', function neutronCountPropertyMinus() {
@@ -151,12 +158,11 @@ define( function( require ) {
       model.neutronCountProperty.value  = Math.min(RSConstants.MAX_NEUTRON_COUNT, model.neutronCountProperty.value + 1);
     }, arrowButtonOptions);
 
-
     var neutronCountContent = new HBox( {
       spacing: 8,
       top: 0,
       right: 0,
-      children: [ neutronMinusButton, neutronNumberDisplay, neutronPlusButton ]
+      children: [ new HStrut( options.minWidth * 0.1), neutronMinusButton, neutronNumberDisplay, neutronPlusButton ]
     } );
 
     // neutron count slider
@@ -192,7 +198,7 @@ define( function( require ) {
       top: 0,
       right: 0,
       align: 'left',
-      children: [ atomPropertiesText, numProtonsText, protonCountContent, protonCountSlider, numNeutronsText, neutronCountContent, neutronCountSlider ]
+      children: [ atomPropertiesText, protonCountTitleBox, protonCountContent, protonCountSlider, neutronCountTitleBox, neutronCountContent, neutronCountSlider ]
     } );
 
     Panel.call( this, content, options );

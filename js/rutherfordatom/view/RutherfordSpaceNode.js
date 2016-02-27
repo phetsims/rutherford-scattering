@@ -31,8 +31,8 @@ define( function( require ) {
 
     ParticleSpaceNode.call( this, model, traceProperty, modelViewTransform, options );
 
-    // @private - dynamic atom image generator
-    this.atomNode = new RutherfordAtomNode( model, options.canvasBounds );
+    // @private - atom image generator
+    this.atomNode = new RutherfordAtomNode( model );
 
     this.invalidatePaint();
   }
@@ -46,11 +46,13 @@ define( function( require ) {
      * @protected
      */
     paintSpace: function( context ) {
+      if( this.atomNode.image === null ) {
+        return;
+      }
 
-      // FIXME
-      //var x = this.bounds.centerX - this.atomNode.image.width / 2;
-      //var y = this.bounds.centerY - this.atomNode.image.height / 2;
-      //context.drawImage( this.atomNode.image, x, y, this.atomNode.image.width, this.atomNode.image.height );
+      var x = this.centerX - this.atomNode.image.width / 2;
+      var y = this.centerY - this.atomNode.image.height / 2;
+      context.drawImage( this.atomNode.image, x, y, this.atomNode.image.width, this.atomNode.image.height );
     }
 
   } ); // inherit
