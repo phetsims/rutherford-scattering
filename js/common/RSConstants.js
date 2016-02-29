@@ -58,6 +58,11 @@ define( function( require ) {
     PANEL_SLIDER_FILL_COLOR: 'rgb( 180, 180, 180 )',
     PANEL_SLIDER_THUMB_DIMENSION:new Dimension2( 15, 30 ),
     PANEL_CHILD_SPACING: 5,
+    PANEL_MIN_WIDTH: 225,
+    PANEL_SPACE_MARGIN: 50,
+    PANEL_TOP_MARGIN: 15,
+    PANEL_INNER_MARGIN: 10,
+    TARGET_SPACE_MARGIN: 50,
 
     //----------------------------------------------------------------------------
     // Dimensions

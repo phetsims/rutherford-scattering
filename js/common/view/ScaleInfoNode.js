@@ -43,7 +43,8 @@ define( function( require ) {
       font: options.font,
       fill: options.fill,
       centerX: this.centerX,
-      centerY: this.centerY
+      centerY: this.centerY,
+      maxWidth: 0.9*width
     } );
     this.addChild( labelText );
 

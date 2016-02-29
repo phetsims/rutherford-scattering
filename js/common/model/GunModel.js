@@ -32,7 +32,7 @@ define( function( require ) {
 
     // @public
     PropertySet.call( this, {
-      on: true // {boolean} is the gun on?
+      on: false // {boolean} is the gun on?
     } );
   }
 

@@ -41,6 +41,7 @@ define( function( require ) {
     options = _.extend( {
       xMargin: 15,
       yMargin: 8,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
       align: 'left',
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE

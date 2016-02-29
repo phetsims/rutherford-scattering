@@ -20,7 +20,7 @@ define( function( require ) {
   function AlphaParticleModel( options ) {
 
     options = _.extend( {
-      speed: 0, // {number} in FIXME: units?
+      speed: 0,
       defaultSpeed: 0,
       position: new Vector2( 0, 0 ),  // {Vector2} initial position
       orientation: Math.PI / 2  // {number} in radians

@@ -20,6 +20,8 @@ define( function( require ) {
   var MIN_NUCLEUS_RADIUS = 20; // view coordinates
   var OUTLINE_LINE_WIDTH = 1;
   var OUTLINE_STROKE_COLOR = 'orange';
+  var MIN_PARTICLE_COUNT = RSConstants.MIN_PROTON_COUNT + RSConstants.MIN_NEUTRON_COUNT;
+  var MAX_PARTICLE_COUNT = RSConstants.MAX_PROTON_COUNT + RSConstants.MAX_NEUTRON_COUNT;
 
   /**
    * @param {AtomModel} model
@@ -28,17 +30,15 @@ define( function( require ) {
    */
   function RutherfordAtomNode( model, options ) {
 
-    // FIXME:
-    //var maxParticles = RSConstants.MAX_PROTON_COUNT + RSConstants.MAX_NEUTRON_COUNT;
-    //var C = MIN_NUCLEUS_RADIUS / Math.pow( maxParticles, 0.333 );
-    //var maxRadius = C * Math.pow( currentParticles, 0.333 );
+    // Max radius of an atom with MAX protons & neutrons
+    var maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, 0.333 ) * Math.pow( MAX_PARTICLE_COUNT, 0.333 );
 
     options = _.extend( {
     }, options );
 
     // set canvasBounds based on max radius of atom
     CanvasNode.call( this, {
-      canvasBounds: new Bounds2( 0, 0, 100, 100 )
+      canvasBounds: new Bounds2( 0, 0, 2*maxRadius, 2*maxRadius )
     } );
 
     var self = this;
@@ -72,8 +72,7 @@ define( function( require ) {
 
       // Calculate the radius of the nucleus
       var currentParticles = self.numberOfProtons + self.numberOfNeutrons;
-      var minParticles = RSConstants.MIN_PROTON_COUNT + RSConstants.MIN_NEUTRON_COUNT;
-      var C = MIN_NUCLEUS_RADIUS / Math.pow( minParticles, 0.333 );
+      var C = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, 0.333 );
       self.radius = C * Math.pow( currentParticles, 0.333 );
       assert && assert( self.radius > 0 , 'Rutherford atom radius <= 0' );
 

@@ -18,7 +18,6 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
   var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var Dimension2 = require( 'DOT/Dimension2' );
@@ -42,6 +41,7 @@ define( function( require ) {
     options = _.extend( {
       xMargin: 15,
       yMargin: 8,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
       align: 'left',
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE
@@ -55,32 +55,6 @@ define( function( require ) {
     // proton count slider title
     var protonCountStrut = new HStrut(options.minWidth*0.05);
     var protonCountTitleBox = new HBox( { children: [ protonCountStrut, numProtonsText ] } );
-
-    /* FIXME: use default control (add new layout) for this?
-    var numberControlOptions = {
-      titleMaxWidth: 200, // i18n, determined empirically
-      titleFont: font,
-      valueMaxWidth: 100, // i18n, determined empirically
-      valueFont: font,
-      decimalPlaces: 0,
-      units: "",
-      delta: 1,
-      minorTickSpacing: 0,
-      //thumbFillEnabled: new Color( 0, 180, 0 ),
-      majorTicks: [
-        { value: RSConstants.MIN_PROTON_COUNT,
-          label: new Text( RSConstants.MIN_PROTON_COUNT, { font: font } )
-        },
-        { value: RSConstants.MAX_PROTON_COUNT,
-          label: new Text( RSConstants.MAX_PROTON_COUNT, { font: font } )
-        }
-      ],
-      startCallback: function() {  },
-      endCallback: function() {  }
-    }
-    var protonRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAXPROTON_COUNT, RSConstants.DEFAULT_PROTON_COUNT );
-    var protonCountSlider = new NumberControl( numberOfProtonsString, model.protonCountProperty, protonRange, numberControlOptions );
-    */
 
     // proton count arrow/number display
     var arrowButtonOptions = {

@@ -41,9 +41,6 @@ define( function( require ) {
    */
   function AlphaParticlePropertiesPanel( model, showTracesProperty, options ) {
 
-    // FIXME: assert missing model properties ?
-    //assert && assert( model.alphaParticleEnergyProperty === undefined, 'alphaParticleEnergyProperty missing.' );
-
     options = _.extend( {
       xMargin: 15,
       yMargin: 8,
@@ -54,10 +51,22 @@ define( function( require ) {
 
     // strings
     var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
-      font: RSConstants.PANEL_TITLE_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_TITLE_COLOR } );
-    var energyText = new Text( energyString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
-    var minEnergyText = new Text( minEnergyString, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
-    var maxEnergyText = new Text( maxEnergyString, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
+      font: RSConstants.PANEL_TITLE_FONT,
+      fontWeight: 'bold',
+      fill: RSConstants.PANEL_TITLE_COLOR
+    } );
+    var energyText = new Text( energyString, { font: RSConstants.PANEL_PROPERTY_FONT,
+      fontWeight: 'bold',
+      fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+    } );
+    var minEnergyText = new Text( minEnergyString, { font: RSConstants.PANEL_TICK_FONT,
+      fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      maxWidth: options.minWidth / 3
+    } );
+    var maxEnergyText = new Text( maxEnergyString, { font: RSConstants.PANEL_TICK_FONT,
+      fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      maxWidth: options.minWidth / 3
+    } );
 
     // slider title
     var energyTextStrut = new HStrut(options.minWidth*0.05);

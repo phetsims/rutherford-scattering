@@ -32,13 +32,6 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // constants
-  var PANEL_MIN_WIDTH = 225;
-  var PANEL_SPACE_MARGIN = 50;
-  var PANEL_TOP_MARGIN = 15;
-  var PANEL_INNER_MARGIN = 10;
-  var TARGET_SPACE_MARGIN = 50;
-
   /**
    * @param {RutherfordAtomModel} model
    * @constructor
@@ -82,8 +75,8 @@ define( function( require ) {
     this.addChild( tinyBoxNode );
 
     // Atom animation space
-    var spaceNodeX = targetMaterialNode.right + TARGET_SPACE_MARGIN;
-    var spaceNodeY = PANEL_TOP_MARGIN;
+    var spaceNodeX = targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN;
+    var spaceNodeY = RSConstants.PANEL_TOP_MARGIN;
     var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
                                        spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
                                        spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
@@ -137,26 +130,27 @@ define( function( require ) {
 
     // Create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel({
-      minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( rutherfordSpaceNode.right + PANEL_SPACE_MARGIN, this.layoutBounds.top + PANEL_TOP_MARGIN ),
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      leftTop: new Vector2( rutherfordSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN,
+        this.layoutBounds.top + RSConstants.PANEL_TOP_MARGIN ),
       resize: false
     } );
     this.addChild( particleLegendPanel );
 
     // Create the alpha particle properties control panel
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
-      minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( rutherfordSpaceNode.right + PANEL_SPACE_MARGIN,
-        particleLegendPanel.bottom + PANEL_INNER_MARGIN ),
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      leftTop: new Vector2( rutherfordSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN,
+        particleLegendPanel.bottom + RSConstants.PANEL_INNER_MARGIN ),
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );
 
     // Create the atom properties control panel
     var atomPropertiesPanel = new AtomPropertiesPanel( model, {
-      minWidth: PANEL_MIN_WIDTH,
-      leftTop: new Vector2( rutherfordSpaceNode.right + PANEL_SPACE_MARGIN,
-        alphaParticlePropertiesPanel.bottom + PANEL_INNER_MARGIN ),
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      leftTop: new Vector2( rutherfordSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN,
+        alphaParticlePropertiesPanel.bottom + RSConstants.PANEL_INNER_MARGIN ),
       resize: false } );
     this.addChild( atomPropertiesPanel );
 
