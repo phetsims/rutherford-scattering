@@ -11,11 +11,15 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Path = require( 'SCENERY/nodes/Path' );
+  var Shape = require( 'KITE/Shape' );
   var Dimension2 = require( 'DOT/Dimension2' );
 
   // constants
-  var TINY_BOX_SIZE = new Dimension2( 10, 10 );
+  var BACK_DEPTH = 4;
+  var BACK_OFFSET = 0.10;
+  var BOX_SIZE = new Dimension2( 10, 10 );
 
   /**
    * @param {Object} [options]
@@ -26,13 +30,23 @@ define( function( require ) {
     options = _.extend( {
       fill: 'black',
       stroke: 'white',
-      lineWidth: 2
+      lineWidth: 1
     }, options );
 
-    Rectangle.call( this, 0, 0, TINY_BOX_SIZE.width, TINY_BOX_SIZE.height, options );
+    var topNode = new Path( new Shape()
+      .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
+      .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
+      .lineTo( BOX_SIZE.width, BACK_DEPTH )
+      .lineTo( 0, BACK_DEPTH )
+      .close(), options );
+
+    options.children = [ topNode  ];
+
+    Node.call( this, options );
   }
 
   rutherfordScattering.register( 'TinyBox', TinyBox );
 
-  return inherit( Rectangle, TinyBox );
+
+  return inherit( Node, TinyBox );
 } );

@@ -22,11 +22,11 @@ define( function( require ) {
   var simOptions = {
     credits: {
       //TODO fill in proper credits, all of these fields are optional, see joist.AboutDialog
-      leadDesign: '',
-      softwareDevelopment: '',
-      team: '',
+      leadDesign: 'Sam McKagan',
+      softwareDevelopment: 'Dave Schmitz, Chris Malley',
+      team: 'Wendy Adams, Mike Dubson, Noah Finkelstein, Danielle Harlow, Amy Rouinfar, Ariel Paul, Kathy Perkins, Noah Podolefsky, Carl Weiman',
       qualityAssurance: '',
-      graphicArts: '',
+      graphicArts: 'Amy Hanson',
       thanks: ''
     }
   };
