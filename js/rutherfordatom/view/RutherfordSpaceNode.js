@@ -18,7 +18,7 @@ define( function( require ) {
   /**
    * @param {AtomModel} model
    * @param {showAlphaTraceProperty} traceProperty
-   * @param {ModelViewTransform2} modelViewTransform
+   * @param {ModelViewTransform2} modelViewTransform - model to view  transform
    * @param { } options, must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
@@ -46,6 +46,8 @@ define( function( require ) {
      * @protected
      */
     paintSpace: function( context ) {
+
+      // Slight chance the image used isn't available. In that case, return & try again on next frame
       if( this.atomNode.image === null ) {
         return;
       }

@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Control panel for the "Ruthorford Scattering" sim.  Allows the user to adust the number of protons and neutrons being simulated.
+ * Control panel to adjust the number of protons and neutrons used in the sim
  *
  * @author Dave Schmitz (Schmitzware)
 
@@ -33,7 +33,8 @@ define( function( require ) {
   /**
    * Constructor for a Atom Properties control panel.
    *
-   * @param { AtomModel } model - The model controlled by this panel.
+   * @param {AtomModel} model - The model controlled by this panel.
+   * @param {Object} [options]
    * @constructor
    */
   function AtomPropertiesPanel( model, options ) {
@@ -48,9 +49,18 @@ define( function( require ) {
     }, options );
 
     // strings
-    var atomPropertiesText = new Text( atomPropertiesString, { font: RSConstants.PANEL_TITLE_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_TITLE_COLOR } );
-    var numProtonsText = new Text( numberOfProtonsString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: 'rgb( 185, 50, 8 )' } );
-    var numNeutronsText = new Text( numberOfNeutronsString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: 'rgb( 160, 160, 160 )' } );
+    var atomPropertiesText = new Text( atomPropertiesString, {
+      font: RSConstants.PANEL_TITLE_FONT,
+      fontWeight: 'bold', fill: RSConstants.PANEL_TITLE_COLOR
+    } );
+    var numProtonsText = new Text( numberOfProtonsString, {
+      font: RSConstants.PANEL_PROPERTY_FONT,
+      fontWeight: 'bold', fill: 'rgb( 185, 50, 8 )'
+    } );
+    var numNeutronsText = new Text( numberOfNeutronsString, {
+      font: RSConstants.PANEL_PROPERTY_FONT,
+      fontWeight: 'bold', fill: 'rgb( 160, 160, 160 )'
+    } );
 
     // proton count slider title
     var protonCountStrut = new HStrut(options.minWidth*0.05);
@@ -68,25 +78,26 @@ define( function( require ) {
       startCallback: function() { // called when the pointer is pressed
         model.userInteraction = true;
       },
-      endCallback: function() { // called when the pointer is pressed
+      endCallback: function() { // called when the pointer is released
         model.userInteraction = false;
       }
     };
-    var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT, RSConstants.DEFAULT_PROTON_COUNT );
+    var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT,
+      RSConstants.DEFAULT_PROTON_COUNT );
     var protonMinusButton = new ArrowButton( 'left', function protonCountPropertyMinus() {
-      model.protonCountProperty.set( Math.max(RSConstants.MIN_PROTON_COUNT, model.protonCountProperty.value - 1) );
+      model.protonCountProperty.set( Math.max( RSConstants.MIN_PROTON_COUNT, model.protonCountProperty.value - 1 ) );
     }, arrowButtonOptions );
     var protonNumberDisplay = new NumberDisplay( model.protonCountProperty, protonCountRange, '', '{0}', {
       backgroundStroke: 'black' } );
     var protonPlusButton = new ArrowButton( 'right', function protonCountPropertyPlus() {
-      model.protonCountProperty.set( Math.min(RSConstants.MAX_PROTON_COUNT, model.protonCountProperty.value + 1) );
+      model.protonCountProperty.set( Math.min( RSConstants.MAX_PROTON_COUNT, model.protonCountProperty.value + 1 ) );
     }, arrowButtonOptions);
 
     var protonCountContent = new HBox( {
       spacing: 8,
       top: 0,
       right: 0,
-      children: [ new HStrut( options.minWidth * 0.1), protonMinusButton, protonNumberDisplay, protonPlusButton ]
+      children: [ new HStrut( options.minWidth * 0.1 ), protonMinusButton, protonNumberDisplay, protonPlusButton ]
     } );
 
     // proton count slider
@@ -105,38 +116,45 @@ define( function( require ) {
       thumbFillEnabled: 'rgb(220, 58, 10)',
       thumbFillHighlighted: 'rgb(270, 108, 60)',
       thumbCenterLineStroke: 'white',
-      startDrag: function() {
+      startDrag: function() { // called when the pointer is pressed
         model.userInteraction = true;
       },
-      endDrag: function() {
+      endDrag: function() { // called when the pointer is released
         model.userInteraction = false;
       }
     } );
     protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT,
-      new Text( RSConstants.MIN_PROTON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
+      new Text( RSConstants.MIN_PROTON_COUNT, {
+        font: RSConstants.PANEL_TICK_FONT,
+        fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+         } ) );
     protonCountSlider.addMajorTick( RSConstants.MAX_PROTON_COUNT,
-      new Text( RSConstants.MAX_PROTON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
+      new Text( RSConstants.MAX_PROTON_COUNT, {
+        font: RSConstants.PANEL_TICK_FONT,
+        fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+      } ) );
 
     // proton count slider title
-    var neutronCountStrut = new HStrut(options.minWidth*0.05);
+    var neutronCountStrut = new HStrut( options.minWidth * 0.05 );
     var neutronCountTitleBox = new HBox( { children: [ neutronCountStrut, numNeutronsText ] } );
 
     // neutron count arrow/number display
-    var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT );
+    var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
+      RSConstants.DEFAULT_NEUTRON_COUNT );
     var neutronMinusButton = new ArrowButton( 'left', function neutronCountPropertyMinus() {
-      model.neutronCountProperty.value  = Math.max(RSConstants.MIN_NEUTRON_COUNT, model.neutronCountProperty.value - 1);
+      model.neutronCountProperty.value  = Math.max( RSConstants.MIN_NEUTRON_COUNT, model.neutronCountProperty.value - 1 );
     }, arrowButtonOptions );
     var neutronNumberDisplay = new NumberDisplay( model.neutronCountProperty, neutronCountRange,'', '{0}', {
       backgroundStroke: 'black' } );
     var neutronPlusButton = new ArrowButton( 'right', function neutronCountPropertyPlus() {
-      model.neutronCountProperty.value  = Math.min(RSConstants.MAX_NEUTRON_COUNT, model.neutronCountProperty.value + 1);
-    }, arrowButtonOptions);
+      model.neutronCountProperty.value  = Math.min( RSConstants.MAX_NEUTRON_COUNT, model.neutronCountProperty.value + 1 );
+    }, arrowButtonOptions );
 
     var neutronCountContent = new HBox( {
       spacing: 8,
       top: 0,
       right: 0,
-      children: [ new HStrut( options.minWidth * 0.1), neutronMinusButton, neutronNumberDisplay, neutronPlusButton ]
+      children: [ new HStrut( options.minWidth * 0.1 ), neutronMinusButton, neutronNumberDisplay, neutronPlusButton ]
     } );
 
     // neutron count slider
@@ -162,9 +180,15 @@ define( function( require ) {
       }
     } );
     neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
-      new Text( RSConstants.MIN_NEUTRON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
+      new Text( RSConstants.MIN_NEUTRON_COUNT, {
+        font: RSConstants.PANEL_TICK_FONT,
+        fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+      } ) );
     neutronCountSlider.addMajorTick( RSConstants.MAX_NEUTRON_COUNT,
-      new Text( RSConstants.MAX_NEUTRON_COUNT, { font: RSConstants.PANEL_TICK_FONT, fill: RSConstants.PANEL_SLIDER_FILL_COLOR } ) );
+      new Text( RSConstants.MAX_NEUTRON_COUNT, {
+        font: RSConstants.PANEL_TICK_FONT,
+        fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+      } ) );
 
     // main panel content
     var content = new VBox( {
@@ -172,7 +196,8 @@ define( function( require ) {
       top: 0,
       right: 0,
       align: 'left',
-      children: [ atomPropertiesText, protonCountTitleBox, protonCountContent, protonCountSlider, neutronCountTitleBox, neutronCountContent, neutronCountSlider ]
+      children: [ atomPropertiesText, protonCountTitleBox, protonCountContent, protonCountSlider, neutronCountTitleBox,
+      neutronCountContent, neutronCountSlider ]
     } );
 
     Panel.call( this, content, options );

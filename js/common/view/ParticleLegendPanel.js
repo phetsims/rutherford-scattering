@@ -1,10 +1,9 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Control panel for the "Ruthorford Scattering" sim.  Allows the user to adust the energy of alpha particles being simulated.
+ * Legend for all the particles in the sim
  *
  * @author Dave Schmitz (Schmitzware)
-
  */
 
 define( function( require ) {
@@ -48,6 +47,7 @@ define( function( require ) {
     }, options );
 
     /**
+     * Build one row in the legend consisting of an image and label
      * @param {string} title
      * @param {Node} particleNode
      * @returns {HBox}
@@ -59,6 +59,7 @@ define( function( require ) {
       var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white' } );
       var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING );
 
+      // container for one row in the legend
       var hBox = new HBox( {
         spacing: LEGEND_ITEM_HORIZONTAL_SPACING,
         top: 0,
@@ -77,6 +78,8 @@ define( function( require ) {
     } );
 
     var children = [ legendText ];
+
+    // add  the legend particle entires
     children.push( buildParticleBox( electronString, ParticleNodeFactory.electron() ) );
     children.push( buildParticleBox( protonString, ParticleNodeFactory.proton() ) );
     children.push( buildParticleBox( neutronString, ParticleNodeFactory.neutron() ) );

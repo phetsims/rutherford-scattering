@@ -1,7 +1,8 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Scale label w/ arrows
+ * Builds the UI scale label w/ arrows & end markers
+ * i.e.  |<--------- label ---------->|
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -24,7 +25,7 @@ define( function( require ) {
   var ARROW_TAIL_MARGIN = 5;
 
   /**
-   * @param {string} label
+   * @param {string} label - the label to place in the middle of the arrows
    * @param {number} width - the desired width of the Node
    * @param {Object} [options]
    * @constructor
@@ -48,7 +49,7 @@ define( function( require ) {
     } );
     this.addChild( labelText );
 
-    // arrows
+    // left arrow
     var arrowWidth = ( width - labelText.getWidth() ) / 2;
     var leftArrowX = labelText.left - arrowWidth;
     var leftArrowNode = new ArrowNode( labelText.left - ARROW_TAIL_MARGIN, labelText.centerY,
@@ -60,6 +61,7 @@ define( function( require ) {
     } );
     this.addChild( leftArrowNode );
 
+    // right arrow
     var rightArrowX = labelText.right + arrowWidth;
     var rightArrowNode = new ArrowNode( labelText.right + ARROW_TAIL_MARGIN, labelText.centerY,
       rightArrowX, labelText.centerY, {

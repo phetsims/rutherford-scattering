@@ -1,6 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
+ * Builds the main Plum Pudding sim screen
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -46,7 +47,7 @@ define( function( require ) {
     // properties
     var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
-    // Alpha particle gun
+    // alpha particle gun
     var gunNode = new LaserPointerNode( model.gun.onProperty, {
       rotation: -Math.PI / 2, // pointing up
       left: this.layoutBounds.left + 25,
@@ -54,7 +55,7 @@ define( function( require ) {
     } );
     this.addChild( gunNode );
 
-    // Alpha particle beam
+    // alpha particle beam
     var beamNode = new BeamNode( model.gun.onProperty, {
       centerX: gunNode.centerX,
       bottom: gunNode.top
@@ -68,13 +69,13 @@ define( function( require ) {
     } );
     this.addChild( targetMaterialNode );
 
-     // Tiny box that indicates what will be zoomed
+     // tiny box that indicates what will be zoomed
     var tinyBoxNode = new TinyBox();
     tinyBoxNode.centerX = targetMaterialNode.centerX;
     tinyBoxNode.centerY = targetMaterialNode.centerY;
     this.addChild( tinyBoxNode );
 
-    // Atom animation space
+    // atom animation space
     var spaceNodeX = targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN;
     var spaceNodeY = RSConstants.PANEL_TOP_MARGIN;
     var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
@@ -86,12 +87,12 @@ define( function( require ) {
     } );
     this.addChild( plumPuddingSpaceNode );
 
-    // Update spaceNode on model step
+    // redraw the spaceNode on model step
     model.addStepListener( function() {
       plumPuddingSpaceNode.invalidatePaint();
     } );
 
-    // Dashed lines that connect the tiny box and space
+    // dashed lines that connect the tiny box and space
     var dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.left, tinyBoxNode.top )
       .lineTo( plumPuddingSpaceNode.left, plumPuddingSpaceNode.top )
@@ -109,7 +110,7 @@ define( function( require ) {
     scaleInfoNode.top = plumPuddingSpaceNode.bottom + 10;
     this.addChild( scaleInfoNode );
 
-     // Add play/pause button.
+     // add play/pause button.
     var playPauseButton = new PlayPauseButton( model.playProperty, {
       bottom: scaleInfoNode.bottom + 60,
       centerX: scaleInfoNode.centerX - 25,
@@ -117,7 +118,7 @@ define( function( require ) {
     } );
     this.addChild( playPauseButton );
 
-    // Add step button to manually step the animation.
+    // add step button to manually step the animation.
     var stepButton = new StepButton( function() {
         model.manualStep();
       },
@@ -128,24 +129,22 @@ define( function( require ) {
     } );
     this.addChild( stepButton );
 
-    // Create the particles legend control panel
+    // create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel({
-      minWidth: RSConstants.PANEL_MIN_WIDTH,
       leftTop: new Vector2( plumPuddingSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN, this.layoutBounds.top + RSConstants.PANEL_TOP_MARGIN ),
       resize: false
     } );
     this.addChild( particleLegendPanel );
 
-    // Create the alpha particle properties control panel
+    // create the alpha particle properties control panel
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
-      minWidth: RSConstants.PANEL_MIN_WIDTH,
       leftTop: new Vector2( plumPuddingSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN,
       particleLegendPanel.bottom + RSConstants.PANEL_INNER_MARGIN ),
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );
 
-    // Reset All buttonRSConstants.
+    // reset all button.
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         showAlphaTraceProperty.reset();

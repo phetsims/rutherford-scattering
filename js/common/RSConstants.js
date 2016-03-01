@@ -1,15 +1,10 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- *
- * @author Dave Schmitz (Schmitzware)
- *
  * This class is a collection of constants that configure global properties.
  * If you change something here, it will change *everywhere* in this simulation.
  *
- * @author Sam Reid (PhET Interactive Simulations)
- * @author Jonathan Olson (PhET Interactive Simulations)
- * @author Chandrashekar Bemagoni (Actual Concepts)
+ * @author Dave Schmitz (Schmitzware)
  */
 define( function( require ) {
   'use strict';
@@ -48,29 +43,29 @@ define( function( require ) {
     //----------------------------------------------------------------------------
 
     // property panels
-    PANEL_COLOR: 'black',
-    PANEL_STROKE: 'gray',
-    PANEL_LINE_WIDTH: 1,
-    PANEL_TITLE_FONT:  new PhetFont( 16 ),
-    PANEL_TITLE_COLOR: 'rgb( 200, 200, 95 )',
+    PANEL_COLOR:          'black',
+    PANEL_STROKE:         'gray',
+    PANEL_LINE_WIDTH:     1,
+    PANEL_TITLE_FONT:     new PhetFont( 16 ),
+    PANEL_TITLE_COLOR:    'rgb( 200, 200, 95 )',
     PANEL_PROPERTY_FONT:  new PhetFont( 14 ),
-    PANEL_TICK_FONT:  new PhetFont( 14 ),
+    PANEL_TICK_FONT:      new PhetFont( 14 ),
     PANEL_SLIDER_FILL_COLOR: 'rgb( 180, 180, 180 )',
     PANEL_SLIDER_THUMB_DIMENSION:new Dimension2( 15, 30 ),
-    PANEL_CHILD_SPACING: 5,
-    PANEL_MIN_WIDTH: 225,
-    PANEL_SPACE_MARGIN: 50,
-    PANEL_TOP_MARGIN: 15,
-    PANEL_INNER_MARGIN: 10,
-    TARGET_SPACE_MARGIN: 50,
+    PANEL_CHILD_SPACING:  5,
+    PANEL_MIN_WIDTH:      225,
+    PANEL_SPACE_MARGIN:   50,
+    PANEL_TOP_MARGIN:     15,
+    PANEL_INNER_MARGIN:   10,
+    TARGET_SPACE_MARGIN:  50,
 
     //----------------------------------------------------------------------------
     // Dimensions
     //----------------------------------------------------------------------------
 
     // Animation space size, must be square!
-    SPACE_NODE_WIDTH:       490,
-    SPACE_NODE_HEIGHT:      490
+    SPACE_NODE_WIDTH:     490,
+    SPACE_NODE_HEIGHT:    490
 
   };
 

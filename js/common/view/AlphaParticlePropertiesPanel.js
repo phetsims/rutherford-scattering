@@ -44,6 +44,7 @@ define( function( require ) {
     options = _.extend( {
       xMargin: 15,
       yMargin: 8,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
       align: 'left',
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE
@@ -55,25 +56,28 @@ define( function( require ) {
       fontWeight: 'bold',
       fill: RSConstants.PANEL_TITLE_COLOR
     } );
-    var energyText = new Text( energyString, { font: RSConstants.PANEL_PROPERTY_FONT,
+    var energyText = new Text( energyString, {
+      font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR
     } );
-    var minEnergyText = new Text( minEnergyString, { font: RSConstants.PANEL_TICK_FONT,
+    var minEnergyText = new Text( minEnergyString, {
+      font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
       maxWidth: options.minWidth / 3
     } );
-    var maxEnergyText = new Text( maxEnergyString, { font: RSConstants.PANEL_TICK_FONT,
+    var maxEnergyText = new Text( maxEnergyString, {
+      font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
       maxWidth: options.minWidth / 3
     } );
 
     // slider title
-    var energyTextStrut = new HStrut(options.minWidth*0.05);
+    var energyTextStrut = new HStrut( options.minWidth * 0.05 );
     var energyTitleBox = new HBox( { children: [ energyTextStrut, energyText ] } );
 
     // particle engery slider
-    var sliderWidth = options.minWidth*0.75;
+    var sliderWidth = options.minWidth * 0.75;
     var particleEnergySlider = new HSlider( model.alphaParticleEnergyProperty, {
       min: RSConstants.MIN_ALPHA_ENERGY,
       max: RSConstants.MAX_ALPHA_ENERGY
@@ -85,10 +89,10 @@ define( function( require ) {
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
-      startDrag: function() {
+      startDrag: function() { // called when the pointer is pressed
         model.userInteraction = true;
       },
-      endDrag: function() {
+      endDrag: function() { // called when the pointer is released
         model.userInteraction = false;
       }
     } );
@@ -96,9 +100,13 @@ define( function( require ) {
     particleEnergySlider.addMajorTick( RSConstants.MAX_ALPHA_ENERGY, maxEnergyText );
 
     // show traces
-    var showTraceStrut = new HStrut(options.minWidth*0.05);
-    var showTraceText = new Text( showTracesString, { font: RSConstants.PANEL_PROPERTY_FONT, fontWeight: 'bold', fill: RSConstants.PANEL_SLIDER_FILL_COLOR } );
-    var showTraceCheckBox = new CheckBox(showTraceText, showTracesProperty, {
+    var showTraceStrut = new HStrut( options.minWidth * 0.05 );
+    var showTraceText = new Text( showTracesString, {
+      font: RSConstants.PANEL_PROPERTY_FONT,
+      fontWeight: 'bold',
+      fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+    } );
+    var showTraceCheckBox = new CheckBox( showTraceText, showTracesProperty, {
       checkBoxColor: 'white',
       checkBoxColorBackground: 'black'
        } );

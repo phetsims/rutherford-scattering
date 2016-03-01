@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * ParticleSpaceNode is the space in which atoms and alpha particels are rendered.
+ * The space in which atoms and alpha particels are rendered.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -23,7 +23,7 @@ define( function( require ) {
   /**
    * @param {AtomModel} model
    * @param {showAlphaTraceProperty} showTraceProperty
-   * @param {ModelViewTransform2} modelViewTransform
+   * @param {ModelViewTransform2} modelViewTransform - model to view  transform
    * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
@@ -74,7 +74,7 @@ define( function( require ) {
   return inherit( CanvasNode, ParticleSpaceNode, {
 
     /**
-     * A stub function to be implemented by derived objects (if needed)
+     * A no/op function to be implemented by derived objects
      * @param {CanvasRenderingContext2D} context
      * @protected
      */
@@ -112,6 +112,7 @@ define( function( require ) {
       // render derived space
       this.paintSpace( context );
 
+      // Slight chance the image used isn't loaded. In that case, return & try again on next frame
       if( self.alphaParticleImage === null ) {
         return;
       }
@@ -123,13 +124,13 @@ define( function( require ) {
         context.strokeStyle = PARTICLE_TRACE_COLOR;
       }
 
-      // render all alpha particles/traces
+      // render all alpha particles & corresponding traces
       this.model.particles.forEach( function( particle ) {
 
         // render the traces (if enabled)
         if( renderTrace ) {
 
-          // render trace segments
+          // add trace segments
           for (var i = 1; i < particle.positions.length; i++) {
             var segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[i-1] );
             context.moveTo( segmentStartViewPosition.x, segmentStartViewPosition.y );
@@ -145,6 +146,7 @@ define( function( require ) {
           particleViewPosition.y - self.particleImageHalfHeight );
       } );
 
+      // render traces
       if( renderTrace ) {
         context.stroke();
       }

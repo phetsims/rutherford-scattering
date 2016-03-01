@@ -1,6 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
+ * The model which advances the alpha particle in the Rutherford sim
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -15,7 +16,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param { } options
+   * @param {Object} options
    * @constructor
    */
   function RutherfordAtomModel( options ) {

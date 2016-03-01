@@ -1,6 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
+ * The model which advances the alpha particle in the Plum Pudding sim
  *
  * @author Dave Schmitz (Schmitzware)
  */

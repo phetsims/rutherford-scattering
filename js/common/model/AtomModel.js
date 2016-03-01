@@ -23,15 +23,17 @@ define( function( require ) {
    */
   function AtomModel( options ) {
 
+    assert && assert( RSConstants.SPACE_NODE_WIDTH === RSConstants.SPACE_NODE_HEIGHT, 'Space must be square.' );
+
     options = _.extend( {
       alphaParticleEnergy: RSConstants.DEFAULT_ALPHA_ENERGY,
-      bounds: new Bounds2(
+      bounds: new Bounds2(  // model computation space
         -RSConstants.SPACE_NODE_WIDTH / 4,
         -RSConstants.SPACE_NODE_HEIGHT / 4,
          RSConstants.SPACE_NODE_WIDTH / 4,
          RSConstants.SPACE_NODE_HEIGHT / 4 ),
       play: true,    // is the sim running or paused
-      userInteraction: false  // is the user interacting with sim controls
+      userInteraction: false  // is the user interacting with the simulation
     }, options );
 
     // @public
@@ -43,7 +45,7 @@ define( function( require ) {
     // @protected - manual step size used when sim is paused
     this.maunalStepDt = 1 / 60;
 
-    // @protected
+    // @protected - the gun which introduces (aka. 'shoots') alpha particles
     this.gun = new GunModel( this );
 
     // @protected - used to signal when a sim step has occurred
@@ -93,7 +95,7 @@ define( function( require ) {
     },
 
     /**
-     * @protected
+     * @public
      */
     removeAllParticles: function() {
       this.particles.length = 0;
@@ -101,7 +103,7 @@ define( function( require ) {
     },
 
     /**
-     * A stub funtion to be implemented by derived objects. This just makes certain one is implemented.
+     * A stub function to be implemented by derived objects. This just makes certain one is implemented.
      * @param {AlphaParticleModel} alphaParticle
      * @param {double} dt
      * @protected
@@ -166,6 +168,7 @@ define( function( require ) {
      * @public
      */
     reset: function() {
+      this.gun.onProperty.reset();
       this.removeAllParticles();
       PropertySet.prototype.reset.call( this );
     }
