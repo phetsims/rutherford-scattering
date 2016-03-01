@@ -13,6 +13,9 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // constants
+  var POSITION_RECORD_STEPS = 2;  // controls how often position changes are recorded
+
   /**
    * @param {Object} [options]
    * @constructor
@@ -31,16 +34,20 @@ define( function( require ) {
       speed: options.speed,
       defaultSpeed: options.defaultSpeed,
       position: options.position,
-      orientation: options.orientation
+      orientation: options.orientation,
+      positionStep: POSITION_RECORD_STEPS
     } );
 
     // @public (read-only) - the position coordinates used for trace rendering
     this.positions = [ ];
 
-    // @private - update particle location
+    // @private - save new particle location
     var self = this;
     var positionListener = function( position ) {
-      self.positions.push( new Vector2( position.x, position.y ) );
+      if( self.positionStep++ === POSITION_RECORD_STEPS ) {
+        self.positions.push( new Vector2( position.x, position.y ) );
+        self.positionStep = 0;
+      }
     };
     this.positionProperty.link( positionListener );
 
@@ -55,7 +62,7 @@ define( function( require ) {
 
   return inherit( PropertySet, AlphaParticleModel, {
 
-       // @public
+    // @public
     dispose: function() {
       this.disposeAlphaParticleModel();
     }

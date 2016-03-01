@@ -8,9 +8,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var PlumPuddingAtomModel = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomModel' );
   var PlumPuddingAtomScreenView = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomScreenView' );
@@ -19,22 +19,20 @@ define( function( require ) {
   var plumPuddingAtomString = require( 'string!RUTHERFORD_SCATTERING/plumPuddingAtom' );
 
   // images
-  var screenIcon = require( 'image!RUTHERFORD_SCATTERING/PlumPuddingAtom-screen-icon.jpg' );
+  var screenIcon = require( 'image!RUTHERFORD_SCATTERING/PlumPuddingAtom-screen-icon.png' );
 
   /**
    * @constructor
    */
   function PlumPuddingAtomScreen() {
 
-    var options = {
-      backgroundColor: 'black'
-    };
-
     Screen.call( this,
       plumPuddingAtomString,
       new Image( screenIcon ),
       function() { return new PlumPuddingAtomModel(); },
-      function( model ) { return new PlumPuddingAtomScreenView( model ); }, options );
+      function( model ) { return new PlumPuddingAtomScreenView( model ); }, {
+      backgroundColor: 'black'
+    } );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreen', PlumPuddingAtomScreen );

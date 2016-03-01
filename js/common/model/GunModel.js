@@ -14,9 +14,11 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var AlphaParticleModel = require( 'RUTHERFORD_SCATTERING/common/model/AlphaParticleModel' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Random = require( 'DOT/Random' );
   var PropertySet = require( 'AXON/PropertySet' );
 
   // constants
+  var RAND = new Random();
   var MAX_PARTICLES = 20;
   var GUN_INTENSITY = 1;
   var X0_MIN = 10;
@@ -53,10 +55,10 @@ define( function( require ) {
 
       if ( this.on && this.dtSinceGunFired >= this.dtPerGunFired ) {
 
-          var ySign = ( Math.random() < 0.5 ? 1 : -1 );
+          var ySign = ( RAND.random() < 0.5 ? 1 : -1 );
 
           // random position withing model bounds
-          var particleX = ySign * ( X0_MIN + ( Math.random() * ( ( this.model.bounds.width / 2 ) - X0_MIN ) ) );
+          var particleX = ySign * ( X0_MIN + ( RAND.random() * ( ( this.model.bounds.width / 2 ) - X0_MIN ) ) );
           var particleY = this.model.bounds.minY;
 
           var initialPosition = new Vector2( particleX, particleY );

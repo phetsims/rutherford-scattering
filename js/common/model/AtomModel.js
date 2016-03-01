@@ -60,6 +60,10 @@ define( function( require ) {
     };
     this.userInteractionProperty.link( userInteractionListener );
 
+    // @private
+    this.disposeAtomModel = function() {
+      this.userInteractionProperty.unlink( userInteractionListener );
+    };
   }
 
   rutherfordScattering.register( 'AtomModel', AtomModel );
@@ -171,6 +175,11 @@ define( function( require ) {
       this.gun.onProperty.reset();
       this.removeAllParticles();
       PropertySet.prototype.reset.call( this );
+    },
+
+    // @public
+    dispose: function() {
+      this.disposeAtomModel();
     }
 
   } ); // inherit

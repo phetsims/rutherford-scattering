@@ -15,8 +15,10 @@ define( function( require ) {
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var Random = require( 'DOT/Random' );
 
   // constants
+  var RAND = new Random();
   var MIN_NUCLEUS_RADIUS = 20; // view coordinates
   var OUTLINE_LINE_WIDTH = 1;
   var OUTLINE_STROKE_COLOR = 'orange';
@@ -104,26 +106,36 @@ define( function( require ) {
     } );
 
     // update atom image when proton count changes
-    model.protonCountProperty.link( function( propertyValue ) {
+    var protonCountListener = function( propertyValue ) {
       self.numberOfProtons = propertyValue;
       self.renderAtomOutline = self.model.userInteractionProperty.value;  // Only render the outline when interacting
       updateAtomImage();
-    } );
+    };
+    model.protonCountProperty.link( protonCountListener );
 
     // update atom image when neutron count changes
-    model.neutronCountProperty.link( function( propertyValue ) {
+    var neutronCountListener = function( propertyValue ) {
       self.numberOfNeutrons = propertyValue;
       self.renderAtomOutline = self.model.userInteractionProperty.value; // Only render the outline when interacting
       updateAtomImage();
-    } );
+    };
+    model.neutronCountProperty.link( neutronCountListener );
 
     // update atom image when user interaction stops
-    model.userInteractionProperty.link( function( propertyValue ) {
+    var userInteractionListener = function( userInteraction ) {
       if( self.renderAtomOutline ) {
         self.renderAtomOutline = false;
         updateAtomImage();
       }
-    } );
+    };
+    model.userInteractionProperty.link( userInteractionListener );
+
+    // @private
+    this.disposeRutherfordAtomNode = function() {
+      this.protonCountProperty.unlink( protonCountListener );
+      this.neutronCountProperty.unlink( neutronCountListener );
+      this.userInteractionProperty.unlink( userInteractionListener );
+    };
 
     this.invalidatePaint();
   }
@@ -133,7 +145,7 @@ define( function( require ) {
   return inherit( CanvasNode, RutherfordAtomNode, {
 
     /**
-     * Renders the Rutherford atom either as a radius outline or as a detailed proton/neutron atom
+     * Renders the Rutherford atom either as a simple radius outline or as a detailed proton/neutron atom
      * @param {CanvasRenderingContext2D} context
      * @private
      */
@@ -167,8 +179,8 @@ define( function( require ) {
 
           // protons
           if ( i < this.numberOfProtons ) {
-            var dP = maxProtonRadius * Math.sqrt( Math.random() ); // random from center distance
-            var thetaP = 2 * Math.PI * Math.random(); // random angle around center
+            var dP = maxProtonRadius * Math.sqrt( RAND.random() ); // random from center distance
+            var thetaP = 2 * Math.PI * RAND.random(); // random angle around center
             var xP = ( this.centerX - this.protonImage.width / 2 ) + ( dP * Math.cos( thetaP ) );
             var yP = ( this.centerY - this.protonImage.height / 2 ) + ( dP * Math.sin( thetaP ) );
             context.drawImage( this.protonImage, xP, yP, this.protonImage.width, this.protonImage.height );
@@ -176,14 +188,19 @@ define( function( require ) {
 
           // neutrons
           if ( i < this.numberOfNeutrons ) {
-            var dN = maxNeutronRadius * Math.sqrt( Math.random() );  // random from center distance
-            var thetaN = 2 * Math.PI * Math.random();  // random angle around center
+            var dN = maxNeutronRadius * Math.sqrt( RAND.random() );  // random from center distance
+            var thetaN = 2 * Math.PI * RAND.random();  // random angle around center
             var xN = ( this.centerX - this.neutronImage.width / 2 ) + ( dN * Math.cos( thetaN ) );
             var yN = ( this.centerY - this.neutronImage.height / 2 ) + ( dN * Math.sin( thetaN ) );
             context.drawImage( this.neutronImage, xN, yN, this.neutronImage.width, this.neutronImage.height );
           }
         }
       }
+    },
+
+    // @public
+    dispose: function() {
+      this.disposeRutherfordAtomNode();
     }
 
   } ); // inherit
