@@ -41,9 +41,9 @@ require.config( {
 
     // this sim
     RUTHERFORD_SCATTERING: '.'
-  }
+  },
 
   // optional cache buster to make browser refresh load all included scripts, can be disabled with ?cacheBuster=false
-  // FIXME: uncomment on publish
-  //urlArgs: phet.chipper.getCacheBusterArgs()
+  urlArgs: phet.chipper.getCacheBusterArgs()
+
 } );
