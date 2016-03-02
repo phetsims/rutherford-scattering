@@ -159,7 +159,7 @@ define( function( require ) {
         model.reset();
       },
       right:  atomPropertiesPanel.right,
-      top: atomPropertiesPanel.bottom + 10
+      top: playPauseButton.top
     } );
     this.addChild( resetAllButton );
 

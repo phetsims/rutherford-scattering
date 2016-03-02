@@ -151,7 +151,7 @@ define( function( require ) {
         model.reset();
       },
       right:  alphaParticlePropertiesPanel.right,
-      top: alphaParticlePropertiesPanel.bottom + 10
+      top: playPauseButton.top
     } );
     this.addChild( resetAllButton );
 
