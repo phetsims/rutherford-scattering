@@ -1,6 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
+ * Plum pudding screen & model construction
  *
  * @author Dave Schmitz (Schmitzware)
  */

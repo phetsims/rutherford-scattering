@@ -70,9 +70,10 @@ define( function( require ) {
     this.addChild( targetMaterialNode );
 
      // tiny box that indicates what will be zoomed
-    var tinyBoxNode = new TinyBox();
-    tinyBoxNode.centerX = targetMaterialNode.centerX;
-    tinyBoxNode.centerY = targetMaterialNode.centerY;
+    var tinyBoxNode = new TinyBox( {
+      centerX: targetMaterialNode.centerX,
+      centerY: targetMaterialNode.centerY
+    } );
     this.addChild( tinyBoxNode );
 
     // atom animation space
@@ -105,13 +106,14 @@ define( function( require ) {
 
     // nuclear scale info
     var scaleFormattedString = StringUtils.format( pattern0AtomicScaleString, '300' );
-    var scaleInfoNode = new ScaleInfoNode( scaleFormattedString, plumPuddingSpaceNode.getWidth() );
-    scaleInfoNode.centerX = plumPuddingSpaceNode.centerX;
-    scaleInfoNode.top = plumPuddingSpaceNode.bottom + 10;
+    var scaleInfoNode = new ScaleInfoNode( scaleFormattedString, plumPuddingSpaceNode.getWidth(), {
+      centerX: plumPuddingSpaceNode.centerX,
+      top: plumPuddingSpaceNode.bottom + 10
+    } );
     this.addChild( scaleInfoNode );
 
      // add play/pause button.
-    var playPauseButton = new PlayPauseButton( model.playProperty, {
+    var playPauseButton = new PlayPauseButton( model.runningProperty, {
       bottom: scaleInfoNode.bottom + 60,
       centerX: scaleInfoNode.centerX - 25,
       radius: 23
@@ -122,7 +124,7 @@ define( function( require ) {
     var stepButton = new StepButton( function() {
         model.manualStep();
       },
-      model.playProperty, {
+      model.runningProperty, {
         centerY: playPauseButton.centerY,
         centerX: scaleInfoNode.centerX + 25,
         radius: 15

@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * RutherfordSpaceNode is the space in which atoms and alpha particles are rendered.
+ * RutherfordAtomSpaceNode is the space in which atoms and alpha particles are rendered.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -16,13 +16,13 @@ define( function( require ) {
 
 
   /**
-   * @param {AtomModel} model
+   * @param {RSBaseModel} model
    * @param {showAlphaTraceProperty} traceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
    * @param { } options, must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
-  function RutherfordSpaceNode( model, traceProperty, modelViewTransform, options ) {
+  function RutherfordAtomSpaceNode( model, traceProperty, modelViewTransform, options ) {
 
     assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvasBounds specified.' );
 
@@ -37,9 +37,9 @@ define( function( require ) {
     this.invalidatePaint();
   }
 
-  rutherfordScattering.register( 'RutherfordSpaceNode', RutherfordSpaceNode );
+  rutherfordScattering.register( 'RutherfordAtomSpaceNode', RutherfordAtomSpaceNode );
 
-  return inherit( ParticleSpaceNode, RutherfordSpaceNode, {
+  return inherit( ParticleSpaceNode, RutherfordAtomSpaceNode, {
 
     /**
      * @param {CanvasRenderingContext2D} context

@@ -11,7 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var AtomModel = require( 'RUTHERFORD_SCATTERING/common/model/AtomModel' );
+  var RSBaseModel = require( 'RUTHERFORD_SCATTERING/common/model/RSBaseModel' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -26,16 +26,16 @@ define( function( require ) {
       neutronCount: RSConstants.DEFAULT_NEUTRON_COUNT
     }, options );
 
-    AtomModel.call( this, options );
+    RSBaseModel.call( this, options );
   }
 
   rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );
 
-  return inherit( AtomModel, RutherfordAtomModel, {
+  return inherit( RSBaseModel, RutherfordAtomModel, {
 
     /**
      * @param {AlphaParticleModel} alphaParticle
-     * @param {double} dt
+     * @param {number} dt
      * @protected
      */
     moveParticle: function ( alphaParticle, dt ) {
@@ -65,7 +65,7 @@ define( function( require ) {
       var initialPosition = alphaParticle.positionProperty.initialValue;
 
       var x0 = Math.abs( initialPosition.x );
-      if ( x0 === 0 ) {
+      if ( x0 < X0_MIN ) {
           x0 = X0_MIN; // algorithm fails for x0 < X0_MIN
       }
 
@@ -86,8 +86,14 @@ define( function( require ) {
       }
 
       //-------------------------------------------------------------------------------
-      // calculate D
+      // calculate D -
       //-------------------------------------------------------------------------------
+
+      // handle potential algorithm failures
+      if ( ( pd <= 0 ) || ( s0 === 0 ) ) {
+        this.removeParticle( alphaParticle );
+        return;
+      }
 
       var D = ( L / L_DIVISOR ) * ( p / pd ) * ( ( sd * sd ) / ( s0 * s0 ) );
 
@@ -95,18 +101,61 @@ define( function( require ) {
       // calculate new alpha particle position, in Polar coordinates
       //-------------------------------------------------------------------------------
 
+      // check intermediate values to handle potential algorithm failures
+      var i0 = ( x0 * x0 ) + ( y0 * y0 );
+      if ( i0 < 0 ) {
+        this.removeParticle( alphaParticle );
+        return;
+      }
+
       // b, horizontal distance to atom's center at y == negative infinity
-      var b1 = Math.sqrt( ( x0 * x0 ) + ( y0 * y0 ) );
-      var b = 0.5 * ( x0 + Math.sqrt( ( -2 * D * b1 ) - ( 2 * D * y0 ) + ( x0 * x0 ) ) );
+      var b1 = Math.sqrt( i0 );
+
+      // check intermediate values to handle potential algorithm failures
+      var i1 = ( -2 * D * b1 ) - ( 2 * D * y0 ) + ( x0 * x0 );
+      if ( i1 < 0 ) {
+        this.removeParticle( alphaParticle );
+        return;
+      }
+
+      var b = 0.5 * ( x0 + Math.sqrt( i1 ) );
 
       // convert current position to Polar coordinates, measured counterclockwise from the -y axis
-      var r = Math.sqrt( ( x * x ) + ( y * y ) );
+
+      // check intermediate values to handle potential algorithm failures
+      var i2 = ( x * x ) + ( y * y );
+      if ( i2 < 0 ) {
+        this.removeParticle( alphaParticle );
+        return;
+      }
+
+      var r = Math.sqrt( i2 );
       var phi = Math.atan2( x, -y );
 
       // new position (in Polar coordinates) and speed
       var t1 = ( ( b * Math.cos( phi ) ) - ( ( D / 2 ) * Math.sin( phi ) ) );
-      var phiNew = phi + ( ( b * b * s * dt ) / ( r * Math.sqrt( Math.pow( b, 4 ) + ( r * r * t1 * t1 ) ) ) );
-      var rNew = Math.abs( ( b * b ) / ( ( b * Math.sin( phiNew ) ) + ( ( D / 2 ) * ( Math.cos( phiNew ) - 1 ) ) ) );
+
+      // check intermediate values to handle potential algorithm failures
+      var i3 = Math.pow( b, 4 ) + ( r * r * t1 * t1 );
+      if ( i3 < 0 ) {
+        this.removeParticle( alphaParticle );
+        return;
+      }
+      var phiNew = phi + ( ( b * b * s * dt ) / ( r * Math.sqrt( i3 ) ) );
+
+      // check intermediate values to handle potential algorithm failures
+      var i4 = ( ( b * Math.sin( phiNew ) ) + ( ( D / 2 ) * ( Math.cos( phiNew ) - 1 ) ) );
+      if ( i4 < 0 ) {
+        this.removeParticle( alphaParticle );
+        return;
+      }
+      var rNew = Math.abs( ( b * b ) / i4 );
+
+      // handle potential algorithm failures
+      if ( rNew === 0 ) {
+        this.removeParticle( alphaParticle );
+        return;
+      }
       var sNew = s0 * Math.sqrt( 1 - ( D / rNew ) );
 
       //-------------------------------------------------------------------------------
@@ -121,12 +170,12 @@ define( function( require ) {
       var yNew = -rNew * Math.cos( phiNew );
 
       //-------------------------------------------------------------------------------
-      // handle failures in the algorithm
+      // handle potential algorithm failures
       //-------------------------------------------------------------------------------
 
       if ( !( b > 0 ) || !( sNew > 0 ) ) {
-        // Remove the problem particle
         this.removeParticle( alphaParticle );
+        return;
       }
 
       //-------------------------------------------------------------------------------

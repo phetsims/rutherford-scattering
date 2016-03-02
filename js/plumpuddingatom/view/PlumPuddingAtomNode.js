@@ -25,7 +25,7 @@ define( function( require ) {
     options = _.extend( {
     }, options );
 
-    Image.call( this, plumPuddingImage );
+    Image.call( this, plumPuddingImage, options );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomNode', PlumPuddingAtomNode );

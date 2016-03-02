@@ -42,6 +42,7 @@ define( function( require ) {
       lineWidth: 1
     } );
 
+    assert && assert( !options.children, 'additional children not supported' );
     options.children = [ topNode  ];
 
     Node.call( this, options );

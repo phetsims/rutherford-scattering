@@ -30,7 +30,7 @@ define( function( require ) {
    * The Rutherford atom is build by randomly drawing proton & neutron images to a CanvasNode. This canvas is then
    * rendered to an Image.
    *
-   * @param {AtomModel} model
+   * @param {RSBaseModel} model
    * @param {Object} [options]
    * @constructor
    */
@@ -92,14 +92,14 @@ define( function( require ) {
     };
 
     // generate proton image - asynchronous
-    var protonNode = ParticleNodeFactory.proton();
+    var protonNode = ParticleNodeFactory.createProton();
     protonNode.toImage( function( image, x, y ) {
       self.protonImage = image;
       updateAtomImage();
     } );
 
     // generate neutron image - asynchronous
-    var neutronNode = ParticleNodeFactory.neutron();
+    var neutronNode = ParticleNodeFactory.createNeutron();
     neutronNode.toImage( function( image, x, y ) {
       self.neutronImage = image;
       updateAtomImage();

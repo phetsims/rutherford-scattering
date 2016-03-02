@@ -21,8 +21,8 @@ define( function( require ) {
   var PARTICLE_TRACE_COLOR = 'grey';
 
   /**
-   * @param {AtomModel} model
-   * @param {showAlphaTraceProperty} showTraceProperty
+   * @param {RSBaseModel} model
+   * @param {Property} showTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
    * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
    * @constructor
@@ -59,7 +59,7 @@ define( function( require ) {
     };
 
     // create a single alpha particle image to use for rendering all particles - asynchronous
-    var alphaParticle = ParticleNodeFactory.alpha();
+    var alphaParticle = ParticleNodeFactory.createAlpha();
     alphaParticle.toImage( function( image, x, y ) {
       self.alphaParticleImage = image;
       self.particleImageHalfWidth = self.alphaParticleImage.width / 2;
@@ -79,6 +79,7 @@ define( function( require ) {
      * @protected
      */
     paintSpace: function( context ) {
+      assert && assert( false, 'subtype needs to implement' );
     },
 
     /**

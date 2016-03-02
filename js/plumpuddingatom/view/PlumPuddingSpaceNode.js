@@ -18,7 +18,7 @@ define( function( require ) {
   var ATOM_IMAGE_MARGIN = 75;
 
   /**
-   * @param {AtomModel} model
+   * @param {RSBaseModel} model
    * @param {showAlphaTraceProperty} traceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
    * @param { } options, must contain a canvasBounds attribute of type Bounds2

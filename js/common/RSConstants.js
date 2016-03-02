@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * This class is a collection of constants that configure global properties.
+ * This object is collection of constants that configure global properties.
  * If you change something here, it will change *everywhere* in this simulation.
  *
  * @author Dave Schmitz (Schmitzware)
@@ -58,7 +58,10 @@ define( function( require ) {
     PANEL_SPACE_MARGIN:     35,   // spacing between the particle space and the property panels
     PANEL_TOP_MARGIN:       15,   // spacing for all top panels from edge of window
     PANEL_VERTICAL_MARGIN:  10,   // vertical spacing between property panels
+
     TARGET_SPACE_MARGIN:    50,   // spacing from gold target material to particle space
+
+    SCALE_TITLE_FONT:       new PhetFont( 18 ),
 
     //----------------------------------------------------------------------------
     // Dimensions

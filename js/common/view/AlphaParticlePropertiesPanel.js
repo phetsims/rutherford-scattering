@@ -34,7 +34,7 @@ define( function( require ) {
   /**
    * Constructor for a Alpha Particle Properties control panel.
    *
-   * @param {AtomModel} model - The model controlled by this panel.
+   * @param {RSBaseModel} model - The model controlled by this panel.
    * @param {Property.<boolean>} showTracesProperty - show particle traces on/off
    * @param {Object} [options]
    * @constructor
@@ -84,7 +84,7 @@ define( function( require ) {
       max: RSConstants.MAX_ALPHA_ENERGY
     }, {
       trackFill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      trackStroke:RSConstants.PANEL_SSLIDER_FILL_COLOR,
+      trackStroke:RSConstants.PANEL_SLIDER_FILL_COLOR,
       majorTickStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
       majorTickLength: 15,
       tickLabelSpacing: 2,

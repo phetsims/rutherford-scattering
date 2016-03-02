@@ -32,7 +32,7 @@ define( function( require ) {
   var ParticleNodeFactory = {
 
     // Electron
-    electron: function() {
+    createElectron: function() {
       return new Node( {
         children: [
           new ParticleNode( ELECTRON_RADIUS, ELECTRON_COLOR )
@@ -41,7 +41,7 @@ define( function( require ) {
     },
 
     // Proton
-    proton: function() {
+    createProton: function() {
       return new Node( {
         children: [
           new ParticleNode( PROTON_RADIUS, PROTON_COLOR )
@@ -50,7 +50,7 @@ define( function( require ) {
     },
 
     // Neutron
-    neutron: function() {
+    createNeutron: function() {
       return new Node( {
         children: [
           new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR )
@@ -59,7 +59,7 @@ define( function( require ) {
     },
 
     // Alpha
-    alpha: function() {
+    createAlpha: function() {
       return new Node( {
         children: [
           new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, { x: NEUTRON_RADIUS-1, y: -NEUTRON_RADIUS } ),
@@ -82,11 +82,14 @@ define( function( require ) {
    * @private
    */
   function ParticleNode( radius, color, options ) {
-    var gradient = new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
+    options = options || {};
+    assert && assert( !options.fill );
+
+    options.fill = new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
       .addColorStop( 0, 'white' )
       .addColorStop( 0.33, color )
       .addColorStop( 1, 'black' );
-    Circle.call( this, radius, _.extend( { fill: gradient }, options ) );
+    Circle.call( this, radius, options );
   }
 
   rutherfordScattering.register( 'ParticleNodeFactory.ParticleNode', ParticleNode );

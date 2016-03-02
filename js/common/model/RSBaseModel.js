@@ -1,6 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
+ * Base object for the models. Keeps track of all active particles.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -21,7 +22,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function AtomModel( options ) {
+  function RSBaseModel( options ) {
 
     assert && assert( RSConstants.SPACE_NODE_WIDTH === RSConstants.SPACE_NODE_HEIGHT, 'Space must be square.' );
 
@@ -32,7 +33,7 @@ define( function( require ) {
         -RSConstants.SPACE_NODE_HEIGHT / 4,
          RSConstants.SPACE_NODE_WIDTH / 4,
          RSConstants.SPACE_NODE_HEIGHT / 4 ),
-      play: true,    // is the sim running or paused
+      running: true,    // is the sim running or paused
       userInteraction: false  // is the user interacting with the simulation
     }, options );
 
@@ -61,15 +62,15 @@ define( function( require ) {
     this.userInteractionProperty.link( userInteractionListener );
 
     // @private
-    this.disposeAtomModel = function() {
+    this.disposeRSBaseModel = function() {
       this.userInteractionProperty.unlink( userInteractionListener );
       this.stepEmitter.removeAllListeners();
     };
   }
 
-  rutherfordScattering.register( 'AtomModel', AtomModel );
+  rutherfordScattering.register( 'RSBaseModel', RSBaseModel );
 
-  return inherit( PropertySet, AtomModel, {
+  return inherit( PropertySet, RSBaseModel, {
 
     /**
      * Registers a listener to be called at each step of the model execution
@@ -110,7 +111,7 @@ define( function( require ) {
     /**
      * A stub function to be implemented by derived objects. This just makes certain one is implemented.
      * @param {AlphaParticleModel} alphaParticle
-     * @param {double} dt
+     * @param {number} dt
      * @protected
      */
     moveParticle: function ( alphaParticle, dt ) {
@@ -146,7 +147,7 @@ define( function( require ) {
      * @public
      */
     step: function( dt ) {
-      if( this.play && !this.userInteraction && dt < 1) {
+      if( this.running && !this.userInteraction && dt < 1) {
         this.gun.step( dt );
         this.moveParticles( dt );
         this.cullParticles();
@@ -180,7 +181,7 @@ define( function( require ) {
 
     // @public
     dispose: function() {
-      this.disposeAtomModel();
+      this.disposeRSBaseModel();
     }
 
   } ); // inherit

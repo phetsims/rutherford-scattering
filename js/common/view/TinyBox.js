@@ -40,6 +40,7 @@ define( function( require ) {
       .lineTo( 0, BACK_DEPTH )
       .close(), options );
 
+    assert && assert( !options.children, 'additional children not supported' );
     options.children = [ topNode  ];
 
     Node.call( this, options );

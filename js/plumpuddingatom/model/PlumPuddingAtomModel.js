@@ -11,7 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var AtomModel = require( 'RUTHERFORD_SCATTERING/common/model/AtomModel' );
+  var RSBaseModel = require( 'RUTHERFORD_SCATTERING/common/model/RSBaseModel' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -23,16 +23,16 @@ define( function( require ) {
     options = _.extend( {
     }, options );
 
-    AtomModel.call( this, options );
+    RSBaseModel.call( this, options );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomModel', PlumPuddingAtomModel );
 
-  return inherit( AtomModel, PlumPuddingAtomModel, {
+  return inherit( RSBaseModel, PlumPuddingAtomModel, {
 
     /**
      * @param {AlphaParticleModel} alphaParticle
-     * @param {double} dt
+     * @param {number} dt
      * @protected
      */
     moveParticle: function ( alphaParticle, dt ) {

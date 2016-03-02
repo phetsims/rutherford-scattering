@@ -24,7 +24,7 @@ define( function( require ) {
   var X0_MIN = 10;
 
   /**
-   * {AtomModel} model
+   * {RSBaseModel} model
    * @constructor
    */
   function GunModel( model ) {

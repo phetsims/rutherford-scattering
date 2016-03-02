@@ -1,6 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
+ * Alpha particle representation - speed, orientation, current/past positions.
  *
  * @author Dave Schmitz (Schmitzware)
  */

@@ -33,7 +33,7 @@ define( function( require ) {
   /**
    * Constructor for a Atom Properties control panel.
    *
-   * @param {AtomModel} model - The model controlled by this panel.
+   * @param {RSBaseModel} model - The model controlled by this panel.
    * @param {Object} [options]
    * @constructor
    */
@@ -52,15 +52,18 @@ define( function( require ) {
     // strings
     var atomPropertiesText = new Text( atomPropertiesString, {
       font: RSConstants.PANEL_TITLE_FONT,
-      fontWeight: 'bold', fill: RSConstants.PANEL_TITLE_COLOR
+      fontWeight: 'bold',
+      fill: RSConstants.PANEL_TITLE_COLOR
     } );
     var numProtonsText = new Text( numberOfProtonsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
-      fontWeight: 'bold', fill: 'rgb( 185, 50, 8 )'
+      fontWeight: 'bold',
+      fill: 'rgb( 185, 50, 8 )'
     } );
     var numNeutronsText = new Text( numberOfNeutronsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
-      fontWeight: 'bold', fill: 'rgb( 160, 160, 160 )'
+      fontWeight: 'bold',
+      fill: 'rgb( 160, 160, 160 )'
     } );
 
     // proton count slider title
@@ -108,7 +111,7 @@ define( function( require ) {
       max: RSConstants.MAX_PROTON_COUNT
     }, {
       trackFill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      trackStroke:RSConstants.PANEL_SSLIDER_FILL_COLOR,
+      trackStroke:RSConstants.PANEL_SLIDER_FILL_COLOR,
       majorTickStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
       majorTickLength: 15,
       tickLabelSpacing: 2,

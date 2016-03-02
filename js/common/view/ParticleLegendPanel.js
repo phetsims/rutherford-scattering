@@ -47,31 +47,6 @@ define( function( require ) {
       stroke: RSConstants.PANEL_STROKE
     }, options );
 
-    /**
-     * Build one row in the legend consisting of an image and label
-     * @param {string} title
-     * @param {Node} particleNode
-     * @returns {HBox}
-     * @private
-     */
-    function buildParticleBox( titleString, particleNode ) {
-
-      var hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width/2 );
-      var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white', maxWidth: 200 } );
-      var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING );
-
-      // container for one row in the legend
-      var hBox = new HBox( {
-        spacing: LEGEND_ITEM_HORIZONTAL_SPACING,
-        top: 0,
-        right: 0,
-        align: 'center',
-        children: [ hStrut1, particleNode, hStrut2, titleText ]
-      } );
-
-      return hBox;
-    }
-
     var legendText = new Text( legendString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
@@ -81,10 +56,10 @@ define( function( require ) {
     var children = [ legendText ];
 
     // add  the legend particle entires
-    children.push( buildParticleBox( electronString, ParticleNodeFactory.electron() ) );
-    children.push( buildParticleBox( protonString, ParticleNodeFactory.proton() ) );
-    children.push( buildParticleBox( neutronString, ParticleNodeFactory.neutron() ) );
-    children.push( buildParticleBox( alphaParticleString, ParticleNodeFactory.alpha() ) );
+    children.push( createParticleBox( electronString, ParticleNodeFactory.createElectron() ) );
+    children.push( createParticleBox( protonString, ParticleNodeFactory.createProton() ) );
+    children.push( createParticleBox( neutronString, ParticleNodeFactory.createNeutron() ) );
+    children.push( createParticleBox( alphaParticleString, ParticleNodeFactory.createAlpha() ) );
 
     var content = new VBox( {
       spacing: RSConstants.PANEL_CHILD_SPACING,
@@ -95,6 +70,31 @@ define( function( require ) {
     } );
 
     Panel.call( this, content, options );
+  }
+
+  /**
+   * Build one row in the legend consisting of an image and label
+   * @param {string} titleString
+   * @param {Node} particleNode
+   * @returns {HBox}
+   * @private
+   */
+  function createParticleBox( titleString, particleNode ) {
+
+    var hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width/2 );
+    var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white', maxWidth: 200 } );
+    var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING );
+
+    // container for one row in the legend
+    var hBox = new HBox( {
+      spacing: LEGEND_ITEM_HORIZONTAL_SPACING,
+      top: 0,
+      right: 0,
+      align: 'center',
+      children: [ hStrut1, particleNode, hStrut2, titleText ]
+    } );
+
+    return hBox;
   }
 
   rutherfordScattering.register( 'ParticlesLegendPanel', ParticlesLegendPanel );
