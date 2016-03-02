@@ -63,6 +63,7 @@ define( function( require ) {
     // @private
     this.disposeAtomModel = function() {
       this.userInteractionProperty.unlink( userInteractionListener );
+      this.stepEmitter.removeAllListeners();
     };
   }
 

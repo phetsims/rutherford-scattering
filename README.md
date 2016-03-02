@@ -6,7 +6,7 @@ at the University of Colorado Boulder.
 For a description of this simulation, associated resources, and a link to the published version,
 <a href="http://phet.colorado.edu/en/simulation/rutherford-scattering" target="_blank">visit the simulation's web page</a>.
 ### Try it!
-<a href="http://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html" target="_blank">Click here to run "Molarity".</a>
+<a href="http://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html" target="_blank">Click here to run "Rutherford Scattering".</a>
 <a href="http://phet.colorado.edu/sims/html/rutherford-scattering/latest/rutherford-scattering_en.html" target="_blank">
 <img src="https://raw.githubusercontent.com/phetsims/rutherford-scattering/master/assets/rutherford-scattering-screenshot.png" alt="Screenshot" style="width: 400px;"/>
 </a>

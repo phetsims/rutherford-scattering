@@ -50,7 +50,7 @@ define( function( require ) {
     // alpha particle gun
     var gunNode = new LaserPointerNode( model.gun.onProperty, {
       rotation: -Math.PI / 2, // pointing up
-      left: this.layoutBounds.left + 25,
+      left: this.layoutBounds.left + 75,
       top: this.layoutBounds.centerY
     } );
     this.addChild( gunNode );
@@ -140,7 +140,7 @@ define( function( require ) {
     // Create the alpha particle properties control panel
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
       leftTop: new Vector2( rutherfordSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN,
-        particleLegendPanel.bottom + RSConstants.PANEL_INNER_MARGIN ),
+        particleLegendPanel.bottom + RSConstants.PANEL_VERTICAL_MARGIN ),
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );
@@ -148,7 +148,7 @@ define( function( require ) {
     // create the atom properties control panel
     var atomPropertiesPanel = new AtomPropertiesPanel( model, {
       leftTop: new Vector2( rutherfordSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN,
-        alphaParticlePropertiesPanel.bottom + RSConstants.PANEL_INNER_MARGIN ),
+        alphaParticlePropertiesPanel.bottom + RSConstants.PANEL_VERTICAL_MARGIN ),
       resize: false } );
     this.addChild( atomPropertiesPanel );
 

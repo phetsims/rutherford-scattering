@@ -23,7 +23,7 @@ define( function( require ) {
     credits: {
       leadDesign: 'Sam McKagan',
       softwareDevelopment: 'Dave Schmitz, Chris Malley',
-      team: 'Wendy Adams, Mike Dubson, Noah Finkelstein, Danielle Harlow, Amy Rouinfar, Ariel Paul, Kathy Perkins, Noah Podolefsky, Carl Weiman',
+      team: 'Amy Rouinfar, Ariel Paul, Kathy Perkins, \n\tWendy Adams, Mike Dubson, Noah Finkelstein, \n\tDanielle Harlow, Noah Podolefsky, Carl Weiman',
       qualityAssurance: '',
       graphicArts: 'Amy Hanson',
       thanks: ''

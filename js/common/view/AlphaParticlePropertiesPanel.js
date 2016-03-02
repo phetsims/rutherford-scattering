@@ -45,6 +45,7 @@ define( function( require ) {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
+      maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE
@@ -64,12 +65,12 @@ define( function( require ) {
     var minEnergyText = new Text( minEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      maxWidth: options.minWidth / 3
+      maxWidth: options.maxWidth / 3
     } );
     var maxEnergyText = new Text( maxEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      maxWidth: options.minWidth / 3
+      maxWidth: options.maxWidth / 3
     } );
 
     // slider title
@@ -104,7 +105,8 @@ define( function( require ) {
     var showTraceText = new Text( showTracesString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+      fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      maxWidth: 200
     } );
     var showTraceCheckBox = new CheckBox( showTraceText, showTracesProperty, {
       checkBoxColor: 'white',

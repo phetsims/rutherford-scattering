@@ -43,6 +43,7 @@ define( function( require ) {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
+      maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE
