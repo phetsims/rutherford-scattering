@@ -17,8 +17,6 @@ define( function ( require ) {
   // strings
   var rutherfordScatteringTitleString = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );
 
-  // constants
-
   var simOptions = {
     credits: {
       leadDesign: 'Amy Hanson, Sam McKagan',
@@ -29,13 +27,6 @@ define( function ( require ) {
       thanks: ''
     }
   };
-
-  // Appending '?dev' to the URL will enable developer-only features.
-  if ( phet.chipper.getQueryParameter( 'dev' ) ) {
-    simOptions = _.extend( {
-      // add dev-specific options here
-    }, simOptions );
-  }
 
   SimLauncher.launch( function () {
     var sim = new Sim( rutherfordScatteringTitleString, [
