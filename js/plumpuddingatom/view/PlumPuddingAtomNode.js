@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -22,16 +22,13 @@ define( function( require ) {
    */
   function PlumPuddingAtomNode( options ) {
 
-    options = _.extend( {
-    }, options );
+    options = _.extend( {}, options );
 
     Image.call( this, plumPuddingImage, options );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomNode', PlumPuddingAtomNode );
 
-  return inherit( Image, PlumPuddingAtomNode, {
-
-  } ); // inherit
+  return inherit( Image, PlumPuddingAtomNode, {} ); // inherit
 
 } ); // define

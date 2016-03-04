@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -28,20 +28,19 @@ define( function( require ) {
 
     assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvasBounds specified.' );
 
-    options = _.extend( {
-    }, options );
+    options = _.extend( {}, options );
 
     ParticleSpaceNode.call( this, model, traceProperty, modelViewTransform, options );
 
     // plum pudding image - calc image scale and center positioning
     this.atomNode = new PlumPuddingAtomNode();
-    var scale = Math.min( this.width, this.height )/
-      ( Math.max( this.atomNode.width, this.atomNode.height ) + 2 * ATOM_IMAGE_MARGIN );
+    var scale = Math.min( this.width, this.height ) /
+                ( Math.max( this.atomNode.width, this.atomNode.height ) + 2 * ATOM_IMAGE_MARGIN );
     var imageWidth = this.atomNode.width * scale;
     var imageHeight = this.atomNode.height * scale;
     var imageX = this.bounds.centerX - imageWidth / 2;
     var imageY = this.bounds.centerY - imageHeight / 2;
-    this.atomNodeRect = { x: imageX, y: imageY, width: imageWidth, height: imageHeight };
+    this.atomNodeRect = {x: imageX, y: imageY, width: imageWidth, height: imageHeight};
 
     this.invalidatePaint();
   }
@@ -56,9 +55,9 @@ define( function( require ) {
      * @param {CanvasRenderingContext2D} context
      * @protected
      */
-    paintSpace: function( context ) {
+    paintSpace: function ( context ) {
       // Slight chance the image used isn't available. In that case, return & try again on next frame
-      if( this.atomNode.image === null ) {
+      if ( this.atomNode.image === null ) {
         return;
       }
 

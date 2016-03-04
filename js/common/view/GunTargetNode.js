@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -27,8 +27,7 @@ define( function( require ) {
    */
   function GunTargetNode( model, options ) {
 
-    options = _.extend( {
-     }, options );
+    options = _.extend( {}, options );
 
     // alpha particle source target
     var targetMaterialNode = new TargetMaterialNode( {
@@ -37,7 +36,7 @@ define( function( require ) {
     } );
 
     // tiny box that indicates what will be zoomed
-    var tinyBoxNode = new TinyBox({
+    var tinyBoxNode = new TinyBox( {
       centerX: targetMaterialNode.centerX,
       centerY: targetMaterialNode.centerY
     } );
@@ -45,7 +44,7 @@ define( function( require ) {
     // dashed lines that emerge from the target
     var dashedPath = new Path( new Shape()
       .moveTo( tinyBoxNode.left, tinyBoxNode.top )
-      .lineTo( 225, RSConstants.PANEL_TOP_MARGIN)
+      .lineTo( 225, RSConstants.PANEL_TOP_MARGIN )
       .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
       .lineTo( 225, RSConstants.PANEL_TOP_MARGIN + RSConstants.SPACE_NODE_HEIGHT ), {
       stroke: 'grey',

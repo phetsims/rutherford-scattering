@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -26,8 +26,7 @@ define( function( require ) {
 
     assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvasBounds specified.' );
 
-    options = _.extend( {
-    }, options );
+    options = _.extend( {}, options );
 
     ParticleSpaceNode.call( this, model, traceProperty, modelViewTransform, options );
 
@@ -45,10 +44,10 @@ define( function( require ) {
      * @param {CanvasRenderingContext2D} context
      * @protected
      */
-    paintSpace: function( context ) {
+    paintSpace: function ( context ) {
 
       // Slight chance the image used isn't available. In that case, return & try again on next frame
-      if( this.atomNode.image === null ) {
+      if ( this.atomNode.image === null ) {
         return;
       }
 

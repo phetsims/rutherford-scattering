@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -30,10 +30,10 @@ define( function( require ) {
     Screen.call( this,
       rutherfordAtomString,
       new Image( screenIcon ),
-      function() { return new RutherfordAtomModel(); },
-      function( model ) { return new RutherfordAtomScreenView( model ); }, {
-      backgroundColor: 'black'
-    } );
+      function () { return new RutherfordAtomModel(); },
+      function ( model ) { return new RutherfordAtomScreenView( model ); }, {
+        backgroundColor: 'black'
+      } );
   }
 
   rutherfordScattering.register( 'RutherfordAtomScreen', RutherfordAtomScreen );

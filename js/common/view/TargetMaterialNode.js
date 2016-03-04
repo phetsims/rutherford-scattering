@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -43,7 +43,7 @@ define( function( require ) {
     } );
 
     assert && assert( !options.children, 'additional children not supported' );
-    options.children = [ topNode  ];
+    options.children = [ topNode ];
 
     Node.call( this, options );
   }

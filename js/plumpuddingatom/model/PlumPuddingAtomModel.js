@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -20,8 +20,7 @@ define( function( require ) {
    */
   function PlumPuddingAtomModel( options ) {
 
-    options = _.extend( {
-    }, options );
+    options = _.extend( {}, options );
 
     RSBaseModel.call( this, options );
   }

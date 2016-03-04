@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -31,8 +31,8 @@ define( function( require ) {
       bounds: new Bounds2(  // model computation space
         -RSConstants.SPACE_NODE_WIDTH / 4,
         -RSConstants.SPACE_NODE_HEIGHT / 4,
-         RSConstants.SPACE_NODE_WIDTH / 4,
-         RSConstants.SPACE_NODE_HEIGHT / 4 ),
+        RSConstants.SPACE_NODE_WIDTH / 4,
+        RSConstants.SPACE_NODE_HEIGHT / 4 ),
       running: true,    // is the sim running or paused
       userInteraction: false  // is the user interacting with the simulation
     }, options );
@@ -41,7 +41,7 @@ define( function( require ) {
     PropertySet.call( this, options );
 
     // @public (read-only) - all active alpha particle models
-    this.particles = [ ];
+    this.particles = [];
 
     // @protected - manual step size used when sim is paused
     this.maunalStepDt = 1 / 60;
@@ -54,15 +54,15 @@ define( function( require ) {
 
     // @private - energy level changed
     var self = this;
-    var userInteractionListener = function( userInteraction ) {
-      if( userInteraction ) {
+    var userInteractionListener = function ( userInteraction ) {
+      if ( userInteraction ) {
         self.removeAllParticles();
       }
     };
     this.userInteractionProperty.link( userInteractionListener );
 
     // @private
-    this.disposeRSBaseModel = function() {
+    this.disposeRSBaseModel = function () {
       this.userInteractionProperty.unlink( userInteractionListener );
       this.stepEmitter.removeAllListeners();
     };
@@ -85,7 +85,7 @@ define( function( require ) {
      * @param {AlphaParticleModel} alphaParticle
      * @public
      */
-    addParticle: function( alphaParticle ) {
+    addParticle: function ( alphaParticle ) {
       this.particles.push( alphaParticle );
     },
 
@@ -93,17 +93,17 @@ define( function( require ) {
      * @param {AlphaParticleModel} alphaParticle
      * @public
      */
-    removeParticle: function( alphaParticle ) {
-      var index = this.particles.indexOf(alphaParticle);
-      if (index > -1) {
-        this.particles.splice(index, 1);
+    removeParticle: function ( alphaParticle ) {
+      var index = this.particles.indexOf( alphaParticle );
+      if ( index > -1 ) {
+        this.particles.splice( index, 1 );
       }
     },
 
     /**
      * @public
      */
-    removeAllParticles: function() {
+    removeAllParticles: function () {
       this.particles.length = 0;
       this.stepEmitter.emit();
     },
@@ -122,9 +122,9 @@ define( function( require ) {
      * @param {number} dt
      * @protected
      */
-    moveParticles: function( dt ) {
+    moveParticles: function ( dt ) {
       var self = this;
-      this.particles.forEach( function( particle ) {
+      this.particles.forEach( function ( particle ) {
         self.moveParticle( particle, dt );
       } );
     },
@@ -133,10 +133,10 @@ define( function( require ) {
      * Culls alpha particles that have left the bounds of space.
      * @protected
      */
-    cullParticles: function() {
+    cullParticles: function () {
       var self = this;
-      this.particles.forEach( function( particle ) {
-        if( !self.bounds.containsPoint( particle.position ) ) {
+      this.particles.forEach( function ( particle ) {
+        if ( !self.bounds.containsPoint( particle.position ) ) {
           self.removeParticle( particle );
         }
       } );
@@ -146,22 +146,22 @@ define( function( require ) {
      * {number} dt - time step
      * @public
      */
-    step: function( dt ) {
-      if( this.running && !this.userInteraction && dt < 1) {
+    step: function ( dt ) {
+      if ( this.running && !this.userInteraction && dt < 1 ) {
         this.gun.step( dt );
         this.moveParticles( dt );
         this.cullParticles();
       }
 
-      this.stepEmitter.emit(dt);
+      this.stepEmitter.emit( dt );
     },
 
     /**
      * Step one frame manually.  Assuming 60 frames per second.
      * @public
      */
-    manualStep: function() {
-      if( !this.userInteraction ) {
+    manualStep: function () {
+      if ( !this.userInteraction ) {
         this.gun.step( this.maunalStepDt );
         this.moveParticles( this.maunalStepDt );
         this.cullParticles();
@@ -173,14 +173,14 @@ define( function( require ) {
     /**
      * @public
      */
-    reset: function() {
+    reset: function () {
       this.gun.onProperty.reset();
       this.removeAllParticles();
       PropertySet.prototype.reset.call( this );
     },
 
     // @public
-    dispose: function() {
+    dispose: function () {
       this.disposeRSBaseModel();
     }
 

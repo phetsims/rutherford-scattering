@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -31,8 +31,7 @@ define( function( require ) {
 
     assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvasBounds specified.' );
 
-    options = _.extend( {
-    }, options );
+    options = _.extend( {}, options );
 
     CanvasNode.call( this, options );
 
@@ -60,7 +59,7 @@ define( function( require ) {
 
     // create a single alpha particle image to use for rendering all particles - asynchronous
     var alphaParticle = ParticleNodeFactory.createAlpha();
-    alphaParticle.toImage( function( image, x, y ) {
+    alphaParticle.toImage( function ( image, x, y ) {
       self.alphaParticleImage = image;
       self.particleImageHalfWidth = self.alphaParticleImage.width / 2;
       self.particleImageHalfHeight = self.alphaParticleImage.height / 2;
@@ -78,7 +77,7 @@ define( function( require ) {
      * @param {CanvasRenderingContext2D} context
      * @protected
      */
-    paintSpace: function( context ) {
+    paintSpace: function ( context ) {
       assert && assert( false, 'subtype needs to implement' );
     },
 
@@ -86,7 +85,7 @@ define( function( require ) {
      * @param {CanvasRenderingContext2D} context
      * @private
      */
-    paintCanvas: function( context ) {
+    paintCanvas: function ( context ) {
 
       var self = this;
 
@@ -94,7 +93,7 @@ define( function( require ) {
       var renderTrace = self.showTraceProperty.value;
 
       // clear
-      context.clearRect(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
+      context.clearRect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
 
       // border
       context.beginPath();
@@ -114,28 +113,28 @@ define( function( require ) {
       this.paintSpace( context );
 
       // Slight chance the image used isn't loaded. In that case, return & try again on next frame
-      if( self.alphaParticleImage === null ) {
+      if ( self.alphaParticleImage === null ) {
         return;
       }
 
       // render all traces as one path for performance
-      if( renderTrace ) {
+      if ( renderTrace ) {
         context.beginPath();
         context.lineWidth = PARTICLE_TRACE_WIDTH;
         context.strokeStyle = PARTICLE_TRACE_COLOR;
       }
 
       // render all alpha particles & corresponding traces
-      this.model.particles.forEach( function( particle ) {
+      this.model.particles.forEach( function ( particle ) {
 
         // render the traces (if enabled)
-        if( renderTrace ) {
+        if ( renderTrace ) {
 
           // add trace segments
-          for (var i = 1; i < particle.positions.length; i++) {
-            var segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[i-1] );
+          for ( var i = 1; i < particle.positions.length; i++ ) {
+            var segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i - 1 ] );
             context.moveTo( segmentStartViewPosition.x, segmentStartViewPosition.y );
-            var segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[i] );
+            var segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i ] );
             context.lineTo( segmentEndViewPosition.x, segmentEndViewPosition.y );
           }
         }
@@ -148,7 +147,7 @@ define( function( require ) {
       } );
 
       // render traces
-      if( renderTrace ) {
+      if ( renderTrace ) {
         context.stroke();
       }
     }

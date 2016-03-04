@@ -7,7 +7,7 @@
 
  */
 
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -75,7 +75,7 @@ define( function( require ) {
 
     // slider title
     var energyTextStrut = new HStrut( options.minWidth * 0.05 );
-    var energyTitleBox = new HBox( { children: [ energyTextStrut, energyText ] } );
+    var energyTitleBox = new HBox( {children: [ energyTextStrut, energyText ]} );
 
     // particle engery slider
     var sliderWidth = options.minWidth * 0.75;
@@ -84,16 +84,16 @@ define( function( require ) {
       max: RSConstants.MAX_ALPHA_ENERGY
     }, {
       trackFill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      trackStroke:RSConstants.PANEL_SLIDER_FILL_COLOR,
+      trackStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
       majorTickStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
       majorTickLength: 15,
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
-      startDrag: function() { // called when the pointer is pressed
+      startDrag: function () { // called when the pointer is pressed
         model.userInteraction = true;
       },
-      endDrag: function() { // called when the pointer is released
+      endDrag: function () { // called when the pointer is released
         model.userInteraction = false;
       }
     } );
@@ -111,8 +111,8 @@ define( function( require ) {
     var showTraceCheckBox = new CheckBox( showTraceText, showTracesProperty, {
       checkBoxColor: 'white',
       checkBoxColorBackground: 'black'
-       } );
-    var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );
+    } );
+    var showTraceBox = new HBox( {children: [ showTraceStrut, showTraceCheckBox ]} );
 
     var content = new VBox( {
       spacing: RSConstants.PANEL_CHILD_SPACING,

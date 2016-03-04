@@ -6,7 +6,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -22,54 +22,54 @@ define( function( require ) {
     //----------------------------------------------------------------------------
 
     // alpha particle
-    MIN_ALPHA_ENERGY:       50,
-    MAX_ALPHA_ENERGY:       100,
-    DEFAULT_ALPHA_ENERGY:   80,
+    MIN_ALPHA_ENERGY: 50,
+    MAX_ALPHA_ENERGY: 100,
+    DEFAULT_ALPHA_ENERGY: 80,
 
-    DEFAULT_SHOW_TRACES:    false,
+    DEFAULT_SHOW_TRACES: false,
 
     // protons
-    MIN_PROTON_COUNT:       20,
-    MAX_PROTON_COUNT:       100,
-    DEFAULT_PROTON_COUNT:   79,
+    MIN_PROTON_COUNT: 20,
+    MAX_PROTON_COUNT: 100,
+    DEFAULT_PROTON_COUNT: 79,
 
     // neutrons
-    MIN_NEUTRON_COUNT:      20,
-    MAX_NEUTRON_COUNT:      150,
-    DEFAULT_NEUTRON_COUNT:  118,
+    MIN_NEUTRON_COUNT: 20,
+    MAX_NEUTRON_COUNT: 150,
+    DEFAULT_NEUTRON_COUNT: 118,
 
     //----------------------------------------------------------------------------
     // Views
     //----------------------------------------------------------------------------
 
     // property panels
-    PANEL_COLOR:            'black',
-    PANEL_STROKE:           'gray',
-    PANEL_LINE_WIDTH:       1,
-    PANEL_TITLE_FONT:       new PhetFont( 16 ),
-    PANEL_TITLE_COLOR:      'rgb( 200, 200, 95 )',
-    PANEL_PROPERTY_FONT:    new PhetFont( 14 ),
-    PANEL_TICK_FONT:        new PhetFont( 14 ),
+    PANEL_COLOR: 'black',
+    PANEL_STROKE: 'gray',
+    PANEL_LINE_WIDTH: 1,
+    PANEL_TITLE_FONT: new PhetFont( 16 ),
+    PANEL_TITLE_COLOR: 'rgb( 200, 200, 95 )',
+    PANEL_PROPERTY_FONT: new PhetFont( 14 ),
+    PANEL_TICK_FONT: new PhetFont( 14 ),
     PANEL_SLIDER_FILL_COLOR: 'rgb( 180, 180, 180 )',
-    PANEL_SLIDER_THUMB_DIMENSION:new Dimension2( 15, 30 ),
-    PANEL_CHILD_SPACING:    5,    // spacing between child panel components
-    PANEL_MIN_WIDTH:        225,
-    PANEL_MAX_WIDTH:        275,
-    PANEL_SPACE_MARGIN:     35,   // spacing between the particle space and the property panels
-    PANEL_TOP_MARGIN:       15,   // spacing for all top panels from edge of window
-    PANEL_VERTICAL_MARGIN:  10,   // vertical spacing between property panels
+    PANEL_SLIDER_THUMB_DIMENSION: new Dimension2( 15, 30 ),
+    PANEL_CHILD_SPACING: 5,    // spacing between child panel components
+    PANEL_MIN_WIDTH: 225,
+    PANEL_MAX_WIDTH: 275,
+    PANEL_SPACE_MARGIN: 35,   // spacing between the particle space and the property panels
+    PANEL_TOP_MARGIN: 15,   // spacing for all top panels from edge of window
+    PANEL_VERTICAL_MARGIN: 10,   // vertical spacing between property panels
 
-    TARGET_SPACE_MARGIN:    50,   // spacing from gold target material to particle space
+    TARGET_SPACE_MARGIN: 50,   // spacing from gold target material to particle space
 
-    SCALE_TITLE_FONT:       new PhetFont( 18 ),
+    SCALE_TITLE_FONT: new PhetFont( 18 ),
 
     //----------------------------------------------------------------------------
     // Dimensions
     //----------------------------------------------------------------------------
 
     // Animation space size, must be square!
-    SPACE_NODE_WIDTH:       490,
-    SPACE_NODE_HEIGHT:      490
+    SPACE_NODE_WIDTH: 490,
+    SPACE_NODE_HEIGHT: 490
 
   };
 

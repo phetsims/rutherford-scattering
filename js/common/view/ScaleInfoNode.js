@@ -6,7 +6,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -41,7 +41,7 @@ define( function( require ) {
     var labelText = new Text( label, {
       font: options.font,
       fill: options.fill,
-      maxWidth: 0.9*width
+      maxWidth: 0.9 * width
     } );
 
     // left arrow
@@ -49,31 +49,31 @@ define( function( require ) {
     var leftArrowX = labelText.left - arrowWidth;
     var leftArrowNode = new ArrowNode( labelText.left - ARROW_TAIL_MARGIN, labelText.centerY,
       leftArrowX, labelText.centerY, {
-      headHeight: ARROW_HEAD_HEIGHT,
-      headWidth: ARROW_HEAD_WIDTH,
-      tailWidth: 2,
-      fill: 'white'
-    } );
+        headHeight: ARROW_HEAD_HEIGHT,
+        headWidth: ARROW_HEAD_WIDTH,
+        tailWidth: 2,
+        fill: 'white'
+      } );
 
     // right arrow
     var rightArrowX = labelText.right + arrowWidth;
     var rightArrowNode = new ArrowNode( labelText.right + ARROW_TAIL_MARGIN, labelText.centerY,
       rightArrowX, labelText.centerY, {
-      headHeight: ARROW_HEAD_HEIGHT,
-      headWidth: ARROW_HEAD_WIDTH,
-      tailWidth: 2,
-      fill: 'white'
-    } );
+        headHeight: ARROW_HEAD_HEIGHT,
+        headWidth: ARROW_HEAD_WIDTH,
+        tailWidth: 2,
+        fill: 'white'
+      } );
 
     // end markers
     var leftMarker = new Path( new Shape().moveTo( leftArrowX, labelText.bounds.minY ).lineTo( leftArrowX, labelText.bounds.maxY ), {
-        stroke: 'white',
-        lineWidth: 1.5
+      stroke: 'white',
+      lineWidth: 1.5
     } );
 
     var rightMarker = new Path( new Shape().moveTo( rightArrowX, labelText.bounds.minY ).lineTo( rightArrowX, labelText.bounds.maxY ), {
-        stroke: 'white',
-        lineWidth: 1.5
+      stroke: 'white',
+      lineWidth: 1.5
     } );
 
     assert && assert( !options.children, 'additional children not supported' );

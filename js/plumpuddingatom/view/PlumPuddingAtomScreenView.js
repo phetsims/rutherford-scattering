@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -53,8 +53,8 @@ define( function( require ) {
     var spaceNodeX = gunTargetNode.right;
     var spaceNodeY = RSConstants.PANEL_TOP_MARGIN;
     var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
-                                       spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
-                                       spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
+      spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
+      spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
     var modelViewTransform = new ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
     var plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: spaceNodeBounds
@@ -62,7 +62,7 @@ define( function( require ) {
     this.addChild( plumPuddingSpaceNode );
 
     // redraw the spaceNode on model step
-    model.addStepListener( function() {
+    model.addStepListener( function () {
       plumPuddingSpaceNode.invalidatePaint();
     } );
 
@@ -73,7 +73,7 @@ define( function( require ) {
     } );
     this.addChild( scaleInfoNode );
 
-     // add play/pause button.
+    // add play/pause button.
     var playPauseButton = new PlayPauseButton( model.runningProperty, {
       bottom: scaleInfoNode.bottom + 60,
       centerX: scaleInfoNode.centerX - 25,
@@ -82,18 +82,18 @@ define( function( require ) {
     this.addChild( playPauseButton );
 
     // add step button to manually step the animation.
-    var stepButton = new StepButton( function() {
+    var stepButton = new StepButton( function () {
         model.manualStep();
       },
       model.runningProperty, {
         centerY: playPauseButton.centerY,
         centerX: scaleInfoNode.centerX + 25,
         radius: 15
-    } );
+      } );
     this.addChild( stepButton );
 
     // create the particles legend control panel
-    var particleLegendPanel = new ParticleLegendPanel({
+    var particleLegendPanel = new ParticleLegendPanel( {
       leftTop: new Vector2( plumPuddingSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN,
         this.layoutBounds.top + RSConstants.PANEL_TOP_MARGIN ),
       resize: false
@@ -103,18 +103,18 @@ define( function( require ) {
     // create the alpha particle properties control panel
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, {
       leftTop: new Vector2( plumPuddingSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN,
-      particleLegendPanel.bottom + RSConstants.PANEL_VERTICAL_MARGIN ),
+        particleLegendPanel.bottom + RSConstants.PANEL_VERTICAL_MARGIN ),
       resize: false
     } );
     this.addChild( alphaParticlePropertiesPanel );
 
     // reset all button.
     var resetAllButton = new ResetAllButton( {
-      listener: function() {
+      listener: function () {
         showAlphaTraceProperty.reset();
         model.reset();
       },
-      right:  alphaParticlePropertiesPanel.right,
+      right: alphaParticlePropertiesPanel.right,
       top: playPauseButton.top
     } );
     this.addChild( resetAllButton );

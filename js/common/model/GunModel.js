@@ -6,7 +6,7 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -46,7 +46,7 @@ define( function( require ) {
      * {number} dt - time step
      * @public
      */
-    step: function( dt ) {
+    step: function ( dt ) {
 
       var initialSpeed = this.model.alphaParticleEnergyProperty.get();
 
@@ -55,21 +55,21 @@ define( function( require ) {
 
       if ( this.on && this.dtSinceGunFired >= this.dtPerGunFired ) {
 
-          var ySign = ( RAND.random() < 0.5 ? 1 : -1 );
+        var ySign = ( RAND.random() < 0.5 ? 1 : -1 );
 
-          // random position withing model bounds
-          var particleX = ySign * ( X0_MIN + ( RAND.random() * ( ( this.model.bounds.width / 2 ) - X0_MIN ) ) );
-          var particleY = this.model.bounds.minY;
+        // random position withing model bounds
+        var particleX = ySign * ( X0_MIN + ( RAND.random() * ( ( this.model.bounds.width / 2 ) - X0_MIN ) ) );
+        var particleY = this.model.bounds.minY;
 
-          var initialPosition = new Vector2( particleX, particleY );
-          var alphaParticle = new AlphaParticleModel( {
-            speed: initialSpeed,
-            defaultSpeed: initialSpeed,
-            position: initialPosition
-          } );
-          this.model.addParticle( alphaParticle );
+        var initialPosition = new Vector2( particleX, particleY );
+        var alphaParticle = new AlphaParticleModel( {
+          speed: initialSpeed,
+          defaultSpeed: initialSpeed,
+          position: initialPosition
+        } );
+        this.model.addParticle( alphaParticle );
 
-          this.dtSinceGunFired = this.dtSinceGunFired % this.dtPerGunFired;
+        this.dtSinceGunFired = this.dtSinceGunFired % this.dtPerGunFired;
       }
     }
 

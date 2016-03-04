@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( function ( require ) {
   'use strict';
 
   // modules
@@ -22,7 +22,7 @@ define( function( require ) {
   function RutherfordAtomModel( options ) {
 
     options = _.extend( {
-      protonCount:  RSConstants.DEFAULT_PROTON_COUNT,
+      protonCount: RSConstants.DEFAULT_PROTON_COUNT,
       neutronCount: RSConstants.DEFAULT_NEUTRON_COUNT
     }, options );
 
@@ -66,7 +66,7 @@ define( function( require ) {
 
       var x0 = Math.abs( initialPosition.x );
       if ( x0 < X0_MIN ) {
-          x0 = X0_MIN; // algorithm fails for x0 < X0_MIN
+        x0 = X0_MIN; // algorithm fails for x0 < X0_MIN
       }
 
       var y0 = initialPosition.y;
@@ -80,9 +80,9 @@ define( function( require ) {
       var y = position.y;
       var xWasNegative = false;
       if ( x < 0 ) {
-          // This algorithm fails for x < 0, so adjust accordingly.
-          x *= -1;
-          xWasNegative = true;
+        // This algorithm fails for x < 0, so adjust accordingly.
+        x *= -1;
+        xWasNegative = true;
       }
 
       //-------------------------------------------------------------------------------
@@ -164,7 +164,7 @@ define( function( require ) {
 
       var xNew = rNew * Math.sin( phiNew );
       if ( xWasNegative ) {
-          xNew *= -1; // restore the sign
+        xNew *= -1; // restore the sign
       }
 
       var yNew = -rNew * Math.cos( phiNew );
