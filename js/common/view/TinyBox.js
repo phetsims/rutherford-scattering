@@ -48,6 +48,5 @@ define( function( require ) {
 
   rutherfordScattering.register( 'TinyBox', TinyBox );
 
-
   return inherit( Node, TinyBox );
 } );

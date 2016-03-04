@@ -13,21 +13,16 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var BeamNode = require( 'RUTHERFORD_SCATTERING/common/view/BeamNode' );
-  var TargetMaterialNode = require( 'RUTHERFORD_SCATTERING/common/view/TargetMaterialNode' );
-  var TinyBox = require( 'RUTHERFORD_SCATTERING/common/view/TinyBox' );
+  var GunTargetNode = require( 'RUTHERFORD_SCATTERING/common/view/GunTargetNode' );
   var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Shape = require( 'KITE/Shape' );
   var Property = require( 'AXON/Property' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -43,41 +38,19 @@ define( function( require ) {
 
     // strings
     var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
+    var scaleFormattedString = StringUtils.format( pattern0AtomicScaleString, '300' );
 
     // properties
     var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
-    // alpha particle gun
-    var gunNode = new LaserPointerNode( model.gun.onProperty, {
-      rotation: -Math.PI / 2, // pointing up
+    var gunTargetNode = new GunTargetNode( model, showAlphaTraceProperty, scaleFormattedString, {
       left: this.layoutBounds.left + 75,
-      top: this.layoutBounds.centerY
+      top: this.layoutBounds.top + RSConstants.PANEL_TOP_MARGIN
     } );
-    this.addChild( gunNode );
-
-    // alpha particle beam
-    var beamNode = new BeamNode( model.gun.onProperty, {
-      centerX: gunNode.centerX,
-      bottom: gunNode.top
-    } );
-    this.addChild( beamNode );
-
-    // Alpha particle source target
-    var targetMaterialNode = new TargetMaterialNode( {
-      centerX: beamNode.centerX,
-      bottom: beamNode.top
-    } );
-    this.addChild( targetMaterialNode );
-
-     // tiny box that indicates what will be zoomed
-    var tinyBoxNode = new TinyBox( {
-      centerX: targetMaterialNode.centerX,
-      centerY: targetMaterialNode.centerY
-    } );
-    this.addChild( tinyBoxNode );
+    this.addChild( gunTargetNode );
 
     // atom animation space
-    var spaceNodeX = targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN;
+    var spaceNodeX = gunTargetNode.right;
     var spaceNodeY = RSConstants.PANEL_TOP_MARGIN;
     var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
                                        spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
@@ -93,19 +66,7 @@ define( function( require ) {
       plumPuddingSpaceNode.invalidatePaint();
     } );
 
-    // dashed lines that connect the tiny box and space
-    var dashedLines = new Path( new Shape()
-      .moveTo( tinyBoxNode.left, tinyBoxNode.top )
-      .lineTo( plumPuddingSpaceNode.left, plumPuddingSpaceNode.top )
-      .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
-      .lineTo( plumPuddingSpaceNode.left, plumPuddingSpaceNode.bottom ), {
-      stroke: 'grey',
-      lineDash: [ 5, 5 ]
-    } );
-    this.addChild( dashedLines );
-
     // nuclear scale info
-    var scaleFormattedString = StringUtils.format( pattern0AtomicScaleString, '300' );
     var scaleInfoNode = new ScaleInfoNode( scaleFormattedString, plumPuddingSpaceNode.getWidth(), {
       centerX: plumPuddingSpaceNode.centerX,
       top: plumPuddingSpaceNode.bottom + 10
@@ -133,7 +94,8 @@ define( function( require ) {
 
     // create the particles legend control panel
     var particleLegendPanel = new ParticleLegendPanel({
-      leftTop: new Vector2( plumPuddingSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN, this.layoutBounds.top + RSConstants.PANEL_TOP_MARGIN ),
+      leftTop: new Vector2( plumPuddingSpaceNode.right + RSConstants.PANEL_SPACE_MARGIN,
+        this.layoutBounds.top + RSConstants.PANEL_TOP_MARGIN ),
       resize: false
     } );
     this.addChild( particleLegendPanel );
@@ -161,8 +123,6 @@ define( function( require ) {
 
   rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
 
-  return inherit( ScreenView, PlumPuddingAtomScreenView, {
-
-  } ); // inherit
+  return inherit( ScreenView, PlumPuddingAtomScreenView );
 
 } ); // define

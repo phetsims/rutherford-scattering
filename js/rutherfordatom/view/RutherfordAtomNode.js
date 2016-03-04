@@ -20,8 +20,9 @@ define( function( require ) {
   // constants
   var RAND = new Random();
   var MIN_NUCLEUS_RADIUS = 20; // view coordinates
-  var OUTLINE_LINE_WIDTH = 1;
-  var OUTLINE_STROKE_COLOR = 'orange';
+  var OUTLINE_LINE_WIDTH = 1.5;
+  var OUTLINE_LINE_DASH = [2, 3];
+  var OUTLINE_STROKE_COLOR = 'grey';
   var MIN_PARTICLE_COUNT = RSConstants.MIN_PROTON_COUNT + RSConstants.MIN_NEUTRON_COUNT;
   var MAX_PARTICLE_COUNT = RSConstants.MAX_PROTON_COUNT + RSConstants.MAX_NEUTRON_COUNT;
   var PARTICLE_COUNT_EXP = 0.333;
@@ -160,6 +161,7 @@ define( function( require ) {
       if ( this.renderAtomOutline ) {
         context.beginPath();
         context.lineWidth = OUTLINE_LINE_WIDTH;
+        context.setLineDash( OUTLINE_LINE_DASH );
         context.strokeStyle = OUTLINE_STROKE_COLOR;
         context.arc( this.centerX, this.centerY, this.radius, 0, 2*Math.PI );
         context.stroke();

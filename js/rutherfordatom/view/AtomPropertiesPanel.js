@@ -73,8 +73,6 @@ define( function( require ) {
     // proton count arrow/number display
     var arrowButtonOptions = {
       scale: 1.0,
-      xMargin: 3,
-      yMargin: 3,
       arrowHeight: 18,
       arrowWidth: 18,
       touchAreaXDilation: 9,

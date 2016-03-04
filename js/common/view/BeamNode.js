@@ -37,4 +37,5 @@ define( function( require ) {
   rutherfordScattering.register( 'BeamNode', BeamNode );
 
   return inherit( Rectangle, BeamNode );
-} );
+
+} ); // define

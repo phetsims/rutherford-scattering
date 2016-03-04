@@ -84,8 +84,6 @@ define( function( require ) {
 
   rutherfordScattering.register( 'ScaleInfoNode', ScaleInfoNode );
 
-  return inherit( Node, ScaleInfoNode, {
-
-  } ); // inherit
+  return inherit( Node, ScaleInfoNode );
 
 } ); // define
