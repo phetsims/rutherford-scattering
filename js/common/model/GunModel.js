@@ -6,7 +6,7 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -46,7 +46,7 @@ define( function ( require ) {
      * {number} dt - time step
      * @public
      */
-    step: function ( dt ) {
+    step: function( dt ) {
 
       var initialSpeed = this.model.alphaParticleEnergyProperty.get();
 

@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -40,13 +40,13 @@ define( function ( require ) {
 
     // @private - save new particle location
     var self = this;
-    var positionListener = function ( position ) {
+    var positionListener = function( position ) {
       self.positions.push( new Vector2( position.x, position.y ) );
     };
     this.positionProperty.link( positionListener );
 
     // @private
-    this.disposeAlphaParticleModel = function () {
+    this.disposeAlphaParticleModel = function() {
       this.positionProperty.unlink( positionListener );
     };
 
@@ -57,7 +57,7 @@ define( function ( require ) {
   return inherit( PropertySet, AlphaParticleModel, {
 
     // @public
-    dispose: function () {
+    dispose: function() {
       this.disposeAlphaParticleModel();
     }
 

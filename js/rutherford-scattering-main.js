@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -33,7 +33,7 @@ define( function ( require ) {
     }
   };
 
-  SimLauncher.launch( function () {
+  SimLauncher.launch( function() {
     var sim = new Sim( rutherfordScatteringTitleString, screens, simOptions );
     sim.start();
   } );

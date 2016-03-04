@@ -7,7 +7,7 @@
 
  */
 
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -68,7 +68,7 @@ define( function ( require ) {
 
     // proton count slider title
     var protonCountStrut = new HStrut( options.minWidth * 0.05 );
-    var protonCountTitleBox = new HBox( {children: [ protonCountStrut, numProtonsText ]} );
+    var protonCountTitleBox = new HBox( { children: [ protonCountStrut, numProtonsText ] } );
 
     // proton count arrow/number display
     var arrowButtonOptions = {
@@ -77,10 +77,10 @@ define( function ( require ) {
       arrowWidth: 18,
       touchAreaXDilation: 9,
       touchAreaYDilation: 9,
-      startCallback: function () { // called when the pointer is pressed
+      startCallback: function() { // called when the pointer is pressed
         model.userInteraction = true;
       },
-      endCallback: function () { // called when the pointer is released
+      endCallback: function() { // called when the pointer is released
         model.userInteraction = false;
       }
     };
@@ -119,10 +119,10 @@ define( function ( require ) {
       thumbFillEnabled: 'rgb(220, 58, 10)',
       thumbFillHighlighted: 'rgb(270, 108, 60)',
       thumbCenterLineStroke: 'white',
-      startDrag: function () { // called when the pointer is pressed
+      startDrag: function() { // called when the pointer is pressed
         model.userInteraction = true;
       },
-      endDrag: function () { // called when the pointer is released
+      endDrag: function() { // called when the pointer is released
         model.userInteraction = false;
       }
     } );
@@ -139,7 +139,7 @@ define( function ( require ) {
 
     // proton count slider title
     var neutronCountStrut = new HStrut( options.minWidth * 0.05 );
-    var neutronCountTitleBox = new HBox( {children: [ neutronCountStrut, numNeutronsText ]} );
+    var neutronCountTitleBox = new HBox( { children: [ neutronCountStrut, numNeutronsText ] } );
 
     // neutron count arrow/number display
     var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
@@ -176,10 +176,10 @@ define( function ( require ) {
       thumbFillEnabled: 'rgb(130, 130, 130)',
       thumbFillHighlighted: 'rgb(180, 180, 180)',
       thumbCenterLineStroke: 'white',
-      startDrag: function () {
+      startDrag: function() {
         model.userInteraction = true;
       },
-      endDrag: function () {
+      endDrag: function() {
         model.userInteraction = false;
       }
     } );

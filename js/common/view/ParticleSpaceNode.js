@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -59,7 +59,7 @@ define( function ( require ) {
 
     // create a single alpha particle image to use for rendering all particles - asynchronous
     var alphaParticle = ParticleNodeFactory.createAlpha();
-    alphaParticle.toImage( function ( image, x, y ) {
+    alphaParticle.toImage( function( image, x, y ) {
       self.alphaParticleImage = image;
       self.particleImageHalfWidth = self.alphaParticleImage.width / 2;
       self.particleImageHalfHeight = self.alphaParticleImage.height / 2;
@@ -77,7 +77,7 @@ define( function ( require ) {
      * @param {CanvasRenderingContext2D} context
      * @protected
      */
-    paintSpace: function ( context ) {
+    paintSpace: function( context ) {
       assert && assert( false, 'subtype needs to implement' );
     },
 
@@ -85,7 +85,7 @@ define( function ( require ) {
      * @param {CanvasRenderingContext2D} context
      * @private
      */
-    paintCanvas: function ( context ) {
+    paintCanvas: function( context ) {
 
       var self = this;
 
@@ -125,7 +125,7 @@ define( function ( require ) {
       }
 
       // render all alpha particles & corresponding traces
-      this.model.particles.forEach( function ( particle ) {
+      this.model.particles.forEach( function( particle ) {
 
         // render the traces (if enabled)
         if ( renderTrace ) {

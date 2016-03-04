@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -75,7 +75,7 @@ define( function ( require ) {
     this.numberOfNeutrons = RSConstants.MIN_NEUTRON_COUNT;
 
     // renders a new atom image based on proton/neutron counts
-    var updateAtomImage = function () {
+    var updateAtomImage = function() {
 
       // Calculate the radius of the nucleus
       var currentParticles = self.numberOfProtons + self.numberOfNeutrons;
@@ -86,27 +86,27 @@ define( function ( require ) {
       self.invalidatePaint();
 
       // generate atom image - asynchronous
-      self.toImage( function ( image, x, y ) {
+      self.toImage( function( image, x, y ) {
         self.image = image;
       } );
     };
 
     // generate proton image - asynchronous
     var protonNode = ParticleNodeFactory.createProton();
-    protonNode.toImage( function ( image, x, y ) {
+    protonNode.toImage( function( image, x, y ) {
       self.protonImage = image;
       updateAtomImage();
     } );
 
     // generate neutron image - asynchronous
     var neutronNode = ParticleNodeFactory.createNeutron();
-    neutronNode.toImage( function ( image, x, y ) {
+    neutronNode.toImage( function( image, x, y ) {
       self.neutronImage = image;
       updateAtomImage();
     } );
 
     // update atom image when proton count changes
-    var protonCountListener = function ( propertyValue ) {
+    var protonCountListener = function( propertyValue ) {
       self.numberOfProtons = propertyValue;
       self.renderAtomOutline = self.model.userInteractionProperty.value;  // Only render the outline when interacting
       updateAtomImage();
@@ -114,7 +114,7 @@ define( function ( require ) {
     model.protonCountProperty.link( protonCountListener );
 
     // update atom image when neutron count changes
-    var neutronCountListener = function ( propertyValue ) {
+    var neutronCountListener = function( propertyValue ) {
       self.numberOfNeutrons = propertyValue;
       self.renderAtomOutline = self.model.userInteractionProperty.value; // Only render the outline when interacting
       updateAtomImage();
@@ -122,7 +122,7 @@ define( function ( require ) {
     model.neutronCountProperty.link( neutronCountListener );
 
     // update atom image when user interaction stops
-    var userInteractionListener = function ( userInteraction ) {
+    var userInteractionListener = function( userInteraction ) {
       if ( self.renderAtomOutline ) {
         self.renderAtomOutline = false;
         updateAtomImage();
@@ -131,7 +131,7 @@ define( function ( require ) {
     model.userInteractionProperty.link( userInteractionListener );
 
     // @private
-    this.disposeRutherfordAtomNode = function () {
+    this.disposeRutherfordAtomNode = function() {
       this.protonCountProperty.unlink( protonCountListener );
       this.neutronCountProperty.unlink( neutronCountListener );
       this.userInteractionProperty.unlink( userInteractionListener );
@@ -149,7 +149,7 @@ define( function ( require ) {
      * @param {CanvasRenderingContext2D} context
      * @private
      */
-    paintCanvas: function ( context ) {
+    paintCanvas: function( context ) {
 
       var bounds = this.canvasBounds;
 
@@ -200,7 +200,7 @@ define( function ( require ) {
     },
 
     // @public
-    dispose: function () {
+    dispose: function() {
       this.disposeRutherfordAtomNode();
     }
 

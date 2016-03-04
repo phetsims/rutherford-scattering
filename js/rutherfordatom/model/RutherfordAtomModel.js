@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -38,7 +38,7 @@ define( function ( require ) {
      * @param {number} dt
      * @protected
      */
-    moveParticle: function ( alphaParticle, dt ) {
+    moveParticle: function( alphaParticle, dt ) {
 
       // algorithm fails for x=0, so use this min value
       var X0_MIN = 0.00001;
