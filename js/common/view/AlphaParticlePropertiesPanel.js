@@ -55,22 +55,24 @@ define( function ( require ) {
     var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.PANEL_TITLE_COLOR
+      fill: RSConstants.PANEL_TITLE_COLOR,
+      maxWidth: 215
     } );
     var energyText = new Text( energyString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+      fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      maxWidth: 210
     } );
     var minEnergyText = new Text( minEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      maxWidth: options.maxWidth / 3
+      maxWidth: options.maxWidth / 4
     } );
     var maxEnergyText = new Text( maxEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      maxWidth: options.maxWidth / 3
+      maxWidth: options.maxWidth / 4
     } );
 
     // slider title
@@ -106,7 +108,7 @@ define( function ( require ) {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      maxWidth: 200
+      maxWidth: 180
     } );
     var showTraceCheckBox = new CheckBox( showTraceText, showTracesProperty, {
       checkBoxColor: 'white',

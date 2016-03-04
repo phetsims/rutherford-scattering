@@ -53,15 +53,18 @@ define( function ( require ) {
     var atomPropertiesText = new Text( atomPropertiesString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.PANEL_TITLE_COLOR
+      fill: RSConstants.PANEL_TITLE_COLOR,
+      maxWidth: 225
     } );
     var numProtonsText = new Text( numberOfProtonsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
+      maxWidth: 225,
       fontWeight: 'bold',
       fill: 'rgb( 185, 50, 8 )'
     } );
     var numNeutronsText = new Text( numberOfNeutronsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
+      maxWidth: 215,
       fontWeight: 'bold',
       fill: 'rgb( 160, 160, 160 )'
     } );
