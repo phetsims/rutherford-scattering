@@ -38,7 +38,7 @@ define( function( require ) {
       RSConstants.SPACE_NODE_WIDTH / 4,
       RSConstants.SPACE_NODE_HEIGHT / 4 ),
 
-    // @public (read-only) - all active alpha particle models
+    // @public (read-only) - {AlphaParticleModel[]} all active alpha particle models
     this.particles = [];
 
     // @protected - manual step size used when sim is paused
