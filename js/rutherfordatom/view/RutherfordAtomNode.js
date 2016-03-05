@@ -73,42 +73,25 @@ define( function ( require ) {
     // @private
     this.numberOfNeutrons = RSConstants.MIN_NEUTRON_COUNT;
 
-    // renders a new atom image based on proton/neutron counts
-    var updateAtomImage = function () {
-
-      // Calculate the radius of the nucleus
-      var currentParticles = self.numberOfProtons + self.numberOfNeutrons;
-      var C = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP );
-      self.radius = C * Math.pow( currentParticles, PARTICLE_COUNT_EXP );
-      assert && assert( self.radius > 0, 'Rutherford atom radius <= 0' );
-
-      self.invalidatePaint();
-
-      // generate atom image - asynchronous
-      self.toImage( function ( image, x, y ) {
-        self.image = image;
-      } );
-    };
-
     // generate proton image - asynchronous
     var protonNode = ParticleNodeFactory.createProton();
     protonNode.toImage( function ( image, x, y ) {
       self.protonImage = image;
-      updateAtomImage();
+      self.updateAtomImage();
     } );
 
     // generate neutron image - asynchronous
     var neutronNode = ParticleNodeFactory.createNeutron();
     neutronNode.toImage( function ( image, x, y ) {
       self.neutronImage = image;
-      updateAtomImage();
+      self.updateAtomImage();
     } );
 
     // update atom image when proton count changes
     var protonCountListener = function ( propertyValue ) {
       self.numberOfProtons = propertyValue;
       self.renderAtomOutline = self.model.userInteractionProperty.value;  // Only render the outline when interacting
-      updateAtomImage();
+      self.updateAtomImage();
     };
     model.protonCountProperty.link( protonCountListener );
 
@@ -116,7 +99,7 @@ define( function ( require ) {
     var neutronCountListener = function ( propertyValue ) {
       self.numberOfNeutrons = propertyValue;
       self.renderAtomOutline = self.model.userInteractionProperty.value; // Only render the outline when interacting
-      updateAtomImage();
+      self.updateAtomImage();
     };
     model.neutronCountProperty.link( neutronCountListener );
 
@@ -124,7 +107,7 @@ define( function ( require ) {
     var userInteractionListener = function ( userInteraction ) {
       if ( self.renderAtomOutline ) {
         self.renderAtomOutline = false;
-        updateAtomImage();
+        self.updateAtomImage();
       }
     };
     model.userInteractionProperty.link( userInteractionListener );
@@ -142,6 +125,27 @@ define( function ( require ) {
   rutherfordScattering.register( 'RutherfordAtomNode', RutherfordAtomNode );
 
   return inherit( CanvasNode, RutherfordAtomNode, {
+
+    /**
+     * renders a new atom image based on proton/neutron counts
+     * @private
+     */
+     updateAtomImage: function () {
+
+      // Calculate the radius of the nucleus
+      var currentParticles = this.numberOfProtons + this.numberOfNeutrons;
+      var C = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP );
+      this.radius = C * Math.pow( currentParticles, PARTICLE_COUNT_EXP );
+      assert && assert( this.radius > 0, 'Rutherford atom radius <= 0' );
+
+      this.invalidatePaint();
+
+      // generate atom image - asynchronous
+      var self = this;
+      this.toImage( function ( image, x, y ) {
+        self.image = image;
+      } );
+    },
 
     /**
      * Renders the Rutherford atom either as a simple radius outline or as a detailed proton/neutron atom
