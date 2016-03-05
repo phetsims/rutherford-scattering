@@ -16,17 +16,12 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {Object} [options]
    * @constructor
    */
-  function RutherfordAtomModel( options ) {
-
-    options = _.extend( {
-      protonCount: RSConstants.DEFAULT_PROTON_COUNT,
-      neutronCount: RSConstants.DEFAULT_NEUTRON_COUNT
-    }, options );
-
-    RSBaseModel.call( this, options );
+  function RutherfordAtomModel( ) {
+    RSBaseModel.call( this );
+    this.addProperty( 'protonCount', RSConstants.DEFAULT_PROTON_COUNT );
+    this.addProperty( 'neutronCount', RSConstants.DEFAULT_NEUTRON_COUNT );
   }
 
   rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );

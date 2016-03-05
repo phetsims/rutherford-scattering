@@ -15,11 +15,10 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {Object} [options]
    * @constructor
    */
-  function PlumPuddingAtomModel( options ) {
-    RSBaseModel.call( this, options );
+  function PlumPuddingAtomModel() {
+    RSBaseModel.call( this );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomModel', PlumPuddingAtomModel );
