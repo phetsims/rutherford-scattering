@@ -29,7 +29,10 @@ define( function ( require ) {
    */
   function GunModel( model ) {
 
+    // @private
     this.model = model;
+
+    // @private
     this.dtSinceGunFired = 0;
 
     // @public
