@@ -21,9 +21,6 @@ define( function( require ) {
    * @constructor
    */
   function PlumPuddingAtomNode( options ) {
-
-    options = _.extend( {}, options );
-
     Image.call( this, plumPuddingImage, options );
   }
 

@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * The model which advances the alpha particle in the Rutherford sim
+ * Model for the 'Rutherford Atom' screen, responsible for moving alpha particles.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -16,17 +16,12 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {Object} options
    * @constructor
    */
-  function RutherfordAtomModel( options ) {
-
-    options = _.extend( {
-      protonCount: RSConstants.DEFAULT_PROTON_COUNT,
-      neutronCount: RSConstants.DEFAULT_NEUTRON_COUNT
-    }, options );
-
-    RSBaseModel.call( this, options );
+  function RutherfordAtomModel( ) {
+    RSBaseModel.call( this );
+    this.addProperty( 'protonCount', RSConstants.DEFAULT_PROTON_COUNT );
+    this.addProperty( 'neutronCount', RSConstants.DEFAULT_NEUTRON_COUNT );
   }
 
   rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );
@@ -36,6 +31,7 @@ define( function( require ) {
     /**
      * @param {AlphaParticleModel} alphaParticle
      * @param {number} dt
+     * @override
      * @protected
      */
     moveParticle: function( alphaParticle, dt ) {
@@ -62,6 +58,7 @@ define( function( require ) {
       //-------------------------------------------------------------------------------
       // (x0,y0) : the alpha particle's initial position, relative to the atom's center.
       //-------------------------------------------------------------------------------
+
       var initialPosition = alphaParticle.positionProperty.initialValue;
 
       var x0 = Math.abs( initialPosition.x );
@@ -74,6 +71,7 @@ define( function( require ) {
       //-------------------------------------------------------------------------------
       // (x,y) : the alpha particle's current position, relative to the atom's center
       //-------------------------------------------------------------------------------
+
       var position = alphaParticle.positionProperty.get();
 
       var x = position.x;

@@ -17,30 +17,28 @@ define( function( require ) {
   var GunModel = require( 'RUTHERFORD_SCATTERING/common/model/GunModel' );
   var Bounds2 = require( 'DOT/Bounds2' );
 
-
   /**
-   * @param {Object} [options]
    * @constructor
    */
-  function RSBaseModel( options ) {
+  function RSBaseModel() {
 
     assert && assert( RSConstants.SPACE_NODE_WIDTH === RSConstants.SPACE_NODE_HEIGHT, 'Space must be square.' );
 
-    options = _.extend( {
+    // @public
+    PropertySet.call( this, {
       alphaParticleEnergy: RSConstants.DEFAULT_ALPHA_ENERGY,
-      bounds: new Bounds2(  // model computation space
-        -RSConstants.SPACE_NODE_WIDTH / 4,
-        -RSConstants.SPACE_NODE_HEIGHT / 4,
-        RSConstants.SPACE_NODE_WIDTH / 4,
-        RSConstants.SPACE_NODE_HEIGHT / 4 ),
       running: true,    // is the sim running or paused
       userInteraction: false  // is the user interacting with the simulation
-    }, options );
+    } );
 
-    // @public
-    PropertySet.call( this, options );
+    // @public (read-only) model computation space
+    this.bounds = new Bounds2(
+      -RSConstants.SPACE_NODE_WIDTH / 4,
+      -RSConstants.SPACE_NODE_HEIGHT / 4,
+      RSConstants.SPACE_NODE_WIDTH / 4,
+      RSConstants.SPACE_NODE_HEIGHT / 4 ),
 
-    // @public (read-only) - all active alpha particle models
+    // @public (read-only) - {AlphaParticleModel[]} all active alpha particle models
     this.particles = [];
 
     // @protected - manual step size used when sim is paused
@@ -120,7 +118,7 @@ define( function( require ) {
 
     /**
      * @param {number} dt
-     * @protected
+     * @private
      */
     moveParticles: function( dt ) {
       var self = this;

@@ -19,18 +19,16 @@ define( function( require ) {
 
   /**
    * @param {RSBaseModel} model
-   * @param {showAlphaTraceProperty} traceProperty
+   * @param {Property.<boolean>} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param { } options, must contain a canvasBounds attribute of type Bounds2
+   * @param {Object} options - must provide {Bounds2} canvasBounds
    * @constructor
    */
-  function PlumPuddingSpaceNode( model, traceProperty, modelViewTransform, options ) {
+  function PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
 
-    assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvasBounds specified.' );
+    assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    options = _.extend( {}, options );
-
-    ParticleSpaceNode.call( this, model, traceProperty, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model, showAlphaTraceProperty, modelViewTransform, options );
 
     // plum pudding image - calc image scale and center positioning
     this.atomNode = new PlumPuddingAtomNode();
@@ -53,6 +51,7 @@ define( function( require ) {
      * Draws the background image
      *
      * @param {CanvasRenderingContext2D} context
+     * @override
      * @protected
      */
     paintSpace: function( context ) {

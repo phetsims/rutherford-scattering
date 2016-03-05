@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * The model which advances the alpha particle in the Plum Pudding sim
+ * Model for the 'Plum Pudding Atom' screen, responsible for moving alpha particles.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -15,14 +15,10 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {Object} [options]
    * @constructor
    */
-  function PlumPuddingAtomModel( options ) {
-
-    options = _.extend( {}, options );
-
-    RSBaseModel.call( this, options );
+  function PlumPuddingAtomModel() {
+    RSBaseModel.call( this );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomModel', PlumPuddingAtomModel );
@@ -32,6 +28,7 @@ define( function( require ) {
     /**
      * @param {AlphaParticleModel} alphaParticle
      * @param {number} dt
+     * @override
      * @protected
      */
     moveParticle: function( alphaParticle, dt ) {

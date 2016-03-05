@@ -14,21 +14,18 @@ define( function( require ) {
   var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   var RutherfordAtomNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomNode' );
 
-
   /**
    * @param {RSBaseModel} model
-   * @param {showAlphaTraceProperty} traceProperty
-   * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param { } options, must contain a canvasBounds attribute of type Bounds2
+   * @param {Property.<boolean>} showAlphaTraceProperty
+   * @param {ModelViewTransform2} modelViewTransform - model to view transform
+   * @param {Object} options - must provide {Bounds2} canvasBounds
    * @constructor
    */
-  function RutherfordAtomSpaceNode( model, traceProperty, modelViewTransform, options ) {
+  function RutherfordAtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
 
-    assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvasBounds specified.' );
+    assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    options = _.extend( {}, options );
-
-    ParticleSpaceNode.call( this, model, traceProperty, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model, showAlphaTraceProperty, modelViewTransform, options );
 
     // @private - atom image generator
     this.atomNode = new RutherfordAtomNode( model );
@@ -42,6 +39,7 @@ define( function( require ) {
 
     /**
      * @param {CanvasRenderingContext2D} context
+     * @override
      * @protected
      */
     paintSpace: function( context ) {

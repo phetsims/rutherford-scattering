@@ -17,31 +17,24 @@ define( function( require ) {
   // strings
   var rutherfordScatteringTitleString = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );
 
-  // constants
+  var screens = [
+    new RutherfordAtomScreen(),
+    new PlumPuddingAtomScreen()
+  ];
 
   var simOptions = {
     credits: {
       leadDesign: 'Amy Hanson, Sam McKagan',
       softwareDevelopment: 'Dave Schmitz, Chris Malley',
-      team: 'Wendy Adams, Mike Dubson, Noah Finkelstein, \nDanielle Harlow, Ariel Paul, Kathy Perkins, \nNoah Podolefsky, Amy Rouinfar, Carl Weiman',
+      team: 'Wendy Adams, Mike Dubson, Noah Finkelstein,\nDanielle Harlow, Ariel Paul, Kathy Perkins,\nNoah Podolefsky, Amy Rouinfar, Carl Weiman',
       qualityAssurance: '',
       graphicArts: '',
       thanks: ''
     }
   };
 
-  // Appending '?dev' to the URL will enable developer-only features.
-  if ( phet.chipper.getQueryParameter( 'dev' ) ) {
-    simOptions = _.extend( {
-      // add dev-specific options here
-    }, simOptions );
-  }
-
   SimLauncher.launch( function() {
-    var sim = new Sim( rutherfordScatteringTitleString, [
-      new RutherfordAtomScreen(),
-      new PlumPuddingAtomScreen()
-    ], simOptions );
+    var sim = new Sim( rutherfordScatteringTitleString, screens, simOptions );
     sim.start();
   } );
 } );

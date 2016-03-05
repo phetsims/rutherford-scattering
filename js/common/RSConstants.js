@@ -42,7 +42,7 @@ define( function( require ) {
     // Views
     //----------------------------------------------------------------------------
 
-    // property panels
+    // properties of panels
     PANEL_COLOR: 'black',
     PANEL_STROKE: 'gray',
     PANEL_LINE_WIDTH: 1,

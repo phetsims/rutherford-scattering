@@ -4,9 +4,7 @@
  * Control panel for the "Ruthorford Scattering" sim. Allows the user to adjust the energy of alpha particles being simulated.
  *
  * @author Dave Schmitz (Schmitzware)
-
  */
-
 define( function( require ) {
   'use strict';
 
@@ -22,7 +20,6 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-
 
   // strings
   var alphaParticlePropertiesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
@@ -67,12 +64,12 @@ define( function( require ) {
     var minEnergyText = new Text( minEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      maxWidth: options.maxWidth / 4
+      maxWidth: options.maxWidth / 5
     } );
     var maxEnergyText = new Text( maxEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      maxWidth: options.maxWidth / 4
+      maxWidth: options.maxWidth / 5
     } );
 
     // slider title

@@ -27,7 +27,7 @@ define( function( require ) {
    */
   function GunTargetNode( gun, options ) {
 
-    options = _.extend( {}, options );
+    options = options || {};
 
     // alpha particle source target
     var targetMaterialNode = new TargetMaterialNode( {
