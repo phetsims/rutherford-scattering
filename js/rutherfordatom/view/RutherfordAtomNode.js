@@ -41,12 +41,11 @@ define( function ( require ) {
     var maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
                     Math.pow( MAX_PARTICLE_COUNT, PARTICLE_COUNT_EXP );
 
-    options = _.extend( {}, options );
-
     // set canvasBounds based on max radius of atom
-    CanvasNode.call( this, {
-      canvasBounds: new Bounds2( 0, 0, 2 * maxRadius, 2 * maxRadius )
-    } );
+    options = options || {};
+    options.canvasBounds = new Bounds2( 0, 0, 2 * maxRadius, 2 * maxRadius );
+
+    CanvasNode.call( this, options );
 
     var self = this;
 
