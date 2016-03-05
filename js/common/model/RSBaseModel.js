@@ -153,7 +153,7 @@ define( function ( require ) {
         this.cullParticles();
       }
 
-      this.stepEmitter.emit( dt );
+      this.stepEmitter.emit();
     },
 
     /**

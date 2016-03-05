@@ -63,7 +63,7 @@ define( function ( require ) {
     this.addChild( rutherfordAtomSpaceNode );
 
     // redraw the spaceNode on model step
-    model.addStepListener( function ( dt ) {
+    model.addStepListener( function () {
       rutherfordAtomSpaceNode.invalidatePaint();
     } );
 
