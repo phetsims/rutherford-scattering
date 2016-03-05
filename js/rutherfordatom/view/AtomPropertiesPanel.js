@@ -7,7 +7,7 @@
 
  */
 
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -71,7 +71,7 @@ define( function ( require ) {
 
     // proton count slider title
     var protonCountStrut = new HStrut( options.minWidth * 0.05 );
-    var protonCountTitleBox = new HBox( {children: [ protonCountStrut, numProtonsText ]} );
+    var protonCountTitleBox = new HBox( { children: [ protonCountStrut, numProtonsText ] } );
 
     // proton count arrow/number display
     var arrowButtonOptions = {
@@ -80,10 +80,10 @@ define( function ( require ) {
       arrowWidth: 18,
       touchAreaXDilation: 9,
       touchAreaYDilation: 9,
-      startCallback: function () { // called when the pointer is pressed
+      startCallback: function() { // called when the pointer is pressed
         model.userInteraction = true;
       },
-      endCallback: function () { // called when the pointer is released
+      endCallback: function() { // called when the pointer is released
         model.userInteraction = false;
       }
     };
@@ -106,12 +106,9 @@ define( function ( require ) {
       children: [ new HStrut( options.minWidth * 0.1 ), protonMinusButton, protonNumberDisplay, protonPlusButton ]
     } );
 
-    // proton count slider
+    // common slider attributes
     var sliderWidth = options.minWidth * 0.75;
-    var protonCountSlider = new HSlider( model.protonCountProperty, {
-      min: RSConstants.MIN_PROTON_COUNT,
-      max: RSConstants.MAX_PROTON_COUNT
-    }, {
+    var sliderOptions = {
       trackFill: RSConstants.PANEL_SLIDER_FILL_COLOR,
       trackStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
       majorTickStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
@@ -119,16 +116,23 @@ define( function ( require ) {
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
-      thumbFillEnabled: 'rgb(220, 58, 10)',
-      thumbFillHighlighted: 'rgb(270, 108, 60)',
       thumbCenterLineStroke: 'white',
-      startDrag: function () { // called when the pointer is pressed
+      startDrag: function() { // called when the pointer is pressed
         model.userInteraction = true;
       },
-      endDrag: function () { // called when the pointer is released
+      endDrag: function() { // called when the pointer is released
         model.userInteraction = false;
       }
-    } );
+    };
+
+    // proton count slider
+    var protonCountSlider = new HSlider( model.protonCountProperty, {
+      min: RSConstants.MIN_PROTON_COUNT,
+      max: RSConstants.MAX_PROTON_COUNT
+    }, _.extend( {}, sliderOptions, {
+      thumbFillEnabled: 'rgb(220, 58, 10)',
+      thumbFillHighlighted: 'rgb(270, 108, 60)'
+    } ) );
     protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT,
       new Text( RSConstants.MIN_PROTON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
@@ -142,7 +146,7 @@ define( function ( require ) {
 
     // proton count slider title
     var neutronCountStrut = new HStrut( options.minWidth * 0.05 );
-    var neutronCountTitleBox = new HBox( {children: [ neutronCountStrut, numNeutronsText ]} );
+    var neutronCountTitleBox = new HBox( { children: [ neutronCountStrut, numNeutronsText ] } );
 
     // neutron count arrow/number display
     var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
@@ -168,24 +172,10 @@ define( function ( require ) {
     var neutronCountSlider = new HSlider( model.neutronCountProperty, {
       min: RSConstants.MIN_NEUTRON_COUNT,
       max: RSConstants.MAX_NEUTRON_COUNT
-    }, {
-      trackFill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      trackStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      majorTickStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      majorTickLength: 15,
-      tickLabelSpacing: 2,
-      trackSize: new Dimension2( sliderWidth, 1 ),
-      thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
+    }, _.extend( {}, sliderOptions, {
       thumbFillEnabled: 'rgb(130, 130, 130)',
-      thumbFillHighlighted: 'rgb(180, 180, 180)',
-      thumbCenterLineStroke: 'white',
-      startDrag: function () {
-        model.userInteraction = true;
-      },
-      endDrag: function () {
-        model.userInteraction = false;
-      }
-    } );
+      thumbFillHighlighted: 'rgb(180, 180, 180)'
+    } ) );
     neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
       new Text( RSConstants.MIN_NEUTRON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,

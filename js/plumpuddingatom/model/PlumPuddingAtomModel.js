@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -34,7 +34,7 @@ define( function ( require ) {
      * @param {number} dt
      * @protected
      */
-    moveParticle: function ( alphaParticle, dt ) {
+    moveParticle: function( alphaParticle, dt ) {
       var speed = alphaParticle.speedProperty.get();
       var distance = speed * dt;
       var direction = alphaParticle.orientationProperty.get();

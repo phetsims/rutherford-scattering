@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -63,7 +63,7 @@ define( function ( require ) {
     this.addChild( plumPuddingSpaceNode );
 
     // redraw the spaceNode on model step
-    model.addStepListener( function () {
+    model.addStepListener( function() {
       plumPuddingSpaceNode.invalidatePaint();
     } );
 
@@ -83,7 +83,7 @@ define( function ( require ) {
     this.addChild( playPauseButton );
 
     // add step button to manually step the animation.
-    var stepButton = new StepButton( function () {
+    var stepButton = new StepButton( function() {
         model.manualStep();
       },
       model.runningProperty, {
@@ -111,7 +111,7 @@ define( function ( require ) {
 
     // reset all button.
     var resetAllButton = new ResetAllButton( {
-      listener: function () {
+      listener: function() {
         showAlphaTraceProperty.reset();
         model.reset();
       },

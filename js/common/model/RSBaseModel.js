@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -54,7 +54,7 @@ define( function ( require ) {
 
     // @private - energy level changed
     var self = this;
-    var userInteractionListener = function ( userInteraction ) {
+    var userInteractionListener = function( userInteraction ) {
       if ( userInteraction ) {
         self.removeAllParticles();
       }
@@ -62,7 +62,7 @@ define( function ( require ) {
     this.userInteractionProperty.link( userInteractionListener );
 
     // @private
-    this.disposeRSBaseModel = function () {
+    this.disposeRSBaseModel = function() {
       this.userInteractionProperty.unlink( userInteractionListener );
       this.stepEmitter.removeAllListeners();
     };
@@ -77,7 +77,7 @@ define( function ( require ) {
      * @param {function()} listener
      * @public
      */
-    addStepListener: function ( listener ) {
+    addStepListener: function( listener ) {
       this.stepEmitter.addListener( listener );
     },
 
@@ -85,7 +85,7 @@ define( function ( require ) {
      * @param {AlphaParticleModel} alphaParticle
      * @public
      */
-    addParticle: function ( alphaParticle ) {
+    addParticle: function( alphaParticle ) {
       this.particles.push( alphaParticle );
     },
 
@@ -93,7 +93,7 @@ define( function ( require ) {
      * @param {AlphaParticleModel} alphaParticle
      * @public
      */
-    removeParticle: function ( alphaParticle ) {
+    removeParticle: function( alphaParticle ) {
       var index = this.particles.indexOf( alphaParticle );
       if ( index > -1 ) {
         this.particles.splice( index, 1 );
@@ -103,7 +103,7 @@ define( function ( require ) {
     /**
      * @public
      */
-    removeAllParticles: function () {
+    removeAllParticles: function() {
       this.particles.length = 0;
       this.stepEmitter.emit();
     },
@@ -114,7 +114,7 @@ define( function ( require ) {
      * @param {number} dt
      * @protected
      */
-    moveParticle: function ( alphaParticle, dt ) {
+    moveParticle: function( alphaParticle, dt ) {
       assert && assert( false, 'No moveParticle model function implemented.' );
     },
 
@@ -122,9 +122,9 @@ define( function ( require ) {
      * @param {number} dt
      * @protected
      */
-    moveParticles: function ( dt ) {
+    moveParticles: function( dt ) {
       var self = this;
-      this.particles.forEach( function ( particle ) {
+      this.particles.forEach( function( particle ) {
         self.moveParticle( particle, dt );
       } );
     },
@@ -133,9 +133,9 @@ define( function ( require ) {
      * Culls alpha particles that have left the bounds of space.
      * @protected
      */
-    cullParticles: function () {
+    cullParticles: function() {
       var self = this;
-      this.particles.forEach( function ( particle ) {
+      this.particles.forEach( function( particle ) {
         if ( !self.bounds.containsPoint( particle.position ) ) {
           self.removeParticle( particle );
         }
@@ -146,7 +146,7 @@ define( function ( require ) {
      * {number} dt - time step
      * @public
      */
-    step: function ( dt ) {
+    step: function( dt ) {
       if ( this.running && !this.userInteraction && dt < 1 ) {
         this.gun.step( dt );
         this.moveParticles( dt );
@@ -160,7 +160,7 @@ define( function ( require ) {
      * Step one frame manually.  Assuming 60 frames per second.
      * @public
      */
-    manualStep: function () {
+    manualStep: function() {
       if ( !this.userInteraction ) {
         this.gun.step( this.maunalStepDt );
         this.moveParticles( this.maunalStepDt );
@@ -173,14 +173,14 @@ define( function ( require ) {
     /**
      * @public
      */
-    reset: function () {
+    reset: function() {
       this.gun.onProperty.reset();
       this.removeAllParticles();
       PropertySet.prototype.reset.call( this );
     },
 
     // @public
-    dispose: function () {
+    dispose: function() {
       this.disposeRSBaseModel();
     }
 

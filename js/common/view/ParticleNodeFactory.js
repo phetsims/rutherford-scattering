@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -32,7 +32,7 @@ define( function ( require ) {
   var ParticleNodeFactory = {
 
     // Electron
-    createElectron: function () {
+    createElectron: function() {
       return new Node( {
         children: [
           new ParticleNode( ELECTRON_RADIUS, ELECTRON_COLOR )
@@ -41,7 +41,7 @@ define( function ( require ) {
     },
 
     // Proton
-    createProton: function () {
+    createProton: function() {
       return new Node( {
         children: [
           new ParticleNode( PROTON_RADIUS, PROTON_COLOR )
@@ -50,7 +50,7 @@ define( function ( require ) {
     },
 
     // Neutron
-    createNeutron: function () {
+    createNeutron: function() {
       return new Node( {
         children: [
           new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR )
@@ -59,13 +59,13 @@ define( function ( require ) {
     },
 
     // Alpha
-    createAlpha: function () {
+    createAlpha: function() {
       return new Node( {
         children: [
-          new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, {x: NEUTRON_RADIUS - 1, y: -NEUTRON_RADIUS} ),
-          new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, {x: -NEUTRON_RADIUS + 1, y: NEUTRON_RADIUS} ),
-          new ParticleNode( PROTON_RADIUS, PROTON_COLOR, {x: -PROTON_RADIUS + 1, y: -PROTON_RADIUS + 1} ),
-          new ParticleNode( PROTON_RADIUS, PROTON_COLOR, {x: PROTON_RADIUS - 1, y: PROTON_RADIUS - 1} )
+          new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, { x: NEUTRON_RADIUS - 1, y: -NEUTRON_RADIUS } ),
+          new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, { x: -NEUTRON_RADIUS + 1, y: NEUTRON_RADIUS } ),
+          new ParticleNode( PROTON_RADIUS, PROTON_COLOR, { x: -PROTON_RADIUS + 1, y: -PROTON_RADIUS + 1 } ),
+          new ParticleNode( PROTON_RADIUS, PROTON_COLOR, { x: PROTON_RADIUS - 1, y: PROTON_RADIUS - 1 } )
         ]
       } );
     }

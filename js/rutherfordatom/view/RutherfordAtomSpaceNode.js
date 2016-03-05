@@ -5,7 +5,7 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function ( require ) {
+define( function( require ) {
   'use strict';
 
   // modules
@@ -44,7 +44,7 @@ define( function ( require ) {
      * @param {CanvasRenderingContext2D} context
      * @protected
      */
-    paintSpace: function ( context ) {
+    paintSpace: function( context ) {
 
       // Slight chance the image used isn't available. In that case, return & try again on next frame
       if ( this.atomNode.image === null ) {
