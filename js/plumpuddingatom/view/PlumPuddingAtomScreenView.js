@@ -27,6 +27,9 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // strings
+  var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
+
   /**
    * @param {PlumPuddingAtomModel} model
    * @constructor
@@ -35,8 +38,6 @@ define( function( require ) {
 
     ScreenView.call( this );
 
-    // strings
-    var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
     var scaleFormattedString = StringUtils.format( pattern0AtomicScaleString, '300' );
 
     // view-specific properties
