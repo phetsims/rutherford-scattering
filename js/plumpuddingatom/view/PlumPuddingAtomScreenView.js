@@ -28,6 +28,9 @@ define( function ( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
 
+  // strings
+  var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
+
   /**
    * @param {PlumPuddingAtomModel} model
    * @constructor
@@ -36,14 +39,12 @@ define( function ( require ) {
 
     ScreenView.call( this );
 
-    // strings
-    var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
     var scaleFormattedString = StringUtils.format( pattern0AtomicScaleString, '300' );
 
     // properties
     var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
-    var gunTargetNode = new GunTargetNode( model, showAlphaTraceProperty, scaleFormattedString, {
+    var gunTargetNode = new GunTargetNode( model, {
       left: this.layoutBounds.left + 75,
       top: this.layoutBounds.top + RSConstants.PANEL_TOP_MARGIN
     } );

@@ -28,6 +28,9 @@ define( function ( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
+  // strings
+  var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
+
   /**
    * @param {RutherfordAtomModel} model
    * @constructor
@@ -36,14 +39,12 @@ define( function ( require ) {
 
     ScreenView.call( this );
 
-    // strings
-    var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
     var scaleFormattedString = StringUtils.format( pattern0NuclearScaleString, '150' );
 
     // properties
     var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
-    var gunTargetNode = new GunTargetNode( model, showAlphaTraceProperty, scaleFormattedString, {
+    var gunTargetNode = new GunTargetNode( model, {
       left: this.layoutBounds.left + 75,
       top: this.layoutBounds.top + RSConstants.PANEL_TOP_MARGIN
     } );
