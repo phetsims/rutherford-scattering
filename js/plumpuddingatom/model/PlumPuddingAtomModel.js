@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * The model which advances the alpha particle in the Plum Pudding sim
+ * Model for the 'Plum Pudding Atom' screen, responsible for moving alpha particles.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -19,9 +19,6 @@ define( function( require ) {
    * @constructor
    */
   function PlumPuddingAtomModel( options ) {
-
-    options = _.extend( {}, options );
-
     RSBaseModel.call( this, options );
   }
 
@@ -32,6 +29,7 @@ define( function( require ) {
     /**
      * @param {AlphaParticleModel} alphaParticle
      * @param {number} dt
+     * @override
      * @protected
      */
     moveParticle: function( alphaParticle, dt ) {

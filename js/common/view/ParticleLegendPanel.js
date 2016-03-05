@@ -5,7 +5,6 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-
 define( function( require ) {
   'use strict';
 
@@ -55,7 +54,7 @@ define( function( require ) {
 
     var children = [ legendText ];
 
-    // add  the legend particle entires
+    // add  the legend particle entries
     children.push( createParticleBox( electronString, ParticleNodeFactory.createElectron() ) );
     children.push( createParticleBox( protonString, ParticleNodeFactory.createProton() ) );
     children.push( createParticleBox( neutronString, ParticleNodeFactory.createNeutron() ) );
@@ -77,7 +76,6 @@ define( function( require ) {
    * @param {string} titleString
    * @param {Node} particleNode
    * @returns {HBox}
-   * @private
    */
   function createParticleBox( titleString, particleNode ) {
 
@@ -86,15 +84,13 @@ define( function( require ) {
     var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING );
 
     // container for one row in the legend
-    var hBox = new HBox( {
+    return new HBox( {
       spacing: LEGEND_ITEM_HORIZONTAL_SPACING,
       top: 0,
       right: 0,
       align: 'center',
       children: [ hStrut1, particleNode, hStrut2, titleText ]
     } );
-
-    return hBox;
   }
 
   rutherfordScattering.register( 'ParticlesLegendPanel', ParticlesLegendPanel );

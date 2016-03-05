@@ -30,6 +30,8 @@ define( function( require ) {
    */
   function TargetMaterialNode( options ) {
 
+    options = options || {};
+
     // top face, in perspective
     var topNode = new Path( new Shape()
       .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )

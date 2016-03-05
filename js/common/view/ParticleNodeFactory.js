@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Factory for creating particle images.
+ * Factory for creating particle nodes.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -19,19 +19,17 @@ define( function( require ) {
   var ELECTRON_COLOR = 'rgb(96,96,255)';
   var PROTON_COLOR = 'rgb(255,69,0)';
   var NEUTRON_COLOR = 'rgb(192,192,192)';
-
   var ELECTRON_RADIUS = 3;
   var PROTON_RADIUS = 4;
   var NEUTRON_RADIUS = 4;
 
-  /**
-   * Factory methods to generate nodes for specific particle types
-   * @returns {Node}
-   * @public
-   */
   var ParticleNodeFactory = {
 
-    // Electron
+    /**
+     * Creates an electron node.
+     * @returns {Node}
+     * @public
+     */
     createElectron: function() {
       return new Node( {
         children: [
@@ -40,7 +38,11 @@ define( function( require ) {
       } );
     },
 
-    // Proton
+    /**
+     * Creates a proton node.
+     * @returns {Node}
+     * @public
+     */
     createProton: function() {
       return new Node( {
         children: [
@@ -49,7 +51,11 @@ define( function( require ) {
       } );
     },
 
-    // Neutron
+    /**
+     * Creates a neutron node.
+     * @returns {Node}
+     * @public
+     */
     createNeutron: function() {
       return new Node( {
         children: [
@@ -58,7 +64,11 @@ define( function( require ) {
       } );
     },
 
-    // Alpha
+    /**
+     * Creates an alpha particle node.
+     * @returns {Node}
+     * @public
+     */
     createAlpha: function() {
       return new Node( {
         children: [

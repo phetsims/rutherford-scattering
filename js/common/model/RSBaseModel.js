@@ -17,7 +17,6 @@ define( function( require ) {
   var GunModel = require( 'RUTHERFORD_SCATTERING/common/model/GunModel' );
   var Bounds2 = require( 'DOT/Bounds2' );
 
-
   /**
    * @param {Object} [options]
    * @constructor
@@ -120,7 +119,7 @@ define( function( require ) {
 
     /**
      * @param {number} dt
-     * @protected
+     * @private
      */
     moveParticles: function( dt ) {
       var self = this;
@@ -170,9 +169,7 @@ define( function( require ) {
       this.stepEmitter.emit();
     },
 
-    /**
-     * @public
-     */
+    // @public
     reset: function() {
       this.gun.onProperty.reset();
       this.removeAllParticles();

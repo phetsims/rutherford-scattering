@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * The space in which atoms and alpha particels are rendered.
+ * The space in which atoms and alpha particles are rendered.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -22,16 +22,14 @@ define( function( require ) {
 
   /**
    * @param {RSBaseModel} model
-   * @param {Property} showTraceProperty
+   * @param {Property} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
    * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
-  function ParticleSpaceNode( model, showTraceProperty, modelViewTransform, options ) {
+  function ParticleSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
 
-    assert && assert( ( options.hasOwnProperty( 'canvasBounds' ) ), 'No canvasBounds specified.' );
-
-    options = _.extend( {}, options );
+    assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
     CanvasNode.call( this, options );
 
@@ -47,7 +45,7 @@ define( function( require ) {
     this.modelViewTransform = modelViewTransform;
 
     // @private
-    this.showTraceProperty = showTraceProperty;
+    this.showAlphaTraceProperty = showAlphaTraceProperty;
 
     // @private - the area to be used as the 'viewport', border not included
     this.clipRect = {
@@ -83,6 +81,7 @@ define( function( require ) {
 
     /**
      * @param {CanvasRenderingContext2D} context
+     * @override
      * @private
      */
     paintCanvas: function( context ) {
@@ -90,7 +89,7 @@ define( function( require ) {
       var self = this;
 
       var bounds = this.canvasBounds;
-      var renderTrace = self.showTraceProperty.value;
+      var renderTrace = self.showAlphaTraceProperty.value;
 
       // clear
       context.clearRect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );

@@ -4,9 +4,7 @@
  * Control panel to adjust the number of protons and neutrons used in the sim
  *
  * @author Dave Schmitz (Schmitzware)
-
  */
-
 define( function( require ) {
   'use strict';
 
@@ -210,5 +208,4 @@ define( function( require ) {
   rutherfordScattering.register( 'AtomPropertiesPanel', AtomPropertiesPanel );
 
   return inherit( Panel, AtomPropertiesPanel );
-
 } );
