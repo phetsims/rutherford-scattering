@@ -21,11 +21,11 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
 
   /**
-   * @param {RSBaseModel} model
+   * @param {GunModel} gun
    * @param {Object} [options]
    * @constructor
    */
-  function GunTargetNode( model, options ) {
+  function GunTargetNode( gun, options ) {
 
     options = _.extend( {}, options );
 
@@ -52,13 +52,13 @@ define( function( require ) {
     } );
 
     // alpha particle beam
-    var beamNode = new BeamNode( model.gun.onProperty, {
+    var beamNode = new BeamNode( gun.onProperty, {
       centerX: tinyBoxNode.centerX,
       top: targetMaterialNode.bottom
     } );
 
     // alpha particle gun
-    var gunNode = new LaserPointerNode( model.gun.onProperty, {
+    var gunNode = new LaserPointerNode( gun.onProperty, {
       rotation: -Math.PI / 2, // pointing up
       centerX: beamNode.centerX,
       top: beamNode.bottom
