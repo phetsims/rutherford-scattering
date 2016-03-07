@@ -18,7 +18,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function AlphaParticleModel( options ) {
+  function AlphaParticle( options ) {
 
     options = _.extend( {
       speed: 0,
@@ -46,19 +46,19 @@ define( function( require ) {
     this.positionProperty.link( positionListener );
 
     // @private
-    this.disposeAlphaParticleModel = function() {
+    this.disposeAlphaParticle = function() {
       this.positionProperty.unlink( positionListener );
     };
 
   } // constructor
 
-  rutherfordScattering.register( 'AlphaParticleModel', AlphaParticleModel );
+  rutherfordScattering.register( 'AlphaParticle', AlphaParticle );
 
-  return inherit( PropertySet, AlphaParticleModel, {
+  return inherit( PropertySet, AlphaParticle, {
 
     // @public
     dispose: function() {
-      this.disposeAlphaParticleModel();
+      this.disposeAlphaParticle();
     }
 
   } );  // inherit

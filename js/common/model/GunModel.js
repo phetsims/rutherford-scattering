@@ -12,7 +12,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var AlphaParticleModel = require( 'RUTHERFORD_SCATTERING/common/model/AlphaParticleModel' );
+  var AlphaParticle = require( 'RUTHERFORD_SCATTERING/common/model/AlphaParticle' );
   var Vector2 = require( 'DOT/Vector2' );
   var Random = require( 'DOT/Random' );
   var PropertySet = require( 'AXON/PropertySet' );
@@ -65,7 +65,7 @@ define( function( require ) {
         var particleY = this.model.bounds.minY;
 
         var initialPosition = new Vector2( particleX, particleY );
-        var alphaParticle = new AlphaParticleModel( {
+        var alphaParticle = new AlphaParticle( {
           speed: initialSpeed,
           defaultSpeed: initialSpeed,
           position: initialPosition

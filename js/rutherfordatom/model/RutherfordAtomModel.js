@@ -29,7 +29,7 @@ define( function( require ) {
   return inherit( RSBaseModel, RutherfordAtomModel, {
 
     /**
-     * @param {AlphaParticleModel} alphaParticle
+     * @param {AlphaParticle} alphaParticle
      * @param {number} dt
      * @override
      * @protected

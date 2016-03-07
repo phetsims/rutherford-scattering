@@ -38,7 +38,7 @@ define( function( require ) {
       RSConstants.SPACE_NODE_WIDTH / 4,
       RSConstants.SPACE_NODE_HEIGHT / 4 ),
 
-    // @public (read-only) - {AlphaParticleModel[]} all active alpha particle models
+    // @public (read-only) - {AlphaParticle[]} all active alpha particle models
     this.particles = [];
 
     // @protected - manual step size used when sim is paused
@@ -75,7 +75,7 @@ define( function( require ) {
     },
 
     /**
-     * @param {AlphaParticleModel} alphaParticle
+     * @param {AlphaParticle} alphaParticle
      * @public
      */
     addParticle: function( alphaParticle ) {
@@ -83,7 +83,7 @@ define( function( require ) {
     },
 
     /**
-     * @param {AlphaParticleModel} alphaParticle
+     * @param {AlphaParticle} alphaParticle
      * @public
      */
     removeParticle: function( alphaParticle ) {
@@ -103,7 +103,7 @@ define( function( require ) {
 
     /**
      * A stub function to be implemented by derived objects. This just makes certain one is implemented.
-     * @param {AlphaParticleModel} alphaParticle
+     * @param {AlphaParticle} alphaParticle
      * @param {number} dt
      * @protected
      */

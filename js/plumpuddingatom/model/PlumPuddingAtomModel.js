@@ -26,7 +26,7 @@ define( function( require ) {
   return inherit( RSBaseModel, PlumPuddingAtomModel, {
 
     /**
-     * @param {AlphaParticleModel} alphaParticle
+     * @param {AlphaParticle} alphaParticle
      * @param {number} dt
      * @override
      * @protected
