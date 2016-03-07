@@ -43,10 +43,7 @@ define( function( require ) {
     // view-specific properties
     var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
-    var gunTargetNode = new GunTargetNode( model.gun, {
-      left: this.layoutBounds.left + 75,
-      top: this.layoutBounds.top + RSConstants.PANEL_TOP_MARGIN
-    } );
+    var gunTargetNode = new GunTargetNode( model.gun );
     this.addChild( gunTargetNode );
 
     // atom animation space
