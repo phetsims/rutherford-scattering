@@ -112,13 +112,6 @@ define( function( require ) {
     };
     model.userInteractionProperty.link( userInteractionListener );
 
-    // @private
-    this.disposeRutherfordAtomNode = function() {
-      this.protonCountProperty.unlink( protonCountListener );
-      this.neutronCountProperty.unlink( neutronCountListener );
-      this.userInteractionProperty.unlink( userInteractionListener );
-    };
-
     this.invalidatePaint();
   }
 
@@ -200,11 +193,6 @@ define( function( require ) {
           }
         }
       }
-    },
-
-    // @public
-    dispose: function() {
-      this.disposeRutherfordAtomNode();
     }
 
   } ); // inherit

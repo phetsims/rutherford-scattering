@@ -59,11 +59,6 @@ define( function( require ) {
     };
     this.userInteractionProperty.link( userInteractionListener );
 
-    // @private
-    this.disposeRSBaseModel = function() {
-      this.userInteractionProperty.unlink( userInteractionListener );
-      this.stepEmitter.removeAllListeners();
-    };
   }
 
   rutherfordScattering.register( 'RSBaseModel', RSBaseModel );
@@ -175,11 +170,6 @@ define( function( require ) {
       this.gun.onProperty.reset();
       this.removeAllParticles();
       PropertySet.prototype.reset.call( this );
-    },
-
-    // @public
-    dispose: function() {
-      this.disposeRSBaseModel();
     }
 
   } ); // inherit

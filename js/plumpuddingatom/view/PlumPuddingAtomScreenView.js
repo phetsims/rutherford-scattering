@@ -30,9 +30,6 @@ define( function( require ) {
   // strings
   var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
 
-  // strings
-  var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
-
   /**
    * @param {PlumPuddingAtomModel} model
    * @constructor
