@@ -14,7 +14,7 @@ define( function( require ) {
   var Emitter = require( 'AXON/Emitter' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var GunModel = require( 'RUTHERFORD_SCATTERING/common/model/GunModel' );
+  var Gun = require( 'RUTHERFORD_SCATTERING/common/model/Gun' );
   var Bounds2 = require( 'DOT/Bounds2' );
 
   /**
@@ -45,7 +45,7 @@ define( function( require ) {
     this.maunalStepDt = 1 / 60;
 
     // @protected - the gun which introduces (aka. 'shoots') alpha particles
-    this.gun = new GunModel( this );
+    this.gun = new Gun( this );
 
     // @protected - used to signal when a sim step has occurred
     this.stepEmitter = new Emitter();

@@ -27,7 +27,7 @@ define( function( require ) {
    * {RSBaseModel} model
    * @constructor
    */
-  function GunModel( model ) {
+  function Gun( model ) {
 
     // @private
     this.model = model;
@@ -41,9 +41,9 @@ define( function( require ) {
     } );
   }
 
-  rutherfordScattering.register( 'GunModel', GunModel );
+  rutherfordScattering.register( 'Gun', Gun );
 
-  return inherit( PropertySet, GunModel, {
+  return inherit( PropertySet, Gun, {
 
     /**
      * {number} dt - time step

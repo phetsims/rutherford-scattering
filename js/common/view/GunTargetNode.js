@@ -21,7 +21,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
 
   /**
-   * @param {GunModel} gun
+   * @param {Gun} gun
    * @param {Object} [options]
    * @constructor
    */
