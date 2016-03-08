@@ -28,7 +28,8 @@ define( function( require ) {
     ParticleSpaceNode.call( this, model.particles, showAlphaTraceProperty, modelViewTransform, options );
 
     // @private - atom image generator
-    this.atomNode = new RutherfordAtomNode( model );
+    this.atomNode = new RutherfordAtomNode( model.userInteractionProperty, model.protonCountProperty,
+      model.neutronCountProperty );
 
     this.invalidatePaint();
   }
