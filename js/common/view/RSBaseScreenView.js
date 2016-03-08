@@ -132,7 +132,7 @@ define( function( require ) {
     // control panels that are common to all ScreenViews
     var controlPanels = [
       new ParticleLegendPanel( { resize: false } ),
-      new AlphaParticlePropertiesPanel( model, showAlphaTraceProperty, { resize: false } )
+      new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, showAlphaTraceProperty, { resize: false } )
     ];
 
     // additional controls panels, optionally added by subtype

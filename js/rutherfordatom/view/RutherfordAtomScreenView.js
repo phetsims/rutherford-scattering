@@ -28,7 +28,8 @@ define( function( require ) {
     var scaleString = StringUtils.format( pattern0NuclearScaleString, 150 );
 
     // create the atom properties control panel
-    var atomPropertiesPanel = new AtomPropertiesPanel( model, { resize: false } );
+    var atomPropertiesPanel = new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty,
+      model.neutronCountProperty, { resize: false } );
 
     RSBaseScreenView.call( this, model, scaleString, createSpaceNode, {
 

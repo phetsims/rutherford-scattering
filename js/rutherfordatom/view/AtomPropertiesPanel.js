@@ -31,11 +31,13 @@ define( function( require ) {
   /**
    * Constructor for a Atom Properties control panel.
    *
-   * @param {RSBaseModel} model - The model controlled by this panel.
+   * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
+   * @param {Property.<boolean>} protonCountProperty
+   * @param {Property.<boolean>} neutronCountProperty
    * @param {Object} [options]
    * @constructor
    */
-  function AtomPropertiesPanel( model, options ) {
+  function AtomPropertiesPanel( userInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
 
     options = _.extend( {
       xMargin: 15,
@@ -46,6 +48,12 @@ define( function( require ) {
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE
     }, options );
+
+    // @private
+    var self = this;
+
+    // @private
+    this.userInteractionProperty = userInteractionProperty;
 
     // strings
     var atomPropertiesText = new Text( atomPropertiesString, {
@@ -79,22 +87,22 @@ define( function( require ) {
       touchAreaXDilation: 9,
       touchAreaYDilation: 9,
       startCallback: function() { // called when the pointer is pressed
-        model.userInteraction = true;
+        self.userInteractionProperty.set( true );
       },
       endCallback: function() { // called when the pointer is released
-        model.userInteraction = false;
+        self.userInteractionProperty.set( false );
       }
     };
     var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT,
       RSConstants.DEFAULT_PROTON_COUNT );
     var protonMinusButton = new ArrowButton( 'left', function protonCountPropertyMinus() {
-      model.protonCountProperty.set( Math.max( RSConstants.MIN_PROTON_COUNT, model.protonCountProperty.value - 1 ) );
+      protonCountProperty.set( Math.max( RSConstants.MIN_PROTON_COUNT, protonCountProperty.value - 1 ) );
     }, arrowButtonOptions );
-    var protonNumberDisplay = new NumberDisplay( model.protonCountProperty, protonCountRange, '', '{0}', {
+    var protonNumberDisplay = new NumberDisplay( protonCountProperty, protonCountRange, '', '{0}', {
       backgroundStroke: 'black'
     } );
     var protonPlusButton = new ArrowButton( 'right', function protonCountPropertyPlus() {
-      model.protonCountProperty.set( Math.min( RSConstants.MAX_PROTON_COUNT, model.protonCountProperty.value + 1 ) );
+      protonCountProperty.set( Math.min( RSConstants.MAX_PROTON_COUNT, protonCountProperty.value + 1 ) );
     }, arrowButtonOptions );
 
     var protonCountContent = new HBox( {
@@ -116,15 +124,15 @@ define( function( require ) {
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       thumbCenterLineStroke: 'white',
       startDrag: function() { // called when the pointer is pressed
-        model.userInteraction = true;
+        self.userInteractionProperty.set( true );
       },
       endDrag: function() { // called when the pointer is released
-        model.userInteraction = false;
+        self.userInteractionProperty.set( false );
       }
     };
 
     // proton count slider
-    var protonCountSlider = new HSlider( model.protonCountProperty, {
+    var protonCountSlider = new HSlider( protonCountProperty, {
       min: RSConstants.MIN_PROTON_COUNT,
       max: RSConstants.MAX_PROTON_COUNT
     }, _.extend( {}, sliderOptions, {
@@ -150,13 +158,13 @@ define( function( require ) {
     var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
       RSConstants.DEFAULT_NEUTRON_COUNT );
     var neutronMinusButton = new ArrowButton( 'left', function neutronCountPropertyMinus() {
-      model.neutronCountProperty.value = Math.max( RSConstants.MIN_NEUTRON_COUNT, model.neutronCountProperty.value - 1 );
+      neutronCountProperty.value = Math.max( RSConstants.MIN_NEUTRON_COUNT, neutronCountProperty.value - 1 );
     }, arrowButtonOptions );
-    var neutronNumberDisplay = new NumberDisplay( model.neutronCountProperty, neutronCountRange, '', '{0}', {
+    var neutronNumberDisplay = new NumberDisplay( neutronCountProperty, neutronCountRange, '', '{0}', {
       backgroundStroke: 'black'
     } );
     var neutronPlusButton = new ArrowButton( 'right', function neutronCountPropertyPlus() {
-      model.neutronCountProperty.value = Math.min( RSConstants.MAX_NEUTRON_COUNT, model.neutronCountProperty.value + 1 );
+      neutronCountProperty.value = Math.min( RSConstants.MAX_NEUTRON_COUNT, neutronCountProperty.value + 1 );
     }, arrowButtonOptions );
 
     var neutronCountContent = new HBox( {
@@ -167,7 +175,7 @@ define( function( require ) {
     } );
 
     // neutron count slider
-    var neutronCountSlider = new HSlider( model.neutronCountProperty, {
+    var neutronCountSlider = new HSlider( neutronCountProperty, {
       min: RSConstants.MIN_NEUTRON_COUNT,
       max: RSConstants.MAX_NEUTRON_COUNT
     }, _.extend( {}, sliderOptions, {

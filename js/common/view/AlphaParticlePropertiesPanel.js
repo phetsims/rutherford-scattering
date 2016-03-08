@@ -31,12 +31,13 @@ define( function( require ) {
   /**
    * Constructor for a Alpha Particle Properties control panel.
    *
-   * @param {RSBaseModel} model - The model controlled by this panel.
+   * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
+   * @param {Property.<boolean>} alphaParticleEnergyProperty - alpha energy
    * @param {Property.<boolean>} showTracesProperty - show particle traces on/off
    * @param {Object} [options]
    * @constructor
    */
-  function AlphaParticlePropertiesPanel( model, showTracesProperty, options ) {
+  function AlphaParticlePropertiesPanel( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
 
     options = _.extend( {
       xMargin: 15,
@@ -47,6 +48,12 @@ define( function( require ) {
       fill: RSConstants.PANEL_COLOR,
       stroke: RSConstants.PANEL_STROKE
     }, options );
+
+    // @private
+    var self = this;
+
+    // @private
+    this.userInteractionProperty = userInteractionProperty;
 
     // strings
     var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
@@ -78,7 +85,7 @@ define( function( require ) {
 
     // particle engery slider
     var sliderWidth = options.minWidth * 0.75;
-    var particleEnergySlider = new HSlider( model.alphaParticleEnergyProperty, {
+    var particleEnergySlider = new HSlider( alphaParticleEnergyProperty, {
       min: RSConstants.MIN_ALPHA_ENERGY,
       max: RSConstants.MAX_ALPHA_ENERGY
     }, {
@@ -90,10 +97,10 @@ define( function( require ) {
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       startDrag: function() { // called when the pointer is pressed
-        model.userInteraction = true;
+        self.userInteractionProperty.set( true );
       },
       endDrag: function() { // called when the pointer is released
-        model.userInteraction = false;
+        self.userInteractionProperty.set( false );
       }
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
