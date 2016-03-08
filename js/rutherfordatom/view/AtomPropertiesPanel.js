@@ -32,8 +32,8 @@ define( function( require ) {
    * Constructor for a Atom Properties control panel.
    *
    * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
-   * @param {Property.<boolean>} protonCountProperty
-   * @param {Property.<boolean>} neutronCountProperty
+   * @param {Property.<number>} protonCountProperty
+   * @param {Property.<number>} neutronCountProperty
    * @param {Object} [options]
    * @constructor
    */

@@ -21,7 +21,7 @@ define( function( require ) {
   var PARTICLE_TRACE_COLOR = 'grey';
 
   /**
-   * @param {AlphaParticleModel[]} particles
+   * @param {AlphaParticle[]} particles
    * @param {Property} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
    * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
