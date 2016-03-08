@@ -40,7 +40,7 @@ define( function( require ) {
   rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );
 
   /**
-   +   * Create the node in which atoms and alpha particles are rendered.
+   * Create the node in which atoms and alpha particles are rendered.
    * @param {RutherfordAtomModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform

@@ -36,7 +36,7 @@ define( function( require ) {
       -RSConstants.SPACE_NODE_WIDTH / 4,
       -RSConstants.SPACE_NODE_HEIGHT / 4,
       RSConstants.SPACE_NODE_WIDTH / 4,
-      RSConstants.SPACE_NODE_HEIGHT / 4 ),
+      RSConstants.SPACE_NODE_HEIGHT / 4 );
 
     // @public (read-only) - {AlphaParticle[]} all active alpha particle models
     this.particles = [];
@@ -58,7 +58,6 @@ define( function( require ) {
       }
     };
     this.userInteractionProperty.link( userInteractionListener );
-
   }
 
   rutherfordScattering.register( 'RSBaseModel', RSBaseModel );

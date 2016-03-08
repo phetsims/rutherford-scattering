@@ -21,13 +21,13 @@ define( function( require ) {
   var PARTICLE_TRACE_COLOR = 'grey';
 
   /**
-   * @param {RSBaseModel} model
+   * @param {AlphaParticleModel[]} particles
    * @param {Property} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
    * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
-  function ParticleSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
+  function ParticleSpaceNode( particles, showAlphaTraceProperty, modelViewTransform, options ) {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
@@ -36,7 +36,7 @@ define( function( require ) {
     var self = this;
 
     // @private
-    this.model = model;
+    this.particles = particles;
 
     // @private
     this.alphaParticleImage = null;
@@ -124,7 +124,7 @@ define( function( require ) {
       }
 
       // render all alpha particles & corresponding traces
-      this.model.particles.forEach( function( particle ) {
+      this.particles.forEach( function( particle ) {
 
         // render the traces (if enabled)
         if ( renderTrace ) {

@@ -27,11 +27,9 @@ define( function( require ) {
     var scaleString = StringUtils.format( pattern0AtomicScaleString, 300 );
 
     RSBaseScreenView.call( this, model, scaleString, createSpaceNode );
-
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
-
 
   /**
    * Create the node in which atoms and alpha particles are rendered.

@@ -28,7 +28,7 @@ define( function( require ) {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    ParticleSpaceNode.call( this, model, showAlphaTraceProperty, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model.particles, showAlphaTraceProperty, modelViewTransform, options );
 
     // plum pudding image - calc image scale and center positioning
     this.atomNode = new PlumPuddingAtomNode();
@@ -65,4 +65,5 @@ define( function( require ) {
     }
 
   } );
+
 } );
