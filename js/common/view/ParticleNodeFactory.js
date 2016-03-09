@@ -16,10 +16,11 @@ define( function( require ) {
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
 
   // constants
-  var ELECTRON_COLOR = 'rgb(96,96,255)';
+  var SPECULAR_HIGHLITE_COLOR = 'rgb(200,200,200)';
+  var ELECTRON_COLOR = 'rgb(135,135,205)';
   var PROTON_COLOR = 'rgb(255,69,0)';
   var NEUTRON_COLOR = 'rgb(192,192,192)';
-  var ELECTRON_RADIUS = 3;
+  var ELECTRON_RADIUS = 2.5;
   var PROTON_RADIUS = 4;
   var NEUTRON_RADIUS = 4;
 
@@ -96,7 +97,7 @@ define( function( require ) {
     assert && assert( !options.fill );
 
     options.fill = new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
-      .addColorStop( 0, 'white' )
+      .addColorStop( 0, SPECULAR_HIGHLITE_COLOR )
       .addColorStop( 0.33, color )
       .addColorStop( 1, 'black' );
     Circle.call( this, radius, options );
