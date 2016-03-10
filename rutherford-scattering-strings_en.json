@@ -11,6 +11,9 @@
   "alphaParticleProperties": {
     "value": "Alpha Particle"
   },
+  "alphaSource": {
+    "value": "α source"
+  },
   "energy": {
     "value": "Energy"
   },

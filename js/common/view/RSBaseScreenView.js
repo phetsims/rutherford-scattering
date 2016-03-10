@@ -19,8 +19,11 @@ define( function( require ) {
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
   var Path = require( 'SCENERY/nodes/Path' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -28,7 +31,10 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var Property = require( 'AXON/Property' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  var Dimension2 = require( 'DOT/Dimension2' );
+
+  // strings
+  var alphaSourceString = require( 'string!RUTHERFORD_SCATTERING/alphaSource' );
 
   /**
    * @param {RSBaseModel} model
@@ -50,11 +56,27 @@ define( function( require ) {
 
     // alpha particle gun
     var gunNode = new LaserPointerNode( model.gun.onProperty, {
-      rotation: -Math.PI / 2, // pointing up
       left: this.layoutBounds.left + 75,
-      top: this.layoutBounds.centerY
+      top: this.layoutBounds.centerY,
+      bodySize: new Dimension2( 75, 68 ),
+      nozzleSize: new Dimension2( 20, 60 ),
+      topColor: 'rgb(211, 140, 70)',
+      highlightColor: 'rgb(229, 186, 144)',
+      bottomColor: 'rgb(106, 70, 35)',
+      buttonColor: 'rgb(0, 203, 230)',
+      rotation: -Math.PI / 2 // pointing up
     } );
     this.addChild( gunNode );
+
+    // particle gun label
+    var alphaSourceText = new Text( alphaSourceString, {
+      centerX: gunNode.centerX,
+      top: gunNode.bottom  + 15,
+      font: new PhetFont( 15 ),
+      fill: 'white',
+      maxWidth: 225
+    } );
+    this.addChild( alphaSourceText );
 
     // alpha particle beam
     var beamNode = new BeamNode( model.gun.onProperty, {
