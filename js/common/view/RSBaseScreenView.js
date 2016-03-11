@@ -34,7 +34,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
 
   // strings
-  var alphaSourceString = require( 'string!RUTHERFORD_SCATTERING/alphaSource' );
+  var alphaSourceString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
 
   /**
    * @param {RSBaseModel} model
