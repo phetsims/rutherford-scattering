@@ -34,7 +34,7 @@ define( function( require ) {
 
     options = _.extend( {
       font: RSConstants.SCALE_TITLE_FONT,
-      fill: 'white'
+      fill: RSConstants.NEUTRAL_FILL_COLOR
     }, options );
 
     // scale text
@@ -52,7 +52,7 @@ define( function( require ) {
         headHeight: ARROW_HEAD_HEIGHT,
         headWidth: ARROW_HEAD_WIDTH,
         tailWidth: 2,
-        fill: 'white'
+        fill: RSConstants.NEUTRAL_FILL_COLOR
       } );
 
     // right arrow
@@ -62,17 +62,17 @@ define( function( require ) {
         headHeight: ARROW_HEAD_HEIGHT,
         headWidth: ARROW_HEAD_WIDTH,
         tailWidth: 2,
-        fill: 'white'
+        fill: RSConstants.NEUTRAL_FILL_COLOR
       } );
 
     // end markers
     var leftMarker = new Path( new Shape().moveTo( leftArrowX, labelText.bounds.minY ).lineTo( leftArrowX, labelText.bounds.maxY ), {
-      stroke: 'white',
+      stroke: RSConstants.NEUTRAL_FILL_COLOR,
       lineWidth: 1.5
     } );
 
     var rightMarker = new Path( new Shape().moveTo( rightArrowX, labelText.bounds.minY ).lineTo( rightArrowX, labelText.bounds.maxY ), {
-      stroke: 'white',
+      stroke: RSConstants.NEUTRAL_FILL_COLOR,
       lineWidth: 1.5
     } );
 

@@ -65,7 +65,7 @@ define( function( require ) {
     var energyText = new Text( energyString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      fill: RSConstants.NEUTRAL_FILL_COLOR,
       maxWidth: 210
     } );
     var minEnergyText = new Text( minEnergyString, {
@@ -111,11 +111,11 @@ define( function( require ) {
     var showTraceText = new Text( showTracesString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      fill: RSConstants.NEUTRAL_FILL_COLOR,
       maxWidth: 180
     } );
     var showTraceCheckBox = new CheckBox( showTraceText, showTracesProperty, {
-      checkBoxColor: 'white',
+      checkBoxColor: RSConstants.NEUTRAL_FILL_COLOR,
       checkBoxColorBackground: 'black'
     } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );

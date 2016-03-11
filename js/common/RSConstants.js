@@ -59,6 +59,8 @@ define( function( require ) {
     PANEL_TOP_MARGIN: 15,   // spacing for all top panels from edge of window
     PANEL_VERTICAL_MARGIN: 10,   // vertical spacing between property panels
 
+    NEUTRAL_FILL_COLOR: 'rgb( 210, 210, 210 )',
+
     TARGET_SPACE_MARGIN: 50,   // spacing from gold target material to particle space
 
     SCALE_TITLE_FONT: new PhetFont( 18 ),

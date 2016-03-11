@@ -81,7 +81,7 @@ define( function( require ) {
   function createParticleBox( titleString, particleNode ) {
 
     var hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
-    var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: 'white', maxWidth: 175 } );
+    var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSConstants.NEUTRAL_FILL_COLOR, maxWidth: 175 } );
     var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING );
 
     // container for one row in the legend

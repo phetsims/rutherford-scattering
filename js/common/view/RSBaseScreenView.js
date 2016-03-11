@@ -73,8 +73,8 @@ define( function( require ) {
       centerX: gunNode.centerX,
       top: gunNode.bottom  + 15,
       font: new PhetFont( 15 ),
-      fill: 'white',
-      maxWidth: 225
+      fill: RSConstants.NEUTRAL_FILL_COLOR,
+      maxWidth: 210
     } );
     this.addChild( alphaSourceText );
 
