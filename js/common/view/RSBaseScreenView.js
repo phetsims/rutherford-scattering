@@ -34,7 +34,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
 
   // strings
-  var alphaSourceString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
+  var alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
 
   /**
    * @param {RSBaseModel} model
@@ -69,7 +69,7 @@ define( function( require ) {
     this.addChild( gunNode );
 
     // particle gun label
-    var alphaSourceText = new Text( alphaSourceString, {
+    var alphaSourceText = new Text( alphaParticlesString, {
       centerX: gunNode.centerX,
       top: gunNode.bottom  + 15,
       font: new PhetFont( 15 ),
