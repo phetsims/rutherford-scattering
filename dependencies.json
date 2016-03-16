@@ -1,0 +1,63 @@
+{
+  "comment": "# rutherford-scattering 1.0.0-dev.1 Wed Mar 16 2016 11:18:32 GMT-0700 (PDT)",
+  "assert": {
+    "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
+    "branch": "master"
+  },
+  "axon": {
+    "sha": "2dfd7daf08482e7a25b48a8256e37f269b4f6820",
+    "branch": "master"
+  },
+  "brand": {
+    "sha": "ac9ccaa74427844b170dcd1582f3e9bb931edef4",
+    "branch": "master"
+  },
+  "chipper": {
+    "sha": "e0cbfc2a9b2e4889a4589bbc6ea5f359d9551d26",
+    "branch": "master"
+  },
+  "dot": {
+    "sha": "da78031b6f080d20bc8346beaa1d37148188371e",
+    "branch": "master"
+  },
+  "joist": {
+    "sha": "28f510089c0f5312ca58526b10ff063466ebbc5a",
+    "branch": "master"
+  },
+  "kite": {
+    "sha": "10ca8bf2b2712307ff528352de8451c0c8afe093",
+    "branch": "master"
+  },
+  "phet-core": {
+    "sha": "c48bf32035dc5a4ed092ad611012fcbdeb5c6351",
+    "branch": "master"
+  },
+  "phetcommon": {
+    "sha": "380b1fb5f15d097133bfceaf119d3eaf40a3a2d4",
+    "branch": "master"
+  },
+  "rutherford-scattering": {
+    "sha": "2579d6d27d3066ef2f1a2efee1d8e51edf298c6b",
+    "branch": "master"
+  },
+  "scenery": {
+    "sha": "d342e36640afb52e5d6a5dfef87a3496e30d6cb4",
+    "branch": "master"
+  },
+  "scenery-phet": {
+    "sha": "6f2433a0b5c14635c9bdc20ffb7fe8a258ea246c",
+    "branch": "master"
+  },
+  "sherpa": {
+    "sha": "fc4c2c967b9adbf6ad33a9462fd0bef81d26865c",
+    "branch": "master"
+  },
+  "sun": {
+    "sha": "11ff76a11960b90a241538b1ce0d46e3a14f173c",
+    "branch": "master"
+  },
+  "tandem": {
+    "sha": "2441eec6b422cb20e08682da02ab2bf7bf73250c",
+    "branch": "master"
+  }
+}
