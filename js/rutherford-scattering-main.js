@@ -17,11 +17,6 @@ define( function( require ) {
   // strings
   var rutherfordScatteringTitleString = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );
 
-  var screens = [
-    new RutherfordAtomScreen(),
-    new PlumPuddingAtomScreen()
-  ];
-
   var simOptions = {
     credits: {
       leadDesign: 'Amy Hanson, Sam McKagan',
@@ -34,6 +29,10 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
+    var screens = [
+      new RutherfordAtomScreen(),
+      new PlumPuddingAtomScreen()
+    ];
     var sim = new Sim( rutherfordScatteringTitleString, screens, simOptions );
     sim.start();
   } );
