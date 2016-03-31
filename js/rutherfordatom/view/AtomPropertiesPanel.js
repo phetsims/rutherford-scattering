@@ -60,7 +60,7 @@ define( function( require ) {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSConstants.PANEL_TITLE_COLOR,
-      maxWidth: 225,
+      maxWidth: 225
     } );
     var numProtonsText = new Text( numberOfProtonsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
@@ -95,13 +95,13 @@ define( function( require ) {
     };
     var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT,
       RSConstants.DEFAULT_PROTON_COUNT );
-    var protonMinusButton = new ArrowButton( 'left', function protonCountPropertyMinus() {
+    this.protonMinusButton = new ArrowButton( 'left', function protonCountPropertyMinus() {
       protonCountProperty.set( Math.max( RSConstants.MIN_PROTON_COUNT, protonCountProperty.value - 1 ) );
     }, arrowButtonOptions );
     var protonNumberDisplay = new NumberDisplay( protonCountProperty, protonCountRange, '', '{0}', {
       backgroundStroke: 'black'
     } );
-    var protonPlusButton = new ArrowButton( 'right', function protonCountPropertyPlus() {
+    this.protonPlusButton = new ArrowButton( 'right', function protonCountPropertyPlus() {
       protonCountProperty.set( Math.min( RSConstants.MAX_PROTON_COUNT, protonCountProperty.value + 1 ) );
     }, arrowButtonOptions );
 
@@ -109,7 +109,7 @@ define( function( require ) {
       spacing: 8,
       top: 0,
       right: 0,
-      children: [ new HStrut( options.minWidth * 0.1 ), protonMinusButton, protonNumberDisplay, protonPlusButton ]
+      children: [ new HStrut( options.minWidth * 0.1 ), this.protonMinusButton, protonNumberDisplay, this.protonPlusButton ]
     } );
 
     // common slider attributes
@@ -152,6 +152,12 @@ define( function( require ) {
         pickable: false
       } ) );
 
+    // /enable/disable +/- buttons on min/max
+    protonCountProperty.link( function( value, oldValue ) {
+      self.protonMinusButton.enabled = !( value === RSConstants.MIN_PROTON_COUNT );
+      self.protonPlusButton.enabled = !( value === RSConstants.MAX_PROTON_COUNT );
+    } );
+
     // proton count slider title
     var neutronCountStrut = new HStrut( options.minWidth * 0.05 );
     var neutronCountTitleBox = new HBox( { children: [ neutronCountStrut, numNeutronsText ] } );
@@ -159,21 +165,27 @@ define( function( require ) {
     // neutron count arrow/number display
     var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
       RSConstants.DEFAULT_NEUTRON_COUNT );
-    var neutronMinusButton = new ArrowButton( 'left', function neutronCountPropertyMinus() {
+    this.neutronMinusButton = new ArrowButton( 'left', function neutronCountPropertyMinus() {
       neutronCountProperty.value = Math.max( RSConstants.MIN_NEUTRON_COUNT, neutronCountProperty.value - 1 );
     }, arrowButtonOptions );
     var neutronNumberDisplay = new NumberDisplay( neutronCountProperty, neutronCountRange, '', '{0}', {
       backgroundStroke: 'black'
     } );
-    var neutronPlusButton = new ArrowButton( 'right', function neutronCountPropertyPlus() {
+    this.neutronPlusButton = new ArrowButton( 'right', function neutronCountPropertyPlus() {
       neutronCountProperty.value = Math.min( RSConstants.MAX_NEUTRON_COUNT, neutronCountProperty.value + 1 );
     }, arrowButtonOptions );
 
+    //
+     // /enable/disable +/- buttons on min/max
+    neutronCountProperty.link( function( value, oldValue ) {
+      self.neutronMinusButton.enabled = !( value === RSConstants.MIN_NEUTRON_COUNT );
+      self.neutronPlusButton.enabled = !( value === RSConstants.MAX_NEUTRON_COUNT );
+    } );
     var neutronCountContent = new HBox( {
       spacing: 8,
       top: 0,
       right: 0,
-      children: [ new HStrut( options.minWidth * 0.1 ), neutronMinusButton, neutronNumberDisplay, neutronPlusButton ]
+      children: [ new HStrut( options.minWidth * 0.1 ), this.neutronMinusButton, neutronNumberDisplay, this.neutronPlusButton ]
     } );
 
     // neutron count slider
