@@ -55,11 +55,11 @@ define( function( require ) {
 
     var children = [ legendText ];
 
-    // add  the legend particle entries
-    children.push( createParticleBox( electronString, ParticleNodeFactory.createElectron() ) );
-    children.push( createParticleBox( protonString, ParticleNodeFactory.createProton() ) );
-    children.push( createParticleBox( neutronString, ParticleNodeFactory.createNeutron() ) );
-    children.push( createParticleBox( alphaParticleString, ParticleNodeFactory.createAlpha() ) );
+    // add the legend particle entries
+    children.push( createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
+    children.push( createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
+    children.push( createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
+    children.push( createParticleBox( ParticleNodeFactory.createAlpha(), alphaParticleString ) );
 
     var content = new VBox( {
       spacing: RSConstants.PANEL_CHILD_SPACING,
@@ -78,11 +78,11 @@ define( function( require ) {
    * @param {Node} particleNode
    * @returns {HBox}
    */
-  function createParticleBox( titleString, particleNode ) {
+  function createParticleBox( particleNode, titleString ) {
 
     var hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
     var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSConstants.NEUTRAL_FILL_COLOR, maxWidth: 175 } );
-    var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING );
+    var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
 
     // container for one row in the legend
     return new HBox( {
