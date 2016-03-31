@@ -71,12 +71,14 @@ define( function( require ) {
     var minEnergyText = new Text( minEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      maxWidth: options.maxWidth / 5
+      maxWidth: options.maxWidth / 5,
+      pickable: false
     } );
     var maxEnergyText = new Text( maxEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      maxWidth: options.maxWidth / 5
+      maxWidth: options.maxWidth / 5,
+      pickable: false
     } );
 
     // slider title

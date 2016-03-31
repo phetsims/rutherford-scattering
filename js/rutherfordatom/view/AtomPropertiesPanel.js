@@ -60,7 +60,7 @@ define( function( require ) {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSConstants.PANEL_TITLE_COLOR,
-      maxWidth: 225
+      maxWidth: 225,
     } );
     var numProtonsText = new Text( numberOfProtonsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
@@ -142,12 +142,14 @@ define( function( require ) {
     protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT,
       new Text( RSConstants.MIN_PROTON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+        fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+        pickable: false
       } ) );
     protonCountSlider.addMajorTick( RSConstants.MAX_PROTON_COUNT,
       new Text( RSConstants.MAX_PROTON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+        fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+        pickable: false
       } ) );
 
     // proton count slider title
@@ -185,12 +187,14 @@ define( function( require ) {
     neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
       new Text( RSConstants.MIN_NEUTRON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+        fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+        pickable: false
       } ) );
     neutronCountSlider.addMajorTick( RSConstants.MAX_NEUTRON_COUNT,
       new Text( RSConstants.MAX_NEUTRON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSConstants.PANEL_SLIDER_FILL_COLOR
+        fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+        pickable: false
       } ) );
 
     // main panel content
