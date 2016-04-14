@@ -25,7 +25,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  var StepButton = require( 'SCENERY_PHET/buttons/StepButton' );
+  var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Shape = require( 'KITE/Shape' );
@@ -141,7 +141,7 @@ define( function( require ) {
     this.addChild( playPauseButton );
 
     // step button to manually step the animation.
-    var stepButton = new StepButton( function() {
+    var stepButton = new StepForwardButton( function() {
         model.manualStep();
       },
       model.runningProperty, {
