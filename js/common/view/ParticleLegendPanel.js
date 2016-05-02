@@ -34,7 +34,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function ParticlesLegendPanel( options ) {
+  function ParticleLegendPanel( options ) {
 
     options = _.extend( {
       xMargin: 15,
@@ -94,8 +94,8 @@ define( function( require ) {
     } );
   }
 
-  rutherfordScattering.register( 'ParticlesLegendPanel', ParticlesLegendPanel );
+  rutherfordScattering.register( 'ParticleLegendPanel', ParticleLegendPanel );
 
-  return inherit( Panel, ParticlesLegendPanel );
+  return inherit( Panel, ParticleLegendPanel );
 
 } );
