@@ -37,7 +37,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function RutherfordAtomNode( userInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
+  function RutherfordNucleusNode( userInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
 
     // max radius of an atom with MAX protons & neutrons
     var maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
@@ -117,9 +117,9 @@ define( function( require ) {
     this.invalidatePaint();
   }
 
-  rutherfordScattering.register( 'RutherfordAtomNode', RutherfordAtomNode );
+  rutherfordScattering.register( 'RutherfordNucleusNode', RutherfordNucleusNode );
 
-  return inherit( CanvasNode, RutherfordAtomNode, {
+  return inherit( CanvasNode, RutherfordNucleusNode, {
 
     /**
      * renders a new atom image based on proton/neutron counts

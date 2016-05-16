@@ -40,9 +40,16 @@ define( function( require ) {
    * @returns {Node}
    */
   var createSpaceNode = function( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) {
-    return new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+    var plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: canvasBounds
     } );
+
+    // redraw the space node on model step
+    model.addStepListener( function( dt ) {
+      plumPuddingSpaceNode.invalidatePaint();
+    } );
+
+    return plumPuddingSpaceNode;
   };
 
   return inherit( RSBaseScreenView, PlumPuddingAtomScreenView );

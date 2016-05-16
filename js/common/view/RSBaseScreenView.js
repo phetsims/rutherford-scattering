@@ -112,11 +112,6 @@ define( function( require ) {
     this.spaceNode = createSpaceNode( model, showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
     this.addChild( this.spaceNode );
 
-    // redraw the spaceNode on model step
-    model.addStepListener( function( dt ) {
-      self.spaceNode.invalidatePaint();
-    } );
-
     // dashed lines that connect the tiny box and space
     var dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.left, tinyBoxNode.top )

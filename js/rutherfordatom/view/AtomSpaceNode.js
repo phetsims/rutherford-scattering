@@ -1,7 +1,9 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * RutherfordAtomSpaceNode is the space in which atoms and alpha particles are rendered.
+ * Space in which atoms and alpha particles are rendered.  In this representation, there are several
+ * atoms in the space and the alpha particles are small particles, most of which travel through the
+ * atoms undeflected.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -12,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
-  var RutherfordAtomNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomNode' );
+  var RutherfordAtomsNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomsNode' );
 
   /**
    * @param {RSBaseModel} model
@@ -21,22 +23,21 @@ define( function( require ) {
    * @param {Object} options - must provide {Bounds2} canvasBounds
    * @constructor
    */
-  function RutherfordAtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
-
+  function AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
+    
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+
+    // @private - generates an image for the atoms
+    this.atomsNode = new RutherfordAtomsNode( model.userInteractionProperty, model.protonCountProperty,
+      model.neutronCountProperty );
 
     ParticleSpaceNode.call( this, model.particles, showAlphaTraceProperty, modelViewTransform, options );
 
-    // @private - atom image generator
-    this.atomNode = new RutherfordAtomNode( model.userInteractionProperty, model.protonCountProperty,
-      model.neutronCountProperty );
-
-    this.invalidatePaint();
   }
 
-  rutherfordScattering.register( 'RutherfordAtomSpaceNode', RutherfordAtomSpaceNode );
+  rutherfordScattering.register( 'AtomSpaceNode', AtomSpaceNode );
 
-  return inherit( ParticleSpaceNode, RutherfordAtomSpaceNode, {
+  return inherit( ParticleSpaceNode, AtomSpaceNode, {
 
     /**
      * @param {CanvasRenderingContext2D} context
@@ -46,13 +47,13 @@ define( function( require ) {
     paintSpace: function( context ) {
 
       // Slight chance the image used isn't available. In that case, return & try again on next frame
-      if ( this.atomNode.image === null ) {
+      if ( this.atomsNode.image === null ) {
         return;
       }
 
-      var x = this.centerX - this.atomNode.image.width / 2;
-      var y = this.centerY - this.atomNode.image.height / 2;
-      context.drawImage( this.atomNode.image, x, y, this.atomNode.image.width, this.atomNode.image.height );
+      var x = this.centerX - this.atomsNode.image.width / 2;
+      var y = this.centerY - this.atomsNode.image.height / 2;
+      context.drawImage( this.atomsNode.image, x, y, this.atomsNode.image.width, this.atomsNode.image.height );
     }
 
   } ); // inherit

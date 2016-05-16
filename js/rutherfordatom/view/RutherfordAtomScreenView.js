@@ -12,12 +12,14 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
-  var RutherfordAtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomSpaceNode' );
+  var NucleusSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/NucleusSpaceNode' );
+  var AtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomSpaceNode' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Node = require( 'SCENERY/nodes/Node' );
 
   // strings
   var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
@@ -66,7 +68,9 @@ define( function( require ) {
   rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );
 
   /**
-   * Create the node in which atoms and alpha particles are rendered.
+   * Create the node in which atoms and alpha particles are rendered.  Node contains both 
+   * scene representations, and visibility is controlled from this node.
+   * 
    * @param {RutherfordAtomModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform
@@ -74,8 +78,32 @@ define( function( require ) {
    * @returns {Node}
    */
   var createSpaceNode = function( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) {
-    return new RutherfordAtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+
+    // create the single nucleus representation scene
+    var nucleusSpaceNode = new NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: canvasBounds
+    } );
+
+    // create the multiple atom representation scene
+    var atomSpaceNode = new AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+      canvasBounds: canvasBounds
+    } );
+
+    // update view on model step
+    model.addStepListener( function( dt ) {
+      nucleusSpaceNode.invalidatePaint();
+      atomSpaceNode.invalidatePaint();
+    } );
+
+    // update which scene is visible
+    model.sceneProperty.link( function( scene ) {
+      var nucleusSpaceVisible = scene === 'nucleus';
+      nucleusSpaceNode.visible = nucleusSpaceVisible;
+      atomSpaceNode.visible = !nucleusSpaceVisible;
+    } );
+
+    return new Node( {
+      children: [ nucleusSpaceNode, atomSpaceNode ]
     } );
   };
 
