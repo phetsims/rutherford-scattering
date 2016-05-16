@@ -15,9 +15,14 @@ define( function( require ) {
   var RutherfordAtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomSpaceNode' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
+  var atomSceneString = require( 'string!RUTHERFORD_SCATTERING/atomScene' );
+  var nucleusSceneString = require( 'string!RUTHERFORD_SCATTERING/nucleusScene' );
 
   /**
    * @param {RutherfordAtomModel} model
@@ -36,6 +41,26 @@ define( function( require ) {
       // add an additional control panel for atom properties
       additionalControlPanels: [ atomPropertiesPanel ]
     } );
+
+    // add scene control
+    var buttonTextOptions = { font: RSConstants.SCALE_TITLE_FONT, fill: RSConstants.NEUTRAL_FILL_COLOR };
+    var sceneRadioButtons = new RadioButtonGroup( model.sceneProperty, [
+      { value: 'nucleus', node: new Text( nucleusSceneString, buttonTextOptions ) },
+      { value: 'atom', node: new Text( atomSceneString, buttonTextOptions ) }
+    ], {
+      orientation: 'vertical',
+      spacing: 15,
+      left: this.targetMaterialNode.left,
+      top: this.spaceNode.top,
+      baseColor: RSConstants.PANEL_COLOR,
+      deselectedStroke: RSConstants.PANEL_STROKE,
+      selectedStroke: RSConstants.PANEL_TITLE_COLOR,
+      buttonContentYMargin: 8,
+      selectedLineWidth: 2,
+      deselectedLineWidth: 1.5,
+      maxWidth: this.targetMaterialNode.width
+    } );
+    this.addChild( sceneRadioButtons );
   }
 
   rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );

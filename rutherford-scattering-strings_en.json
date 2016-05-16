@@ -20,6 +20,12 @@
   "atomProperties": {
     "value": "Atom"
   },
+  "atomScene": {
+    "value": "Atom"
+  },
+  "nucleusScene": {
+    "value": "Nucleus"
+  },
   "numberOfProtons": {
     "value": "Protons"
   },

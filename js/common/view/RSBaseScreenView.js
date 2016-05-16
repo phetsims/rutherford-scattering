@@ -50,6 +50,7 @@ define( function( require ) {
     }, options );
 
     ScreenView.call( this, options );
+    var self = this;
 
     // properties
     var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
@@ -85,50 +86,52 @@ define( function( require ) {
     } );
     this.addChild( beamNode );
 
-    // alpha particle source target
-    var targetMaterialNode = new TargetMaterialNode( {
+    // @protected for layout in subtypes, alpha particle source target
+    this.targetMaterialNode = new TargetMaterialNode( {
       centerX: beamNode.centerX,
       bottom: beamNode.top
     } );
-    this.addChild( targetMaterialNode );
+    this.addChild( this.targetMaterialNode );
 
     // tiny box that indicates what will be zoomed
     var tinyBoxNode = new TinyBox( {
-      centerX: targetMaterialNode.centerX,
-      centerY: targetMaterialNode.centerY
+      centerX: self.targetMaterialNode.centerX,
+      centerY: self.targetMaterialNode.centerY
     } );
     this.addChild( tinyBoxNode );
 
     // atom animation space
-    var spaceNodeX = targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN;
+    var spaceNodeX = this.targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN;
     var spaceNodeY = RSConstants.PANEL_TOP_MARGIN;
     var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
       spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
       spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
     var modelViewTransform = new ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
-    var spaceNode = createSpaceNode( model, showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
-    this.addChild( spaceNode );
+
+    // @protected for layout in subtypes
+    this.spaceNode = createSpaceNode( model, showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
+    this.addChild( this.spaceNode );
 
     // redraw the spaceNode on model step
     model.addStepListener( function( dt ) {
-      spaceNode.invalidatePaint();
+      self.spaceNode.invalidatePaint();
     } );
 
     // dashed lines that connect the tiny box and space
     var dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.left, tinyBoxNode.top )
-      .lineTo( spaceNode.left, spaceNode.top )
+      .lineTo( self.spaceNode.left, self.spaceNode.top )
       .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
-      .lineTo( spaceNode.left, spaceNode.bottom ), {
+      .lineTo( self.spaceNode.left, self.spaceNode.bottom ), {
       stroke: 'grey',
       lineDash: [ 5, 5 ]
     } );
     this.addChild( dashedLines );
 
     // scale info
-    var scaleInfoNode = new ScaleInfoNode( scaleString, spaceNode.getWidth(), {
-      centerX: spaceNode.centerX,
-      top: spaceNode.bottom + 10
+    var scaleInfoNode = new ScaleInfoNode( scaleString, this.spaceNode.getWidth(), {
+      centerX: this.spaceNode.centerX,
+      top: this.spaceNode.bottom + 10
     } );
     this.addChild( scaleInfoNode );
 
@@ -167,8 +170,8 @@ define( function( require ) {
       align: 'left',
       children: controlPanels,
       spacing: RSConstants.PANEL_VERTICAL_MARGIN,
-      top: spaceNode.top,
-      left: spaceNode.right + RSConstants.PANEL_SPACE_MARGIN
+      top: this.spaceNode.top,
+      left: this.spaceNode.right + RSConstants.PANEL_SPACE_MARGIN
     } );
     this.addChild( vBox );
 

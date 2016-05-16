@@ -22,6 +22,7 @@ define( function( require ) {
     RSBaseModel.call( this );
     this.addProperty( 'protonCount', RSConstants.DEFAULT_PROTON_COUNT );
     this.addProperty( 'neutronCount', RSConstants.DEFAULT_NEUTRON_COUNT );
+    this.addProperty( 'scene', 'nucleus' ); // scene to display, 'atom'|'nucleus'
   }
 
   rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );
