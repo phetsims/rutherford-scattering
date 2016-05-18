@@ -27,7 +27,7 @@ define( function( require ) {
    * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
-  function ParticleSpaceNode( particles, showAlphaTraceProperty, modelViewTransform, options ) {
+  function ParticleSpaceNode( atoms, showAlphaTraceProperty, modelViewTransform, options ) {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
@@ -36,7 +36,7 @@ define( function( require ) {
     var self = this;
 
     // @private
-    this.particles = particles;
+    this.atoms = atoms;
 
     // @private
     this.alphaParticleImage = null;
@@ -124,25 +124,29 @@ define( function( require ) {
       }
 
       // render all alpha particles & corresponding traces
-      this.particles.forEach( function( particle ) {
+      this.atoms.forEach( function( atom ) {
 
-        // render the traces (if enabled)
-        if ( renderTrace ) {
+        atom.particles.forEach( function( particle ) {
 
-          // add trace segments
-          for ( var i = 1; i < particle.positions.length; i++ ) {
-            var segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i - 1 ] );
-            context.moveTo( segmentStartViewPosition.x, segmentStartViewPosition.y );
-            var segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i ] );
-            context.lineTo( segmentEndViewPosition.x, segmentEndViewPosition.y );
+          // render the traces (if enabled)
+          if ( renderTrace ) {
+
+            // add trace segments
+            for ( var i = 1; i < particle.positions.length; i++ ) {
+              var segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i - 1 ] );
+              context.moveTo( segmentStartViewPosition.x, segmentStartViewPosition.y );
+              var segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i ] );
+              context.lineTo( segmentEndViewPosition.x, segmentEndViewPosition.y );
+            }
           }
-        }
 
-        // render particle
-        var particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.position );
-        context.drawImage( self.alphaParticleImage,
-          particleViewPosition.x - self.particleImageHalfWidth,
-          particleViewPosition.y - self.particleImageHalfHeight );
+          // render particle
+          var particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.position );
+          context.drawImage( self.alphaParticleImage,
+            particleViewPosition.x - self.particleImageHalfWidth,
+            particleViewPosition.y - self.particleImageHalfHeight );
+        } );
+
       } );
 
       // render traces

@@ -31,7 +31,7 @@ define( function( require ) {
     this.atomsNode = new RutherfordAtomsNode( model.userInteractionProperty, model.protonCountProperty,
       model.neutronCountProperty );
 
-    ParticleSpaceNode.call( this, model.particles, showAlphaTraceProperty, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model.atomSpace.atoms, showAlphaTraceProperty, modelViewTransform, options );
 
   }
 

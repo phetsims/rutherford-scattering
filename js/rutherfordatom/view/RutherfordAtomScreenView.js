@@ -95,11 +95,20 @@ define( function( require ) {
       atomSpaceNode.invalidatePaint();
     } );
 
-    // update which scene is visible
+    // update which scene is visible and remove all particles
     model.sceneProperty.link( function( scene ) {
-      var nucleusSpaceVisible = scene === 'nucleus';
-      nucleusSpaceNode.visible = nucleusSpaceVisible;
-      atomSpaceNode.visible = !nucleusSpaceVisible;
+      var nucleusVisible = scene === 'nucleus';
+
+      // set visibility of model space
+      model.nucleusSpace.isVisible = nucleusVisible;
+      model.atomSpace.isVisible = !nucleusVisible; 
+
+      // set node visibility
+      nucleusSpaceNode.visible = nucleusVisible;
+      atomSpaceNode.visible = !nucleusVisible;
+
+      model.removeAllParticles();
+      
     } );
 
     return new Node( {
