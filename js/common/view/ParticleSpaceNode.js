@@ -1,9 +1,13 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * The space in which atoms and alpha particles are rendered.
+ * The space in which atoms and alpha particles are rendered.  The particles can be represented two 
+ * ways, 'nucleus' and 'particle'.  When represented by a nucleus, the particle is shown as an image of
+ * two protons and two neutrons.  When represented as a particle, it is represented as a small magenta
+ * circle.
  *
  * @author Dave Schmitz (Schmitzware)
+ * @author Jesse Greenberg
  */
 define( function( require ) {
   'use strict';
@@ -13,12 +17,16 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
+  var Util = require( 'DOT/Util' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // constants
   var SPACE_BORDER_WIDTH = 2;
   var SPACE_BORDER_COLOR = 'grey';
   var PARTICLE_TRACE_WIDTH = 1.5;
-  var PARTICLE_TRACE_COLOR = 'grey';
+  var NUCLEUS_TRACE_COLOR = 'grey';
+  var FADEOUT_SEGMENTS = 75;
+  var PARTICLE_TRACE_COLOR = 'rgba(255,0,255,{0})'; // trace color fades out by number, inserted by StringUtils
 
   /**
    * @param {AlphaParticle[]} particles
@@ -30,6 +38,11 @@ define( function( require ) {
   function ParticleSpaceNode( atoms, showAlphaTraceProperty, modelViewTransform, options ) {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+
+    options = _.extend( {
+      particleStyle: 'nucleus' // 'nucleus'|'particle'
+    }, options );
+    this.particleStyle = options.particleStyle;
 
     CanvasNode.call( this, options );
 
@@ -56,7 +69,13 @@ define( function( require ) {
     };
 
     // create a single alpha particle image to use for rendering all particles - asynchronous
-    var alphaParticle = ParticleNodeFactory.createAlpha();
+    var alphaParticle;
+    if ( this.particleStyle === 'nucleus' ) {
+      alphaParticle = ParticleNodeFactory.createNucleusAlpha();
+    }
+    else if ( this.particleStyle === 'particle' ) {
+      alphaParticle = ParticleNodeFactory.createParticleAlpha(); 
+    }
     alphaParticle.toImage( function( image, x, y ) {
       self.alphaParticleImage = image;
       self.particleImageHalfWidth = self.alphaParticleImage.width / 2;
@@ -116,16 +135,17 @@ define( function( require ) {
         return;
       }
 
-      // render all traces as one path for performance
+      // if style is 'nucleus' we can get away with rendering with one path for performance
       if ( renderTrace ) {
-        context.beginPath();
-        context.lineWidth = PARTICLE_TRACE_WIDTH;
-        context.strokeStyle = PARTICLE_TRACE_COLOR;
+        if ( this.particleStyle === 'nucleus' ) {
+          context.beginPath();
+          context.lineWidth = PARTICLE_TRACE_WIDTH;
+          context.strokeStyle = NUCLEUS_TRACE_COLOR;  
+        }
       }
 
       // render all alpha particles & corresponding traces
       this.atoms.forEach( function( atom ) {
-
         atom.particles.forEach( function( particle ) {
 
           // render the traces (if enabled)
@@ -133,10 +153,27 @@ define( function( require ) {
 
             // add trace segments
             for ( var i = 1; i < particle.positions.length; i++ ) {
+              if ( self.particleStyle === 'particle' ) {
+                // if the style is of a 'particle', each segment needs a new path
+                // to create the gradient effect
+                context.beginPath();
+              }
+
               var segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i - 1 ] );
               context.moveTo( segmentStartViewPosition.x, segmentStartViewPosition.y );
               var segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i ] );
               context.lineTo( segmentEndViewPosition.x, segmentEndViewPosition.y );
+
+              if ( self.particleStyle === 'particle' ) {
+
+                // only the last FADEOUT_SEGMENTS should be visible, map i to the opacity
+                var length = particle.positions.length;
+                var alpha = Util.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
+                var strokeStyle = StringUtils.format( PARTICLE_TRACE_COLOR, alpha );
+                context.strokeStyle = strokeStyle;
+                context.stroke();
+                context.closePath();
+              }
             }
           }
 
@@ -149,9 +186,11 @@ define( function( require ) {
 
       } );
 
-      // render traces
+      // render traces if 
       if ( renderTrace ) {
-        context.stroke();
+        if ( this.particleStyle === 'nucleus' ) {
+          context.stroke();
+        }
       }
     }
 

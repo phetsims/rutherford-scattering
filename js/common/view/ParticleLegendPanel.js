@@ -59,7 +59,7 @@ define( function( require ) {
     children.push( createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
     children.push( createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
     children.push( createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
-    children.push( createParticleBox( ParticleNodeFactory.createAlpha(), alphaParticleString ) );
+    children.push( createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleString ) );
 
     var content = new VBox( {
       spacing: RSConstants.PANEL_CHILD_SPACING,

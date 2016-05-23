@@ -20,9 +20,11 @@ define( function( require ) {
   var ELECTRON_COLOR = 'rgb(135,135,205)';
   var PROTON_COLOR = 'rgb(255,69,0)';
   var NEUTRON_COLOR = 'rgb(192,192,192)';
+  var PARTICLE_COLOR = 'rgb(255,0,255)';
   var ELECTRON_RADIUS = 2.5;
   var PROTON_RADIUS = 4;
   var NEUTRON_RADIUS = 4;
+  var PARTICLE_RADIUS = 2;
 
   var ParticleNodeFactory = {
 
@@ -66,17 +68,30 @@ define( function( require ) {
     },
 
     /**
-     * Creates an alpha particle node.
+     * Creates an alpha particle node, represented by two protons and two neutrons.
      * @returns {Node}
      * @public
      */
-    createAlpha: function() {
+    createNucleusAlpha: function() {
       return new Node( {
         children: [
           new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, { x: NEUTRON_RADIUS - 1, y: -NEUTRON_RADIUS } ),
           new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, { x: -NEUTRON_RADIUS + 1, y: NEUTRON_RADIUS } ),
           new ParticleNode( PROTON_RADIUS, PROTON_COLOR, { x: -PROTON_RADIUS + 1, y: -PROTON_RADIUS + 1 } ),
           new ParticleNode( PROTON_RADIUS, PROTON_COLOR, { x: PROTON_RADIUS - 1, y: PROTON_RADIUS - 1 } )
+        ]
+      } );
+    },
+
+    /**
+     * Creates an alpha particle node, represented by a small circle.
+     * @return {Node} 
+     * @public
+     */
+    createParticleAlpha: function() {
+      return new Node( {
+        children: [
+          new Circle( PARTICLE_RADIUS, { fill: PARTICLE_COLOR } )
         ]
       } );
     }

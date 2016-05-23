@@ -27,6 +27,10 @@ define( function( require ) {
     
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
+    options = _.extend( {
+      particleStyle: 'particle'
+    }, options );
+
     // @private - generates an image for the collection of atoms
     this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );
 

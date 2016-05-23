@@ -21,7 +21,7 @@ define( function( require ) {
   function RutherfordAtom( protonCountProperty, position, boundingWidth, options ) {
 
     options = _.extend( {
-      scatterWidth: 3 // width in bounds which will cause a scatter, bounding width by default
+      scatterWidth: 2 // width in bounds which will cause a scatter, bounding width by default
     } );
     this.scatterWidth = options.scatterWidth;
 
