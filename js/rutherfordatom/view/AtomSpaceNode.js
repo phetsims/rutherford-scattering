@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
-  var RutherfordAtomsNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomsNode' );
+  var AtomCollectionNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomCollectionNode' );
 
   /**
    * @param {RSBaseModel} model
@@ -27,9 +27,8 @@ define( function( require ) {
     
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    // @private - generates an image for the atoms
-    this.atomsNode = new RutherfordAtomsNode( model.userInteractionProperty, model.protonCountProperty,
-      model.neutronCountProperty );
+    // @private - generates an image for the collection of atoms
+    this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );
 
     ParticleSpaceNode.call( this, model.atomSpace.atoms, showAlphaTraceProperty, modelViewTransform, options );
 
