@@ -2,7 +2,7 @@
 
 /**
  * Visual representation of a collection of rutherford atoms.  Electron energy levels are shown around the atoms, 
- * represented by dashed circles scaled by the Bohr radius for each level.  
+ * represented by dashed circles scaled by the Bohr energy for each level.  
  *
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
