@@ -68,6 +68,9 @@ define( function( require ) {
     //----------------------------------------------------------------------------
     // Dimensions
     //----------------------------------------------------------------------------
+    
+    // dimension of the beam
+    BEAM_SIZE: new Dimension2( 10, 110 ),
 
     // Animation space size, must be square!
     SPACE_NODE_WIDTH: 490,

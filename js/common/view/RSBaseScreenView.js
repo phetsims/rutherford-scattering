@@ -55,8 +55,8 @@ define( function( require ) {
     // properties
     var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
-    // alpha particle gun
-    var gunNode = new LaserPointerNode( model.gun.onProperty, {
+    // @protected for layout in subtypes, alpha particle gun
+    this.gunNode = new LaserPointerNode( model.gun.onProperty, {
       left: this.layoutBounds.left + 75,
       top: this.layoutBounds.centerY,
       bodySize: new Dimension2( 75, 68 ),
@@ -67,12 +67,12 @@ define( function( require ) {
       buttonColor: 'rgb(0, 203, 230)',
       rotation: -Math.PI / 2 // pointing up
     } );
-    this.addChild( gunNode );
+    this.addChild( this.gunNode );
 
     // particle gun label
     var alphaSourceText = new Text( alphaParticlesString, {
-      centerX: gunNode.centerX,
-      top: gunNode.bottom  + 15,
+      centerX: this.gunNode.centerX,
+      top: this.gunNode.bottom  + 15,
       font: new PhetFont( 15 ),
       fill: RSConstants.NEUTRAL_FILL_COLOR,
       maxWidth: 210
@@ -81,8 +81,8 @@ define( function( require ) {
 
     // alpha particle beam
     var beamNode = new BeamNode( model.gun.onProperty, {
-      centerX: gunNode.centerX,
-      bottom: gunNode.top
+      centerX: this.gunNode.centerX,
+      bottom: this.gunNode.top
     } );
     this.addChild( beamNode );
 
