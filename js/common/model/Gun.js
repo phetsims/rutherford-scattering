@@ -21,7 +21,7 @@ define( function( require ) {
   var RAND = new Random();
   var MAX_PARTICLES = 20;
   var GUN_INTENSITY = 1;
-  var X0_MIN = 10;
+  // var X0_MIN = 10;
 
   /**
    * {RSBaseModel} model

@@ -79,17 +79,17 @@ define( function( require ) {
     } );
     this.addChild( alphaSourceText );
 
-    // alpha particle beam
-    var beamNode = new BeamNode( model.gun.onProperty, {
+    // @protected, alpha particle beam
+    this.beamNode = new BeamNode( model.gun.onProperty, {
       centerX: this.gunNode.centerX,
       bottom: this.gunNode.top
     } );
-    this.addChild( beamNode );
+    this.addChild( this.beamNode );
 
     // @protected for layout in subtypes, alpha particle source target
     this.targetMaterialNode = new TargetMaterialNode( {
-      centerX: beamNode.centerX,
-      bottom: beamNode.top
+      centerX: this.beamNode.centerX,
+      bottom: this.beamNode.top
     } );
     this.addChild( this.targetMaterialNode );
 

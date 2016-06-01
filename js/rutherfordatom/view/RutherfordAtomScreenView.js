@@ -20,7 +20,10 @@ define( function( require ) {
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var RutherfordAtomBeamNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomBeamNode' );
+
+  // constants
+  var ATOM_BEAM_FILL = 'rgba(143,143,143,0.4)';
+  var NUCLEUS_BEAM_FILL = 'rgba(143,143,143,1)';
 
   // strings
   var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
@@ -45,12 +48,20 @@ define( function( require ) {
       additionalControlPanels: [ atomPropertiesPanel ]
     } );
 
-    // alpha particle beam, changes width with scene property, centered on the gun
-    var beamNode = new RutherfordAtomBeamNode( model.gun.onProperty, model.sceneProperty, this.gunNode, {
-      centerX: this.gunNode.centerX,
-      bottom: this.gunNode.top
+    // for the 'Atom' scene, the beam should be wider and semi-transparent
+    var self = this;
+    model.sceneProperty.link( function( scene ) {
+      var beam = self.beamNode;
+      if ( scene === 'atom' ) {
+        beam.setRect( 0, 0, RSConstants.BEAM_SIZE.width * 4, RSConstants.BEAM_SIZE.height );
+        beam.fill = ATOM_BEAM_FILL;
+      }
+      else {
+        beam.setRect( 0, 0, RSConstants.BEAM_SIZE.width, RSConstants.BEAM_SIZE.height );
+        beam.fill = NUCLEUS_BEAM_FILL;
+      }
+      beam.centerX = self.gunNode.centerX;
     } );
-    this.addChild( beamNode );
 
     // add scene control
     var buttonTextOptions = { font: RSConstants.SCALE_TITLE_FONT, fill: RSConstants.NEUTRAL_FILL_COLOR };

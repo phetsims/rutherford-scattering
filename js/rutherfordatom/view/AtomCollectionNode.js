@@ -16,7 +16,6 @@ define( function( require ) {
   var Circle = require( 'SCENERY/nodes/Circle' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
   var IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV

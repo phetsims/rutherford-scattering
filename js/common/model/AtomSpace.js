@@ -46,7 +46,6 @@ define( function( require ) {
      * @public
      */
     removeParticle: function( alphaParticle ) {
-      var self = this;
       var index = this.particles.indexOf( alphaParticle );
       if ( index > -1 ) {
         this.particles.splice( index, 1 );
