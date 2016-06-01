@@ -94,45 +94,35 @@ define( function( require ) {
     },
 
     /**
+     * Add a particle to the visible space.
      * @param {AlphaParticle} alphaParticle
      * @public
      */
     addParticle: function( alphaParticle ) {
-      // get the visible space
-      var visibleSpace = this.getVisibleSpace();
-
-      // add the particle to the nearest atom at the bottom of the space
-      var nearestAtom;
-      visibleSpace.atoms.forEach( function( atom ) {
-        if ( atom.bounds.containsPoint( alphaParticle.position ) ) {
-          nearestAtom = atom;
-          return;
-        }
-      } );
-      assert && assert( nearestAtom, 'No atom found for new particle' );
-
-      nearestAtom.addParticle( alphaParticle );
       this.particles.push( alphaParticle );
+
+      // add the particle to the space
+      this.getVisibleSpace().addParticle( alphaParticle );
     },
 
     /**
+     * Remove a particle from the visible space
      * @param {AlphaParticle} alphaParticle
      * @public
      */
     removeParticle: function( alphaParticle ) {
-      // get the visible space
+      // remove the particle from the visible space
       var visibleSpace = this.getVisibleSpace();
+      visibleSpace.removeParticle( alphaParticle );
 
+      // remove the particle from its atom if scattered
+      visibleSpace.atoms.forEach( function( atom ) {
+        atom.removeParticle( alphaParticle );
+      } );
+
+      // remove the particle from the base model
       var index = this.particles.indexOf( alphaParticle );
       if ( index > -1 ) {
-        // make sure that the particle is not associated with an atom
-        visibleSpace.atoms.forEach( function( atom ) {
-          var particleIndex = atom.particles.indexOf( alphaParticle );
-          if ( particleIndex > -1 ) {
-            atom.particles.splice( particleIndex, 1 );
-            return;
-          }  
-        } );
         this.particles.splice( index, 1 );
       }
     },
@@ -142,9 +132,11 @@ define( function( require ) {
      * @public
      */
     removeAllParticles: function() {
-      // get the visible space
+      // remove the particles from the visible space
       var visibleSpace = this.getVisibleSpace();
+      visibleSpace.particles.length = 0;
 
+      // remove all particles from the atoms
       visibleSpace.atoms.forEach( function( atom ) {
         atom.particles.length = 0;
       } );
@@ -168,45 +160,9 @@ define( function( require ) {
      * @private
      */
     moveParticles: function( dt ) {
-      this.getVisibleSpace().atoms.forEach( function( atom ) {
-        atom.moveParticles();
-      } );
-    },
 
-    /**
-     * Transition a particle from the bounding box of one atom to another.  A particle should only 
-     * be transitioned to another atom if it enters the atom's bounds from the bottom, and it has 
-     * not been scattered.
-     * @private
-     */
-    transitionParticles: function() {
-      // get the visible space
-      var visibleSpace = this.getVisibleSpace();
-
-      visibleSpace.atoms.forEach( function( atom ) {
-        atom.particles.forEach( function( particle ) {
-          if ( particle.position.y > atom.bounds.maxY &&
-                particle.orientation === particle.orientationProperty.initialValue ) {
-            // if the particle is beyond its bounding box and it hasn't been scattered,
-            // transition to the next bounding box
-            for ( var i = 0; i < visibleSpace.atoms.length; i++ ) {
-              var secondAtom = visibleSpace.atoms[ i ];
-              if ( secondAtom === atom ) {
-                // don't compare the box to itself
-                continue;
-              }
-              else {
-                if ( secondAtom.bounds.minY === atom.bounds.maxY ) {
-                  // we have found the next atom, move the particle into that space
-                  atom.removeParticle( particle );
-                  secondAtom.addParticle( particle );
-                  return; 
-                }
-              }
-            }
-          }
-        } );
-      } );
+      // move particles owned by the visible space
+      this.getVisibleSpace().moveParticles( dt );
     },
 
     /**
@@ -230,10 +186,10 @@ define( function( require ) {
       if ( this.running && !this.userInteraction && dt < 1 ) {
         this.gun.step( dt );
 
-        this.getVisibleSpace().atoms.forEach( function( atom ) {
-          atom.moveParticles( dt );
-        } );
-        this.transitionParticles();
+        // move particles
+        this.moveParticles( dt );
+
+        // remove particles out of bounds
         this.cullParticles();
       }
 
@@ -248,7 +204,6 @@ define( function( require ) {
       if ( !this.userInteraction ) {
         this.gun.step( this.maunalStepDt );
         this.moveParticles( this.maunalStepDt );
-        this.transitionParticles();
         this.cullParticles();
       }
 

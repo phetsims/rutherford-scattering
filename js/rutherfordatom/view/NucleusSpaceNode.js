@@ -26,7 +26,7 @@ define( function( require ) {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    ParticleSpaceNode.call( this, model.nucleusSpace.atoms, showAlphaTraceProperty, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model.nucleusSpace, showAlphaTraceProperty, modelViewTransform, options );
 
     // @private - atom image generator
     this.atomNode = new RutherfordNucleusNode( model.userInteractionProperty, model.protonCountProperty,

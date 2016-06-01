@@ -34,7 +34,7 @@ define( function( require ) {
     // @private - generates an image for the collection of atoms
     this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );
 
-    ParticleSpaceNode.call( this, model.atomSpace.atoms, showAlphaTraceProperty, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model.atomSpace, showAlphaTraceProperty, modelViewTransform, options );
 
   }
 

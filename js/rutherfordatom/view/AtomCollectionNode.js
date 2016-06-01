@@ -16,6 +16,7 @@ define( function( require ) {
   var Circle = require( 'SCENERY/nodes/Circle' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   // constants
   var IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV
@@ -38,6 +39,7 @@ define( function( require ) {
     // for each atom in the space, draw the following
     var self = this;
     atomSpace.atoms.forEach( function( atom ) {
+
       // a small circle represents each nucleus
       var nucleusCircle = new Circle( 2, { fill: RSConstants.PANEL_TITLE_COLOR } );
       nucleusCircle.center = modelViewTransform.modelToViewPosition( atom.position );
@@ -72,12 +74,6 @@ define( function( require ) {
 
   rutherfordScattering.register( 'AtomCollectionNode', AtomCollectionNode );
 
-  return inherit( Node, AtomCollectionNode, {
-
-    // paintCanvas: function() {
-    //   // do nothing
-    // }
-
-  } ); // inherit
+  return inherit( Node, AtomCollectionNode ); // inherit
 
 } ); // define

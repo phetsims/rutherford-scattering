@@ -15,6 +15,9 @@ define( function( require ) {
   var RutherfordAtom = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtom' );
   var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
 
+  // constants
+  var DEFLECTION_WIDTH = 14;
+
   /**
    * Constructor.
    * @param {Property.<number>} protonCountProperty
@@ -25,16 +28,19 @@ define( function( require ) {
     AtomSpace.call( this, protonCountProperty, bounds );
 
     // factor out for readability
-    var atomWidth = this.bounds.width / 2;
+    var atomWidth = this.bounds.width / 2; // bounds of the entire atom, including electron radii
     var halfAtomWidth = atomWidth / 2;
-    var atom1 = new RutherfordAtom( protonCountProperty, new Vector2( -halfAtomWidth, +halfAtomWidth ), atomWidth );
-    var atom2 = new RutherfordAtom( protonCountProperty, new Vector2( +halfAtomWidth, +halfAtomWidth ), atomWidth );
-    var atom3 = new RutherfordAtom( protonCountProperty, new Vector2( 0, -halfAtomWidth ), atomWidth );
-    var atom4 = new RutherfordAtom( protonCountProperty, new Vector2( -atomWidth, -halfAtomWidth ), atomWidth );
-    var atom5 = new RutherfordAtom( protonCountProperty, new Vector2( atomWidth, -halfAtomWidth ), atomWidth );
+
+    // create the atoms
+    var atom1 = new RutherfordAtom( protonCountProperty, new Vector2( -halfAtomWidth, +halfAtomWidth ), DEFLECTION_WIDTH );
+    var atom2 = new RutherfordAtom( protonCountProperty, new Vector2( +halfAtomWidth, +halfAtomWidth ), DEFLECTION_WIDTH );
+    var atom3 = new RutherfordAtom( protonCountProperty, new Vector2( 0, -halfAtomWidth ), DEFLECTION_WIDTH );
+    var atom4 = new RutherfordAtom( protonCountProperty, new Vector2( -atomWidth, -halfAtomWidth ), DEFLECTION_WIDTH );
+    var atom5 = new RutherfordAtom( protonCountProperty, new Vector2( atomWidth, -halfAtomWidth ), DEFLECTION_WIDTH );
+
     this.atoms.push( atom1, atom2, atom3, atom4, atom5 );
 
-    // make sure that atom bounds are OK
+    // make sure that atom bounds do not overlap
     this.checkAtomBounds();
   }
 

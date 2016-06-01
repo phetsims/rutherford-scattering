@@ -61,7 +61,9 @@ define( function( require ) {
         var ySign = ( RAND.random() < 0.5 ? 1 : -1 );
 
         // random position withing model bounds
-        var particleX = ySign * ( X0_MIN + ( RAND.random() * ( ( this.model.bounds.width / 2 ) - X0_MIN ) ) );
+        // TODO: Not sure if this correction in x really should be removed
+        // var particleX = ySign * ( X0_MIN + ( RAND.random() * ( ( this.model.bounds.width / 2 ) - X0_MIN ) ) );
+        var particleX = ySign * (( RAND.random() * ( ( this.model.bounds.width / 2 ) ) ) );
         var particleY = this.model.bounds.minY;
 
         var initialPosition = new Vector2( particleX, particleY );
