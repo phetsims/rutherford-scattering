@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Model for the 'Rutherford Atom' screen, responsible for moving alpha particles.
+ * Model for the 'Rutherford Atom', responsible for moving alpha particles within its bounds.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -30,13 +30,6 @@ define( function( require ) {
   rutherfordScattering.register( 'RutherfordAtom', RutherfordAtom );
 
   return inherit( Atom, RutherfordAtom, {
-
-    moveParticles: function( dt ) {
-      var self = this;
-      this.particles.forEach( function( particle ) {
-        self.moveParticle( particle, dt );
-      } );
-    },
 
     /**
      * @param {AlphaParticle} alphaParticle

@@ -13,7 +13,7 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Vector2 = require( 'DOT/Vector2' );
   var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
-  var RutherfordNucleusAtom = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleusAtom' );
+  var RutherfordAtom = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtom' );
 
   /**
    * Constructor.
@@ -24,8 +24,8 @@ define( function( require ) {
 
     AtomSpace.call( this, protonCountProperty, bounds );
 
-    var rutherfordNucleusAtom = new RutherfordNucleusAtom( protonCountProperty, new Vector2( 0, 0 ), this.bounds.width );
-    this.atoms.push( rutherfordNucleusAtom );
+    var rutherfordAtom = new RutherfordAtom( protonCountProperty, new Vector2( 0, 0 ), this.bounds.width );
+    this.atoms.push( rutherfordAtom );
 
     // make sure that atom bounds are OK
     this.checkAtomBounds();
