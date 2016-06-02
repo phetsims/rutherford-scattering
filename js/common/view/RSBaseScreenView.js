@@ -58,7 +58,7 @@ define( function( require ) {
     // @protected for layout in subtypes, alpha particle gun
     this.gunNode = new LaserPointerNode( model.gun.onProperty, {
       left: this.layoutBounds.left + 75,
-      top: this.layoutBounds.centerY,
+      top: this.layoutBounds.centerY + 50,
       bodySize: new Dimension2( 75, 68 ),
       nozzleSize: new Dimension2( 20, 60 ),
       topColor: 'rgb(211, 140, 70)',

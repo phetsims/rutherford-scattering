@@ -17,14 +17,8 @@
   "energy": {
     "value": "Energy"
   },
-  "atomProperties": {
+  "atom": {
     "value": "Atom"
-  },
-  "atomScene": {
-    "value": "Atom"
-  },
-  "nucleusScene": {
-    "value": "Nucleus"
   },
   "numberOfProtons": {
     "value": "Protons"

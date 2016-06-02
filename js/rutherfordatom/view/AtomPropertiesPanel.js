@@ -24,7 +24,7 @@ define( function( require ) {
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   // strings
-  var atomPropertiesString = require( 'string!RUTHERFORD_SCATTERING/atomProperties' );
+  var atomString = require( 'string!RUTHERFORD_SCATTERING/atom' );
   var numberOfProtonsString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
   var numberOfNeutronsString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
 
@@ -56,7 +56,7 @@ define( function( require ) {
     this.userInteractionProperty = userInteractionProperty;
 
     // strings
-    var atomPropertiesText = new Text( atomPropertiesString, {
+    var atomPropertiesText = new Text( atomString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSConstants.PANEL_TITLE_COLOR,

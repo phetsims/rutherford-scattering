@@ -18,7 +18,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var Node = require( 'SCENERY/nodes/Node' );
 
   // constants
@@ -27,8 +27,10 @@ define( function( require ) {
 
   // strings
   var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
-  var atomSceneString = require( 'string!RUTHERFORD_SCATTERING/atomScene' );
-  var nucleusSceneString = require( 'string!RUTHERFORD_SCATTERING/nucleusScene' );
+
+  // images
+  var atomImage = require( 'image!RUTHERFORD_SCATTERING/Atom.png' );
+  var nucleusImage = require( 'image!RUTHERFORD_SCATTERING/Nucleus.png' );
 
   /**
    * @param {RutherfordAtomModel} model
@@ -64,10 +66,10 @@ define( function( require ) {
     } );
 
     // add scene control
-    var buttonTextOptions = { font: RSConstants.SCALE_TITLE_FONT, fill: RSConstants.NEUTRAL_FILL_COLOR };
+    var buttonOptions = { scale: 0.18 };
     var sceneRadioButtons = new RadioButtonGroup( model.sceneProperty, [
-      { value: 'nucleus', node: new Text( nucleusSceneString, buttonTextOptions ) },
-      { value: 'atom', node: new Text( atomSceneString, buttonTextOptions ) }
+      { value: 'nucleus', node: new Image( nucleusImage, buttonOptions ) },
+      { value: 'atom', node: new Image( atomImage, buttonOptions ) }
     ], {
       orientation: 'vertical',
       spacing: 15,
