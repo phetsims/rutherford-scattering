@@ -12,8 +12,6 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Vector2 = require( 'DOT/Vector2' );
-  var PlumPuddingAtom = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtom' );
   var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
 
   /**
