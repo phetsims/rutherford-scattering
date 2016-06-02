@@ -1,7 +1,8 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Model for the Rutherford Atom space, responsible for atoms of the model.
+ * Model for the Plum Pudding Atom space.  In this representation, the particles move 
+ * straight through space, so no additional atom models are added.
  *
  * @author Jesse Greenberg
  */
@@ -24,11 +25,6 @@ define( function( require ) {
 
     AtomSpace.call( this, protonCountProperty, bounds );
 
-    var plumPuddingAtom = new PlumPuddingAtom(  protonCountProperty, new Vector2( 0, 0 ), this.bounds.width );
-    this.atoms.push( plumPuddingAtom );
-
-    // make sure that atom bounds are OK
-    this.checkAtomBounds();
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomSpace', PlumPuddingAtomSpace );
