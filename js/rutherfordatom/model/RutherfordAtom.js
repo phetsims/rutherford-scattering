@@ -1,7 +1,9 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Model for the 'Rutherford Atom', responsible for moving alpha particles within its bounds.
+ * Model for the 'Rutherford Atom', responsible for moving alpha particles within its bounds.  For 
+ * additional information concerning the trajectory algorithm, see trajectories.pdf located in docs
+ * (document may be out of date).
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -32,6 +34,26 @@ define( function( require ) {
   return inherit( Atom, RutherfordAtom, {
 
     /**
+     * ASSUMPTIONS MADE IN THIS ALGORITHM: 
+     * (1) The atom is located at (0,0).
+     * This is not the case in our model. So coordindates are adjusted 
+     * as described in the comments.
+     * (2) +y is up.
+     * Our model has +y down. So we'll be adjusting the sign on y 
+     * coordinates, as described in the comments.
+     * (3) alpha particles are moving from bottom to top
+     * (4) x values are positive.
+     * The algoritm fails for negative values of x. This is not
+     * mentioned in the specification document. So we have to convert
+     * to positive values of x, then convert back.
+     * (5) Using "phi=arctan(-x,y)" as described in the spec causes
+     * particles to jump discontinuously when they go above the y axis.
+     * This is fixed by using Math.atan2 instead.
+     * (6) Depending on the parameters supplied, the algorithm will tend
+     * to fail as the alpha particle's horizontal position (x) gets closer
+     * to zero. So the Gun model is calibrated to fire alpha particles 
+     * with some min initial x value.
+     * 
      * @param {AlphaParticle} alphaParticle
      * @param {number} dt
      * @override
