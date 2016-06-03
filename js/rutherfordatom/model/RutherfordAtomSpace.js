@@ -25,7 +25,9 @@ define( function( require ) {
    */
   function RutherfordAtomSpace( protonCountProperty, bounds ) {
 
-    AtomSpace.call( this, protonCountProperty, bounds );
+    AtomSpace.call( this, protonCountProperty, bounds, {
+      atomWidth: DEFLECTION_WIDTH
+    } );
 
     // factor out for readability
     var atomWidth = this.bounds.width / 2; // bounds of the entire atom, including electron radii

@@ -17,12 +17,19 @@ define( function( require ) {
    * Constructor.
    * @param {Property.<number>} protonCountProperty
    * @param {Bounds2} bounds
+   * @param {Object} options
    */
-  function AtomSpace( protonCountProperty, bounds ) {
+  function AtomSpace( protonCountProperty, bounds, options ) {
+
+    options = _.extend( {
+      atomWidth: bounds.width // width of each atom in the space, width of space by default 
+    }, options );
+
     // @public (read-only)
     this.atoms = [];
     this.particles = [];
     this.bounds = bounds;
+    this.atomWidth = options.atomWidth;
 
     // @public - whether this space is visible or not
     this.isVisible = true;

@@ -21,7 +21,7 @@ define( function( require ) {
   var RAND = new Random();
   var MAX_PARTICLES = 20;
   var GUN_INTENSITY = 1;
-  // var X0_MIN = 10;
+  var X0_MIN_FRACTION = 0.04; // closest particle can get horizontally to atom as a fraction of atomic bounds
 
   /**
    * {RSBaseModel} model
@@ -61,9 +61,16 @@ define( function( require ) {
         var ySign = ( RAND.random() < 0.5 ? 1 : -1 );
 
         // random position withing model bounds
-        // TODO: Not sure if this correction in x really should be removed
-        // var particleX = ySign * ( X0_MIN + ( RAND.random() * ( ( this.model.bounds.width / 2 ) - X0_MIN ) ) );
-        var particleX = ySign * (( RAND.random() * ( ( this.model.bounds.width / 2 ) ) ) );
+        var rand = RAND.random();
+        var particleX = ySign * rand * this.model.bounds.width / 2;
+
+        // make sure that the particle was not directly fired at an atom to prevent trajectory failure
+        var xMin = X0_MIN_FRACTION * this.model.getVisibleSpace().atomWidth;
+        this.model.getVisibleSpace().atoms.forEach( function ( atom ) {
+          if ( Math.abs( particleX - atom.position.x ) < xMin ) {
+            particleX = particleX + ( ( ySign * xMin ) * ( 1 - rand ) );
+          }
+        } );
         var particleY = this.model.bounds.minY;
 
         var initialPosition = new Vector2( particleX, particleY );
