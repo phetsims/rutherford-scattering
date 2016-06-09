@@ -28,7 +28,7 @@ define( function( require ) {
 
     // @public (read-only) - spaces containing the atoms
     this.atomSpace = new RutherfordAtomSpace( this.protonCountProperty, this.bounds );
-    this.nucleusSpace = new RutherfordNucleusSpace( this.protonCountProperty, this.bounds );
+    this.nucleusSpace = new RutherfordNucleusSpace( this.protonCountProperty, this.neutronCountProperty, this.bounds );
 
     // @public (read-only)
     this.atomSpaces = [ this.atomSpace, this.nucleusSpace ];

@@ -30,7 +30,7 @@ define( function( require ) {
 
     // @private - atom image generator
     this.atomNode = new RutherfordNucleusNode( model.userInteractionProperty, model.protonCountProperty,
-      model.neutronCountProperty );
+      model.neutronCountProperty, model.nucleusSpace.rutherfordNucleus );
 
     this.invalidatePaint();
   }

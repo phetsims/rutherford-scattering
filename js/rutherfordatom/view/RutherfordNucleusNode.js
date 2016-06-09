@@ -15,10 +15,8 @@ define( function( require ) {
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var Random = require( 'DOT/Random' );
 
   // constants
-  var RAND = new Random();
   var MIN_NUCLEUS_RADIUS = 20; // view coordinates
   var OUTLINE_LINE_WIDTH = 1.5;
   var OUTLINE_LINE_DASH = [ 2, 3 ];
@@ -37,7 +35,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function RutherfordNucleusNode( userInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
+  function RutherfordNucleusNode( userInteractionProperty, protonCountProperty, neutronCountProperty, rutherfordNucleus, options ) {
 
     // max radius of an atom with MAX protons & neutrons
     var maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
@@ -53,6 +51,9 @@ define( function( require ) {
 
     // @private
     this.userInteractionProperty = userInteractionProperty;
+
+    // @private
+    this.rutherfordNucleus = rutherfordNucleus;
 
     // @private - switch to render the outline or full atom
     this.renderAtomOutline = false;
@@ -140,6 +141,7 @@ define( function( require ) {
       this.toImage( function( image, x, y ) {
         self.image = image;
       } );
+
     },
 
     /**
@@ -169,31 +171,73 @@ define( function( require ) {
         if ( this.protonImage === null || this.neutronImage === null ) {
           return;
         }
+        var self = this;
+
+        var nucleons = this.rutherfordNucleus.protons.getArray().slice( 0 ).concat( this.rutherfordNucleus.neutrons.getArray().slice( 0 ) );
+
+        // get the number of layers in the particle
+        var zLayer = 0;
+        nucleons.forEach( function( nucleon ) {
+          if ( nucleon.zLayer > zLayer ) {
+            zLayer = nucleon.zLayer;
+          }
+        } );
+
+        // add the layers, starting from the largest
+        for ( var i = zLayer; i  >= 0; i-- ) {
+          nucleons.forEach( function( nucleon ) {
+            if ( nucleon.zLayer === i ) {
+              var xN = ( self.center.x - self.neutronImage.width / 2 ) + nucleon.position.x;
+              var yN = ( self.center.y - self.neutronImage.height / 2 ) + nucleon.position.y;
+              if ( nucleon.type === 'neutron' ) {
+                context.drawImage( self.neutronImage, xN, yN, self.neutronImage.width, self.neutronImage.height );
+              }
+              else {
+                context.drawImage( self.protonImage, xN, yN, self.protonImage.width, self.protonImage.height );
+              }
+            }
+          } );
+        }
+
+        // this.rutherfordNucleus.neutrons.forEach( function( neutron ) {
+        //   var xN = ( self.center.x - self.neutronImage.width / 2 ) + neutron.position.x;
+        //   var yN = ( self.center.y - self.neutronImage.height / 2 ) + neutron.position.y;
+        //   context.drawImage( self.neutronImage, xN, yN, self.neutronImage.width, self.neutronImage.height );
+        // } );
+
+        // this.rutherfordNucleus.protons.forEach( function( proton ) {
+        //   var xP = ( self.center.x - self.protonImage.width / 2 ) + proton.position.x;
+        //   var yP = ( self.center.y - self.protonImage.height / 2 ) + proton.position.y;
+        //   context.drawImage( self.protonImage, xP, yP, self.protonImage.width, self.protonImage.height );
+        // } );
+
+
 
         // Randomly place protons and neutrons inside a circle
-        var maxProtonRadius = this.radius - ( this.protonImage.width / 2 );
-        var maxNeutronRadius = this.radius - ( this.neutronImage.width / 2 );
-        var maxParticles = Math.max( this.numberOfProtons, this.numberOfNeutrons );
-        for ( var i = 0; i < maxParticles; i++ ) {
+        // var maxProtonRadius = this.radius - ( this.protonImage.width / 2 );
+        // var maxNeutronRadius = this.radius - ( this.neutronImage.width / 2 );
+        // var maxParticles = Math.max( this.numberOfProtons, this.numberOfNeutrons );
+        // for ( var i = 0; i < maxParticles; i++ ) {
 
-          // protons
-          if ( i < this.numberOfProtons ) {
-            var dP = maxProtonRadius * Math.sqrt( RAND.random() ); // random from center distance
-            var thetaP = 2 * Math.PI * RAND.random(); // random angle around center
-            var xP = ( this.centerX - this.protonImage.width / 2 ) + ( dP * Math.cos( thetaP ) );
-            var yP = ( this.centerY - this.protonImage.height / 2 ) + ( dP * Math.sin( thetaP ) );
-            context.drawImage( this.protonImage, xP, yP, this.protonImage.width, this.protonImage.height );
-          }
+        //   // protons
+        //   if ( i < this.numberOfProtons ) {
+        //     var dP = maxProtonRadius * Math.sqrt( RAND.random() ); // random from center distance
+        //     var thetaP = 2 * Math.PI * RAND.random(); // random angle around center
+        //     var xP = ( this.centerX - this.protonImage.width / 2 ) + ( dP * Math.cos( thetaP ) );
+        //     var yP = ( this.centerY - this.protonImage.height / 2 ) + ( dP * Math.sin( thetaP ) );
 
-          // neutrons
-          if ( i < this.numberOfNeutrons ) {
-            var dN = maxNeutronRadius * Math.sqrt( RAND.random() );  // random from center distance
-            var thetaN = 2 * Math.PI * RAND.random();  // random angle around center
-            var xN = ( this.centerX - this.neutronImage.width / 2 ) + ( dN * Math.cos( thetaN ) );
-            var yN = ( this.centerY - this.neutronImage.height / 2 ) + ( dN * Math.sin( thetaN ) );
-            context.drawImage( this.neutronImage, xN, yN, this.neutronImage.width, this.neutronImage.height );
-          }
-        }
+        //     context.drawImage( this.protonImage, xP, yP, this.protonImage.width, this.protonImage.height );
+        //   }
+
+        //   // neutrons
+        //   if ( i < this.numberOfNeutrons ) {
+        //     var dN = maxNeutronRadius * Math.sqrt( RAND.random() );  // random from center distance
+        //     var thetaN = 2 * Math.PI * RAND.random();  // random angle around center
+        //     var xN = ( this.centerX - this.neutronImage.width / 2 ) + ( dN * Math.cos( thetaN ) );
+        //     var yN = ( this.centerY - this.neutronImage.height / 2 ) + ( dN * Math.sin( thetaN ) );
+        //     context.drawImage( this.neutronImage, xN, yN, this.neutronImage.width, this.neutronImage.height );
+        //   }
+        // }
       }
     }
 
