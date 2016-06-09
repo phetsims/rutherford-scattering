@@ -41,6 +41,7 @@ define( function( require ) {
         }
         else {
           self.extractParticle( particleType );
+          self.reconfigureNucleus()
         }
       }
       self.moveAllParticlesToDestination();
