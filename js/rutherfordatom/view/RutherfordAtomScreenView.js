@@ -21,6 +21,7 @@ define( function( require ) {
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
 
   // constants
   var ATOM_BEAM_FILL = 'rgba(143,143,143,0.4)';
@@ -28,6 +29,7 @@ define( function( require ) {
 
   // strings
   var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
+  var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
 
   // images
   var atomImage = require( 'image!RUTHERFORD_SCATTERING/Atom.png' );
@@ -38,23 +40,32 @@ define( function( require ) {
    */
   function RutherfordAtomScreenView( model ) {
 
-    var scaleString = StringUtils.format( pattern0NuclearScaleString, 150 );
+    var nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, 150 );
+    var atomicScaleString = StringUtils.format( pattern0AtomicScaleString, 600 );
 
     // create the atom properties control panel
     var atomPropertiesPanel = new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty,
       model.neutronCountProperty, { resize: false } );
 
-    RSBaseScreenView.call( this, model, scaleString, createSpaceNode, {
+    RSBaseScreenView.call( this, model, nucleusScaleString, createSpaceNode, {
 
       // add an additional control panel for atom properties
       additionalControlPanels: [ atomPropertiesPanel ]
     } );
 
-    // for the 'Atom' scene, the beam should be wider and semi-transparent
+    // scale info for the 'atom' scene, only visible when atom scene is selected
+    var atomicScaleInfoNode = new ScaleInfoNode( atomicScaleString, this.spaceNode.getWidth(), {
+      center: this.scaleInfoNode.center
+    } );
+    this.addChild( atomicScaleInfoNode );
+
+    // for the 'Atom' scene, the beam should be wider and semi-transparent and the scale indicator 
+    // should be updated
     var self = this;
     model.sceneProperty.link( function( scene ) {
       var beam = self.beamNode;
-      if ( scene === 'atom' ) {
+      var atomSceneVisible = scene === 'atom';
+      if ( atomSceneVisible ) {
         beam.setRect( 0, 0, RSConstants.BEAM_SIZE.width * 4, RSConstants.BEAM_SIZE.height );
         beam.fill = ATOM_BEAM_FILL;
       }
@@ -62,6 +73,10 @@ define( function( require ) {
         beam.setRect( 0, 0, RSConstants.BEAM_SIZE.width, RSConstants.BEAM_SIZE.height );
         beam.fill = NUCLEUS_BEAM_FILL;
       }
+
+      self.scaleInfoNode.visible = !atomSceneVisible;
+      atomicScaleInfoNode.visible = atomSceneVisible;
+
       beam.centerX = self.gunNode.centerX;
     } );
 

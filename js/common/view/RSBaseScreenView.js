@@ -123,17 +123,17 @@ define( function( require ) {
     } );
     this.addChild( dashedLines );
 
-    // scale info
-    var scaleInfoNode = new ScaleInfoNode( scaleString, this.spaceNode.getWidth(), {
+    // @protected, visibility can be manipulated by subtypes - scale info
+    this.scaleInfoNode = new ScaleInfoNode( scaleString, this.spaceNode.getWidth(), {
       centerX: this.spaceNode.centerX,
       top: this.spaceNode.bottom + 10
     } );
-    this.addChild( scaleInfoNode );
+    this.addChild( this.scaleInfoNode );
 
     // play/pause button
     var playPauseButton = new PlayPauseButton( model.runningProperty, {
-      bottom: scaleInfoNode.bottom + 60,
-      centerX: scaleInfoNode.centerX - 25,
+      bottom: this.scaleInfoNode.bottom + 60,
+      centerX: this.scaleInfoNode.centerX - 25,
       radius: 23
     } );
     this.addChild( playPauseButton );
@@ -144,7 +144,7 @@ define( function( require ) {
       },
       model.runningProperty, {
         centerY: playPauseButton.centerY,
-        centerX: scaleInfoNode.centerX + 25,
+        centerX: this.scaleInfoNode.centerX + 25,
         radius: 15
       } );
     this.addChild( stepButton );
