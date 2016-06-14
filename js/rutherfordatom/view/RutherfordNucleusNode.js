@@ -15,6 +15,10 @@ define( function( require ) {
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var Property = require( 'AXON/Property' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var Vector2 = require( 'DOT/Vector2' );
+  var RutherfordNucleus = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleus' );
 
   // constants
   var MIN_NUCLEUS_RADIUS = 20; // view coordinates
@@ -198,47 +202,73 @@ define( function( require ) {
             }
           } );
         }
-
-        // this.rutherfordNucleus.neutrons.forEach( function( neutron ) {
-        //   var xN = ( self.center.x - self.neutronImage.width / 2 ) + neutron.position.x;
-        //   var yN = ( self.center.y - self.neutronImage.height / 2 ) + neutron.position.y;
-        //   context.drawImage( self.neutronImage, xN, yN, self.neutronImage.width, self.neutronImage.height );
-        // } );
-
-        // this.rutherfordNucleus.protons.forEach( function( proton ) {
-        //   var xP = ( self.center.x - self.protonImage.width / 2 ) + proton.position.x;
-        //   var yP = ( self.center.y - self.protonImage.height / 2 ) + proton.position.y;
-        //   context.drawImage( self.protonImage, xP, yP, self.protonImage.width, self.protonImage.height );
-        // } );
-
-
-
-        // Randomly place protons and neutrons inside a circle
-        // var maxProtonRadius = this.radius - ( this.protonImage.width / 2 );
-        // var maxNeutronRadius = this.radius - ( this.neutronImage.width / 2 );
-        // var maxParticles = Math.max( this.numberOfProtons, this.numberOfNeutrons );
-        // for ( var i = 0; i < maxParticles; i++ ) {
-
-        //   // protons
-        //   if ( i < this.numberOfProtons ) {
-        //     var dP = maxProtonRadius * Math.sqrt( RAND.random() ); // random from center distance
-        //     var thetaP = 2 * Math.PI * RAND.random(); // random angle around center
-        //     var xP = ( this.centerX - this.protonImage.width / 2 ) + ( dP * Math.cos( thetaP ) );
-        //     var yP = ( this.centerY - this.protonImage.height / 2 ) + ( dP * Math.sin( thetaP ) );
-
-        //     context.drawImage( this.protonImage, xP, yP, this.protonImage.width, this.protonImage.height );
-        //   }
-
-        //   // neutrons
-        //   if ( i < this.numberOfNeutrons ) {
-        //     var dN = maxNeutronRadius * Math.sqrt( RAND.random() );  // random from center distance
-        //     var thetaN = 2 * Math.PI * RAND.random();  // random angle around center
-        //     var xN = ( this.centerX - this.neutronImage.width / 2 ) + ( dN * Math.cos( thetaN ) );
-        //     var yN = ( this.centerY - this.neutronImage.height / 2 ) + ( dN * Math.sin( thetaN ) );
-        //     context.drawImage( this.neutronImage, xN, yN, this.neutronImage.width, this.neutronImage.height );
-        //   }
-        // }
       }
+    }
+
+  }, {
+
+    /**
+     * Create an icon of the Rutherford Nucleus with the desired number of protons and neutrons.
+     * 
+     * @param {number} protonCount
+     * @param {number} neutronCount
+     */
+    RutherfordNucleusIcon: function( protonCount, neutronCount ) {
+
+      // create static properties and nucleus for the icon
+      var protonCountProperty = new Property( protonCount );
+      var neutronCountProperty = new Property( neutronCount );
+      var nucleus = new RutherfordNucleus( protonCountProperty, neutronCountProperty );
+
+      return RutherfordNucleusNode.paintNucleusIcon( nucleus );
+    },
+
+    /**
+     * Paint an icon of the nucleus.  This is different from the paint algorithm above becuase
+     * it renders nucleons with individual circle nodes rather than painting a single image in the context.
+     * Using image improves the render time for a dynamic nucleus but can be blury for static icons at 
+     * which are scaled.
+     * 
+     * @param  {RutherfordNucleus} rutherfordNucleus
+     * @return {Node}
+     * @public
+     */
+    paintNucleusIcon: function( rutherfordNucleus ) {
+      var iconNode = new Node();
+
+      var protons = rutherfordNucleus.protons.getArray().slice( 0 );
+      var neutrons = rutherfordNucleus.neutrons.getArray().slice( 0 );
+      var nucleons = protons.concat( neutrons );
+
+      // get the number of layers in the particle
+      var zLayer = 0;
+      nucleons.forEach( function( nucleon ) {
+        if ( nucleon.zLayer > zLayer ) {
+          zLayer = nucleon.zLayer;
+        }
+      } );
+
+      // add the layers, starting from the largest which is in the back
+      for ( var i = zLayer; i  >= 0; i-- ) {
+        nucleons.forEach( function( nucleon ) {
+          if ( nucleon.zLayer === i ) {
+            var xN = nucleon.position.x;
+            var yN = nucleon.position.y;
+            if ( nucleon.type === 'neutron' ) {
+              var neutronNode = ParticleNodeFactory.createNeutron();
+              neutronNode.translation = new Vector2( xN, yN );
+              iconNode.addChild( neutronNode );
+            }
+            else {
+              var protonNode = ParticleNodeFactory.createProton();
+              protonNode.translation = new Vector2( xN, yN );
+              iconNode.addChild( protonNode );
+            }
+          }
+        } );
+      }
+
+      return iconNode;
     }
 
   } ); // inherit

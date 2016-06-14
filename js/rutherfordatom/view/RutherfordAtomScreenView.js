@@ -18,6 +18,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Node = require( 'SCENERY/nodes/Node' );
 
@@ -30,7 +31,6 @@ define( function( require ) {
 
   // images
   var atomImage = require( 'image!RUTHERFORD_SCATTERING/Atom.png' );
-  var nucleusImage = require( 'image!RUTHERFORD_SCATTERING/Nucleus.png' );
 
   /**
    * @param {RutherfordAtomModel} model
@@ -68,7 +68,7 @@ define( function( require ) {
     // add scene control
     var buttonOptions = { scale: 0.18 };
     var sceneRadioButtons = new RadioButtonGroup( model.sceneProperty, [
-      { value: 'nucleus', node: new Image( nucleusImage, buttonOptions ) },
+      { value: 'nucleus', node: RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 ) },
       { value: 'atom', node: new Image( atomImage, buttonOptions ) }
     ], {
       orientation: 'vertical',
