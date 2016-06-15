@@ -41,6 +41,10 @@ define( function( require ) {
      */
     addParticle: function( alphaParticle ) {
       this.particles.push( alphaParticle );
+
+      // the 'initial position' for the particle relative to the atom center also needs to be set
+      // for correct behavior of the trajectory algorithm
+      alphaParticle.initialPosition = alphaParticle.position;
     },
 
     /**

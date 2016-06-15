@@ -38,6 +38,10 @@ define( function( require ) {
     // @public (read-only) - the position coordinates used for trace rendering
     this.positions = [];
 
+    // @public - initial position of the particle in a new bounding box, must be set
+    // once a particle enters the bounding box of an atom
+    this.initialPosition = new Vector2( 0, 0 );
+
     // @private - save new particle location
     var self = this;
     var positionListener = function( position ) {

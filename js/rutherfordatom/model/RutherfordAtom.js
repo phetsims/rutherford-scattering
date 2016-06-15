@@ -84,7 +84,8 @@ define( function( require ) {
       // (x0,y0) : the alpha particle's initial position, relative to the atom's center.
       //-------------------------------------------------------------------------------
 
-      var initialPosition = alphaParticle.positionProperty.initialValue;
+      // var initialPosition = alphaParticle.positionProperty.initialValue;
+      var initialPosition = alphaParticle.initialPosition;
       var relativeInitialPosition = initialPosition.minus( this.position );
 
       var x0 = Math.abs( relativeInitialPosition.x );
