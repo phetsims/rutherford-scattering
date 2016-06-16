@@ -22,11 +22,10 @@ define( function( require ) {
    * @constructor
    */
   function RutherfordNucleus( protonCountProperty, neutronCountProperty ) {
-    ParticleAtom.call( this );
-
-    // TODO: after extracting particles, I had to call reconfigureNucleus in removeParticle() of ParticleAtom.
-    // I suppose I could call that here if reconfigureNucleus is meant to be public.
-
+    
+    ParticleAtom.call( this, {
+      nucleonRadius: 3
+    } );
     var self = this;
     var particle;
 

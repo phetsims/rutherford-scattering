@@ -83,7 +83,6 @@ define( function( require ) {
       ];
 
       self.controlPanel.updatePanels( panels );
-      console.log( self.controlPanel.height );
 
       self.scaleInfoNode.visible = !atomSceneVisible;
       atomicScaleInfoNode.visible = atomSceneVisible;
