@@ -1,12 +1,4 @@
 {
-  "RutherfordAtom-screen-icon.png": {
-    "text": [
-      "Copyright 2002-2016 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "created by Amy Hanson"
-  },
   "PlumPuddingAtom-screen-icon.png": {
     "text": [
       "Copyright 2002-2016 University of Colorado Boulder"
@@ -24,14 +16,6 @@
     "notes": "created by Amy Hanson"
   },
   "Atom.png": {
-    "text": [
-      "Copyright 2002-2016 University of Colorado Boulder"
-    ],
-    "projectURL": "http://phet.colorado.edu",
-    "license": "contact phethelp@colorado.edu",
-    "notes": "created by Amy Hanson"
-  },
-  "Nucleus.png": {
     "text": [
       "Copyright 2002-2016 University of Colorado Boulder"
     ],

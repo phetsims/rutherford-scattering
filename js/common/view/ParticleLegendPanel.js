@@ -1,9 +1,10 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Legend for all the particles in the sim
+ * Legend for all the particles in the sim.
  *
  * @author Dave Schmitz (Schmitzware)
+ * @author Jesse Greenberg
  */
 define( function( require ) {
   'use strict';
@@ -17,52 +18,45 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
 
   // strings
   var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
-  var electronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
-  var protonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
-  var neutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
-  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
 
   // constants
-  var LEGEND_ITEM_HORIZONTAL_SPACING = 7;
+  var LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;
+  var LEGEND_TITLE_HORIZONTAL_SPACING = 10;
 
   /**
    *
    * @param {Object} [options]
    * @constructor
    */
-  function ParticleLegendPanel( options ) {
+  function ParticleLegendPanel( children, options ) {
 
     options = _.extend( {
-      xMargin: 15,
+      xMargin: 5,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
       fill: RSConstants.PANEL_COLOR,
-      stroke: RSConstants.PANEL_STROKE
+      stroke: RSConstants.PANEL_STROKE,
+      itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
 
     var legendText = new Text( legendString, {
       font: RSConstants.PANEL_TITLE_FONT,
-      fontWeight: 'bold',
+      fontWeight: 'bold', 
       fill: RSConstants.PANEL_TITLE_COLOR,
       maxWidth: 225
     } );
 
-    var children = [ legendText ];
-
-    // add the legend particle entries
-    children.push( createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
-    children.push( createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
-    children.push( createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
-    children.push( createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleString ) );
+    // add the legend title to the begining of the children
+    var legendTitleRow = createLegendTitle( legendText );
+    children.unshift( legendTitleRow );
 
     var content = new VBox( {
-      spacing: RSConstants.PANEL_CHILD_SPACING,
+      spacing: options.itemVerticalSpacing,
       top: 0,
       right: 0,
       align: 'left',
@@ -70,6 +64,19 @@ define( function( require ) {
     } );
 
     Panel.call( this, content, options );
+  }
+
+  /**
+   * Build the title row consisting of the title text
+   */
+  function createLegendTitle( titleText ) {
+    var hStrut = new HStrut( LEGEND_TITLE_HORIZONTAL_SPACING );
+
+    return new HBox( {
+      spacing: 0,
+      align: 'center',
+      children: [ hStrut, titleText ]
+    } );
   }
 
   /**
@@ -96,6 +103,10 @@ define( function( require ) {
 
   rutherfordScattering.register( 'ParticleLegendPanel', ParticleLegendPanel );
 
-  return inherit( Panel, ParticleLegendPanel );
+  return inherit( Panel, ParticleLegendPanel, {}, {
+    createParticleBox: function( particleNode, titleString ) {
+      return createParticleBox( particleNode, titleString );
+    }
+  } );
 
 } );

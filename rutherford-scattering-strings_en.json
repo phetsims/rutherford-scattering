@@ -47,6 +47,15 @@
   "neutron": {
     "value": "Neutron"
   },
+  "nucleus": {
+    "value": "Nucleus"
+  },
+  "electronEnergyLevel": {
+    "value": "Electron Energy Level"
+  },
+  "alphaParticleTrace": {
+    "value": "Alpha Particle Trace"
+  },
   "legend": {
     "value": "Legend"
   },

@@ -17,9 +17,8 @@ define( function( require ) {
   var TargetMaterialNode = require( 'RUTHERFORD_SCATTERING/common/view/TargetMaterialNode' );
   var TinyBox = require( 'RUTHERFORD_SCATTERING/common/view/TinyBox' );
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
-  var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
+  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
   var Path = require( 'SCENERY/nodes/Path' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -31,6 +30,7 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
   var Property = require( 'AXON/Property' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var RSControlPanel = require( 'RUTHERFORD_SCATTERING/common/view/RSControlPanel' );
   var Dimension2 = require( 'DOT/Dimension2' );
 
   // strings
@@ -149,26 +149,20 @@ define( function( require ) {
       } );
     this.addChild( stepButton );
 
-    // control panels that are common to all ScreenViews
+    // @protected, for visibility control by subtypes - control panels that are common to all ScreenViews
+    this.nuclearParticleLegend = new NuclearParticleLegendPanel( { resize: false } );
+    this.alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, showAlphaTraceProperty, { resize: false } );
     var controlPanels = [
-      new ParticleLegendPanel( { resize: false } ),
-      new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, showAlphaTraceProperty, { resize: false } )
+      this.nuclearParticleLegend,
+      this.alphaParticlePropertiesPanel
     ];
 
-    // additional controls panels, optionally added by subtype
-    if ( options.additionalControlPanels ) {
-      controlPanels = controlPanels.concat( options.additionalControlPanels );
-    }
-
-    // arrange control panels vertically
-    var vBox = new VBox( {
-      align: 'left',
-      children: controlPanels,
-      spacing: RSConstants.PANEL_VERTICAL_MARGIN,
+    // @protected - collect all control panels in a single panel
+    this.controlPanel = new RSControlPanel( controlPanels, {
       top: this.spaceNode.top,
       left: this.spaceNode.right + RSConstants.PANEL_SPACE_MARGIN
     } );
-    this.addChild( vBox );
+    this.addChild( this.controlPanel );
 
     // reset all button
     var resetAllButton = new ResetAllButton( {
@@ -176,7 +170,7 @@ define( function( require ) {
         showAlphaTraceProperty.reset();
         model.reset();
       },
-      right: vBox.right,
+      right: this.controlPanel.right,
       bottom: this.layoutBounds.bottom - 20
     } );
     this.addChild( resetAllButton );

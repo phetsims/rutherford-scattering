@@ -13,6 +13,8 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Circle = require( 'SCENERY/nodes/Circle' );
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
 
   // constants
@@ -21,10 +23,15 @@ define( function( require ) {
   var PROTON_COLOR = 'rgb(255,69,0)';
   var NEUTRON_COLOR = 'rgb(192,192,192)';
   var PARTICLE_COLOR = 'rgb(255,0,255)';
+  var NUCLEUS_COLOR = 'rgb( 200, 200, 95 )';
+  var ENERGY_LEVEL_COLOR = 'rgb(128,128,128)';
   var ELECTRON_RADIUS = 2.5;
   var PROTON_RADIUS = 4;
   var NEUTRON_RADIUS = 4;
   var PARTICLE_RADIUS = 2;
+  var NUCLEUS_RADIUS = 2;
+  var ENERGY_LEVEL_LINE_LENGTH = 5;
+
 
   var ParticleNodeFactory = {
 
@@ -63,6 +70,49 @@ define( function( require ) {
       return new Node( {
         children: [
           new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR )
+        ]
+      } );
+    },
+
+    /**
+     * Creates a nucleus node, represented by a small circle.
+     * @returns {Node}
+     * @public
+     */
+    createNucleus: function() {
+      return new Node( {
+        children: [
+          new Circle( NUCLEUS_RADIUS, { fill: NUCLEUS_COLOR } )
+        ]
+      } );
+    },
+
+    /**
+     * Create an icon for the legend describing the energy level of an electron
+     * @return {Node} [description]
+     */
+    createEnergyLevel: function() {
+      return new Node( {
+        children: [
+          new Line( 0, 0, ENERGY_LEVEL_LINE_LENGTH, 0, { stroke: ENERGY_LEVEL_COLOR } ),
+          new Line( 2 * ENERGY_LEVEL_LINE_LENGTH, 0, 3 * ENERGY_LEVEL_LINE_LENGTH, 0, { stroke: ENERGY_LEVEL_COLOR } ),
+          new Line( 4 * ENERGY_LEVEL_LINE_LENGTH, 0, 5 * ENERGY_LEVEL_LINE_LENGTH, 0, {stroke: ENERGY_LEVEL_COLOR } )
+        ]
+      } );
+    },
+
+    /**
+     * Create an icon for the legend describing the particle trace, represented as an arrow
+     * @return {Node}
+     */
+    createParticleTrace: function() {
+      return new Node( {
+        children: [
+          new ArrowNode( 0, 0, 20, 0, { 
+            fill: PARTICLE_COLOR,
+            tailWidth: 2,
+            headHeight: 10
+          } )
         ]
       } );
     },

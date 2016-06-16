@@ -15,6 +15,7 @@ define( function( require ) {
   var NucleusSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/NucleusSpaceNode' );
   var AtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomSpaceNode' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
+  var AtomParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomParticleLegendPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
@@ -43,15 +44,7 @@ define( function( require ) {
     var nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, 150 );
     var atomicScaleString = StringUtils.format( pattern0AtomicScaleString, 600 );
 
-    // create the atom properties control panel
-    var atomPropertiesPanel = new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty,
-      model.neutronCountProperty, { resize: false } );
-
-    RSBaseScreenView.call( this, model, nucleusScaleString, createSpaceNode, {
-
-      // add an additional control panel for atom properties
-      additionalControlPanels: [ atomPropertiesPanel ]
-    } );
+    RSBaseScreenView.call( this, model, nucleusScaleString, createSpaceNode );
 
     // scale info for the 'atom' scene, only visible when atom scene is selected
     var atomicScaleInfoNode = new ScaleInfoNode( atomicScaleString, this.spaceNode.getWidth(), {
@@ -59,20 +52,38 @@ define( function( require ) {
     } );
     this.addChild( atomicScaleInfoNode );
 
-    // for the 'Atom' scene, the beam should be wider and semi-transparent and the scale indicator 
-    // should be updated
+    // add the control panels for this screen view
+    this.atomParticleLegend = new AtomParticleLegendPanel( { resize: false } );
+    var atomPropertiesPanel = new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty,
+      model.neutronCountProperty, { resize: false } );
+
+    // for the 'Atom' scene, the beam should be wider and semi-transparent, the scale indicator 
+    // should be updated, and the control/legend panels need to change
     var self = this;
     model.sceneProperty.link( function( scene ) {
+      var legendPanel;
       var beam = self.beamNode;
       var atomSceneVisible = scene === 'atom';
+
       if ( atomSceneVisible ) {
         beam.setRect( 0, 0, RSConstants.BEAM_SIZE.width * 4, RSConstants.BEAM_SIZE.height );
         beam.fill = ATOM_BEAM_FILL;
+        legendPanel = self.atomParticleLegend;
       }
       else {
         beam.setRect( 0, 0, RSConstants.BEAM_SIZE.width, RSConstants.BEAM_SIZE.height );
         beam.fill = NUCLEUS_BEAM_FILL;
+        legendPanel = self.nuclearParticleLegend;
       }
+
+      var panels = [
+        legendPanel,
+        self.alphaParticlePropertiesPanel,
+        atomPropertiesPanel
+      ];
+
+      self.controlPanel.updatePanels( panels );
+      console.log( self.controlPanel.height );
 
       self.scaleInfoNode.visible = !atomSceneVisible;
       atomicScaleInfoNode.visible = atomSceneVisible;

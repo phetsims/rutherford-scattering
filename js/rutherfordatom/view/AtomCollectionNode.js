@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var Node = require( 'SCENERY/nodes/Node' );
 
   // constants
@@ -40,7 +40,7 @@ define( function( require ) {
     atomSpace.atoms.forEach( function( atom ) {
 
       // a small circle represents each nucleus
-      var nucleusCircle = new Circle( 2, { fill: RSConstants.PANEL_TITLE_COLOR } );
+      var nucleusCircle = ParticleNodeFactory.createNucleus();
       nucleusCircle.center = modelViewTransform.modelToViewPosition( atom.position );
       self.addChild( nucleusCircle );
 
