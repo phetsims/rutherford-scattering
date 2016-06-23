@@ -126,6 +126,10 @@ define( function( require ) {
           // apply bounding box if it is prepared and the particle reaches the atomic bounding box
           if ( particle.preparedBoundingBox ) {
             if ( particle.preparedBoundingBox.containsPoint( particle.position ) && particle.atom !== particle.preparedAtom ) {
+              if ( particle.atom ) {
+                // if the particle already belongs to an atom, remove it from the atom
+                particle.atom.removeParticle( particle );
+              }
               // immediately set the atom so it stops traveling farther into the box
               particle.atom = particle.preparedAtom;
               particle.preparedAtom.addParticle( particle );

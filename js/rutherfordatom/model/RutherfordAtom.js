@@ -41,10 +41,12 @@ define( function( require ) {
   return inherit( Atom, RutherfordAtom, {
 
     /**
-     * Remove a particle.  On error, notify the space so that the particle can be removed 
-     * entirely not just this atom.
+     * Remove a particle.  Most of the time, a particle needs to be removed from this atom but kept in 
+     * the space so that a new atom can pick it up if necessary.  On error, notify the space so that 
+     * the particle can be removed entirely from the model.
      * @param  {AlphaParticle}  particle
      * @param  {Boolean} isError
+     * @public
      */
     removeParticle: function( particle, isError ) {
       Atom.prototype.removeParticle.call( this, particle );
@@ -74,12 +76,6 @@ define( function( require ) {
      * to fail as the alpha particle's horizontal position (x) gets closer
      * to zero. So the Gun model is calibrated to fire alpha particles 
      * with some min initial x value.
-     *
-     * NOTE: In the original algorithm, particles are removed to prevent failure.  Now that the sim
-     * supports multiple deflections, this is too aggressive and simply returning is sufficient.  Commenting out
-     * these removeParticle functions, but keeping for documentation since I am unfamiliar with this algorithm
-     * and this may need to be revisited in the future.
-     * - Jesse Greenberg (6/22/16)
      * 
      * @param {AlphaParticle} alphaParticle
      * @param {number} dt
@@ -148,9 +144,9 @@ define( function( require ) {
       // calculate D -
       //-------------------------------------------------------------------------------
 
-      // handle potential algorithm failures, see documentation above
+      // handle potential algorithm failures
       if ( ( pd <= 0 ) || ( s0 === 0 ) ) {
-        // this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true );
         return;
       }
 
@@ -160,20 +156,20 @@ define( function( require ) {
       // calculate new alpha particle position, in Polar coordinates
       //-------------------------------------------------------------------------------
 
-      // check intermediate values to handle potential algorithm failures, see documentation above
+      // check intermediate values to handle potential algorithm failures
       var i0 = ( x0 * x0 ) + ( y0 * y0 );
       if ( i0 < 0 ) {
-        // this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true );
         return;
       }
 
       // b, horizontal distance to atom's center at y == negative infinity
       var b1 = Math.sqrt( i0 );
 
-      // check intermediate values to handle potential algorithm failures, see documentation above
+      // check intermediate values to handle potential algorithm failures
       var i1 = ( -2 * D * b1 ) - ( 2 * D * y0 ) + ( x0 * x0 );
       if ( i1 < 0 ) {
-        // this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true );
         return;
       }
 
@@ -181,10 +177,10 @@ define( function( require ) {
 
       // convert current position to Polar coordinates, measured counterclockwise from the -y axis
 
-      // check intermediate values to handle potential algorithm failures, see documentation above
+      // check intermediate values to handle potential algorithm failures
       var i2 = ( x * x ) + ( y * y );
       if ( i2 < 0 ) {
-        // this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true );
         return;
       }
 
@@ -194,16 +190,15 @@ define( function( require ) {
       // new position (in Polar coordinates) and speed
       var t1 = ( ( b * Math.cos( phi ) ) - ( ( D / 2 ) * Math.sin( phi ) ) );
 
-      // check intermediate values to handle potential algorithm failures, see documentation above
+      // check intermediate values to handle potential algorithm failures
       var i3 = Math.pow( b, 4 ) + ( r * r * t1 * t1 );
       if ( i3 < 0 ) {
-        // this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true );
         return;
       }
       var phiNew = phi + ( ( b * b * s * dt ) / ( r * Math.sqrt( i3 ) ) );
 
       // check intermediate values to handle potential algorithm failures
-      // see documentation above, this one must be kept because it truly signifies a failure
       var i4 = ( ( b * Math.sin( phiNew ) ) + ( ( D / 2 ) * ( Math.cos( phiNew ) - 1 ) ) );
       if ( i4 < 0 ) {
         this.removeParticle( alphaParticle, true );
@@ -211,9 +206,9 @@ define( function( require ) {
       }
       var rNew = Math.abs( ( b * b ) / i4 );
 
-      // handle potential algorithm failures, see documentation above
+      // handle potential algorithm failures
       if ( rNew === 0 ) {
-        // this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true );
         return;
       }
       var sNew = s0 * Math.sqrt( 1 - ( D / rNew ) );
@@ -234,7 +229,7 @@ define( function( require ) {
       //-------------------------------------------------------------------------------
 
       if ( !( b > 0 ) || !( sNew > 0 ) ) {
-        // this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true );
         return;
       }
 
