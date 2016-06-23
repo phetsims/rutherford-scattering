@@ -12,6 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Emitter = require( 'AXON/Emitter' );
 
   /**
    * Constructor.
@@ -27,9 +28,22 @@ define( function( require ) {
 
     // @public (read-only)
     this.atoms = [];
-    this.particles = [];
+    this.particles = []; // all particles contained by this space
+    this.particlesInEmptySpace = []; // all particles in empty space, excluding those that are in an atom
     this.bounds = bounds;
     this.atomWidth = options.atomWidth;
+
+    // emitter which signifies that a particle has been transitioned to a new atom
+    this.particleTransitionedEmitter = new Emitter();
+
+    // @public - emitter which signifies that a particle has been removed from an atom
+    this.particleRemovedFromAtomEmitter = new Emitter();
+
+    // when a particle has been removed from an atom, remove it from the space as well
+    var self = this;
+    this.particleRemovedFromAtomEmitter.addListener( function( particle ) {
+      self.removeParticle( particle );
+    } );
 
     // @public - whether this space is visible or not
     this.isVisible = true;
@@ -37,18 +51,32 @@ define( function( require ) {
 
   rutherfordScattering.register( 'AtomSpace', AtomSpace );
 
-  return inherit( AtomSpace, AtomSpace, {
+  return inherit( Object, AtomSpace, {
 
     /**
+     * Add a particle to this space, and track it as being in the empty space
+     * at first.
      * @param {AlphaParticle} alphaParticle
      * @public
      */
     addParticle: function( alphaParticle ) {
       this.particles.push( alphaParticle );
+      this.addParticleToEmptySpace( alphaParticle );
     },
 
     /**
-     * Remove a particle from this space
+     * Add a particle to empty space.  Particles in the empty space
+     * are outside the bounds of an atom, and the AtomSpace will transition
+     * the particle from one atom to another if it comes within atomic bounds.
+     * @param {AlphaParticle} alphaParticle
+     */
+    addParticleToEmptySpace: function( alphaParticle ) {
+      alphaParticle.isInSpace = true;
+      this.particlesInEmptySpace.push( alphaParticle );
+    },
+
+    /**
+     * Remove a particle from this space.
      * @param  {AlphaParticle} alphaParticle
      * @public
      */
@@ -56,6 +84,78 @@ define( function( require ) {
       var index = this.particles.indexOf( alphaParticle );
       if ( index > -1 ) {
         this.particles.splice( index, 1 );
+        this.removeParticleFromEmptySpace( alphaParticle );
+      }
+    },
+
+    /**
+     * Remove a particle from empty space.  The particle may still be associated
+     * with the model, but is inside of an atom in the space.
+     * @param  {AlphaParticle} alphaParticle
+     */
+    removeParticleFromEmptySpace: function( alphaParticle ) {
+      var index = this.particlesInEmptySpace.indexOf( alphaParticle );
+      if ( index > -1 ) {
+        alphaParticle.isInSpace = false;
+        this.particlesInEmptySpace.splice( index, 1 );
+      }
+    },
+
+    /**
+     * Transition a particle in empty space to an atom if the particle hits atomic bounds.  If the particle hits
+     * a new atom's bounding circle, a new shape is prepared and transformed for the trajectory algorithm.  Once
+     * the particle hits the atom's bounding box, the prepared shape is applied until the particle reaches
+     * a new atom.
+     */
+    transitionParticlesToAtoms: function() {
+      for ( var i = 0; i < this.particlesInEmptySpace.length; i++ ) {
+        var particle = this.particlesInEmptySpace[ i ];
+
+        for ( var j = 0; j < this.atoms.length; j++ ) {
+          var atom = this.atoms[ j ];
+
+          if ( particle.preparedAtom !== atom && atom.boundingCircle.containsPoint( particle.position ) ) {
+            particle.prepareBoundingBox( atom );
+            particle.preparedAtom = atom;
+
+            // purely for debugging to visualize transformed shapes
+            this.particleTransitionedEmitter.emit1( particle );
+
+          }
+
+          // apply bounding box if it is prepared and the particle reaches the atomic bounding box
+          if ( particle.preparedBoundingBox ) {
+            if ( particle.preparedBoundingBox.containsPoint( particle.position ) && particle.atom !== particle.preparedAtom ) {
+              // immediately set the atom so it stops traveling farther into the box
+              particle.atom = particle.preparedAtom;
+              particle.preparedAtom.addParticle( particle );
+
+              particle.boundingBox = particle.preparedBoundingBox;
+              particle.rotationAngle = particle.preparedRotationAngle;
+
+              this.removeParticleFromEmptySpace( particle );
+            }
+          }
+        }
+      }
+    },
+
+    /**
+     * Once the particle leaves the bounding circle of an atom, add it back to the space so that it
+     * can be added to a new particle for multiple deflections if necessary.
+     * @public
+     */
+    transitionParticlesToSpace: function() {
+      for ( var i = 0; i < this.particles.length; i++ ) {
+        var particle = this.particles[ i ];
+
+        // if the particle leaves the bounding circle of its atom, add it back into empty space
+        if ( !particle.isInSpace ) {
+          // once the particle exits the atom's bounding box, remove it
+          if ( !particle.atom.boundingCircle.containsPoint( particle.position ) ) {
+            this.addParticleToEmptySpace( particle );        
+          }
+        }
       }
     },
 
@@ -63,28 +163,21 @@ define( function( require ) {
      * All particles that are in the space and not contained by an atom need to move straight through.
      * If a particle moves into an atom's bounds, it should be removed from the space and added to
      * that atom.  The atom will then handle the particle's trajectory through space.
+     * @private
      */
     moveParticles: function( dt ) {
-      var particleMovedToAtom;
+
+      // move particles into atoms if they reach atomic bounds
+      this.transitionParticlesToAtoms();
+
+      // move particles back into empty space if they leave atomic bounds
+      this.transitionParticlesToSpace();
+
+      // move particles in empty space straight through
       for ( var i = 0 ; i < this.particles.length; i++ ) {
-        particleMovedToAtom = false;
-        var alphaParticle = this.particles[ i ]; // for readability
+        var alphaParticle = this.particles[ i ];
 
-        // if the particle is in the bounds of another atom, add it to the atom and remove from the space
-        for ( var j = 0; j < this.atoms.length; j++ ) {
-          var atom = this.atoms[ j ];
-          if ( atom.bounds.containsPoint( alphaParticle.position ) ) {
-            this.removeParticle( alphaParticle );
-            atom.addParticle( alphaParticle );
-
-            // do nothing more with this particle
-            particleMovedToAtom = true;
-            break;
-          }
-        }
-
-        // if the particle has not been added to an atom, move it through space
-        if ( !particleMovedToAtom ) {
+        if ( !alphaParticle.atom ) {
           var speed = alphaParticle.speedProperty.get();
           var distance = speed * dt;
           var direction = alphaParticle.orientationProperty.get();
@@ -97,7 +190,7 @@ define( function( require ) {
         }
       }
 
-      // move particles owned by the atoms
+      // move particles contained by atomic bounds
       this.atoms.forEach( function( atom ) {
         atom.moveParticles( dt );
       } );
@@ -113,8 +206,8 @@ define( function( require ) {
       for ( var i = 0; i < this.atoms.length - 1; i++ ) {
         for ( var j = i + 1; j < this.atoms.length; j++ ) {
           // get the atom bounds and erode slightly because bounds should perfectly overlap at edges
-          var atom1Bounds = this.atoms[ i ].bounds.eroded( 0.01 );
-          var atom2Bounds = this.atoms[ j ].bounds.eroded( 0.01 );
+          var atom1Bounds = this.atoms[ i ].boundingRect.bounds;
+          var atom2Bounds = this.atoms[ j ].boundingRect.bounds;
           var boundsIntersect = atom1Bounds.intersectsBounds( atom2Bounds );
           assert && assert( !boundsIntersect, 'Atom bounds intersect' );
         }

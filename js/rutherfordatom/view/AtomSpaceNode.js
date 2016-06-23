@@ -15,6 +15,11 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   var AtomCollectionNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomCollectionNode' );
+  var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
+  var Path = require( 'SCENERY/nodes/Path' );
+
+  // constants
+  var DEBUG_SHAPES = RSQueryParameters.SHOW_DEBUG_SHAPES;
 
   /**
    * @param {RSBaseModel} model
@@ -35,6 +40,16 @@ define( function( require ) {
     this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );
 
     ParticleSpaceNode.call( this, model.atomSpace, showAlphaTraceProperty, modelViewTransform, options );
+    var self = this;
+
+    if ( DEBUG_SHAPES ) {
+      model.atomSpace.particleTransitionedEmitter.addListener( function( particle ) {
+        // a particle has been transitioned to a new atom - show the bounding box of the particle
+        self.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), { 
+          stroke: 'rgb(114,183,188)'
+        } ) );
+      } );      
+    }
 
   }
 
@@ -50,7 +65,7 @@ define( function( require ) {
     paintSpace: function( context ) {
 
       // Slight chance the image used isn't available. In that case, return & try again on next frame
-      if ( this.atomsNode.image === null ) {
+      if ( !this.atomsNode.image ) {
         return;
       }
 

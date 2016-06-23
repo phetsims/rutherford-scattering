@@ -6,6 +6,7 @@
  * (document may be out of date).
  *
  * @author Dave Schmitz (Schmitzware)
+ * @author Jesse Greenberg
  */
 define( function( require ) {
   'use strict';
@@ -18,20 +19,40 @@ define( function( require ) {
   var Atom = require( 'RUTHERFORD_SCATTERING/common/model/Atom' );
 
   /**
-   * @constructor
+   * Constructor.
+   * @param {Emitter} particleRemovedEmitter
+   * @param {Property.<number>} protonCountProperty
+   * @param {Vector2} position
+   * @param {number} boundingWidth
+   * @param {Object} options
    */
-  function RutherfordAtom( protonCountProperty, position, boundingWidth, options ) {
+  function RutherfordAtom( particleRemovedEmitter, protonCountProperty, position, boundingWidth, options ) {
 
     Atom.call( this, position, boundingWidth, options );
 
     // @private
     this.protonCountProperty = protonCountProperty;
+    this.particleRemovedemitter = particleRemovedEmitter;
 
   }
 
   rutherfordScattering.register( 'RutherfordAtom', RutherfordAtom );
 
   return inherit( Atom, RutherfordAtom, {
+
+    /**
+     * Remove a particle.  On error, notify the space so that the particle can be removed 
+     * entirely not just this atom.
+     * @param  {AlphaParticle}  particle
+     * @param  {Boolean} isError
+     */
+    removeParticle: function( particle, isError ) {
+      Atom.prototype.removeParticle.call( this, particle );
+
+      if ( isError ) {
+        this.particleRemovedemitter.emit1( particle );
+      }
+    },
 
     /**
      * ASSUMPTIONS MADE IN THIS ALGORITHM: 
@@ -53,6 +74,12 @@ define( function( require ) {
      * to fail as the alpha particle's horizontal position (x) gets closer
      * to zero. So the Gun model is calibrated to fire alpha particles 
      * with some min initial x value.
+     *
+     * NOTE: In the original algorithm, particles are removed to prevent failure.  Now that the sim
+     * supports multiple deflections, this is too aggressive and simply returning is sufficient.  Commenting out
+     * these removeParticle functions, but keeping for documentation since I am unfamiliar with this algorithm
+     * and this may need to be revisited in the future.
+     * - Jesse Greenberg (6/22/16)
      * 
      * @param {AlphaParticle} alphaParticle
      * @param {number} dt
@@ -60,6 +87,13 @@ define( function( require ) {
      * @protected
      */
     moveParticle: function( alphaParticle, dt ) {
+
+      // apply a rotation to the particle coordinate frame if nececssary so that
+      // the trajectory algorithm can proceed as if the particle were moving straight
+      // up the space - this is required by the trajectory model, see trajectories.pdf
+      var rotationAngle = alphaParticle.rotationAngle;
+      var correctedInitialPosition = this.rotatePointAround( alphaParticle.initialPosition, this.position, -rotationAngle );
+      var correctedPosition = this.rotatePointAround( alphaParticle.position, this.position, -rotationAngle );
 
       // algorithm fails for x=0, so use this min value
       var X0_MIN = 0.00001;
@@ -71,7 +105,7 @@ define( function( require ) {
       // misc constants that we'll need
       //-------------------------------------------------------------------------------
 
-      var L = this.bounds.getWidth();
+      var L = this.boundingRect.bounds.getWidth();
 
       var p = this.protonCountProperty.get(); // protons in the atom's nucleus
       var pd = RSConstants.DEFAULT_PROTON_COUNT; // default setting for the sim
@@ -84,9 +118,8 @@ define( function( require ) {
       // (x0,y0) : the alpha particle's initial position, relative to the atom's center.
       //-------------------------------------------------------------------------------
 
-      // var initialPosition = alphaParticle.positionProperty.initialValue;
-      var initialPosition = alphaParticle.initialPosition;
-      var relativeInitialPosition = initialPosition.minus( this.position );
+      // var initialPosition = alphaParticle.initialPosition;
+      var relativeInitialPosition = correctedInitialPosition.minus( this.position );
 
       var x0 = Math.abs( relativeInitialPosition.x );
       if ( x0 < X0_MIN ) {
@@ -99,8 +132,8 @@ define( function( require ) {
       // (x,y) : the alpha particle's current position, relative to the atom's center
       //-------------------------------------------------------------------------------
 
-      var position = alphaParticle.positionProperty.get();
-      var relativePosition = position.minus( this.position );
+      // var position = alphaParticle.positionProperty.get();
+      var relativePosition = correctedPosition.minus( this.position );
 
       var x = relativePosition.x;
       var y = relativePosition.y;
@@ -115,9 +148,9 @@ define( function( require ) {
       // calculate D -
       //-------------------------------------------------------------------------------
 
-      // handle potential algorithm failures
+      // handle potential algorithm failures, see documentation above
       if ( ( pd <= 0 ) || ( s0 === 0 ) ) {
-        this.removeParticle( alphaParticle );
+        // this.removeParticle( alphaParticle, true );
         return;
       }
 
@@ -127,20 +160,20 @@ define( function( require ) {
       // calculate new alpha particle position, in Polar coordinates
       //-------------------------------------------------------------------------------
 
-      // check intermediate values to handle potential algorithm failures
+      // check intermediate values to handle potential algorithm failures, see documentation above
       var i0 = ( x0 * x0 ) + ( y0 * y0 );
       if ( i0 < 0 ) {
-        this.removeParticle( alphaParticle );
+        // this.removeParticle( alphaParticle, true );
         return;
       }
 
       // b, horizontal distance to atom's center at y == negative infinity
       var b1 = Math.sqrt( i0 );
 
-      // check intermediate values to handle potential algorithm failures
+      // check intermediate values to handle potential algorithm failures, see documentation above
       var i1 = ( -2 * D * b1 ) - ( 2 * D * y0 ) + ( x0 * x0 );
       if ( i1 < 0 ) {
-        this.removeParticle( alphaParticle );
+        // this.removeParticle( alphaParticle, true );
         return;
       }
 
@@ -148,10 +181,10 @@ define( function( require ) {
 
       // convert current position to Polar coordinates, measured counterclockwise from the -y axis
 
-      // check intermediate values to handle potential algorithm failures
+      // check intermediate values to handle potential algorithm failures, see documentation above
       var i2 = ( x * x ) + ( y * y );
       if ( i2 < 0 ) {
-        this.removeParticle( alphaParticle );
+        // this.removeParticle( alphaParticle, true );
         return;
       }
 
@@ -161,25 +194,26 @@ define( function( require ) {
       // new position (in Polar coordinates) and speed
       var t1 = ( ( b * Math.cos( phi ) ) - ( ( D / 2 ) * Math.sin( phi ) ) );
 
-      // check intermediate values to handle potential algorithm failures
+      // check intermediate values to handle potential algorithm failures, see documentation above
       var i3 = Math.pow( b, 4 ) + ( r * r * t1 * t1 );
       if ( i3 < 0 ) {
-        this.removeParticle( alphaParticle );
+        // this.removeParticle( alphaParticle, true );
         return;
       }
       var phiNew = phi + ( ( b * b * s * dt ) / ( r * Math.sqrt( i3 ) ) );
 
       // check intermediate values to handle potential algorithm failures
+      // see documentation above, this one must be kept because it truly signifies a failure
       var i4 = ( ( b * Math.sin( phiNew ) ) + ( ( D / 2 ) * ( Math.cos( phiNew ) - 1 ) ) );
       if ( i4 < 0 ) {
-        this.removeParticle( alphaParticle );
+        this.removeParticle( alphaParticle, true );
         return;
       }
       var rNew = Math.abs( ( b * b ) / i4 );
 
-      // handle potential algorithm failures
+      // handle potential algorithm failures, see documentation above
       if ( rNew === 0 ) {
-        this.removeParticle( alphaParticle );
+        // this.removeParticle( alphaParticle, true );
         return;
       }
       var sNew = s0 * Math.sqrt( 1 - ( D / rNew ) );
@@ -200,7 +234,7 @@ define( function( require ) {
       //-------------------------------------------------------------------------------
 
       if ( !( b > 0 ) || !( sNew > 0 ) ) {
-        this.removeParticle( alphaParticle );
+        // this.removeParticle( alphaParticle, true );
         return;
       }
 
@@ -208,13 +242,41 @@ define( function( require ) {
       // set the alpha particle's new properties
       //-------------------------------------------------------------------------------
 
-      // get the change in position relative to the atom's center
+      // get the change in position relative to the atom's center, and rotate back to space coordinates
       var delta = new Vector2( xNew, yNew ).minus( relativePosition );
+      delta.rotate( alphaParticle.rotationAngle );
 
       // update the position of the particle in its space coordinates
-      alphaParticle.positionProperty.value = position.plus( delta );
+      alphaParticle.positionProperty.value = alphaParticle.positionProperty.value.plus( delta );
       alphaParticle.speedProperty.value = sNew;
+
       alphaParticle.orientationProperty.value = phiNew;
+
+    },
+
+    /**
+     * Rotate the point around another origin point, returning a new Vector2.
+     * Vector2 does not support RotateAround, should this be moved there?
+     * 
+     * @param  {Vector2} point - the point to rotate
+     * @param  {Vector2} rotatePoint - the point to rotate around
+     * @param  {number} angle
+     * @return {Vector2}
+     */
+    rotatePointAround: function( point, rotatePoint, angle ) {
+
+        var sinAngle = Math.sin( angle );
+        var cosAngle = Math.cos( angle );
+
+        // translate the point back to the origin by subtracting the pivot point
+        var translatedPosition = point.minus( rotatePoint );
+
+        // rotate the point with the equivalent rotation matrix
+        var xNew = translatedPosition.x * cosAngle - translatedPosition.y * sinAngle;
+        var yNew = translatedPosition.x * sinAngle + translatedPosition.y * cosAngle;
+
+        // translate the point back
+        return new Vector2( xNew, yNew ).plus( rotatePoint ); 
     }
 
   } ); // inherit

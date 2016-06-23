@@ -148,11 +148,6 @@ define( function( require ) {
       // render all alpha particles & corresponding traces in the space
       self.renderAlphaParticles( context, this.particleSpace, renderTrace );
 
-      // render alpha particles that belong to individual atoms
-      self.particleSpace.atoms.forEach( function( atom ) {
-        self.renderAlphaParticles( context, atom, renderTrace );
-      } );
-
       // render traces as single path in nucleus representation for performance
       if ( renderTrace ) {
         if ( this.particleStyle === 'nucleus' ) {

@@ -16,11 +16,15 @@ define( function( require ) {
   var Circle = require( 'SCENERY/nodes/Circle' );
   var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
+  var Path = require( 'SCENERY/nodes/Path' );
 
   // constants
   var IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV
   var RADIUS_SCALE = 5.95; // scale to make the radii visible in the space, chosen empirically
   var ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
+
+  var DEBUG_SHAPES = RSQueryParameters.SHOW_DEBUG_SHAPES;
 
   /**
    * Constructor.
@@ -62,6 +66,15 @@ define( function( require ) {
         var scaledRadius = getScaledRadius( i );
         var radius = new Circle( scaledRadius, { stroke: 'grey', lineDash: [ 5, 5 ], center: nucleusCircle.center } );
         self.addChild( radius );
+      }
+
+      // draw the bounds of each nucleus
+      if ( DEBUG_SHAPES ) {
+        var boundsRectangle = new Path( modelViewTransform.modelToViewShape( atom.boundingRect ), { stroke: 'red' } );
+        self.addChild( boundsRectangle );
+
+        var boundingCircle = new Path( modelViewTransform.modelToViewShape( atom.boundingCircle ), { stroke: 'red' } );
+        self.addChild( boundingCircle );
       }
     } );
 

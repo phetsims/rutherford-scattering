@@ -12,10 +12,13 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Bounds2 = require( 'DOT/Bounds2' );
+  var Shape = require( 'KITE/Shape' );
 
   /**
-   * @constructor
+   * Constructor.
+   * @param {Vector2} position
+   * @param {number} boundingWidth
+   * @param {Object} options
    */
   function Atom( position, boundingWidth, options ) {
 
@@ -24,7 +27,11 @@ define( function( require ) {
 
     // bounds must always be square
     var halfWidth = boundingWidth / 2;
-    this.bounds = new Bounds2( position.x - halfWidth, position.y - halfWidth, position.x + halfWidth, position.y + halfWidth );
+    this.boundingRect = Shape.rectangle( position.x - halfWidth, position.y - halfWidth, boundingWidth, boundingWidth );
+
+    // @public circle which contains the entire bounding box for the atom
+    var radius = Math.sqrt( halfWidth * halfWidth + halfWidth * halfWidth );
+    this.boundingCircle = Shape.circle( position.x, position.y, radius );
 
     // @private - array of particles that are currently in the bounding box of this atom
     this.particles = [];
