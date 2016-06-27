@@ -1,9 +1,9 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Collection of all control panels in a screen of this sim.  Different scenes in a single 
+ * Collection of all control panels in a screen of this sim.  Different scenes in a single
  * screne can have different panels, so the panels can be updated.
- * 
+ *
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
  */

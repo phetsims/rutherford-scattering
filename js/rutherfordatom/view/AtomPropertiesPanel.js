@@ -79,6 +79,35 @@ define( function( require ) {
     var protonCountStrut = new HStrut( options.minWidth * 0.05 );
     var protonCountTitleBox = new HBox( { children: [ protonCountStrut, numProtonsText ] } );
 
+    // allowable ranges for proton/neutron values
+    var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT,
+      RSConstants.DEFAULT_PROTON_COUNT );
+    var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
+        RSConstants.DEFAULT_NEUTRON_COUNT );
+
+    // generalized callback for each arrow button - userInteractionProperty
+    // should only be set if the new value is in the allowable range
+    var arrowButtonStartCallback = function( property, delta, valueRange ) {
+      var newValue = property.value + delta;
+      if ( valueRange.contains( newValue ) ) {
+        self.userInteractionProperty.set( true );
+      }
+    };
+
+    // specific callbakcs for each of the arrow buttons
+    var protonAddedStartCallback = function() {
+      arrowButtonStartCallback( protonCountProperty, 1, protonCountRange );
+    };
+    var protonRemovedStartCallback = function() {
+      arrowButtonStartCallback( protonCountProperty, -1, protonCountRange );
+    };
+    var neutronAddedStartCallback = function() {
+      arrowButtonStartCallback( neutronCountProperty, 1, neutronCountRange );
+    };
+    var neutronRemovedStartCallback = function() {
+      arrowButtonStartCallback( neutronCountProperty, -1, neutronCountRange );
+    };
+
     // proton count arrow/number display
     var arrowButtonOptions = {
       scale: 1.0,
@@ -87,23 +116,26 @@ define( function( require ) {
       touchAreaXDilation: 9,
       touchAreaYDilation: 9,
       startCallback: function() { // called when the pointer is pressed
-        self.userInteractionProperty.set( true );
+        assert && assert( false, 'button needs unique start callback to check range' );
       },
       endCallback: function() { // called when the pointer is released
         self.userInteractionProperty.set( false );
       }
     };
-    var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT,
-      RSConstants.DEFAULT_PROTON_COUNT );
+
     this.protonMinusButton = new ArrowButton( 'left', function protonCountPropertyMinus() {
       protonCountProperty.set( Math.max( RSConstants.MIN_PROTON_COUNT, protonCountProperty.value - 1 ) );
-    }, arrowButtonOptions );
+    }, _.extend( arrowButtonOptions, {
+      startCallback: protonRemovedStartCallback
+    } ) );
     var protonNumberDisplay = new NumberDisplay( protonCountProperty, protonCountRange, '', '{0}', {
       backgroundStroke: 'black'
     } );
     this.protonPlusButton = new ArrowButton( 'right', function protonCountPropertyPlus() {
       protonCountProperty.set( Math.min( RSConstants.MAX_PROTON_COUNT, protonCountProperty.value + 1 ) );
-    }, arrowButtonOptions );
+    }, _.extend( arrowButtonOptions, {
+      startCallback: protonAddedStartCallback
+    } ) );
 
     var protonCountContent = new HBox( {
       spacing: 8,
@@ -163,20 +195,21 @@ define( function( require ) {
     var neutronCountTitleBox = new HBox( { children: [ neutronCountStrut, numNeutronsText ] } );
 
     // neutron count arrow/number display
-    var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
-      RSConstants.DEFAULT_NEUTRON_COUNT );
     this.neutronMinusButton = new ArrowButton( 'left', function neutronCountPropertyMinus() {
       neutronCountProperty.value = Math.max( RSConstants.MIN_NEUTRON_COUNT, neutronCountProperty.value - 1 );
-    }, arrowButtonOptions );
+    }, _.extend( arrowButtonOptions, {
+      startCallback: neutronRemovedStartCallback
+    } ) );
     var neutronNumberDisplay = new NumberDisplay( neutronCountProperty, neutronCountRange, '', '{0}', {
       backgroundStroke: 'black'
     } );
     this.neutronPlusButton = new ArrowButton( 'right', function neutronCountPropertyPlus() {
       neutronCountProperty.value = Math.min( RSConstants.MAX_NEUTRON_COUNT, neutronCountProperty.value + 1 );
-    }, arrowButtonOptions );
+    }, _.extend( arrowButtonOptions, {
+      startCallback: neutronAddedStartCallback
+    } ) );
 
-    //
-     // /enable/disable +/- buttons on min/max
+    // /enable/disable +/- buttons on min/max
     neutronCountProperty.link( function( value, oldValue ) {
       self.neutronMinusButton.enabled = !( value === RSConstants.MIN_NEUTRON_COUNT );
       self.neutronPlusButton.enabled = !( value === RSConstants.MAX_NEUTRON_COUNT );
