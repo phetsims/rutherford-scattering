@@ -41,6 +41,7 @@ define( function( require ) {
   function RSBaseScreenView( model, scaleString, createSpaceNode, options ) {
 
     options = _.extend( {
+      includeElectronLegend: true, // should the particle legend include an entry for the electron?
       additionalControlPanels: null // {Panel[]|null} additional control panels, added below the common panels
     }, options );
 
@@ -135,7 +136,10 @@ define( function( require ) {
     this.addChild( stepButton );
 
     // @protected, for visibility control by subtypes - control panels that are common to all ScreenViews
-    this.nuclearParticleLegend = new NuclearParticleLegendPanel( { resize: false } );
+    this.nuclearParticleLegend = new NuclearParticleLegendPanel( {
+      resize: false,
+      includeElectron: options.includeElectronLegend
+    } );
     this.alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, showAlphaTraceProperty, { resize: false } );
     var controlPanels = [
       this.nuclearParticleLegend,

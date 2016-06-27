@@ -28,9 +28,15 @@ define( function( require ) {
    */
   function NuclearParticleLegendPanel( options ) {
 
+    options = _.extend( {
+      includeElectron: true // should the panel include an entry for the electron?
+    }, options );
+
     // add the legend particle entries
     var children = [];
-    children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
+    if ( options.includeElectron ) {
+      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
+    }
     children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
     children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
     children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleString ) );

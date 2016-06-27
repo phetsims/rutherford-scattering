@@ -27,10 +27,6 @@ define( function( require ) {
    */
   function AtomParticleLegendPanel( options ) {
 
-    options = _.extend( {
-      itemVerticalSpacing: 12
-    }, options );
-
     // add the legend particle entries
     var children = [];
     children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleus(), nucleusString ) );

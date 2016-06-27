@@ -44,7 +44,9 @@ define( function( require ) {
     var nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, 150 );
     var atomicScaleString = StringUtils.format( pattern0AtomicScaleString, 600 );
 
-    RSBaseScreenView.call( this, model, nucleusScaleString, createSpaceNode );
+    RSBaseScreenView.call( this, model, nucleusScaleString, createSpaceNode, {
+      includeElectronLegend: false
+    } );
 
     // scale info for the 'atom' scene, only visible when atom scene is selected
     var atomicScaleInfoNode = new ScaleInfoNode( atomicScaleString, this.spaceNode.getWidth(), {
@@ -57,7 +59,7 @@ define( function( require ) {
     var atomPropertiesPanel = new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty,
       model.neutronCountProperty, { resize: false } );
 
-    // for the 'Atom' scene, the beam should be wider and semi-transparent, the scale indicator 
+    // for the 'Atom' scene, the beam should be wider and semi-transparent, the scale indicator
     // should be updated, and the control/legend panels need to change
     var self = this;
     model.sceneProperty.link( function( scene ) {
@@ -114,9 +116,9 @@ define( function( require ) {
   rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );
 
   /**
-   * Create the node in which atoms and alpha particles are rendered.  Node contains both 
+   * Create the node in which atoms and alpha particles are rendered.  Node contains both
    * scene representations, and visibility is controlled from this node.
-   * 
+   *
    * @param {RutherfordAtomModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform
@@ -147,14 +149,14 @@ define( function( require ) {
 
       // set visibility of model space
       model.nucleusSpace.isVisible = nucleusVisible;
-      model.atomSpace.isVisible = !nucleusVisible; 
+      model.atomSpace.isVisible = !nucleusVisible;
 
       // set node visibility
       nucleusSpaceNode.visible = nucleusVisible;
       atomSpaceNode.visible = !nucleusVisible;
 
       model.removeAllParticles();
-      
+
     } );
 
     return new Node( {
