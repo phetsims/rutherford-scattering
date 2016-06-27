@@ -24,7 +24,7 @@ define( function( require ) {
    */
   function PlumPuddingAtomScreenView( model ) {
 
-    var scaleString = StringUtils.format( pattern0AtomicScaleString, 300 );
+    var scaleString = StringUtils.format( pattern0AtomicScaleString, '3.0 x 10<sup>-10</sup>' );
 
     RSBaseScreenView.call( this, model, scaleString, createSpaceNode );
   }

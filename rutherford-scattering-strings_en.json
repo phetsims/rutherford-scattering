@@ -57,9 +57,9 @@
     "value": "Legend"
   },
   "pattern.0atomicScale": {
-    "value": "{0} pm (atomic scale)"
+    "value": "{0} m (atomic scale)"
   },
   "pattern.0nuclearScale": {
-    "value": "{0} fm (nuclear scale)"
+    "value": "{0} m (nuclear scale)"
   }
 }

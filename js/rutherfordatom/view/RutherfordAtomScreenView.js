@@ -41,8 +41,8 @@ define( function( require ) {
    */
   function RutherfordAtomScreenView( model ) {
 
-    var nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, 150 );
-    var atomicScaleString = StringUtils.format( pattern0AtomicScaleString, 600 );
+    var nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, '1.5 x 10<sup>-13</sup>' );
+    var atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>'  );
 
     RSBaseScreenView.call( this, model, nucleusScaleString, createSpaceNode, {
       includeElectronLegend: false

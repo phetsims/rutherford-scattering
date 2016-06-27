@@ -15,7 +15,7 @@ define( function( require ) {
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
 
@@ -38,7 +38,7 @@ define( function( require ) {
     }, options );
 
     // scale text
-    var labelText = new Text( label, {
+    var labelText = new SubSupText( label, {
       font: options.font,
       fill: options.fill,
       maxWidth: 0.9 * width
