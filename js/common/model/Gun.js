@@ -16,6 +16,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
   var Random = require( 'DOT/Random' );
   var PropertySet = require( 'AXON/PropertySet' );
+  var LinearFunction = require( 'DOT/LinearFunction' );
 
   // constants
   var RAND = new Random();
@@ -34,6 +35,17 @@ define( function( require ) {
 
     // @private
     this.dtSinceGunFired = 0;
+
+    // function to correct the initial position of the particle if necessary
+    // the trajectory algorithm fails if particle is too close to nucleus,
+    // so this correction ensure that does not happen
+    // map values determined empirically
+    // @private - to prevent function instantiation every animation frame
+    var width1 = 20;
+    var width2 = this.model.bounds.width;
+    var correction1 = 2;
+    var correction2 = 10;
+    this.correctionFunction = new LinearFunction( width1, width2, correction1, correction2 );
 
     // @public
     PropertySet.call( this, {
@@ -65,10 +77,18 @@ define( function( require ) {
         var particleX = ySign * rand * this.model.bounds.width / 2;
 
         // make sure that the particle was not directly fired at an atom to prevent trajectory failure
-        var xMin = X0_MIN_FRACTION * this.model.getVisibleSpace().atomWidth;
+        var self = this;
+        var xMin = X0_MIN_FRACTION * this.model.bounds.width;
         this.model.getVisibleSpace().atoms.forEach( function ( atom ) {
           if ( Math.abs( particleX - atom.position.x ) < xMin ) {
-            particleX = particleX + ( ( ySign * xMin ) * ( 1 - rand ) );
+            var correction = self.correctionFunction( atom.boundingRect.bounds.width );
+            if ( particleX > atom.position.x ) {
+              // particle is to the right of nucleus, push it farther away
+              particleX += correction;
+            }
+            else {
+              particleX -= correction;
+            }
           }
         } );
         var particleY = this.model.bounds.minY;
