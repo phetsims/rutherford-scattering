@@ -125,14 +125,12 @@ define( function( require ) {
     this.addChild( playPauseButton );
 
     // step button to manually step the animation.
-    var stepButton = new StepForwardButton( function() {
-        model.manualStep();
-      },
-      model.runningProperty, {
-        centerY: playPauseButton.centerY,
-        centerX: this.scaleInfoNode.centerX + 25,
-        radius: 15
-      } );
+    var stepButton = new StepForwardButton( model.runningProperty, {
+      listener: function() { model.manualStep(); },
+      centerY: playPauseButton.centerY,
+      centerX: this.scaleInfoNode.centerX + 25,
+      radius: 15
+    } );
     this.addChild( stepButton );
 
     // @protected, for visibility control by subtypes - control panels that are common to all ScreenViews
