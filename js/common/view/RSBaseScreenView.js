@@ -125,7 +125,8 @@ define( function( require ) {
     this.addChild( playPauseButton );
 
     // step button to manually step the animation.
-    var stepButton = new StepForwardButton( model.runningProperty, {
+    var stepButton = new StepForwardButton( {
+      playingProperty: model.runningProperty,
       listener: function() { model.manualStep(); },
       centerY: playPauseButton.centerY,
       centerX: this.scaleInfoNode.centerX + 25,
