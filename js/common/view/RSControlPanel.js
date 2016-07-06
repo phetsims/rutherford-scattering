@@ -2,7 +2,7 @@
 
 /**
  * Collection of all control panels in a screen of this sim.  Different scenes in a single
- * screne can have different panels, so the panels can be updated.
+ * scene can have different panels, so the panels can be updated.
  *
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
@@ -27,7 +27,6 @@ define( function( require ) {
     Node.call( this );
 
     var defaultOptions = {
-      orientation: 'vertical',
       spacing: RSConstants.PANEL_VERTICAL_MARGIN,
       align: 'left',
       resize: false,
