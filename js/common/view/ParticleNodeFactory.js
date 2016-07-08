@@ -75,6 +75,28 @@ define( function( require ) {
     },
 
     /**
+     * Draw a proton with canvas using the provided context
+     *
+     * @param  {number} x
+     * @param  {number} y
+     * @param  {CanvasRenderingContext2D} context
+     */
+    drawProtonWithCanvas: function( x, y, context) {
+      drawParticleWithCanvas( x, y, PROTON_RADIUS, PROTON_COLOR, context );
+    },
+
+    /**
+     * Draw a neutron with canvas using the provided context
+     *
+     * @param  {number} x
+     * @param  {number} y
+     * @param  {CanvasRenderingContext2D} context
+     */
+    drawNeutronWithCanvas: function( x, y, context ) {
+      drawParticleWithCanvas( x, y, NEUTRON_RADIUS, NEUTRON_COLOR, context );
+    },
+
+    /**
      * Creates a nucleus node, represented by a small circle.
      * @returns {Node}
      * @public
@@ -108,7 +130,7 @@ define( function( require ) {
     createParticleTrace: function() {
       return new Node( {
         children: [
-          new ArrowNode( 0, 0, 20, 0, { 
+          new ArrowNode( 0, 0, 20, 0, {
             fill: PARTICLE_COLOR,
             tailWidth: 2,
             headHeight: 10
@@ -135,7 +157,7 @@ define( function( require ) {
 
     /**
      * Creates an alpha particle node, represented by a small circle.
-     * @return {Node} 
+     * @return {Node}
      * @public
      */
     createParticleAlpha: function() {
@@ -171,6 +193,33 @@ define( function( require ) {
   rutherfordScattering.register( 'ParticleNodeFactory.ParticleNode', ParticleNode );
 
   inherit( Circle, ParticleNode );
+
+  /**
+   * Draw a particle on a canvas using the provided context.  The particle is at location (x,y) in the
+   * coordinate frames of teh canvas.
+   *
+   * @param  {number} x
+   * @param  {number} y
+   * @param  {number} radius
+   * @param  {string} color
+   * @param  {CanvasRenderingContext2D} context
+   */
+  var drawParticleWithCanvas = function( x, y, radius, color, context ) {
+    // draw the circle
+    context.beginPath();
+    context.arc( x, y, radius, 0, 2 * Math.PI, false);
+
+    // create the radial gradient from the center of the arc
+    var gradient = context.createRadialGradient( x + radius * 0.1, y + radius * 0.7, 0.2, x + -radius * 0.2, y + -radius * 0.3, radius * 2 );
+    gradient.addColorStop( 0, SPECULAR_HIGHLITE_COLOR );
+    gradient.addColorStop( 0.33, color );
+    gradient.addColorStop( 1, 'black' );
+    context.fillStyle = gradient;
+
+    // fill and close so that the context can be used to draw more particles
+    context.fill();
+    context.closePath();
+  };
 
   return ParticleNodeFactory;
 } );

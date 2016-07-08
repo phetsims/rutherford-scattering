@@ -16,8 +16,6 @@ define( function( require ) {
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Property = require( 'AXON/Property' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Vector2 = require( 'DOT/Vector2' );
   var RutherfordNucleus = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleus' );
 
   // constants
@@ -124,7 +122,7 @@ define( function( require ) {
 
   rutherfordScattering.register( 'RutherfordNucleusNode', RutherfordNucleusNode );
 
-  return inherit( CanvasNode, RutherfordNucleusNode, {
+  inherit( CanvasNode, RutherfordNucleusNode, {
 
     /**
      * renders a new atom image based on proton/neutron counts
@@ -175,33 +173,10 @@ define( function( require ) {
         if ( this.protonImage === null || this.neutronImage === null ) {
           return;
         }
-        var self = this;
 
-        var nucleons = this.rutherfordNucleus.protons.getArray().slice( 0 ).concat( this.rutherfordNucleus.neutrons.getArray().slice( 0 ) );
+        var boundPaintNucleus = paintNucleusIcon.bind( this, this.rutherfordNucleus, bounds, context, 'canvasImage' );
+        boundPaintNucleus();
 
-        // get the number of layers in the particle
-        var zLayer = 0;
-        nucleons.forEach( function( nucleon ) {
-          if ( nucleon.zLayer > zLayer ) {
-            zLayer = nucleon.zLayer;
-          }
-        } );
-
-        // add the layers, starting from the largest
-        for ( var i = zLayer; i  >= 0; i-- ) {
-          nucleons.forEach( function( nucleon ) {
-            if ( nucleon.zLayer === i ) {
-              var xN = ( self.center.x - self.neutronImage.width / 2 ) + nucleon.position.x;
-              var yN = ( self.center.y - self.neutronImage.height / 2 ) + nucleon.position.y;
-              if ( nucleon.type === 'neutron' ) {
-                context.drawImage( self.neutronImage, xN, yN, self.neutronImage.width, self.neutronImage.height );
-              }
-              else {
-                context.drawImage( self.protonImage, xN, yN, self.protonImage.width, self.protonImage.height );
-              }
-            }
-          } );
-        }
       }
     }
 
@@ -209,7 +184,7 @@ define( function( require ) {
 
     /**
      * Create an icon of the Rutherford Nucleus with the desired number of protons and neutrons.
-     * 
+     *
      * @param {number} protonCount
      * @param {number} neutronCount
      */
@@ -220,57 +195,108 @@ define( function( require ) {
       var neutronCountProperty = new Property( neutronCount );
       var nucleus = new RutherfordNucleus( protonCountProperty, neutronCountProperty );
 
-      return RutherfordNucleusNode.paintNucleusIcon( nucleus );
-    },
-
-    /**
-     * Paint an icon of the nucleus.  This is different from the paint algorithm above becuase
-     * it renders nucleons with individual circle nodes rather than painting a single image in the context.
-     * Using image improves the render time for a dynamic nucleus but can be blury for static icons at 
-     * which are scaled.
-     * 
-     * @param  {RutherfordNucleus} rutherfordNucleus
-     * @return {Node}
-     * @public
-     */
-    paintNucleusIcon: function( rutherfordNucleus ) {
-      var iconNode = new Node();
-
-      var protons = rutherfordNucleus.protons.getArray().slice( 0 );
-      var neutrons = rutherfordNucleus.neutrons.getArray().slice( 0 );
-      var nucleons = protons.concat( neutrons );
-
-      // get the number of layers in the particle
-      var zLayer = 0;
-      nucleons.forEach( function( nucleon ) {
-        if ( nucleon.zLayer > zLayer ) {
-          zLayer = nucleon.zLayer;
-        }
-      } );
-
-      // add the layers, starting from the largest which is in the back
-      for ( var i = zLayer; i  >= 0; i-- ) {
-        nucleons.forEach( function( nucleon ) {
-          if ( nucleon.zLayer === i ) {
-            var xN = nucleon.position.x;
-            var yN = nucleon.position.y;
-            if ( nucleon.type === 'neutron' ) {
-              var neutronNode = ParticleNodeFactory.createNeutron();
-              neutronNode.translation = new Vector2( xN, yN );
-              iconNode.addChild( neutronNode );
-            }
-            else {
-              var protonNode = ParticleNodeFactory.createProton();
-              protonNode.translation = new Vector2( xN, yN );
-              iconNode.addChild( protonNode );
-            }
-          }
-        } );
-      }
-
-      return iconNode;
+      return new IconCanvasNode( nucleus );
     }
 
   } ); // inherit
+
+  /**
+   * Constructor for an icon representation of the Rutherford Nucleus.  This has no attached listeners,
+   * and is a static representation of the nucleus.
+   *
+   * @param  {RutherfordNucleus} nucleus
+   * @param  {Object} options
+   * @constructor
+   */
+  function IconCanvasNode( nucleus, options ) {
+
+    // @private
+    this.nucleus = nucleus;
+
+    // max radius of an atom with MAX protons & neutrons
+    var numberOfParticles = nucleus.protonCount + nucleus.neutronCount;
+    var maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
+                    Math.pow( numberOfParticles, PARTICLE_COUNT_EXP );
+
+    // @private - used to center elements drawn in the context
+    this.nucleusBounds = new Bounds2( 0, 0, 2 * maxRadius, 2 * maxRadius );
+
+    // set canvasBounds based on max radius of atom
+    options = options || {};
+    options.canvasBounds = this.nucleusBounds;
+    CanvasNode.call( this, options );
+
+    this.invalidatePaint();
+  }
+
+  inherit( CanvasNode, IconCanvasNode, {
+
+    /**
+     * Paint function for the canvas node
+     *
+     * @param  {CanvasRenderingContext2D} context
+     */
+    paintCanvas: function( context ) {
+      // paint the nucleus with canvas arcs - slower than image, but better resolution for icons
+      paintNucleusIcon( this.nucleus, this.nucleusBounds, context, 'canvasArc' );
+    }
+} );
+
+  var paintNucleusIcon = function( nucleus, nucleusBounds, context, render ) {
+    var protons = nucleus.protons.getArray().slice( 0 );
+    var neutrons = nucleus.neutrons.getArray().slice( 0 );
+    var nucleons = protons.concat( neutrons );
+
+    // get the number of layers in the particle
+    var zLayer = 0;
+    nucleons.forEach( function( nucleon ) {
+      if ( nucleon.zLayer > zLayer ) {
+        zLayer = nucleon.zLayer;
+      }
+    } );
+
+    // add the layers, starting from the largest which is in the back
+    var self = this;
+    for ( var i = zLayer; i  >= 0; i-- ) {
+      nucleons.forEach( function( nucleon ) {
+        if ( nucleon.zLayer === i ) {
+          var xN = nucleon.position.x;
+          var yN = nucleon.position.y;
+
+          if ( render === 'canvasArc' ) {
+            // drawing with arcs is a little slower, but the result is less pixilated, so
+            // this method is good for drawing icons
+
+            // if using canvas arcs to render the nucleus, offset by center of bounds
+            xN += nucleusBounds.centerX;
+            yN += nucleusBounds.centerY;
+            if ( nucleon.type === 'neutron' ) {
+              ParticleNodeFactory.drawNeutronWithCanvas( xN, yN, context );
+            }
+            else {
+              ParticleNodeFactory.drawProtonWithCanvas( xN, yN, context );
+            }
+          }
+          else if ( render === 'canvasImage' ) {
+            // drawing with image is a bit faster but the result can be pixilated when scaled, so this
+            // should be used when rendering a nucleus that should change frequently and rapidly
+
+            // if drawing with images, offset by bounds of the image
+            xN += ( self.center.x - self.neutronImage.width / 2 );
+            yN += ( self.center.y - self.neutronImage.height / 2 );
+
+            if ( nucleon.type === 'neutron' ) {
+              context.drawImage( self.neutronImage, xN, yN, self.neutronImage.width, self.neutronImage.height );
+            }
+            else {
+              context.drawImage( self.protonImage, xN, yN, self.protonImage.width, self.protonImage.height );
+            }
+          }
+        }
+      } );
+    }
+  };
+
+  return RutherfordNucleusNode;
 
 } ); // define
