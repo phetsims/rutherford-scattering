@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Model for the 'Rutherford Atom', responsible for moving alpha particles within its bounds.  For 
+ * Model for the 'Rutherford Atom', responsible for moving alpha particles within its bounds.  For
  * additional information concerning the trajectory algorithm, see trajectories.pdf located in docs
  * (document may be out of date).
  *
@@ -41,8 +41,8 @@ define( function( require ) {
   return inherit( Atom, RutherfordAtom, {
 
     /**
-     * Remove a particle.  Most of the time, a particle needs to be removed from this atom but kept in 
-     * the space so that a new atom can pick it up if necessary.  On error, notify the space so that 
+     * Remove a particle.  Most of the time, a particle needs to be removed from this atom but kept in
+     * the space so that a new atom can pick it up if necessary.  On error, notify the space so that
      * the particle can be removed entirely from the model.
      * @param  {AlphaParticle}  particle
      * @param  {Boolean} isError
@@ -57,12 +57,12 @@ define( function( require ) {
     },
 
     /**
-     * ASSUMPTIONS MADE IN THIS ALGORITHM: 
+     * ASSUMPTIONS MADE IN THIS ALGORITHM:
      * (1) The atom is located at (0,0).
-     * This is not the case in our model. So coordindates are adjusted 
+     * This is not the case in our model. So coordindates are adjusted
      * as described in the comments.
      * (2) +y is up.
-     * Our model has +y down. So we'll be adjusting the sign on y 
+     * Our model has +y down. So we'll be adjusting the sign on y
      * coordinates, as described in the comments.
      * (3) alpha particles are moving from bottom to top
      * (4) x values are positive.
@@ -74,9 +74,9 @@ define( function( require ) {
      * This is fixed by using Math.atan2 instead.
      * (6) Depending on the parameters supplied, the algorithm will tend
      * to fail as the alpha particle's horizontal position (x) gets closer
-     * to zero. So the Gun model is calibrated to fire alpha particles 
+     * to zero. So the Gun model is calibrated to fire alpha particles
      * with some min initial x value.
-     * 
+     *
      * @param {AlphaParticle} alphaParticle
      * @param {number} dt
      * @override
@@ -252,7 +252,7 @@ define( function( require ) {
     /**
      * Rotate the point around another origin point, returning a new Vector2.
      * Vector2 does not support RotateAround, should this be moved there?
-     * 
+     *
      * @param  {Vector2} point - the point to rotate
      * @param  {Vector2} rotatePoint - the point to rotate around
      * @param  {number} angle
@@ -271,7 +271,7 @@ define( function( require ) {
         var yNew = translatedPosition.x * sinAngle + translatedPosition.y * cosAngle;
 
         // translate the point back
-        return new Vector2( xNew, yNew ).plus( rotatePoint ); 
+        return new Vector2( xNew, yNew ).plus( rotatePoint );
     }
 
   } ); // inherit

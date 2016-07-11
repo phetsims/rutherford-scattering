@@ -22,11 +22,16 @@ define( function( require ) {
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var PhetFont = require('SCENERY_PHET/PhetFont' );
 
   // constants
   var ATOM_BEAM_FILL = 'rgba(143,143,143,0.4)';
   var NUCLEUS_BEAM_FILL = 'rgba(143,143,143,1)';
+
+  var SHOW_ERROR_COUNT = RSQueryParameters.SHOW_ERROR_COUNT;
 
   // strings
   var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
@@ -136,6 +141,23 @@ define( function( require ) {
     var atomSpaceNode = new AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: canvasBounds
     } );
+
+    if ( SHOW_ERROR_COUNT ) {
+      // show the number of particles that were removed from the space in error
+      var errorCountPattern = 'Error count: {0}';
+      var errorText = new Text( '', {
+        font: new PhetFont( 18 ),
+        fill: 'red',
+        leftBottom: atomSpaceNode.leftTop
+      } );
+      atomSpaceNode.addChild( errorText );
+
+      var atomsRemoved = 0;
+      model.atomSpace.particleRemovedFromAtomEmitter.addListener( function() {
+        atomsRemoved += 1;
+        errorText.text = StringUtils.format( errorCountPattern, atomsRemoved );
+      } );
+    }
 
     // update view on model step
     model.addStepListener( function( dt ) {

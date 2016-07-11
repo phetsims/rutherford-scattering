@@ -15,7 +15,11 @@ define( function( require ) {
 
   var RSQueryParameters = {
 
-    SHOW_DEBUG_SHAPES: !!getQueryParameter( 'showDebugShapes' )
+    // show shapes around each atom to show the transform of the atomic bounds as a particle enters the bounding box
+    SHOW_DEBUG_SHAPES: !!getQueryParameter( 'showDebugShapes' ),
+
+    // show a count of the number of times a particle is removed from the atom space in error
+    SHOW_ERROR_COUNT: !!getQueryParameter( 'showErrorCount' )
 
   };
 
