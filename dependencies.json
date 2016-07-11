@@ -1,11 +1,11 @@
 {
-  "comment": "# rutherford-scattering 1.0.0-dev.6 Thu Jun 23 2016 14:15:13 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# rutherford-scattering 1.0.0-dev.8 Mon Jul 11 2016 10:40:40 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "master"
   },
   "axon": {
-    "sha": "b71cc337f6748ee080e97b50497f05972b498de0",
+    "sha": "9a0e2f3a61a2416edf8247c6ccdb262195b2f420",
     "branch": "master"
   },
   "brand": {
@@ -13,19 +13,19 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "e044eccd6b6c25ee7e1360c068444d191eeedf8c",
+    "sha": "9059e93b28d88dbc7e2e2c2c6b4b696dfe9ff4d2",
     "branch": "master"
   },
   "dot": {
-    "sha": "551f726fe6f182efb95ec56c3ebe2f6292d04f25",
+    "sha": "3628c3aef07fca8751fdaba0f80d07812a2a0acd",
     "branch": "master"
   },
   "joist": {
-    "sha": "a42bced705887608a8f615cd35141fc1a630c1f1",
+    "sha": "94bc734c61a9569d975cb8c4c15d213d95dffd37",
     "branch": "master"
   },
   "kite": {
-    "sha": "dce9765e6fcb535970ef17c1a1bcb8db95599b08",
+    "sha": "88f0c3a051a24f71a6465641badeccab1246820a",
     "branch": "master"
   },
   "phet-core": {
@@ -37,31 +37,31 @@
     "branch": "master"
   },
   "rutherford-scattering": {
-    "sha": "757c59a2c73d8d6b796802d374e47e9206c41087",
+    "sha": "54e74d5281b2785bfeeebdad310c2cbb128e6e67",
     "branch": "master"
   },
   "scenery": {
-    "sha": "4476eb958b8e19367bd12c7e50636328058f077a",
+    "sha": "942889ad7b16f527d86a81bb1f2d219835671771",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "52b783d9ea0b4d0dda0a1c6f685dbb8a541d9fdf",
+    "sha": "0d6b589e3674e0dccd013aa4790651fad81a6e78",
     "branch": "master"
   },
   "sherpa": {
-    "sha": "77506dc331eb1c6e3509ceb17076c4b8a9bbee4a",
+    "sha": "03590a07436272b142319aae4aaa0dae08471387",
     "branch": "master"
   },
   "shred": {
-    "sha": "95e9e909fcaed913bd2c89f2b90b03dba907b50a",
+    "sha": "ea1036cfc2cb551077f5411c598f4e6fdced8c59",
     "branch": "master"
   },
   "sun": {
-    "sha": "0d7e743b1a91cae1a38f56b15393143a26ecb158",
+    "sha": "cccaf53409b87182a417d85906ef40047e495dfb",
     "branch": "master"
   },
   "tandem": {
-    "sha": "b3c68afaf8511b008b264a5829a40711c753b629",
+    "sha": "a8ac284b9dc4fa6a9e1e3ca039b594126c4de1f5",
     "branch": "master"
   }
 }
