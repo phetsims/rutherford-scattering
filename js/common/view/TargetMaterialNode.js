@@ -21,8 +21,8 @@ define( function( require ) {
   var BACK_DEPTH = 30;
   var BACK_OFFSET = 0.10;
   var BOX_SIZE = new Dimension2( 120, 120 );
-  var BACK_COLOR = 'rgb( 126, 126, 52 )';
-  var FRONT_COLOR = 'rgb( 168, 168, 69 )';
+  var BACK_COLOR = '#8c7e29';
+  var FRONT_COLOR = '#d6cb86';
 
   /**
    * @param {Object} [options]
