@@ -35,6 +35,9 @@
   "alphaParticle": {
     "value": "Alpha Particle"
   },
+  "alphaParticles": {
+    "value": "Alpha Particles"
+  },
   "positiveCharge": {
     "value": "Positive Charge"
   },

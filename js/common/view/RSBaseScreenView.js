@@ -30,6 +30,12 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var RSControlPanel = require( 'RUTHERFORD_SCATTERING/common/view/RSControlPanel' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+
+  // strings
+  var alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
+
 
   /**
    * @param {RSBaseModel} model
@@ -65,6 +71,15 @@ define( function( require ) {
       rotation: -Math.PI / 2 // pointing up
     } );
     this.addChild( this.gunNode );
+
+    var alphaSourceText = new Text( alphaParticlesString, {
+      centerX: this.gunNode.centerX,
+      top: this.gunNode.bottom + 15,
+      font: new PhetFont( 15 ),
+      fill: RSConstants.NEUTRAL_FILL_COLOR,
+      maxWidth: 210
+    } );
+    this.addChild( alphaSourceText );
 
     // @protected, alpha particle beam
     this.beamNode = new BeamNode( model.gun.onProperty, {
