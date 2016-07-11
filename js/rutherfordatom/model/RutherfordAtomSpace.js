@@ -16,7 +16,7 @@ define( function( require ) {
   var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
 
   // constants
-  var DEFLECTION_WIDTH = 20;
+  var DEFLECTION_WIDTH = 30;
 
   /**
    * Constructor.
