@@ -16,6 +16,7 @@ define( function( require ) {
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Line = require( 'SCENERY/nodes/Line' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  var Image = require( 'SCENERY/nodes/Image' );
 
   // constants
   var SPECULAR_HIGHLITE_COLOR = 'rgb(200,200,200)';
@@ -32,6 +33,8 @@ define( function( require ) {
   var NUCLEUS_RADIUS = 2;
   var ENERGY_LEVEL_LINE_LENGTH = 5;
 
+  // images
+  var plumPuddingImage = require( 'image!RUTHERFORD_SCATTERING/plumPuddingIcon.png' );
 
   var ParticleNodeFactory = {
 
@@ -164,6 +167,14 @@ define( function( require ) {
       return new Node( {
         children: [
           new Circle( PARTICLE_RADIUS, { fill: PARTICLE_COLOR } )
+        ]
+      } );
+    },
+
+    createPlumPuddingIcon: function() {
+      return new Node( {
+        children: [
+          new Image( plumPuddingImage, { scale: 0.06 } )
         ]
       } );
     }

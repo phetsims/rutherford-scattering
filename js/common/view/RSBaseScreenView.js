@@ -42,6 +42,7 @@ define( function( require ) {
 
     options = _.extend( {
       includeElectronLegend: true, // should the particle legend include an entry for the electron?
+      includePlumPuddingLegend: false, // should the particle legend include an entry for the plum pudding cloud?
       additionalControlPanels: null // {Panel[]|null} additional control panels, added below the common panels
     }, options );
 
@@ -137,7 +138,8 @@ define( function( require ) {
     // @protected, for visibility control by subtypes - control panels that are common to all ScreenViews
     this.nuclearParticleLegend = new NuclearParticleLegendPanel( {
       resize: false,
-      includeElectron: options.includeElectronLegend
+      includeElectron: options.includeElectronLegend,
+      includePlumPudding: options.includePlumPuddingLegend
     } );
     this.alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, showAlphaTraceProperty, { resize: false } );
     var controlPanels = [

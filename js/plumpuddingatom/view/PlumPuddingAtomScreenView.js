@@ -26,7 +26,9 @@ define( function( require ) {
 
     var scaleString = StringUtils.format( pattern0AtomicScaleString, '3.0 x 10<sup>-10</sup>' );
 
-    RSBaseScreenView.call( this, model, scaleString, createSpaceNode );
+    RSBaseScreenView.call( this, model, scaleString, createSpaceNode, {
+      includePlumPuddingLegend: true
+    } );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );

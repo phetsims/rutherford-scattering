@@ -20,6 +20,7 @@ define( function( require ) {
   var protonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
   var neutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
   var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
+  var positiveChargeString = require( 'string!RUTHERFORD_SCATTERING/positiveCharge' );
 
   /**
    * Constructor
@@ -40,6 +41,9 @@ define( function( require ) {
     children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
     children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
     children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleString ) );
+    if ( options.includePlumPudding ) {
+      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createPlumPuddingIcon(), positiveChargeString ) );
+    }
 
     ParticleLegendPanel.call( this, children, options );
   }
