@@ -48,11 +48,11 @@ define( function( require ) {
      * @param  {Boolean} isError
      * @public
      */
-    removeParticle: function( particle, isError ) {
+    removeParticle: function( particle, isError, line ) {
       Atom.prototype.removeParticle.call( this, particle );
 
       if ( isError ) {
-        this.particleRemovedemitter.emit1( particle );
+        this.particleRemovedemitter.emit2( particle, line );
       }
     },
 
@@ -146,7 +146,7 @@ define( function( require ) {
 
       // handle potential algorithm failures
       if ( ( pd <= 0 ) || ( s0 === 0 ) ) {
-        this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true, '149' );
         return;
       }
 
@@ -159,7 +159,7 @@ define( function( require ) {
       // check intermediate values to handle potential algorithm failures
       var i0 = ( x0 * x0 ) + ( y0 * y0 );
       if ( i0 < 0 ) {
-        this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true, '162' );
         return;
       }
 
@@ -169,7 +169,7 @@ define( function( require ) {
       // check intermediate values to handle potential algorithm failures
       var i1 = ( -2 * D * b1 ) - ( 2 * D * y0 ) + ( x0 * x0 );
       if ( i1 < 0 ) {
-        this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true, '172' );
         return;
       }
 
@@ -180,7 +180,7 @@ define( function( require ) {
       // check intermediate values to handle potential algorithm failures
       var i2 = ( x * x ) + ( y * y );
       if ( i2 < 0 ) {
-        this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true, '183' );
         return;
       }
 
@@ -193,7 +193,7 @@ define( function( require ) {
       // check intermediate values to handle potential algorithm failures
       var i3 = Math.pow( b, 4 ) + ( r * r * t1 * t1 );
       if ( i3 < 0 ) {
-        this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true, '196' );
         return;
       }
       var phiNew = phi + ( ( b * b * s * dt ) / ( r * Math.sqrt( i3 ) ) );
@@ -201,14 +201,14 @@ define( function( require ) {
       // check intermediate values to handle potential algorithm failures
       var i4 = ( ( b * Math.sin( phiNew ) ) + ( ( D / 2 ) * ( Math.cos( phiNew ) - 1 ) ) );
       if ( i4 < 0 ) {
-        this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true, '204' );
         return;
       }
       var rNew = Math.abs( ( b * b ) / i4 );
 
       // handle potential algorithm failures
       if ( rNew === 0 ) {
-        this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true, '211' );
         return;
       }
       var sNew = s0 * Math.sqrt( 1 - ( D / rNew ) );
@@ -229,7 +229,7 @@ define( function( require ) {
       //-------------------------------------------------------------------------------
 
       if ( !( b > 0 ) || !( sNew > 0 ) ) {
-        this.removeParticle( alphaParticle, true );
+        this.removeParticle( alphaParticle, true, '232' );
         return;
       }
 

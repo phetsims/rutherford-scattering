@@ -144,7 +144,7 @@ define( function( require ) {
 
     if ( SHOW_ERROR_COUNT ) {
       // show the number of particles that were removed from the space in error
-      var errorCountPattern = 'Error count: {0}';
+      var errorCountPattern = 'Error count: {0} - particle removed at line {1}';
       var errorText = new Text( '', {
         font: new PhetFont( 18 ),
         fill: 'red',
@@ -153,9 +153,9 @@ define( function( require ) {
       atomSpaceNode.addChild( errorText );
 
       var atomsRemoved = 0;
-      model.atomSpace.particleRemovedFromAtomEmitter.addListener( function() {
+      model.atomSpace.particleRemovedFromAtomEmitter.addListener( function( particle, lineNumber ) {
         atomsRemoved += 1;
-        errorText.text = StringUtils.format( errorCountPattern, atomsRemoved );
+        errorText.text = StringUtils.format( errorCountPattern, atomsRemoved, lineNumber );
       } );
     }
 
