@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var AlphaParticle = require( 'RUTHERFORD_SCATTERING/common/model/AlphaParticle' );
+  var ParticleTrajectory = require( 'RUTHERFORD_SCATTERING/common/model/ParticleTrajectory' );
   var Vector2 = require( 'DOT/Vector2' );
   var Random = require( 'DOT/Random' );
   var PropertySet = require( 'AXON/PropertySet' );
@@ -49,7 +50,7 @@ define( function( require ) {
 
     // @public
     PropertySet.call( this, {
-      on: false // {boolean} is the gun on?
+      on: true // {boolean} is the gun on?
     } );
   }
 
@@ -94,7 +95,17 @@ define( function( require ) {
         var particleY = this.model.bounds.minY;
 
         var initialPosition = new Vector2( particleX, particleY );
-        var alphaParticle = new AlphaParticle( {
+
+        // create a trajectory from the initial position
+        var initialConditions = {
+          position: initialPosition,
+          defaultSpeed: initialSpeed,
+          speed: initialSpeed,
+          orientation: Math.PI / 2
+        };
+        var particleTrajectory = new ParticleTrajectory( this.model.getVisibleSpace(), initialConditions );
+
+        var alphaParticle = new AlphaParticle( particleTrajectory, {
           speed: initialSpeed,
           defaultSpeed: initialSpeed,
           position: initialPosition

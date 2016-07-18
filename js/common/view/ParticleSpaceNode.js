@@ -1,7 +1,7 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * The space in which atoms and alpha particles are rendered.  The particles can be represented two 
+ * The space in which atoms and alpha particles are rendered.  The particles can be represented two
  * ways, 'nucleus' and 'particle'.  When represented by a nucleus, the particle is shown as an image of
  * two protons and two neutrons.  When represented as a particle, it is represented as a small magenta
  * circle.
@@ -75,7 +75,7 @@ define( function( require ) {
       alphaParticle = ParticleNodeFactory.createNucleusAlpha();
     }
     else if ( this.particleStyle === 'particle' ) {
-      alphaParticle = ParticleNodeFactory.createParticleAlpha(); 
+      alphaParticle = ParticleNodeFactory.createParticleAlpha();
     }
     alphaParticle.toImage( function( image, x, y ) {
       self.alphaParticleImage = image;
@@ -141,7 +141,7 @@ define( function( require ) {
         if ( this.particleStyle === 'nucleus' ) {
           context.beginPath();
           context.lineWidth = PARTICLE_TRACE_WIDTH;
-          context.strokeStyle = NUCLEUS_TRACE_COLOR;  
+          context.strokeStyle = NUCLEUS_TRACE_COLOR;
         }
       }
 

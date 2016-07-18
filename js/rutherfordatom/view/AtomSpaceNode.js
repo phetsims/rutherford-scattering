@@ -29,7 +29,7 @@ define( function( require ) {
    * @constructor
    */
   function AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
-    
+
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
     options = _.extend( {
@@ -45,12 +45,11 @@ define( function( require ) {
     if ( DEBUG_SHAPES ) {
       model.atomSpace.particleTransitionedEmitter.addListener( function( particle ) {
         // a particle has been transitioned to a new atom - show the bounding box of the particle
-        self.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), { 
+        self.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), {
           stroke: 'rgb(114,183,188)'
         } ) );
-      } );      
+      } );
     }
-
   }
 
   rutherfordScattering.register( 'AtomSpaceNode', AtomSpaceNode );

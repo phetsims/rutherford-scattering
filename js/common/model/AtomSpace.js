@@ -11,7 +11,6 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Vector2 = require( 'DOT/Vector2' );
   var Emitter = require( 'AXON/Emitter' );
 
   /**
@@ -23,7 +22,7 @@ define( function( require ) {
   function AtomSpace( protonCountProperty, bounds, options ) {
 
     options = _.extend( {
-      atomWidth: bounds.width // width of each atom in the space, width of space by default 
+      atomWidth: bounds.width // width of each atom in the space, width of space by default
     }, options );
 
     // @public (read-only)
@@ -157,7 +156,7 @@ define( function( require ) {
         if ( !particle.isInSpace ) {
           // once the particle exits the atom's bounding box, remove it
           if ( !particle.atom.boundingCircle.containsPoint( particle.position ) ) {
-            this.addParticleToEmptySpace( particle );        
+            this.addParticleToEmptySpace( particle );
           }
         }
       }
@@ -171,33 +170,45 @@ define( function( require ) {
      */
     moveParticles: function( dt ) {
 
-      // move particles into atoms if they reach atomic bounds
-      this.transitionParticlesToAtoms();
-
-      // move particles back into empty space if they leave atomic bounds
-      this.transitionParticlesToSpace();
-
-      // move particles in empty space straight through
-      for ( var i = 0 ; i < this.particles.length; i++ ) {
+      // move all particles to the next position along their trajectory
+      for ( var i = 0; i < this.particles.length; i++ ) {
         var alphaParticle = this.particles[ i ];
 
-        if ( !alphaParticle.atom ) {
-          var speed = alphaParticle.speedProperty.get();
-          var distance = speed * dt;
-          var direction = alphaParticle.orientationProperty.get();
-          var dx = Math.cos( direction ) * distance;
-          var dy = Math.sin( direction ) * distance;
-          var position = alphaParticle.positionProperty.get();
-          var x = position.x + dx;
-          var y = position.y + dy;
-          alphaParticle.positionProperty.value = new Vector2( x, y );
-        }
+        // move the particle to its next position in the trajectory for its time
+        var nextPosition = alphaParticle.trajectory.getPositionAtTime( alphaParticle.time );
+        alphaParticle.position = nextPosition;
+
+        // step the age of the particle
+        alphaParticle.time += dt;
       }
 
+      // move particles into atoms if they reach atomic bounds
+      // this.transitionParticlesToAtoms();
+
+      // move particles back into empty space if they leave atomic bounds
+      // this.transitionParticlesToSpace();
+
+      // // move particles in empty space straight through
+      // for ( var i = 0 ; i < this.particles.length; i++ ) {
+      //   var alphaParticle = this.particles[ i ];
+      //
+      //   if ( !alphaParticle.atom ) {
+      //     var speed = alphaParticle.speedProperty.get();
+      //     var distance = speed * dt;
+      //     var direction = alphaParticle.orientationProperty.get();
+      //     var dx = Math.cos( direction ) * distance;
+      //     var dy = Math.sin( direction ) * distance;
+      //     var position = alphaParticle.positionProperty.get();
+      //     var x = position.x + dx;
+      //     var y = position.y + dy;
+      //     alphaParticle.positionProperty.value = new Vector2( x, y );
+      //   }
+      // }
+
       // move particles contained by atomic bounds
-      this.atoms.forEach( function( atom ) {
-        atom.moveParticles( dt );
-      } );
+      // this.atoms.forEach( function( atom ) {
+      //   atom.moveParticles( dt );
+      // } );
     },
 
     /**

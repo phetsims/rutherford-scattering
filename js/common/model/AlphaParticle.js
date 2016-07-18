@@ -20,7 +20,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function AlphaParticle( options ) {
+  function AlphaParticle( trajectory, options ) {
 
     options = _.extend( {
       speed: 0,
@@ -36,6 +36,15 @@ define( function( require ) {
       position: options.position,
       orientation: options.orientation
     } );
+
+    // @public (read-only) - the trajectory which this particle will follow, also used for rendering traces
+    this.trajectory = trajectory;
+
+    // @public (read-only) - position of the particle along its trajectory
+    this.trajectoryIndex = 0;
+
+    // @public (read-only) - age of the particle pointing to where it should be in its trajectory
+    this.time = 0;
 
     // @public (read-only) - the position coordinates used for trace rendering
     this.positions = [];
@@ -65,7 +74,7 @@ define( function( require ) {
     // @public - is this particle in the atom space or does it belong to an atom?
     this.isInSpace = true;
 
-    // @public {Shape} - transformed shape for the bounding box of the next atom, set once 
+    // @public {Shape} - transformed shape for the bounding box of the next atom, set once
     // the particle enters the bounding circle of the atom
     this.preparedBoundingBox = null;
 
