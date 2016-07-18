@@ -19,7 +19,7 @@ define( function( require ) {
   var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
   var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
@@ -80,9 +80,9 @@ define( function( require ) {
     var protonCountTitleBox = new HBox( { children: [ protonCountStrut, numProtonsText ] } );
 
     // allowable ranges for proton/neutron values
-    var protonCountRange = new Range( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT,
+    var protonCountRange = new RangeWithValue( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT,
       RSConstants.DEFAULT_PROTON_COUNT );
-    var neutronCountRange = new Range( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
+    var neutronCountRange = new RangeWithValue( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
         RSConstants.DEFAULT_NEUTRON_COUNT );
 
     // generalized callback for each arrow button - userInteractionProperty
