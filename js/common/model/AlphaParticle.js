@@ -2,6 +2,9 @@
 
 /**
  * Alpha particle representation - speed, orientation, current/past positions.
+ * An alpha particle is initially added to an AtomSpace.  If, during its trajectory, it enters
+ * a bounding box of an atom, it will be added to that atom, and its containing atom will
+ * cary it through its trajectory until it enters the bounding box of a new atom.
  *
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
@@ -65,7 +68,7 @@ define( function( require ) {
     // @public - is this particle in the atom space or does it belong to an atom?
     this.isInSpace = true;
 
-    // @public {Shape} - transformed shape for the bounding box of the next atom, set once 
+    // @public {Shape} - transformed shape for the bounding box of the next atom, set once
     // the particle enters the bounding circle of the atom
     this.preparedBoundingBox = null;
 
@@ -117,7 +120,7 @@ define( function( require ) {
      * Set the bounding box for the particle. The bounding box is a rectangle shape of
      * the atom's bounds transformed so that the bottom edge is orthogonal to the orientation
      * of the particle.  The prepared box is set as soon as a particle enters the bounding circle
-     * containing an atom.
+     * containing the atom.
      * @param {RutherfordAtom} atom
      */
     prepareBoundingBox: function( atom ) {

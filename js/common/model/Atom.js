@@ -25,11 +25,12 @@ define( function( require ) {
     // @public (read-only)
     this.position = position;
 
-    // bounds must always be square
     var halfWidth = boundingWidth / 2;
+
+    // @public (read-only) - bounding rect is always square
     this.boundingRect = Shape.rectangle( position.x - halfWidth, position.y - halfWidth, boundingWidth, boundingWidth );
 
-    // @public circle which contains the entire bounding box for the atom
+    // @public (read-only) circle which contains the entire bounding box for the atom
     var radius = Math.sqrt( halfWidth * halfWidth + halfWidth * halfWidth );
     this.boundingCircle = Shape.circle( position.x, position.y, radius );
 
@@ -49,8 +50,8 @@ define( function( require ) {
     addParticle: function( alphaParticle ) {
       this.particles.push( alphaParticle );
 
-      // the 'initial position' for the particle relative to the atom center also needs to be set
-      // for correct behavior of the trajectory algorithm
+      // the 'initial position' for the particle relative to the atom center needs to be set once the particle enters
+      // the bounding box for correct behavior of the trajectory algorithm
       alphaParticle.initialPosition = alphaParticle.position;
     },
 

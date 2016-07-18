@@ -23,7 +23,7 @@ define( function( require ) {
   function AtomSpace( protonCountProperty, bounds, options ) {
 
     options = _.extend( {
-      atomWidth: bounds.width // width of each atom in the space, width of space by default 
+      atomWidth: bounds.width // width of each atom in the space, width of space by default
     }, options );
 
     // @public (read-only)
@@ -40,6 +40,7 @@ define( function( require ) {
     this.particleRemovedFromAtomEmitter = new Emitter();
 
     // when a particle has been removed from an atom, remove it from the space as well
+    // no need to remove listener, exists for life of sim
     var self = this;
     this.particleRemovedFromAtomEmitter.addListener( function( particle ) {
       self.removeParticle( particle );
@@ -76,7 +77,7 @@ define( function( require ) {
     },
 
     /**
-     * Remove a particle from this space.
+     * Remove a particle from this space amd the model entirely.
      * @param  {AlphaParticle} alphaParticle
      * @public
      */
@@ -104,8 +105,8 @@ define( function( require ) {
     /**
      * Transition a particle in empty space to an atom if the particle hits atomic bounds.  If the particle hits
      * a new atom's bounding circle, a new shape is prepared and transformed for the trajectory algorithm.  Once
-     * the particle hits the atom's bounding box, the prepared shape is applied until the particle reaches
-     * a new atom.
+     * the particle hits the atom's bounding box, the prepared shape is applied, and the atom will cary out
+     * the trajectory until the particle reaches a new atom.
      */
     transitionParticlesToAtoms: function() {
       for ( var i = 0; i < this.particlesInEmptySpace.length; i++ ) {
@@ -153,11 +154,11 @@ define( function( require ) {
       for ( var i = 0; i < this.particles.length; i++ ) {
         var particle = this.particles[ i ];
 
-        // if the particle leaves the bounding circle of its atom, add it back into empty space
         if ( !particle.isInSpace ) {
-          // once the particle exits the atom's bounding box, remove it
+          // if the particle leaves the bounding circle of its atom, add it back into empty space
           if ( !particle.atom.boundingCircle.containsPoint( particle.position ) ) {
-            this.addParticleToEmptySpace( particle );        
+            // once the particle exits the atom's bounding box, remove it
+            this.addParticleToEmptySpace( particle );
           }
         }
       }

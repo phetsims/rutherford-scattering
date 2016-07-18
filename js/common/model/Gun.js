@@ -38,7 +38,7 @@ define( function( require ) {
 
     // function to correct the initial position of the particle if necessary
     // the trajectory algorithm fails if particle is too close to nucleus,
-    // so this correction ensure that does not happen
+    // so this correction ensure that this does not happen
     // map values determined empirically
     // @private - to prevent function instantiation every animation frame
     var width1 = 20;
