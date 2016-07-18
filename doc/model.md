@@ -13,6 +13,12 @@ changing either the number of protons or energy of alpha particles changes effec
 trajectories of the alpha particles. The details of the effects is found in
 the trajectories.pdf document.
 
+There is also a second screen that allows the user to see a 'Macro' view of the sample.  
+In this view, there are a collection of nuclei and the particles will scatter off of each
+of these nuclei.  The majority of particles will travel through the space without Scattering
+at all.  Changing the energy or the number of protons will effect the scatter behavior, as in
+the 'Nucleus' scene.
+
 Plum Pudding:
 
 Always contains 79 electrons which do not change in anyway. Alpha particles travel straight
