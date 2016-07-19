@@ -79,6 +79,7 @@ define( function( require ) {
     /**
      * Get the space which is currently visible.
      * @return {AtomSpace}
+     * @public
      */
     getVisibleSpace: function() {
       var visibleSpace;

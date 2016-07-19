@@ -122,6 +122,7 @@ define( function( require ) {
      * of the particle.  The prepared box is set as soon as a particle enters the bounding circle
      * containing the atom.
      * @param {RutherfordAtom} atom
+     * @public
      */
     prepareBoundingBox: function( atom ) {
 

@@ -171,6 +171,11 @@ define( function( require ) {
       } );
     },
 
+    /**
+     * Creates a plum pudding image.
+     * @return {Node}
+     * @public
+     */
     createPlumPuddingIcon: function() {
       return new Node( {
         children: [
@@ -207,13 +212,14 @@ define( function( require ) {
 
   /**
    * Draw a particle on a canvas using the provided context.  The particle is at location (x,y) in the
-   * coordinate frames of teh canvas.
+   * coordinate frames of the canvas.
    *
    * @param  {number} x
    * @param  {number} y
    * @param  {number} radius
    * @param  {string} color
    * @param  {CanvasRenderingContext2D} context
+   * @private
    */
   var drawParticleWithCanvas = function( x, y, radius, color, context ) {
     // draw the circle

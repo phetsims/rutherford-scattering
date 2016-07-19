@@ -129,6 +129,7 @@ define( function( require ) {
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Bounds2} canvasBounds
    * @returns {Node}
+   * @protected
    */
   var createSpaceNode = function( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) {
 

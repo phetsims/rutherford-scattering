@@ -187,6 +187,7 @@ define( function( require ) {
      *
      * @param {number} protonCount
      * @param {number} neutronCount
+     * @public
      */
     RutherfordNucleusIcon: function( protonCount, neutronCount ) {
 
@@ -235,6 +236,7 @@ define( function( require ) {
      * Paint function for the canvas node
      *
      * @param  {CanvasRenderingContext2D} context
+     * @protected @override
      */
     paintCanvas: function( context ) {
       // paint the nucleus with canvas arcs - slower than image, but better resolution for icons

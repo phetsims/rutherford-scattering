@@ -70,6 +70,7 @@ define( function( require ) {
      * are outside the bounds of an atom, and the AtomSpace will transition
      * the particle from one atom to another if it comes within atomic bounds.
      * @param {AlphaParticle} alphaParticle
+     * @private
      */
     addParticleToEmptySpace: function( alphaParticle ) {
       alphaParticle.isInSpace = true;
@@ -93,6 +94,7 @@ define( function( require ) {
      * Remove a particle from empty space.  The particle may still be associated
      * with the model, but is inside of an atom in the space.
      * @param  {AlphaParticle} alphaParticle
+     * @private
      */
     removeParticleFromEmptySpace: function( alphaParticle ) {
       var index = this.particlesInEmptySpace.indexOf( alphaParticle );
@@ -107,6 +109,7 @@ define( function( require ) {
      * a new atom's bounding circle, a new shape is prepared and transformed for the trajectory algorithm.  Once
      * the particle hits the atom's bounding box, the prepared shape is applied, and the atom will cary out
      * the trajectory until the particle reaches a new atom.
+     * @private
      */
     transitionParticlesToAtoms: function() {
       for ( var i = 0; i < this.particlesInEmptySpace.length; i++ ) {
@@ -205,6 +208,7 @@ define( function( require ) {
      * Check to make sure that the atom bounds do not overlap each other.
      * Added to prototype so that subtypes can check their atoms once they
      * have been instantiated.
+     * @public
      */
     checkAtomBounds: function() {
     // make sure that none of the atoms overlap each other

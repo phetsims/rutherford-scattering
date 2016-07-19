@@ -19,6 +19,7 @@ define( function( require ) {
   /**
    * Constructor.
    * @param {Property.<number>} protonCountProperty
+   * @param {Property.<number>} neutronCountProperty
    * @param {Bounds2} bounds
    */
   function RutherfordNucleusSpace( protonCountProperty, neutronCountProperty, bounds ) {

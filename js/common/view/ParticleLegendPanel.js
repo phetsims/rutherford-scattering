@@ -46,7 +46,7 @@ define( function( require ) {
 
     var legendText = new Text( legendString, {
       font: RSConstants.PANEL_TITLE_FONT,
-      fontWeight: 'bold', 
+      fontWeight: 'bold',
       fill: RSConstants.PANEL_TITLE_COLOR,
       maxWidth: 225
     } );
@@ -81,9 +81,10 @@ define( function( require ) {
 
   /**
    * Build one row in the legend consisting of an image and label
-   * @param {string} titleString
    * @param {Node} particleNode
+   * @param {string} titleString
    * @returns {HBox}
+   * @private
    */
   function createParticleBox( particleNode, titleString ) {
 
