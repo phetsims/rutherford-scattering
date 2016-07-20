@@ -141,6 +141,7 @@ define( function( require ) {
       // generate atom image - asynchronous
       var self = this;
       this.toImage( function( image, x, y ) {
+        // @public (read-only)
         self.image = image;
       } );
 
