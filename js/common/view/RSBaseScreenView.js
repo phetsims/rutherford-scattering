@@ -116,9 +116,9 @@ define( function( require ) {
 
     // dashed lines that connect the tiny box and space
     var dashedLines = new Path( new Shape()
-      .moveTo( tinyBoxNode.left, tinyBoxNode.top )
+      .moveTo( tinyBoxNode.centerX, tinyBoxNode.top )
       .lineTo( self.spaceNode.left, self.spaceNode.top )
-      .moveTo( tinyBoxNode.left, tinyBoxNode.bottom )
+      .moveTo( tinyBoxNode.centerX, tinyBoxNode.bottom )
       .lineTo( self.spaceNode.left, self.spaceNode.bottom ), {
       stroke: 'grey',
       lineDash: [ 5, 5 ]
