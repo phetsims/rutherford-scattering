@@ -244,6 +244,17 @@ define( function( require ) {
     }
 } );
 
+  /**
+   * Paint a nucleus icon with canvas.  A 'render method' is used to determine the style of rendering.
+   * render options are 'canvasArc' and 'canvasImage'.  'canvasArc' is a slower option, but has better
+   * resolution, and is good for icons.  'canvasImage' is faster and is good for dynamic elements that
+   * need to change frequenly, but it tends to have poor resolution at larger scales.
+   *
+   * @param  {RutherfordNucleus} nucleus
+   * @param  {Bounds2} nucleusBounds description
+   * @param  {CanvasRenderingContext2D} context
+   * @param  {string} render - 'canvasArc' | 'canvasImage', determines rendering method, see above
+   */
   var paintNucleusIcon = function( nucleus, nucleusBounds, context, render ) {
     var protons = nucleus.protons.getArray().slice( 0 );
     var neutrons = nucleus.neutrons.getArray().slice( 0 );
