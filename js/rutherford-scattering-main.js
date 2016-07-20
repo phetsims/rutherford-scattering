@@ -20,7 +20,7 @@ define( function( require ) {
   var simOptions = {
     credits: {
       leadDesign: 'Amy Hanson, Sam McKagan',
-      softwareDevelopment: 'Dave Schmitz, Chris Malley',
+      softwareDevelopment: 'Jesse Greenberg, Chris Malley, Dave Schmitz',
       team: 'Wendy Adams, Mike Dubson, Noah Finkelstein,\nDanielle Harlow, Ariel Paul, Kathy Perkins,\nNoah Podolefsky, Amy Rouinfar, Carl Weiman',
       qualityAssurance: '',
       graphicArts: '',
