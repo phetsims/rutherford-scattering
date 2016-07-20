@@ -64,7 +64,7 @@ define( function( require ) {
     var atomPropertiesPanel = new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty,
       model.neutronCountProperty, { resize: false } );
 
-    // for the 'Atom' scene, the beam should be wider and semi-transparent, the scale indicator
+    // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
     // should be updated, and the control/legend panels need to change
     var self = this;
     model.sceneProperty.link( function( scene ) {
@@ -73,12 +73,10 @@ define( function( require ) {
       var atomSceneVisible = scene === 'atom';
 
       if ( atomSceneVisible ) {
-        beam.setRect( 0, 0, RSConstants.BEAM_SIZE.width * 4, RSConstants.BEAM_SIZE.height );
         beam.fill = ATOM_BEAM_FILL;
         legendPanel = self.atomParticleLegend;
       }
       else {
-        beam.setRect( 0, 0, RSConstants.BEAM_SIZE.width, RSConstants.BEAM_SIZE.height );
         beam.fill = NUCLEUS_BEAM_FILL;
         legendPanel = self.nuclearParticleLegend;
       }
