@@ -28,9 +28,6 @@ define( function( require ) {
   var PhetFont = require('SCENERY_PHET/PhetFont' );
 
   // constants
-  var ATOM_BEAM_FILL = 'rgba(143,143,143,0.4)';
-  var NUCLEUS_BEAM_FILL = 'rgba(143,143,143,1)';
-
   var SHOW_ERROR_COUNT = RSQueryParameters.SHOW_ERROR_COUNT;
 
   // strings
@@ -73,11 +70,11 @@ define( function( require ) {
       var atomSceneVisible = scene === 'atom';
 
       if ( atomSceneVisible ) {
-        beam.fill = ATOM_BEAM_FILL;
+        beam.fill = RSConstants.ATOM_BEAM_FILL;
         legendPanel = self.atomParticleLegend;
       }
       else {
-        beam.fill = NUCLEUS_BEAM_FILL;
+        beam.fill = RSConstants.NUCLEUS_BEAM_FILL;
         legendPanel = self.nuclearParticleLegend;
       }
 

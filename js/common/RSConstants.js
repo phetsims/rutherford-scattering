@@ -74,7 +74,13 @@ define( function( require ) {
 
     // Animation space size, must be square!
     SPACE_NODE_WIDTH: 490,
-    SPACE_NODE_HEIGHT: 490
+    SPACE_NODE_HEIGHT: 490,
+
+    //----------------------------------------------------------------------------
+    // Other common colors
+    //----------------------------------------------------------------------------
+    ATOM_BEAM_FILL: 'rgba(143,143,143,0.4)',
+    NUCLEUS_BEAM_FILL: 'rgba(143,143,143,1)'
 
   };
 

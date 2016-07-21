@@ -84,7 +84,8 @@ define( function( require ) {
     // @protected, alpha particle beam
     this.beamNode = new BeamNode( model.gun.onProperty, {
       centerX: this.gunNode.centerX,
-      bottom: this.gunNode.top
+      bottom: this.gunNode.top,
+      fill: RSConstants.ATOM_BEAM_FILL
     } );
     this.addChild( this.beamNode );
 
