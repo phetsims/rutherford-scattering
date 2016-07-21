@@ -18,8 +18,9 @@ define( function( require ) {
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   /**
-   *
-   * @param {Object} [options]
+   * Constructor.
+   * @param {array.<Panel>} panels
+   * @param {object} options
    * @constructor
    */
   function RSControlPanel( panels, options ) {
