@@ -1,8 +1,8 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Visual representation of a collection of rutherford atoms.  Electron energy levels are shown around the atoms, 
- * represented by dashed circles scaled by the Bohr energy for each level.  
+ * Visual representation of a collection of rutherford atoms.  Electron energy levels are shown around the atoms,
+ * represented by dashed circles scaled by the Bohr energy for each level.
  *
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
@@ -29,10 +29,9 @@ define( function( require ) {
   /**
    * Constructor.
    *
-   * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
-   * @param {Property.<boolean>} protonCountProperty
-   * @param {Property.<boolean>} neutronCountProperty
-   * @param {Object} [options]
+   * @param {RutherfordAtomSpace} atomSpace - AtomSpace containing the atoms
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} options`
    * @constructor
    */
   function AtomCollectionNode( atomSpace, modelViewTransform, options ) {
