@@ -16,7 +16,7 @@ define( function( require ) {
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var ArrowButton = require( 'SCENERY_PHET/buttons/ArrowButton' );
+  var ArrowButton = require( 'SUN/buttons/ArrowButton' );
   var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
