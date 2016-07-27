@@ -67,5 +67,8 @@
   },
   "pattern.0nuclearScale": {
     "value": "{0} m (nuclear scale)"
+  },
+  "options.projectorColors": {
+    "value": "Projector Mode"
   }
 }

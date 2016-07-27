@@ -17,6 +17,7 @@ define( function( require ) {
   var ScreenIcon = require( 'JOIST/ScreenIcon' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
 
   // strings
   var rutherfordAtomString = require( 'string!RUTHERFORD_SCATTERING/rutherfordAtom' );
@@ -27,7 +28,7 @@ define( function( require ) {
   function RutherfordAtomScreen() {
 
     // create an icon for the rutherford atom screen with default number of protons and neutrons
-    var screenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon( 
+    var screenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
       RSConstants.DEFAULT_PROTON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT
     ), {
       fill: 'black'
@@ -40,6 +41,12 @@ define( function( require ) {
       function( model ) { return new RutherfordAtomScreenView( model ); }, {
         backgroundColor: 'black'
       } );
+
+    // screen will exist for life of sim, no need to unlink
+    var self = this;
+    RSColors.link( 'background', function( color ) {
+      self.backgroundColor = color;
+    } );
   }
 
   rutherfordScattering.register( 'RutherfordAtomScreen', RutherfordAtomScreen );

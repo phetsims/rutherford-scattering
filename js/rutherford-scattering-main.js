@@ -13,6 +13,9 @@ define( function( require ) {
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var RutherfordAtomScreen = require( 'RUTHERFORD_SCATTERING/rutherfordatom/RutherfordAtomScreen' );
   var PlumPuddingAtomScreen = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/PlumPuddingAtomScreen' );
+  var MenuOptionsNode = require( 'RUTHERFORD_SCATTERING/common/view/MenuOptionsNode' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
 
   // strings
   var rutherfordScatteringTitleString = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );
@@ -25,8 +28,19 @@ define( function( require ) {
       qualityAssurance: '',
       graphicArts: '',
       thanks: ''
-    }
+    },
+    optionsNode: new MenuOptionsNode()
   };
+
+  // no need to unlink, will exist for life of sim
+  RSGlobals.projectorColorsProperty.link( function( useProjectorColors ) {
+    if ( useProjectorColors ) {
+      RSColors.applyProfile( 'projector' );
+    }
+    else {
+      RSColors.applyProfile( 'default' );
+    }
+  } );
 
   SimLauncher.launch( function() {
     var screens = [

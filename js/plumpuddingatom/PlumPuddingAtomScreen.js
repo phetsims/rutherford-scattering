@@ -15,6 +15,7 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var PlumPuddingAtomModel = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomModel' );
   var PlumPuddingAtomScreenView = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomScreenView' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
 
   // strings
   var plumPuddingAtomString = require( 'string!RUTHERFORD_SCATTERING/plumPuddingAtom' );
@@ -34,6 +35,12 @@ define( function( require ) {
       function( model ) { return new PlumPuddingAtomScreenView( model ); }, {
         backgroundColor: 'black'
       } );
+
+    // screen will exist for life of sim, no need to unlink
+    var self = this;
+    RSColors.link( 'background', function( color ) {
+      self.backgroundColor = color;
+    } );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreen', PlumPuddingAtomScreen );
