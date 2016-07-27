@@ -16,6 +16,8 @@ define( function( require ) {
   var AtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomSpaceNode' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
   var AtomParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomParticleLegendPanel' );
+  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
+  var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
@@ -56,11 +58,6 @@ define( function( require ) {
     } );
     this.addChild( atomicScaleInfoNode );
 
-    // add the control panels for this screen view
-    this.atomParticleLegend = new AtomParticleLegendPanel( { resize: false } );
-    var atomPropertiesPanel = new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty,
-      model.neutronCountProperty, { resize: false } );
-
     // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
     // should be updated, and the control/legend panels need to change
     var self = this;
@@ -69,26 +66,39 @@ define( function( require ) {
       var beam = self.beamNode;
       var atomSceneVisible = scene === 'atom';
 
+      // dispose and remove the old control panel
+      self.controlPanel.dispose();
+      self.removeChild( self.controlPanel );
+
+      // create scene specific legend panels
       if ( atomSceneVisible ) {
         beam.fill = RSConstants.ATOM_BEAM_FILL;
-        legendPanel = self.atomParticleLegend;
+        legendPanel = new AtomParticleLegendPanel( { resize: false } );
       }
       else {
         beam.fill = RSConstants.NUCLEUS_BEAM_FILL;
-        legendPanel = self.nuclearParticleLegend;
+        legendPanel = new NuclearParticleLegendPanel( {
+          resize: false,
+          includeElectron: false,
+          includePlumPudding: false
+        } );
       }
 
       var panels = [
         legendPanel,
-        self.alphaParticlePropertiesPanel,
-        atomPropertiesPanel
+        new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } ),
+        new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } )
       ];
 
-      self.controlPanel.updatePanels( panels );
+      // create the new control panel
+      self.controlPanel = self.createControlPanel( panels );
+      self.addChild( self.controlPanel );
 
+      // update visibility of scene specific scale info
       self.scaleInfoNode.visible = !atomSceneVisible;
       atomicScaleInfoNode.visible = atomSceneVisible;
 
+      // recenter the gun beam
       beam.centerX = self.gunNode.centerX;
     } );
 

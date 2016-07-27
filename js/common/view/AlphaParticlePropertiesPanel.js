@@ -131,10 +131,28 @@ define( function( require ) {
     } );
 
     Panel.call( this, content, options );
+
+    // @private - make panel eligible for garbage collection
+    this.disposePanel = function() {
+      showTraceCheckBox.dispose();
+      particleEnergySlider.dispose();
+    };
   }
 
   rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
 
-  return inherit( Panel, AlphaParticlePropertiesPanel );
+  return inherit( Panel, AlphaParticlePropertiesPanel, {
+
+    /**
+     * dispose - this panel is created and destroyed every time the scene and color scheme changes
+     * so it is important to fully dispose of all elemets.
+     *
+     * @return {type}  description
+     */
+    dispose: function() {
+      Panel.prototype.dispose.call( this );
+      this.disposePanel();
+    }
+  } );
 
 } );

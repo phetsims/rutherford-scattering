@@ -56,7 +56,7 @@ define( function( require ) {
     var self = this;
 
     // properties
-    var showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
+    this.showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
     // @protected for layout in subtypes, alpha particle gun
     this.gunNode = new LaserPointerNode( model.gun.onProperty, {
@@ -112,7 +112,7 @@ define( function( require ) {
     var modelViewTransform = new ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
 
     // @protected for layout in subtypes
-    this.spaceNode = createSpaceNode( model, showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
+    this.spaceNode = createSpaceNode( model, this.showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
     this.addChild( this.spaceNode );
 
     // dashed lines that connect the tiny box and space
@@ -152,28 +152,25 @@ define( function( require ) {
     this.addChild( stepButton );
 
     // @protected, for visibility control by subtypes - control panels that are common to all ScreenViews
-    this.nuclearParticleLegend = new NuclearParticleLegendPanel( {
+    var nuclearParticleLegend = new NuclearParticleLegendPanel( {
       resize: false,
       includeElectron: options.includeElectronLegend,
       includePlumPudding: options.includePlumPuddingLegend
     } );
-    this.alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, showAlphaTraceProperty, { resize: false } );
+    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
     var controlPanels = [
-      this.nuclearParticleLegend,
-      this.alphaParticlePropertiesPanel
+      nuclearParticleLegend,
+      alphaParticlePropertiesPanel
     ];
 
     // @protected - collect all control panels in a single panel
-    this.controlPanel = new RSControlPanel( controlPanels, {
-      top: this.spaceNode.top,
-      left: this.spaceNode.right + RSConstants.PANEL_SPACE_MARGIN
-    } );
+    this.controlPanel = this.createControlPanel( controlPanels );
     this.addChild( this.controlPanel );
 
     // reset all button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
-        showAlphaTraceProperty.reset();
+        self.showAlphaTraceProperty.reset();
         model.reset();
       },
       right: this.controlPanel.right,
@@ -184,5 +181,21 @@ define( function( require ) {
 
   rutherfordScattering.register( 'RSBaseScreenView', RSBaseScreenView );
 
-  return inherit( ScreenView, RSBaseScreenView );
+  return inherit( ScreenView, RSBaseScreenView, {
+
+    /**
+     * Create a control panel - used by subtypes to generate a control panel from a set
+     * of panels.
+     *
+     * @param  {array.<Panel>} panels
+     * @return {RSControlPanel}
+     * @protected
+     */
+    createControlPanel: function( panels ) {
+      return new RSControlPanel( panels, {
+        top: this.spaceNode.top,
+        left: this.spaceNode.right + RSConstants.PANEL_SPACE_MARGIN
+      } );
+    }
+  } );
 } );

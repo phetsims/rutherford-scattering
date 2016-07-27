@@ -54,6 +54,8 @@ define( function( require ) {
 
     // @private
     this.userInteractionProperty = userInteractionProperty;
+    this.neutronCountProperty = neutronCountProperty;
+    this.protonCountProperty = protonCountProperty;
 
     // strings
     var atomPropertiesText = new Text( atomString, {
@@ -185,10 +187,11 @@ define( function( require ) {
       } ) );
 
     // /enable/disable +/- buttons on min/max
-    protonCountProperty.link( function( value, oldValue ) {
+    var enabledListener = function( value ) {
       self.protonMinusButton.enabled = !( value === RSConstants.MIN_PROTON_COUNT );
       self.protonPlusButton.enabled = !( value === RSConstants.MAX_PROTON_COUNT );
-    } );
+    };
+    protonCountProperty.link( enabledListener );
 
     // proton count slider title
     var neutronCountStrut = new HStrut( options.minWidth * 0.05 );
@@ -210,10 +213,12 @@ define( function( require ) {
     } ) );
 
     // /enable/disable +/- buttons on min/max
-    neutronCountProperty.link( function( value, oldValue ) {
+    var neutronCountListener = function( value ) {
       self.neutronMinusButton.enabled = !( value === RSConstants.MIN_NEUTRON_COUNT );
       self.neutronPlusButton.enabled = !( value === RSConstants.MAX_NEUTRON_COUNT );
-    } );
+    };
+    this.neutronCountProperty.link( neutronCountListener );
+
     var neutronCountContent = new HBox( {
       spacing: 8,
       top: 0,
@@ -222,7 +227,7 @@ define( function( require ) {
     } );
 
     // neutron count slider
-    var neutronCountSlider = new HSlider( neutronCountProperty, {
+    var neutronCountSlider = new HSlider( this.neutronCountProperty, {
       min: RSConstants.MIN_NEUTRON_COUNT,
       max: RSConstants.MAX_NEUTRON_COUNT
     }, _.extend( {}, sliderOptions, {
@@ -253,9 +258,45 @@ define( function( require ) {
     } );
 
     Panel.call( this, content, options );
+
+    // ensure that panel is eligible for garbage collection, a panel is created and destroyed every time
+    // scene or color scheme changes so it si important that everything is disposed
+    // @private
+    this.disposePanel = function() {
+
+        // dispose arrow buttons
+        this.protonMinusButton.dispose();
+        this.protonPlusButton.dispose();
+        this.neutronMinusButton.dispose();
+        this.neutronPlusButton.dispose();
+
+        // dispose sliders
+        protonCountSlider.dispose();
+        neutronCountSlider.dispose();
+
+        // dispose number displays
+        protonNumberDisplay.dispose();
+        neutronNumberDisplay.dispose();
+
+        // unlink properties
+        protonCountProperty.unlink( enabledListener );
+        this.neutronCountProperty.unlink( neutronCountListener );
+    };
   }
 
   rutherfordScattering.register( 'AtomPropertiesPanel', AtomPropertiesPanel );
 
-  return inherit( Panel, AtomPropertiesPanel );
+  return inherit( Panel, AtomPropertiesPanel, {
+
+    /**
+     * Dispose this panel - this panel can be created and destroyed frequently so
+     * it is important to dispose of all panel elements.
+     *
+     * @public
+     */
+    dispose: function() {
+      Panel.prototype.dispose.call( this );
+      this.disposePanel();
+    }
+  } );
 } );

@@ -36,27 +36,30 @@ define( function( require ) {
     this.panelOptions = _.extend( defaultOptions, options ); // @private
 
     // @private - arrange control panels vertically
-    this.vBox = new VBox( this.panelOptions );
-    this.addChild( this.vBox );
+    var vBox = new VBox( this.panelOptions );
+    this.addChild( vBox );
 
     this.mutate( options );
+
+    // disposal to prevent memory leak - this is important because a new
+    // control panel is created every time the scene or color scheme changes
+    this.disposeControlPanel = function() {
+      this.panelOptions.children.forEach( function( panel ) {
+        panel.dispose();
+      } );
+    };
   }
 
   rutherfordScattering.register( 'RSControlPanel', RSControlPanel );
 
   return inherit( Node, RSControlPanel, {
 
-    updatePanels: function( panels ) {
-      // remove all of the old panels
-      this.removeChild( this.vBox );
-
-      // replace the children
-      this.panelOptions.children = panels;
-      var controlPanel = new VBox( this.panelOptions );
-
-      // the the vBox back to the view
-      this.vBox = controlPanel;
-      this.addChild( this.vBox );
+    /**
+     * Dispose the control panel.  A new control panel is created every time the color scheme
+     * and scene property changes so it is important to dispose of all elements.
+     */
+    dispose: function() {
+      this.disposeControlPanel();
     }
   } );
 } );
