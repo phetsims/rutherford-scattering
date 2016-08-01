@@ -103,6 +103,10 @@ define( function( require ) {
     materialBackColor: {
       default: new Color( 140, 126, 41 ),
       projector: new Color( 140, 126, 41 )
+    },
+    panelSliderLabelColor: {
+      default: new Color( 180, 180, 180 ),
+      projector: new Color( 0, 0, 0 )
     }
   };
 

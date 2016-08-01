@@ -20,6 +20,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
 
   // strings
   var alphaParticlePropertiesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
@@ -45,8 +46,8 @@ define( function( require ) {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSConstants.PANEL_COLOR,
-      stroke: RSConstants.PANEL_STROKE
+      fill: RSColors.panelColor,
+      stroke: RSColors.panelBorderColor
     }, options );
 
     // @private
@@ -59,24 +60,24 @@ define( function( require ) {
     var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.PANEL_TITLE_COLOR,
+      fill: RSColors.panelTitleColor,
       maxWidth: 215
     } );
     var energyText = new Text( energyString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.NEUTRAL_FILL_COLOR,
+      fill: RSColors.panelLabelColor,
       maxWidth: 210
     } );
     var minEnergyText = new Text( minEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
-      fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      fill: RSColors.panelSliderLabelColor,
       maxWidth: options.maxWidth / 5,
       pickable: false
     } );
     var maxEnergyText = new Text( maxEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
-      fill: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      fill: RSColors.panelSliderLabelColor,
       maxWidth: options.maxWidth / 5,
       pickable: false
     } );
@@ -91,9 +92,9 @@ define( function( require ) {
       min: RSConstants.MIN_ALPHA_ENERGY,
       max: RSConstants.MAX_ALPHA_ENERGY
     }, {
-      trackFill: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      trackStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
-      majorTickStroke: RSConstants.PANEL_SLIDER_FILL_COLOR,
+      trackFill: RSColors.panelSliderLabelColor,
+      trackStroke: RSColors.panelSliderLabelColor,
+      majorTickStroke: RSColors.panelSliderLabelColor,
       majorTickLength: 15,
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
@@ -113,12 +114,12 @@ define( function( require ) {
     var showTraceText = new Text( showTracesString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.NEUTRAL_FILL_COLOR,
+      fill: RSColors.panelLabelColor,
       maxWidth: 180
     } );
     var showTraceCheckBox = new CheckBox( showTraceText, showTracesProperty, {
-      checkBoxColor: RSConstants.NEUTRAL_FILL_COLOR,
-      checkBoxColorBackground: 'black'
+      checkBoxColor: RSColors.panelLabelColor,
+      checkBoxColorBackground: RSColors.panelColor
     } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );
 
