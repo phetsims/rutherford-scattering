@@ -105,6 +105,14 @@ define( function( require ) {
     },
 
     /**
+     * Remove all particles from the space, including those that are in the empty space.
+     */
+    removeAllParticles: function() {
+      this.particles.length = 0;
+      this.particlesInEmptySpace.length = 0;
+    },
+
+    /**
      * Transition a particle in empty space to an atom if the particle hits atomic bounds.  If the particle hits
      * a new atom's bounding circle, a new shape is prepared and transformed for the trajectory algorithm.  Once
      * the particle hits the atom's bounding box, the prepared shape is applied, and the atom will cary out

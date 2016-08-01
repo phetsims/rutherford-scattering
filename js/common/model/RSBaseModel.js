@@ -135,11 +135,16 @@ define( function( require ) {
     removeAllParticles: function() {
       // remove the particles from the visible space
       var visibleSpace = this.getVisibleSpace();
-      visibleSpace.particles.length = 0;
+      visibleSpace.removeAllParticles();
 
       // remove all particles from the atoms
       visibleSpace.atoms.forEach( function( atom ) {
         atom.particles.length = 0;
+      } );
+
+      // dispose all particles
+      this.particles.forEach( function( particle ) {
+        particle.dispose();
       } );
       this.particles.length = 0;
       this.stepEmitter.emit();
