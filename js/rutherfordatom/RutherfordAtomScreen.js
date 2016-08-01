@@ -31,7 +31,7 @@ define( function( require ) {
     var screenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
       RSConstants.DEFAULT_PROTON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT
     ), {
-      fill: 'black'
+      fill: RSColors.backgroundColor
     } );
 
     Screen.call( this,
@@ -39,12 +39,12 @@ define( function( require ) {
       screenIcon,
       function() { return new RutherfordAtomModel(); },
       function( model ) { return new RutherfordAtomScreenView( model ); }, {
-        backgroundColor: 'black'
+        backgroundColor: RSColors.backgroundColor
       } );
 
     // screen will exist for life of sim, no need to unlink
     var self = this;
-    RSColors.link( 'background', function( color ) {
+    RSColors.link( 'backgroundColor', function( color ) {
       self.backgroundColor = color;
     } );
   }

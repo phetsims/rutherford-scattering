@@ -20,51 +20,55 @@ define( function( require ) {
   // the 'default' value provided.
   // NOTE: This is NOT provided to clients directly, but is passed to the PropertySet constructor.
   var colors = {
-    background: {
+    backgroundColor: {
       default: new Color( 0, 0, 0 ),
       projector: new Color( 255, 255, 255 )
     },
-    radioButtonBorder: {
+    panelColor: {
+      default: new Color( 0, 0, 0 ),
+      projector: new Color( 255, 255, 255 )
+    },
+    radioButtonBorderColor: {
       default: new Color( 200, 200, 95 ),
       projector: new Color( 49, 193, 221 )
     },
-    panelBorder: {
-      default: new Color( 128, 128, 1288 ),
+    panelBorderColor: {
+      default: new Color( 128, 128, 128 ),
       projector: new Color(128, 128, 128  )
     },
-    panelTitle: {
+    panelTitleColor: {
       default: new Color(200, 200, 95 ),
       projector: new Color( 0, 0, 0  )
     },
-    panelSilder: {
+    panelSilderColor: {
       default: new Color( 180, 180, 180 ),
       projector: new Color( 0, 0, 0 )
     },
-    panelLabel: {
+    panelLabelColor: {
       default: new Color( 210, 210, 210 ),
       projector: new Color( 0, 0, 0 )
     },
-    protonsLabel: {
+    protonsLabelColor: {
       default: new Color( 185, 50, 8 ),
       projector: new Color( 185, 50, 8 )
     },
-    neutronsLabel: {
+    neutronsLabelColor: {
       default: new Color( 160, 160, 160 ),
       projector: new Color( 125, 125, 125 )
     },
-    atomBeam: {
+    atomBeamColor: {
       default: new Color( 143, 143, 143, 0.4 ),
       projector: new Color( 143, 143, 143, 0.4 )
     },
-    nucleusBeam: {
+    nucleusBeamColor: {
       default: new Color( 143, 143, 143 ),
       projector: new Color( 163, 163, 163 )
     },
-    particleSpecularHighlight: {
+    particleSpecularHighlightColor: {
       default: new Color( 200, 200, 200 ),
       projector: new Color( 200, 200, 200 )
     },
-    alphaNucleusTrace: {
+    alphaNucleusTraceColor: {
       default: new Color( 128, 128, 128 ),
       projector: new Color( 128, 128, 128 )
     },

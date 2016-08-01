@@ -33,12 +33,12 @@ define( function( require ) {
       new Image( screenIcon ),
       function() { return new PlumPuddingAtomModel(); },
       function( model ) { return new PlumPuddingAtomScreenView( model ); }, {
-        backgroundColor: 'black'
+        backgroundColor: RSColors.backgroundColor
       } );
 
     // screen will exist for life of sim, no need to unlink
     var self = this;
-    RSColors.link( 'background', function( color ) {
+    RSColors.link( 'backgroundColor', function( color ) {
       self.backgroundColor = color;
     } );
   }

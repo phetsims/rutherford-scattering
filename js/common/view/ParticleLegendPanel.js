@@ -18,6 +18,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
 
   // strings
   var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
@@ -39,15 +40,15 @@ define( function( require ) {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSConstants.PANEL_COLOR,
-      stroke: RSConstants.PANEL_STROKE,
+      fill: RSColors.panelColor,
+      stroke: RSColors.panelBorderColor,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
 
     var legendText = new Text( legendString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSConstants.PANEL_TITLE_COLOR,
+      fill: RSColors.panelTitleColor,
       maxWidth: 225
     } );
 
@@ -89,7 +90,7 @@ define( function( require ) {
   function createParticleBox( particleNode, titleString ) {
 
     var hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
-    var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSConstants.NEUTRAL_FILL_COLOR, maxWidth: 175 } );
+    var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSColors.panelLabelColor, maxWidth: 175 } );
     var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
 
     // container for one row in the legend
