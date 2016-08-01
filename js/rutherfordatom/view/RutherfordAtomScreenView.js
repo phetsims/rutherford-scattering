@@ -61,25 +61,16 @@ define( function( require ) {
     } );
     this.addChild( atomicScaleInfoNode );
 
-    // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
-    // should be updated, and the control/legend panels need to change
-    var self = this;
-    model.sceneProperty.link( function( scene ) {
+    // create the panels of the control panel on the right
+    var createPanels = function() {
       var legendPanel;
-      var beam = self.beamNode;
-      var atomSceneVisible = scene === 'atom';
-
-      // dispose and remove the old control panel
-      self.controlPanel.dispose();
-      self.removeChild( self.controlPanel );
+      var atomSceneVisible = model.sceneProperty.value === 'atom';
 
       // create scene specific legend panels
       if ( atomSceneVisible ) {
-        beam.fill = RSConstants.ATOM_BEAM_FILL;
         legendPanel = new AtomParticleLegendPanel( { resize: false } );
       }
       else {
-        beam.fill = RSConstants.NUCLEUS_BEAM_FILL;
         legendPanel = new NuclearParticleLegendPanel( {
           resize: false,
           includeElectron: false,
@@ -87,13 +78,34 @@ define( function( require ) {
         } );
       }
 
-      var panels = [
+      return [
         legendPanel,
         new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } ),
         new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } )
       ];
+    };
+
+    // when the color profile changes, create a new control panel
+    var self = this;
+    RSGlobals.link( 'projectorColors', function() {
+      // dispose and remove the old control panel
+      self.controlPanel.dispose();
+      self.removeChild( self.controlPanel );
 
       // create the new control panel
+      var panels = createPanels();
+      self.controlPanel = self.createControlPanel( panels );
+      self.addChild( self.controlPanel );
+    } );
+
+    // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
+    // should be updated, and the control/legend panels need to change
+    model.sceneProperty.link( function( scene ) {
+      var beam = self.beamNode;
+      var atomSceneVisible = scene === 'atom';
+
+      // create the new control panel
+      var panels = createPanels();
       self.controlPanel = self.createControlPanel( panels );
       self.addChild( self.controlPanel );
 
@@ -101,8 +113,10 @@ define( function( require ) {
       self.scaleInfoNode.visible = !atomSceneVisible;
       atomicScaleInfoNode.visible = atomSceneVisible;
 
-      // recenter the gun beam
+      // recenter the gun beam and set new fill
       beam.centerX = self.gunNode.centerX;
+      beam.fill = atomSceneVisible ? RSConstants.ATOM_BEAM_FILL : RSConstants.NUCLEUS_BEAM_FILL;
+
     } );
 
     // create radio buttons for the scene - new buttons must be created
