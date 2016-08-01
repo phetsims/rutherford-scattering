@@ -32,6 +32,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
 
   // strings
   var alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
@@ -85,7 +86,7 @@ define( function( require ) {
     this.beamNode = new BeamNode( model.gun.onProperty, {
       centerX: this.gunNode.centerX,
       bottom: this.gunNode.top,
-      fill: RSConstants.ATOM_BEAM_FILL
+      fill: RSColors.atomBeamColor
     } );
     this.addChild( this.beamNode );
 

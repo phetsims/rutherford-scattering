@@ -18,6 +18,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
 
   // constants
   var IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV
@@ -37,49 +38,59 @@ define( function( require ) {
   function AtomCollectionNode( atomSpace, modelViewTransform, options ) {
 
     Node.call( this, options );
-
-    // for each atom in the space, draw the following
     var self = this;
-    atomSpace.atoms.forEach( function( atom ) {
 
-      // a small circle represents each nucleus
-      var nucleusCircle = ParticleNodeFactory.createNucleus();
-      nucleusCircle.center = modelViewTransform.modelToViewPosition( atom.position );
-      self.addChild( nucleusCircle );
+    // draw each atom in the space - called every time the color profile changes
+    var drawAtomSpace = function() {
 
-      // create the radii - concentric circles with dashed lines spaced proportionally to the Bohr
-      // energies
-      var getScaledRadius = function( index ) {
-        var radius = 0;
+      // remove the all children
+      self.removeAllChildren();
+      atomSpace.atoms.forEach( function( atom ) {
 
-        // sum the Bohr energies up to this index
-        for ( var i = 1; i <= index; i++ ) {
-          var bohrEnergy = IONIZATION_ENERGY / ( i * i );
-          radius += bohrEnergy; // radius will be scaled by this sum
+        // a small circle represents each nucleus
+        var nucleusCircle = ParticleNodeFactory.createNucleus();
+        nucleusCircle.center = modelViewTransform.modelToViewPosition( atom.position );
+        self.addChild( nucleusCircle );
+
+        // create the radii - concentric circles with dashed lines spaced proportionally to the Bohr
+        // energies
+        var getScaledRadius = function( index ) {
+          var radius = 0;
+
+          // sum the Bohr energies up to this index
+          for ( var i = 1; i <= index; i++ ) {
+            var bohrEnergy = IONIZATION_ENERGY / ( i * i );
+            radius += bohrEnergy; // radius will be scaled by this sum
+          }
+          return radius * RADIUS_SCALE;
+        };
+
+        // draw the radii
+        for ( var i = ENERGY_LEVELS; i > 0 ; i-- ) {
+          var scaledRadius = getScaledRadius( i );
+          var radius = new Circle( scaledRadius, { stroke: 'grey', lineDash: [ 5, 5 ], center: nucleusCircle.center } );
+          self.addChild( radius );
         }
-        return radius * RADIUS_SCALE;
-      };
 
-      // draw the radii
-      for ( var i = ENERGY_LEVELS; i > 0 ; i-- ) {
-        var scaledRadius = getScaledRadius( i );
-        var radius = new Circle( scaledRadius, { stroke: 'grey', lineDash: [ 5, 5 ], center: nucleusCircle.center } );
-        self.addChild( radius );
-      }
+        // draw the bounds of each nucleus
+        if ( DEBUG_SHAPES ) {
+          var boundsRectangle = new Path( modelViewTransform.modelToViewShape( atom.boundingRect ), { stroke: 'red' } );
+          self.addChild( boundsRectangle );
 
-      // draw the bounds of each nucleus
-      if ( DEBUG_SHAPES ) {
-        var boundsRectangle = new Path( modelViewTransform.modelToViewShape( atom.boundingRect ), { stroke: 'red' } );
-        self.addChild( boundsRectangle );
+          var boundingCircle = new Path( modelViewTransform.modelToViewShape( atom.boundingCircle ), { stroke: 'red' } );
+          self.addChild( boundingCircle );
+        }
+      } );
+    };
 
-        var boundingCircle = new Path( modelViewTransform.modelToViewShape( atom.boundingCircle ), { stroke: 'red' } );
-        self.addChild( boundingCircle );
-      }
-    } );
+    // draw the atom space whenever the color profile changes
+    RSGlobals.link( 'projectorColors', function() {
+      drawAtomSpace();
 
-    // convert to image
-    this.image = self.toImage( function( image, x, y ) {
-      self.image = image;
+      // update the image
+      self.image = self.toImage( function( image, x, y ) {
+        self.image = image;
+      } );
     } );
   }
 

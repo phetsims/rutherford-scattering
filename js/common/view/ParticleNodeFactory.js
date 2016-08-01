@@ -17,6 +17,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
 
   // constants
   var SPECULAR_HIGHLITE_COLOR = 'rgb(200,200,200)';
@@ -24,7 +25,6 @@ define( function( require ) {
   var PROTON_COLOR = 'rgb(255,69,0)';
   var NEUTRON_COLOR = 'rgb(192,192,192)';
   var PARTICLE_COLOR = 'rgb(255,0,255)';
-  var NUCLEUS_COLOR = 'rgb( 200, 200, 95 )';
   var ENERGY_LEVEL_COLOR = 'rgb(128,128,128)';
   var ELECTRON_RADIUS = 2.5;
   var PROTON_RADIUS = 4;
@@ -107,7 +107,7 @@ define( function( require ) {
     createNucleus: function() {
       return new Node( {
         children: [
-          new Circle( NUCLEUS_RADIUS, { fill: NUCLEUS_COLOR } )
+          new Circle( NUCLEUS_RADIUS, { fill: RSColors.nucleusColor } )
         ]
       } );
     },

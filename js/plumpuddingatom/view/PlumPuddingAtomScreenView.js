@@ -14,6 +14,9 @@ define( function( require ) {
   var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
   var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
+  var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
 
   // strings
   var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
@@ -28,6 +31,26 @@ define( function( require ) {
 
     RSBaseScreenView.call( this, model, scaleString, createSpaceNode, {
       includePlumPuddingLegend: true
+    } );
+    var self = this;
+
+    // whenever the color profile changes, redraw the control panel
+    RSGlobals.link( 'projectorColors', function() {
+      // dispose and remove the old control panel
+      self.controlPanel.dispose();
+      self.removeChild( self.controlPanel );
+
+      // create the new control panel
+      var panels = [
+        new NuclearParticleLegendPanel( {
+          resize: false,
+          includeElectron: true,
+          includePlumPudding: true
+        } ),
+        new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } )
+      ];
+      self.controlPanel = self.createControlPanel( panels );
+      self.addChild( self.controlPanel );
     } );
   }
 
