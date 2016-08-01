@@ -28,6 +28,8 @@ define( function( require ) {
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require('SCENERY_PHET/PhetFont' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
 
   // constants
   var SHOW_ERROR_COUNT = RSQueryParameters.SHOW_ERROR_COUNT;
@@ -38,6 +40,7 @@ define( function( require ) {
 
   // images
   var atomImage = require( 'image!RUTHERFORD_SCATTERING/Atom.png' );
+  var atomProjectorImage = require( 'image!RUTHERFORD_SCATTERING/AtomProjector.png' );
 
   /**
    * @param {RutherfordAtomModel} model
@@ -102,25 +105,47 @@ define( function( require ) {
       beam.centerX = self.gunNode.centerX;
     } );
 
-    // add scene control
-    var buttonOptions = { scale: 0.18 };
-    var sceneRadioButtons = new RadioButtonGroup( model.sceneProperty, [
-      { value: 'nucleus', node: RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 ) },
-      { value: 'atom', node: new Image( atomImage, buttonOptions ) }
-    ], {
-      orientation: 'vertical',
-      spacing: 15,
-      left: this.targetMaterialNode.left,
-      top: this.spaceNode.top,
-      baseColor: RSConstants.PANEL_COLOR,
-      deselectedStroke: RSConstants.PANEL_STROKE,
-      selectedStroke: RSConstants.PANEL_TITLE_COLOR,
-      buttonContentYMargin: 8,
-      selectedLineWidth: 2,
-      deselectedLineWidth: 1.5,
-      maxWidth: this.targetMaterialNode.width
+    // create radio buttons for the scene - new buttons must be created
+    // every time the color profile changes
+    var createRadioButtons = function( atomIconImage ) {
+      var buttonOptions = { scale: 0.18 };
+      return new RadioButtonGroup( model.sceneProperty, [
+        { value: 'nucleus', node: RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 ) },
+        { value: 'atom', node: new Image( atomIconImage, buttonOptions ) }
+      ], {
+        orientation: 'vertical',
+        spacing: 15,
+        left: self.targetMaterialNode.left,
+        top: self.spaceNode.top,
+        baseColor: RSColors.panelColor,
+        deselectedStroke: RSColors.panelBorderColor,
+        selectedStroke: RSColors.radioButtonBorderColor,
+        buttonContentYMargin: 8,
+        selectedLineWidth: 2,
+        deselectedLineWidth: 1.5,
+        maxWidth: self.targetMaterialNode.width
+      } );
+    };
+
+    // @private
+    self.sceneRadioButtons = createRadioButtons( atomImage );
+    self.addChild( self.sceneRadioButtons );
+
+    // if the bacgrkound, panel or stroke colors change, draw a new button group
+    RSColors.multilink( [ 'panelColor', 'panelBorderColor', 'panelTitleColor' ], function() {
+      // remove and dispose of the old button group
+      self.removeChild( self.sceneRadioButtons );
+      self.sceneRadioButtons.dispose();
+
+      // get the correct image for the 'atom' scene icon
+      var iconImage = RSGlobals.projectorColors ? atomProjectorImage : atomImage;
+
+      // create the new radio button group
+      var newButtonGroup = createRadioButtons( iconImage );
+      self.sceneRadioButtons = newButtonGroup;
+      self.addChild( newButtonGroup );
     } );
-    this.addChild( sceneRadioButtons );
+
   }
 
   rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );

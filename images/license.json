@@ -23,6 +23,14 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Amy Hanson"
   },
+  "AtomProjector.png": {
+    "text": [
+      "Copyright 2002-2016 University of Colorado Boulder"
+    ],
+    "projectURL": "http://phet.colorado.edu",
+    "license": "contact phethelp@colorado.edu",
+    "notes": "created by Amy Hanson - identical to 'Atom.png' but with new colors for 'projector' mode"
+  },
   "plumPuddingIcon.png": {
     "text": [
       "Copyright 2002-2016 University of Colorado Boulder"
