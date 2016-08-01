@@ -19,7 +19,6 @@ define( function( require ) {
   var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
   var Image = require( 'SCENERY/nodes/Image' );
@@ -115,7 +114,7 @@ define( function( require ) {
 
       // recenter the gun beam and set new fill
       beam.centerX = self.gunNode.centerX;
-      beam.fill = atomSceneVisible ? RSConstants.ATOM_BEAM_FILL : RSConstants.NUCLEUS_BEAM_FILL;
+      beam.fill = atomSceneVisible ? RSColors.atomBeamColor : RSColors.nucleusBeamColor;
 
     } );
 
