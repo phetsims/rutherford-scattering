@@ -103,11 +103,6 @@ define( function( require ) {
       var beam = self.beamNode;
       var atomSceneVisible = scene === 'atom';
 
-      // create the new control panel
-      var panels = createPanels();
-      self.controlPanel = self.createControlPanel( panels );
-      self.addChild( self.controlPanel );
-
       // update visibility of scene specific scale info
       self.scaleInfoNode.visible = !atomSceneVisible;
       atomicScaleInfoNode.visible = atomSceneVisible;
