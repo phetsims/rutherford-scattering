@@ -18,6 +18,8 @@ define( function( require ) {
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
 
   // constants
   var ARROW_HEAD_WIDTH = 12;
@@ -74,6 +76,19 @@ define( function( require ) {
     var rightMarker = new Path( new Shape().moveTo( rightArrowX, labelText.bounds.minY ).lineTo( rightArrowX, labelText.bounds.maxY ), {
       stroke: RSConstants.NEUTRAL_FILL_COLOR,
       lineWidth: 1.5
+    } );
+
+    // when the color profile changes, update the fill of all associated children
+    RSGlobals.link( 'projectorColors', function() {
+      var labelColor = RSColors.panelLabelColor;
+      // update end marker fill
+      leftMarker.stroke = labelColor;
+      rightMarker.stroke = labelColor;
+
+      rightArrowNode.fill = labelColor;
+      leftArrowNode.fill = labelColor;
+
+      labelText.fill = labelColor;
     } );
 
     assert && assert( !options.children, 'additional children not supported' );
