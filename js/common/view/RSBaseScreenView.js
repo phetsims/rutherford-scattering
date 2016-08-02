@@ -33,6 +33,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
 
   // strings
   var alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
@@ -81,6 +82,11 @@ define( function( require ) {
       maxWidth: 210
     } );
     this.addChild( alphaSourceText );
+
+    // when the color profile changes, the alpha source text should be black
+    RSGlobals.link( 'projectorColors', function() {
+      alphaSourceText.fill = RSColors.panelLabelColor;
+    } );
 
     // @protected, alpha particle beam
     this.beamNode = new BeamNode( model.gun.onProperty, {
