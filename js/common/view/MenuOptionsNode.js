@@ -12,7 +12,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordSCattering = require( 'RUTHERFORD_SCATTERING/rutherfordSCattering' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var VBox = require( 'SCENERY/nodes/VBox' );
   var Text = require( 'SCENERY/nodes/Text' );
   var CheckBox = require( 'SUN/CheckBox' );
@@ -39,7 +39,7 @@ define( function( require ) {
     } ) );
   }
 
-  rutherfordSCattering.register( 'MenuOptionsNode', MenuOptionsNode );
+  rutherfordScattering.register( 'MenuOptionsNode', MenuOptionsNode );
 
   return inherit( VBox, MenuOptionsNode );
 } );
