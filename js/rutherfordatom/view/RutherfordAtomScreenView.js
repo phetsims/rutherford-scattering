@@ -28,7 +28,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require('SCENERY_PHET/PhetFont' );
   var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
 
   // constants
   var SHOW_ERROR_COUNT = RSQueryParameters.SHOW_ERROR_COUNT;
@@ -115,10 +114,11 @@ define( function( require ) {
 
     // create radio buttons for the scene - new buttons must be created
     // every time the color profile changes
+    var nucleusIcon = RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 );
     var createRadioButtons = function( atomIconImage ) {
       var buttonOptions = { scale: 0.18 };
       return new RadioButtonGroup( model.sceneProperty, [
-        { value: 'nucleus', node: RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 ) },
+        { value: 'nucleus', node: nucleusIcon },
         { value: 'atom', node: new Image( atomIconImage, buttonOptions ) }
       ], {
         orientation: 'vertical',

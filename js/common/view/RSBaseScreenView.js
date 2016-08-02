@@ -84,9 +84,7 @@ define( function( require ) {
     this.addChild( alphaSourceText );
 
     // when the color profile changes, the alpha source text should be black
-    RSGlobals.link( 'projectorColors', function() {
-      alphaSourceText.fill = RSColors.panelLabelColor;
-    } );
+    RSColors.linkAttribute( 'panelLabelColor', alphaSourceText, 'fill' );
 
     // @protected, alpha particle beam
     this.beamNode = new BeamNode( model.gun.onProperty, {
