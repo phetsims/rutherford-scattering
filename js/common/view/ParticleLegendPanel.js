@@ -28,8 +28,8 @@ define( function( require ) {
   var LEGEND_TITLE_HORIZONTAL_SPACING = 10;
 
   /**
-   *
-   * @param {Object} [options]
+   * @param {array.<HBox>} children - children for the panel contained in HBoxes
+   * @param {Object} options
    * @constructor
    */
   function ParticleLegendPanel( children, options ) {
@@ -69,6 +69,7 @@ define( function( require ) {
 
   /**
    * Build the title row consisting of the title text
+   * @param {string} titleText
    */
   function createLegendTitle( titleText ) {
     var hStrut = new HStrut( LEGEND_TITLE_HORIZONTAL_SPACING );
