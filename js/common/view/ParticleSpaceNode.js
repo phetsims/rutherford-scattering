@@ -29,13 +29,13 @@ define( function( require ) {
   var PARTICLE_TRACE_COLOR = 'rgba(255,0,255,{0})'; // trace color fades out by number, inserted by StringUtils
 
   /**
-   * @param {AlphaParticle[]} particles
+   * @param {atomSpace} atomSpace - space containing atoms and particles
    * @param {Property} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
    * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
-  function ParticleSpaceNode( particleSpace, showAlphaTraceProperty, modelViewTransform, options ) {
+  function ParticleSpaceNode( atomSpace, showAlphaTraceProperty, modelViewTransform, options ) {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
@@ -50,7 +50,7 @@ define( function( require ) {
 
     // @private
     // this.atoms = atoms;
-    this.particleSpace = particleSpace;
+    this.atomSpace = atomSpace;
 
     // @private
     this.alphaParticleImage = null;
@@ -146,7 +146,7 @@ define( function( require ) {
       }
 
       // render all alpha particles & corresponding traces in the space
-      self.renderAlphaParticles( context, this.particleSpace, renderTrace );
+      self.renderAlphaParticles( context, this.atomSpace, renderTrace );
 
       // render traces as single path in nucleus representation for performance
       if ( renderTrace ) {
