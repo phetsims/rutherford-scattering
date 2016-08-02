@@ -28,6 +28,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require('SCENERY_PHET/PhetFont' );
   var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
 
   // constants
   var SHOW_ERROR_COUNT = RSQueryParameters.SHOW_ERROR_COUNT;

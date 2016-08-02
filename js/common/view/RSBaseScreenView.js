@@ -33,7 +33,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
 
   // strings
   var alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
