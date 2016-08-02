@@ -46,6 +46,7 @@ define( function( require ) {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
+      resize: false,
       fill: RSColors.panelColor,
       stroke: RSColors.panelBorderColor
     }, options );
@@ -254,6 +255,7 @@ define( function( require ) {
       top: 0,
       right: 0,
       align: 'left',
+      resize: false,
       children: [ atomPropertiesText, protonCountTitleBox, protonCountContent, protonCountSlider, neutronCountTitleBox,
         neutronCountContent, neutronCountSlider ]
     } );
