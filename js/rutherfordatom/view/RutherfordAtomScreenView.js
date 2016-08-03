@@ -141,7 +141,7 @@ define( function( require ) {
     self.addChild( self.sceneRadioButtons );
 
     // if the bacgrkound, panel or stroke colors change, draw a new button group
-    RSColors.multilink( [ 'panelColor', 'panelBorderColor', 'panelTitleColor' ], function() {
+    RSGlobals.link( 'projectorColors', function() {
       // remove and dispose of the old button group
       self.removeChild( self.sceneRadioButtons );
       self.sceneRadioButtons.dispose();
