@@ -83,6 +83,7 @@ define( function( require ) {
     this.addChild( alphaSourceText );
 
     // when the color profile changes, the alpha source text should be black
+    // no need to unlink since the text will exist for life of sim
     RSColors.linkAttribute( 'panelLabelColor', alphaSourceText, 'fill' );
 
     // @protected, alpha particle beam

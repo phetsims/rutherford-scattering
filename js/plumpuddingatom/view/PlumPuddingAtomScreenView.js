@@ -35,6 +35,7 @@ define( function( require ) {
     var self = this;
 
     // whenever the color profile changes, redraw the control panel
+    // this screen view exists for life of sim, no need to unlink
     RSGlobals.link( 'projectorColors', function() {
       // dispose and remove the old control panel
       self.controlPanel.dispose();

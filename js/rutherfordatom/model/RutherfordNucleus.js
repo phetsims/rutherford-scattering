@@ -22,7 +22,7 @@ define( function( require ) {
    * @constructor
    */
   function RutherfordNucleus( protonCountProperty, neutronCountProperty ) {
-    
+
     ParticleAtom.call( this, {
       nucleonRadius: 3
     } );
@@ -46,17 +46,28 @@ define( function( require ) {
       self.moveAllParticlesToDestination();
     };
 
-    protonCountProperty.link( function( protonCount ) {
-      configureNucleus( protonCount, 'proton' );
-    } );
+    var protonObserver = function( protonCount ) { configureNucleus( protonCount, 'proton' ); };
+    var neutronObserver = function( neutronCount ) { configureNucleus( neutronCount, 'neutron' ); };
+    protonCountProperty.link( protonObserver );
+    neutronCountProperty.link( neutronObserver );
 
-    neutronCountProperty.link( function( neutronCount ) {
-      configureNucleus( neutronCount, 'neutron' );
-    } );
+    // @private
+    this.disposeNucleus = function() {
+      protonCountProperty.unlink( protonObserver );
+      neutronCountProperty.unlink( neutronObserver );
+    };
   }
 
   rutherfordScattering.register( 'RutherfordNucleus', RutherfordNucleus );
 
-  return inherit( ParticleAtom, RutherfordNucleus );
+  return inherit( ParticleAtom, RutherfordNucleus, {
+
+    /**
+     * Make nucleus eligible for garbage collection.
+     */
+    dispose: function() {
+      this.disposeNucleus();
+    }
+  } );
 
 } ); // define

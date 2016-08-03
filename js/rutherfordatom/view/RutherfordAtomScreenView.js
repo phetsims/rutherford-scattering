@@ -85,6 +85,7 @@ define( function( require ) {
     };
 
     // when the color profile changes, create a new control panel
+    // no need to unlink, screen view exists for life of sim
     var self = this;
     RSGlobals.link( 'projectorColors', function() {
       // dispose and remove the old control panel
@@ -99,6 +100,7 @@ define( function( require ) {
 
     // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
     // should be updated, and the control/legend panels need to change
+    // no need to unlink, screen view exists for life of sim
     model.sceneProperty.link( function( scene ) {
       var beam = self.beamNode;
       var atomSceneVisible = scene === 'atom';
@@ -141,6 +143,7 @@ define( function( require ) {
     self.addChild( self.sceneRadioButtons );
 
     // if the bacgrkound, panel or stroke colors change, draw a new button group
+    // no need to unlink, screen view exists for life of sim
     RSGlobals.link( 'projectorColors', function() {
       // remove and dispose of the old button group
       self.removeChild( self.sceneRadioButtons );
@@ -206,6 +209,7 @@ define( function( require ) {
     } );
 
     // update which scene is visible and remove all particles
+    // no need to unlink, screen view exists for life of sim
     model.sceneProperty.link( function( scene ) {
       var nucleusVisible = scene === 'nucleus';
 

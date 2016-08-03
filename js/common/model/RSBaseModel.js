@@ -60,6 +60,8 @@ define( function( require ) {
         self.removeAllParticles();
       }
     };
+
+    // no need to unlink this property as base model will exist for life of sim
     this.userInteractionProperty.link( userInteractionListener );
   }
 

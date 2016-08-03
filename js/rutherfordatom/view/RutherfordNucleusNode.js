@@ -118,11 +118,25 @@ define( function( require ) {
     userInteractionProperty.link( userInteractionListener );
 
     this.invalidatePaint();
+
+    // @private
+    this.disposeNucleusNode = function() {
+      protonCountProperty.unlink( protonCountListener );
+      neutronCountProperty.unlink( neutronCountListener );
+      userInteractionProperty.unlink( userInteractionListener );
+    };
   }
 
   rutherfordScattering.register( 'RutherfordNucleusNode', RutherfordNucleusNode );
 
   inherit( CanvasNode, RutherfordNucleusNode, {
+
+    /**
+     * Make this node eligible for garbage collection
+     */
+    dispose: function() {
+
+    },
 
     /**
      * renders a new atom image based on proton/neutron counts
