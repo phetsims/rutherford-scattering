@@ -1,11 +1,11 @@
 {
-  "comment": "# rutherford-scattering 1.0.0-dev.12 Mon Aug 01 2016 14:00:11 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# rutherford-scattering 1.0.0-dev.13 Wed Aug 03 2016 10:01:08 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "master"
   },
   "axon": {
-    "sha": "ee81f9c16500eb226ffc70dc41293f87713466b9",
+    "sha": "1fd9183228d023c668b50d2230f13c03b6963a96",
     "branch": "master"
   },
   "brand": {
@@ -13,7 +13,7 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "960524843ce7aaee1bf481dd6a3b5764987a0d68",
+    "sha": "c45cf08ff07aaa2796aee87994463775c6db5f48",
     "branch": "master"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "joist": {
-    "sha": "8f9ac6437dde78ceacb0f6509865f1d7c479a785",
+    "sha": "e8a38a2cd451145ce5d4378f137860db7d9c088f",
     "branch": "master"
   },
   "kite": {
@@ -37,7 +37,7 @@
     "branch": "master"
   },
   "rutherford-scattering": {
-    "sha": "22cc356885a884830c91db91f1422ed2467c9b83",
+    "sha": "a863155bb42839675a1072941efbc2dea31c07e9",
     "branch": "master"
   },
   "scenery": {
@@ -45,7 +45,7 @@
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "d8447bae5edb6742136278e9ca397624fae06bf9",
+    "sha": "212da61dd9e7bccc9c09460d8373c0fb20547d9a",
     "branch": "master"
   },
   "sherpa": {
@@ -57,7 +57,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "f0e080eed31e22610168d198d94a63ddc87de1f6",
+    "sha": "df2905e655c4eee80125a7e184c230476135744b",
     "branch": "master"
   },
   "tandem": {
