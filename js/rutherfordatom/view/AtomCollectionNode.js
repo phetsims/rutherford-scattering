@@ -85,7 +85,7 @@ define( function( require ) {
 
     // draw the atom space whenever the color profile changes
     // no need to unlink, this instance exists for life of sim
-    RSGlobals.link( 'projectorColors', function() {
+    RSGlobals.link( 'projectorMode', function() {
       drawAtomSpace();
 
       // update the image

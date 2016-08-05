@@ -87,7 +87,7 @@ define( function( require ) {
     // when the color profile changes, create a new control panel
     // no need to unlink, screen view exists for life of sim
     var self = this;
-    RSGlobals.link( 'projectorColors', function() {
+    RSGlobals.link( 'projectorMode', function() {
       // dispose and remove the old control panel
       self.controlPanel.dispose();
       self.removeChild( self.controlPanel );
@@ -144,13 +144,13 @@ define( function( require ) {
 
     // if the bacgrkound, panel or stroke colors change, draw a new button group
     // no need to unlink, screen view exists for life of sim
-    RSGlobals.link( 'projectorColors', function() {
+    RSGlobals.link( 'projectorMode', function() {
       // remove and dispose of the old button group
       self.removeChild( self.sceneRadioButtons );
       self.sceneRadioButtons.dispose();
 
       // get the correct image for the 'atom' scene icon
-      var iconImage = RSGlobals.projectorColors ? atomProjectorImage : atomImage;
+      var iconImage = RSGlobals.projectorMode ? atomProjectorImage : atomImage;
 
       // create the new radio button group
       var newButtonGroup = createRadioButtons( iconImage );

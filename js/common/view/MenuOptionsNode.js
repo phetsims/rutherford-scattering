@@ -20,7 +20,7 @@ define( function( require ) {
   var OptionsDialog = require( 'JOIST/OptionsDialog' );
 
   // strings
-  var optionsProjectorColorsString = require( 'string!RUTHERFORD_SCATTERING/options.projectorColors' );
+  var optionsProjectorModeString = require( 'string!RUTHERFORD_SCATTERING/options.projectorMode' );
 
   /**
    *
@@ -29,8 +29,8 @@ define( function( require ) {
   function MenuOptionsNode( model ) {
     var children = [];
 
-    children.push( new CheckBox( new Text( optionsProjectorColorsString, { font: OptionsDialog.DEFAULT_FONT } ),
-      RSGlobals.projectorColorsProperty, {} ) );
+    children.push( new CheckBox( new Text( optionsProjectorModeString, { font: OptionsDialog.DEFAULT_FONT } ),
+      RSGlobals.projectorModeProperty, {} ) );
 
     VBox.call( this, _.extend( {
       children: children,

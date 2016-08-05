@@ -33,8 +33,8 @@ define( function( require ) {
   };
 
   // no need to unlink, will exist for life of sim
-  RSGlobals.projectorColorsProperty.link( function( useProjectorColors ) {
-    if ( useProjectorColors ) {
+  RSGlobals.projectorModeProperty.link( function( useProjectorMode ) {
+    if ( useProjectorMode ) {
       RSColors.applyProfile( 'projector' );
     }
     else {
