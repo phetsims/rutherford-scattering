@@ -107,6 +107,10 @@ define( function( require ) {
     panelSliderLabelColor: {
       default: new Color( 180, 180, 180 ),
       projector: new Color( 0, 0, 0 )
+    },
+    screenIconFillColor: {
+      default: new Color( 0, 0, 0 ),
+      projector: new Color( 0, 0, 0)
     }
   };
 
