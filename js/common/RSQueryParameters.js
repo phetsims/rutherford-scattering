@@ -19,7 +19,11 @@ define( function( require ) {
     SHOW_DEBUG_SHAPES: !!getQueryParameter( 'showDebugShapes' ),
 
     // show a count of the number of times a particle is removed from the atom space in error
-    SHOW_ERROR_COUNT: !!getQueryParameter( 'showErrorCount' )
+    SHOW_ERROR_COUNT: !!getQueryParameter( 'showErrorCount' ),
+
+    // enable projector mode by default for development and so the sim can be linked directly
+    // to projector mode
+    PROJECTOR_MODE: !!getQueryParameter( 'projectorMode' )
 
   };
 
