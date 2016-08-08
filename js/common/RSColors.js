@@ -110,7 +110,11 @@ define( function( require ) {
     },
     screenIconFillColor: {
       default: new Color( 0, 0, 0 ),
-      projector: new Color( 0, 0, 0)
+      projector: new Color( 0, 0, 0 )
+    },
+    nucleusOutlineColor: {
+      default: new Color( 255, 255, 255 ),
+      projector: new Color( 0, 0, 0 )
     }
   };
 
