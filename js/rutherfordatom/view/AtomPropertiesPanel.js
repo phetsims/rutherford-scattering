@@ -321,11 +321,13 @@ define( function( require ) {
     } );
 
     this.disposeContent = function() {
+      // NOTE: Disposing arrow buttons causes an assertion failure, see axon #77.
+      // However, there is no indication of a memory leak even though these are commented
       // dispose arrow buttons
-      this.protonMinusButton.dispose();
-      this.protonPlusButton.dispose();
-      this.neutronMinusButton.dispose();
-      this.neutronPlusButton.dispose();
+      // this.protonMinusButton.dispose();
+      // this.protonPlusButton.dispose();
+      // this.neutronMinusButton.dispose();
+      // this.neutronPlusButton.dispose();
 
       // dispose sliders
       protonCountSlider.dispose();

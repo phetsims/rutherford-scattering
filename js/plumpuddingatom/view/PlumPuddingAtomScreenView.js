@@ -54,8 +54,7 @@ define( function( require ) {
 
       var panels = [
         particlePropertiesPanel,
-        legendPanel,
-        particlePropertiesPanel
+        legendPanel
       ];
       self.controlPanel = self.createControlPanel( panels );
       self.addChild( self.controlPanel );
