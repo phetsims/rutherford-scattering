@@ -32,13 +32,57 @@ define( function( require ) {
   /**
    * Constructor for a Alpha Particle Properties control panel.
    *
-   * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
-   * @param {Property.<boolean>} alphaParticleEnergyProperty - alpha energy
-   * @param {Property.<boolean>} showTracesProperty - show particle traces on/off
+   * @param {AlphaParticlePropertiesPanelContent} showTracesProperty - content for the panel
    * @param {Object} [options]
    * @constructor
    */
-  function AlphaParticlePropertiesPanel( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
+  function AlphaParticlePropertiesPanel( content, options ) {
+
+    options = _.extend( {
+      xMargin: 15,
+      yMargin: 8,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      maxWidth: RSConstants.PANEL_MAX_WIDTH,
+      align: 'left',
+      fill: RSColors.panelColor,
+      stroke: RSColors.panelBorderColor
+    }, options );
+
+    Panel.call( this, content, options );
+
+    // @private - make panel eligible for garbage collection
+    this.disposePanel = function() {
+      content.dispose();
+    };
+  }
+
+  rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
+
+  inherit( Panel, AlphaParticlePropertiesPanel, {
+
+    /**
+     * dispose - this panel is created and destroyed every time the scene and color scheme changes
+     * so it is important to fully dispose of all elemets.
+     *
+     * @return {type}  description
+     */
+    dispose: function() {
+      Panel.prototype.dispose.call( this );
+      this.disposePanel();
+    }
+  }, {
+
+    /**
+     * Create content for the panel
+     *
+     * @return {AlphaParticlePropertiesPanelContent}
+     */
+    createPanelContent: function( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
+      return new AlphaParticlePropertiesPanelContent( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options );
+    }
+  } );
+
+  function AlphaParticlePropertiesPanelContent( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
 
     options = _.extend( {
       xMargin: 15,
@@ -123,7 +167,7 @@ define( function( require ) {
     } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );
 
-    var content = new VBox( {
+    VBox.call( this, {
       spacing: RSConstants.PANEL_CHILD_SPACING,
       top: 0,
       right: 0,
@@ -131,29 +175,25 @@ define( function( require ) {
       children: [ alphaParticlePropertiesText, energyTitleBox, particleEnergySlider, showTraceBox ]
     } );
 
-    Panel.call( this, content, options );
-
-    // @private - make panel eligible for garbage collection
-    this.disposePanel = function() {
+    // @private
+    this.disposeContent = function() {
       showTraceCheckBox.dispose();
       particleEnergySlider.dispose();
     };
   }
 
-  rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
-
-  return inherit( Panel, AlphaParticlePropertiesPanel, {
+  inherit( VBox, AlphaParticlePropertiesPanelContent, {
 
     /**
-     * dispose - this panel is created and destroyed every time the scene and color scheme changes
-     * so it is important to fully dispose of all elemets.
-     *
-     * @return {type}  description
+     * Make content eligible for garbage collection
      */
     dispose: function() {
-      Panel.prototype.dispose.call( this );
-      this.disposePanel();
+      this.disposeContent();
     }
   } );
+
+  rutherfordScattering.register( 'AlphaParticlePropertiesPanelContent', AlphaParticlePropertiesPanelContent );
+
+  return AlphaParticlePropertiesPanel;
 
 } );

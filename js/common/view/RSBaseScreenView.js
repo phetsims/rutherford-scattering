@@ -162,7 +162,8 @@ define( function( require ) {
       includeElectron: options.includeElectronLegend,
       includePlumPudding: options.includePlumPuddingLegend
     } );
-    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+    var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent, { resize: false } );
     var controlPanels = [
       nuclearParticleLegend,
       alphaParticlePropertiesPanel
