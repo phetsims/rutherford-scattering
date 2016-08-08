@@ -113,6 +113,15 @@ define( function( require ) {
       beam.centerX = self.gunNode.centerX;
       beam.fill = atomSceneVisible ? RSColors.atomBeamColor : RSColors.nucleusBeamColor;
 
+      // dispose and remove the old control panel
+      self.controlPanel.dispose();
+      self.removeChild( self.controlPanel );
+
+      // create the new control panel
+      var panels = createPanels();
+      self.controlPanel = self.createControlPanel( panels );
+      self.addChild( self.controlPanel );
+
     } );
 
     // create radio buttons for the scene - new buttons must be created
