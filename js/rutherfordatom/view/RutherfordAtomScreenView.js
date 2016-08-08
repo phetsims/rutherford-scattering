@@ -63,15 +63,15 @@ define( function( require ) {
 
     // create the panels of the control panel on the right
     var createPanels = function() {
-      var legendPanel;
+      var legendContent;
       var atomSceneVisible = model.sceneProperty.value === 'atom';
 
-      // create scene specific legend panels
+      // create content for the legend panels
       if ( atomSceneVisible ) {
-        legendPanel = new AtomParticleLegendPanel( { resize: false } );
+        legendContent = AtomParticleLegendPanel.createPanelContent( { resize: false } );
       }
       else {
-        legendPanel = new NuclearParticleLegendPanel( {
+        legendContent = NuclearParticleLegendPanel.createPanelContent( {
           resize: false,
           includeElectron: false,
           includePlumPudding: false
@@ -84,12 +84,15 @@ define( function( require ) {
       var minWidth = RSConstants.PANEL_MIN_WIDTH;
       if ( particlePropertiesContent.width !== atomPropertiesContent.width ) {
         // max panel width including the X margins
-        var maxPanelWidth = Math.max( particlePropertiesContent.width, atomPropertiesContent.width ) + 2 * RSConstants.PANEL_X_MARGIN;
+        var maxPanelWidth = Math.max( particlePropertiesContent.width, atomPropertiesContent.width, legendContent.width ) + 2 * RSConstants.PANEL_X_MARGIN;
         minWidth = Math.max( minWidth, maxPanelWidth );
       }
 
-      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent, { minWidth: minWidth } );
-      var atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, { resize: false, minWidth: minWidth } );
+      // create the panels, limited by the min width
+      var panelOptions = { minWidth: minWidth, resize: false };
+      var legendPanel = atomSceneVisible ? new AtomParticleLegendPanel( legendContent, panelOptions ) : new NuclearParticleLegendPanel( legendContent, panelOptions );
+      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent, panelOptions );
+      var atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, panelOptions );
 
       return [
         legendPanel,

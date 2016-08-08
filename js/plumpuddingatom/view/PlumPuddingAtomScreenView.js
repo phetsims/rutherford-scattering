@@ -43,14 +43,18 @@ define( function( require ) {
 
       // create the new control panel
       var particlePanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
+      var legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
+        resize: false,
+        includeElectron: true,
+        includePlumPudding: true
+      } );
 
       var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePanelContent, { resize: false } );
+      var legendPanel = new NuclearParticleLegendPanel( legendPanelContent, { resize: false } );
+
       var panels = [
-        new NuclearParticleLegendPanel( {
-          resize: false,
-          includeElectron: true,
-          includePlumPudding: true
-        } ),
+        particlePropertiesPanel,
+        legendPanel,
         particlePropertiesPanel
       ];
       self.controlPanel = self.createControlPanel( panels );

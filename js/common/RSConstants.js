@@ -53,7 +53,7 @@ define( function( require ) {
     PANEL_SLIDER_FILL_COLOR: 'rgb( 180, 180, 180 )',
     PANEL_SLIDER_THUMB_DIMENSION: new Dimension2( 15, 30 ),
     PANEL_CHILD_SPACING: 5,    // spacing between child panel components
-    PANEL_MIN_WIDTH: 225,
+    PANEL_MIN_WIDTH: 230,
     PANEL_MAX_WIDTH: 275,
     PANEL_SPACE_MARGIN: 35,   // spacing between the particle space and the property panels
     PANEL_TOP_MARGIN: 15,   // spacing for all top panels from edge of window

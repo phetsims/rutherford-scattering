@@ -22,21 +22,33 @@ define( function( require ) {
 
   /**
    * Constructor.
+   * @param {VBox} content
    * @param {Object} [options]
    * @constructor
    */
-  function AtomParticleLegendPanel( options ) {
-
-    // add the legend particle entries
-    var children = [];
-    children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleus(), nucleusString ) );
-    children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createEnergyLevel(), electronEnergyLevelString ) );
-    children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createParticleTrace(), alphaParticleTraceString ) );
-
-    ParticleLegendPanel.call( this, children, options );
+  function AtomParticleLegendPanel( content, options ) {
+    ParticleLegendPanel.call( this, content, options );
   }
 
   rutherfordScattering.register( 'AtomParticleLegendPanel', AtomParticleLegendPanel );
 
-  return inherit( ParticleLegendPanel, AtomParticleLegendPanel );
+  return inherit( ParticleLegendPanel, AtomParticleLegendPanel, {}, {
+
+    /**
+     * Create the content that is to be contained in this panel.
+     *
+     * @param  {Object} [ options ]
+     * @return {VBox}
+     */
+    createPanelContent: function( options ) {
+
+      // add the legend particle entries
+      var children = [];
+      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleus(), nucleusString ) );
+      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createEnergyLevel(), electronEnergyLevelString ) );
+      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createParticleTrace(), alphaParticleTraceString ) );
+
+      return ParticleLegendPanel.createPanelContent( children, options );
+    }
+  } );
 } );

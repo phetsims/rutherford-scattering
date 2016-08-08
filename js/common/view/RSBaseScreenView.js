@@ -157,11 +157,12 @@ define( function( require ) {
     this.addChild( stepButton );
 
     // @protected, for visibility control by subtypes - control panels that are common to all ScreenViews
-    var nuclearParticleLegend = new NuclearParticleLegendPanel( {
+    var nuclearParticleLegendContent = NuclearParticleLegendPanel.createPanelContent( {
       resize: false,
       includeElectron: options.includeElectronLegend,
       includePlumPudding: options.includePlumPuddingLegend
     } );
+    var nuclearParticleLegend = new NuclearParticleLegendPanel( nuclearParticleLegendContent, { resize: false } );
     var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
     var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent, { resize: false } );
     var controlPanels = [

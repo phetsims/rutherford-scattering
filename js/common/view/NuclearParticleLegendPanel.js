@@ -23,32 +23,44 @@ define( function( require ) {
   var positiveChargeString = require( 'string!RUTHERFORD_SCATTERING/positiveCharge' );
 
   /**
-   * Constructor
+   *
+   * @param {VBox} content
    * @param {Object} [options]
    * @constructor
    */
-  function NuclearParticleLegendPanel( options ) {
-
-    options = _.extend( {
-      includeElectron: true // should the panel include an entry for the electron?
-    }, options );
-
-    // add the legend particle entries
-    var children = [];
-    if ( options.includeElectron ) {
-      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
-    }
-    children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
-    children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
-    children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleString ) );
-    if ( options.includePlumPudding ) {
-      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createPlumPuddingIcon(), positiveChargeString ) );
-    }
-
-    ParticleLegendPanel.call( this, children, options );
+  function NuclearParticleLegendPanel( content, options ) {
+    ParticleLegendPanel.call( this, content, options );
   }
 
   rutherfordScattering.register( 'NuclearParticleLegendPanel', NuclearParticleLegendPanel );
 
-  return inherit( ParticleLegendPanel, NuclearParticleLegendPanel );
+  return inherit( ParticleLegendPanel, NuclearParticleLegendPanel, {}, {
+
+    /**
+     * Create the panel content that is to be in this control panel.
+     *
+     * @param  {Object} options
+     * @return {VBox}
+     */
+    createPanelContent: function( options ) {
+
+      options = _.extend( {
+        includeElectron: true // should the panel include an entry for the electron?
+      }, options );
+
+      // add the legend particle entries
+      var children = [];
+      if ( options.includeElectron ) {
+        children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
+      }
+      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
+      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
+      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleString ) );
+      if ( options.includePlumPudding ) {
+        children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createPlumPuddingIcon(), positiveChargeString ) );
+      }
+
+      return ParticleLegendPanel.createPanelContent( children, options );
+    }
+  } );
 } );
