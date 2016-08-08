@@ -19,6 +19,7 @@ define( function( require ) {
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Util = require( 'DOT/Util' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
 
   // constants
   var SPACE_BORDER_WIDTH = 2;
@@ -124,8 +125,10 @@ define( function( require ) {
       // viewport clip
       context.beginPath();
       context.strokeStyle = 'transparent';
+      context.fillStyle = RSColors.backgroundColor.toCSS();
       context.rect( this.clipRect.x, this.clipRect.y, this.clipRect.width, this.clipRect.height );
       context.stroke();
+      context.fill();
       context.clip();
 
       // render derived space
