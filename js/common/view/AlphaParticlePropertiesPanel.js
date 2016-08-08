@@ -18,6 +18,7 @@ define( function( require ) {
   var HSlider = require( 'SUN/HSlider' );
   var CheckBox = require( 'SUN/CheckBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
@@ -153,6 +154,13 @@ define( function( require ) {
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
     particleEnergySlider.addMajorTick( RSConstants.MAX_ALPHA_ENERGY, maxEnergyText );
 
+    // place the slider in a container rectangle so that the layout does not change when the thumb is at the halfway
+    // mark
+    var thumbWidth = RSConstants.PANEL_SLIDER_THUMB_DIMENSION.width + 2;
+    var sliderHeight = particleEnergySlider.height;
+    var containerRect = new Rectangle( -thumbWidth / 2, -sliderHeight / 2, sliderWidth + thumbWidth, sliderHeight );
+    containerRect.addChild( particleEnergySlider );
+
     // show traces
     var showTraceStrut = new HStrut( options.minWidth * 0.05 );
     var showTraceText = new Text( showTracesString, {
@@ -172,7 +180,8 @@ define( function( require ) {
       top: 0,
       right: 0,
       align: 'left',
-      children: [ alphaParticlePropertiesText, energyTitleBox, particleEnergySlider, showTraceBox ]
+      resize: false,
+      children: [ alphaParticlePropertiesText, energyTitleBox, containerRect, showTraceBox ]
     } );
 
     // @private

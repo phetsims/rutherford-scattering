@@ -229,24 +229,9 @@ define( function( require ) {
     }
 
     // update view on model step
-    model.timer = 0;
     model.addStepListener( function( dt ) {
       nucleusSpaceNode.invalidatePaint();
       atomSpaceNode.invalidatePaint();
-
-      // TODO: REMOVE THIS - test harness to check for memory leaks in the panels
-      if ( dt ) {
-        model.timer += dt;
-        if ( model.timer > 0.01 ) {
-          model.timer = 0;
-          if ( model.sceneProperty.value === 'atom' ) {
-            model.sceneProperty.set( 'nucleus' );
-          }
-          else {
-            model.sceneProperty.set( 'atom' );
-          }
-        }
-      }
     } );
 
     // update which scene is visible and remove all particles
