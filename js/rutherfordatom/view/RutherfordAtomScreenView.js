@@ -29,6 +29,7 @@ define( function( require ) {
   var PhetFont = require('SCENERY_PHET/PhetFont' );
   var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   // constants
   var SHOW_ERROR_COUNT = RSQueryParameters.SHOW_ERROR_COUNT;
@@ -78,10 +79,17 @@ define( function( require ) {
       }
 
       var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
-      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent );
-
       var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model.userInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } );
-      var atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, { resize: false } );
+
+      var minWidth = RSConstants.PANEL_MIN_WIDTH;
+      if ( particlePropertiesContent.width !== atomPropertiesContent.width ) {
+        // max panel width including the X margins
+        var maxPanelWidth = Math.max( particlePropertiesContent.width, atomPropertiesContent.width ) + 2 * RSConstants.PANEL_X_MARGIN;
+        minWidth = Math.max( minWidth, maxPanelWidth );
+      }
+
+      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent, { minWidth: minWidth } );
+      var atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, { resize: false, minWidth: minWidth } );
 
       return [
         legendPanel,

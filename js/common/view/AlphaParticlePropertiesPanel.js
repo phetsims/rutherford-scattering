@@ -39,7 +39,7 @@ define( function( require ) {
   function AlphaParticlePropertiesPanel( content, options ) {
 
     options = _.extend( {
-      xMargin: 15,
+      xMargin: RSConstants.PANEL_X_MARGIN,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,

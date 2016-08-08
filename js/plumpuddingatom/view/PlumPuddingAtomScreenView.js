@@ -42,14 +42,16 @@ define( function( require ) {
       self.removeChild( self.controlPanel );
 
       // create the new control panel
-      var panelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
+      var particlePanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
+
+      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePanelContent, { resize: false } );
       var panels = [
         new NuclearParticleLegendPanel( {
           resize: false,
           includeElectron: true,
           includePlumPudding: true
         } ),
-        new AlphaParticlePropertiesPanel( panelContent, { resize: false } )
+        particlePropertiesPanel
       ];
       self.controlPanel = self.createControlPanel( panels );
       self.addChild( self.controlPanel );

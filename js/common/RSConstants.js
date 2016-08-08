@@ -58,6 +58,7 @@ define( function( require ) {
     PANEL_SPACE_MARGIN: 35,   // spacing between the particle space and the property panels
     PANEL_TOP_MARGIN: 15,   // spacing for all top panels from edge of window
     PANEL_VERTICAL_MARGIN: 10,   // vertical spacing between property panels
+    PANEL_X_MARGIN: 15,
 
     NEUTRAL_FILL_COLOR: 'rgb( 210, 210, 210 )',
 
