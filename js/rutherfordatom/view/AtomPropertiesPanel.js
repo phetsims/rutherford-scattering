@@ -32,13 +32,73 @@ define( function( require ) {
   /**
    * Constructor for a Atom Properties control panel.
    *
-   * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
-   * @param {Property.<number>} protonCountProperty
-   * @param {Property.<number>} neutronCountProperty
+   * @param {AtomPropertiesPanelContent} content - Content contained by the panel
    * @param {Object} [options]
    * @constructor
    */
-  function AtomPropertiesPanel( userInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
+  function AtomPropertiesPanel( content, options ) {
+
+    options = _.extend( {
+      xMargin: 15,
+      yMargin: 8,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      maxWidth: RSConstants.PANEL_MAX_WIDTH,
+      align: 'left',
+      resize: false,
+      fill: RSColors.panelColor,
+      stroke: RSColors.panelBorderColor
+    }, options );
+
+    Panel.call( this, content, options );
+
+    // ensure that panel is eligible for garbage collection, a panel is created and destroyed every time
+    // scene or color scheme changes so it si important that everything is disposed
+    // @private
+    this.disposePanel = function() {
+      content.dispose();
+    };
+  }
+
+  rutherfordScattering.register( 'AtomPropertiesPanel', AtomPropertiesPanel );
+
+  inherit( Panel, AtomPropertiesPanel, {
+
+    /**
+     * Dispose this panel - this panel can be created and destroyed frequently so
+     * it is important to dispose of all panel elements.
+     *
+     * @public
+     */
+    dispose: function() {
+      Panel.prototype.dispose.call( this );
+      this.disposePanel();
+    }
+  }, {
+
+    /**
+     * create content for the panel
+     *
+     * @param  {Property.<boolean>} userInteractionProperty
+     * @param  {Property.<number>} protonCountProperty
+     * @param  {Property.<number>} neutronCountProperty
+     * @param  {Object} options
+     * @public
+     */
+    createPanelContent: function( userInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
+      return new AtomPropertiesPanelContent( userInteractionProperty, protonCountProperty, neutronCountProperty, options );
+    }
+  } );
+
+  /**
+   * Create the content for the AtomPropertiesPanel.
+   *
+   * @param  {Property.<boolean>} userInteractionProperty
+   * @param  {Property.<number>} protonCountProperty
+   * @param  {Property.<number>} neutronCountProperty
+   * @param  {Object} options
+   * @constructor
+   */
+  function AtomPropertiesPanelContent( userInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
 
     options = _.extend( {
       xMargin: 15,
@@ -250,7 +310,7 @@ define( function( require ) {
       } ) );
 
     // main panel content
-    var content = new VBox( {
+    VBox.call( this, {
       spacing: RSConstants.PANEL_CHILD_SPACING,
       top: 0,
       right: 0,
@@ -260,46 +320,40 @@ define( function( require ) {
         neutronCountContent, neutronCountSlider ]
     } );
 
-    Panel.call( this, content, options );
+    this.disposeContent = function() {
+      // dispose arrow buttons
+      this.protonMinusButton.dispose();
+      this.protonPlusButton.dispose();
+      this.neutronMinusButton.dispose();
+      this.neutronPlusButton.dispose();
 
-    // ensure that panel is eligible for garbage collection, a panel is created and destroyed every time
-    // scene or color scheme changes so it si important that everything is disposed
-    // @private
-    this.disposePanel = function() {
+      // dispose sliders
+      protonCountSlider.dispose();
+      neutronCountSlider.dispose();
 
-        // dispose arrow buttons
-        this.protonMinusButton.dispose();
-        this.protonPlusButton.dispose();
-        this.neutronMinusButton.dispose();
-        this.neutronPlusButton.dispose();
+      // dispose number displays
+      protonNumberDisplay.dispose();
+      neutronNumberDisplay.dispose();
 
-        // dispose sliders
-        protonCountSlider.dispose();
-        neutronCountSlider.dispose();
-
-        // dispose number displays
-        protonNumberDisplay.dispose();
-        neutronNumberDisplay.dispose();
-
-        // unlink properties
-        protonCountProperty.unlink( enabledListener );
-        this.neutronCountProperty.unlink( neutronCountListener );
+      // unlink properties
+      protonCountProperty.unlink( enabledListener );
+      this.neutronCountProperty.unlink( neutronCountListener );
     };
   }
 
-  rutherfordScattering.register( 'AtomPropertiesPanel', AtomPropertiesPanel );
-
-  return inherit( Panel, AtomPropertiesPanel, {
+  inherit( VBox, AtomPropertiesPanelContent, {
 
     /**
-     * Dispose this panel - this panel can be created and destroyed frequently so
-     * it is important to dispose of all panel elements.
+     * Make eligible for garbage collection
      *
-     * @public
+     * @return {type}  description
      */
     dispose: function() {
-      Panel.prototype.dispose.call( this );
-      this.disposePanel();
+      this.disposeContent();
     }
   } );
+
+  rutherfordScattering.register( 'AtomPropertiesPanelContent', AtomPropertiesPanelContent );
+
+  return AtomPropertiesPanel;
 } );

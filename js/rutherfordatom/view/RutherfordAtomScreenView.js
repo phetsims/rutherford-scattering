@@ -80,10 +80,13 @@ define( function( require ) {
       var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
       var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent );
 
+      var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model.userInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } );
+      var atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, { resize: false } );
+
       return [
         legendPanel,
         particlePropertiesPanel,
-        new AtomPropertiesPanel( model.userInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } )
+        atomPropertiesPanel
       ];
     };
 
