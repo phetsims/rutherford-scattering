@@ -157,8 +157,8 @@ define( function( require ) {
     // place the slider in a container rectangle so that the layout does not change when the thumb is at the halfway
     // mark
     var thumbWidth = RSConstants.PANEL_SLIDER_THUMB_DIMENSION.width + 2;
-    var sliderHeight = particleEnergySlider.height;
-    var containerRect = new Rectangle( -thumbWidth / 2, -sliderHeight / 2, sliderWidth + thumbWidth, sliderHeight );
+    var rectHeight = 5; // something small so that it doesn't interfere with the layout
+    var containerRect = new Rectangle( -thumbWidth / 2, -rectHeight, sliderWidth + thumbWidth, rectHeight );
     containerRect.addChild( particleEnergySlider );
 
     // show traces
