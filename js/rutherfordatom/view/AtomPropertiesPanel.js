@@ -24,6 +24,7 @@ define( function( require ) {
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var Util = require( 'DOT/Util' );
 
   // strings
   var atomString = require( 'string!RUTHERFORD_SCATTERING/atom' );
@@ -264,7 +265,9 @@ define( function( require ) {
       thumbFillEnabled: 'rgb(220, 58, 10)',
       thumbFillHighlighted: 'rgb(270, 108, 60)',
       startDrag: function() { protonSliderInteractionProperty.set( true ); },
-      endDrag: function() { protonSliderInteractionProperty.set( false ); }
+      endDrag: function() {
+        protonCountProperty.set( Util.roundSymmetric( protonCountProperty.value ) ); // proper resolution for nucleons
+        protonSliderInteractionProperty.set( false ); }
     } ) );
     protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT,
       new Text( RSConstants.MIN_PROTON_COUNT, {
@@ -329,7 +332,9 @@ define( function( require ) {
       thumbFillEnabled: 'rgb(130, 130, 130)',
       thumbFillHighlighted: 'rgb(180, 180, 180)',
       startDrag: function() { neutronSliderInteractionProperty.set( true ); },
-      endDrag: function() { neutronSliderInteractionProperty.set( false ); }
+      endDrag: function() {
+        neutronCountProperty.set( Util.roundSymmetric( neutronCountProperty.value ) ); // proper resolution for nucleons
+        neutronSliderInteractionProperty.set( false ); }
     } ) );
     neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
       new Text( RSConstants.MIN_NEUTRON_COUNT, {
