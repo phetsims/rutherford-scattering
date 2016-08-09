@@ -221,7 +221,7 @@ define( function( require ) {
       startCallback: protonRemovedStartCallback,
       endCallback: function() { leftProtonButtonInteractionProperty.set( false ); }
     } ) );
-    var protonNumberDisplay = new NumberDisplay( protonCountProperty, protonCountRange, {
+    var protonNumberDisplay = new NumberDisplay( protonCountProperty, protonCountRange, '', '{0}', {
       backgroundStroke: 'black'
     } );
     this.protonPlusButton = new ArrowButton( 'right', function protonCountPropertyPlus() {
@@ -300,7 +300,7 @@ define( function( require ) {
       startCallback: neutronRemovedStartCallback,
       endCallback: function() { leftNeutronButtonInteractionProperty.set( false ); }
     } ) );
-    var neutronNumberDisplay = new NumberDisplay( neutronCountProperty, neutronCountRange, {
+    var neutronNumberDisplay = new NumberDisplay( neutronCountProperty, neutronCountRange, '', '{0}', {
       backgroundStroke: 'black'
     } );
     this.neutronPlusButton = new ArrowButton( 'right', function neutronCountPropertyPlus() {
