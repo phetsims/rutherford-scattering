@@ -28,11 +28,11 @@ define( function( require ) {
   var LEGEND_TITLE_HORIZONTAL_SPACING = 10;
 
   /**
-   * @param {array.<HBox>} children - children for the panel contained in HBoxes
+   * @param {VBox} children - content to be contained in the panel
    * @param {Object} options
    * @constructor
    */
-  function ParticleLegendPanel( children, options ) {
+  function ParticleLegendPanel( content, options ) {
 
     options = _.extend( {
       xMargin: 5,
@@ -44,25 +44,6 @@ define( function( require ) {
       stroke: RSColors.panelBorderColor,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
-
-    var legendText = new Text( legendString, {
-      font: RSConstants.PANEL_TITLE_FONT,
-      fontWeight: 'bold',
-      fill: RSColors.panelTitleColor,
-      maxWidth: 225
-    } );
-
-    // add the legend title to the begining of the children
-    var legendTitleRow = createLegendTitle( legendText );
-    children.unshift( legendTitleRow );
-
-    var content = new VBox( {
-      spacing: options.itemVerticalSpacing,
-      top: 0,
-      right: 0,
-      align: 'left',
-      children: children
-    } );
 
     Panel.call( this, content, options );
   }
@@ -88,7 +69,7 @@ define( function( require ) {
    * @returns {HBox}
    * @private
    */
-  function createParticleBox( particleNode, titleString ) {
+  function createParticleRow( particleNode, titleString ) {
 
     var hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
     var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSColors.panelLabelColor, maxWidth: 175 } );
@@ -106,10 +87,68 @@ define( function( require ) {
 
   rutherfordScattering.register( 'ParticleLegendPanel', ParticleLegendPanel );
 
-  return inherit( Panel, ParticleLegendPanel, {}, {
+  inherit( Panel, ParticleLegendPanel, {}, {
+
+    /**
+     * Create a box containing one row for the legend panel
+     *
+     * @param  {Node} particleNode
+     * @param  {string} titleString
+     * @return {HBox}
+     * @protected
+     */
     createParticleBox: function( particleNode, titleString ) {
-      return createParticleBox( particleNode, titleString );
+      return createParticleRow( particleNode, titleString );
+    },
+
+    /**
+     * Create content which will be contained in the panel.
+     *
+     * @return {type}  description
+     * @public
+     */
+    createPanelContent: function( children, options ) {
+      return new ParticleLegendPanelContent( children, options );
     }
   } );
+
+  function ParticleLegendPanelContent( children, options ) {
+
+    options = _.extend( {
+      xMargin: 5,
+      yMargin: 8,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      maxWidth: RSConstants.PANEL_MAX_WIDTH,
+      align: 'left',
+      fill: RSColors.panelColor,
+      stroke: RSColors.panelBorderColor,
+      itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
+    }, options );
+
+    var legendText = new Text( legendString, {
+      font: RSConstants.PANEL_TITLE_FONT,
+      fontWeight: 'bold',
+      fill: RSColors.panelTitleColor,
+      maxWidth: 225
+    } );
+
+    // add the legend title to the begining of the children
+    var legendTitleRow = createLegendTitle( legendText );
+    children.unshift( legendTitleRow );
+
+    VBox.call( this, {
+      spacing: options.itemVerticalSpacing,
+      top: 0,
+      right: 0,
+      align: 'left',
+      children: children
+    } );
+  }
+
+  rutherfordScattering.register( 'ParticleLegendPanelContent', ParticleLegendPanelContent );
+
+  inherit( VBox, ParticleLegendPanelContent );
+
+  return ParticleLegendPanel;
 
 } );

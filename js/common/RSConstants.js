@@ -53,11 +53,12 @@ define( function( require ) {
     PANEL_SLIDER_FILL_COLOR: 'rgb( 180, 180, 180 )',
     PANEL_SLIDER_THUMB_DIMENSION: new Dimension2( 15, 30 ),
     PANEL_CHILD_SPACING: 5,    // spacing between child panel components
-    PANEL_MIN_WIDTH: 225,
+    PANEL_MIN_WIDTH: 230,
     PANEL_MAX_WIDTH: 275,
     PANEL_SPACE_MARGIN: 35,   // spacing between the particle space and the property panels
     PANEL_TOP_MARGIN: 15,   // spacing for all top panels from edge of window
     PANEL_VERTICAL_MARGIN: 10,   // vertical spacing between property panels
+    PANEL_X_MARGIN: 15,
 
     NEUTRAL_FILL_COLOR: 'rgb( 210, 210, 210 )',
 
@@ -73,8 +74,9 @@ define( function( require ) {
     BEAM_SIZE: new Dimension2( 40, 110 ),
 
     // Animation space size, must be square!
-    SPACE_NODE_WIDTH: 490,
-    SPACE_NODE_HEIGHT: 490,
+    SPACE_NODE_WIDTH: 510,
+    SPACE_NODE_HEIGHT: 510,
+    SPACE_BUFFER: 10, // a buffer around the space so that the particles 'slide' into space 
 
     //----------------------------------------------------------------------------
     // Other common colors

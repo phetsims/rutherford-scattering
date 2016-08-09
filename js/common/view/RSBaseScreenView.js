@@ -109,8 +109,8 @@ define( function( require ) {
     this.addChild( tinyBoxNode );
 
     // atom animation space
-    var spaceNodeX = this.targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN;
-    var spaceNodeY = RSConstants.PANEL_TOP_MARGIN;
+    var spaceNodeX = this.targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN - RSConstants.SPACE_BUFFER;
+    var spaceNodeY = RSConstants.PANEL_TOP_MARGIN - RSConstants.SPACE_BUFFER;
     var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
       spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
       spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
@@ -157,12 +157,14 @@ define( function( require ) {
     this.addChild( stepButton );
 
     // @protected, for visibility control by subtypes - control panels that are common to all ScreenViews
-    var nuclearParticleLegend = new NuclearParticleLegendPanel( {
+    var nuclearParticleLegendContent = NuclearParticleLegendPanel.createPanelContent( {
       resize: false,
       includeElectron: options.includeElectronLegend,
       includePlumPudding: options.includePlumPuddingLegend
     } );
-    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( model.userInteractionProperty, model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+    var nuclearParticleLegend = new NuclearParticleLegendPanel( nuclearParticleLegendContent, { resize: false } );
+    var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent, { resize: false } );
     var controlPanels = [
       nuclearParticleLegend,
       alphaParticlePropertiesPanel

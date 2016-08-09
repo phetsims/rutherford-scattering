@@ -27,10 +27,8 @@ define( function( require ) {
     // @public
     PropertySet.call( this, {
       alphaParticleEnergy: RSConstants.DEFAULT_ALPHA_ENERGY,
-      running: true,    // is the sim running or paused
-      userInteraction: false  // is the user interacting with the simulation
+      running: true    // is the sim running or paused
     } );
-    var self = this;
 
     // @public (read-only) model computation space
     this.bounds = new Bounds2(
@@ -54,15 +52,6 @@ define( function( require ) {
     // @protected - used to signal when a sim step has occurred
     this.stepEmitter = new Emitter();
 
-    // @private - energy level changed
-    var userInteractionListener = function( userInteraction ) {
-      if ( userInteraction ) {
-        self.removeAllParticles();
-      }
-    };
-
-    // no need to unlink this property as base model will exist for life of sim
-    this.userInteractionProperty.link( userInteractionListener );
   }
 
   rutherfordScattering.register( 'RSBaseModel', RSBaseModel );
@@ -191,7 +180,7 @@ define( function( require ) {
      * @public
      */
     step: function( dt ) {
-      if ( this.running && !this.userInteraction && dt < 1 ) {
+      if ( this.running && !this.userInteractionProperty.value && dt < 1 ) {
         this.gun.step( dt );
 
         // move particles

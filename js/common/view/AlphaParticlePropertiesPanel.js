@@ -18,6 +18,7 @@ define( function( require ) {
   var HSlider = require( 'SUN/HSlider' );
   var CheckBox = require( 'SUN/CheckBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
@@ -32,13 +33,70 @@ define( function( require ) {
   /**
    * Constructor for a Alpha Particle Properties control panel.
    *
-   * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
-   * @param {Property.<boolean>} alphaParticleEnergyProperty - alpha energy
-   * @param {Property.<boolean>} showTracesProperty - show particle traces on/off
+   * @param {AlphaParticlePropertiesPanelContent} showTracesProperty - content for the panel
    * @param {Object} [options]
    * @constructor
    */
-  function AlphaParticlePropertiesPanel( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
+  function AlphaParticlePropertiesPanel( content, options ) {
+
+    options = _.extend( {
+      xMargin: RSConstants.PANEL_X_MARGIN,
+      yMargin: 8,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      maxWidth: RSConstants.PANEL_MAX_WIDTH,
+      align: 'left',
+      fill: RSColors.panelColor,
+      stroke: RSColors.panelBorderColor
+    }, options );
+
+    Panel.call( this, content, options );
+
+    // @private - make panel eligible for garbage collection
+    this.disposePanel = function() {
+      content.dispose();
+    };
+  }
+
+  rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
+
+  inherit( Panel, AlphaParticlePropertiesPanel, {
+
+    /**
+     * dispose - this panel is created and destroyed every time the scene and color scheme changes
+     * so it is important to fully dispose of all elemets.
+     *
+     * @return {type}  description
+     */
+    dispose: function() {
+      Panel.prototype.dispose.call( this );
+      this.disposePanel();
+    }
+  }, {
+
+    /**
+     * Create the panel content for this panel.
+     *
+     * @param  {Property.<boolean>} energyInteractionProperty
+     * @param  {Property.<boolean>} alphaParticleEnergyProperty
+     * @param  {Property.<boolean>} showTracesProperty
+     * @param  {Object} [options]
+     * @returns {VBox}
+     */
+    createPanelContent: function( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
+      return new AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options );
+    }
+  } );
+
+  /**
+   * Constructo content that will be contained by this panel.
+   *
+   * @param  {Property.<boolean>} energyInteractionProperty
+   * @param  {Property.<boolean>} alphaParticleEnergyProperty
+   * @param  {Property.<boolean>} showTracesProperty
+   * @param  {Object} [options]
+   * @constructor
+   */
+  function AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
 
     options = _.extend( {
       xMargin: 15,
@@ -54,7 +112,7 @@ define( function( require ) {
     var self = this;
 
     // @private
-    this.userInteractionProperty = userInteractionProperty;
+    this.energyInteractionProperty = energyInteractionProperty;
 
     // strings
     var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
@@ -100,14 +158,21 @@ define( function( require ) {
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       startDrag: function() { // called when the pointer is pressed
-        self.userInteractionProperty.set( true );
+        self.energyInteractionProperty.set( true );
       },
       endDrag: function() { // called when the pointer is released
-        self.userInteractionProperty.set( false );
+        self.energyInteractionProperty.set( false );
       }
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
     particleEnergySlider.addMajorTick( RSConstants.MAX_ALPHA_ENERGY, maxEnergyText );
+
+    // place the slider in a container rectangle so that the layout does not change when the thumb is at the halfway
+    // mark
+    var thumbWidth = RSConstants.PANEL_SLIDER_THUMB_DIMENSION.width + 2;
+    var rectHeight = 5; // something small so that it doesn't interfere with the layout
+    var containerRect = new Rectangle( -thumbWidth / 2, -rectHeight, sliderWidth + thumbWidth, rectHeight );
+    containerRect.addChild( particleEnergySlider );
 
     // show traces
     var showTraceStrut = new HStrut( options.minWidth * 0.05 );
@@ -123,37 +188,34 @@ define( function( require ) {
     } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );
 
-    var content = new VBox( {
+    VBox.call( this, {
       spacing: RSConstants.PANEL_CHILD_SPACING,
       top: 0,
       right: 0,
       align: 'left',
-      children: [ alphaParticlePropertiesText, energyTitleBox, particleEnergySlider, showTraceBox ]
+      resize: false,
+      children: [ alphaParticlePropertiesText, energyTitleBox, containerRect, showTraceBox ]
     } );
 
-    Panel.call( this, content, options );
-
-    // @private - make panel eligible for garbage collection
-    this.disposePanel = function() {
+    // @private
+    this.disposeContent = function() {
       showTraceCheckBox.dispose();
       particleEnergySlider.dispose();
     };
   }
 
-  rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
-
-  return inherit( Panel, AlphaParticlePropertiesPanel, {
+  inherit( VBox, AlphaParticlePropertiesPanelContent, {
 
     /**
-     * dispose - this panel is created and destroyed every time the scene and color scheme changes
-     * so it is important to fully dispose of all elemets.
-     *
-     * @return {type}  description
+     * Make content eligible for garbage collection
      */
     dispose: function() {
-      Panel.prototype.dispose.call( this );
-      this.disposePanel();
+      this.disposeContent();
     }
   } );
+
+  rutherfordScattering.register( 'AlphaParticlePropertiesPanelContent', AlphaParticlePropertiesPanelContent );
+
+  return AlphaParticlePropertiesPanel;
 
 } );
