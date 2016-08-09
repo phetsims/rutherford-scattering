@@ -20,6 +20,7 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   // constants
   var SPACE_BORDER_WIDTH = 2;
@@ -39,6 +40,9 @@ define( function( require ) {
   function ParticleSpaceNode( atomSpace, showAlphaTraceProperty, modelViewTransform, options ) {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+
+    // the bounds should be eroded by 10 so it appears that particles glide into the space
+    options.canvasBounds = options.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
 
     options = _.extend( {
       particleStyle: 'nucleus' // 'nucleus'|'particle'

@@ -74,8 +74,9 @@ define( function( require ) {
     BEAM_SIZE: new Dimension2( 40, 110 ),
 
     // Animation space size, must be square!
-    SPACE_NODE_WIDTH: 490,
-    SPACE_NODE_HEIGHT: 490,
+    SPACE_NODE_WIDTH: 510,
+    SPACE_NODE_HEIGHT: 510,
+    SPACE_BUFFER: 10, // a buffer around the space so that the particles 'slide' into space 
 
     //----------------------------------------------------------------------------
     // Other common colors

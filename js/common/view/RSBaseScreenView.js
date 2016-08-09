@@ -109,8 +109,8 @@ define( function( require ) {
     this.addChild( tinyBoxNode );
 
     // atom animation space
-    var spaceNodeX = this.targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN;
-    var spaceNodeY = RSConstants.PANEL_TOP_MARGIN;
+    var spaceNodeX = this.targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN - RSConstants.SPACE_BUFFER;
+    var spaceNodeY = RSConstants.PANEL_TOP_MARGIN - RSConstants.SPACE_BUFFER;
     var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
       spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
       spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
