@@ -376,7 +376,11 @@ define( function( require ) {
       protonCountProperty.unlink( enabledListener );
       this.neutronCountProperty.unlink( neutronCountListener );
       protonPanelInteractionProperty.unlink( protonInteractionListener );
-      neutronInteractionProperty.unlink( neutronInteractionListener );
+      neutronPanelInteractionProperty.unlink( neutronInteractionListener );
+
+      // dispose the derived properties
+      protonPanelInteractionProperty.dispose();
+      neutronPanelInteractionProperty.dispose();
 
     };
   }
