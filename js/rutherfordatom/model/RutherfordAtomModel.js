@@ -17,6 +17,7 @@ define( function( require ) {
   var RutherfordAtomSpace = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtomSpace' );
   var RutherfordNucleusSpace = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleusSpace' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var PropertySet = require( 'AXON/PropertySet' );
 
   /**
    * @constructor
@@ -33,7 +34,19 @@ define( function( require ) {
     this.addProperty( 'protonInteraction', false ); // interaction with the proton count slider
     this.addProperty( 'neutronInteraction', false ); // interaction with the neutron count slider
 
-    // create a derived property for user interaction, so that the an interaction occurs when any dependency
+    // @public - specific interaction properties for the rutherford atom portion, for multitouch
+    // tracked in the model because the control panels gets disposed when the scene changes, and we
+    // do not want these properties to be reset at that time
+    this.interactionPropertySet = new PropertySet( {
+      leftProtonButtonInteraction: false,
+      rightProtonButtonInteraction: false,
+      protonSliderInteraction: false,
+      leftNeutronButtonInteraction: false,
+      rightNeutronButtonInteraction: false,
+      neutronSliderInteraction: false
+    } );
+
+    // @public - create a derived property for user interaction, so that the an interaction occurs when any dependency
     // is true
     this.userInteractionProperty = DerivedProperty.or( [ this.energyInteractionProperty, this.protonInteractionProperty, this.neutronInteractionProperty ] );
 
