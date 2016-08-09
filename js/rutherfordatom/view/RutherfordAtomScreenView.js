@@ -78,8 +78,8 @@ define( function( require ) {
         } );
       }
 
-      var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
-      var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model.userInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } );
+      var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.energyInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
+      var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model.protonInteractionProperty, model.neutronInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } );
 
       var minWidth = RSConstants.PANEL_MIN_WIDTH;
       if ( particlePropertiesContent.width !== atomPropertiesContent.width ) {

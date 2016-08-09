@@ -74,16 +74,29 @@ define( function( require ) {
   }, {
 
     /**
-     * Create content for the panel
+     * Create the panel content for this panel.
      *
-     * @return {AlphaParticlePropertiesPanelContent}
+     * @param  {Property.<boolean>} energyInteractionProperty
+     * @param  {Property.<boolean>} alphaParticleEnergyProperty
+     * @param  {Property.<boolean>} showTracesProperty
+     * @param  {Object} [options]
+     * @returns {VBox}
      */
-    createPanelContent: function( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
-      return new AlphaParticlePropertiesPanelContent( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options );
+    createPanelContent: function( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
+      return new AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options );
     }
   } );
 
-  function AlphaParticlePropertiesPanelContent( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
+  /**
+   * Constructo content that will be contained by this panel.
+   *
+   * @param  {Property.<boolean>} energyInteractionProperty
+   * @param  {Property.<boolean>} alphaParticleEnergyProperty
+   * @param  {Property.<boolean>} showTracesProperty
+   * @param  {Object} [options]
+   * @constructor
+   */
+  function AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
 
     options = _.extend( {
       xMargin: 15,
@@ -99,7 +112,7 @@ define( function( require ) {
     var self = this;
 
     // @private
-    this.userInteractionProperty = userInteractionProperty;
+    this.energyInteractionProperty = energyInteractionProperty;
 
     // strings
     var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
@@ -145,10 +158,10 @@ define( function( require ) {
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       startDrag: function() { // called when the pointer is pressed
-        self.userInteractionProperty.set( true );
+        self.energyInteractionProperty.set( true );
       },
       endDrag: function() { // called when the pointer is released
-        self.userInteractionProperty.set( false );
+        self.energyInteractionProperty.set( false );
       }
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
