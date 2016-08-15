@@ -31,6 +31,11 @@ define( function( require ) {
   var numberOfProtonsString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
   var numberOfNeutronsString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
 
+  // global, tracking where fingers are for multitouch support
+  // must persist beyond lifetime of the panel so that fingers are tracked when new
+  // panels are created for scene or color profile changes
+  var FINGER_TRACKER = {};
+
   /**
    * Constructor for a Atom Properties control panel.
    *
@@ -257,6 +262,40 @@ define( function( require ) {
       }
     };
 
+    /**
+     * Track fingers for multitouch, adding a finger count to a particular element and setting
+     * the interaction properties correctly.
+     *
+     * @param  {string} sliderID
+     * @param  {Proprty.<boolean>} interactionProperty
+     */
+    var addFinger = function( sliderID, interactionProperty ) {
+      interactionProperty.set( true );
+      if ( !FINGER_TRACKER[ sliderID ] && FINGER_TRACKER[ sliderID ] !== 0 ) {
+        FINGER_TRACKER[ sliderID ] = 1; // first time finger is down on this thumb
+      }
+      else {
+        FINGER_TRACKER[ sliderID ]++;
+      }
+    };
+
+    /**
+     * Remove a finger from an element for multitouch support, removing a finger count from a particular element
+     * and setting the interaction properties appropriately.
+     *
+     * @param  {string} sliderID
+     * @param  {Property.<boolean>} interactionProperty
+     * @param  {Property.<number>} countProperty
+     */
+    var removeFinger = function( sliderID, interactionProperty, countProperty ) {
+      FINGER_TRACKER[ sliderID ]--;
+      assert && assert( FINGER_TRACKER[ sliderID] >=0, 'at least 0 fingers must be using the slider' );
+      countProperty.set( Util.roundSymmetric( countProperty.value ) ); // proper resolution for nucleons
+      if ( FINGER_TRACKER[ sliderID ] === 0 ) {
+        interactionProperty.set( false );
+      }
+    };
+
     // proton count slider
     var protonCountSlider = new HSlider( protonCountProperty, {
       min: RSConstants.MIN_PROTON_COUNT,
@@ -264,10 +303,12 @@ define( function( require ) {
     }, _.extend( {}, sliderOptions, {
       thumbFillEnabled: 'rgb(220, 58, 10)',
       thumbFillHighlighted: 'rgb(270, 108, 60)',
-      startDrag: function() { protonSliderInteractionProperty.set( true ); },
+      startDrag: function() {
+        addFinger( 'protonCountSlider', protonSliderInteractionProperty );
+      },
       endDrag: function() {
-        protonCountProperty.set( Util.roundSymmetric( protonCountProperty.value ) ); // proper resolution for nucleons
-        protonSliderInteractionProperty.set( false ); }
+        removeFinger( 'protonCountSlider', protonSliderInteractionProperty, protonCountProperty );
+      }
     } ) );
     protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT,
       new Text( RSConstants.MIN_PROTON_COUNT, {
@@ -331,11 +372,10 @@ define( function( require ) {
     }, _.extend( {}, sliderOptions, {
       thumbFillEnabled: 'rgb(130, 130, 130)',
       thumbFillHighlighted: 'rgb(180, 180, 180)',
-      startDrag: function() { neutronSliderInteractionProperty.set( true ); },
-      endDrag: function() {
-        neutronCountProperty.set( Util.roundSymmetric( neutronCountProperty.value ) ); // proper resolution for nucleons
-        neutronSliderInteractionProperty.set( false ); }
-    } ) );
+      startDrag: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
+      endDrag: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, neutronCountProperty ); }
+    }
+    ) );
     neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
       new Text( RSConstants.MIN_NEUTRON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
