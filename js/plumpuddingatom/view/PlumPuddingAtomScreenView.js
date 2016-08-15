@@ -53,8 +53,8 @@ define( function( require ) {
       var legendPanel = new NuclearParticleLegendPanel( legendPanelContent, { resize: false } );
 
       var panels = [
-        particlePropertiesPanel,
-        legendPanel
+        legendPanel,
+        particlePropertiesPanel
       ];
       self.controlPanel = self.createControlPanel( panels );
       self.addChild( self.controlPanel );
