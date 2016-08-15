@@ -30,6 +30,11 @@ define( function( require ) {
   var minEnergyString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
   var maxEnergyString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' );
 
+  // global, tracks fingers on the slider for multitouch support
+  // must persist beyond individual panel instances so multitouch is supported
+  // when a panel is created or destroyed
+  var FINGER_TRACKER = {};
+
   /**
    * Constructor for a Alpha Particle Properties control panel.
    *
@@ -109,9 +114,6 @@ define( function( require ) {
     }, options );
 
     // @private
-    var self = this;
-
-    // @private
     this.energyInteractionProperty = energyInteractionProperty;
 
     // strings
@@ -144,6 +146,32 @@ define( function( require ) {
     var energyTextStrut = new HStrut( options.minWidth * 0.05 );
     var energyTitleBox = new HBox( { children: [ energyTextStrut, energyText ] } );
 
+    /**
+     * Track fingers for multitouch, adding a finger count to the slider and setting the proper
+     * interaction properties.
+     */
+    var addFinger = function( elementID ) {
+      energyInteractionProperty.set( true );
+      if ( !FINGER_TRACKER[ elementID ] && FINGER_TRACKER[ elementID ] !== 0 ) {
+        FINGER_TRACKER[ elementID ] = 1; // first time finger is down on this thumb
+      }
+      else {
+        FINGER_TRACKER[ elementID ]++;
+      }
+    };
+
+    /**
+     * Remove a finger from an element for multitouch support, removing a finger count from a particular element
+     * and setting the interaction properties appropriately.
+     */
+    var removeFinger = function( elementID ) {
+      FINGER_TRACKER[ elementID ]--;
+      assert && assert( FINGER_TRACKER[ elementID ] >= 0, 'at least 0 fingers must be using the slider' );
+      if ( FINGER_TRACKER[ elementID ] === 0 ) {
+        energyInteractionProperty.set( false );
+      }
+    };
+
     // particle engery slider
     var sliderWidth = options.minWidth * 0.75;
     var particleEnergySlider = new HSlider( alphaParticleEnergyProperty, {
@@ -158,10 +186,10 @@ define( function( require ) {
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       startDrag: function() { // called when the pointer is pressed
-        self.energyInteractionProperty.set( true );
+        addFinger( 'particleEnergySlider' );
       },
       endDrag: function() { // called when the pointer is released
-        self.energyInteractionProperty.set( false );
+        removeFinger( 'particleEnergySlider' );
       }
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
