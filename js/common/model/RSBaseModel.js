@@ -198,7 +198,7 @@ define( function( require ) {
      * @public
      */
     manualStep: function() {
-      if ( !this.userInteraction ) {
+      if ( !this.userInteractionProperty.value ) {
         this.gun.step( this.maunalStepDt );
         this.moveParticles( this.maunalStepDt );
         this.cullParticles();
