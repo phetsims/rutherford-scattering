@@ -78,11 +78,16 @@ define( function( require ) {
     // @private
     this.numberOfNeutrons = RSConstants.MIN_NEUTRON_COUNT;
 
+    // @private - flags that track when it is time to redraw the nucleus
+    this.isDirty = false;
+    this.timeSinceDirty = 0; // ms
+
     // generate proton image - asynchronous
     var protonNode = ParticleNodeFactory.createProton();
     protonNode.toImage( function( image, x, y ) {
       self.protonImage = image;
       self.updateAtomImage();
+      self.timeSinceDirty = 0;
     } );
 
     // generate neutron image - asynchronous
@@ -90,6 +95,7 @@ define( function( require ) {
     neutronNode.toImage( function( image, x, y ) {
       self.neutronImage = image;
       self.updateAtomImage();
+      self.timeSinceDirty = 0;
     } );
 
     // update atom image when proton count changes
@@ -97,6 +103,7 @@ define( function( require ) {
       self.numberOfProtons = propertyValue;
       self.renderAtomOutline = self.userInteractionProperty.value;  // Only render the outline when interacting
       self.updateAtomImage();
+      self.timeSinceDirty = 0;
     };
     protonCountProperty.link( protonCountListener );
 
@@ -105,6 +112,7 @@ define( function( require ) {
       self.numberOfNeutrons = propertyValue;
       self.renderAtomOutline = self.userInteractionProperty.value; // Only render the outline when interacting
       self.updateAtomImage();
+      self.timeSinceDirty = 0;
     };
     neutronCountProperty.link( neutronCountListener );
 
@@ -113,6 +121,7 @@ define( function( require ) {
       if ( self.renderAtomOutline ) {
         self.renderAtomOutline = false;
         self.updateAtomImage();
+        self.timeSinceDirty = 0;
       }
     };
     userInteractionProperty.link( userInteractionListener );
@@ -172,6 +181,7 @@ define( function( require ) {
 
       // clear
       context.clearRect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
+      this.renderAtomOutline = this.userInteractionProperty.value;
 
       // outline rendering
       if ( this.renderAtomOutline ) {
@@ -192,6 +202,8 @@ define( function( require ) {
         var boundPaintNucleus = paintNucleusIcon.bind( this, this.rutherfordNucleus, bounds, context, 'canvasImage' );
         boundPaintNucleus();
 
+        // notify as dirty so that the nucleus gets redrawn
+        this.isDirty = true;
       }
     }
 

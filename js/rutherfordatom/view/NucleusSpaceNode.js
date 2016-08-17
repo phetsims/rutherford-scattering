@@ -33,6 +33,24 @@ define( function( require ) {
       model.neutronCountProperty, model.nucleusSpace.rutherfordNucleus );
 
     this.invalidatePaint();
+
+    // workaround for an issue where the asynchronous images for the RutherfordNuclues weren't getting
+    // updated correctly - when marked as 'dirty', the atom node will be explicitly redrawn to ensure that
+    // it looks correct in the space
+    // does not need to be unlinked, space will exist for life of sim
+    var self = this;
+    model.stepEmitter.addListener( function( dt ) {
+      if ( self.atomNode.isDirty ) {
+        if ( dt ) {
+          self.atomNode.timeSinceDirty += dt;
+          self.atomNode.updateAtomImage();
+          self.atomNode.invalidatePaint();
+          if ( self.atomNode.timeSinceDirty > 1 ) {
+            self.atomNode.isDirty = false;
+          }
+        }
+      }
+    } );
   }
 
   rutherfordScattering.register( 'NucleusSpaceNode', NucleusSpaceNode );

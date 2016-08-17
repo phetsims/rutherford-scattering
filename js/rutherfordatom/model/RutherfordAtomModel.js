@@ -18,6 +18,7 @@ define( function( require ) {
   var RutherfordNucleusSpace = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleusSpace' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
 
   /**
    * @constructor
@@ -30,9 +31,10 @@ define( function( require ) {
 
     // interactions that create dependencies for the userInteractionProperty
     // these will be passed on to individual panels and interface elements
-    this.addProperty( 'energyInteraction', false ); // interaction with the energy slider
-    this.addProperty( 'protonInteraction', false ); // interaction with the proton count slider
-    this.addProperty( 'neutronInteraction', false ); // interaction with the neutron count slider
+    // NOT added to property set because we don't want these to get reset with 'reset all'
+    this.energyInteractionProperty = new Property( false ); // interaction with the energy slider
+    this.protonInteractionProperty = new Property( false ); // interaction with the proton count slider
+    this.neutronInteractionProperty = new Property( false ); // interaction with the neutron count slider
 
     // @public - specific interaction properties for the rutherford atom portion, for multitouch
     // tracked in the model because the control panels gets disposed when the scene changes, and we
