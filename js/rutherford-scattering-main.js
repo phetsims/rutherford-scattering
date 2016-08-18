@@ -25,7 +25,7 @@ define( function( require ) {
       leadDesign: 'Amy Hanson, Sam McKagan',
       softwareDevelopment: 'Jesse Greenberg, Chris Malley, Dave Schmitz',
       team: 'Wendy Adams, Michael Dubson, Noah Finkelstein,\nDanielle Harlow, Ariel Paul, Kathy Perkins,\nNoah Podolefsky, Amy Rouinfar, Carl Weiman',
-      qualityAssurance: 'Steele Dalton, Amanda Davis, Bryce Griebenow, Andrea Lin, Ben Roberts, Bryan Yoelin',
+      qualityAssurance: 'Steele Dalton, Amanda Davis, Bryce Griebenow,\nAndrea Lin, Ben Roberts, Bryan Yoelin',
       graphicArts: '',
       thanks: ''
     },
