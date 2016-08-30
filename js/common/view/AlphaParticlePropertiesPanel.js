@@ -185,6 +185,8 @@ define( function( require ) {
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
+      thumbTouchAreaXDilation: 15,
+      thumbTouchAreaYDilation: 4,
       startDrag: function() { // called when the pointer is pressed
         addFinger( 'particleEnergySlider' );
       },
