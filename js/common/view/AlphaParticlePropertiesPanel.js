@@ -14,6 +14,7 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var VStrut = require( 'SCENERY/nodes/VStrut' );
   var Text = require( 'SCENERY/nodes/Text' );
   var HSlider = require( 'SUN/HSlider' );
   var CheckBox = require( 'SUN/CheckBox' );
@@ -186,7 +187,7 @@ define( function( require ) {
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       thumbTouchAreaXDilation: 15,
-      thumbTouchAreaYDilation: 4,
+      thumbTouchAreaYDilation: 12,
       startDrag: function() { // called when the pointer is pressed
         addFinger( 'particleEnergySlider' );
       },
@@ -224,7 +225,7 @@ define( function( require ) {
       right: 0,
       align: 'left',
       resize: false,
-      children: [ alphaParticlePropertiesText, energyTitleBox, containerRect, showTraceBox ]
+      children: [ alphaParticlePropertiesText, energyTitleBox, containerRect, new VStrut(5), showTraceBox ]
     } );
 
     // @private
