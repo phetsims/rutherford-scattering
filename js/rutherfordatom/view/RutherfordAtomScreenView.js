@@ -147,8 +147,8 @@ define( function( require ) {
     var createRadioButtons = function( atomIconImage ) {
       var buttonOptions = { scale: 0.18 };
       return new RadioButtonGroup( model.sceneProperty, [
-        { value: 'nucleus', node: nucleusIcon },
-        { value: 'atom', node: new Image( atomIconImage, buttonOptions ) }
+        { value: 'atom', node: new Image( atomIconImage, buttonOptions ) },
+        { value: 'nucleus', node: nucleusIcon }
       ], {
         orientation: 'vertical',
         spacing: 15,

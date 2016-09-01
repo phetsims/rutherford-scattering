@@ -27,7 +27,7 @@ define( function( require ) {
     RSBaseModel.call( this );
     this.addProperty( 'protonCount', RSConstants.DEFAULT_PROTON_COUNT );
     this.addProperty( 'neutronCount', RSConstants.DEFAULT_NEUTRON_COUNT );
-    this.addProperty( 'scene', 'nucleus' ); // scene to display, 'atom'|'nucleus'
+    this.addProperty( 'scene', 'atom' ); // scene to display, 'atom'|'nucleus'
 
     // interactions that create dependencies for the userInteractionProperty
     // these will be passed on to individual panels and interface elements
