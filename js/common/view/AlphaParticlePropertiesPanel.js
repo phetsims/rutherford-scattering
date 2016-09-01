@@ -1,7 +1,9 @@
 // Copyright 2002-2016, University of Colorado Boulder
 
 /**
- * Control panel for the "Ruthorford Scattering" sim. Allows the user to adjust the energy of alpha particles being simulated.
+ * Control panel for the "Ruthorford Scattering" sim. Allows the user to adjust the energy of alpha particles
+ * being simulated.  Content is created by AlphaParticlePropertiesPanelContent below since the Content
+ * is created and destroyed when the scene or color profile changes.
  *
  * @author Dave Schmitz (Schmitzware)
  */
@@ -39,7 +41,7 @@ define( function( require ) {
   /**
    * Constructor for a Alpha Particle Properties control panel.
    *
-   * @param {AlphaParticlePropertiesPanelContent} showTracesProperty - content for the panel
+   * @param {AlphaParticlePropertiesPanelContent} content - content for the panel
    * @param {Object} [options]
    * @constructor
    */
