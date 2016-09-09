@@ -28,19 +28,22 @@ define( function( require ) {
   function RutherfordAtomScreen() {
 
     // create an icon for the rutherford atom screen with default number of protons and neutrons
-    var screenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
+    var homeScreenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
       RSConstants.DEFAULT_PROTON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT
     ), {
       fill: RSColors.screenIconFillColor
     } );
 
+    var options = {
+      name: rutherfordAtomString,
+      backgroundColor: RSColors.backgroundColor,
+      homeScreenIcon: homeScreenIcon
+    };
+
     Screen.call( this,
-      rutherfordAtomString,
-      screenIcon,
       function() { return new RutherfordAtomModel(); },
-      function( model ) { return new RutherfordAtomScreenView( model ); }, {
-        backgroundColor: RSColors.backgroundColor
-      } );
+      function( model ) { return new RutherfordAtomScreenView( model ); },
+      options );
 
     // screen will exist for life of sim, no need to unlink
     var self = this;

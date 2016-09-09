@@ -28,13 +28,16 @@ define( function( require ) {
    */
   function PlumPuddingAtomScreen() {
 
+    var options = {
+      name: plumPuddingAtomString,
+      backgroundColor: RSColors.backgroundColor,
+      homeScreenIcon: new Image( screenIcon )
+    };
+
     Screen.call( this,
-      plumPuddingAtomString,
-      new Image( screenIcon ),
       function() { return new PlumPuddingAtomModel(); },
-      function( model ) { return new PlumPuddingAtomScreenView( model ); }, {
-        backgroundColor: RSColors.backgroundColor
-      } );
+      function( model ) { return new PlumPuddingAtomScreenView( model ); },
+      options );
 
     // screen will exist for life of sim, no need to unlink
     var self = this;
