@@ -242,7 +242,7 @@ define( function( require ) {
     this.nucleus = nucleus;
 
     // max radius of an atom with MAX protons & neutrons
-    var numberOfParticles = nucleus.protonCount + nucleus.neutronCount;
+    var numberOfParticles = nucleus.protonCountProperty.get() + nucleus.neutronCountProperty.get();
     var maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
                     Math.pow( numberOfParticles, PARTICLE_COUNT_EXP );
 
@@ -290,8 +290,8 @@ define( function( require ) {
     // get the number of layers in the particle
     var zLayer = 0;
     nucleons.forEach( function( nucleon ) {
-      if ( nucleon.zLayer > zLayer ) {
-        zLayer = nucleon.zLayer;
+      if ( nucleon.zLayerProperty.get() > zLayer ) {
+        zLayer = nucleon.zLayerProperty.get();
       }
     } );
 
@@ -299,9 +299,9 @@ define( function( require ) {
     var self = this;
     for ( var i = zLayer; i  >= 0; i-- ) {
       nucleons.forEach( function( nucleon ) {
-        if ( nucleon.zLayer === i ) {
-          var xN = nucleon.position.x;
-          var yN = nucleon.position.y;
+        if ( nucleon.zLayerProperty.get() === i ) {
+          var xN = nucleon.positionProperty.get().x;
+          var yN = nucleon.positionProperty.get().y;
 
           if ( render === 'canvasArc' ) {
             // drawing with arcs is a little slower, but the result is less pixilated, so
@@ -310,7 +310,7 @@ define( function( require ) {
             // if using canvas arcs to render the nucleus, offset by center of bounds
             xN += nucleusBounds.centerX;
             yN += nucleusBounds.centerY;
-            if ( nucleon.type === 'neutron' ) {
+            if ( nucleon.typeProperty.get() === 'neutron' ) {
               ParticleNodeFactory.drawNeutronWithCanvas( xN, yN, context );
             }
             else {
@@ -325,7 +325,7 @@ define( function( require ) {
             xN += ( self.center.x - self.neutronImage.width / 2 );
             yN += ( self.center.y - self.neutronImage.height / 2 );
 
-            if ( nucleon.type === 'neutron' ) {
+            if ( nucleon.typeProperty.get() === 'neutron' ) {
               context.drawImage( self.neutronImage, xN, yN, self.neutronImage.width, self.neutronImage.height );
             }
             else {
