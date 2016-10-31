@@ -11,21 +11,17 @@ define( function( require ) {
   // modules
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
-  var getQueryParameter = phet.chipper.getQueryParameter;
-
-  var RSQueryParameters = {
+  var RSQueryParameters = QueryStringMachine.getAll( {
 
     // show shapes around each atom to show the transform of the atomic bounds as a particle enters the bounding box
-    SHOW_DEBUG_SHAPES: !!getQueryParameter( 'showDebugShapes' ),
+    showDebugShapes: { type: 'flag' },
 
     // show a count of the number of times a particle is removed from the atom space in error
-    SHOW_ERROR_COUNT: !!getQueryParameter( 'showErrorCount' ),
+    showErrorCount: { type: 'flag' },
 
-    // enable projector mode by default for development and so the sim can be linked directly
-    // to projector mode
-    PROJECTOR_MODE: !!getQueryParameter( 'projectorMode' )
-
-  };
+    // enable projector mode by default for development and so the sim can be linked directly to projector mode
+    projectorMode: { type: 'flag' }
+  } );
 
   rutherfordScattering.register( 'RSQueryParameters', RSQueryParameters );
 

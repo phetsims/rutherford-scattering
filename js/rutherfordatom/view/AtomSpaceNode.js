@@ -18,9 +18,6 @@ define( function( require ) {
   var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
   var Path = require( 'SCENERY/nodes/Path' );
 
-  // constants
-  var DEBUG_SHAPES = RSQueryParameters.SHOW_DEBUG_SHAPES;
-
   /**
    * @param {RSBaseModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
@@ -42,7 +39,7 @@ define( function( require ) {
     ParticleSpaceNode.call( this, model.atomSpace, showAlphaTraceProperty, modelViewTransform, options );
     var self = this;
 
-    if ( DEBUG_SHAPES ) {
+    if ( RSQueryParameters.showDebugShapes ) {
       model.atomSpace.particleTransitionedEmitter.addListener( function( particle ) {
         // a particle has been transitioned to a new atom - show the bounding box of the particle
         self.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), { 

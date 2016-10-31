@@ -15,7 +15,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
 
   var RSGlobals = new PropertySet( {
-    projectorMode: RSQueryParameters.PROJECTOR_MODE || false
+    projectorMode: RSQueryParameters.projectorMode
   } );
 
   rutherfordScattering.register( 'RSGlobals', RSGlobals );

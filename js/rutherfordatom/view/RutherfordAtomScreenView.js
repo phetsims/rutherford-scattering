@@ -31,9 +31,6 @@ define( function( require ) {
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
-  // constants
-  var SHOW_ERROR_COUNT = RSQueryParameters.SHOW_ERROR_COUNT;
-
   // strings
   var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
   var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
@@ -211,7 +208,7 @@ define( function( require ) {
       canvasBounds: canvasBounds
     } );
 
-    if ( SHOW_ERROR_COUNT ) {
+    if ( RSQueryParameters.showErrorCount ) {
       // show the number of particles that were removed from the space in error
       var errorCountPattern = 'Error count: {0} - particle removed at line {1}';
       var errorText = new Text( '', {

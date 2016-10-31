@@ -25,8 +25,6 @@ define( function( require ) {
   var RADIUS_SCALE = 5.95; // scale to make the radii visible in the space, chosen empirically
   var ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
 
-  var DEBUG_SHAPES = RSQueryParameters.SHOW_DEBUG_SHAPES;
-
   /**
    * Constructor.
    *
@@ -73,7 +71,7 @@ define( function( require ) {
         }
 
         // draw the bounds of each nucleus
-        if ( DEBUG_SHAPES ) {
+        if ( RSQueryParameters.showDebugShapes ) {
           var boundsRectangle = new Path( modelViewTransform.modelToViewShape( atom.boundingRect ), { stroke: 'red' } );
           self.addChild( boundsRectangle );
 
