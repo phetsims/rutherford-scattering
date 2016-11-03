@@ -20,7 +20,7 @@ define( function( require ) {
   /**
    * Constructor.
    * @param {array.<Panel>} panels
-   * @param {object} options
+   * @param {Object} options
    * @constructor
    */
   function RSControlPanel( panels, options ) {
