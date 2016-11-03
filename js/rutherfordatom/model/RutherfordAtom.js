@@ -45,7 +45,7 @@ define( function( require ) {
      * the space so that a new atom can pick it up if necessary.  On error, notify the space so that
      * the particle can be removed entirely from the model.
      * @param  {AlphaParticle}  particle
-     * @param  {Boolean} isError
+     * @param  {boolean} isError
      * @public
      */
     removeParticle: function( particle, isError, line ) {
