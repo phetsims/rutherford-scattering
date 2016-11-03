@@ -127,7 +127,7 @@ define( function( require ) {
   var RSColors = extend( new PropertySet( initialProperties ), {
 
     /**
-     * Applies all colors for the specific named color scheme, ingoring colors that aren't sepcified for it.
+     * Applies all colors for the specific named color scheme, ignoring colors that aren't specified for it.
      *
      * @param  {string} profileName - one of 'default' or 'projector'
      */
