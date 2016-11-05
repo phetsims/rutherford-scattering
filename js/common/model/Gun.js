@@ -70,10 +70,10 @@ define( function( require ) {
 
       if ( this.on && this.dtSinceGunFired >= this.dtPerGunFired ) {
 
-        var ySign = ( RAND.random() < 0.5 ? 1 : -1 );
+        var ySign = ( RAND.nextDouble() < 0.5 ? 1 : -1 );
 
         // random position withing model bounds
-        var rand = RAND.random();
+        var rand = RAND.nextDouble();
         var particleX = ySign * rand * this.model.bounds.width / 2;
 
         // make sure that the particle was not directly fired at an atom to prevent trajectory failure
