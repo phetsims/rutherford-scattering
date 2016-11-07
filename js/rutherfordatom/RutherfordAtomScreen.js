@@ -48,7 +48,7 @@ define( function( require ) {
     // screen will exist for life of sim, no need to unlink
     var self = this;
     RSColors.link( 'backgroundColor', function( color ) {
-      self.backgroundColor = color;
+      self.backgroundColorProperty.value = color;
     } );
   }
 
