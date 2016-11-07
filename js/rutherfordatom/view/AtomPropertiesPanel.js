@@ -61,7 +61,7 @@ define( function( require ) {
     // ensure that panel is eligible for garbage collection, a panel is created and destroyed every time
     // scene or color scheme changes so it si important that everything is disposed
     // @private
-    this.disposePanel = function() {
+    this.disposeAtomPropertiesPanel = function() {
       content.dispose();
     };
   }
@@ -78,7 +78,7 @@ define( function( require ) {
      */
     dispose: function() {
       Panel.prototype.dispose.call( this );
-      this.disposePanel();
+      this.disposeAtomPropertiesPanel();
     }
   }, {
 

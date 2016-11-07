@@ -60,7 +60,7 @@ define( function( require ) {
     Panel.call( this, content, options );
 
     // @private - make panel eligible for garbage collection
-    this.disposePanel = function() {
+    this.disposeAlphaParticlePropertiesPanel = function() {
       content.dispose();
     };
   }
@@ -77,7 +77,7 @@ define( function( require ) {
      */
     dispose: function() {
       Panel.prototype.dispose.call( this );
-      this.disposePanel();
+      this.disposeAlphaParticlePropertiesPanel();
     }
   }, {
 
