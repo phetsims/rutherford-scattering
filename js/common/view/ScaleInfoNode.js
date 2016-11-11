@@ -19,7 +19,7 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
 
   // constants
   var ARROW_HEAD_WIDTH = 12;
@@ -81,7 +81,7 @@ define( function( require ) {
     // when the color profile changes, update the fill of all associated children
     // no need to dispose, instance exists for life of sim
     RSGlobals.link( 'projectorMode', function() {
-      var labelColor = RSColors.panelLabelColor;
+      var labelColor = RSColorProfile.panelLabelColor;
       // update end marker fill
       leftMarker.stroke = labelColor;
       rightMarker.stroke = labelColor;

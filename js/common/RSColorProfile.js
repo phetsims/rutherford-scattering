@@ -12,14 +12,13 @@ define( function( require ) {
 
   // modules
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var extend = require( 'PHET_CORE/extend' );
+  var ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
   var Color = require( 'SCENERY/util/Color' );
-  var PropertySet = require( 'AXON/PropertySet' );
 
   // Initial colors for each profile, by string key.  If a projector color is not defined, it will take
   // the 'default' value provided.
   // NOTE: This is NOT provided to clients directly, but is passed to the PropertySet constructor.
-  var colors = {
+  var RSColorProfile = new ColorProfile( {
     backgroundColor: {
       default: new Color( 0, 0, 0 ),
       projector: new Color( 255, 255, 255 )
@@ -116,37 +115,9 @@ define( function( require ) {
       default: new Color( 255, 255, 255 ),
       projector: new Color( 0, 0, 0 )
     }
-  };
-
-  // initial properties object, to load into PropertySet (so reset works nicely)
-  var initialProperties = {};
-  for ( var key in colors ) {
-    initialProperties[ key ] = colors[ key ].default;
-  }
-
-  var RSColors = extend( new PropertySet( initialProperties ), {
-
-    /**
-     * Applies all colors for the specific named color scheme, ignoring colors that aren't specified for it.
-     *
-     * @param  {string} profileName - one of 'default' or 'projector'
-     */
-    applyProfile: function( profileName ) {
-      assert && assert( profileName === 'default' || profileName === 'projector' );
-
-      for ( var key in colors ) {
-        if ( profileName in colors[ key ] ) {
-          var oldColor = this[ key ];
-          var newColor = colors[ key ][ profileName ];
-          if ( !newColor.equals( oldColor ) ) {
-            this[ key ] = newColor;
-          }
-        }
-      }
-    }
   } );
 
-  rutherfordScattering.register( 'RSColors', RSColors );
+  rutherfordScattering.register( 'RSColorProfile', RSColorProfile );
 
-  return RSColors;
+  return RSColorProfile;
 } );

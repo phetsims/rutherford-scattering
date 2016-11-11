@@ -27,7 +27,7 @@ define( function( require ) {
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require('SCENERY_PHET/PhetFont' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
@@ -125,7 +125,7 @@ define( function( require ) {
 
       // recenter the gun beam and set new fill
       beam.centerX = self.gunNode.centerX;
-      beam.fill = atomSceneVisible ? RSColors.atomBeamColor : RSColors.nucleusBeamColor;
+      beam.fill = atomSceneVisible ? RSColorProfile.atomBeamColor : RSColorProfile.nucleusBeamColor;
 
       // dispose and remove the old control panel
       self.controlPanel.dispose();
@@ -151,9 +151,9 @@ define( function( require ) {
         spacing: 15,
         left: self.targetMaterialNode.left,
         top: self.spaceNode.top,
-        baseColor: RSColors.panelColor,
-        deselectedStroke: RSColors.panelBorderColor,
-        selectedStroke: RSColors.radioButtonBorderColor,
+        baseColor: RSColorProfile.panelColor,
+        deselectedStroke: RSColorProfile.panelBorderColor,
+        selectedStroke: RSColorProfile.radioButtonBorderColor,
         buttonContentYMargin: 8,
         selectedLineWidth: 2,
         deselectedLineWidth: 1.5,

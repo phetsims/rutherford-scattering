@@ -17,7 +17,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var Property = require( 'AXON/Property' );
   var RutherfordNucleus = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleus' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
 
   // constants
   var MIN_NUCLEUS_RADIUS = 20; // view coordinates
@@ -188,7 +188,7 @@ define( function( require ) {
         context.beginPath();
         context.lineWidth = OUTLINE_LINE_WIDTH;
         context.setLineDash( OUTLINE_LINE_DASH );
-        context.strokeStyle = RSColors.nucleusOutlineColor.toCSS();
+        context.strokeStyle = RSColorProfile.nucleusOutlineColor.toCSS();
         context.arc( this.centerX, this.centerY, this.radius, 0, 2 * Math.PI );
         context.stroke();
       }

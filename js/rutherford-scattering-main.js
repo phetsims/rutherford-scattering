@@ -15,7 +15,7 @@ define( function( require ) {
   var PlumPuddingAtomScreen = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/PlumPuddingAtomScreen' );
   var MenuOptionsNode = require( 'RUTHERFORD_SCATTERING/common/view/MenuOptionsNode' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
 
   // strings
   var rutherfordScatteringTitleString = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );
@@ -35,10 +35,10 @@ define( function( require ) {
   // no need to unlink, will exist for life of sim
   RSGlobals.projectorModeProperty.link( function( useProjectorMode ) {
     if ( useProjectorMode ) {
-      RSColors.applyProfile( 'projector' );
+      RSColorProfile.profileNameProperty.set( 'projector' );
     }
     else {
-      RSColors.applyProfile( 'default' );
+      RSColorProfile.profileNameProperty.set( 'default' );
     }
   } );
 

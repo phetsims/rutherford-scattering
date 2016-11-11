@@ -19,7 +19,7 @@ define( function( require ) {
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Util = require( 'DOT/Util' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
 
   // constants
@@ -129,7 +129,7 @@ define( function( require ) {
       // viewport clip
       context.beginPath();
       context.strokeStyle = 'transparent';
-      context.fillStyle = RSColors.backgroundColor.toCSS();
+      context.fillStyle = RSColorProfile.backgroundColor.toCSS();
       context.rect( this.clipRect.x, this.clipRect.y, this.clipRect.width, this.clipRect.height );
       context.stroke();
       context.fill();

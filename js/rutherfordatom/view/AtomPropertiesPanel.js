@@ -22,7 +22,7 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Util = require( 'DOT/Util' );
 
@@ -52,8 +52,8 @@ define( function( require ) {
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
       resize: false,
-      fill: RSColors.panelColor,
-      stroke: RSColors.panelBorderColor
+      fill: RSColorProfile.panelColor,
+      stroke: RSColorProfile.panelBorderColor
     }, options );
 
     Panel.call( this, content, options );
@@ -117,8 +117,8 @@ define( function( require ) {
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
       resize: false,
-      fill: RSColors.panelColor,
-      stroke: RSColors.panelBorderColor
+      fill: RSColorProfile.panelColor,
+      stroke: RSColorProfile.panelBorderColor
     }, options );
 
     // @private
@@ -156,20 +156,20 @@ define( function( require ) {
     var atomPropertiesText = new Text( atomString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSColors.panelTitleColor,
+      fill: RSColorProfile.panelTitleColor,
       maxWidth: 225
     } );
     var numProtonsText = new Text( numberOfProtonsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       maxWidth: 210,
       fontWeight: 'bold',
-      fill: RSColors.protonsLabelColor
+      fill: RSColorProfile.protonsLabelColor
     } );
     var numNeutronsText = new Text( numberOfNeutronsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       maxWidth: 210,
       fontWeight: 'bold',
-      fill: RSColors.neutronsLabelColor
+      fill: RSColorProfile.neutronsLabelColor
     } );
 
     // proton count slider title
@@ -246,9 +246,9 @@ define( function( require ) {
     // common slider attributes
     var sliderWidth = options.minWidth * 0.75;
     var sliderOptions = {
-      trackFill: RSColors.panelSliderLabelColor,
-      trackStroke: RSColors.panelSliderLabelColor,
-      majorTickStroke: RSColors.panelSliderLabelColor,
+      trackFill: RSColorProfile.panelSliderLabelColor,
+      trackStroke: RSColorProfile.panelSliderLabelColor,
+      majorTickStroke: RSColorProfile.panelSliderLabelColor,
       majorTickLength: 15,
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
@@ -313,13 +313,13 @@ define( function( require ) {
     protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT,
       new Text( RSConstants.MIN_PROTON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColors.panelSliderLabelColor,
+        fill: RSColorProfile.panelSliderLabelColor,
         pickable: false
       } ) );
     protonCountSlider.addMajorTick( RSConstants.MAX_PROTON_COUNT,
       new Text( RSConstants.MAX_PROTON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColors.panelSliderLabelColor,
+        fill: RSColorProfile.panelSliderLabelColor,
         pickable: false
       } ) );
 
@@ -379,13 +379,13 @@ define( function( require ) {
     neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
       new Text( RSConstants.MIN_NEUTRON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColors.panelSliderLabelColor,
+        fill: RSColorProfile.panelSliderLabelColor,
         pickable: false
       } ) );
     neutronCountSlider.addMajorTick( RSConstants.MAX_NEUTRON_COUNT,
       new Text( RSConstants.MAX_NEUTRON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColors.panelSliderLabelColor,
+        fill: RSColorProfile.panelSliderLabelColor,
         pickable: false
       } ) );
 

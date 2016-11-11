@@ -17,7 +17,7 @@ define( function( require ) {
   var ScreenIcon = require( 'JOIST/ScreenIcon' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
 
   // strings
   var rutherfordAtomString = require( 'string!RUTHERFORD_SCATTERING/rutherfordAtom' );
@@ -31,12 +31,12 @@ define( function( require ) {
     var homeScreenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
       RSConstants.DEFAULT_PROTON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT
     ), {
-      fill: RSColors.screenIconFillColor
+      fill: RSColorProfile.screenIconFillColor
     } );
 
     var options = {
       name: rutherfordAtomString,
-      backgroundColor: RSColors.backgroundColor,
+      backgroundColor: RSColorProfile.backgroundColor,
       homeScreenIcon: homeScreenIcon
     };
 
@@ -47,7 +47,7 @@ define( function( require ) {
 
     // screen will exist for life of sim, no need to unlink
     var self = this;
-    RSColors.link( 'backgroundColor', function( color ) {
+    RSColorProfile.link( 'backgroundColor', function( color ) {
       self.backgroundColorProperty.value = color;
     } );
   }

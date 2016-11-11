@@ -17,7 +17,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
 
   // constants
   var SPECULAR_HIGHLITE_COLOR = 'rgb(200,200,200)';
@@ -107,7 +107,7 @@ define( function( require ) {
     createNucleus: function() {
       return new Node( {
         children: [
-          new Circle( NUCLEUS_RADIUS, { fill: RSColors.nucleusColor } )
+          new Circle( NUCLEUS_RADIUS, { fill: RSColorProfile.nucleusColor } )
         ]
       } );
     },

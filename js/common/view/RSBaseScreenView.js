@@ -32,7 +32,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
 
   // strings
   var alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
@@ -84,13 +84,13 @@ define( function( require ) {
 
     // when the color profile changes, the alpha source text should be black
     // no need to unlink since the text will exist for life of sim
-    RSColors.linkAttribute( 'panelLabelColor', alphaSourceText, 'fill' );
+    RSColorProfile.linkAttribute( 'panelLabelColor', alphaSourceText, 'fill' );
 
     // @protected, alpha particle beam
     this.beamNode = new BeamNode( model.gun.onProperty, {
       centerX: this.gunNode.centerX,
       bottom: this.gunNode.top,
-      fill: RSColors.atomBeamColor
+      fill: RSColorProfile.atomBeamColor
     } );
     this.addChild( this.beamNode );
 

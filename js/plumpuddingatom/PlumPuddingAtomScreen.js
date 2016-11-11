@@ -15,7 +15,7 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var PlumPuddingAtomModel = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomModel' );
   var PlumPuddingAtomScreenView = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomScreenView' );
-  var RSColors = require( 'RUTHERFORD_SCATTERING/common/RSColors' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
 
   // strings
   var plumPuddingAtomString = require( 'string!RUTHERFORD_SCATTERING/plumPuddingAtom' );
@@ -30,7 +30,7 @@ define( function( require ) {
 
     var options = {
       name: plumPuddingAtomString,
-      backgroundColor: RSColors.backgroundColor,
+      backgroundColor: RSColorProfile.backgroundColor,
       homeScreenIcon: new Image( screenIcon )
     };
 
@@ -41,7 +41,7 @@ define( function( require ) {
 
     // screen will exist for life of sim, no need to unlink
     var self = this;
-    RSColors.link( 'backgroundColor', function( color ) {
+    RSColorProfile.link( 'backgroundColor', function( color ) {
       self.backgroundColorProperty.value = color;
     } );
   }
