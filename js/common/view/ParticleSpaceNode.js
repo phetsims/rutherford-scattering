@@ -129,7 +129,7 @@ define( function( require ) {
       // viewport clip
       context.beginPath();
       context.strokeStyle = 'transparent';
-      context.fillStyle = RSColorProfile.backgroundColor.toCSS();
+      context.fillStyle = RSColorProfile.backgroundColorProperty.get().toCSS();
       context.rect( this.clipRect.x, this.clipRect.y, this.clipRect.width, this.clipRect.height );
       context.stroke();
       context.fill();

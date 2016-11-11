@@ -90,7 +90,7 @@ define( function( require ) {
     this.beamNode = new BeamNode( model.gun.onProperty, {
       centerX: this.gunNode.centerX,
       bottom: this.gunNode.top,
-      fill: RSColorProfile.atomBeamColor
+      fill: RSColorProfile.atomBeamColorProperty.get()
     } );
     this.addChild( this.beamNode );
 

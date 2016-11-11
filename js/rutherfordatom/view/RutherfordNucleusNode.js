@@ -188,7 +188,7 @@ define( function( require ) {
         context.beginPath();
         context.lineWidth = OUTLINE_LINE_WIDTH;
         context.setLineDash( OUTLINE_LINE_DASH );
-        context.strokeStyle = RSColorProfile.nucleusOutlineColor.toCSS();
+        context.strokeStyle = RSColorProfile.nucleusOutlineColorProperty.get().toCSS();
         context.arc( this.centerX, this.centerY, this.radius, 0, 2 * Math.PI );
         context.stroke();
       }

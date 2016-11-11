@@ -52,8 +52,8 @@ define( function( require ) {
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
       resize: false,
-      fill: RSColorProfile.panelColor,
-      stroke: RSColorProfile.panelBorderColor
+      fill: RSColorProfile.panelColorProperty.get(),
+      stroke: RSColorProfile.panelBorderColorProperty.get()
     }, options );
 
     Panel.call( this, content, options );
@@ -117,8 +117,8 @@ define( function( require ) {
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
       resize: false,
-      fill: RSColorProfile.panelColor,
-      stroke: RSColorProfile.panelBorderColor
+      fill: RSColorProfile.panelColorProperty.get(),
+      stroke: RSColorProfile.panelBorderColorProperty.get()
     }, options );
 
     // @private
@@ -156,20 +156,20 @@ define( function( require ) {
     var atomPropertiesText = new Text( atomString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelTitleColor,
+      fill: RSColorProfile.panelTitleColorProperty.get(),
       maxWidth: 225
     } );
     var numProtonsText = new Text( numberOfProtonsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       maxWidth: 210,
       fontWeight: 'bold',
-      fill: RSColorProfile.protonsLabelColor
+      fill: RSColorProfile.protonsLabelColorProperty.get()
     } );
     var numNeutronsText = new Text( numberOfNeutronsString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       maxWidth: 210,
       fontWeight: 'bold',
-      fill: RSColorProfile.neutronsLabelColor
+      fill: RSColorProfile.neutronsLabelColorProperty.get()
     } );
 
     // proton count slider title
@@ -246,9 +246,9 @@ define( function( require ) {
     // common slider attributes
     var sliderWidth = options.minWidth * 0.75;
     var sliderOptions = {
-      trackFill: RSColorProfile.panelSliderLabelColor,
-      trackStroke: RSColorProfile.panelSliderLabelColor,
-      majorTickStroke: RSColorProfile.panelSliderLabelColor,
+      trackFill: RSColorProfile.panelSliderLabelColorProperty.get(),
+      trackStroke: RSColorProfile.panelSliderLabelColorProperty.get(),
+      majorTickStroke: RSColorProfile.panelSliderLabelColorProperty.get(),
       majorTickLength: 15,
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
@@ -313,13 +313,13 @@ define( function( require ) {
     protonCountSlider.addMajorTick( RSConstants.MIN_PROTON_COUNT,
       new Text( RSConstants.MIN_PROTON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColorProfile.panelSliderLabelColor,
+        fill: RSColorProfile.panelSliderLabelColorProperty.get(),
         pickable: false
       } ) );
     protonCountSlider.addMajorTick( RSConstants.MAX_PROTON_COUNT,
       new Text( RSConstants.MAX_PROTON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColorProfile.panelSliderLabelColor,
+        fill: RSColorProfile.panelSliderLabelColorProperty.get(),
         pickable: false
       } ) );
 
@@ -379,13 +379,13 @@ define( function( require ) {
     neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
       new Text( RSConstants.MIN_NEUTRON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColorProfile.panelSliderLabelColor,
+        fill: RSColorProfile.panelSliderLabelColorProperty.get(),
         pickable: false
       } ) );
     neutronCountSlider.addMajorTick( RSConstants.MAX_NEUTRON_COUNT,
       new Text( RSConstants.MAX_NEUTRON_COUNT, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColorProfile.panelSliderLabelColor,
+        fill: RSColorProfile.panelSliderLabelColorProperty.get(),
         pickable: false
       } ) );
 

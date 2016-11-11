@@ -30,7 +30,7 @@ define( function( require ) {
 
     var options = {
       name: plumPuddingAtomString,
-      backgroundColor: RSColorProfile.backgroundColor,
+      backgroundColor: RSColorProfile.backgroundColorProperty.get(),
       homeScreenIcon: new Image( screenIcon )
     };
 
@@ -41,7 +41,7 @@ define( function( require ) {
 
     // screen will exist for life of sim, no need to unlink
     var self = this;
-    RSColorProfile.link( 'backgroundColor', function( color ) {
+    RSColorProfile.backgroundColorProperty.link( function( color ) {
       self.backgroundColorProperty.value = color;
     } );
   }

@@ -125,7 +125,7 @@ define( function( require ) {
 
       // recenter the gun beam and set new fill
       beam.centerX = self.gunNode.centerX;
-      beam.fill = atomSceneVisible ? RSColorProfile.atomBeamColor : RSColorProfile.nucleusBeamColor;
+      beam.fill = atomSceneVisible ? RSColorProfile.atomBeamColorProperty.get() : RSColorProfile.nucleusBeamColorProperty.get();
 
       // dispose and remove the old control panel
       self.controlPanel.dispose();
@@ -151,9 +151,9 @@ define( function( require ) {
         spacing: 15,
         left: self.targetMaterialNode.left,
         top: self.spaceNode.top,
-        baseColor: RSColorProfile.panelColor,
-        deselectedStroke: RSColorProfile.panelBorderColor,
-        selectedStroke: RSColorProfile.radioButtonBorderColor,
+        baseColor: RSColorProfile.panelColorProperty.get(),
+        deselectedStroke: RSColorProfile.panelBorderColorProperty.get(),
+        selectedStroke: RSColorProfile.radioButtonBorderColorProperty.get(),
         buttonContentYMargin: 8,
         selectedLineWidth: 2,
         deselectedLineWidth: 1.5,

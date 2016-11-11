@@ -107,7 +107,7 @@ define( function( require ) {
     createNucleus: function() {
       return new Node( {
         children: [
-          new Circle( NUCLEUS_RADIUS, { fill: RSColorProfile.nucleusColor } )
+          new Circle( NUCLEUS_RADIUS, { fill: RSColorProfile.nucleusColorProperty.get() } )
         ]
       } );
     },

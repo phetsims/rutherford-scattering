@@ -40,8 +40,8 @@ define( function( require ) {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSColorProfile.panelColor,
-      stroke: RSColorProfile.panelBorderColor,
+      fill: RSColorProfile.panelColorProperty.get(),
+      stroke: RSColorProfile.panelBorderColorProperty.get(),
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
 
@@ -72,7 +72,7 @@ define( function( require ) {
   function createParticleRow( particleNode, titleString ) {
 
     var hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
-    var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSColorProfile.panelLabelColor, maxWidth: 175 } );
+    var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSColorProfile.panelLabelColorProperty.get(), maxWidth: 175 } );
     var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
 
     // container for one row in the legend
@@ -120,15 +120,15 @@ define( function( require ) {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSColorProfile.panelColor,
-      stroke: RSColorProfile.panelBorderColor,
+      fill: RSColorProfile.panelColorProperty.get(),
+      stroke: RSColorProfile.panelBorderColorProperty.get(),
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
 
     var legendText = new Text( legendString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelTitleColor,
+      fill: RSColorProfile.panelTitleColorProperty.get(),
       maxWidth: 225
     } );
 

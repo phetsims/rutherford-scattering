@@ -31,12 +31,12 @@ define( function( require ) {
     var homeScreenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
       RSConstants.DEFAULT_PROTON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT
     ), {
-      fill: RSColorProfile.screenIconFillColor
+      fill: RSColorProfile.screenIconFillColorProperty.get()
     } );
 
     var options = {
       name: rutherfordAtomString,
-      backgroundColor: RSColorProfile.backgroundColor,
+      backgroundColor: RSColorProfile.backgroundColorProperty.get(),
       homeScreenIcon: homeScreenIcon
     };
 
@@ -47,7 +47,7 @@ define( function( require ) {
 
     // screen will exist for life of sim, no need to unlink
     var self = this;
-    RSColorProfile.link( 'backgroundColor', function( color ) {
+    RSColorProfile.backgroundColorProperty.link( function( color ) {
       self.backgroundColorProperty.value = color;
     } );
   }

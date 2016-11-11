@@ -81,7 +81,7 @@ define( function( require ) {
     // when the color profile changes, update the fill of all associated children
     // no need to dispose, instance exists for life of sim
     RSGlobals.link( 'projectorMode', function() {
-      var labelColor = RSColorProfile.panelLabelColor;
+      var labelColor = RSColorProfile.panelLabelColorProperty.get();
       // update end marker fill
       leftMarker.stroke = labelColor;
       rightMarker.stroke = labelColor;
