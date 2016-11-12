@@ -52,7 +52,7 @@ define( function( require ) {
     neutronCountProperty.link( neutronObserver );
 
     // @private
-    this.disposeNucleus = function() {
+    this.disposeRutherfordNucleus = function() {
       protonCountProperty.unlink( protonObserver );
       neutronCountProperty.unlink( neutronObserver );
     };
@@ -66,7 +66,7 @@ define( function( require ) {
      * Make nucleus eligible for garbage collection.
      */
     dispose: function() {
-      this.disposeNucleus();
+      this.disposeRutherfordNucleus();
     }
   } );
 

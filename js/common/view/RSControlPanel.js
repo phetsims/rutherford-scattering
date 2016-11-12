@@ -43,7 +43,8 @@ define( function( require ) {
 
     // disposal to prevent memory leak - this is important because a new
     // control panel is created every time the scene or color scheme changes
-    this.disposeControlPanel = function() {
+    // @private
+    this.disposeRSControlPanel = function() {
       this.panelOptions.children.forEach( function( panel ) {
         panel.dispose();
       } );
@@ -59,7 +60,7 @@ define( function( require ) {
      * and scene property changes so it is important to dispose of all elements.
      */
     dispose: function() {
-      this.disposeControlPanel();
+      this.disposeRSControlPanel();
     }
   } );
 } );

@@ -129,7 +129,7 @@ define( function( require ) {
     this.invalidatePaint();
 
     // @private
-    this.disposeNucleusNode = function() {
+    this.disposeRutherfordNucleusNode = function() {
       protonCountProperty.unlink( protonCountListener );
       neutronCountProperty.unlink( neutronCountListener );
       userInteractionProperty.unlink( userInteractionListener );
@@ -144,7 +144,7 @@ define( function( require ) {
      * Make this node eligible for garbage collection
      */
     dispose: function() {
-
+      this.disposeRutherfordNucleusNode();
     },
 
     /**
