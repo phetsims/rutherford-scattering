@@ -53,8 +53,8 @@ define( function( require ) {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSColorProfile.panelColorProperty.get(),
-      stroke: RSColorProfile.panelBorderColorProperty.get()
+      fill: RSColorProfile.panelColorProperty,
+      stroke: RSColorProfile.panelBorderColorProperty
     }, options );
 
     Panel.call( this, content, options );
@@ -112,8 +112,8 @@ define( function( require ) {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSColorProfile.panelColorProperty.get(),
-      stroke: RSColorProfile.panelBorderColorProperty.get()
+      fill: RSColorProfile.panelColorProperty,
+      stroke: RSColorProfile.panelBorderColorProperty
     }, options );
 
     // @private
@@ -123,24 +123,24 @@ define( function( require ) {
     var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelTitleColorProperty.get(),
+      fill: RSColorProfile.panelTitleColorProperty,
       maxWidth: 215
     } );
     var energyText = new Text( energyString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelLabelColorProperty.get(),
+      fill: RSColorProfile.panelLabelColorProperty,
       maxWidth: 210
     } );
     var minEnergyText = new Text( minEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
-      fill: RSColorProfile.panelSliderLabelColorProperty.get(),
+      fill: RSColorProfile.panelSliderLabelColorProperty,
       maxWidth: options.maxWidth / 5,
       pickable: false
     } );
     var maxEnergyText = new Text( maxEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
-      fill: RSColorProfile.panelSliderLabelColorProperty.get(),
+      fill: RSColorProfile.panelSliderLabelColorProperty,
       maxWidth: options.maxWidth / 5,
       pickable: false
     } );
@@ -181,9 +181,9 @@ define( function( require ) {
       min: RSConstants.MIN_ALPHA_ENERGY,
       max: RSConstants.MAX_ALPHA_ENERGY
     }, {
-      trackFill: RSColorProfile.panelSliderLabelColorProperty.get(),
-      trackStroke: RSColorProfile.panelSliderLabelColorProperty.get(),
-      majorTickStroke: RSColorProfile.panelSliderLabelColorProperty.get(),
+      trackFill: RSColorProfile.panelSliderLabelColorProperty,
+      trackStroke: RSColorProfile.panelSliderLabelColorProperty,
+      majorTickStroke: RSColorProfile.panelSliderLabelColorProperty,
       majorTickLength: 15,
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
@@ -212,12 +212,12 @@ define( function( require ) {
     var showTraceText = new Text( showTracesString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelLabelColorProperty.get(),
+      fill: RSColorProfile.panelLabelColorProperty,
       maxWidth: 180
     } );
     var showTraceCheckBox = new CheckBox( showTraceText, showTracesProperty, {
-      checkBoxColor: RSColorProfile.panelLabelColorProperty.get(),
-      checkBoxColorBackground: RSColorProfile.panelColorProperty.get()
+      checkBoxColor: RSColorProfile.panelLabelColorProperty,
+      checkBoxColorBackground: RSColorProfile.panelColorProperty
     } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );
 

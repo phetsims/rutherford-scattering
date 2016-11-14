@@ -31,7 +31,7 @@ define( function( require ) {
     var homeScreenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
       RSConstants.DEFAULT_PROTON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT
     ), {
-      fill: RSColorProfile.screenIconFillColorProperty.get()
+      fill: RSColorProfile.screenIconFillColorProperty
     } );
 
     var options = {
