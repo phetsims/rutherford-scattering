@@ -17,10 +17,7 @@ define( function( require ) {
     showDebugShapes: { type: 'flag' },
 
     // show a count of the number of times a particle is removed from the atom space in error
-    showErrorCount: { type: 'flag' },
-
-    // enable projector mode by default for development and so the sim can be linked directly to projector mode
-    projectorMode: { type: 'flag' }
+    showErrorCount: { type: 'flag' }
   } );
 
   rutherfordScattering.register( 'RSQueryParameters', RSQueryParameters );
