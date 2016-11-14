@@ -115,7 +115,7 @@ define( function( require ) {
       default: new Color( 255, 255, 255 ),
       projector: new Color( 0, 0, 0 )
     }
-  } );
+  }, [ 'default', 'projector' ] );
 
   rutherfordScattering.register( 'RSColorProfile', RSColorProfile );
 

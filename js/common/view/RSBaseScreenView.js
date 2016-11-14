@@ -84,7 +84,7 @@ define( function( require ) {
 
     // when the color profile changes, the alpha source text should be black
     // no need to unlink since the text will exist for life of sim
-    RSColorProfile.linkAttribute( 'panelLabelColor', alphaSourceText, 'fill' );
+    RSColorProfile.panelLabelColorProperty.linkAttribute( alphaSourceText, 'fill' );
 
     // @protected, alpha particle beam
     this.beamNode = new BeamNode( model.gun.onProperty, {
