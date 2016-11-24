@@ -30,7 +30,7 @@ define( function( require ) {
 
     var options = {
       name: plumPuddingAtomString,
-      backgroundColor: RSColorProfile.backgroundColorProperty.get(),
+      backgroundColorProperty: RSColorProfile.backgroundColorProperty,
       homeScreenIcon: new Image( screenIcon )
     };
 
@@ -38,12 +38,6 @@ define( function( require ) {
       function() { return new PlumPuddingAtomModel(); },
       function( model ) { return new PlumPuddingAtomScreenView( model ); },
       options );
-
-    // screen will exist for life of sim, no need to unlink
-    var self = this;
-    RSColorProfile.backgroundColorProperty.link( function( color ) {
-      self.backgroundColorProperty.value = color;
-    } );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreen', PlumPuddingAtomScreen );
