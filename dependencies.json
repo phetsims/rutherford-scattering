@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.0.3 Wed Sep 14 2016 16:39:12 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# rutherford-scattering 1.0.3 Tue Dec 06 2016 12:47:40 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -33,11 +33,11 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "83ea84c8d9fc089e8d8ad139874366c868404152",
-    "branch": "HEAD"
+    "sha": "e77d2353abefa38498cc971d856620f3679fb3ba",
+    "branch": "rutherford-scattering-1.0"
   },
   "rutherford-scattering": {
-    "sha": "465f2b3fc6b31c789136144ed89828e0c9abc336",
+    "sha": "21851ec7fa48e7ab8c6ca206f711ec18e6cdca95",
     "branch": "1.0"
   },
   "scenery": {
