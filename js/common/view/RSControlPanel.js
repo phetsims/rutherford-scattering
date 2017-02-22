@@ -61,6 +61,7 @@ define( function( require ) {
      */
     dispose: function() {
       this.disposeRSControlPanel();
+      Node.prototype.dispose.call( this );
     }
   } );
 } );
