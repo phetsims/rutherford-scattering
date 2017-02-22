@@ -244,6 +244,7 @@ define( function( require ) {
      */
     dispose: function() {
       this.disposeContent();
+      VBox.prototype.dispose.call( this );
     }
   } );
 
