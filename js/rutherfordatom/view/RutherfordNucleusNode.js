@@ -310,7 +310,7 @@ define( function( require ) {
             // if using canvas arcs to render the nucleus, offset by center of bounds
             xN += nucleusBounds.centerX;
             yN += nucleusBounds.centerY;
-            if ( nucleon.typeProperty.get() === 'neutron' ) {
+            if ( nucleon.type === 'neutron' ) {
               ParticleNodeFactory.drawNeutronWithCanvas( xN, yN, context );
             }
             else {
@@ -325,7 +325,7 @@ define( function( require ) {
             xN += ( self.center.x - self.neutronImage.width / 2 );
             yN += ( self.center.y - self.neutronImage.height / 2 );
 
-            if ( nucleon.typeProperty.get() === 'neutron' ) {
+            if ( nucleon.type === 'neutron' ) {
               context.drawImage( self.neutronImage, xN, yN, self.neutronImage.width, self.neutronImage.height );
             }
             else {
