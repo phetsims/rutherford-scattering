@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.0.4 Thu Apr 06 2017 00:09:52 GMT-0600 (MDT)",
+  "comment": "# rutherford-scattering 1.0.5-rc.1 Thu Apr 06 2017 01:57:56 GMT-0600 (MDT)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -37,12 +37,12 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "904227cf9ade1c3d86751d77d1e1f22e92c8c69e",
+    "sha": "0826255c8bea959711d0265c09c5d184028ccfe3",
     "branch": "1.0"
   },
   "scenery": {
     "sha": "a4cb8cfdb24285a993180c2a936cf0056170950e",
-    "branch": "rutherford-scattering-1.0"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "3cb8a1d7937a6664b22ba443264dea1f0cb26cf4",
