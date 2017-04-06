@@ -94,7 +94,7 @@ define( function( require ) {
      *
      * @param  {Node} particleNode
      * @param  {string} titleString
-     * @return {HBox}
+     * @returns {HBox}
      * @protected
      */
     createParticleBox: function( particleNode, titleString ) {
@@ -104,7 +104,7 @@ define( function( require ) {
     /**
      * Create content which will be contained in the panel.
      *
-     * @return {type}  description
+     * @returns {type}  description
      * @public
      */
     createPanelContent: function( children, options ) {

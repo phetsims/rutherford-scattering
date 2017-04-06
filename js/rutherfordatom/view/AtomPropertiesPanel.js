@@ -435,7 +435,7 @@ define( function( require ) {
     /**
      * Make eligible for garbage collection
      *
-     * @return {type}  description
+     * @returns {type}  description
      */
     dispose: function() {
       this.disposeContent();

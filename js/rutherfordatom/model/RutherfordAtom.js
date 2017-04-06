@@ -256,7 +256,7 @@ define( function( require ) {
      * @param  {Vector2} point - the point to rotate
      * @param  {Vector2} rotatePoint - the point to rotate around
      * @param  {number} angle
-     * @return {Vector2}
+     * @returns {Vector2}
      */
     rotatePointAround: function( point, rotatePoint, angle ) {
 

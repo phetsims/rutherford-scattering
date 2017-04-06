@@ -40,7 +40,7 @@ define( function( require ) {
      * Create the panel content that is to be in this control panel.
      *
      * @param  {Object} options
-     * @return {VBox}
+     * @returns {VBox}
      */
     createPanelContent: function( options ) {
 

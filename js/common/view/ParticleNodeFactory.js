@@ -114,7 +114,7 @@ define( function( require ) {
 
     /**
      * Create an icon for the legend describing the energy level of an electron
-     * @return {Node} [description]
+     * @returns {Node} [description]
      */
     createEnergyLevel: function() {
       return new Node( {
@@ -128,7 +128,7 @@ define( function( require ) {
 
     /**
      * Create an icon for the legend describing the particle trace, represented as an arrow
-     * @return {Node}
+     * @returns {Node}
      */
     createParticleTrace: function() {
       return new Node( {
@@ -160,7 +160,7 @@ define( function( require ) {
 
     /**
      * Creates an alpha particle node, represented by a small circle.
-     * @return {Node}
+     * @returns {Node}
      * @public
      */
     createParticleAlpha: function() {
@@ -173,7 +173,7 @@ define( function( require ) {
 
     /**
      * Creates a plum pudding image.
-     * @return {Node}
+     * @returns {Node}
      * @public
      */
     createPlumPuddingIcon: function() {

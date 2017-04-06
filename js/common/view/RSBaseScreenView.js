@@ -195,7 +195,7 @@ define( function( require ) {
      * of panels.
      *
      * @param  {array.<Panel>} panels
-     * @return {RSControlPanel}
+     * @returns {RSControlPanel}
      * @protected
      */
     createControlPanel: function( panels ) {

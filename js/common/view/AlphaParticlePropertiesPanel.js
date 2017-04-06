@@ -73,7 +73,7 @@ define( function( require ) {
      * dispose - this panel is created and destroyed every time the scene and color scheme changes
      * so it is important to fully dispose of all elemets.
      *
-     * @return {type}  description
+     * @returns {type}  description
      */
     dispose: function() {
       Panel.prototype.dispose.call( this );

@@ -99,7 +99,7 @@ define( function( require ) {
      * Get the direction that this particle is travelling in space coordinates as a vector
      * of unit length.  The vector is created from the latest positions in the array since
      * the the the particle orientation is bound to the second quadrant.
-     * @return {Vector2}
+     * @returns {Vector2}
      * @public
      */
     getDirection: function() {
