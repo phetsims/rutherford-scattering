@@ -102,9 +102,10 @@ define( function( require ) {
     // no need to unlink, screen view exists for life of sim
     var self = this;
     RSGlobals.link( 'projectorMode', function() {
-      // dispose and remove the old control panel
-      self.controlPanel.dispose();
+      
+      // remove and dispose the old control panel
       self.removeChild( self.controlPanel );
+      self.controlPanel.dispose();
 
       // create the new control panel
       var panels = createPanels();
