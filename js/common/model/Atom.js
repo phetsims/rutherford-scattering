@@ -10,7 +10,6 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Shape = require( 'KITE/Shape' );
 
@@ -142,7 +141,6 @@ define( function( require ) {
     reset: function() {
       this.gun.onProperty.reset();
       this.removeAllParticles();
-      PropertySet.prototype.reset.call( this );
     }
 
   } ); // inherit
