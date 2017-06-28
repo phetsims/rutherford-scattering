@@ -34,11 +34,6 @@ define( function( require ) {
     // @public {string} - scene to display, 'atom'|'nucleus'
     this.sceneProperty = new Property( 'atom' );
 
-    // TODO: Remove once #119 is resolved
-    Property.preventGetSet( this, 'protonCount' );
-    Property.preventGetSet( this, 'neutronCount' );
-    Property.preventGetSet( this, 'scene' );
-
     // interactions that create dependencies for the userInteractionProperty
     // these will be passed on to individual panels and interface elements
     // NOT added to property set because we don't want these to get reset with 'reset all'
@@ -57,14 +52,6 @@ define( function( require ) {
       rightNeutronButtonInteractionProperty: new Property( false ),
       neutronSliderInteractionProperty: new Property( false )
     };
-
-    // TODO: for debugging, remove after #119 is done
-    Property.preventGetSet( this, 'leftProtonButtonInteraction' );
-    Property.preventGetSet( this, 'rightProtonButtonInteraction' );
-    Property.preventGetSet( this, 'protonSliderInteraction' );
-    Property.preventGetSet( this, 'leftNeutronButtonInteraction' );
-    Property.preventGetSet( this, 'rightNeutronButtonInteraction' );
-    Property.preventGetSet( this, 'neutronSliderInteraction' );
 
     // @public - create a derived property for user interaction, so that the an interaction occurs when any dependency
     // is true

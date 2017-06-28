@@ -17,9 +17,6 @@ define( function( require ) {
     projectorModeProperty: new Property( phet.chipper.queryParameters.colorProfile === 'projector' )
   };
 
-  // TODO: remove after https://github.com/phetsims/rutherford-scattering/issues/119
-  Property.preventGetSet( RSGlobals, 'projectorMode' );
-
   rutherfordScattering.register( 'RSGlobals', RSGlobals );
 
   return RSGlobals;

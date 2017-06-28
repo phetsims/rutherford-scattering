@@ -37,12 +37,6 @@ define( function( require ) {
     this.positionProperty = new Property( options.position );
     this.orientationProperty = new Property( options.orientation );
 
-    // TODO: For debugging, remove once https://github.com/phetsims/rutherford-scattering/issues/119 is fixed
-    Property.preventGetSet( this, 'speed' );
-    Property.preventGetSet( this, 'defaultSpeed' );
-    Property.preventGetSet( this, 'position' );
-    Property.preventGetSet( this, 'orientation' );
-
     // @public (read-only) - the position coordinates used for trace rendering
     this.positions = [];
 

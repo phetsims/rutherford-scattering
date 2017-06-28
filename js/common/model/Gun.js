@@ -49,8 +49,6 @@ define( function( require ) {
 
     // @public {boolean} is the gun on?
     this.onProperty = new Property( false );
-
-    Property.preventGetSet( this, 'on' );
   }
 
   rutherfordScattering.register( 'Gun', Gun );

@@ -30,10 +30,6 @@ define( function( require ) {
     // @public {boolean}
     this.runningProperty = new Property( true );
 
-    // TODO: remove once #119 is resolved
-    Property.preventGetSet( this, 'alphaParticleEnergy' );
-    Property.preventGetSet( this, 'running' );
-
     // @public (read-only) model computation space
     this.bounds = new Bounds2(
       -RSConstants.SPACE_NODE_WIDTH / 4,

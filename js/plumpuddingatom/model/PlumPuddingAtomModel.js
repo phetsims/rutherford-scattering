@@ -25,9 +25,6 @@ define( function( require ) {
     // so a DerivedProperty is not necessary as in RutherfordAtomModel
     this.userInteractionProperty = new Property( false );
 
-    // TODO: for debugging, remove once #119 is finished
-    Property.preventGetSet( this, 'userInteraction' );
-
     // @private - energy level changed
     var self = this;
     var userInteractionListener = function( userInteraction ) {
