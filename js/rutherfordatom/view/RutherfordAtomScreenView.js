@@ -76,7 +76,7 @@ define( function( require ) {
       }
 
       var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.energyInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
-      var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model.interactionPropertySet, model.protonInteractionProperty, model.neutronInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } );
+      var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model.interactionPropertyGroup, model.protonInteractionProperty, model.neutronInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } );
 
       var minWidth = RSConstants.PANEL_MIN_WIDTH;
       if ( particlePropertiesContent.width !== atomPropertiesContent.width ) {
@@ -101,7 +101,7 @@ define( function( require ) {
     // when the color profile changes, create a new control panel
     // no need to unlink, screen view exists for life of sim
     var self = this;
-    RSGlobals.link( 'projectorMode', function() {
+    RSGlobals.projectorModeProperty.link( function() {
       
       // remove and dispose the old control panel
       self.removeChild( self.controlPanel );
@@ -144,6 +144,7 @@ define( function( require ) {
     var nucleusIcon = RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 );
     var createRadioButtons = function( atomIconImage ) {
       var buttonOptions = { scale: 0.18 };
+
       return new RadioButtonGroup( model.sceneProperty, [
         { value: 'atom', node: new Image( atomIconImage, buttonOptions ) },
         { value: 'nucleus', node: nucleusIcon }
@@ -168,13 +169,14 @@ define( function( require ) {
 
     // if the bacgrkound, panel or stroke colors change, draw a new button group
     // no need to unlink, screen view exists for life of sim
-    RSGlobals.link( 'projectorMode', function() {
+    RSGlobals.projectorModeProperty.link( function() {
+
       // remove and dispose of the old button group
       self.removeChild( self.sceneRadioButtons );
       self.sceneRadioButtons.dispose();
 
       // get the correct image for the 'atom' scene icon
-      var iconImage = RSGlobals.projectorMode ? atomProjectorImage : atomImage;
+      var iconImage = RSGlobals.projectorModeProperty.get() ? atomProjectorImage : atomImage;
 
       // create the new radio button group
       var newButtonGroup = createRadioButtons( iconImage );

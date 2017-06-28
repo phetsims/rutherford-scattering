@@ -204,7 +204,7 @@ define( function( require ) {
         }
 
         // render particle
-        var particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.position );
+        var particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.positionProperty.get() );
         context.drawImage( self.alphaParticleImage,
           particleViewPosition.x - self.particleImageHalfWidth,
           particleViewPosition.y - self.particleImageHalfHeight );

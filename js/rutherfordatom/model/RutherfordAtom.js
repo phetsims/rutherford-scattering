@@ -89,7 +89,7 @@ define( function( require ) {
       // up the space - this is required by the trajectory model, see trajectories.pdf
       var rotationAngle = alphaParticle.rotationAngle;
       var correctedInitialPosition = this.rotatePointAround( alphaParticle.initialPosition, this.position, -rotationAngle );
-      var correctedPosition = this.rotatePointAround( alphaParticle.position, this.position, -rotationAngle );
+      var correctedPosition = this.rotatePointAround( alphaParticle.positionProperty.get(), this.position, -rotationAngle );
 
       // algorithm fails for x=0, so use this min value
       var X0_MIN = 0.00001;
@@ -242,10 +242,10 @@ define( function( require ) {
       delta.rotate( alphaParticle.rotationAngle );
 
       // update the position of the particle in its space coordinates
-      alphaParticle.positionProperty.value = alphaParticle.positionProperty.value.plus( delta );
-      alphaParticle.speedProperty.value = sNew;
+      alphaParticle.positionProperty.set( alphaParticle.positionProperty.get().plus( delta ) );
+      alphaParticle.speedProperty.set( sNew );
 
-      alphaParticle.orientationProperty.value = phiNew;
+      alphaParticle.orientationProperty.set( phiNew );
 
     },
 

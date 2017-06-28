@@ -51,7 +51,7 @@ define( function( require ) {
 
       // the 'initial position' for the particle relative to the atom center needs to be set once the particle enters
       // the bounding box for correct behavior of the trajectory algorithm
-      alphaParticle.initialPosition = alphaParticle.position;
+      alphaParticle.initialPosition = alphaParticle.positionProperty.get();
     },
 
     /**
@@ -101,7 +101,7 @@ define( function( require ) {
     cullParticles: function() {
       var self = this;
       this.particles.forEach( function( particle ) {
-        if ( !self.bounds.containsPoint( particle.position ) ) {
+        if ( !self.bounds.containsPoint( particle.positionProperty.get() ) ) {
           self.removeParticle( particle );
         }
       } );

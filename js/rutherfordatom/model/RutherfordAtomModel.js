@@ -17,7 +17,6 @@ define( function( require ) {
   var RutherfordAtomSpace = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtomSpace' );
   var RutherfordNucleusSpace = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleusSpace' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var Property = require( 'AXON/Property' );
 
   /**
@@ -25,9 +24,20 @@ define( function( require ) {
    */
   function RutherfordAtomModel( ) {
     RSBaseModel.call( this );
-    this.addProperty( 'protonCount', RSConstants.DEFAULT_PROTON_COUNT );
-    this.addProperty( 'neutronCount', RSConstants.DEFAULT_NEUTRON_COUNT );
-    this.addProperty( 'scene', 'atom' ); // scene to display, 'atom'|'nucleus'
+
+    // @public {number}
+    this.protonCountProperty = new Property( RSConstants.DEFAULT_PROTON_COUNT );
+
+    // @public {number}
+    this.neutronCountProperty = new Property( RSConstants.DEFAULT_NEUTRON_COUNT );
+
+    // @public {string} - scene to display, 'atom'|'nucleus'
+    this.sceneProperty = new Property( 'atom' );
+
+    // TODO: Remove once #119 is resolved
+    Property.preventGetSet( this, 'protonCount' );
+    Property.preventGetSet( this, 'neutronCount' );
+    Property.preventGetSet( this, 'scene' );
 
     // interactions that create dependencies for the userInteractionProperty
     // these will be passed on to individual panels and interface elements
@@ -39,14 +49,22 @@ define( function( require ) {
     // @public - specific interaction properties for the rutherford atom portion, for multitouch
     // tracked in the model because the control panels gets disposed when the scene changes, and we
     // do not want these properties to be reset at that time
-    this.interactionPropertySet = new PropertySet( {
-      leftProtonButtonInteraction: false,
-      rightProtonButtonInteraction: false,
-      protonSliderInteraction: false,
-      leftNeutronButtonInteraction: false,
-      rightNeutronButtonInteraction: false,
-      neutronSliderInteraction: false
-    } );
+    this.interactionPropertyGroup = {
+      leftProtonButtonInteractionProperty: new Property( false ),
+      rightProtonButtonInteractionProperty: new Property( false ),
+      protonSliderInteractionProperty: new Property( false ),
+      leftNeutronButtonInteractionProperty: new Property( false ),
+      rightNeutronButtonInteractionProperty: new Property( false ),
+      neutronSliderInteractionProperty: new Property( false )
+    };
+
+    // TODO: for debugging, remove after #119 is done
+    Property.preventGetSet( this, 'leftProtonButtonInteraction' );
+    Property.preventGetSet( this, 'rightProtonButtonInteraction' );
+    Property.preventGetSet( this, 'protonSliderInteraction' );
+    Property.preventGetSet( this, 'leftNeutronButtonInteraction' );
+    Property.preventGetSet( this, 'rightNeutronButtonInteraction' );
+    Property.preventGetSet( this, 'neutronSliderInteraction' );
 
     // @public - create a derived property for user interaction, so that the an interaction occurs when any dependency
     // is true

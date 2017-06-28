@@ -100,7 +100,7 @@ define( function( require ) {
   /**
    * Create the content for the AtomPropertiesPanel.
    *
-   * @param  {PropertySet} interactionPropertySet - property set for the model tracking interaction with various components
+   * @param  {Object} interactionPropertyGroup - group of Properties for the model tracking interaction with various components
    * @param  {Property.<boolean>} protonInteractionProperty
    * @param  {Property.<boolean>} neutronInteractionProperty
    * @param  {Property.<number>} protonCountProperty
@@ -108,7 +108,7 @@ define( function( require ) {
    * @param  {Object} options
    * @constructor
    */
-  function AtomPropertiesPanelContent( interactionPropertySet, protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
+  function AtomPropertiesPanelContent( interactionPropertyGroup, protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
 
     options = _.extend( {
       xMargin: 15,
@@ -131,12 +131,12 @@ define( function( require ) {
     this.protonCountProperty = protonCountProperty;
 
     // each element must have a unique interaction property to support multitouch, see #104
-    var leftProtonButtonInteractionProperty = interactionPropertySet.leftProtonButtonInteractionProperty;
-    var rightProtonButtonInteractionProperty = interactionPropertySet.rightProtonButtonInteractionProperty;
-    var leftNeutronButtonInteractionProperty = interactionPropertySet.leftNeutronButtonInteractionProperty;
-    var rightNeutronButtonInteractionProperty = interactionPropertySet.leftProtonButtonInteractionProperty;
-    var protonSliderInteractionProperty = interactionPropertySet.protonSliderInteractionProperty;
-    var neutronSliderInteractionProperty = interactionPropertySet.neutronSliderInteractionProperty;
+    var leftProtonButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
+    var rightProtonButtonInteractionProperty = interactionPropertyGroup.rightProtonButtonInteractionProperty;
+    var leftNeutronButtonInteractionProperty = interactionPropertyGroup.leftNeutronButtonInteractionProperty;
+    var rightNeutronButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
+    var protonSliderInteractionProperty = interactionPropertyGroup.protonSliderInteractionProperty;
+    var neutronSliderInteractionProperty = interactionPropertyGroup.neutronSliderInteractionProperty;
 
     // these properties are true when any of the dependencies are true
     var protonPanelInteractionProperty = DerivedProperty.or( [ leftProtonButtonInteractionProperty, rightProtonButtonInteractionProperty, protonSliderInteractionProperty ] );

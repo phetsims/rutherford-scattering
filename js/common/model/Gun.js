@@ -15,7 +15,7 @@ define( function( require ) {
   var AlphaParticle = require( 'RUTHERFORD_SCATTERING/common/model/AlphaParticle' );
   var Vector2 = require( 'DOT/Vector2' );
   var Random = require( 'DOT/Random' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
   var LinearFunction = require( 'DOT/LinearFunction' );
 
   // constants
@@ -47,15 +47,15 @@ define( function( require ) {
     var correction2 = 10;
     this.correctionFunction = new LinearFunction( width1, width2, correction1, correction2 );
 
-    // @public
-    PropertySet.call( this, {
-      on: false // {boolean} is the gun on?
-    } );
+    // @public {boolean} is the gun on?
+    this.onProperty = new Property( false );
+
+    Property.preventGetSet( this, 'on' );
   }
 
   rutherfordScattering.register( 'Gun', Gun );
 
-  return inherit( PropertySet, Gun, {
+  return inherit( Object, Gun, {
 
     /**
      * {number} dt - time step
@@ -68,7 +68,7 @@ define( function( require ) {
       this.dtSinceGunFired += ( GUN_INTENSITY * dt );
       this.dtPerGunFired = ( this.model.bounds.width / initialSpeed ) / MAX_PARTICLES;
 
-      if ( this.on && this.dtSinceGunFired >= this.dtPerGunFired ) {
+      if ( this.onProperty.get() && this.dtSinceGunFired >= this.dtPerGunFired ) {
 
         var ySign = ( RAND.nextDouble() < 0.5 ? 1 : -1 );
 
@@ -103,6 +103,14 @@ define( function( require ) {
 
         this.dtSinceGunFired = this.dtSinceGunFired % this.dtPerGunFired;
       }
+    },
+
+    /**
+     * Reset the gun to its initial state, which is off
+     * @public
+     */
+    reset: function() {
+      this.onProperty.reset();
     }
 
   } ); // inherit

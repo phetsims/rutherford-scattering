@@ -13,6 +13,7 @@ define( function( require ) {
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSBaseModel = require( 'RUTHERFORD_SCATTERING/common/model/RSBaseModel' );
   var PlumPuddingAtomSpace = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomSpace' );
+  var Property = require( 'AXON/Property' );
 
   /**
    * @constructor
@@ -20,9 +21,12 @@ define( function( require ) {
   function PlumPuddingAtomModel() {
     RSBaseModel.call( this );
 
-    // a property to track user interaction - only one element will change this in this screen, so a DerivedProperty
-    // is not necessary as in RutherfordAtomModel
-    this.addProperty( 'userInteraction', false );
+    // @public {boolean} - a property to track user interaction - only one element will change this in this screen,
+    // so a DerivedProperty is not necessary as in RutherfordAtomModel
+    this.userInteractionProperty = new Property( false );
+
+    // TODO: for debugging, remove once #119 is finished
+    Property.preventGetSet( this, 'userInteraction' );
 
     // @private - energy level changed
     var self = this;

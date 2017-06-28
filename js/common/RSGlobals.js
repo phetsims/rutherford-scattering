@@ -11,11 +11,14 @@ define( function( require ) {
 
   // modules
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
 
-  var RSGlobals = new PropertySet( {
-    projectorMode: ( phet.chipper.queryParameters.colorProfile === 'projector' )
-  } );
+  var RSGlobals = {
+    projectorModeProperty: new Property( phet.chipper.queryParameters.colorProfile === 'projector' )
+  };
+
+  // TODO: remove after https://github.com/phetsims/rutherford-scattering/issues/119
+  Property.preventGetSet( RSGlobals, 'projectorMode' );
 
   rutherfordScattering.register( 'RSGlobals', RSGlobals );
 

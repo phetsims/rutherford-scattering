@@ -126,7 +126,7 @@ define( function( require ) {
         for ( var j = 0; j < this.atoms.length; j++ ) {
           var atom = this.atoms[ j ];
 
-          if ( particle.preparedAtom !== atom && atom.boundingCircle.containsPoint( particle.position ) ) {
+          if ( particle.preparedAtom !== atom && atom.boundingCircle.containsPoint( particle.positionProperty.get() ) ) {
             particle.prepareBoundingBox( atom );
             particle.preparedAtom = atom;
 
@@ -137,7 +137,7 @@ define( function( require ) {
 
           // apply bounding box if it is prepared and the particle reaches the atomic bounding box
           if ( particle.preparedBoundingBox ) {
-            if ( particle.preparedBoundingBox.containsPoint( particle.position ) && particle.atom !== particle.preparedAtom ) {
+            if ( particle.preparedBoundingBox.containsPoint( particle.positionProperty.get() ) && particle.atom !== particle.preparedAtom ) {
               if ( particle.atom ) {
                 // if the particle already belongs to an atom, remove it from the atom
                 particle.atom.removeParticle( particle );
@@ -167,7 +167,7 @@ define( function( require ) {
 
         if ( !particle.isInSpace ) {
           // if the particle leaves the bounding circle of its atom, add it back into empty space
-          if ( !particle.atom.boundingCircle.containsPoint( particle.position ) ) {
+          if ( !particle.atom.boundingCircle.containsPoint( particle.positionProperty.get() ) ) {
             // once the particle exits the atom's bounding box, remove it
             this.addParticleToEmptySpace( particle );
           }
@@ -202,7 +202,7 @@ define( function( require ) {
           var position = alphaParticle.positionProperty.get();
           var x = position.x + dx;
           var y = position.y + dy;
-          alphaParticle.positionProperty.value = new Vector2( x, y );
+          alphaParticle.positionProperty.set( new Vector2( x, y ) );
         }
       }
 

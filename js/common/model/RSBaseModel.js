@@ -10,8 +10,8 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var Emitter = require( 'AXON/Emitter' );
+  var Property = require( 'AXON/Property' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Gun = require( 'RUTHERFORD_SCATTERING/common/model/Gun' );
@@ -24,11 +24,15 @@ define( function( require ) {
 
     assert && assert( RSConstants.SPACE_NODE_WIDTH === RSConstants.SPACE_NODE_HEIGHT, 'Space must be square.' );
 
-    // @public
-    PropertySet.call( this, {
-      alphaParticleEnergy: RSConstants.DEFAULT_ALPHA_ENERGY,
-      running: true    // is the sim running or paused
-    } );
+    // @public {number}
+    this.alphaParticleEnergyProperty = new Property( RSConstants.DEFAULT_ALPHA_ENERGY );
+
+    // @public {boolean}
+    this.runningProperty = new Property( true );
+
+    // TODO: remove once #119 is resolved
+    Property.preventGetSet( this, 'alphaParticleEnergy' );
+    Property.preventGetSet( this, 'running' );
 
     // @public (read-only) model computation space
     this.bounds = new Bounds2(
@@ -56,7 +60,7 @@ define( function( require ) {
 
   rutherfordScattering.register( 'RSBaseModel', RSBaseModel );
 
-  return inherit( PropertySet, RSBaseModel, {
+  return inherit( Object, RSBaseModel, {
 
     /**
      * Registers a listener to be called at each step of the model execution
@@ -169,7 +173,7 @@ define( function( require ) {
     cullParticles: function() {
       var self = this;
       this.particles.forEach( function( particle ) {
-        if ( !self.bounds.containsPoint( particle.position ) ) {
+        if ( !self.bounds.containsPoint( particle.positionProperty.get() ) ) {
           self.removeParticle( particle );
         }
       } );
@@ -180,7 +184,7 @@ define( function( require ) {
      * @public
      */
     step: function( dt ) {
-      if ( this.running && !this.userInteractionProperty.value && dt < 1 ) {
+      if ( this.runningProperty.get() && !this.userInteractionProperty.value && dt < 1 ) {
         this.gun.step( dt );
 
         // move particles
@@ -213,7 +217,8 @@ define( function( require ) {
     reset: function() {
       this.gun.reset();
       this.removeAllParticles();
-      PropertySet.prototype.reset.call( this );
+      this.alphaParticleEnergyProperty.reset();
+      this.runningProperty.reset();
     }
 
   } ); // inherit

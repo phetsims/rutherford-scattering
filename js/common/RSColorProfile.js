@@ -17,7 +17,8 @@ define( function( require ) {
 
   // Initial colors for each profile, by string key.  If a projector color is not defined, it will take
   // the 'default' value provided.
-  // NOTE: This is NOT provided to clients directly, but is passed to the PropertySet constructor.
+  // NOTE: This is NOT provided to clients directly, but each of these are passed to the Property constructor,
+  // see ColorProfile.js
   var RSColorProfile = new ColorProfile( {
     backgroundColor: {
       default: new Color( 0, 0, 0 ),

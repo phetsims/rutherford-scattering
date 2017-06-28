@@ -14,7 +14,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Vector2 = require( 'DOT/Vector2' );
   var Matrix3 = require( 'DOT/Matrix3' );
@@ -32,13 +32,16 @@ define( function( require ) {
       orientation: Math.PI / 2  // {number} in radians
     }, options );
 
-    // @public
-    PropertySet.call( this, {
-      speed: options.speed,
-      defaultSpeed: options.defaultSpeed,
-      position: options.position,
-      orientation: options.orientation
-    } );
+    this.speedProperty = new Property( options.speed );
+    this.defaultSpeedProperty = new Property( options.defaultSpeed );
+    this.positionProperty = new Property( options.position );
+    this.orientationProperty = new Property( options.orientation );
+
+    // TODO: For debugging, remove once https://github.com/phetsims/rutherford-scattering/issues/119 is fixed
+    Property.preventGetSet( this, 'speed' );
+    Property.preventGetSet( this, 'defaultSpeed' );
+    Property.preventGetSet( this, 'position' );
+    Property.preventGetSet( this, 'orientation' );
 
     // @public (read-only) - the position coordinates used for trace rendering
     this.positions = [];
@@ -88,7 +91,7 @@ define( function( require ) {
 
   rutherfordScattering.register( 'AlphaParticle', AlphaParticle );
 
-  return inherit( PropertySet, AlphaParticle, {
+  return inherit( Object, AlphaParticle, {
 
     // @public
     dispose: function() {
@@ -106,7 +109,8 @@ define( function( require ) {
 
       // if there are less than two positions, return a vector pointing in the initial orientation
       if ( this.positions.length < 2 ) {
-        return new Vector2( Math.cos( this.orientation ), Math.sin( this.orientation ) ).normalized();
+        var orientation = this.orientationProperty.get();
+        return new Vector2( Math.cos( orientation ), Math.sin( orientation ) ).normalized();
       }
 
       var position1 = this.positions[ this.positions.length - 2 ];
