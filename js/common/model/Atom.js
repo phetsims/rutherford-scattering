@@ -139,7 +139,7 @@ define( function( require ) {
      * @public
      */
     reset: function() {
-      this.gun.onProperty.reset();
+      this.gun.reset();
       this.removeAllParticles();
     }
 
