@@ -38,8 +38,8 @@ define( function( require ) {
     // this screen view exists for life of sim, no need to unlink
     RSGlobals.projectorModeProperty.link( function() {
       // dispose and remove the old control panel
-      self.controlPanel.dispose();
       self.removeChild( self.controlPanel );
+      self.controlPanel.dispose();
 
       // create the new control panel
       var particlePanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
