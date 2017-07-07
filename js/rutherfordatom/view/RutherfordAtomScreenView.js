@@ -102,7 +102,7 @@ define( function( require ) {
     // no need to unlink, screen view exists for life of sim
     var self = this;
     RSGlobals.projectorModeProperty.link( function() {
-      
+
       // remove and dispose the old control panel
       self.removeChild( self.controlPanel );
       self.controlPanel.dispose();
@@ -129,8 +129,8 @@ define( function( require ) {
       beam.fill = atomSceneVisible ? RSColorProfile.atomBeamColorProperty : RSColorProfile.nucleusBeamColorProperty;
 
       // dispose and remove the old control panel
-      self.controlPanel.dispose();
       self.removeChild( self.controlPanel );
+      self.controlPanel.dispose();
 
       // create the new control panel
       var panels = createPanels();
