@@ -15,7 +15,7 @@ define( function( require ) {
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var RichText = require( 'SCENERY_PHET/RichText' );
+  var RichText = require( 'SCENERY/nodes/RichText' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
