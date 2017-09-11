@@ -14,10 +14,10 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var Matrix3 = require( 'DOT/Matrix3' );
   var Property = require( 'AXON/Property' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Matrix3 = require( 'DOT/Matrix3' );
 
   /**
    * @param {Object} [options]

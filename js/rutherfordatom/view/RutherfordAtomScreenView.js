@@ -9,31 +9,31 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
-  var NucleusSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/NucleusSpaceNode' );
-  var AtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomSpaceNode' );
-  var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
-  var AtomParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomParticleLegendPanel' );
-  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
-  var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
+  var AtomParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomParticleLegendPanel' );
+  var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
+  var AtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomSpaceNode' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
+  var NucleusSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/NucleusSpaceNode' );
+  var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
   var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
+  var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var PhetFont = require('SCENERY_PHET/PhetFont' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
 
   // strings
-  var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
   var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
+  var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
 
   // images
   var atomImage = require( 'image!RUTHERFORD_SCATTERING/Atom.png' );

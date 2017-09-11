@@ -9,14 +9,14 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
-  var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
+  var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
+  var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // strings
   var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );

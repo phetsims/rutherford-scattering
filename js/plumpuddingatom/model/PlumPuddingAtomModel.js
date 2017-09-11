@@ -10,10 +10,10 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSBaseModel = require( 'RUTHERFORD_SCATTERING/common/model/RSBaseModel' );
   var PlumPuddingAtomSpace = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomSpace' );
   var Property = require( 'AXON/Property' );
+  var RSBaseModel = require( 'RUTHERFORD_SCATTERING/common/model/RSBaseModel' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   /**
    * @constructor

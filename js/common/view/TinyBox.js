@@ -9,12 +9,12 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Shape = require( 'KITE/Shape' );
-  var Dimension2 = require( 'DOT/Dimension2' );
 
   // constants
   var BACK_DEPTH = 4;

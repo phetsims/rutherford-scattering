@@ -9,11 +9,11 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var RutherfordAtom = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtom' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Vector2 = require( 'DOT/Vector2' );
-  var RutherfordAtom = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtom' );
-  var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
 
   // constants
   var DEFLECTION_WIDTH = 30;

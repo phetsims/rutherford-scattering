@@ -9,13 +9,13 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var MenuOptionsNode = require( 'RUTHERFORD_SCATTERING/common/view/MenuOptionsNode' );
+  var PlumPuddingAtomScreen = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/PlumPuddingAtomScreen' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var RutherfordAtomScreen = require( 'RUTHERFORD_SCATTERING/rutherfordatom/RutherfordAtomScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
-  var RutherfordAtomScreen = require( 'RUTHERFORD_SCATTERING/rutherfordatom/RutherfordAtomScreen' );
-  var PlumPuddingAtomScreen = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/PlumPuddingAtomScreen' );
-  var MenuOptionsNode = require( 'RUTHERFORD_SCATTERING/common/view/MenuOptionsNode' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
 
   // strings
   var rutherfordScatteringTitleString = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );

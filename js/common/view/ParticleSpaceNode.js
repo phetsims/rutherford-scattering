@@ -13,14 +13,14 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
-  var Util = require( 'DOT/Util' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Util = require( 'DOT/Util' );
 
   // constants
   var SPACE_BORDER_WIDTH = 2;

@@ -11,9 +11,9 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var ParticleAtom = require( 'SHRED/model/ParticleAtom' );
   var Particle = require( 'SHRED/model/Particle' );
+  var ParticleAtom = require( 'SHRED/model/ParticleAtom' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Util = require( 'DOT/Util' );
 
   /**

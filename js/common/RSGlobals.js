@@ -10,8 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Property = require( 'AXON/Property' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   var RSGlobals = {
     projectorModeProperty: new Property( phet.chipper.queryParameters.colorProfile === 'projector' )

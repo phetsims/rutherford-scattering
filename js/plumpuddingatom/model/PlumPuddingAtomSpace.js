@@ -10,9 +10,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
 
   /**
    * Constructor.

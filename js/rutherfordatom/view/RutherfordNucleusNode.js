@@ -9,15 +9,15 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var Property = require( 'AXON/Property' );
-  var RutherfordNucleus = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleus' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RutherfordNucleus = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleus' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
   var MIN_NUCLEUS_RADIUS = 20; // view coordinates

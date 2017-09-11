@@ -11,14 +11,14 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Circle = require( 'SCENERY/nodes/Circle' );
-  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
+  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var Path = require( 'SCENERY/nodes/Path' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
   var IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV

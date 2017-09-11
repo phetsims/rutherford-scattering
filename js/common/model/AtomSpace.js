@@ -9,10 +9,10 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Emitter = require( 'AXON/Emitter' );
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Vector2 = require( 'DOT/Vector2' );
-  var Emitter = require( 'AXON/Emitter' );
 
   /**
    * Constructor.

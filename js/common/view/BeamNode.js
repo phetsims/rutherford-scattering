@@ -10,9 +10,9 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   /**
    * @param {Property.<boolean>} visibleProperty - is the beam visible?

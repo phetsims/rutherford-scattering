@@ -10,15 +10,15 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Panel = require( 'SUN/Panel' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Panel = require( 'SUN/Panel' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );

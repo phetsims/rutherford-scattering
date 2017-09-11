@@ -11,9 +11,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
   var Color = require( 'SCENERY/util/Color' );
+  var ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // Initial colors for each profile, by string key.  If a projector color is not defined, it will take
   // the 'default' value provided.

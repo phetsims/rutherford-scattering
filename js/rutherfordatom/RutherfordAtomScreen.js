@@ -10,14 +10,14 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var Screen = require( 'JOIST/Screen' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RutherfordAtomModel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtomModel' );
   var RutherfordAtomScreenView = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomScreenView' );
-  var ScreenIcon = require( 'JOIST/ScreenIcon' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var Screen = require( 'JOIST/Screen' );
+  var ScreenIcon = require( 'JOIST/ScreenIcon' );
 
   // strings
   var rutherfordAtomString = require( 'string!RUTHERFORD_SCATTERING/rutherfordAtom' );

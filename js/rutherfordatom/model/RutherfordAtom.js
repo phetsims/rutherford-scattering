@@ -12,11 +12,11 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var Vector2 = require( 'DOT/Vector2' );
   var Atom = require( 'RUTHERFORD_SCATTERING/common/model/Atom' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * Constructor.

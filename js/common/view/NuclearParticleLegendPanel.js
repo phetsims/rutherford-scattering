@@ -11,16 +11,16 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
+  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // strings
-  var electronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
-  var protonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
-  var neutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
   var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
+  var electronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
+  var neutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
   var positiveChargeString = require( 'string!RUTHERFORD_SCATTERING/positiveCharge' );
+  var protonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
 
   /**
    *

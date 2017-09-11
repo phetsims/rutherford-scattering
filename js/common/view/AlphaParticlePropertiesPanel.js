@@ -11,27 +11,27 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Panel = require( 'SUN/Panel' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var HSlider = require( 'SUN/HSlider' );
   var CheckBox = require( 'SUN/CheckBox' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
+  var HSlider = require( 'SUN/HSlider' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Panel = require( 'SUN/Panel' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
+  var VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
   var alphaParticlePropertiesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
   var energyString = require( 'string!RUTHERFORD_SCATTERING/energy' );
-  var showTracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
-  var minEnergyString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
   var maxEnergyString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' );
+  var minEnergyString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
+  var showTracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
 
   // global, tracks fingers on the slider for multitouch support
   // must persist beyond individual panel instances so multitouch is supported

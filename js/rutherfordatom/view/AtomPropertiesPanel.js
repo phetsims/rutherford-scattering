@@ -9,27 +9,27 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Panel = require( 'SUN/Panel' );
-  var HSlider = require( 'SUN/HSlider' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var ArrowButton = require( 'SUN/buttons/ArrowButton' );
-  var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
+  var Dimension2 = require( 'DOT/Dimension2' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
+  var HSlider = require( 'SUN/HSlider' );
+  var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
+  var Panel = require( 'SUN/Panel' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var atomString = require( 'string!RUTHERFORD_SCATTERING/atom' );
-  var numberOfProtonsString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
   var numberOfNeutronsString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
+  var numberOfProtonsString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
 
   // global, tracking where fingers are for multitouch support
   // must persist beyond lifetime of the panel so that fingers are tracked when new

@@ -12,10 +12,10 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * Constructor.

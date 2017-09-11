@@ -11,13 +11,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var CheckBox = require( 'SUN/CheckBox' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var OptionsDialog = require( 'JOIST/OptionsDialog' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var optionsProjectorModeString = require( 'string!RUTHERFORD_SCATTERING/options.projectorMode' );

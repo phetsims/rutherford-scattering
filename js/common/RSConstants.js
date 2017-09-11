@@ -10,9 +10,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
   var RSConstants = {

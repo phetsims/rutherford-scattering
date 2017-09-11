@@ -9,13 +9,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Emitter = require( 'AXON/Emitter' );
-  var Property = require( 'AXON/Property' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var Gun = require( 'RUTHERFORD_SCATTERING/common/model/Gun' );
   var Bounds2 = require( 'DOT/Bounds2' );
+  var Emitter = require( 'AXON/Emitter' );
+  var Gun = require( 'RUTHERFORD_SCATTERING/common/model/Gun' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Property = require( 'AXON/Property' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   /**
    * @constructor

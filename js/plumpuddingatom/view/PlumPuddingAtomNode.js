@@ -9,9 +9,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Image = require( 'SCENERY/nodes/Image' );
 
   // images
   var plumPuddingImage = require( 'image!RUTHERFORD_SCATTERING/plumPudding.png' );

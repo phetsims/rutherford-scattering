@@ -9,30 +9,30 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var BeamNode = require( 'RUTHERFORD_SCATTERING/common/view/BeamNode' );
-  var TargetMaterialNode = require( 'RUTHERFORD_SCATTERING/common/view/TargetMaterialNode' );
-  var TinyBox = require( 'RUTHERFORD_SCATTERING/common/view/TinyBox' );
-  var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
-  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
-  var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
-  var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var Shape = require( 'KITE/Shape' );
-  var Property = require( 'AXON/Property' );
+  var BeamNode = require( 'RUTHERFORD_SCATTERING/common/view/BeamNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
-  var RSControlPanel = require( 'RUTHERFORD_SCATTERING/common/view/RSControlPanel' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
+  var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
+  var Property = require( 'AXON/Property' );
+  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RSControlPanel = require( 'RUTHERFORD_SCATTERING/common/view/RSControlPanel' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
+  var ScreenView = require( 'JOIST/ScreenView' );
+  var Shape = require( 'KITE/Shape' );
+  var StepForwardButton = require( 'SCENERY_PHET/buttons/StepForwardButton' );
+  var TargetMaterialNode = require( 'RUTHERFORD_SCATTERING/common/view/TargetMaterialNode' );
+  var Text = require( 'SCENERY/nodes/Text' );
+  var TinyBox = require( 'RUTHERFORD_SCATTERING/common/view/TinyBox' );
 
   // strings
   var alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );

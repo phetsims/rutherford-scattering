@@ -10,16 +10,16 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var RichText = require( 'SCENERY/nodes/RichText' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
-  var Shape = require( 'KITE/Shape' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var RichText = require( 'SCENERY/nodes/RichText' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  var Shape = require( 'KITE/Shape' );
 
   // constants
   var ARROW_HEAD_WIDTH = 12;

@@ -11,12 +11,12 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   var AtomCollectionNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomCollectionNode' );
-  var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   /**
    * @param {RSBaseModel} model

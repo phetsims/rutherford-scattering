@@ -9,15 +9,15 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Circle = require( 'SCENERY/nodes/Circle' );
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
+  var Circle = require( 'SCENERY/nodes/Circle' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var RadialGradient = require( 'SCENERY/util/RadialGradient' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
   var SPECULAR_HIGHLITE_COLOR = 'rgb(200,200,200)';
