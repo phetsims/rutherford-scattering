@@ -184,6 +184,8 @@ define( function( require ) {
       self.addChild( newButtonGroup );
     } );
 
+    // add laser, all control panels, and scene buttons to accessibleOrder
+    this.accessibleOrder.unshift( this.gunNode, this.controlPanel, this.sceneRadioButtons );
   }
 
   rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );

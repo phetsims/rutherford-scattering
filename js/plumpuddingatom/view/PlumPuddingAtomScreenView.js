@@ -59,6 +59,9 @@ define( function( require ) {
       self.controlPanel = self.createControlPanel( panels );
       self.addChild( self.controlPanel );
     } );
+
+    // a11y
+    this.accessibleOrder.unshift( self.gunNode, self.controlPanel );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );

@@ -184,6 +184,8 @@ define( function( require ) {
       bottom: this.layoutBounds.bottom - 20
     } );
     this.addChild( resetAllButton );
+
+    this.accessibleOrder = [ playPauseButton, stepButton, resetAllButton ];
   }
 
   rutherfordScattering.register( 'RSBaseScreenView', RSBaseScreenView );
