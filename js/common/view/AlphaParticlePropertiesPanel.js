@@ -195,7 +195,12 @@ define( function( require ) {
       },
       endDrag: function() { // called when the pointer is released
         removeFinger( 'particleEnergySlider' );
-      }
+      },
+
+      // a11y
+      keyboardStep: 5,
+      shiftKeyboardStep: 1,
+      pageKeyboardStep: 10
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
     particleEnergySlider.addMajorTick( RSConstants.MAX_ALPHA_ENERGY, maxEnergyText );

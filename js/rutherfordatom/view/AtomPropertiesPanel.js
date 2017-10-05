@@ -259,7 +259,12 @@ define( function( require ) {
       },
       endDrag: function() { // called when the pointer is released
         assert && assert( false, 'slider needs custom start callback to set the correct interaction property' );
-      }
+      },
+
+      // a11y
+      keyboardStep: 5,
+      shiftKeyboardStep: 1,
+      pageKeyboardStep: 10
     };
 
     /**
