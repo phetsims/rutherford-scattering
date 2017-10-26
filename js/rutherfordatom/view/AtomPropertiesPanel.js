@@ -314,6 +314,8 @@ define( function( require ) {
 
           thumbFillEnabled: 'rgb(130, 130, 130)',
           thumbFillHighlighted: 'rgb(180, 180, 180)',
+
+          // Individual callbacks for each component of the NumberControl to support multitouch
           sliderStartCallback: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
           sliderEndCallback: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, neutronCountProperty ); },
           leftArrowStartCallback: neutronRemovedStartCallback,
