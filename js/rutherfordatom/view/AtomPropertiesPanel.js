@@ -9,15 +9,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ArrowButton = require( 'SUN/buttons/ArrowButton' );
   var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HSlider = require( 'SUN/HSlider' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
-  var NumberDisplay = require( 'SCENERY_PHET/NumberDisplay' );
   var Panel = require( 'SUN/Panel' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
@@ -86,6 +81,7 @@ define( function( require ) {
     /**
      * create content for the panel
      *
+     * @param  {Object} interactionPropertyGroup
      * @param  {Property.<boolean>} protonInteractionProperty
      * @param  {Property.<boolean>} neutronInteractionProperty
      * @param  {Property.<number>} protonCountProperty
@@ -93,8 +89,8 @@ define( function( require ) {
      * @param  {Object} options
      * @public
      */
-    createPanelContent: function( protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
-      return new AtomPropertiesPanelContent( protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options );
+    createPanelContent: function( interactionPropertyGroup, protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
+      return new AtomPropertiesPanelContent( interactionPropertyGroup, protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options );
     }
   } );
 
@@ -121,9 +117,6 @@ define( function( require ) {
       fill: RSColorProfile.panelColorProperty,
       stroke: RSColorProfile.panelBorderColorProperty
     }, options );
-
-    // @private
-    var self = this;
 
     // @private
     this.protonInteractionProperty = protonInteractionProperty;
@@ -266,7 +259,7 @@ define( function( require ) {
     ];
 
     // Number control for protons
-    var protonNumberControl = new NumberControl( numberOfProtonsString, protonCountProperty, protonCountRange, _.extend( {
+    var protonNumberControl = new NumberControl( numberOfProtonsString, protonCountProperty, protonCountRange, _.extend( numberControlOptions, {
       titleFill: RSColorProfile.protonsLabelColorProperty,
       majorTicks: protonMajorTicks,
 
@@ -281,36 +274,11 @@ define( function( require ) {
       rightArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, rightProtonButtonInteractionProperty, 1, protonCountRange ); },
       rightArrowEndCallback: function() {rightProtonButtonInteractionProperty.set( false ); }
 
-    }, numberControlOptions ) );
-
-
-    // proton count arrow/number display
-    var arrowButtonOptions = {
-      scale: 1.0,
-      arrowHeight: 18,
-      arrowWidth: 18,
-      touchAreaXDilation: 9,
-      touchAreaYDilation: 9,
-      startCallback: function() { // called when the pointer is pressed
-        assert && assert( false, 'button needs unique start callback to check range' );
-      },
-      endCallback: function() { // called when the pointer is released
-        assert && assert( false, 'button needs unique end callback to set the proper interaction property' );
-      }
-    };
-
-
-    var numNeutronsText = new Text( numberOfNeutronsString, {
-      font: RSConstants.PANEL_PROPERTY_FONT,
-      maxWidth: 210,
-      fontWeight: 'bold',
-      fill: RSColorProfile.neutronsLabelColorProperty
-    } );
+    } ) );
 
 
     var neutronCountRange = new RangeWithValue( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
       RSConstants.DEFAULT_NEUTRON_COUNT );
-
 
     var neutronAddedStartCallback = function() {
       arrowButtonStartCallback( neutronCountProperty, rightNeutronButtonInteractionProperty, 1, neutronCountRange );
@@ -319,87 +287,41 @@ define( function( require ) {
       arrowButtonStartCallback( neutronCountProperty, leftNeutronButtonInteractionProperty, -1, neutronCountRange );
     };
 
-
-    // proton count slider title
-    var neutronCountStrut = new HStrut( options.minWidth * 0.05 );
-    var neutronCountTitleBox = new HBox( { children: [ neutronCountStrut, numNeutronsText ] } );
-
-    // neutron count arrow/number display
-    this.neutronMinusButton = new ArrowButton( 'left', function neutronCountPropertyMinus() {
-      neutronCountProperty.value = Math.max( RSConstants.MIN_NEUTRON_COUNT, neutronCountProperty.value - 1 );
-    }, _.extend( arrowButtonOptions, {
-      startCallback: neutronRemovedStartCallback,
-      endCallback: function() { leftNeutronButtonInteractionProperty.set( false ); }
-    } ) );
-    var neutronNumberDisplay = new NumberDisplay( neutronCountProperty, neutronCountRange, {
-      backgroundStroke: 'black'
-    } );
-    this.neutronPlusButton = new ArrowButton( 'right', function neutronCountPropertyPlus() {
-      neutronCountProperty.value = Math.min( RSConstants.MAX_NEUTRON_COUNT, neutronCountProperty.value + 1 );
-    }, _.extend( arrowButtonOptions, {
-      startCallback: neutronAddedStartCallback,
-      endCallback: function() { rightNeutronButtonInteractionProperty.set( false ); }
-    } ) );
-
-    // /enable/disable +/- buttons on min/max
-    var neutronCountListener = function( value ) {
-      self.neutronMinusButton.enabled = !( value === RSConstants.MIN_NEUTRON_COUNT );
-      self.neutronPlusButton.enabled = !( value === RSConstants.MAX_NEUTRON_COUNT );
-    };
-    this.neutronCountProperty.link( neutronCountListener );
-
-    var neutronCountContent = new HBox( {
-      spacing: 8,
-      top: 0,
-      right: 0,
-      children: [ new HStrut( options.minWidth * 0.1 ), this.neutronMinusButton, neutronNumberDisplay, this.neutronPlusButton ]
-    } );
-    // common slider attributes
-    var sliderOptions = {
-      trackFill: RSColorProfile.panelSliderLabelColorProperty,
-      trackStroke: RSColorProfile.panelSliderLabelColorProperty,
-      majorTickStroke: RSColorProfile.panelSliderLabelColorProperty,
-      majorTickLength: 15,
-      tickLabelSpacing: 2,
-      trackSize: new Dimension2( sliderWidth, 1 ),
-      thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
-      thumbCenterLineStroke: 'white',
-      startDrag: function() { // called when the pointer is pressed
-        assert && assert( false, 'slider needs custom start callback to set the correct interaction property' );
-      },
-      endDrag: function() { // called when the pointer is released
-        assert && assert( false, 'slider needs custom start callback to set the correct interaction property' );
-      },
-
-      // a11y
-      keyboardStep: 5,
-      shiftKeyboardStep: 1,
-      pageKeyboardStep: 10
-    };
-
-    // neutron count slider
-    var neutronCountSlider = new HSlider( this.neutronCountProperty, {
-      min: RSConstants.MIN_NEUTRON_COUNT,
-      max: RSConstants.MAX_NEUTRON_COUNT
-    }, _.extend( {}, sliderOptions, {
-        thumbFillEnabled: 'rgb(130, 130, 130)',
-        thumbFillHighlighted: 'rgb(180, 180, 180)',
-        startDrag: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
-        endDrag: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, neutronCountProperty ); }
+    var neutronMajorTicks = [ {
+      value: RSConstants.MIN_NEUTRON_COUNT,
+      label: new Text( RSConstants.MIN_NEUTRON_COUNT, {
+        font: RSConstants.PANEL_TICK_FONT,
+        fill: RSColorProfile.panelSliderLabelColorProperty,
+        pickable: false
+      } )
+    },
+      {
+        value: RSConstants.MAX_NEUTRON_COUNT,
+        label: new Text( RSConstants.MAX_NEUTRON_COUNT, {
+          font: RSConstants.PANEL_TICK_FONT,
+          fill: RSColorProfile.panelSliderLabelColorProperty,
+          pickable: false
+        } )
       }
-    ) );
-    neutronCountSlider.addMajorTick( RSConstants.MIN_NEUTRON_COUNT,
-      new Text( RSConstants.MIN_NEUTRON_COUNT, {
-        font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColorProfile.panelSliderLabelColorProperty,
-        pickable: false
-      } ) );
-    neutronCountSlider.addMajorTick( RSConstants.MAX_NEUTRON_COUNT,
-      new Text( RSConstants.MAX_NEUTRON_COUNT, {
-        font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColorProfile.panelSliderLabelColorProperty,
-        pickable: false
-      } ) );
+    ];
+
+
+    // Number control for protons
+    var neutronNumberControl = new NumberControl( numberOfNeutronsString, neutronCountProperty, neutronCountRange,
+      _.extend( numberControlOptions, {
+          titleFill: RSColorProfile.neutronsLabelColorProperty,
+          majorTicks: neutronMajorTicks,
+
+          thumbFillEnabled: 'rgb(130, 130, 130)',
+          thumbFillHighlighted: 'rgb(180, 180, 180)',
+          sliderStartCallback: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
+          sliderEndCallback: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, neutronCountProperty ); },
+          leftArrowStartCallback: neutronRemovedStartCallback,
+          leftArrowEndCallback: function() { leftNeutronButtonInteractionProperty.set( false ); },
+          rightArrowStartCallback: neutronAddedStartCallback,
+          rightArrowEndCallback: function() { rightNeutronButtonInteractionProperty.set( false ); }
+        }
+      ) );
 
     // main panel content
     VBox.call( this, {
@@ -408,7 +330,7 @@ define( function( require ) {
       right: 0,
       align: 'left',
       resize: false,
-      children: [ atomPropertiesText, protonNumberControl, neutronCountTitleBox, neutronCountContent, neutronCountSlider ]
+      children: [ atomPropertiesText, protonNumberControl, neutronNumberControl ]
     } );
 
     this.disposeContent = function() {
@@ -422,16 +344,9 @@ define( function( require ) {
 
       // dispose number controls
       protonNumberControl.dispose();
-
-      // dispose sliders
-      neutronCountSlider.dispose();
-
-      // dispose number displays
-      neutronNumberDisplay.dispose();
+      neutronNumberControl.dispose();
 
       // unlink properties
-      // protonCountProperty.unlink( enabledListener );
-      this.neutronCountProperty.unlink( neutronCountListener );
       protonPanelInteractionProperty.unlink( protonInteractionListener );
       neutronPanelInteractionProperty.unlink( neutronInteractionListener );
 
