@@ -267,13 +267,21 @@ define( function( require ) {
       thumbFillEnabled: 'rgb(220, 58, 10)',
       thumbFillHighlighted: 'rgb(270, 108, 60)',
 
+      startCallback: function(){
+        protonInteractionProperty.set( true );
+      },
+      endCallback: function(){
+        protonCountProperty.set( Util.roundSymmetric( protonCountProperty.value ) ); // proper resolution for nucleons
+        protonInteractionProperty.set( false );
+      }
+
       // Individual callbacks for each component of the NumberControl to support multitouch
-      sliderStartCallback: function() { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
-      sliderEndCallback: function() { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, protonCountProperty ); },
-      leftArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, leftProtonButtonInteractionProperty, -1, protonCountRange ); },
-      leftArrowEndCallback: function() {leftProtonButtonInteractionProperty.set( false ); },
-      rightArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, rightProtonButtonInteractionProperty, 1, protonCountRange ); },
-      rightArrowEndCallback: function() {rightProtonButtonInteractionProperty.set( false ); }
+      // sliderStartCallback: function() { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
+      // sliderEndCallback: function() { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, protonCountProperty ); },
+      // leftArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, leftProtonButtonInteractionProperty, -1, protonCountRange ); },
+      // leftArrowEndCallback: function() {leftProtonButtonInteractionProperty.set( false ); },
+      // rightArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, rightProtonButtonInteractionProperty, 1, protonCountRange ); },
+      // rightArrowEndCallback: function() {rightProtonButtonInteractionProperty.set( false ); }
     } ) );
 
 
@@ -305,7 +313,6 @@ define( function( require ) {
       }
     ];
 
-
     // Number control for protons
     var neutronNumberControl = new NumberControl( numberOfNeutronsString, neutronCountProperty, neutronCountRange,
       _.extend( numberControlOptions, {
@@ -314,12 +321,20 @@ define( function( require ) {
 
           thumbFillEnabled: 'rgb(130, 130, 130)',
           thumbFillHighlighted: 'rgb(180, 180, 180)',
-          sliderStartCallback: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
-          sliderEndCallback: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, neutronCountProperty ); },
-          leftArrowStartCallback: neutronRemovedStartCallback,
-          leftArrowEndCallback: function() { leftNeutronButtonInteractionProperty.set( false ); },
-          rightArrowStartCallback: neutronAddedStartCallback,
-          rightArrowEndCallback: function() { rightNeutronButtonInteractionProperty.set( false ); }
+
+        startCallback: function(){
+          neutronInteractionProperty.set( true )  ;
+        },
+        endCallback: function(){
+          neutronCountProperty.set( Util.roundSymmetric( neutronCountProperty.value ) ); // proper resolution for nucleons
+          neutronInteractionProperty.set( false );
+        }
+          // sliderStartCallback: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
+          // sliderEndCallback: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, neutronCountProperty ); },
+          // leftArrowStartCallback: neutronRemovedStartCallback,
+          // leftArrowEndCallback: function() { leftNeutronButtonInteractionProperty.set( false ); },
+          // rightArrowStartCallback: neutronAddedStartCallback,
+          // rightArrowEndCallback: function() { rightNeutronButtonInteractionProperty.set( false ); }
         }
       ) );
 
