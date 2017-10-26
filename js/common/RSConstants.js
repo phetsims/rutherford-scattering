@@ -49,6 +49,7 @@ define( function( require ) {
     PANEL_TITLE_FONT: new PhetFont( 16 ),
     PANEL_TITLE_COLOR: 'rgb( 200, 200, 95 )',
     PANEL_PROPERTY_FONT: new PhetFont( 14 ),
+    PANEL_VALUE_DISPLAY_FONT: new PhetFont( 20 ),
     PANEL_TICK_FONT: new PhetFont( 14 ),
     PANEL_SLIDER_FILL_COLOR: 'rgb( 180, 180, 180 )',
     PANEL_SLIDER_THUMB_DIMENSION: new Dimension2( 15, 30 ),
@@ -76,7 +77,7 @@ define( function( require ) {
     // Animation space size, must be square!
     SPACE_NODE_WIDTH: 510,
     SPACE_NODE_HEIGHT: 510,
-    SPACE_BUFFER: 10, // a buffer around the space so that the particles 'slide' into space 
+    SPACE_BUFFER: 10, // a buffer around the space so that the particles 'slide' into space
 
     //----------------------------------------------------------------------------
     // Other common colors
