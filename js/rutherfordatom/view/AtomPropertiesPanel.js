@@ -241,16 +241,16 @@ define( function( require ) {
 
     var protonMajorTicks = [
       {
-        value: RSConstants.MIN_PROTON_COUNT,
-        label: new Text( RSConstants.MIN_PROTON_COUNT, {
+        value: protonCountRange.min,
+        label: new Text( protonCountRange.min, {
           font: RSConstants.PANEL_TICK_FONT,
           fill: RSColorProfile.panelSliderLabelColorProperty,
           pickable: false
         } )
       },
       {
-        value: RSConstants.MAX_PROTON_COUNT,
-        label: new Text( RSConstants.MAX_PROTON_COUNT, {
+        value: protonCountRange.max,
+        label: new Text( protonCountRange.max, {
           font: RSConstants.PANEL_TICK_FONT,
           fill: RSColorProfile.panelSliderLabelColorProperty,
           pickable: false
@@ -273,7 +273,6 @@ define( function( require ) {
       leftArrowEndCallback: function() {leftProtonButtonInteractionProperty.set( false ); },
       rightArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, rightProtonButtonInteractionProperty, 1, protonCountRange ); },
       rightArrowEndCallback: function() {rightProtonButtonInteractionProperty.set( false ); }
-
     } ) );
 
 
@@ -288,16 +287,16 @@ define( function( require ) {
     };
 
     var neutronMajorTicks = [ {
-      value: RSConstants.MIN_NEUTRON_COUNT,
-      label: new Text( RSConstants.MIN_NEUTRON_COUNT, {
+      value: neutronCountRange.min,
+      label: new Text( neutronCountRange.min, {
         font: RSConstants.PANEL_TICK_FONT,
         fill: RSColorProfile.panelSliderLabelColorProperty,
         pickable: false
       } )
     },
       {
-        value: RSConstants.MAX_NEUTRON_COUNT,
-        label: new Text( RSConstants.MAX_NEUTRON_COUNT, {
+        value: neutronCountRange.max,
+        label: new Text( neutronCountRange.max, {
           font: RSConstants.PANEL_TICK_FONT,
           fill: RSColorProfile.panelSliderLabelColorProperty,
           pickable: false
@@ -346,14 +345,9 @@ define( function( require ) {
       protonNumberControl.dispose();
       neutronNumberControl.dispose();
 
-      // unlink properties
-      protonPanelInteractionProperty.unlink( protonInteractionListener );
-      neutronPanelInteractionProperty.unlink( neutronInteractionListener );
-
       // dispose the derived properties
       protonPanelInteractionProperty.dispose();
       neutronPanelInteractionProperty.dispose();
-
     };
   }
 
