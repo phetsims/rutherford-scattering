@@ -210,7 +210,8 @@ define( function( require ) {
     var numberControlOptions = {
       layoutFunction: NumberControl.createLayoutFunction3( {
         ySpacing: 3,
-        alignTitle: 'left'
+        alignTitle: 'left',
+        titleLeftIndent: options.minWidth * 0.05 // indent of the title
       } ),
       titleFont: RSConstants.PANEL_PROPERTY_FONT,
       titleMaxWidth: 210,
