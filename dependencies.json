@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.0.6 Fri Nov 17 2017 15:09:24 GMT-0700 (MST)",
+  "comment": "# rutherford-scattering 1.0.7-rc.1 Fri Nov 17 2017 19:08:35 GMT-0700 (MST)",
   "assert": {
     "sha": "7d27130a4d27da15aa7f8a21bbfb9245288c1b44",
     "branch": "HEAD"
@@ -14,7 +14,7 @@
   },
   "chipper": {
     "sha": "de20836e96e5eb75841a02ff273c7ec25d73fe35",
-    "branch": "rutherford-scattering-1.0"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "6ee3c51e61c78acd6d31a831c060d4f30fa82770",
@@ -22,7 +22,7 @@
   },
   "joist": {
     "sha": "9f6ee98f20e1d601d06af9fa19995f631e9fcbca",
-    "branch": "rutherford-scattering-1.0"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "88f0c3a051a24f71a6465641badeccab1246820a",
@@ -37,7 +37,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "f78cfb85509b135bc604f79efcd9350b5703c1dd",
+    "sha": "3b40a57d761f346d668c7763f0c86c78f43cbfd8",
     "branch": "1.0"
   },
   "scenery": {
