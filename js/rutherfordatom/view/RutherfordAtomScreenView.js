@@ -103,7 +103,7 @@ define( function( require ) {
     var restoreAccessibleOrder = function() {
       var prependItems = [ self.gunNode, self.controlPanel, self.sceneRadioButtons ];
       self.accessibleOrder = prependItems.concat( self.accessibleOrder );
-    }
+    };
 
     // when the color profile changes, create a new control panel
     // no need to unlink, screen view exists for life of sim
@@ -194,7 +194,7 @@ define( function( require ) {
 
       // add laser, all control panels, and scene buttons to accessibleOrder, must be set after
       // creating new radio buttons
-      restoreAccessibleOrder()
+      restoreAccessibleOrder();
     } );
 
     restoreAccessibleOrder();    
