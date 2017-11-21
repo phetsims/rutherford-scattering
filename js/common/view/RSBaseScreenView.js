@@ -37,6 +37,8 @@ define( function( require ) {
   // strings
   var alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
 
+  // constants
+  var GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
 
   /**
    * @param {RSBaseModel} model
@@ -69,7 +71,8 @@ define( function( require ) {
       highlightColor: 'rgb(229, 186, 144)',
       bottomColor: 'rgb(106, 70, 35)',
       buttonColor: 'rgb(0, 203, 230)',
-      rotation: -Math.PI / 2 // pointing up
+      rotation: GUN_ROTATION, // pointing up
+      buttonRotation: -GUN_ROTATION // so button lighting is correct
     } );
     this.addChild( this.gunNode );
 
