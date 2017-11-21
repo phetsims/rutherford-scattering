@@ -98,9 +98,15 @@ define( function( require ) {
       ];
     };
 
+    // when various panels are added/removed due to changing color profile or scene, reset the accessible order
+    var self = this;
+    var restoreAccessibleOrder = function() {
+      var prependItems = [ self.gunNode, self.controlPanel, self.sceneRadioButtons ];
+      self.accessibleOrder = prependItems.concat( self.accessibleOrder );
+    }
+
     // when the color profile changes, create a new control panel
     // no need to unlink, screen view exists for life of sim
-    var self = this;
     RSGlobals.projectorModeProperty.link( function() {
 
       // remove and dispose the old control panel
@@ -111,6 +117,8 @@ define( function( require ) {
       var panels = createPanels();
       self.controlPanel = self.createControlPanel( panels );
       self.addChild( self.controlPanel );
+
+      restoreAccessibleOrder();
     } );
 
     // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
@@ -137,6 +145,7 @@ define( function( require ) {
       self.controlPanel = self.createControlPanel( panels );
       self.addChild( self.controlPanel );
 
+      restoreAccessibleOrder();
     } );
 
     // create radio buttons for the scene - new buttons must be created
@@ -182,10 +191,13 @@ define( function( require ) {
       var newButtonGroup = createRadioButtons( iconImage );
       self.sceneRadioButtons = newButtonGroup;
       self.addChild( newButtonGroup );
+
+      // add laser, all control panels, and scene buttons to accessibleOrder, must be set after
+      // creating new radio buttons
+      restoreAccessibleOrder()
     } );
 
-    // add laser, all control panels, and scene buttons to accessibleOrder
-    this.accessibleOrder.unshift( this.gunNode, this.controlPanel, this.sceneRadioButtons );
+    restoreAccessibleOrder();    
   }
 
   rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );
@@ -250,7 +262,6 @@ define( function( require ) {
       atomSpaceNode.visible = !nucleusVisible;
 
       model.removeAllParticles();
-
     } );
 
     return new Node( {
