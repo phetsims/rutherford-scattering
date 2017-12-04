@@ -13,6 +13,12 @@
     "requirejsNamespace": "RUTHERFORD_SCATTERING",
     "phetLibs": [
       "shred"
-    ]
+    ],
+    "runnable": true,
+    "supportedBrands": [
+      "phet"
+    ],
+    "accessible": true,
+    "simulation": true
   }
 }
