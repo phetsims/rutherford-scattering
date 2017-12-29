@@ -43,7 +43,7 @@ define( function( require ) {
 
     options = _.extend( {
       xMargin: RSConstants.PANEL_X_MARGIN,
-      yMargin: 8,
+      yMargin: 10,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
@@ -327,7 +327,7 @@ define( function( require ) {
 
     // main panel content
     VBox.call( this, {
-      spacing: RSConstants.PANEL_CHILD_SPACING,
+      spacing: RSConstants.PANEL_CHILD_SPACING * 2.1,
       top: 0,
       right: 0,
       align: 'left',
