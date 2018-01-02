@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var FocusOverlay = require( 'SCENERY/overlays/FocusOverlay' );
   var MenuOptionsNode = require( 'RUTHERFORD_SCATTERING/common/view/MenuOptionsNode' );
   var PlumPuddingAtomScreen = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/PlumPuddingAtomScreen' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
@@ -32,6 +33,10 @@ define( function( require ) {
     },
     optionsNode: new MenuOptionsNode()
   };
+
+  // group focus highlights are synced with color profile
+  FocusOverlay.setInnerGroupHighlightColor( RSColorProfile.innerGroupHighlightColorProperty );
+  FocusOverlay.setOuterGroupHighlightColor( RSColorProfile.outerGroupHighlightColorProperty );
 
   // no need to unlink, will exist for life of sim
   RSGlobals.projectorModeProperty.link( function( useProjectorMode ) {

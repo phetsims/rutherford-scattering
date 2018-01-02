@@ -13,6 +13,7 @@ define( function( require ) {
   // modules
   var Color = require( 'SCENERY/util/Color' );
   var ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
+  var FocusHighlightPath = require( 'SCENERY/accessibility/FocusHighlightPath' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // Initial colors for each profile, by string key.  If a projector color is not defined, it will take
@@ -115,6 +116,14 @@ define( function( require ) {
     nucleusOutlineColor: {
       default: new Color( 255, 255, 255 ),
       projector: new Color( 0, 0, 0 )
+    },
+    innerGroupHighlightColor: {
+      default: FocusHighlightPath.INNER_DARK_GROUP_FOCUS_COLOR,
+      projector: FocusHighlightPath.INNER_LIGHT_GROUP_FOCUS_COLOR
+    },
+    outerGroupHighlightColor: {
+      default: FocusHighlightPath.OUTER_DARK_GROUP_FOCUS_COLOR,
+      projector: FocusHighlightPath.OUTER_LIGHT_GROUP_FOCUS_COLOR
     }
   }, [ 'default', 'projector' ] );
 
