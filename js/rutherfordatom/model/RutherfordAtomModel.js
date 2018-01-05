@@ -79,6 +79,18 @@ define( function( require ) {
 
   rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );
 
-  return inherit( RSBaseModel, RutherfordAtomModel );
+  return inherit( RSBaseModel, RutherfordAtomModel, {
+
+    reset: function() {
+      this.protonCountProperty.reset();
+      this.neutronCountProperty.reset();
+      this.sceneProperty.reset();
+      this.energyInteractionProperty.reset();
+      this.protonInteractionProperty.reset();
+      this.neutronInteractionProperty.reset();
+
+      RSBaseModel.prototype.reset.call( this );
+    }
+  } );
 
 } ); // define
