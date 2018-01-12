@@ -11,7 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var CheckBox = require( 'SUN/CheckBox' );
+  var Checkbox = require( 'SUN/Checkbox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var OptionsDialog = require( 'JOIST/OptionsDialog' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
@@ -29,7 +29,7 @@ define( function( require ) {
   function MenuOptionsNode( model ) {
     var children = [];
 
-    children.push( new CheckBox( new Text( optionsProjectorModeString, { font: OptionsDialog.DEFAULT_FONT } ),
+    children.push( new Checkbox( new Text( optionsProjectorModeString, { font: OptionsDialog.DEFAULT_FONT } ),
       RSGlobals.projectorModeProperty, {} ) );
 
     VBox.call( this, _.extend( {

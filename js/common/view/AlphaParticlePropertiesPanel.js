@@ -11,7 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var CheckBox = require( 'SUN/CheckBox' );
+  var Checkbox = require( 'SUN/Checkbox' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HSlider = require( 'SUN/HSlider' );
@@ -220,11 +220,11 @@ define( function( require ) {
       fill: RSColorProfile.panelLabelColorProperty,
       maxWidth: 180
     } );
-    var showTraceCheckBox = new CheckBox( showTraceText, showTracesProperty, {
-      checkBoxColor: RSColorProfile.panelLabelColorProperty,
-      checkBoxColorBackground: RSColorProfile.panelColorProperty
+    var showTraceCheckbox = new Checkbox( showTraceText, showTracesProperty, {
+      checkboxColor: RSColorProfile.panelLabelColorProperty,
+      checkboxColorBackground: RSColorProfile.panelColorProperty
     } );
-    var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckBox ] } );
+    var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckbox ] } );
 
     VBox.call( this, {
       spacing: RSConstants.PANEL_CHILD_SPACING,
@@ -237,7 +237,7 @@ define( function( require ) {
 
     // @private
     this.disposeContent = function() {
-      showTraceCheckBox.dispose();
+      showTraceCheckbox.dispose();
       particleEnergySlider.dispose();
     };
   }
