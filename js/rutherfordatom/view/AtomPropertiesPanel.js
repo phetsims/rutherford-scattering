@@ -232,7 +232,6 @@ define( function( require ) {
 
       // a11y
       keyboardStep: 5,
-      shiftKeyboardStep: 1,
       pageKeyboardStep: 10
     };
 
