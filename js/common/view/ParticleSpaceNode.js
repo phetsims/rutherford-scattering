@@ -26,7 +26,7 @@ define( function( require ) {
   var SPACE_BORDER_WIDTH = 2;
   var SPACE_BORDER_COLOR = 'grey';
   var PARTICLE_TRACE_WIDTH = 1.5;
-  var NUCLEUS_TRACE_COLOR = 'grey';
+  var NUCLEUS_TRACE_COLOR = 'rgba(255,0,255,255)'; // same color as atomic scale without fadeout
   var FADEOUT_SEGMENTS = 80;
   var PARTICLE_TRACE_COLOR = 'rgba(255,0,255,{0})'; // trace color fades out by number, inserted by StringUtils
 
