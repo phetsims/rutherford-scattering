@@ -14,6 +14,7 @@ define( function( require ) {
 
   // modules
   var CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
+  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
@@ -26,9 +27,7 @@ define( function( require ) {
   var SPACE_BORDER_WIDTH = 2;
   var SPACE_BORDER_COLOR = 'grey';
   var PARTICLE_TRACE_WIDTH = 1.5;
-  var NUCLEUS_TRACE_COLOR = 'rgba(255,0,255,255)'; // same color as atomic scale without fadeout
   var FADEOUT_SEGMENTS = 80;
-  var PARTICLE_TRACE_COLOR = 'rgba(255,0,255,{0})'; // trace color fades out by number, inserted by StringUtils
 
   /**
    * @param {atomSpace} atomSpace - space containing atoms and particles
@@ -45,16 +44,17 @@ define( function( require ) {
     options.canvasBounds = options.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
 
     options = _.extend( {
-      particleStyle: 'nucleus' // 'nucleus'|'particle'
+      particleStyle: 'nucleus', // 'nucleus'|'particle'
+      particleTraceColor: new Color(255,0,255)
     }, options );
     this.particleStyle = options.particleStyle;
+    this.particleTraceColor = options.particleTraceColor;
 
     CanvasNode.call( this, options );
 
     var self = this;
 
     // @private
-    // this.atoms = atoms;
     this.atomSpace = atomSpace;
 
     // @private
@@ -65,6 +65,9 @@ define( function( require ) {
 
     // @private
     this.showAlphaTraceProperty = showAlphaTraceProperty;
+
+    // @private
+    this.particleTraceColorWithFade = 'rgba(' + options.particleTraceColor.r + ',' + options.particleTraceColor.g + ',' + options.particleTraceColor.b + ',{0}';
 
     // @private - the area to be used as the 'viewport', border not included
     this.clipRect = {
@@ -143,24 +146,8 @@ define( function( require ) {
         return;
       }
 
-      // if style is 'nucleus' we can get away with rendering with one path for performance
-      if ( renderTrace ) {
-        if ( this.particleStyle === 'nucleus' ) {
-          context.beginPath();
-          context.lineWidth = PARTICLE_TRACE_WIDTH;
-          context.strokeStyle = NUCLEUS_TRACE_COLOR;
-        }
-      }
-
       // render all alpha particles & corresponding traces in the space
       self.renderAlphaParticles( context, this.atomSpace, renderTrace );
-
-      // render traces as single path in nucleus representation for performance
-      if ( renderTrace ) {
-        if ( this.particleStyle === 'nucleus' ) {
-          context.stroke();
-        }
-      }
     },
 
     /**
@@ -172,6 +159,17 @@ define( function( require ) {
      */
     renderAlphaParticles: function( context, particleContainer, renderTrace ) {
       var self = this;
+
+      // if style is 'nucleus' we can get away with rendering with one path for performance
+      if ( renderTrace ) {
+
+        if ( self.particleStyle === 'nucleus' ) {
+          context.beginPath();
+          context.lineWidth = PARTICLE_TRACE_WIDTH;
+          context.strokeStyle = self.particleTraceColor.getCanvasStyle();
+        }
+      }
+
       particleContainer.particles.forEach( function( particle ) {
 
         // render the traces (if enabled)
@@ -195,7 +193,7 @@ define( function( require ) {
               // only the last FADEOUT_SEGMENTS should be visible, map i to the opacity
               var length = particle.positions.length;
               var alpha = Util.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
-              var strokeStyle = StringUtils.format( PARTICLE_TRACE_COLOR, alpha );
+              var strokeStyle = StringUtils.format( self.particleTraceColorWithFade, alpha );
               context.strokeStyle = strokeStyle;
               context.stroke();
               context.closePath();
@@ -209,8 +207,13 @@ define( function( require ) {
           particleViewPosition.x - self.particleImageHalfWidth,
           particleViewPosition.y - self.particleImageHalfHeight );
       } );
+
+      // render traces as single path in nucleus representation for performance
+      if ( renderTrace ) {
+        if ( self.particleStyle === 'nucleus' ) {
+          context.stroke();
+        }
+      }
     }
-
   } ); // inherit
-
 } ); // define

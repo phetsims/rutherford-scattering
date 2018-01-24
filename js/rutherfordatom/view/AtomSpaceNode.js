@@ -26,7 +26,7 @@ define( function( require ) {
    * @constructor
    */
   function AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
-    
+
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
     options = _.extend( {
@@ -45,9 +45,8 @@ define( function( require ) {
         self.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), { 
           stroke: 'rgb(114,183,188)'
         } ) );
-      } );      
+      } );
     }
-
   }
 
   rutherfordScattering.register( 'AtomSpaceNode', AtomSpaceNode );
@@ -70,7 +69,5 @@ define( function( require ) {
       var y = this.centerY - this.atomsNode.image.height / 2;
       context.drawImage( this.atomsNode.image, x, y, this.atomsNode.image.width, this.atomsNode.image.height );
     }
-
   } ); // inherit
-
 } ); // define

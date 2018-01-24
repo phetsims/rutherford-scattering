@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   var PlumPuddingAtomNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomNode' );
@@ -24,6 +25,10 @@ define( function( require ) {
   function PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+
+    options = _.extend( {
+      particleTraceColor: new Color( 'grey' )
+    }, options );
 
     ParticleSpaceNode.call( this, model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, options );
 
