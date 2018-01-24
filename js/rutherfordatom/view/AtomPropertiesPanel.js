@@ -213,9 +213,8 @@ define( function( require ) {
         alignTitle: 'left',
         titleLeftIndent: options.minWidth * 0.05 // indent of the title
       } ),
-      titleFont: RSConstants.PANEL_PROPERTY_FONT,
+      titleFont: RSConstants.PANEL_PROPERTY_FONT.copy( { weight: 'bold' } ),
       titleMaxWidth: 210,
-      titleFontWeight: 'bold',
 
       valueBackgroundStroke: 'black',
       valueFont: RSConstants.PANEL_VALUE_DISPLAY_FONT,
