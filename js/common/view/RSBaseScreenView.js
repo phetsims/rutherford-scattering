@@ -19,6 +19,7 @@ define( function( require ) {
   var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var PlayAreaNode = require( 'SCENERY_PHET/accessibility/nodes/PlayAreaNode' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -65,6 +66,10 @@ define( function( require ) {
     // @protected - used for accessibleOrder in subTypes
     this.sceneSummaryNode = new RSSceneSummaryNode();
     this.addChild( this.sceneSummaryNode );
+
+    // @protected - used for accessibleOrder in subTypes
+    this.playAreaNode = new PlayAreaNode();
+    this.addChild( this.playAreaNode );
 
     // @protected for layout in subtypes, alpha particle gun
     this.gunNode = new LaserPointerNode( model.gun.onProperty, {
