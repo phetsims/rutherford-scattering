@@ -15,6 +15,7 @@ define( function( require ) {
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -26,6 +27,15 @@ define( function( require ) {
   var atomString = require( 'string!RUTHERFORD_SCATTERING/atom' );
   var numberOfNeutronsString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
   var numberOfProtonsString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
+
+  // a11y strings
+  var atomSettingsString = RSA11yStrings.atomSettings.value;
+  var protonsValuePatternString = RSA11yStrings.protonsValuePattern.value;
+  // var protonsPerAtomValuePatternString = RSA11yStrings.protonsPerAtomValuePattern.value;
+  var protonSliderDescriptionString = RSA11yStrings.protonSliderDescription.value;
+  var neutronsValuePatternString = RSA11yStrings.neutronsValuePattern.value;
+  // var neutronsPerAtomValuePatternString = RSA11yStrings.neutronsPerAtomValuePattern.value;
+  var neutronSliderDescriptionString = RSA11yStrings.neutronSliderDescription.value;
 
   // global, tracking where fingers are for multitouch support
   // must persist beyond lifetime of the panel so that fingers are tracked when new
@@ -49,7 +59,12 @@ define( function( require ) {
       align: 'left',
       resize: false,
       fill: RSColorProfile.panelColorProperty,
-      stroke: RSColorProfile.panelBorderColorProperty
+      stroke: RSColorProfile.panelBorderColorProperty,
+
+      tagName: 'div',
+      labelTagName: 'h3',
+      accessibleLabel: atomSettingsString,
+      prependLabels: true
     }, options );
 
     Panel.call( this, content, options );
@@ -271,7 +286,14 @@ define( function( require ) {
       leftArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, leftProtonButtonInteractionProperty, -1, protonCountRange ); },
       leftArrowEndCallback: function() {leftProtonButtonInteractionProperty.set( false ); },
       rightArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, rightProtonButtonInteractionProperty, 1, protonCountRange ); },
-      rightArrowEndCallback: function() {rightProtonButtonInteractionProperty.set( false ); }
+      rightArrowEndCallback: function() {rightProtonButtonInteractionProperty.set( false ); },
+
+      // a11y
+      labelTagName: 'label',
+      accessibleLabel: protonsValuePatternString,
+      descriptionTagName: 'p',
+      accessibleDescription: protonSliderDescriptionString,
+      parentContainerTagName: 'div'
     } ) );
 
 
@@ -319,7 +341,14 @@ define( function( require ) {
           leftArrowStartCallback: neutronRemovedStartCallback,
           leftArrowEndCallback: function() { leftNeutronButtonInteractionProperty.set( false ); },
           rightArrowStartCallback: neutronAddedStartCallback,
-          rightArrowEndCallback: function() { rightNeutronButtonInteractionProperty.set( false ); }
+          rightArrowEndCallback: function() { rightNeutronButtonInteractionProperty.set( false ); },
+
+          // a11y
+          labelTagName: 'label',
+          accessibleLabel: neutronsValuePatternString,
+          descriptionTagName: 'p',
+          accessibleDescription: neutronSliderDescriptionString,
+          parentContainerTagName: 'div'
         }
       ) );
 

@@ -59,6 +59,40 @@ define( function( require ) {
     traceCheckboxDescription: {
       value: 'Observe particles in stream with or without traces'
     },
+    atomSettings: {
+      value: 'Atom Settings'
+    },
+    protonsValuePattern: {
+      value: 'Protons {{protons}}'
+    },
+    protonsPerAtomValuePattern: {
+      value: 'Protons per Atom {{protons}}'
+    },
+    protonSliderDescription: {
+      value: 'Adjust number of protons per atom in foil.'
+    },
+    neutronsValuePattern: {
+      value: 'Neutrons {{neutrons}}'
+    },
+    neutronsPerAtomValuePattern: {
+      value: 'Neutrons per Atom {{neutrons}}'
+    },
+    neutronSliderDescription: {
+      value: 'Adjust number of neutrons per atom in foil.'
+    },
+
+    atomicScaleView: {
+      value: 'Atomic Scale View'
+    },
+    nuclearScaleView: {
+      value: 'Nuclear Scale View'
+    },
+    switchScale: {
+      value: 'Switch Scale'
+    },
+    switchScaleDescription: {
+      value: 'Observe experiments at nuclear or atomic scales.'
+    },
   };
 
   if ( phet.chipper.queryParameters.stringTest === 'xss' ) {

@@ -13,27 +13,35 @@ define( function( require ) {
   var AtomParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomParticleLegendPanel' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
   var AtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomSpaceNode' );
+  var ControlPanelNode = require( 'SCENERY_PHET/accessibility/nodes/ControlPanelNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var NucleusSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/NucleusSpaceNode' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+  var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
   var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var PhetFont = require('SCENERY_PHET/PhetFont' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
 
   // strings
   var pattern0AtomicScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0atomicScale' );
   var pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
+
+  // a11yStrings
+  var switchScaleString = RSA11yStrings.switchScale.value;
+  var switchScaleDescriptionString = RSA11yStrings.switchScaleDescription.value;
+  var nuclearScaleViewString = RSA11yStrings.nuclearScaleView.value;
+  var atomicScaleViewString = RSA11yStrings.atomicScaleView.value;
 
   // images
   var atomImage = require( 'image!RUTHERFORD_SCATTERING/Atom.png' );
@@ -46,7 +54,7 @@ define( function( require ) {
   function RutherfordAtomScreenView( model ) {
 
     var nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, '1.5 x 10<sup>-13</sup>' );
-    var atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>'  );
+    var atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>' );
 
     RSBaseScreenView.call( this, model, nucleusScaleString, createSpaceNode, {
       includeElectronLegend: false
@@ -152,11 +160,15 @@ define( function( require ) {
     // every time the color profile changes
     var nucleusIcon = RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 );
     var createRadioButtons = function( atomIconImage ) {
+
+      var container = new Node();
+      container.addChild( new ControlPanelNode() ); // TODO: we shouldn't add this heading in this function
+
       var buttonOptions = { scale: 0.18 };
 
-      return new RadioButtonGroup( model.sceneProperty, [
-        { value: 'atom', node: new Image( atomIconImage, buttonOptions ) },
-        { value: 'nucleus', node: nucleusIcon }
+      return container.addChild( new RadioButtonGroup( model.sceneProperty, [
+        { value: 'atom', node: new Image( atomIconImage, buttonOptions ), accessibleLabel: atomicScaleViewString },
+        { value: 'nucleus', node: nucleusIcon, accessibleLabel: nuclearScaleViewString }
       ], {
         orientation: 'vertical',
         spacing: 15,
@@ -168,8 +180,14 @@ define( function( require ) {
         buttonContentYMargin: 8,
         selectedLineWidth: 2,
         deselectedLineWidth: 1.5,
-        maxWidth: self.targetMaterialNode.width
-      } );
+        maxWidth: self.targetMaterialNode.width,
+
+        tagName: 'div',
+        accessibleDescription: switchScaleDescriptionString,
+        labelTagName: 'h3',
+        accessibleLabel: switchScaleString,
+        prependLabels: true
+      } ) );
     };
 
     // @private
@@ -197,7 +215,7 @@ define( function( require ) {
       restoreAccessibleOrder();
     } );
 
-    restoreAccessibleOrder();    
+    restoreAccessibleOrder();
   }
 
   rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );

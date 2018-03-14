@@ -37,7 +37,7 @@ define( function( require ) {
     /**
      * Create the content that is to be contained in this panel.
      *
-     * @param  {Object} [ options ]
+     * @param  {Object} [options]
      * @returns {VBox}
      */
     createPanelContent: function( options ) {

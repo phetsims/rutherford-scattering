@@ -67,7 +67,8 @@ define( function( require ) {
       // a11y
       tagName: 'div',
       labelTagName: 'h3',
-      accessibleLabel: alphaParticleSettingsString
+      accessibleLabel: alphaParticleSettingsString,
+      prependLabels: true
     }, options );
 
     Panel.call( this, content, options );
