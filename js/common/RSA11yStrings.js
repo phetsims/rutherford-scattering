@@ -93,6 +93,13 @@ define( function( require ) {
     switchScaleDescription: {
       value: 'Observe experiments at nuclear or atomic scales.'
     },
+
+    otherViewingStreamingOptions: {
+      value: 'Other/Viewing/Streaming Options'
+    },
+    otherOptionsDescription: {
+      value: 'Observe details by pausing continuous stream, or streaming in steps.'
+    }
   };
 
   if ( phet.chipper.queryParameters.stringTest === 'xss' ) {

@@ -16,6 +16,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -43,6 +44,9 @@ define( function( require ) {
   // a11y strings
   var toggleAlphaParticleString = RSA11yStrings.toggleAlphaParticle.value;
   var alphaParticlesHelpTextString = RSA11yStrings.alphaParticlesHelpText.value;
+
+  var otherViewingStreamingOptionsString = RSA11yStrings.otherViewingStreamingOptions.value;
+  var otherOptionsDescriptionString = RSA11yStrings.otherOptionsDescription.value;
 
   // constants
   var GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
@@ -205,7 +209,16 @@ define( function( require ) {
     } );
     this.addChild( resetAllButton );
 
-    this.accessibleOrder = [ playPauseButton, stepButton, resetAllButton ];
+    // a11y
+    var viewingStreamingOptionsNode = new Node( {
+      tagName: 'div',
+      labelTagName: 'h3',
+      accessibleLabel: otherViewingStreamingOptionsString,
+      accessibleDescription: otherOptionsDescriptionString
+    } );
+    this.addChild( viewingStreamingOptionsNode );
+
+    this.accessibleOrder = [ viewingStreamingOptionsNode, playPauseButton, stepButton, resetAllButton ];
   }
 
   rutherfordScattering.register( 'RSBaseScreenView', RSBaseScreenView );
