@@ -40,8 +40,25 @@ define( function( require ) {
     },
     alphaParticlesHelpText: {
       value: 'Start and stop stream of alpha particles.'
-    }
+    },
 
+    alphaParticleSettings: {
+      value: 'Alpha Particle Settings'
+    },
+    energySliderDescription: {
+      value: 'Adjust the energy of particles in the alpha particle stream'
+    },
+    energy: {
+      value: 'Energy'
+    },
+
+    traces: {
+      value: 'Traces'
+    },
+
+    traceCheckboxDescription: {
+      value: 'Observe particles in stream with or without traces'
+    },
   };
 
   if ( phet.chipper.queryParameters.stringTest === 'xss' ) {

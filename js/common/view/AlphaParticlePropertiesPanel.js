@@ -19,6 +19,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -33,6 +34,13 @@ define( function( require ) {
   var minEnergyString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
   var showTracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
 
+  // a11y strings
+  var alphaParticleSettingsString = RSA11yStrings.alphaParticleSettings.value;
+  var energySliderDescriptionString = RSA11yStrings.energySliderDescription.value;
+  var tracesString = RSA11yStrings.traces.value;
+  var traceCheckboxDescriptionString = RSA11yStrings.traceCheckboxDescription.value;
+
+  // constants
   // global, tracks fingers on the slider for multitouch support
   // must persist beyond individual panel instances so multitouch is supported
   // when a panel is created or destroyed
@@ -54,7 +62,12 @@ define( function( require ) {
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
       fill: RSColorProfile.panelColorProperty,
-      stroke: RSColorProfile.panelBorderColorProperty
+      stroke: RSColorProfile.panelBorderColorProperty,
+
+      // a11y
+      tagName: 'div',
+      labelTagName: 'h3',
+      accessibleLabel: alphaParticleSettingsString
     }, options );
 
     Panel.call( this, content, options );
@@ -200,7 +213,12 @@ define( function( require ) {
       // a11y
       keyboardStep: 5,
       shiftKeyboardStep: 1,
-      pageKeyboardStep: 10
+      pageKeyboardStep: 10,
+      labelTagName: 'label',
+      accessibleLabel: energyString,
+      descriptionTagName: 'p',
+      accessibleDescription: energySliderDescriptionString,
+      prependLabels: true
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
     particleEnergySlider.addMajorTick( RSConstants.MAX_ALPHA_ENERGY, maxEnergyText );
@@ -222,7 +240,14 @@ define( function( require ) {
     } );
     var showTraceCheckbox = new Checkbox( showTraceText, showTracesProperty, {
       checkboxColor: RSColorProfile.panelLabelColorProperty,
-      checkboxColorBackground: RSColorProfile.panelColorProperty
+      checkboxColorBackground: RSColorProfile.panelColorProperty,
+
+      // a11y
+      labelTagName: 'label',
+      accessibleLabel: tracesString,
+      descriptionTagName: 'p',
+      accessibleDescription: traceCheckboxDescriptionString,
+      parentContainerTagName: 'div'
     } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckbox ] } );
 
@@ -232,7 +257,7 @@ define( function( require ) {
       right: 0,
       align: 'left',
       resize: false,
-      children: [ alphaParticlePropertiesText, energyTitleBox, containerRect, new VStrut(5), showTraceBox ]
+      children: [ alphaParticlePropertiesText, energyTitleBox, containerRect, new VStrut( 5 ), showTraceBox ]
     } );
 
     // @private
