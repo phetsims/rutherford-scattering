@@ -1,4 +1,4 @@
-// Copyright 2016-2017, University of Colorado Boulder
+// Copyright 2016-2018, University of Colorado Boulder
 
 /**
  * Base type for ScreenViews
@@ -25,6 +25,7 @@ define( function( require ) {
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RSControlPanel = require( 'RUTHERFORD_SCATTERING/common/view/RSControlPanel' );
+  var RSSceneSummaryNode = require( 'RUTHERFORD_SCATTERING/common/view/RSSceneSummaryNode' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -60,6 +61,10 @@ define( function( require ) {
 
     // properties
     this.showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
+
+    // @protected - used for accessibleOrder in subTypes
+    this.sceneSummaryNode = new RSSceneSummaryNode();
+    this.addChild( this.sceneSummaryNode );
 
     // @protected for layout in subtypes, alpha particle gun
     this.gunNode = new LaserPointerNode( model.gun.onProperty, {

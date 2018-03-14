@@ -1,4 +1,4 @@
-// Copyright 2016-2017, University of Colorado Boulder
+// Copyright 2016-2018, University of Colorado Boulder
 
 /**
  * View for the 'Rutherford Atom' screen.
@@ -101,7 +101,7 @@ define( function( require ) {
     // when various panels are added/removed due to changing color profile or scene, reset the accessible order
     var self = this;
     var restoreAccessibleOrder = function() {
-      var prependItems = [ self.gunNode, self.controlPanel, self.sceneRadioButtons ];
+      var prependItems = [ self.sceneSummaryNode, self.gunNode, self.controlPanel, self.sceneRadioButtons ];
       self.accessibleOrder = prependItems.concat( self.accessibleOrder );
     };
 

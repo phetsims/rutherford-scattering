@@ -1,4 +1,4 @@
-// Copyright 2016-2017, University of Colorado Boulder
+// Copyright 2016-2018, University of Colorado Boulder
 
 /**
  * Builds the main Plum Pudding sim screen
@@ -60,7 +60,7 @@ define( function( require ) {
       self.addChild( self.controlPanel );
 
       // a11y - update accessible order when we recreate the control panel
-      var prependItems = [ self.gunNode, self.controlPanel ];
+      var prependItems = [ self.sceneSummaryNode, self.gunNode, self.controlPanel ];
       self.accessibleOrder = prependItems.concat( self.accessibleOrder );
     } );
   }
