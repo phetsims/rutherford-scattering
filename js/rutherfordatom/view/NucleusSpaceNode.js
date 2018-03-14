@@ -12,8 +12,13 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
+  var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+
+  // a11y strings
+  var observationWindowString = RSA11yStrings.observationWindow.value;
+  var nucleusSpaceDescriptionString = RSA11yStrings.nucleusSpaceDescription.value;
 
   /**
    * @param {RSBaseModel} model
@@ -25,6 +30,18 @@ define( function( require ) {
   function NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+
+    options = _.extend( {
+
+      // a11y
+      tagName: 'div',
+      labelTagName: 'h3',
+      accessibleLabel: observationWindowString,
+      descriptionTagName: 'p',
+      accessibleDescription: nucleusSpaceDescriptionString,
+      prependLabels: true
+
+    }, options );
 
     ParticleSpaceNode.call( this, model.nucleusSpace, showAlphaTraceProperty, modelViewTransform, options );
 

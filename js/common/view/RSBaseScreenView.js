@@ -23,6 +23,7 @@ define( function( require ) {
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RSControlPanel = require( 'RUTHERFORD_SCATTERING/common/view/RSControlPanel' );
@@ -38,6 +39,10 @@ define( function( require ) {
 
   // strings
   var alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
+
+  // a11y strings
+  var toggleAlphaParticleString = RSA11yStrings.toggleAlphaParticle.value;
+  var alphaParticlesHelpTextString = RSA11yStrings.alphaParticlesHelpText.value;
 
   // constants
   var GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
@@ -82,7 +87,9 @@ define( function( require ) {
       bottomColor: 'rgb(106, 70, 35)',
       buttonColor: 'rgb(0, 203, 230)',
       rotation: GUN_ROTATION, // pointing up
-      buttonRotation: -GUN_ROTATION // so button lighting is correct
+      buttonRotation: -GUN_ROTATION, // so button lighting is correct
+      buttonAccessibleLabel: toggleAlphaParticleString,
+      buttonAccessibleDescription: alphaParticlesHelpTextString
     } );
     this.addChild( this.gunNode );
 

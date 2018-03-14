@@ -15,8 +15,13 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+
+  // a11y strings
+  var observationWindowString = RSA11yStrings.observationWindow.value;
+  var atomSpaceDescriptionString = RSA11yStrings.atomSpaceDescription.value;
 
   /**
    * @param {RSBaseModel} model
@@ -30,7 +35,16 @@ define( function( require ) {
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
     options = _.extend( {
-      particleStyle: 'particle'
+      particleStyle: 'particle',
+
+      // a11y
+      tagName: 'div',
+      labelTagName: 'h3',
+      accessibleLabel: observationWindowString,
+      descriptionTagName: 'p',
+      accessibleDescription: atomSpaceDescriptionString,
+      prependLabels: true
+
     }, options );
 
     // @private - generates an image for the collection of atoms
@@ -42,7 +56,7 @@ define( function( require ) {
     if ( RSQueryParameters.showDebugShapes ) {
       model.atomSpace.particleTransitionedEmitter.addListener( function( particle ) {
         // a particle has been transitioned to a new atom - show the bounding box of the particle
-        self.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), { 
+        self.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), {
           stroke: 'rgb(114,183,188)'
         } ) );
       } );

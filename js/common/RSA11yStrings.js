@@ -22,7 +22,26 @@ define( function( require ) {
              'to toggle between atomic and nuclear scale views, buttons to pause and step incrementally through ' +
              'observations, and a button to reset the sim. Stream alpha particles to begin observations. Look for alpha ' +
              'particles and atom sliders to play, or read on for details about the observation window.'
+    },
+
+    observationWindow: {
+      value: 'Observation Window'
+    },
+    atomSpaceDescription: {
+      value: 'An atomic scale view of the foil is shown. Portions of five tightly packed atoms are visible, with three ' +
+             'nuclei visible in the scene.'
+    },
+    nucleusSpaceDescription: {
+      value: 'An nuclear scale view of the foil is shown. A single atomic nucleus is visible with a representative ' +
+             'number of protons and neutrons.'
+    },
+    toggleAlphaParticle: {
+      value: 'Toggle Alpha Particle Stream'
+    },
+    alphaParticlesHelpText: {
+      value: 'Start and stop stream of alpha particles.'
     }
+
   };
 
   if ( phet.chipper.queryParameters.stringTest === 'xss' ) {
