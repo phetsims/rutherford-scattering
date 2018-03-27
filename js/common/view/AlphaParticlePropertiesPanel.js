@@ -248,7 +248,7 @@ define( function( require ) {
       accessibleLabel: tracesString,
       descriptionTagName: 'p',
       accessibleDescription: traceCheckboxDescriptionString,
-      parentContainerTagName: 'div'
+      containerTagName: 'div'
     } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckbox ] } );
 

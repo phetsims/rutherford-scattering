@@ -293,7 +293,7 @@ define( function( require ) {
       accessibleLabel: protonsValuePatternString,
       descriptionTagName: 'p',
       accessibleDescription: protonSliderDescriptionString,
-      parentContainerTagName: 'div'
+      containerTagName: 'div'
     } ) );
 
 
@@ -348,7 +348,7 @@ define( function( require ) {
           accessibleLabel: neutronsValuePatternString,
           descriptionTagName: 'p',
           accessibleDescription: neutronSliderDescriptionString,
-          parentContainerTagName: 'div'
+          containerTagName: 'div'
         }
       ) );
 
