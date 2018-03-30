@@ -63,7 +63,7 @@ define( function( require ) {
 
       tagName: 'div',
       labelTagName: 'h3',
-      accessibleLabel: atomSettingsString,
+      labelContent: atomSettingsString,
       prependLabels: true
     }, options );
 
@@ -289,7 +289,7 @@ define( function( require ) {
       rightArrowEndCallback: function() {rightProtonButtonInteractionProperty.set( false ); },
 
       // a11y
-      accessibleLabel: protonsValuePatternString,
+      labelContent: protonsValuePatternString,
       descriptionTagName: 'p',
       accessibleDescription: protonSliderDescriptionString,
       containerTagName: 'div'
@@ -343,7 +343,7 @@ define( function( require ) {
           rightArrowEndCallback: function() { rightNeutronButtonInteractionProperty.set( false ); },
 
           // a11y
-          accessibleLabel: neutronsValuePatternString,
+          labelContent: neutronsValuePatternString,
           descriptionTagName: 'p',
           accessibleDescription: neutronSliderDescriptionString,
           containerTagName: 'div'

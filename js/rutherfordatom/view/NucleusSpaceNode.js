@@ -36,7 +36,7 @@ define( function( require ) {
       // a11y
       tagName: 'div',
       labelTagName: 'h3',
-      accessibleLabel: observationWindowString,
+      labelContent: observationWindowString,
       descriptionTagName: 'p',
       accessibleDescription: nucleusSpaceDescriptionString,
       prependLabels: true

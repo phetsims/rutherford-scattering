@@ -167,8 +167,8 @@ define( function( require ) {
       var buttonOptions = { scale: 0.18 };
 
       return container.addChild( new RadioButtonGroup( model.sceneProperty, [
-        { value: 'atom', node: new Image( atomIconImage, buttonOptions ), accessibleLabel: atomicScaleViewString },
-        { value: 'nucleus', node: nucleusIcon, accessibleLabel: nuclearScaleViewString }
+        { value: 'atom', node: new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
+        { value: 'nucleus', node: nucleusIcon, labelContent: nuclearScaleViewString }
       ], {
         orientation: 'vertical',
         spacing: 15,
@@ -185,7 +185,7 @@ define( function( require ) {
         tagName: 'div',
         accessibleDescription: switchScaleDescriptionString,
         labelTagName: 'h3',
-        accessibleLabel: switchScaleString,
+        labelContent: switchScaleString,
         prependLabels: true
       } ) );
     };

@@ -213,7 +213,7 @@ define( function( require ) {
     var viewingStreamingOptionsNode = new Node( {
       tagName: 'div',
       labelTagName: 'h3',
-      accessibleLabel: otherViewingStreamingOptionsString,
+      labelContent: otherViewingStreamingOptionsString,
       accessibleDescription: otherOptionsDescriptionString
     } );
     this.addChild( viewingStreamingOptionsNode );

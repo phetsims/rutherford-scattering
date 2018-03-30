@@ -67,7 +67,7 @@ define( function( require ) {
       // a11y
       tagName: 'div',
       labelTagName: 'h3',
-      accessibleLabel: alphaParticleSettingsString,
+      labelContent: alphaParticleSettingsString,
       prependLabels: true
     }, options );
 
@@ -215,7 +215,7 @@ define( function( require ) {
       keyboardStep: 5,
       shiftKeyboardStep: 1,
       pageKeyboardStep: 10,
-      accessibleLabel: energyString,
+      labelContent: energyString,
       descriptionTagName: 'p',
       accessibleDescription: energySliderDescriptionString,
       prependLabels: true
@@ -243,7 +243,7 @@ define( function( require ) {
       checkboxColorBackground: RSColorProfile.panelColorProperty,
 
       // a11y
-      accessibleLabel: tracesString,
+      labelContent: tracesString,
       descriptionTagName: 'p',
       accessibleDescription: traceCheckboxDescriptionString,
       containerTagName: 'div'
