@@ -215,7 +215,6 @@ define( function( require ) {
       keyboardStep: 5,
       shiftKeyboardStep: 1,
       pageKeyboardStep: 10,
-      labelTagName: 'label',
       accessibleLabel: energyString,
       descriptionTagName: 'p',
       accessibleDescription: energySliderDescriptionString,
@@ -244,7 +243,6 @@ define( function( require ) {
       checkboxColorBackground: RSColorProfile.panelColorProperty,
 
       // a11y
-      labelTagName: 'label',
       accessibleLabel: tracesString,
       descriptionTagName: 'p',
       accessibleDescription: traceCheckboxDescriptionString,

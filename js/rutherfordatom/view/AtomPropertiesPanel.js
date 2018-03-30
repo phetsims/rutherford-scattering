@@ -289,7 +289,6 @@ define( function( require ) {
       rightArrowEndCallback: function() {rightProtonButtonInteractionProperty.set( false ); },
 
       // a11y
-      labelTagName: 'label',
       accessibleLabel: protonsValuePatternString,
       descriptionTagName: 'p',
       accessibleDescription: protonSliderDescriptionString,
@@ -344,7 +343,6 @@ define( function( require ) {
           rightArrowEndCallback: function() { rightNeutronButtonInteractionProperty.set( false ); },
 
           // a11y
-          labelTagName: 'label',
           accessibleLabel: neutronsValuePatternString,
           descriptionTagName: 'p',
           accessibleDescription: neutronSliderDescriptionString,
