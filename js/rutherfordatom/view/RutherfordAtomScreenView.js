@@ -183,7 +183,7 @@ define( function( require ) {
         maxWidth: self.targetMaterialNode.width,
 
         tagName: 'div',
-        accessibleDescription: switchScaleDescriptionString,
+        descriptionContent: switchScaleDescriptionString,
         labelTagName: 'h3',
         labelContent: switchScaleString,
         prependLabels: true

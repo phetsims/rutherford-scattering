@@ -214,7 +214,7 @@ define( function( require ) {
       tagName: 'div',
       labelTagName: 'h3',
       labelContent: otherViewingStreamingOptionsString,
-      accessibleDescription: otherOptionsDescriptionString
+      descriptionContent: otherOptionsDescriptionString
     } );
     this.addChild( viewingStreamingOptionsNode );
 

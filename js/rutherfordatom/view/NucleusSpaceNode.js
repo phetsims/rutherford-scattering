@@ -38,7 +38,7 @@ define( function( require ) {
       labelTagName: 'h3',
       labelContent: observationWindowString,
       descriptionTagName: 'p',
-      accessibleDescription: nucleusSpaceDescriptionString,
+      descriptionContent: nucleusSpaceDescriptionString,
       prependLabels: true
 
     }, options );

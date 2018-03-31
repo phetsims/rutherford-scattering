@@ -217,7 +217,7 @@ define( function( require ) {
       pageKeyboardStep: 10,
       labelContent: energyString,
       descriptionTagName: 'p',
-      accessibleDescription: energySliderDescriptionString,
+      descriptionContent: energySliderDescriptionString,
       prependLabels: true
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
@@ -245,7 +245,7 @@ define( function( require ) {
       // a11y
       labelContent: tracesString,
       descriptionTagName: 'p',
-      accessibleDescription: traceCheckboxDescriptionString,
+      descriptionContent: traceCheckboxDescriptionString,
       containerTagName: 'div'
     } );
     var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckbox ] } );

@@ -291,7 +291,7 @@ define( function( require ) {
       // a11y
       labelContent: protonsValuePatternString,
       descriptionTagName: 'p',
-      accessibleDescription: protonSliderDescriptionString,
+      descriptionContent: protonSliderDescriptionString,
       containerTagName: 'div'
     } ) );
 
@@ -345,7 +345,7 @@ define( function( require ) {
           // a11y
           labelContent: neutronsValuePatternString,
           descriptionTagName: 'p',
-          accessibleDescription: neutronSliderDescriptionString,
+          descriptionContent: neutronSliderDescriptionString,
           containerTagName: 'div'
         }
       ) );
