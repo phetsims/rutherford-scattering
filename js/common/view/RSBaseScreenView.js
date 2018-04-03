@@ -92,8 +92,8 @@ define( function( require ) {
       buttonColor: 'rgb(0, 203, 230)',
       rotation: GUN_ROTATION, // pointing up
       buttonRotation: -GUN_ROTATION, // so button lighting is correct
-      buttonAccessibleLabel: toggleAlphaParticleString,
-      buttonAccessibleDescription: alphaParticlesHelpTextString
+      buttonLabelContent: toggleAlphaParticleString,
+      buttonDescriptionContent: alphaParticlesHelpTextString
     } );
     this.addChild( this.gunNode );
 
