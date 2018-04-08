@@ -39,8 +39,7 @@ define( function( require ) {
       labelContent: observationWindowString,
       descriptionTagName: 'p',
       descriptionContent: nucleusSpaceDescriptionString,
-      prependLabels: true
-
+      appendDescription: true
     }, options );
 
     ParticleSpaceNode.call( this, model.nucleusSpace, showAlphaTraceProperty, modelViewTransform, options );

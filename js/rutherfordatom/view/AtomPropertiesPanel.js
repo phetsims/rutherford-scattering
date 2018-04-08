@@ -63,8 +63,7 @@ define( function( require ) {
 
       tagName: 'div',
       labelTagName: 'h3',
-      labelContent: atomSettingsString,
-      prependLabels: true
+      labelContent: atomSettingsString
     }, options );
 
     Panel.call( this, content, options );

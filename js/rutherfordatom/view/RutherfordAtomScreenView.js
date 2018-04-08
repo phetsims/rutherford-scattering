@@ -186,7 +186,7 @@ define( function( require ) {
         descriptionContent: switchScaleDescriptionString,
         labelTagName: 'h3',
         labelContent: switchScaleString,
-        prependLabels: true
+        appendDescription: true
       } ) );
     };
 

@@ -43,8 +43,7 @@ define( function( require ) {
       labelContent: observationWindowString,
       descriptionTagName: 'p',
       descriptionContent: atomSpaceDescriptionString,
-      prependLabels: true
-
+      appendDescription: true
     }, options );
 
     // @private - generates an image for the collection of atoms

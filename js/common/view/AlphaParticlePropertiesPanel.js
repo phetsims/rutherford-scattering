@@ -68,7 +68,6 @@ define( function( require ) {
       tagName: 'div',
       labelTagName: 'h3',
       labelContent: alphaParticleSettingsString,
-      prependLabels: true
     }, options );
 
     Panel.call( this, content, options );
@@ -218,7 +217,7 @@ define( function( require ) {
       labelContent: energyString,
       descriptionTagName: 'p',
       descriptionContent: energySliderDescriptionString,
-      prependLabels: true
+      appendDescription: true
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
     particleEnergySlider.addMajorTick( RSConstants.MAX_ALPHA_ENERGY, maxEnergyText );
