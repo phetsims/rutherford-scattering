@@ -14,12 +14,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LinearFunction = require( 'DOT/LinearFunction' );
   var Property = require( 'AXON/Property' );
-  var Random = require( 'DOT/Random' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var RAND = new Random();
   var MAX_PARTICLES = 20;
   var GUN_INTENSITY = 1;
   var X0_MIN_FRACTION = 0.04; // closest particle can get horizontally to atom as a fraction of atomic bounds
@@ -68,10 +66,10 @@ define( function( require ) {
 
       if ( this.onProperty.get() && this.dtSinceGunFired >= this.dtPerGunFired ) {
 
-        var ySign = ( RAND.nextDouble() < 0.5 ? 1 : -1 );
+        var ySign = ( phet.joist.random.nextDouble() < 0.5 ? 1 : -1 );
 
         // random position withing model bounds
-        var rand = RAND.nextDouble();
+        var rand = phet.joist.random.nextDouble();
         var particleX = ySign * rand * this.model.bounds.width / 2;
 
         // make sure that the particle was not directly fired at an atom to prevent trajectory failure
