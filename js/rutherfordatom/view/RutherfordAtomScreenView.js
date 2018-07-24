@@ -109,7 +109,7 @@ define( function( require ) {
     // when various panels are added/removed due to changing color profile or scene, reset the accessible order
     var self = this;
     var restoreAccessibleOrder = function() {
-      self.accessibleOrder = [ self.sceneSummaryNode, self.playAreaNode, self.gunNode, self.controlPanel, self.sceneRadioButtons ].filter( function( node ) {
+      self.accessibleOrder = [ self.sceneSummaryNode, self.playAreaNode, self.gunNode, self.controlPanel, self.sceneRadioButtonGroup ].filter( function( node ) {
         return !!node;
       } );
     };
@@ -157,17 +157,23 @@ define( function( require ) {
       restoreAccessibleOrder();
     } );
 
+    // a11y - a section for a control panel, 
+    var controlPanelNode = new Node( { children: [ new ControlPanelNode() ] } );
+    this.addChild( controlPanelNode );
+
     // create radio buttons for the scene - new buttons must be created
     // every time the color profile changes
     var nucleusIcon = RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 );
+    var buttonOptions = { scale: 0.18 };
+
+    /**
+     * Create the RadioButonGroup that will act as the scene selection control in this sim.
+     *
+     * @param {Image} atomIconImage - the icon for the atomic scene, changes with color profile
+     * @return {RadioButtonGroup} - returns a RadioButtonGroup that must be disposed when profile changes
+     */
     var createRadioButtons = function( atomIconImage ) {
-
-      var container = new Node();
-      container.addChild( new ControlPanelNode() ); // TODO: we shouldn't add this heading in this function
-
-      var buttonOptions = { scale: 0.18 };
-
-      return container.addChild( new RadioButtonGroup( model.sceneProperty, [
+      return new RadioButtonGroup( model.sceneProperty, [
         { value: 'atom', node: new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
         { value: 'nucleus', node: nucleusIcon, labelContent: nuclearScaleViewString }
       ], {
@@ -188,28 +194,28 @@ define( function( require ) {
         labelTagName: 'h3',
         labelContent: switchScaleString,
         appendDescription: true
-      } ) );
+      } );
     };
 
     // @private
-    self.sceneRadioButtons = createRadioButtons( atomImage );
-    self.addChild( self.sceneRadioButtons );
+    self.sceneRadioButtonGroup = createRadioButtons( atomImage );
+    controlPanelNode.addChild( self.sceneRadioButtonGroup );
 
     // if the bacgrkound, panel or stroke colors change, draw a new button group
     // no need to unlink, screen view exists for life of sim
     RSGlobals.projectorModeProperty.link( function() {
 
       // remove and dispose of the old button group
-      self.removeChild( self.sceneRadioButtons );
-      self.sceneRadioButtons.dispose();
+      controlPanelNode.removeChild( self.sceneRadioButtonGroup );
+      self.sceneRadioButtonGroup.dispose();
 
       // get the correct image for the 'atom' scene icon
       var iconImage = RSGlobals.projectorModeProperty.get() ? atomProjectorImage : atomImage;
 
       // create the new radio button group
       var newButtonGroup = createRadioButtons( iconImage );
-      self.sceneRadioButtons = newButtonGroup;
-      self.addChild( newButtonGroup );
+      self.sceneRadioButtonGroup = newButtonGroup;
+      controlPanelNode.addChild( newButtonGroup );
 
       // add laser, all control panels, and scene buttons to accessibleOrder, must be set after
       // creating new radio buttons
