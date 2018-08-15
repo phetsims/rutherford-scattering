@@ -109,7 +109,7 @@ define( function( require ) {
     // when various panels are added/removed due to changing color profile or scene, reset the accessible order
     var self = this;
     var restoreAccessibleOrder = function() {
-      self.accessibleOrder = [ self.sceneSummaryNode, self.playAreaNode, self.gunNode, self.controlPanel, self.sceneRadioButtonGroup ].filter( function( node ) {
+      self.accessibleOrder = [ self.screenSummaryNode, self.playAreaNode, self.gunNode, self.controlPanel, self.sceneRadioButtonGroup ].filter( function( node ) {
         return !!node;
       } );
     };

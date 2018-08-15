@@ -9,23 +9,25 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var SceneSummaryNode = require( 'SCENERY_PHET/accessibility/nodes/SceneSummaryNode' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var inherit = require( 'PHET_CORE/inherit' );
   var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
-  var sceneSummaryString = RSA11yStrings.sceneSummary.value;
+  var screenSummaryString = RSA11yStrings.screenSummary.value;
 
   /**
    * @constructor
    * @param {Object} options
    */
-  function RSSceneSummaryNode( options ) {
-
-    SceneSummaryNode.call( this, sceneSummaryString, options );
+  function RSScreenSummaryNode( options ) {
+    Node.call( this, {
+      tagName: 'p',
+      innerContent: screenSummaryString
+    } );
   }
 
-  rutherfordScattering.register( 'RSSceneSummaryNode', RSSceneSummaryNode );
+  rutherfordScattering.register( 'RSScreenSummaryNode', RSScreenSummaryNode );
 
-  return inherit( SceneSummaryNode, RSSceneSummaryNode );
+  return inherit( Node, RSScreenSummaryNode );
 } );

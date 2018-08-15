@@ -15,7 +15,7 @@ define( function( require ) {
 
   var RSA11yStrings = {
 
-    sceneSummary: {
+    screenSummary: {
       value: 'On this screen, the Play Area has a source that can stream Alpha particles onto a thin foil. A highly ' +
              'magnified view of the foil is shown in an observation window. Sliders adjust energy of the alpha particles ' +
              'and the number of protons and neutrons comprising the atoms in the foil. The Control Panel has radio buttons ' +

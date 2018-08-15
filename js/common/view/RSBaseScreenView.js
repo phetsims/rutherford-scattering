@@ -28,7 +28,7 @@ define( function( require ) {
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RSControlPanel = require( 'RUTHERFORD_SCATTERING/common/view/RSControlPanel' );
-  var RSSceneSummaryNode = require( 'RUTHERFORD_SCATTERING/common/view/RSSceneSummaryNode' );
+  var RSScreenSummaryNode = require( 'RUTHERFORD_SCATTERING/common/view/RSScreenSummaryNode' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var ScaleInfoNode = require( 'RUTHERFORD_SCATTERING/common/view/ScaleInfoNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
@@ -63,7 +63,10 @@ define( function( require ) {
     options = _.extend( {
       includeElectronLegend: true, // should the particle legend include an entry for the electron?
       includePlumPuddingLegend: false, // should the particle legend include an entry for the plum pudding cloud?
-      additionalControlPanels: null // {Panel[]|null} additional control panels, added below the common panels
+      additionalControlPanels: null, // {Panel[]|null} additional control panels, added below the common panels
+
+      // a11y
+      addScreenSummaryNode: true
     }, options );
 
     ScreenView.call( this, options );
@@ -73,8 +76,7 @@ define( function( require ) {
     this.showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
     // @protected - used for accessibleOrder in subTypes
-    this.sceneSummaryNode = new RSSceneSummaryNode();
-    this.addChild( this.sceneSummaryNode );
+    this.screenSummaryNode.addChild( new RSScreenSummaryNode() );
 
     // @protected - used for accessibleOrder in subTypes
     this.playAreaNode = new PlayAreaNode();

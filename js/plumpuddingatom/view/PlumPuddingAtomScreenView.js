@@ -60,7 +60,7 @@ define( function( require ) {
       self.addChild( self.controlPanel );
 
       // a11y - update accessible order when we recreate the control panel
-      self.accessibleOrder = [ self.sceneSummaryNode, self.playAreaNode, self.gunNode, self.controlPanel ].filter( function( node ) {
+      self.accessibleOrder = [ self.screenSummaryNode, self.playAreaNode, self.gunNode, self.controlPanel ].filter( function( node ) {
         return !!node;
       } );
     } );
