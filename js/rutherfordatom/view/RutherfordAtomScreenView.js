@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var AtomParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomParticleLegendPanel' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
@@ -24,7 +25,6 @@ define( function( require ) {
   var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
   var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
@@ -68,36 +68,40 @@ define( function( require ) {
 
     // create the panels of the control panel on the right
     var createPanels = function() {
+
       var legendContent;
       var atomSceneVisible = model.sceneProperty.value === 'atom';
 
-      // create content for the legend panels
-      if ( atomSceneVisible ) {
-        legendContent = AtomParticleLegendPanel.createPanelContent( { resize: false } );
-      }
-      else {
-        legendContent = NuclearParticleLegendPanel.createPanelContent( {
-          resize: false,
-          includeElectron: false,
-          includePlumPudding: false
-        } );
-      }
-
+      // create content for the control panels
+      var atomLegendContent = AtomParticleLegendPanel.createPanelContent( { resize: false } );
+      var nuclearLegendContent = NuclearParticleLegendPanel.createPanelContent( {
+        resize: false,
+        includeElectron: false,
+        includePlumPudding: false
+      } );
       var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.energyInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
       var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model.interactionPropertyGroup, model.protonInteractionProperty, model.neutronInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } );
 
-      var minWidth = RSConstants.PANEL_MIN_WIDTH;
-      if ( particlePropertiesContent.width !== atomPropertiesContent.width ) {
-        // max panel width including the X margins
-        var maxPanelWidth = Math.max( particlePropertiesContent.width, atomPropertiesContent.width, legendContent.width ) + 2 * RSConstants.PANEL_X_MARGIN;
-        minWidth = Math.max( minWidth, maxPanelWidth );
+      // make sure that content for all panels are aligned, this content does not include title
+      var contentAlignGroup = new AlignGroup( { matchVertical: false } );
+      var atomContentBox = contentAlignGroup.createBox( atomLegendContent, { xAlign: 'left' } );
+      var nuclearContentBox = contentAlignGroup.createBox( nuclearLegendContent, { xAlign: 'left' } );
+      var particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
+      var atromPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
+
+      // create content for the legend panels
+      if ( atomSceneVisible ) {
+        legendContent = atomContentBox;
+      }
+      else {
+        legendContent = nuclearContentBox;
       }
 
-      // create the panels, limited by the min width
-      var panelOptions = { minWidth: minWidth, resize: false };
+      // create the panels
+      var panelOptions = { resize: false };
       var legendPanel = atomSceneVisible ? new AtomParticleLegendPanel( legendContent, panelOptions ) : new NuclearParticleLegendPanel( legendContent, panelOptions );
-      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent, panelOptions );
-      var atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, panelOptions );
+      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
+      var atomPropertiesPanel = new AtomPropertiesPanel( atromPropertiesContentBox, panelOptions );
 
       return [
         legendPanel,

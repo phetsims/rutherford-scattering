@@ -55,6 +55,20 @@ define( function( require ) {
    */
   function AlphaParticlePropertiesPanel( content, options ) {
 
+    // the title for the panel
+    var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
+      font: RSConstants.PANEL_TITLE_FONT,
+      fontWeight: 'bold',
+      fill: RSColorProfile.panelTitleColorProperty,
+      maxWidth: 215
+    } );
+
+    var contentVBox = new VBox( {
+      children: [ alphaParticlePropertiesText, content ],
+      align: 'left',
+      spacing: RSConstants.PANEL_CHILD_SPACING
+    } );
+
     options = _.extend( {
       xMargin: RSConstants.PANEL_X_MARGIN,
       yMargin: 8,
@@ -70,7 +84,7 @@ define( function( require ) {
       labelContent: alphaParticleSettingsString
     }, options );
 
-    Panel.call( this, content, options );
+    Panel.call( this, contentVBox, options );
 
     // @private - make panel eligible for garbage collection
     this.disposeAlphaParticlePropertiesPanel = function() {
@@ -132,13 +146,6 @@ define( function( require ) {
     // @private
     this.energyInteractionProperty = energyInteractionProperty;
 
-    // strings
-    var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
-      font: RSConstants.PANEL_TITLE_FONT,
-      fontWeight: 'bold',
-      fill: RSColorProfile.panelTitleColorProperty,
-      maxWidth: 215
-    } );
     var energyText = new Text( energyString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
@@ -257,7 +264,7 @@ define( function( require ) {
       right: 0,
       align: 'left',
       resize: false,
-      children: [ alphaParticlePropertiesText, energyTitleBox, containerRect, new VStrut( 5 ), showTraceBox ]
+      children: [ energyTitleBox, containerRect, new VStrut( 5 ), showTraceBox ]
     } );
 
     // @private

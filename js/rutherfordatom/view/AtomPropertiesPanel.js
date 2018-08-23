@@ -49,6 +49,20 @@ define( function( require ) {
    */
   function AtomPropertiesPanel( content, options ) {
 
+    // Add the title of the panel content
+    var atomPropertiesText = new Text( atomString, {
+      font: RSConstants.PANEL_TITLE_FONT,
+      fontWeight: 'bold',
+      fill: RSColorProfile.panelTitleColorProperty,
+      maxWidth: 225
+    } );
+
+    var panelBox = new VBox( {
+      children: [ atomPropertiesText, content ],
+      align: 'left',
+      spacing: RSConstants.PANEL_CHILD_SPACING
+    } );
+
     options = _.extend( {
       xMargin: RSConstants.PANEL_X_MARGIN,
       yMargin: 10,
@@ -64,7 +78,7 @@ define( function( require ) {
       labelContent: atomSettingsString
     }, options );
 
-    Panel.call( this, content, options );
+    Panel.call( this, panelBox, options );
 
     // ensure that panel is eligible for garbage collection, a panel is created and destroyed every time
     // scene or color scheme changes so it si important that everything is disposed
@@ -107,14 +121,14 @@ define( function( require ) {
   } );
 
   /**
-   * Create the content for the AtomPropertiesPanel.
+   * Create the content for the AtomPropertiesPanel. This does not include the panel title.
    *
    * @param  {Object} interactionPropertyGroup - group of Properties for the model tracking interaction with various components
    * @param  {Property.<boolean>} protonInteractionProperty
    * @param  {Property.<boolean>} neutronInteractionProperty
    * @param  {Property.<number>} protonCountProperty
    * @param  {Property.<number>} neutronCountProperty
-   * @param  {Object} options
+   * @param  {Object} [options]
    * @constructor
    */
   function AtomPropertiesPanelContent( interactionPropertyGroup, protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
@@ -158,16 +172,6 @@ define( function( require ) {
     protonPanelInteractionProperty.link( protonInteractionListener );
     neutronPanelInteractionProperty.link( neutronInteractionListener );
     // end of multitouch set up
-
-
-    // Add the title of the panel content
-    var atomPropertiesText = new Text( atomString, {
-      font: RSConstants.PANEL_TITLE_FONT,
-      fontWeight: 'bold',
-      fill: RSColorProfile.panelTitleColorProperty,
-      maxWidth: 225
-    } );
-
 
     /**
      * Track fingers for multitouch, adding a finger count to a particular element and setting
@@ -356,7 +360,7 @@ define( function( require ) {
       right: 0,
       align: 'left',
       resize: false,
-      children: [ atomPropertiesText, protonNumberControl, neutronNumberControl ]
+      children: [ protonNumberControl, neutronNumberControl ]
     } );
 
     this.disposeContent = function() {

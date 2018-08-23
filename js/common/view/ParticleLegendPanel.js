@@ -33,18 +33,33 @@ define( function( require ) {
    */
   function ParticleLegendPanel( content, options ) {
 
+    // the title for the panel
+    var legendText = new Text( legendString, {
+      font: RSConstants.PANEL_TITLE_FONT,
+      fontWeight: 'bold',
+      fill: RSColorProfile.panelTitleColorProperty,
+      maxWidth: 225
+    } );
+
+    // title with content, aligned
+    var contentVBox = new VBox( {
+      children: [ legendText, content ],
+      align: 'left',
+      spacing: RSConstants.PANEL_CHILD_SPACING
+    } );
+
     options = _.extend( {
-      xMargin: 5,
+      xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
-      align: 'center',
+      align: 'left',
       fill: RSColorProfile.panelColorProperty,
       stroke: RSColorProfile.panelBorderColorProperty,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
 
-    Panel.call( this, content, options );
+    Panel.call( this, contentVBox, options );
   }
 
   /**
@@ -97,6 +112,11 @@ define( function( require ) {
     }
   } );
 
+  /**
+   * Creates the content for the panel, does not include the title.
+   * @param {Array.<Node>} children
+   * @param {Object} [options]
+   */
   function ParticleLegendPanelContent( children, options ) {
 
     options = _.extend( {
@@ -109,16 +129,6 @@ define( function( require ) {
       stroke: RSColorProfile.panelBorderColorProperty,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
-
-    var legendText = new Text( legendString, {
-      font: RSConstants.PANEL_TITLE_FONT,
-      fontWeight: 'bold',
-      fill: RSColorProfile.panelTitleColorProperty,
-      maxWidth: 225
-    } );
-
-    // add the legend title to the begining of the children
-    children.unshift( legendText );
 
     VBox.call( this, {
       spacing: options.itemVerticalSpacing,
