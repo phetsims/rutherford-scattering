@@ -31,10 +31,8 @@ define( function( require ) {
   // a11y strings
   var atomSettingsString = RSA11yStrings.atomSettings.value;
   var protonsValuePatternString = RSA11yStrings.protonsValuePattern.value;
-  // var protonsPerAtomValuePatternString = RSA11yStrings.protonsPerAtomValuePattern.value;
   var protonSliderDescriptionString = RSA11yStrings.protonSliderDescription.value;
   var neutronsValuePatternString = RSA11yStrings.neutronsValuePattern.value;
-  // var neutronsPerAtomValuePatternString = RSA11yStrings.neutronsPerAtomValuePattern.value;
   var neutronSliderDescriptionString = RSA11yStrings.neutronSliderDescription.value;
 
   // global, tracking where fingers are for multitouch support
