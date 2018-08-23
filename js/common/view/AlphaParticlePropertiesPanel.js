@@ -60,7 +60,7 @@ define( function( require ) {
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
-      align: 'left',
+      align: 'center',
       fill: RSColorProfile.panelColorProperty,
       stroke: RSColorProfile.panelBorderColorProperty,
 

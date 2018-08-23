@@ -25,7 +25,6 @@ define( function( require ) {
 
   // constants
   var LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;
-  var LEGEND_TITLE_HORIZONTAL_SPACING = 10;
 
   /**
    * @param {VBox} children - content to be contained in the panel
@@ -39,27 +38,13 @@ define( function( require ) {
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
-      align: 'left',
+      align: 'center',
       fill: RSColorProfile.panelColorProperty,
       stroke: RSColorProfile.panelBorderColorProperty,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
 
     Panel.call( this, content, options );
-  }
-
-  /**
-   * Build the title row consisting of the title text
-   * @param {string} titleText
-   */
-  function createLegendTitle( titleText ) {
-    var hStrut = new HStrut( LEGEND_TITLE_HORIZONTAL_SPACING );
-
-    return new HBox( {
-      spacing: 0,
-      align: 'center',
-      children: [ hStrut, titleText ]
-    } );
   }
 
   /**
@@ -133,8 +118,7 @@ define( function( require ) {
     } );
 
     // add the legend title to the begining of the children
-    var legendTitleRow = createLegendTitle( legendText );
-    children.unshift( legendTitleRow );
+    children.unshift( legendText );
 
     VBox.call( this, {
       spacing: options.itemVerticalSpacing,
