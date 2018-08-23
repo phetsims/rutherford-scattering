@@ -67,7 +67,7 @@ define( function( require ) {
     this.showAlphaTraceProperty = showAlphaTraceProperty;
 
     // @private
-    this.particleTraceColorWithFade = 'rgba(' + options.particleTraceColor.r + ',' + options.particleTraceColor.g + ',' + options.particleTraceColor.b + ',{0}';
+    this.particleTraceColorWithFade = 'rgba(' + options.particleTraceColor.r + ',' + options.particleTraceColor.g + ',' + options.particleTraceColor.b + ',{0})';
 
     // @private - the area to be used as the 'viewport', border not included
     this.clipRect = {
@@ -160,9 +160,9 @@ define( function( require ) {
     renderAlphaParticles: function( context, particleContainer, renderTrace ) {
       var self = this;
 
-      // if style is 'nucleus' we can get away with rendering with one path for performance
       if ( renderTrace ) {
 
+        // if style is 'nucleus' we can get away with rendering with one path for performance
         if ( self.particleStyle === 'nucleus' ) {
           context.beginPath();
           context.lineWidth = PARTICLE_TRACE_WIDTH;
@@ -178,8 +178,8 @@ define( function( require ) {
           // add trace segments
           for ( var i = 1; i < particle.positions.length; i++ ) {
             if ( self.particleStyle === 'particle' ) {
-              // if the style is of a 'particle', each segment needs a new path
-              // to create the gradient effect
+
+              // if the style is of a 'particle', each segment needs a new path to create the gradient effect
               context.beginPath();
             }
 
