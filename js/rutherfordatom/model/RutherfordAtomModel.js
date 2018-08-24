@@ -36,7 +36,6 @@ define( function( require ) {
 
     // interactions that create dependencies for the userInteractionProperty
     // these will be passed on to individual panels and interface elements
-    // NOT added to property set because we don't want these to get reset with 'reset all'
     this.energyInteractionProperty = new Property( false ); // interaction with the energy slider
     this.protonInteractionProperty = new Property( false ); // interaction with the proton count slider
     this.neutronInteractionProperty = new Property( false ); // interaction with the neutron count slider
