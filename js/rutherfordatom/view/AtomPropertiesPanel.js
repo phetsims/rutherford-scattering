@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var NumberControl = require( 'SCENERY_PHET/NumberControl' );
   var Panel = require( 'SUN/Panel' );
+  var Property = require( 'AXON/Property' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
   var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
@@ -39,6 +40,18 @@ define( function( require ) {
   // must persist beyond lifetime of the panel so that fingers are tracked when new
   // panels are created for scene or color profile changes
   var FINGER_TRACKER = {};
+
+  // specific interaction properties for the rutherford atom portion, for multitouch
+  // Not specific to an instance of an AtomPropertiesPanel, values of the interaction state Properties should
+  // persist beyond when scene or color profile changes
+  var interactionPropertyGroup = {
+    leftProtonButtonInteractionProperty: new Property( false ),
+    rightProtonButtonInteractionProperty: new Property( false ),
+    protonSliderInteractionProperty: new Property( false ),
+    leftNeutronButtonInteractionProperty: new Property( false ),
+    rightNeutronButtonInteractionProperty: new Property( false ),
+    neutronSliderInteractionProperty: new Property( false )
+  };
 
   /**
    * Constructor for a Atom Properties control panel.
@@ -107,7 +120,6 @@ define( function( require ) {
     /**
      * create content for the panel
      *
-     * @param  {Object} interactionPropertyGroup
      * @param  {Property.<boolean>} protonInteractionProperty
      * @param  {Property.<boolean>} neutronInteractionProperty
      * @param  {Property.<number>} protonCountProperty
@@ -115,15 +127,14 @@ define( function( require ) {
      * @param  {Object} options
      * @public
      */
-    createPanelContent: function( interactionPropertyGroup, protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
-      return new AtomPropertiesPanelContent( interactionPropertyGroup, protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options );
+    createPanelContent: function( protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
+      return new AtomPropertiesPanelContent( protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options );
     }
   } );
 
   /**
    * Create the content for the AtomPropertiesPanel. This does not include the panel title.
    *
-   * @param  {Object} interactionPropertyGroup - group of Properties for the model tracking interaction with various components
    * @param  {Property.<boolean>} protonInteractionProperty
    * @param  {Property.<boolean>} neutronInteractionProperty
    * @param  {Property.<number>} protonCountProperty
@@ -131,7 +142,7 @@ define( function( require ) {
    * @param  {Object} [options]
    * @constructor
    */
-  function AtomPropertiesPanelContent( interactionPropertyGroup, protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
+  function AtomPropertiesPanelContent( protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
 
     options = _.extend( {
       xMargin: 15,

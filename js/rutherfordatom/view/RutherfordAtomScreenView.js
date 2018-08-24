@@ -80,7 +80,7 @@ define( function( require ) {
         includePlumPudding: false
       } );
       var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.energyInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
-      var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model.interactionPropertyGroup, model.protonInteractionProperty, model.neutronInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } );
+      var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model.protonInteractionProperty, model.neutronInteractionProperty, model.protonCountProperty, model.neutronCountProperty, { resize: false } );
 
       // make sure that content for all panels are aligned, this content does not include title
       var contentAlignGroup = new AlignGroup( { matchVertical: false } );

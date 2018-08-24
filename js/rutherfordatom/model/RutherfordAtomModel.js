@@ -34,23 +34,11 @@ define( function( require ) {
     // @public {string} - scene to display, 'atom'|'nucleus'
     this.sceneProperty = new Property( 'atom' );
 
-    // interactions that create dependencies for the userInteractionProperty
-    // these will be passed on to individual panels and interface elements
+    // interactions that create dependencies for the DerivedProperties that will track user interaction, generally
+    // used by control panels to prevent multitouch issues by tracking when the user is changing something
     this.energyInteractionProperty = new Property( false ); // interaction with the energy slider
     this.protonInteractionProperty = new Property( false ); // interaction with the proton count slider
     this.neutronInteractionProperty = new Property( false ); // interaction with the neutron count slider
-
-    // @public - specific interaction properties for the rutherford atom portion, for multitouch
-    // tracked in the model because the control panels gets disposed when the scene changes, and we
-    // do not want these properties to be reset at that time
-    this.interactionPropertyGroup = {
-      leftProtonButtonInteractionProperty: new Property( false ),
-      rightProtonButtonInteractionProperty: new Property( false ),
-      protonSliderInteractionProperty: new Property( false ),
-      leftNeutronButtonInteractionProperty: new Property( false ),
-      rightNeutronButtonInteractionProperty: new Property( false ),
-      neutronSliderInteractionProperty: new Property( false )
-    };
 
     // @public - create a derived property for user interaction, so that the an interaction occurs when any dependency
     // is true
