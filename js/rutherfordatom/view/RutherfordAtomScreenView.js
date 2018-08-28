@@ -14,7 +14,7 @@ define( function( require ) {
   var AtomParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomParticleLegendPanel' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
   var AtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomSpaceNode' );
-  var ControlPanelNode = require( 'SCENERY_PHET/accessibility/nodes/ControlPanelNode' );
+  var ControlAreaNode = require( 'SCENERY_PHET/accessibility/nodes/ControlAreaNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -162,7 +162,7 @@ define( function( require ) {
     } );
 
     // a11y - a section for a control panel, 
-    var controlPanelNode = new Node( { children: [ new ControlPanelNode() ] } );
+    var controlPanelNode = new Node( { children: [ new ControlAreaNode() ] } );
     this.addChild( controlPanelNode );
 
     // create radio buttons for the scene - new buttons must be created
