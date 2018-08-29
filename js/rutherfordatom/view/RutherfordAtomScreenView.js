@@ -3,7 +3,7 @@
 /**
  * View for the 'Rutherford Atom' screen.
  *
- * @author Chris Malley (Pixelzoom)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
