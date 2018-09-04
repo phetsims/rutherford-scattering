@@ -48,19 +48,19 @@ define( function( require ) {
         includeElectron: true // should the panel include an entry for the electron?
       }, options );
 
-      // add the legend particle entries
-      var children = [];
+      // {Array.<Node>} - children for the content, gets wrapped in AlignBoxes in createPanelContent
+      var content = [];
       if ( options.includeElectron ) {
-        children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
+        content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
       }
-      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
-      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
-      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleString ) );
+      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
+      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
+      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleString ) );
       if ( options.includePlumPudding ) {
-        children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createPlumPuddingIcon(), positiveChargeString ) );
+        content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createPlumPuddingIcon(), positiveChargeString ) );
       }
 
-      return ParticleLegendPanel.createPanelContent( children, options );
+      return ParticleLegendPanel.createPanelContent( content, options );
     }
   } );
 } );

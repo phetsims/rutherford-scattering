@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -107,17 +108,17 @@ define( function( require ) {
      * @returns {type}  description
      * @public
      */
-    createPanelContent: function( children, options ) {
-      return new ParticleLegendPanelContent( children, options );
+    createPanelContent: function( content, options ) {
+      return new ParticleLegendPanelContent( content, options );
     }
   } );
 
   /**
    * Creates the content for the panel, does not include the title.
-   * @param {Array.<Node>} children
+   * @param {Array.<Node>} content
    * @param {Object} [options]
    */
-  function ParticleLegendPanelContent( children, options ) {
+  function ParticleLegendPanelContent( content, options ) {
 
     options = _.extend( {
       xMargin: 5,
@@ -129,6 +130,13 @@ define( function( require ) {
       stroke: RSColorProfile.panelBorderColorProperty,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
+
+    // i18n - make align boxes for all items so that they are the same height, important when strings change size
+    var alignGroup = new AlignGroup( { matchHorizontal: false } );
+    var children = [];
+    content.forEach( function( item ) {
+      children.push( alignGroup.createBox( item ) );
+    } );
 
     VBox.call( this, {
       spacing: options.itemVerticalSpacing,
