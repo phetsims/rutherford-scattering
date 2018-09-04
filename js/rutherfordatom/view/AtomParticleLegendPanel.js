@@ -43,12 +43,12 @@ define( function( require ) {
     createPanelContent: function( options ) {
 
       // add the legend particle entries
-      var children = [];
-      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleus(), nucleusString ) );
-      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createEnergyLevel(), electronEnergyLevelString ) );
-      children.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createParticleTrace(), alphaParticleTraceString ) );
+      var content = [];
+      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleus(), nucleusString ) );
+      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createEnergyLevel(), electronEnergyLevelString ) );
+      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createParticleTrace(), alphaParticleTraceString ) );
 
-      return ParticleLegendPanel.createPanelContent( children, options );
+      return ParticleLegendPanel.createPanelContent( content, options );
     }
   } );
 } );
