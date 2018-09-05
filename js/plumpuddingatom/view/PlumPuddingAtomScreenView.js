@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlignGroup = require( 'SCENERY/nodes/AlignGroup' );
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
@@ -49,8 +50,12 @@ define( function( require ) {
         includePlumPudding: true
       } );
 
-      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePanelContent, { resize: false } );
-      var legendPanel = new NuclearParticleLegendPanel( legendPanelContent, { resize: false } );
+      var contentAlignGroup = new AlignGroup( { matchVertical: false } );
+      var particleContentBox = contentAlignGroup.createBox( particlePanelContent );
+      var legendContentBox = contentAlignGroup.createBox( legendPanelContent );
+
+      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particleContentBox, { resize: false } );
+      var legendPanel = new NuclearParticleLegendPanel( legendContentBox, { resize: false } );
 
       var panels = [
         legendPanel,
