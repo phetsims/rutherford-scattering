@@ -127,8 +127,8 @@ define( function( require ) {
      * @param  {Object} options
      * @public
      */
-    createPanelContent: function( protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
-      return new AtomPropertiesPanelContent( protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options );
+    createPanelContent: function( model, options ) {
+      return new AtomPropertiesPanelContent( model, options );
     }
   } );
 
@@ -142,7 +142,7 @@ define( function( require ) {
    * @param  {Object} [options]
    * @constructor
    */
-  function AtomPropertiesPanelContent( protonInteractionProperty, neutronInteractionProperty, protonCountProperty, neutronCountProperty, options ) {
+  function AtomPropertiesPanelContent( model, options ) {
 
     options = _.extend( {
       xMargin: 15,
@@ -156,10 +156,10 @@ define( function( require ) {
     }, options );
 
     // @private
-    this.protonInteractionProperty = protonInteractionProperty;
-    this.neutronInteractionProperty = neutronInteractionProperty;
-    this.neutronCountProperty = neutronCountProperty;
-    this.protonCountProperty = protonCountProperty;
+    this.protonInteractionProperty = model.protonInteractionProperty;
+    this.neutronInteractionProperty = model.neutronInteractionProperty;
+    this.neutronCountProperty = model.neutronCountProperty;
+    this.protonCountProperty = model.protonCountProperty;
 
     // each element must have a unique interaction property to support multitouch, see #104
     var leftProtonButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
@@ -174,11 +174,12 @@ define( function( require ) {
     var neutronPanelInteractionProperty = DerivedProperty.or( [ leftNeutronButtonInteractionProperty, rightNeutronButtonInteractionProperty, neutronSliderInteractionProperty ] );
 
     // must be disposed
+    var self = this;
     var protonInteractionListener = function( protonInteraction ) {
-      protonInteractionProperty.set( protonInteraction );
+      self.protonInteractionProperty.set( protonInteraction );
     };
     var neutronInteractionListener = function( neutronInteraction ) {
-      neutronInteractionProperty.set( neutronInteraction );
+      self.neutronInteractionProperty.set( neutronInteraction );
     };
     protonPanelInteractionProperty.link( protonInteractionListener );
     neutronPanelInteractionProperty.link( neutronInteractionListener );
@@ -215,21 +216,6 @@ define( function( require ) {
       countProperty.set( Util.roundSymmetric( countProperty.value ) ); // proper resolution for nucleons
       if ( FINGER_TRACKER[ sliderID ] === 0 ) {
         interactionProperty.set( false );
-      }
-    };
-
-    /**
-     * Generalized callback for each arrow button - proton/neutronInteractionProperty
-     * should only be set if the new value is in the allowable range
-     * @param {Property.<Number>} countProperty
-     * @param interactionProperty
-     * @param delta
-     * @param valueRange
-     */
-    var arrowButtonStartCallback = function( countProperty, interactionProperty, delta, valueRange ) {
-      var newValue = countProperty.value + delta;
-      if ( valueRange.contains( newValue ) ) {
-        interactionProperty.set( true );
       }
     };
 
@@ -284,8 +270,12 @@ define( function( require ) {
       }
     ];
 
+    // will track whether we are pressing and holding arrow buttons down
+    var rightProtonButtonDown = false;
+    var leftProtonButtonDown = false;
+
     // Number control for protons
-    var protonNumberControl = new NumberControl( numberOfProtonsString, protonCountProperty, protonCountRange, _.extend( numberControlOptions, {
+    var protonNumberControl = new NumberControl( numberOfProtonsString, this.protonCountProperty, protonCountRange, _.extend( numberControlOptions, {
       titleFill: RSColorProfile.protonsLabelColorProperty,
       majorTicks: protonMajorTicks,
 
@@ -294,11 +284,23 @@ define( function( require ) {
 
       // Individual callbacks for each component of the NumberControl to support multitouch
       sliderStartCallback: function() { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
-      sliderEndCallback: function() { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, protonCountProperty ); },
-      leftArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, leftProtonButtonInteractionProperty, -1, protonCountRange ); },
-      leftArrowEndCallback: function() {leftProtonButtonInteractionProperty.set( false ); },
-      rightArrowStartCallback: function() { arrowButtonStartCallback( protonCountProperty, rightProtonButtonInteractionProperty, 1, protonCountRange ); },
-      rightArrowEndCallback: function() {rightProtonButtonInteractionProperty.set( false ); },
+      sliderEndCallback: function() { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, self.protonCountProperty ); },
+      leftArrowStartCallback: function() {
+        leftProtonButtonDown = true;
+      },
+      leftArrowEndCallback: function() {
+        leftProtonButtonInteractionProperty.set( false );
+        leftProtonButtonDown = false;
+        model.removeAllParticles();
+      },
+      rightArrowStartCallback: function() {
+        rightProtonButtonDown = true;
+      },
+      rightArrowEndCallback: function() {
+        rightProtonButtonInteractionProperty.set( false );
+        rightProtonButtonDown = false;
+        model.removeAllParticles();
+      },
 
       // a11y
       labelContent: protonsValuePatternString,
@@ -308,16 +310,21 @@ define( function( require ) {
       containerTagName: 'div'
     } ) );
 
+    function protonCountListener() {
+
+      // if we are still pressing the arrow buttons while neutron count is changing, we are pressing and holding -
+      // update the interaction Properties so that the dashed circle appears
+      if ( leftProtonButtonDown ) {
+        leftProtonButtonInteractionProperty.set( true );
+      }
+      if ( rightProtonButtonDown ) {
+        rightProtonButtonInteractionProperty.set( true );
+      }
+    }
+    this.protonCountProperty.link( protonCountListener );
 
     var neutronCountRange = new RangeWithValue( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
       RSConstants.DEFAULT_NEUTRON_COUNT );
-
-    var neutronAddedStartCallback = function() {
-      arrowButtonStartCallback( neutronCountProperty, rightNeutronButtonInteractionProperty, 1, neutronCountRange );
-    };
-    var neutronRemovedStartCallback = function() {
-      arrowButtonStartCallback( neutronCountProperty, leftNeutronButtonInteractionProperty, -1, neutronCountRange );
-    };
 
     var neutronMajorTicks = [ {
       value: neutronCountRange.min,
@@ -337,9 +344,12 @@ define( function( require ) {
       }
     ];
 
+    // will track whether we are pressing and holding arrow buttons down
+    var leftNeutronButtonDown = false;
+    var rightNeutronButtonDown = false;
 
     // Number control for protons
-    var neutronNumberControl = new NumberControl( numberOfNeutronsString, neutronCountProperty, neutronCountRange,
+    var neutronNumberControl = new NumberControl( numberOfNeutronsString, this.neutronCountProperty, neutronCountRange,
       _.extend( numberControlOptions, {
           titleFill: RSColorProfile.neutronsLabelColorProperty,
           majorTicks: neutronMajorTicks,
@@ -349,11 +359,23 @@ define( function( require ) {
 
           // Individual callbacks for each component of the NumberControl to support multitouch
           sliderStartCallback: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
-          sliderEndCallback: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, neutronCountProperty ); },
-          leftArrowStartCallback: neutronRemovedStartCallback,
-          leftArrowEndCallback: function() { leftNeutronButtonInteractionProperty.set( false ); },
-          rightArrowStartCallback: neutronAddedStartCallback,
-          rightArrowEndCallback: function() { rightNeutronButtonInteractionProperty.set( false ); },
+          sliderEndCallback: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, self.neutronCountProperty ); },
+          leftArrowEndCallback: function() {
+            leftNeutronButtonInteractionProperty.set( false );
+            leftNeutronButtonDown = false;
+            model.removeAllParticles();
+          },
+          rightArrowEndCallback: function() {
+            rightNeutronButtonInteractionProperty.set( false );
+            rightNeutronButtonDown = false;
+            model.removeAllParticles();
+          },
+          leftArrowStartCallback: function() {
+            leftNeutronButtonDown = true;
+          },
+          rightArrowStartCallback: function() {
+            rightNeutronButtonDown = true;
+          },
 
           // a11y
           labelContent: neutronsValuePatternString,
@@ -362,7 +384,20 @@ define( function( require ) {
           descriptionContent: neutronSliderDescriptionString,
           containerTagName: 'div'
         }
-      ) );
+      ) );  
+
+    function neutronCountListener() {
+
+      // if we are still pressing the arrow buttons while neutron count is changing, we are pressing and holding -
+      // update the interaction Properties so that the dashed circle appears
+      if ( leftNeutronButtonDown ) {
+        leftNeutronButtonInteractionProperty.set( true );
+      }
+      if ( rightNeutronButtonDown ) {
+        rightNeutronButtonInteractionProperty.set( true );
+      }
+    }
+    this.neutronCountProperty.link( neutronCountListener );
 
     // main panel content
     VBox.call( this, {
@@ -382,7 +417,11 @@ define( function( require ) {
       // this.protonPlusButton.dispose();
       // this.neutronMinusButton.dispose();
       // this.neutronPlusButton.dispose();
-
+      
+      // dispose listeners attached to proton/neutron count Properties
+      self.neutronCountProperty.unlink( neutronCountListener );
+      self.protonCountProperty.unlink( protonCountListener );
+      
       // dispose number controls
       protonNumberControl.dispose();
       neutronNumberControl.dispose();
