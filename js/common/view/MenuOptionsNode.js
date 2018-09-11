@@ -22,7 +22,7 @@ define( function( require ) {
    *
    * @constructor
    */
-  function MenuOptionsNode( model ) {
+  function MenuOptionsNode() {
 
     var projectorCheckbox = new ProjectorModeCheckbox( {
       projectorModeEnabledProperty: RSGlobals.projectorModeProperty
