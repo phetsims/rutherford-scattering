@@ -11,29 +11,25 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Checkbox = require( 'SUN/Checkbox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var OptionsDialog = require( 'JOIST/OptionsDialog' );
+  var ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var VBox = require( 'SCENERY/nodes/VBox' );
-
-  // strings
-  var optionsProjectorModeString = require( 'string!RUTHERFORD_SCATTERING/options.projectorMode' );
 
   /**
    *
    * @constructor
    */
   function MenuOptionsNode( model ) {
-    var children = [];
 
-    children.push( new Checkbox( new Text( optionsProjectorModeString, { font: OptionsDialog.DEFAULT_FONT } ),
-      RSGlobals.projectorModeProperty, {} ) );
+    var projectorCheckbox = new ProjectorModeCheckbox( {
+      projectorModeEnabledProperty: RSGlobals.projectorModeProperty
+    } );
 
     VBox.call( this, _.extend( {
-      children: children,
+      children: [ projectorCheckbox ],
       spacing: OptionsDialog.DEFAULT_SPACING,
       align: 'left'
     } ) );
