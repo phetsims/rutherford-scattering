@@ -13,6 +13,7 @@ define( function( require ) {
   var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
+  var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
   var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
   var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
@@ -43,16 +44,18 @@ define( function( require ) {
       self.controlPanel.dispose();
 
       // create the new control panel
-      var particlePanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
+      var propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
       var legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
         resize: false,
         includeElectron: true,
         includePlumPudding: true
       } );
 
+      // handle alignment for the panels, should have exactly the same width, but the legend content should be aligned
+      // to the left
       var contentAlignGroup = new AlignGroup( { matchVertical: false } );
-      var particleContentBox = contentAlignGroup.createBox( particlePanelContent );
-      var legendContentBox = contentAlignGroup.createBox( legendPanelContent );
+      var particleContentBox = contentAlignGroup.createBox( propertiesPanelContent );
+      var legendContentBox = contentAlignGroup.createBox( legendPanelContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
 
       var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particleContentBox, { resize: false } );
       var legendPanel = new NuclearParticleLegendPanel( legendContentBox, { resize: false } );

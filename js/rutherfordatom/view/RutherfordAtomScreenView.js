@@ -20,6 +20,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var NucleusSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/NucleusSpaceNode' );
+  var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
@@ -82,10 +83,11 @@ define( function( require ) {
       var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.energyInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
       var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
 
-      // make sure that content for all panels are aligned, this content does not include title
+      // make sure that content for all panels are aligned and the legend content is aligned to the left
+      // this content does not include title
       var contentAlignGroup = new AlignGroup( { matchVertical: false } );
-      var atomContentBox = contentAlignGroup.createBox( atomLegendContent, { xAlign: 'left' } );
-      var nuclearContentBox = contentAlignGroup.createBox( nuclearLegendContent, { xAlign: 'left' } );
+      var atomContentBox = contentAlignGroup.createBox( atomLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
+      var nuclearContentBox = contentAlignGroup.createBox( nuclearLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
       var particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
       var atromPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
 
