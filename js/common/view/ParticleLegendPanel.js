@@ -110,7 +110,10 @@ define( function( require ) {
      */
     createPanelContent: function( content, options ) {
       return new ParticleLegendPanelContent( content, options );
-    }
+    },
+
+    // for aligning with other panels in the various screens, legend content should be left aligned
+    LEGEND_CONTENT_ALIGN: 'left'
   } );
 
   /**
