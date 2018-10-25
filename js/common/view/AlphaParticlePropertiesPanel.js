@@ -18,6 +18,7 @@ define( function( require ) {
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Panel = require( 'SUN/Panel' );
+  var Range = require( 'DOT/Range' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
@@ -197,10 +198,10 @@ define( function( require ) {
 
     // particle engery slider
     var sliderWidth = options.minWidth * 0.75;
-    var particleEnergySlider = new HSlider( alphaParticleEnergyProperty, {
-      min: RSConstants.MIN_ALPHA_ENERGY,
-      max: RSConstants.MAX_ALPHA_ENERGY
-    }, {
+    var particleEnergySlider = new HSlider( alphaParticleEnergyProperty, new Range(
+      RSConstants.MIN_ALPHA_ENERGY,
+      RSConstants.MAX_ALPHA_ENERGY
+    ), {
       trackFill: RSColorProfile.panelSliderLabelColorProperty,
       trackStroke: RSColorProfile.panelSliderLabelColorProperty,
       majorTickStroke: RSColorProfile.panelSliderLabelColorProperty,
