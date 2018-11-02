@@ -27,7 +27,7 @@ define( function( require ) {
       softwareDevelopment: 'Jesse Greenberg, Chris Malley, Dave Schmitz',
       team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
             'Noah Podolefsky, Amy Rouinfar, Carl Weiman',
-      qualityAssurance: 'Steele Dalton, Amanda Davis, Bryce Griebenow, Andrea Lin, Ben Roberts, Bryan Yoelin',
+      qualityAssurance: 'Steele Dalton, Amanda Davis, Bryce Griebenow, Andrea Lin, Ben Roberts, Kathryn Woessner, Bryan Yoelin',
       graphicArts: '',
       thanks: ''
     },
