@@ -20,7 +20,7 @@ define( function( require ) {
   // the 'default' value provided.
   // NOTE: This is NOT provided to clients directly, but each of these are passed to the Property constructor,
   // see ColorProfile.js
-  var RSColorProfile = new ColorProfile( {
+  var RSColorProfile = new ColorProfile( [ 'default', 'projector' ], {
     backgroundColor: {
       default: new Color( 0, 0, 0 ),
       projector: new Color( 255, 255, 255 )
@@ -125,7 +125,7 @@ define( function( require ) {
       default: FocusHighlightPath.OUTER_DARK_GROUP_FOCUS_COLOR,
       projector: FocusHighlightPath.OUTER_LIGHT_GROUP_FOCUS_COLOR
     }
-  }, [ 'default', 'projector' ] );
+  } );
 
   rutherfordScattering.register( 'RSColorProfile', RSColorProfile );
 
