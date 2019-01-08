@@ -176,7 +176,7 @@ define( function( require ) {
      * Create the RadioButonGroup that will act as the scene selection control in this sim.
      *
      * @param {Image} atomIconImage - the icon for the atomic scene, changes with color profile
-     * @return {RadioButtonGroup} - returns a RadioButtonGroup that must be disposed when profile changes
+     * @returns {RadioButtonGroup} - returns a RadioButtonGroup that must be disposed when profile changes
      */
     var createRadioButtons = function( atomIconImage ) {
       return new RadioButtonGroup( model.sceneProperty, [
