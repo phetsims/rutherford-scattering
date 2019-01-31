@@ -226,25 +226,29 @@ define( function( require ) {
         alignTitle: 'left',
         titleLeftIndent: options.minWidth * 0.05 // indent of the title
       } ),
-      titleFont: RSConstants.PANEL_PROPERTY_FONT.copy( { weight: 'bold' } ),
-      titleMaxWidth: 210,
+      titleNodeOptions: {
+        font: RSConstants.PANEL_PROPERTY_FONT.copy( { weight: 'bold' } ),
+        maxWidth: 210
+      },
+      numberDisplayOptions: {
+        backgroundStroke: 'black',
+        font: RSConstants.PANEL_VALUE_DISPLAY_FONT
+      },
+      sliderOptions: {
+        trackSize: new Dimension2( sliderWidth, 1 ),
+        trackFill: RSColorProfile.panelSliderLabelColorProperty,
+        trackStroke: RSColorProfile.panelSliderLabelColorProperty,
+        thumbCenterLineStroke: 'white',
+        thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
 
-      valueBackgroundStroke: 'black',
-      valueFont: RSConstants.PANEL_VALUE_DISPLAY_FONT,
+        majorTickStroke: RSColorProfile.panelSliderLabelColorProperty,
+        majorTickLength: 15,
+        tickLabelSpacing: 2,
 
-      trackSize: new Dimension2( sliderWidth, 1 ),
-      trackFill: RSColorProfile.panelSliderLabelColorProperty,
-      trackStroke: RSColorProfile.panelSliderLabelColorProperty,
-      thumbCenterLineStroke: 'white',
-      thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
-
-      majorTickStroke: RSColorProfile.panelSliderLabelColorProperty,
-      majorTickLength: 15,
-      tickLabelSpacing: 2,
-
-      // a11y
-      keyboardStep: 5,
-      pageKeyboardStep: 10
+        // a11y
+        keyboardStep: 5,
+        pageKeyboardStep: 10
+      }
     };
 
     // allowable range for proton values
@@ -275,40 +279,46 @@ define( function( require ) {
     var leftProtonButtonDown = false;
 
     // Number control for protons
-    var protonNumberControl = new NumberControl( numberOfProtonsString, this.protonCountProperty, protonCountRange, _.extend( numberControlOptions, {
-      titleFill: RSColorProfile.protonsLabelColorProperty,
-      majorTicks: protonMajorTicks,
-
-      thumbFillEnabled: 'rgb(220, 58, 10)',
-      thumbFillHighlighted: 'rgb(270, 108, 60)',
-
-      // Individual callbacks for each component of the NumberControl to support multitouch
-      sliderStartCallback: function() { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
-      sliderEndCallback: function() { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, self.protonCountProperty ); },
-      leftArrowStartCallback: function() {
-        leftProtonButtonDown = true;
-      },
-      leftArrowEndCallback: function() {
-        leftProtonButtonInteractionProperty.set( false );
-        leftProtonButtonDown = false;
-        model.removeAllParticles();
-      },
-      rightArrowStartCallback: function() {
-        rightProtonButtonDown = true;
-      },
-      rightArrowEndCallback: function() {
-        rightProtonButtonInteractionProperty.set( false );
-        rightProtonButtonDown = false;
-        model.removeAllParticles();
-      },
-
+    var protonNumberControlOptions = _.extend( {}, numberControlOptions, {
       // a11y
       labelContent: protonsValuePatternString,
       labelTagName: 'label',
       descriptionTagName: 'p',
       descriptionContent: protonSliderDescriptionString,
       containerTagName: 'div'
-    } ) );
+    } );
+    protonNumberControlOptions.titleNodeOptions = _.extend( {},
+      numberControlOptions.titleNodeOptions, { fill: RSColorProfile.protonsLabelColorProperty } );
+    protonNumberControlOptions.arrowButtonOptions = {
+      leftStart: function() {
+        leftProtonButtonDown = true;
+      },
+      leftEnd: function() {
+        leftProtonButtonInteractionProperty.set( false );
+        leftProtonButtonDown = false;
+        model.removeAllParticles();
+      },
+      rightStart: function() {
+        rightProtonButtonDown = true;
+      },
+      rightEnd: function() {
+        rightProtonButtonInteractionProperty.set( false );
+        rightProtonButtonDown = false;
+        model.removeAllParticles();
+      }
+    };
+    protonNumberControlOptions.sliderOptions = _.extend( {},
+      numberControlOptions.sliderOptions, {
+        majorTicks: protonMajorTicks,
+
+        thumbFillEnabled: 'rgb(220, 58, 10)',
+        thumbFillHighlighted: 'rgb(270, 108, 60)',
+
+        // Individual callbacks for each component of the NumberControl to support multitouch
+        startDrag: function() { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
+        endDrag: function() { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, self.protonCountProperty ); }
+    } );
+    var protonNumberControl = new NumberControl( numberOfProtonsString, this.protonCountProperty, protonCountRange, protonNumberControlOptions );
 
     function protonCountListener() {
 
@@ -349,42 +359,49 @@ define( function( require ) {
     var rightNeutronButtonDown = false;
 
     // Number control for protons
-    var neutronNumberControl = new NumberControl( numberOfNeutronsString, this.neutronCountProperty, neutronCountRange,
-      _.extend( numberControlOptions, {
-          titleFill: RSColorProfile.neutronsLabelColorProperty,
-          majorTicks: neutronMajorTicks,
+    var neutronNumberControlOptions = _.extend( {}, numberControlOptions, {
+      // a11y
+      labelContent: neutronsValuePatternString,
+      labelTagName: 'label',
+      descriptionTagName: 'p',
+      descriptionContent: neutronSliderDescriptionString,
+      containerTagName: 'div'
+    } );
+    neutronNumberControlOptions.titleNodeOptions = _.extend( {},
+      numberControlOptions.titleNodeOptions, { fill: RSColorProfile.neutronsLabelColorProperty }
+    );
+    neutronNumberControlOptions.sliderOptions = _.extend( {},
+      numberControlOptions.sliderOptions, {
+        majorTicks: neutronMajorTicks,
 
-          thumbFillEnabled: 'rgb(130, 130, 130)',
-          thumbFillHighlighted: 'rgb(180, 180, 180)',
+        thumbFillEnabled: 'rgb(130, 130, 130)',
+        thumbFillHighlighted: 'rgb(180, 180, 180)',
 
-          // Individual callbacks for each component of the NumberControl to support multitouch
-          sliderStartCallback: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
-          sliderEndCallback: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, self.neutronCountProperty ); },
-          leftArrowEndCallback: function() {
-            leftNeutronButtonInteractionProperty.set( false );
-            leftNeutronButtonDown = false;
-            model.removeAllParticles();
-          },
-          rightArrowEndCallback: function() {
-            rightNeutronButtonInteractionProperty.set( false );
-            rightNeutronButtonDown = false;
-            model.removeAllParticles();
-          },
-          leftArrowStartCallback: function() {
-            leftNeutronButtonDown = true;
-          },
-          rightArrowStartCallback: function() {
-            rightNeutronButtonDown = true;
-          },
+        // Individual callbacks for each component of the NumberControl to support multitouch
+        startDrag: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
+        endDrag: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, self.neutronCountProperty ); }
+      }
+    );
 
-          // a11y
-          labelContent: neutronsValuePatternString,
-          labelTagName: 'label',
-          descriptionTagName: 'p',
-          descriptionContent: neutronSliderDescriptionString,
-          containerTagName: 'div'
-        }
-      ) );  
+    neutronNumberControlOptions.arrowButtonOptions = {
+      leftEnd: function() {
+        leftNeutronButtonInteractionProperty.set( false );
+        leftNeutronButtonDown = false;
+        model.removeAllParticles();
+      },
+      rightEnd: function() {
+        rightNeutronButtonInteractionProperty.set( false );
+        rightNeutronButtonDown = false;
+        model.removeAllParticles();
+      },
+      leftStart: function() {
+        leftNeutronButtonDown = true;
+      },
+      rightStart: function() {
+        rightNeutronButtonDown = true;
+      }
+    };
+    var neutronNumberControl = new NumberControl( numberOfNeutronsString, this.neutronCountProperty, neutronCountRange, neutronNumberControlOptions );
 
     function neutronCountListener() {
 
@@ -417,11 +434,11 @@ define( function( require ) {
       // this.protonPlusButton.dispose();
       // this.neutronMinusButton.dispose();
       // this.neutronPlusButton.dispose();
-      
+
       // dispose listeners attached to proton/neutron count Properties
       self.neutronCountProperty.unlink( neutronCountListener );
       self.protonCountProperty.unlink( protonCountListener );
-      
+
       // dispose number controls
       protonNumberControl.dispose();
       neutronNumberControl.dispose();
