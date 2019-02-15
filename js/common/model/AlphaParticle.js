@@ -128,7 +128,7 @@ define( function( require ) {
       var direction = this.getDirection();
       var perpendicular = direction.perpendicular();
 
-      var rotationAngle = perpendicular.angle();
+      var rotationAngle = perpendicular.angle;
       this.preparedRotationAngle = rotationAngle;
 
       var transformedShape = atom.boundingRect.transformed( Matrix3.rotationAroundPoint( rotationAngle, atom.position ) );
