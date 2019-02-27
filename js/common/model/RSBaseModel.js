@@ -50,7 +50,7 @@ define( function( require ) {
     this.gun = new Gun( this );
 
     // @protected - used to signal when a sim step has occurred
-    this.stepEmitter = new Emitter();
+    this.stepEmitter = new Emitter( { validationEnabled: false } );
 
   }
 
@@ -190,7 +190,7 @@ define( function( require ) {
         this.cullParticles();
       }
 
-      this.stepEmitter.emit1( dt );
+      this.stepEmitter.emit( dt );
     },
 
     /**
