@@ -34,10 +34,10 @@ define( function( require ) {
     this.atomWidth = options.atomWidth;
 
     // emitter which signifies that a particle has been transitioned to a new atom
-    this.particleTransitionedEmitter = new Emitter();
+    this.particleTransitionedEmitter = new Emitter(  { validationEnabled: false } );
 
     // @public - emitter which signifies that a particle has been removed from an atom
-    this.particleRemovedFromAtomEmitter = new Emitter();
+    this.particleRemovedFromAtomEmitter = new Emitter(  { validationEnabled: false } );
 
     // when a particle has been removed from an atom, remove it from the space as well
     // no need to remove listener, exists for life of sim
@@ -131,7 +131,7 @@ define( function( require ) {
             particle.preparedAtom = atom;
 
             // purely for debugging to visualize transformed shapes
-            this.particleTransitionedEmitter.emit1( particle );
+            this.particleTransitionedEmitter.emit( particle );
 
           }
 
