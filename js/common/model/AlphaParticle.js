@@ -126,7 +126,7 @@ define( function( require ) {
 
       // get the angle of the vector orthogonal to the direction of movement
       var direction = this.getDirection();
-      var perpendicular = direction.perpendicular();
+      var perpendicular = direction.perpendicular;
 
       var rotationAngle = perpendicular.angle;
       this.preparedRotationAngle = rotationAngle;
