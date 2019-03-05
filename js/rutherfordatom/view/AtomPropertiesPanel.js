@@ -311,7 +311,7 @@ define( function( require ) {
       numberControlOptions.sliderOptions, {
         majorTicks: protonMajorTicks,
 
-        thumbFillEnabled: 'rgb(220, 58, 10)',
+        thumbFill: 'rgb(220, 58, 10)',
         thumbFillHighlighted: 'rgb(270, 108, 60)',
 
         // Individual callbacks for each component of the NumberControl to support multitouch
@@ -374,7 +374,7 @@ define( function( require ) {
       numberControlOptions.sliderOptions, {
         majorTicks: neutronMajorTicks,
 
-        thumbFillEnabled: 'rgb(130, 130, 130)',
+        thumbFill: 'rgb(130, 130, 130)',
         thumbFillHighlighted: 'rgb(180, 180, 180)',
 
         // Individual callbacks for each component of the NumberControl to support multitouch
