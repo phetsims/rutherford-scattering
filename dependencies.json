@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.0 Fri Nov 02 2018 12:42:07 GMT-0400 (Eastern Daylight Time)",
+  "comment": "# rutherford-scattering 1.1.0 Fri Mar 08 2019 14:06:15 GMT-0500 (EST)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -9,8 +9,8 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "89d28f6309a83eb51b6c1fc0130e76ad7935f09e",
-    "branch": "HEAD"
+    "sha": "a17e1a749b114327274939a3a6865e3901cef4e8",
+    "branch": "rutherford-scattering-1.1"
   },
   "chipper": {
     "sha": "f1a7eb076e5aaa44053b53b36eaaf8aac7f8c7b0",
@@ -21,8 +21,8 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "99bbfd89b0ef53bd13f4e8ce4e7b33b60ee1be25",
-    "branch": "HEAD"
+    "sha": "19035808d0db91b2df90813a4eb87100034105f7",
+    "branch": "rutherford-scattering-1.1"
   },
   "kite": {
     "sha": "08b2dbf93e335ca47400981a957d8fbe3b307c20",
@@ -61,7 +61,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "4757be9501ab89dc4ed9df3f30dcd0570869e5d2",
+    "sha": "09a9474a0d136036418a88850840f65e81fe0fe4",
     "branch": "1.1"
   },
   "scenery": {
