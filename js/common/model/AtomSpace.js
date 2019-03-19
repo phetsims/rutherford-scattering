@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var AlphaParticle = require( 'RUTHERFORD_SCATTERING/common/model/AlphaParticle' );
   var Emitter = require( 'AXON/Emitter' );
   var inherit = require( 'PHET_CORE/inherit' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -34,15 +35,18 @@ define( function( require ) {
     this.atomWidth = options.atomWidth;
 
     // emitter which signifies that a particle has been transitioned to a new atom
-    this.particleTransitionedEmitter = new Emitter(  { validationEnabled: false } );
+    this.particleTransitionedEmitter = new Emitter( { validators: [ { valueType: AlphaParticle }] } );
 
     // @public - emitter which signifies that a particle has been removed from an atom
-    this.particleRemovedFromAtomEmitter = new Emitter(  { validationEnabled: false } );
+    this.particleRemovedFromAtomEmitter = new Emitter( { validators: [
+      { valueType: AlphaParticle },
+      { valueType: 'number' }
+    ] } );
 
     // when a particle has been removed from an atom, remove it from the space as well
     // no need to remove listener, exists for life of sim
     var self = this;
-    this.particleRemovedFromAtomEmitter.addListener( function( particle ) {
+    this.particleRemovedFromAtomEmitter.addListener( function( particle, line ) {
       self.removeParticle( particle );
     } );
 
