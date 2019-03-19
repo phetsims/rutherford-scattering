@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.0 Fri Mar 08 2019 14:06:15 GMT-0500 (EST)",
+  "comment": "# rutherford-scattering 1.1.0 Tue Mar 19 2019 17:18:14 GMT-0400 (EDT)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -10,11 +10,11 @@
   },
   "brand": {
     "sha": "a17e1a749b114327274939a3a6865e3901cef4e8",
-    "branch": "rutherford-scattering-1.1"
+    "branch": "HEAD"
   },
   "chipper": {
-    "sha": "f1a7eb076e5aaa44053b53b36eaaf8aac7f8c7b0",
-    "branch": "HEAD"
+    "sha": "f1bca7ba3c58b3953f890f8da55aa06b2a932836",
+    "branch": "rutherford-scattering-1.1"
   },
   "dot": {
     "sha": "e9a91d9156c5c3a7726783f0cca1fa7fbacbf633",
@@ -22,7 +22,7 @@
   },
   "joist": {
     "sha": "19035808d0db91b2df90813a4eb87100034105f7",
-    "branch": "rutherford-scattering-1.1"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "08b2dbf93e335ca47400981a957d8fbe3b307c20",
@@ -56,12 +56,16 @@
     "sha": "1dba87045557b96113e5032e39415863b3f6f10a",
     "branch": "HEAD"
   },
+  "phetmarks": {
+    "sha": "b93322c53de42e282750fd62c8f48e2c365581a1",
+    "branch": "HEAD"
+  },
   "query-string-machine": {
     "sha": "21fd2a0a6535b8e82d0db9adf42cbca3403b6410",
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "09a9474a0d136036418a88850840f65e81fe0fe4",
+    "sha": "51eb7fdcd8be33a74a2f5f7b5abb7653b180ab1d",
     "branch": "1.1"
   },
   "scenery": {
@@ -91,9 +95,5 @@
   "tandem": {
     "sha": "c9b53278d443d93f9945c6addc02806271361ed1",
     "branch": "HEAD"
-  },
-  "phetmarks": {
-    "branch": "master",
-    "sha": "b93322c53de42e282750fd62c8f48e2c365581a1"
   }
 }
