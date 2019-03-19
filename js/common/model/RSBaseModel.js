@@ -50,8 +50,7 @@ define( function( require ) {
     this.gun = new Gun( this );
 
     // @protected - used to signal when a sim step has occurred
-    this.stepEmitter = new Emitter( { validationEnabled: false } );
-
+    this.stepEmitter = new Emitter( { validators: [ { valueType: 'number' } ] } );
   }
 
   rutherfordScattering.register( 'RSBaseModel', RSBaseModel );
@@ -138,7 +137,7 @@ define( function( require ) {
         particle.dispose();
       } );
       this.particles.length = 0;
-      this.stepEmitter.emit();
+      this.stepEmitter.emit( this.maunalStepDt );
     },
 
     /**
@@ -204,7 +203,7 @@ define( function( require ) {
         this.cullParticles();
       }
 
-      this.stepEmitter.emit();
+      this.stepEmitter.emit( this.maunalStepDt );
     },
 
     /**
