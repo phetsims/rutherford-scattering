@@ -52,7 +52,7 @@ define( function( require ) {
       Atom.prototype.removeParticle.call( this, particle );
 
       if ( isError ) {
-        this.particleRemovedemitter.emit( particle, line );
+        this.particleRemovedemitter.emit( particle );
       }
     },
 
