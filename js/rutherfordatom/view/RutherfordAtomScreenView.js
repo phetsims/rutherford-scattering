@@ -258,7 +258,7 @@ define( function( require ) {
 
     if ( RSQueryParameters.showErrorCount ) {
       // show the number of particles that were removed from the space in error
-      var errorCountPattern = 'Error count: {0} - particle removed at line {1}';
+      var errorCountPattern = 'Error count: {{numRemoved}}';
       var errorText = new Text( '', {
         font: new PhetFont( 18 ),
         fill: 'red',
@@ -267,9 +267,11 @@ define( function( require ) {
       atomSpaceNode.addChild( errorText );
 
       var atomsRemoved = 0;
-      model.atomSpace.particleRemovedFromAtomEmitter.addListener( function( particle, lineNumber ) {
+      model.atomSpace.particleRemovedFromAtomEmitter.addListener( function( particle ) {
         atomsRemoved += 1;
-        errorText.text = StringUtils.format( errorCountPattern, atomsRemoved, lineNumber );
+        errorText.text = StringUtils.fillIn( errorCountPattern, {
+          numRemoved: atomsRemoved
+        } );
       } );
     }
 

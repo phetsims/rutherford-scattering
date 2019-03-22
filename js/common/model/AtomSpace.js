@@ -37,17 +37,13 @@ define( function( require ) {
     // emitter which signifies that a particle has been transitioned to a new atom
     this.particleTransitionedEmitter = new Emitter( { validators: [ { valueType: AlphaParticle }] } );
 
-    // @public - emitter which signifies that a particle has been removed from an atom - will emit
-    // the AlphaParticle removed as well as a string indicating the line of removal (for debugging)
-    this.particleRemovedFromAtomEmitter = new Emitter( { validators: [
-      { valueType: AlphaParticle },
-      { valueType: 'string' }
-    ] } );
+    // @public - emitter which signifies that a particle has been removed from an atom
+    this.particleRemovedFromAtomEmitter = new Emitter( { validators: [ { valueType: AlphaParticle } ] } );
 
     // when a particle has been removed from an atom, remove it from the space as well
     // no need to remove listener, exists for life of sim
     var self = this;
-    this.particleRemovedFromAtomEmitter.addListener( function( particle, line ) {
+    this.particleRemovedFromAtomEmitter.addListener( function( particle ) {
       self.removeParticle( particle );
     } );
 
