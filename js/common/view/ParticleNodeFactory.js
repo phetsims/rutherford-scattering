@@ -206,8 +206,6 @@ define( function( require ) {
     Circle.call( this, radius, options );
   }
 
-  rutherfordScattering.register( 'ParticleNodeFactory.ParticleNode', ParticleNode );
-
   inherit( Circle, ParticleNode );
 
   /**
