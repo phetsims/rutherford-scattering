@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.2-rc.1 Thu Apr 18 2019 11:02:29 GMT-0800 (Alaskan Daylight Time)",
+  "comment": "# rutherford-scattering 1.1.2 Wed Apr 24 2019 17:02:23 GMT-0800 (Alaskan Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -65,7 +65,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "c471d190e00057eff1fbca59cf2e3b8821d8dd53",
+    "sha": "070f376fd839b6593f79dee18c72fad8e62c3c50",
     "branch": "1.1"
   },
   "scenery": {
