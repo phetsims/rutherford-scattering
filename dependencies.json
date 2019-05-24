@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.2 Wed Apr 24 2019 17:02:23 GMT-0800 (Alaskan Daylight Time)",
+  "comment": "# rutherford-scattering 1.1.2 Fri May 24 2019 15:11:34 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -13,8 +13,8 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "e1b64e8a0a02b8d3ffc8ae17b62c84ae9c8a2b87",
-    "branch": "HEAD"
+    "sha": "a3389716b868a89a5a155c166ced135440196051",
+    "branch": "rutherford-scattering-1.1"
   },
   "dot": {
     "sha": "e9a91d9156c5c3a7726783f0cca1fa7fbacbf633",
@@ -36,18 +36,6 @@
     "sha": "e42116c49519fb48806639e9fb4df5c3742eb812",
     "branch": "HEAD"
   },
-  "phet-io-wrapper-classroom-activity": {
-    "sha": "abc4ae3eda746b338cc8ea08ea0b3ee0cd037c82",
-    "branch": "HEAD"
-  },
-  "phet-io-wrapper-hookes-law-energy": {
-    "sha": "39a153bdf4d84d054a8decf81347573f50a7bcc0",
-    "branch": "HEAD"
-  },
-  "phet-io-wrapper-lab-book": {
-    "sha": "868e17c89689d38106be87b2ce9f9605ded895f2",
-    "branch": "HEAD"
-  },
   "phet-io-wrappers": {
     "sha": "97461ad81619a810ac2ffa11addfd03d7dbf330d",
     "branch": "HEAD"
@@ -65,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "070f376fd839b6593f79dee18c72fad8e62c3c50",
+    "sha": "a56420ce2b20ae9f55122e5fcb13f7659350fbb5",
     "branch": "1.1"
   },
   "scenery": {
