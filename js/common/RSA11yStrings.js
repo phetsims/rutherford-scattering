@@ -63,19 +63,19 @@ define( function( require ) {
       value: 'Atom Settings'
     },
     protonsValuePattern: {
-      value: 'Protons {{protons}}'
+      value: 'Protons {protons}' // TODO: make these template vars again when working on descriptions
     },
     protonsPerAtomValuePattern: {
-      value: 'Protons per Atom {{protons}}'
+      value: 'Protons per Atom {protons}' // TODO: make these template vars again when working on descriptions
     },
     protonSliderDescription: {
       value: 'Adjust number of protons per atom in foil.'
     },
     neutronsValuePattern: {
-      value: 'Neutrons {{neutrons}}'
+      value: 'Neutrons {neutrons}' // TODO: make these template vars again when working on descriptions
     },
     neutronsPerAtomValuePattern: {
-      value: 'Neutrons per Atom {{neutrons}}'
+      value: 'Neutrons per Atom {neutrons}' // TODO: make these template vars again when working on descriptions
     },
     neutronSliderDescription: {
       value: 'Adjust number of neutrons per atom in foil.'
