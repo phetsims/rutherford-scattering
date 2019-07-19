@@ -1,4 +1,4 @@
-// Copyright 2016-2017, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
  * Builds the UI scale label w/ arrows & end markers
@@ -17,7 +17,6 @@ define( function( require ) {
   var RichText = require( 'SCENERY/nodes/RichText' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var Shape = require( 'KITE/Shape' );
 
@@ -35,14 +34,13 @@ define( function( require ) {
   function ScaleInfoNode( label, width, options ) {
 
     options = _.extend( {
-      font: RSConstants.SCALE_TITLE_FONT,
-      fill: RSConstants.NEUTRAL_FILL_COLOR
+      font: RSConstants.SCALE_TITLE_FONT
     }, options );
 
     // scale text
     var labelText = new RichText( label, {
       font: options.font,
-      fill: options.fill,
+      fill: RSColorProfile.panelLabelColorProperty,
       maxWidth: 0.9 * width
     } );
 
@@ -54,7 +52,7 @@ define( function( require ) {
         headHeight: ARROW_HEAD_HEIGHT,
         headWidth: ARROW_HEAD_WIDTH,
         tailWidth: 2,
-        fill: RSConstants.NEUTRAL_FILL_COLOR
+        fill: RSColorProfile.panelLabelColorProperty
       } );
 
     // right arrow
@@ -64,33 +62,18 @@ define( function( require ) {
         headHeight: ARROW_HEAD_HEIGHT,
         headWidth: ARROW_HEAD_WIDTH,
         tailWidth: 2,
-        fill: RSConstants.NEUTRAL_FILL_COLOR
+        fill: RSColorProfile.panelLabelColorProperty
       } );
 
     // end markers
     var leftMarker = new Path( new Shape().moveTo( leftArrowX, labelText.bounds.minY ).lineTo( leftArrowX, labelText.bounds.maxY ), {
-      stroke: RSConstants.NEUTRAL_FILL_COLOR,
+      stroke: RSColorProfile.panelLabelColorProperty,
       lineWidth: 1.5
     } );
 
     var rightMarker = new Path( new Shape().moveTo( rightArrowX, labelText.bounds.minY ).lineTo( rightArrowX, labelText.bounds.maxY ), {
-      stroke: RSConstants.NEUTRAL_FILL_COLOR,
+      stroke: RSColorProfile.panelLabelColorProperty,
       lineWidth: 1.5
-    } );
-
-    // when the color profile changes, update the fill of all associated children
-    // no need to dispose, instance exists for life of sim
-    RSGlobals.projectorModeProperty.link( function() {
-      var labelColor = RSColorProfile.panelLabelColorProperty;
-      
-      // update end marker fill
-      leftMarker.stroke = labelColor;
-      rightMarker.stroke = labelColor;
-
-      rightArrowNode.fill = labelColor;
-      leftArrowNode.fill = labelColor;
-
-      labelText.fill = labelColor;
     } );
 
     assert && assert( !options.children, 'additional children not supported' );

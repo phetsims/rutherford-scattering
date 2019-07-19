@@ -99,18 +99,14 @@ define( function( require ) {
     } );
     this.addChild( this.gunNode );
 
-    var alphaSourceText = new Text( alphaParticlesString, {
+    var alphaParticlesText = new Text( alphaParticlesString, {
       centerX: this.gunNode.centerX,
       top: this.gunNode.bottom + 15,
       font: new PhetFont( 15 ),
-      fill: RSConstants.NEUTRAL_FILL_COLOR,
+      fill: RSColorProfile.panelLabelColorProperty,
       maxWidth: 210
     } );
-    this.addChild( alphaSourceText );
-
-    // when the color profile changes, the alpha source text should be black
-    // no need to unlink since the text will exist for life of sim
-    RSColorProfile.panelLabelColorProperty.linkAttribute( alphaSourceText, 'fill' );
+    this.addChild( alphaParticlesText );
 
     // @protected, alpha particle beam
     this.beamNode = new BeamNode( model.gun.onProperty, {

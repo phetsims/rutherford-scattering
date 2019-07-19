@@ -1,4 +1,4 @@
-// Copyright 2016-2017, University of Colorado Boulder
+// Copyright 2016-2019, University of Colorado Boulder
 
 /**
  * This object is collection of constants that configure global properties.
@@ -60,8 +60,6 @@ define( function( require ) {
     PANEL_TOP_MARGIN: 15,   // spacing for all top panels from edge of window
     PANEL_VERTICAL_MARGIN: 10,   // vertical spacing between property panels
     PANEL_X_MARGIN: 15,
-
-    NEUTRAL_FILL_COLOR: 'rgb( 210, 210, 210 )',
 
     TARGET_SPACE_MARGIN: 50,   // spacing from gold target material to particle space
 
