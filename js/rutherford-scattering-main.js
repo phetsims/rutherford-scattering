@@ -30,7 +30,9 @@ define( function( require ) {
       graphicArts: '',
       thanks: ''
     },
-    optionsNode: new MenuOptionsNode()
+
+    // Creates content for the Options dialog
+    createOptionsDialogContent: () => new MenuOptionsNode()
   };
 
   // group focus highlights are synced with color profile
