@@ -13,7 +13,6 @@ define( function( require ) {
   var MenuOptionsNode = require( 'RUTHERFORD_SCATTERING/common/view/MenuOptionsNode' );
   var PlumPuddingAtomScreen = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/PlumPuddingAtomScreen' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
   var RutherfordAtomScreen = require( 'RUTHERFORD_SCATTERING/rutherfordatom/RutherfordAtomScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
@@ -37,16 +36,6 @@ define( function( require ) {
   // group focus highlights are synced with color profile
   FocusOverlay.setInnerGroupHighlightColor( RSColorProfile.innerGroupHighlightColorProperty );
   FocusOverlay.setOuterGroupHighlightColor( RSColorProfile.outerGroupHighlightColorProperty );
-
-  // no need to unlink, will exist for life of sim
-  RSGlobals.projectorModeProperty.link( function( useProjectorMode ) {
-    if ( useProjectorMode ) {
-      RSColorProfile.profileNameProperty.set( 'projector' );
-    }
-    else {
-      RSColorProfile.profileNameProperty.set( 'default' );
-    }
-  } );
 
   SimLauncher.launch( function() {
     var screens = [

@@ -14,19 +14,16 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var OptionsDialog = require( 'JOIST/OptionsDialog' );
   var ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
-   *
    * @constructor
    */
   function MenuOptionsNode() {
 
-    var projectorCheckbox = new ProjectorModeCheckbox( {
-      projectorModeEnabledProperty: RSGlobals.projectorModeProperty
-    } );
+    var projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
 
     VBox.call( this, _.extend( {
       children: [ projectorCheckbox ],

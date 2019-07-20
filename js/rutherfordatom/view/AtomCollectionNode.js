@@ -16,7 +16,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   var Path = require( 'SCENERY/nodes/Path' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
@@ -83,7 +83,7 @@ define( function( require ) {
 
     // draw the atom space whenever the color profile changes
     // no need to unlink, this instance exists for life of sim
-    RSGlobals.projectorModeProperty.link( function() {
+    RSColorProfile.profileNameProperty.link( function() {
       drawAtomSpace();
 
       // update the image

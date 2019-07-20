@@ -14,6 +14,7 @@ define( function( require ) {
   var AtomParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomParticleLegendPanel' );
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
   var AtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomSpaceNode' );
+  var ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
   var ControlAreaNode = require( 'SCENERY_PHET/accessibility/nodes/ControlAreaNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -26,7 +27,6 @@ define( function( require ) {
   var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
   var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
   var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
   var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -122,7 +122,7 @@ define( function( require ) {
 
     // when the color profile changes, create a new control panel
     // no need to unlink, screen view exists for life of sim
-    RSGlobals.projectorModeProperty.link( function() {
+    RSColorProfile.profileNameProperty.link( function() {
 
       // remove and dispose the old control panel
       self.removeChild( self.controlPanel );
@@ -209,14 +209,14 @@ define( function( require ) {
 
     // if the bacgrkound, panel or stroke colors change, draw a new button group
     // no need to unlink, screen view exists for life of sim
-    RSGlobals.projectorModeProperty.link( function() {
+    RSColorProfile.profileNameProperty.link( function( profileName ) {
 
       // remove and dispose of the old button group
       controlPanelNode.removeChild( self.sceneRadioButtonGroup );
       self.sceneRadioButtonGroup.dispose();
 
       // get the correct image for the 'atom' scene icon
-      var iconImage = RSGlobals.projectorModeProperty.get() ? atomProjectorImage : atomImage;
+      var iconImage = ( profileName === ColorProfile.PROJECTOR_COLOR_PROFILE_NAME ) ? atomProjectorImage : atomImage;
 
       // create the new radio button group
       var newButtonGroup = createRadioButtons( iconImage );

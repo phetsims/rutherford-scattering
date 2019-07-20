@@ -16,7 +16,7 @@ define( function( require ) {
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
   var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
-  var RSGlobals = require( 'RUTHERFORD_SCATTERING/common/RSGlobals' );
+  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
@@ -38,7 +38,8 @@ define( function( require ) {
 
     // whenever the color profile changes, redraw the control panel
     // this screen view exists for life of sim, no need to unlink
-    RSGlobals.projectorModeProperty.link( function() {
+    RSColorProfile.profileNameProperty.link( function() {
+
       // dispose and remove the old control panel
       self.removeChild( self.controlPanel );
       self.controlPanel.dispose();
