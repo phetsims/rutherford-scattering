@@ -16,7 +16,6 @@ define( function( require ) {
   var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
   var PlumPuddingSpaceNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingSpaceNode' );
   var RSBaseScreenView = require( 'RUTHERFORD_SCATTERING/common/view/RSBaseScreenView' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
@@ -34,44 +33,39 @@ define( function( require ) {
     RSBaseScreenView.call( this, model, scaleString, createSpaceNode, {
       includePlumPuddingLegend: true
     } );
-    var self = this;
 
-    // whenever the color profile changes, redraw the control panel
-    // this screen view exists for life of sim, no need to unlink
-    RSColorProfile.profileNameProperty.link( function() {
+    // dispose and remove the old control panel
+    this.removeChild( this.controlPanel );
+    this.controlPanel.dispose();
 
-      // dispose and remove the old control panel
-      self.removeChild( self.controlPanel );
-      self.controlPanel.dispose();
+    // create the new control panel
+    var propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty,
+      model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+    var legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
+      resize: false,
+      includeElectron: true,
+      includePlumPudding: true
+    } );
 
-      // create the new control panel
-      var propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
-      var legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
-        resize: false,
-        includeElectron: true,
-        includePlumPudding: true
-      } );
+    // handle alignment for the panels, should have exactly the same width, but the legend content should be aligned
+    // to the left
+    var contentAlignGroup = new AlignGroup( { matchVertical: false } );
+    var particleContentBox = contentAlignGroup.createBox( propertiesPanelContent );
+    var legendContentBox = contentAlignGroup.createBox( legendPanelContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
 
-      // handle alignment for the panels, should have exactly the same width, but the legend content should be aligned
-      // to the left
-      var contentAlignGroup = new AlignGroup( { matchVertical: false } );
-      var particleContentBox = contentAlignGroup.createBox( propertiesPanelContent );
-      var legendContentBox = contentAlignGroup.createBox( legendPanelContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
+    var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particleContentBox, { resize: false } );
+    var legendPanel = new NuclearParticleLegendPanel( legendContentBox, { resize: false } );
 
-      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particleContentBox, { resize: false } );
-      var legendPanel = new NuclearParticleLegendPanel( legendContentBox, { resize: false } );
+    var panels = [
+      legendPanel,
+      particlePropertiesPanel
+    ];
+    this.controlPanel = this.createControlPanel( panels );
+    this.addChild( this.controlPanel );
 
-      var panels = [
-        legendPanel,
-        particlePropertiesPanel
-      ];
-      self.controlPanel = self.createControlPanel( panels );
-      self.addChild( self.controlPanel );
-
-      // a11y - update accessible order when we recreate the control panel
-      self.accessibleOrder = [ self.screenSummaryNode, self.playAreaNode, self.gunNode, self.controlPanel ].filter( function( node ) {
-        return !!node;
-      } );
+    // a11y - update accessible order when we recreate the control panel
+    this.accessibleOrder = [ this.screenSummaryNode, this.playAreaNode, this.gunNode, this.controlPanel ].filter( function( node ) {
+      return !!node;
     } );
   }
 
