@@ -120,21 +120,8 @@ define( function( require ) {
       } );
     };
 
-    // when the color profile changes, create a new control panel
-    // no need to unlink, screen view exists for life of sim
-    RSColorProfile.profileNameProperty.link( function() {
-
-      // remove and dispose the old control panel
-      self.removeChild( self.controlPanel );
-      self.controlPanel.dispose();
-
-      // create the new control panel
-      var panels = createPanels();
-      self.controlPanel = self.createControlPanel( panels );
-      self.addChild( self.controlPanel );
-
-      restoreAccessibleOrder();
-    } );
+    // {Node} control panel is created below by sceneProperty listener, to correspond to scene
+    this.controlPanel = null;
 
     // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
     // should be updated, and the control/legend panels need to change
@@ -152,8 +139,10 @@ define( function( require ) {
       beam.fill = atomSceneVisible ? RSColorProfile.atomBeamColorProperty : RSColorProfile.nucleusBeamColorProperty;
 
       // dispose and remove the old control panel
-      self.removeChild( self.controlPanel );
-      self.controlPanel.dispose();
+      if ( self.controlPanel ) {
+        self.removeChild( self.controlPanel );
+        self.controlPanel.dispose();
+      }
 
       // create the new control panel
       var panels = createPanels();
