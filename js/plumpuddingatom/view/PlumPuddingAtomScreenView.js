@@ -34,10 +34,6 @@ define( function( require ) {
       includePlumPuddingLegend: true
     } );
 
-    // dispose and remove the old control panel
-    this.removeChild( this.controlPanel );
-    this.controlPanel.dispose();
-
     // create the new control panel
     var propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty,
       model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
@@ -60,11 +56,11 @@ define( function( require ) {
       legendPanel,
       particlePropertiesPanel
     ];
-    this.controlPanel = this.createControlPanel( panels );
-    this.addChild( this.controlPanel );
+    const controlPanel = this.createControlPanel( panels );
+    this.addChild( controlPanel );
 
     // a11y - update accessible order when we recreate the control panel
-    this.accessibleOrder = [ this.screenSummaryNode, this.playAreaNode, this.gunNode, this.controlPanel ].filter( function( node ) {
+    this.accessibleOrder = [ this.screenSummaryNode, this.playAreaNode, this.gunNode, controlPanel ].filter( function( node ) {
       return !!node;
     } );
   }

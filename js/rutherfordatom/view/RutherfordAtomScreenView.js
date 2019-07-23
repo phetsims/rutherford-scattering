@@ -121,7 +121,7 @@ define( function( require ) {
     };
 
     // {Node} control panel is created below by sceneProperty listener, to correspond to scene
-    this.controlPanel = null;
+    let controlPanel = null;
 
     // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
     // should be updated, and the control/legend panels need to change
@@ -139,15 +139,15 @@ define( function( require ) {
       beam.fill = atomSceneVisible ? RSColorProfile.atomBeamColorProperty : RSColorProfile.nucleusBeamColorProperty;
 
       // dispose and remove the old control panel
-      if ( self.controlPanel ) {
-        self.removeChild( self.controlPanel );
-        self.controlPanel.dispose();
+      if ( controlPanel ) {
+        self.removeChild( controlPanel );
+        controlPanel.dispose();
       }
 
       // create the new control panel
       var panels = createPanels();
-      self.controlPanel = self.createControlPanel( panels );
-      self.addChild( self.controlPanel );
+      controlPanel = self.createControlPanel( panels );
+      self.addChild( controlPanel );
 
       restoreAccessibleOrder();
     } );

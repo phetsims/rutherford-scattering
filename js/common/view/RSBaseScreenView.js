@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var AlphaParticlePropertiesPanel = require( 'RUTHERFORD_SCATTERING/common/view/AlphaParticlePropertiesPanel' );
   var BeamNode = require( 'RUTHERFORD_SCATTERING/common/view/BeamNode' );
   var Bounds2 = require( 'DOT/Bounds2' );
   var Dimension2 = require( 'DOT/Dimension2' );
@@ -17,7 +16,6 @@ define( function( require ) {
   var LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var NuclearParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/NuclearParticleLegendPanel' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayAreaNode = require( 'SCENERY_PHET/accessibility/nodes/PlayAreaNode' );
@@ -178,31 +176,13 @@ define( function( require ) {
     } );
     this.addChild( stepButton );
 
-    // @protected, for visibility control by subtypes - control panels that are common to all ScreenViews
-    var nuclearParticleLegendContent = NuclearParticleLegendPanel.createPanelContent( {
-      resize: false,
-      includeElectron: options.includeElectronLegend,
-      includePlumPudding: options.includePlumPuddingLegend
-    } );
-    var nuclearParticleLegend = new NuclearParticleLegendPanel( nuclearParticleLegendContent, { resize: false } );
-    var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
-    var alphaParticlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContent, { resize: false } );
-    var controlPanels = [
-      nuclearParticleLegend,
-      alphaParticlePropertiesPanel
-    ];
-
-    // @protected - collect all control panels in a single panel
-    this.controlPanel = this.createControlPanel( controlPanels );
-    this.addChild( this.controlPanel );
-
     // reset all button
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         self.showAlphaTraceProperty.reset();
         model.reset();
       },
-      right: this.controlPanel.right,
+      right: this.layoutBounds.maxX - 48,
       bottom: this.layoutBounds.bottom - 20
     } );
     this.addChild( resetAllButton );
