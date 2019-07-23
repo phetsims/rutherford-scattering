@@ -64,7 +64,7 @@ define( function( require ) {
       additionalControlPanels: null, // {Panel[]|null} additional control panels, added below the common panels
 
       // a11y
-      addScreenSummaryNode: true
+      screenSummaryContent: new RSScreenSummaryNode()
     }, options );
 
     ScreenView.call( this, options );
@@ -72,9 +72,6 @@ define( function( require ) {
 
     // properties
     this.showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
-
-    // @protected - used for accessibleOrder in subTypes
-    this.screenSummaryNode.addChild( new RSScreenSummaryNode() );
 
     // @protected - used for accessibleOrder in subTypes
     this.playAreaNode = new PlayAreaNode();
