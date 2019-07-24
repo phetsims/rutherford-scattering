@@ -59,7 +59,7 @@ define( function( require ) {
     const controlPanel = this.createControlPanel( panels );
     this.addChild( controlPanel );
 
-    this.playAreaNode.accessibleOrder = [this.gunNode];
+    this.playAreaNode.accessibleOrder = [ this.gunNode ];
     controlPanel && this.controlAreaNode.accessibleOrder.push( controlPanel );
   }
 
