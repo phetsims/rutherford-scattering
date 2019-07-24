@@ -44,7 +44,7 @@ define( function( require ) {
     this.image = null;
 
     // draw each atom in the space - called every time the color profile changes
-    var drawAtomSpace = function() {
+    var drawAtomCollection = function() {
 
       // remove the all children
       self.removeAllChildren();
@@ -91,7 +91,7 @@ define( function( require ) {
     // than profileNameProperty so that we redraw the image if that color changes from
     // rutherford-scattering-colors.hmtl. No need to unlink, this instance exists for life of sim
     RSColorProfile.nucleusColorProperty.link( function() {
-      drawAtomSpace();
+      drawAtomCollection();
 
       // update the image
       self.image = self.toImage( function( image, x, y ) {
