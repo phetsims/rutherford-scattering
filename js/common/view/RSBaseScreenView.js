@@ -18,7 +18,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PlayAreaNode = require( 'SCENERY_PHET/accessibility/nodes/PlayAreaNode' );
   var PlayPauseButton = require( 'SCENERY_PHET/buttons/PlayPauseButton' );
   var Property = require( 'AXON/Property' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -72,10 +71,6 @@ define( function( require ) {
 
     // properties
     this.showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
-
-    // @protected - used for accessibleOrder in subTypes
-    this.playAreaNode = new PlayAreaNode();
-    this.addChild( this.playAreaNode );
 
     // @protected for layout in subtypes, alpha particle gun
     this.gunNode = new LaserPointerNode( model.gun.onProperty, {
@@ -144,7 +139,7 @@ define( function( require ) {
       .moveTo( tinyBoxNode.centerX, tinyBoxNode.bottom )
       .lineTo( self.spaceNode.left, self.spaceNode.bottom ), {
       stroke: 'grey',
-      lineDash: [ 5, 5 ]
+      lineDash: [5, 5]
     } );
     this.addChild( dashedLines );
 
@@ -193,7 +188,7 @@ define( function( require ) {
     } );
     this.addChild( viewingStreamingOptionsNode );
 
-    this.accessibleOrder = [ viewingStreamingOptionsNode, playPauseButton, stepButton, resetAllButton ];
+    this.controlAreaNode.accessibleOrder = [null, viewingStreamingOptionsNode, playPauseButton, stepButton, resetAllButton];
   }
 
   rutherfordScattering.register( 'RSBaseScreenView', RSBaseScreenView );

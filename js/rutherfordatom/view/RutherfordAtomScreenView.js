@@ -15,7 +15,6 @@ define( function( require ) {
   var AtomPropertiesPanel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomPropertiesPanel' );
   var AtomSpaceNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomSpaceNode' );
   var ColorProfile = require( 'SCENERY_PHET/ColorProfile' );
-  var ControlAreaNode = require( 'SCENERY_PHET/accessibility/nodes/ControlAreaNode' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -115,9 +114,13 @@ define( function( require ) {
     // when various panels are added/removed due to changing color profile or scene, reset the accessible order
     var self = this;
     var restoreAccessibleOrder = function() {
-      self.accessibleOrder = [ self.screenSummaryNode, self.playAreaNode, self.gunNode, self.controlPanel, self.sceneRadioButtonGroup ].filter( function( node ) {
-        return !!node;
-      } );
+      self.playAreaNode.accessibleOrder = [
+        self.gunNode
+      ];
+      self.controlAreaNode.accessibleOrder = _.uniq( self.controlAreaNode.accessibleOrder.concat( [
+        self.controlPanel,
+        self.sceneRadioButtonGroup
+      ].filter( _.identity ) ) );
     };
 
     // {Node} control panel is created below by sceneProperty listener, to correspond to scene
@@ -151,10 +154,6 @@ define( function( require ) {
 
       restoreAccessibleOrder();
     } );
-
-    // a11y - a section for a control panel, 
-    var controlPanelNode = new Node( { children: [ new ControlAreaNode() ] } );
-    this.addChild( controlPanelNode );
 
     // create radio buttons for the scene - new buttons must be created
     // every time the color profile changes
@@ -194,14 +193,14 @@ define( function( require ) {
 
     // @private
     self.sceneRadioButtonGroup = createRadioButtons( atomImage );
-    controlPanelNode.addChild( self.sceneRadioButtonGroup );
+    this.controlAreaNode.addChild( self.sceneRadioButtonGroup );
 
     // if the bacgrkound, panel or stroke colors change, draw a new button group
     // no need to unlink, screen view exists for life of sim
     RSColorProfile.profileNameProperty.link( function( profileName ) {
 
       // remove and dispose of the old button group
-      controlPanelNode.removeChild( self.sceneRadioButtonGroup );
+      self.controlAreaNode.removeChild( self.sceneRadioButtonGroup );
       self.sceneRadioButtonGroup.dispose();
 
       // get the correct image for the 'atom' scene icon
@@ -210,7 +209,7 @@ define( function( require ) {
       // create the new radio button group
       var newButtonGroup = createRadioButtons( iconImage );
       self.sceneRadioButtonGroup = newButtonGroup;
-      controlPanelNode.addChild( newButtonGroup );
+      self.controlAreaNode.addChild( newButtonGroup );
 
       // add laser, all control panels, and scene buttons to accessibleOrder, must be set after
       // creating new radio buttons
@@ -287,7 +286,7 @@ define( function( require ) {
     } );
 
     return new Node( {
-      children: [ nucleusSpaceNode, atomSpaceNode ]
+      children: [nucleusSpaceNode, atomSpaceNode]
     } );
   };
 

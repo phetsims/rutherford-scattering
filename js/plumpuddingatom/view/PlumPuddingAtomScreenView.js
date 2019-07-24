@@ -59,10 +59,8 @@ define( function( require ) {
     const controlPanel = this.createControlPanel( panels );
     this.addChild( controlPanel );
 
-    // a11y - update accessible order when we recreate the control panel
-    this.accessibleOrder = [ this.screenSummaryNode, this.playAreaNode, this.gunNode, controlPanel ].filter( function( node ) {
-      return !!node;
-    } );
+    this.playAreaNode.accessibleOrder = [this.gunNode];
+    controlPanel && this.controlAreaNode.accessibleOrder.push( controlPanel );
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
