@@ -1,8 +1,9 @@
 // Copyright 2016-2019, University of Colorado Boulder
 
 /**
- * Visual representation of a collection of rutherford atoms.  Electron energy levels are shown around the atoms,
- * represented by dashed circles scaled by the Bohr energy for each level.
+ * Visual representation of a collection of rutherford atoms. This draws the actual nuclei and electron shells in the
+ * "Atom" scene of the "Rutherford Atom" screen. The electron energy levels are represented by dashed
+ * circles scaled by the Bohr energy for each level.
  *
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
@@ -37,6 +38,10 @@ define( function( require ) {
 
     Node.call( this, options );
     var self = this;
+
+    // @public {null|HTMLImageElement} - This node will eventually be drawn with canvas with context.drawImage.
+    // The image is created asynchronously in this constructor.
+    this.image = null;
 
     // draw each atom in the space - called every time the color profile changes
     var drawAtomSpace = function() {
