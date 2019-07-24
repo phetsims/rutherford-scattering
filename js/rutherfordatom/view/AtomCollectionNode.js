@@ -39,8 +39,8 @@ define( function( require ) {
     Node.call( this, options );
     var self = this;
 
-    // @public {null|HTMLImageElement} - This node will eventually be drawn with canvas with context.drawImage.
-    // The image is created asynchronously in this constructor.
+    // @public (read-only) {null|HTMLImageElement} - This node will eventually be drawn with canvas with
+    // context.drawImage. The image is created asynchronously in this constructor.
     this.image = null;
 
     // draw each atom in the space - called every time the color profile changes
