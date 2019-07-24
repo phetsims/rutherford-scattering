@@ -86,9 +86,11 @@ define( function( require ) {
       } );
     };
 
-    // draw the atom space whenever the color profile changes
-    // no need to unlink, this instance exists for life of sim
-    RSColorProfile.profileNameProperty.link( function() {
+    // Draw to image whenever the color changes so this can be drawn to a CanvasNode. The only color that changes is
+    // nucleusColorProperty (used in ParticleNodeFactory.createNucleus()) and we link directly to that color rather
+    // than profileNameProperty so that we redraw the image if that color changes from
+    // rutherford-scattering-colors.hmtl. No need to unlink, this instance exists for life of sim
+    RSColorProfile.nucleusColorProperty.link( function() {
       drawAtomSpace();
 
       // update the image
