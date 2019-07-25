@@ -60,7 +60,10 @@ define( function( require ) {
     this.addChild( controlPanel );
 
     this.playAreaNode.accessibleOrder = [ this.gunNode ];
-    controlPanel && this.controlAreaNode.accessibleOrder.push( controlPanel );
+    if ( controlPanel ) {
+      const newOrder = _.union( [ controlPanel ], this.controlAreaNode.accessibleOrder );
+      this.controlAreaNode.setAccessibleOrder( newOrder );
+    }
   }
 
   rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
