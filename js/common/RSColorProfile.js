@@ -41,10 +41,6 @@ define( function( require ) {
       default: new Color(200, 200, 95 ),
       projector: new Color( 0, 0, 0  )
     },
-    panelSilderColor: {
-      default: new Color( 180, 180, 180 ),
-      projector: new Color( 0, 0, 0 )
-    },
     panelLabelColor: {
       default: new Color( 210, 210, 210 ),
       projector: new Color( 0, 0, 0 )
@@ -65,45 +61,9 @@ define( function( require ) {
       default: new Color( 143, 143, 143 ),
       projector: new Color( 163, 163, 163 )
     },
-    particleSpecularHighlightColor: {
-      default: new Color( 200, 200, 200 ),
-      projector: new Color( 200, 200, 200 )
-    },
-    alphaNucleusTraceColor: {
-      default: new Color( 128, 128, 128 ),
-      projector: new Color( 128, 128, 128 )
-    },
-    electronColor: {
-      default: new Color( 135, 135, 135 ),
-      projector: new Color( 135, 135, 205 )
-    },
-    protonColor: {
-      default: new Color( 255, 69, 0 ),
-      projector: new Color( 255, 69, 0 )
-    },
-    neutronColor: {
-      default: new Color( 192, 192, 192 ),
-      projector: new Color(192, 192, 192 )
-    },
-    particleColor: {
-      default: new Color(255, 0, 255 ),
-      projector: new Color( 255, 0, 255 )
-    },
     nucleusColor: {
       default: new Color( 200, 200, 95 ),
       projector: new Color( 128, 128, 0 )
-    },
-    energyLevelColor: {
-      default: new Color( 128, 128, 128 ),
-      projector: new Color(128, 128, 128 )
-    },
-    materialFrontColor: {
-      default: new Color( 214, 203, 134 ),
-      projector: new Color( 214, 203, 134 )
-    },
-    materialBackColor: {
-      default: new Color( 140, 126, 41 ),
-      projector: new Color( 140, 126, 41 )
     },
     panelSliderLabelColor: {
       default: new Color( 180, 180, 180 ),
