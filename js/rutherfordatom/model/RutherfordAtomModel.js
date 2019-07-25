@@ -23,7 +23,23 @@ define( function( require ) {
    * @constructor
    */
   function RutherfordAtomModel( ) {
-    RSBaseModel.call( this );
+
+    // interactions that create dependencies for the DerivedProperties that will track user interaction, generally
+    // used by control panels to prevent multitouch issues by tracking when the user is changing something
+    const energyInteractionProperty = new Property( false ); // interaction with the energy slider
+    const protonInteractionProperty = new Property( false ); // interaction with the proton count slider
+    const neutronInteractionProperty = new Property( false ); // interaction with the neutron count slider
+
+    // @public - create a derived property for user interaction, so that the an interaction occurs when any dependency
+    // is true
+    const userInteractionProperty = DerivedProperty.or( [ energyInteractionProperty, protonInteractionProperty, neutronInteractionProperty ] );
+
+    RSBaseModel.call( this, userInteractionProperty );
+
+    // @public
+    this.energyInteractionProperty = energyInteractionProperty;
+    this.protonInteractionProperty = protonInteractionProperty;
+    this.neutronInteractionProperty = neutronInteractionProperty;
 
     // @public {number}
     this.protonCountProperty = new Property( RSConstants.DEFAULT_PROTON_COUNT );
@@ -33,27 +49,6 @@ define( function( require ) {
 
     // @public {string} - scene to display, 'atom'|'nucleus'
     this.sceneProperty = new Property( 'atom' );
-
-    // interactions that create dependencies for the DerivedProperties that will track user interaction, generally
-    // used by control panels to prevent multitouch issues by tracking when the user is changing something
-    this.energyInteractionProperty = new Property( false ); // interaction with the energy slider
-    this.protonInteractionProperty = new Property( false ); // interaction with the proton count slider
-    this.neutronInteractionProperty = new Property( false ); // interaction with the neutron count slider
-
-    // @public - create a derived property for user interaction, so that the an interaction occurs when any dependency
-    // is true
-    this.userInteractionProperty = DerivedProperty.or( [ this.energyInteractionProperty, this.protonInteractionProperty, this.neutronInteractionProperty ] );
-
-    // @private - energy level changed
-    var self = this;
-    var userInteractionListener = function( userInteraction ) {
-      if ( userInteraction ) {
-        self.removeAllParticles();
-      }
-    };
-
-    // no need to unlink this property as base model will exist for life of sim
-    this.userInteractionProperty.link( userInteractionListener );
 
     // @public (read-only) - spaces containing the atoms
     this.atomSpace = new RutherfordAtomSpace( this.protonCountProperty, this.bounds );

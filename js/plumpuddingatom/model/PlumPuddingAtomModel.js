@@ -19,22 +19,12 @@ define( function( require ) {
    * @constructor
    */
   function PlumPuddingAtomModel() {
-    RSBaseModel.call( this );
 
     // @public {boolean} - a property to track user interaction - only one element will change this in this screen,
     // so a DerivedProperty is not necessary as in RutherfordAtomModel
-    this.userInteractionProperty = new Property( false );
+    const userInteractionProperty = new Property( false );
 
-    // @private - energy level changed
-    var self = this;
-    var userInteractionListener = function( userInteraction ) {
-      if ( userInteraction ) {
-        self.removeAllParticles();
-      }
-    };
-
-    // no need to unlink this property as base model will exist for life of sim
-    this.userInteractionProperty.link( userInteractionListener );
+    RSBaseModel.call( this, userInteractionProperty );
 
     // @public (read-only) - space containing the atom
     this.plumPuddingSpace = new PlumPuddingAtomSpace( this.protonCountProperty, this.bounds );
