@@ -41,7 +41,6 @@ define( function( require ) {
       tagName: 'div',
       labelTagName: 'h3',
       labelContent: observationWindowString,
-      descriptionTagName: 'p',
       descriptionContent: atomSpaceDescriptionString,
       appendDescription: true
     }, options );

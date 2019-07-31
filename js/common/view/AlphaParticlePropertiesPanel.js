@@ -224,7 +224,6 @@ define( function( require ) {
       pageKeyboardStep: 10,
       labelContent: energyString,
       labelTagName: 'label',
-      descriptionTagName: 'p',
       descriptionContent: energySliderDescriptionString,
       appendDescription: true
     } );
@@ -253,7 +252,6 @@ define( function( require ) {
       // a11y
       labelContent: tracesString,
       labelTagName: 'label',
-      descriptionTagName: 'p',
       descriptionContent: traceCheckboxDescriptionString,
       containerTagName: 'div'
     } );
