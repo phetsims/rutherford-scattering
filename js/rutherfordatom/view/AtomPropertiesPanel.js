@@ -279,14 +279,7 @@ define( function( require ) {
     var leftProtonButtonDown = false;
 
     // Number control for protons
-    var protonNumberControlOptions = _.extend( {}, numberControlOptions, {
-      // a11y
-      labelContent: protonsValuePatternString,
-      labelTagName: 'label',
-      descriptionTagName: 'p',
-      descriptionContent: protonSliderDescriptionString,
-      containerTagName: 'div'
-    } );
+    var protonNumberControlOptions = _.extend( {}, numberControlOptions );
     protonNumberControlOptions.titleNodeOptions = _.extend( {},
       numberControlOptions.titleNodeOptions, { fill: RSColorProfile.protonsLabelColorProperty } );
     protonNumberControlOptions.arrowButtonOptions = {
@@ -316,8 +309,15 @@ define( function( require ) {
 
         // Individual callbacks for each component of the NumberControl to support multitouch
         startDrag: function() { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
-        endDrag: function() { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, self.protonCountProperty ); }
-    } );
+        endDrag: function() { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, self.protonCountProperty ); },
+
+        // a11y
+        labelContent: protonsValuePatternString,
+        labelTagName: 'label',
+        descriptionTagName: 'p',
+        descriptionContent: protonSliderDescriptionString,
+        containerTagName: 'div'
+      } );
     var protonNumberControl = new NumberControl( numberOfProtonsString, this.protonCountProperty, protonCountRange, protonNumberControlOptions );
 
     function protonCountListener() {
@@ -331,6 +331,7 @@ define( function( require ) {
         rightProtonButtonInteractionProperty.set( true );
       }
     }
+
     this.protonCountProperty.link( protonCountListener );
 
     var neutronCountRange = new RangeWithValue( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
@@ -359,14 +360,7 @@ define( function( require ) {
     var rightNeutronButtonDown = false;
 
     // Number control for protons
-    var neutronNumberControlOptions = _.extend( {}, numberControlOptions, {
-      // a11y
-      labelContent: neutronsValuePatternString,
-      labelTagName: 'label',
-      descriptionTagName: 'p',
-      descriptionContent: neutronSliderDescriptionString,
-      containerTagName: 'div'
-    } );
+    var neutronNumberControlOptions = _.extend( {}, numberControlOptions );
     neutronNumberControlOptions.titleNodeOptions = _.extend( {},
       numberControlOptions.titleNodeOptions, { fill: RSColorProfile.neutronsLabelColorProperty }
     );
@@ -379,7 +373,14 @@ define( function( require ) {
 
         // Individual callbacks for each component of the NumberControl to support multitouch
         startDrag: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
-        endDrag: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, self.neutronCountProperty ); }
+        endDrag: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, self.neutronCountProperty ); },
+
+        // a11y
+        labelContent: neutronsValuePatternString,
+        labelTagName: 'label',
+        descriptionTagName: 'p',
+        descriptionContent: neutronSliderDescriptionString,
+        containerTagName: 'div'
       }
     );
 
@@ -414,6 +415,7 @@ define( function( require ) {
         rightNeutronButtonInteractionProperty.set( true );
       }
     }
+
     this.neutronCountProperty.link( neutronCountListener );
 
     // main panel content
