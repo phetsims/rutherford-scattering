@@ -55,7 +55,7 @@ define( function( require ) {
     this.gun = new Gun( this );
 
     // @protected - used to signal when a sim step has occurred
-    this.stepEmitter = new Emitter( { validators: [ { valueType: 'number' } ] } );
+    this.stepEmitter = new Emitter( { parameters: [ { valueType: 'number' } ] } );
 
     // no need to unlink this property as base model will exist for life of sim
     var userInteractionListener = userInteraction => {

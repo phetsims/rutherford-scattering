@@ -35,10 +35,10 @@ define( function( require ) {
     this.atomWidth = options.atomWidth;
 
     // emitter which signifies that a particle has been transitioned to a new atom
-    this.particleTransitionedEmitter = new Emitter( { validators: [ { valueType: AlphaParticle }] } );
+    this.particleTransitionedEmitter = new Emitter( { parameters: [ { valueType: AlphaParticle }] } );
 
     // @public - emitter which signifies that a particle has been removed from an atom
-    this.particleRemovedFromAtomEmitter = new Emitter( { validators: [ { valueType: AlphaParticle } ] } );
+    this.particleRemovedFromAtomEmitter = new Emitter( { parameters: [ { valueType: AlphaParticle } ] } );
 
     // when a particle has been removed from an atom, remove it from the space as well
     // no need to remove listener, exists for life of sim
