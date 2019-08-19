@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.5 Mon Aug 05 2019 16:46:55 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# rutherford-scattering 1.1.5 Mon Aug 19 2019 14:44:31 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -21,8 +21,8 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "19035808d0db91b2df90813a4eb87100034105f7",
-    "branch": "HEAD"
+    "sha": "fa7b042f27b6716bc63304cfc37d4a739febace4",
+    "branch": "rutherford-scattering-1.1"
   },
   "kite": {
     "sha": "08b2dbf93e335ca47400981a957d8fbe3b307c20",
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "53fa70664a7db8f6248f74cd415dc4cd66553e6f",
+    "sha": "af6975a6fe00e13bdfd7e9f162c8202afb97e9df",
     "branch": "1.1"
   },
   "scenery": {
@@ -61,8 +61,8 @@
     "branch": "HEAD"
   },
   "scenery-phet": {
-    "sha": "6027f56de3ccd3da036003b08df55d135f7bbe74",
-    "branch": "HEAD"
+    "sha": "9942abf465964bf25654faae0676d1886bbe4747",
+    "branch": "rutherford-scattering-1.1"
   },
   "sherpa": {
     "sha": "16fe1a7e29d4b666c6e412fc840304ea2d04a3d3",
