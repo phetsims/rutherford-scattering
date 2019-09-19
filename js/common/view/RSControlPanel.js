@@ -7,15 +7,15 @@
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * Constructor.

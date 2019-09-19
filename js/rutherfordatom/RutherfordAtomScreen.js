@@ -5,22 +5,22 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var RutherfordAtomModel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtomModel' );
-  var RutherfordAtomScreenView = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomScreenView' );
-  var RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Screen = require( 'JOIST/Screen' );
-  var ScreenIcon = require( 'JOIST/ScreenIcon' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  const RutherfordAtomModel = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtomModel' );
+  const RutherfordAtomScreenView = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordAtomScreenView' );
+  const RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Screen = require( 'JOIST/Screen' );
+  const ScreenIcon = require( 'JOIST/ScreenIcon' );
 
   // strings
-  var rutherfordAtomString = require( 'string!RUTHERFORD_SCATTERING/rutherfordAtom' );
+  const rutherfordAtomString = require( 'string!RUTHERFORD_SCATTERING/rutherfordAtom' );
 
   /**
    * @constructor

@@ -6,13 +6,13 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
   var RSConstants = {

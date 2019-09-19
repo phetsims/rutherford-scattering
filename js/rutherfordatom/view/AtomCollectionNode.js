@@ -8,18 +8,18 @@
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Circle = require( 'SCENERY/nodes/Circle' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Circle = require( 'SCENERY/nodes/Circle' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  const RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
   var IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV

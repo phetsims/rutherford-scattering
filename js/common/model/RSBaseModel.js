@@ -5,17 +5,17 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var Emitter = require( 'AXON/Emitter' );
-  var Gun = require( 'RUTHERFORD_SCATTERING/common/model/Gun' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const Emitter = require( 'AXON/Emitter' );
+  const Gun = require( 'RUTHERFORD_SCATTERING/common/model/Gun' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Property = require( 'AXON/Property' );
+  const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   /**
    * @param {Property} userInteractionProperty - true while the user is interacting with something that should stop

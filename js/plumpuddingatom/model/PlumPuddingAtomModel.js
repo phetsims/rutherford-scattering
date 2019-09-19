@@ -5,15 +5,15 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var PlumPuddingAtomSpace = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomSpace' );
-  var Property = require( 'AXON/Property' );
-  var RSBaseModel = require( 'RUTHERFORD_SCATTERING/common/model/RSBaseModel' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const PlumPuddingAtomSpace = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomSpace' );
+  const Property = require( 'AXON/Property' );
+  const RSBaseModel = require( 'RUTHERFORD_SCATTERING/common/model/RSBaseModel' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   /**
    * @constructor

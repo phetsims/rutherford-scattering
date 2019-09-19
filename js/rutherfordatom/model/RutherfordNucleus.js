@@ -6,15 +6,15 @@
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Particle = require( 'SHRED/model/Particle' );
-  var ParticleAtom = require( 'SHRED/model/ParticleAtom' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Util = require( 'DOT/Util' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Particle = require( 'SHRED/model/Particle' );
+  const ParticleAtom = require( 'SHRED/model/ParticleAtom' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Util = require( 'DOT/Util' );
 
   /**
    * @param {Property.<number>} protonCountProperty

@@ -5,29 +5,29 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var NumberControl = require( 'SCENERY_PHET/NumberControl' );
-  var Panel = require( 'SUN/Panel' );
-  var Property = require( 'AXON/Property' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
-  var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const NumberControl = require( 'SCENERY_PHET/NumberControl' );
+  const Panel = require( 'SUN/Panel' );
+  const Property = require( 'AXON/Property' );
+  const RangeWithValue = require( 'DOT/RangeWithValue' );
+  const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
+  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var atomString = require( 'string!RUTHERFORD_SCATTERING/atom' );
-  var numberOfNeutronsString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
-  var numberOfProtonsString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
+  const atomString = require( 'string!RUTHERFORD_SCATTERING/atom' );
+  const numberOfNeutronsString = require( 'string!RUTHERFORD_SCATTERING/numberOfNeutrons' );
+  const numberOfProtonsString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
 
   // a11y strings
   var atomSettingsString = RSA11yStrings.atomSettings.value;

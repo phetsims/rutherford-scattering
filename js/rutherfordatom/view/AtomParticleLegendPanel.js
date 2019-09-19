@@ -6,19 +6,19 @@
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
-  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
+  const ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // strings
-  var alphaParticleTraceString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleTrace' );
-  var electronEnergyLevelString = require( 'string!RUTHERFORD_SCATTERING/electronEnergyLevel' );
-  var nucleusString = require( 'string!RUTHERFORD_SCATTERING/nucleus' );
+  const alphaParticleTraceString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleTrace' );
+  const electronEnergyLevelString = require( 'string!RUTHERFORD_SCATTERING/electronEnergyLevel' );
+  const nucleusString = require( 'string!RUTHERFORD_SCATTERING/nucleus' );
 
   /**
    * Constructor.

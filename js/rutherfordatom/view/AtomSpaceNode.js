@@ -7,17 +7,17 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AtomCollectionNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomCollectionNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
-  var RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const AtomCollectionNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomCollectionNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
+  const RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // a11y strings
   var observationWindowString = RSA11yStrings.observationWindow.value;

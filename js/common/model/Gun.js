@@ -6,16 +6,16 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AlphaParticle = require( 'RUTHERFORD_SCATTERING/common/model/AlphaParticle' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LinearFunction = require( 'DOT/LinearFunction' );
-  var Property = require( 'AXON/Property' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const AlphaParticle = require( 'RUTHERFORD_SCATTERING/common/model/AlphaParticle' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LinearFunction = require( 'DOT/LinearFunction' );
+  const Property = require( 'AXON/Property' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var MAX_PARTICLES = 20;

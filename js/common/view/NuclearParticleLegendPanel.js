@@ -6,21 +6,21 @@
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
-  var ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const ParticleLegendPanel = require( 'RUTHERFORD_SCATTERING/common/view/ParticleLegendPanel' );
+  const ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // strings
-  var alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
-  var electronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
-  var neutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
-  var positiveChargeString = require( 'string!RUTHERFORD_SCATTERING/positiveCharge' );
-  var protonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
+  const alphaParticleString = require( 'string!RUTHERFORD_SCATTERING/alphaParticle' );
+  const electronString = require( 'string!RUTHERFORD_SCATTERING/electron' );
+  const neutronString = require( 'string!RUTHERFORD_SCATTERING/neutron' );
+  const positiveChargeString = require( 'string!RUTHERFORD_SCATTERING/positiveCharge' );
+  const protonString = require( 'string!RUTHERFORD_SCATTERING/proton' );
 
   /**
    *

@@ -5,15 +5,15 @@
  *
  * @author Jesse Greenberg
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var RutherfordAtom = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtom' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const RutherfordAtom = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtom' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var DEFLECTION_WIDTH = 30;

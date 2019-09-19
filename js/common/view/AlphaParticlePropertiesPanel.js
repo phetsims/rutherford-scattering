@@ -7,33 +7,33 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Checkbox = require( 'SUN/Checkbox' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HSlider = require( 'SUN/HSlider' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Panel = require( 'SUN/Panel' );
-  var Range = require( 'DOT/Range' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
-  var VStrut = require( 'SCENERY/nodes/VStrut' );
+  const Checkbox = require( 'SUN/Checkbox' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HSlider = require( 'SUN/HSlider' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Panel = require( 'SUN/Panel' );
+  const Range = require( 'DOT/Range' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
+  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
+  const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  var alphaParticlePropertiesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
-  var energyString = require( 'string!RUTHERFORD_SCATTERING/energy' );
-  var maxEnergyString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' );
-  var minEnergyString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
-  var showTracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
+  const alphaParticlePropertiesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticleProperties' );
+  const energyString = require( 'string!RUTHERFORD_SCATTERING/energy' );
+  const maxEnergyString = require( 'string!RUTHERFORD_SCATTERING/maxEnergy' );
+  const minEnergyString = require( 'string!RUTHERFORD_SCATTERING/minEnergy' );
+  const showTracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
 
   // a11y strings
   var alphaParticleSettingsString = RSA11yStrings.alphaParticleSettings.value;

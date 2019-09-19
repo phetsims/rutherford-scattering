@@ -5,16 +5,16 @@
  *
  * @author Jesse Greenberg
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var RutherfordAtom = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtom' );
-  var RutherfordNucleus = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleus' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const AtomSpace = require( 'RUTHERFORD_SCATTERING/common/model/AtomSpace' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const RutherfordAtom = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordAtom' );
+  const RutherfordNucleus = require( 'RUTHERFORD_SCATTERING/rutherfordatom/model/RutherfordNucleus' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   /**
    * Constructor.

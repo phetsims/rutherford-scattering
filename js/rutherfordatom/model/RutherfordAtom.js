@@ -8,15 +8,15 @@
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Atom = require( 'RUTHERFORD_SCATTERING/common/model/Atom' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const Atom = require( 'RUTHERFORD_SCATTERING/common/model/Atom' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   /**
    * Constructor.

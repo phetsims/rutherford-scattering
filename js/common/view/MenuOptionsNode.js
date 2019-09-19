@@ -7,16 +7,16 @@
  * @author Jesse Greenberg
  */
 
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
-  var OptionsDialog = require( 'JOIST/OptionsDialog' );
-  var ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
-  var RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  var rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const OptionsDialog = require( 'JOIST/OptionsDialog' );
+  const ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
+  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
+  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   /**
    * @constructor
