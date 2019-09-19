@@ -20,7 +20,7 @@ define( require => {
   // strings
   const rutherfordScatteringTitleString = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );
 
-  var simOptions = {
+  const simOptions = {
     credits: {
       leadDesign: 'Amy Hanson, Sam McKagan',
       softwareDevelopment: 'Jesse Greenberg, Chris Malley, Dave Schmitz',
@@ -40,11 +40,11 @@ define( require => {
   FocusOverlay.setOuterGroupHighlightColor( RSColorProfile.outerGroupHighlightColorProperty );
 
   SimLauncher.launch( function() {
-    var screens = [
+    const screens = [
       new RutherfordAtomScreen(),
       new PlumPuddingAtomScreen()
     ];
-    var sim = new Sim( rutherfordScatteringTitleString, screens, simOptions );
+    const sim = new Sim( rutherfordScatteringTitleString, screens, simOptions );
     sim.start();
   } );
 } );

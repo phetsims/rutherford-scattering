@@ -24,10 +24,10 @@ define( require => {
   const Util = require( 'DOT/Util' );
 
   // constants
-  var SPACE_BORDER_WIDTH = 2;
-  var SPACE_BORDER_COLOR = 'grey';
-  var PARTICLE_TRACE_WIDTH = 1.5;
-  var FADEOUT_SEGMENTS = 80;
+  const SPACE_BORDER_WIDTH = 2;
+  const SPACE_BORDER_COLOR = 'grey';
+  const PARTICLE_TRACE_WIDTH = 1.5;
+  const FADEOUT_SEGMENTS = 80;
 
   /**
    * @param {atomSpace} atomSpace - space containing atoms and particles
@@ -52,7 +52,7 @@ define( require => {
 
     CanvasNode.call( this, options );
 
-    var self = this;
+    const self = this;
 
     // @private
     this.atomSpace = atomSpace;
@@ -78,7 +78,7 @@ define( require => {
     };
 
     // create a single alpha particle image to use for rendering all particles - asynchronous
-    var alphaParticle;
+    let alphaParticle;
     if ( this.particleStyle === 'nucleus' ) {
       alphaParticle = ParticleNodeFactory.createNucleusAlpha();
     }
@@ -114,10 +114,10 @@ define( require => {
      */
     paintCanvas: function( context ) {
 
-      var self = this;
+      const self = this;
 
-      var bounds = this.canvasBounds;
-      var renderTrace = self.showAlphaTraceProperty.value;
+      const bounds = this.canvasBounds;
+      const renderTrace = self.showAlphaTraceProperty.value;
 
       // clear
       context.clearRect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
@@ -158,7 +158,7 @@ define( require => {
      * @private
      */
     renderAlphaParticles: function( context, particleContainer, renderTrace ) {
-      var self = this;
+      const self = this;
 
       if ( renderTrace ) {
 
@@ -176,24 +176,24 @@ define( require => {
         if ( renderTrace ) {
 
           // add trace segments
-          for ( var i = 1; i < particle.positions.length; i++ ) {
+          for ( let i = 1; i < particle.positions.length; i++ ) {
             if ( self.particleStyle === 'particle' ) {
 
               // if the style is of a 'particle', each segment needs a new path to create the gradient effect
               context.beginPath();
             }
 
-            var segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i - 1 ] );
+            const segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i - 1 ] );
             context.moveTo( segmentStartViewPosition.x, segmentStartViewPosition.y );
-            var segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i ] );
+            const segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i ] );
             context.lineTo( segmentEndViewPosition.x, segmentEndViewPosition.y );
 
             if ( self.particleStyle === 'particle' ) {
 
               // only the last FADEOUT_SEGMENTS should be visible, map i to the opacity
-              var length = particle.positions.length;
-              var alpha = Util.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
-              var strokeStyle = StringUtils.format( self.particleTraceColorWithFade, alpha );
+              const length = particle.positions.length;
+              const alpha = Util.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
+              const strokeStyle = StringUtils.format( self.particleTraceColorWithFade, alpha );
               context.strokeStyle = strokeStyle;
               context.stroke();
               context.closePath();
@@ -202,7 +202,7 @@ define( require => {
         }
 
         // render particle
-        var particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.positionProperty.get() );
+        const particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.positionProperty.get() );
         context.drawImage( self.alphaParticleImage,
           particleViewPosition.x - self.particleImageHalfWidth,
           particleViewPosition.y - self.particleImageHalfHeight );

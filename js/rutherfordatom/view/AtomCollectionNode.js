@@ -22,9 +22,9 @@ define( require => {
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
-  var IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV
-  var RADIUS_SCALE = 5.95; // scale to make the radii visible in the space, chosen empirically
-  var ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
+  const IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV
+  const RADIUS_SCALE = 5.95; // scale to make the radii visible in the space, chosen empirically
+  const ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
 
   /**
    * Constructor.
@@ -37,50 +37,50 @@ define( require => {
   function AtomCollectionNode( atomSpace, modelViewTransform, options ) {
 
     Node.call( this, options );
-    var self = this;
+    const self = this;
 
     // @public (read-only) {null|HTMLImageElement} - This node will eventually be drawn with canvas with
     // context.drawImage. The image is created asynchronously in this constructor.
     this.image = null;
 
     // draw each atom in the space - called every time the color profile changes
-    var drawAtomCollection = function() {
+    const drawAtomCollection = function() {
 
       // remove the all children
       self.removeAllChildren();
       atomSpace.atoms.forEach( function( atom ) {
 
         // a small circle represents each nucleus
-        var nucleusCircle = ParticleNodeFactory.createNucleus();
+        const nucleusCircle = ParticleNodeFactory.createNucleus();
         nucleusCircle.center = modelViewTransform.modelToViewPosition( atom.position );
         self.addChild( nucleusCircle );
 
         // create the radii - concentric circles with dashed lines spaced proportionally to the Bohr
         // energies
-        var getScaledRadius = function( index ) {
-          var radius = 0;
+        const getScaledRadius = function( index ) {
+          let radius = 0;
 
           // sum the Bohr energies up to this index
-          for ( var i = 1; i <= index; i++ ) {
-            var bohrEnergy = IONIZATION_ENERGY / ( i * i );
+          for ( let i = 1; i <= index; i++ ) {
+            const bohrEnergy = IONIZATION_ENERGY / ( i * i );
             radius += bohrEnergy; // radius will be scaled by this sum
           }
           return radius * RADIUS_SCALE;
         };
 
         // draw the radii
-        for ( var i = ENERGY_LEVELS; i > 0 ; i-- ) {
-          var scaledRadius = getScaledRadius( i );
-          var radius = new Circle( scaledRadius, { stroke: 'grey', lineDash: [ 5, 5 ], center: nucleusCircle.center } );
+        for ( let i = ENERGY_LEVELS; i > 0 ; i-- ) {
+          const scaledRadius = getScaledRadius( i );
+          const radius = new Circle( scaledRadius, { stroke: 'grey', lineDash: [ 5, 5 ], center: nucleusCircle.center } );
           self.addChild( radius );
         }
 
         // draw the bounds of each nucleus
         if ( RSQueryParameters.showDebugShapes ) {
-          var boundsRectangle = new Path( modelViewTransform.modelToViewShape( atom.boundingRect ), { stroke: 'red' } );
+          const boundsRectangle = new Path( modelViewTransform.modelToViewShape( atom.boundingRect ), { stroke: 'red' } );
           self.addChild( boundsRectangle );
 
-          var boundingCircle = new Path( modelViewTransform.modelToViewShape( atom.boundingCircle ), { stroke: 'red' } );
+          const boundingCircle = new Path( modelViewTransform.modelToViewShape( atom.boundingCircle ), { stroke: 'red' } );
           self.addChild( boundingCircle );
         }
       } );

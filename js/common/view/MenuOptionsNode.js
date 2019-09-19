@@ -23,7 +23,7 @@ define( require => {
    */
   function MenuOptionsNode() {
 
-    var projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
+    const projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
 
     VBox.call( this, _.extend( {
       children: [ projectorCheckbox ],

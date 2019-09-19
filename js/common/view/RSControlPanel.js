@@ -27,7 +27,7 @@ define( require => {
 
     Node.call( this );
 
-    var defaultOptions = {
+    const defaultOptions = {
       spacing: RSConstants.PANEL_VERTICAL_MARGIN,
       align: 'left',
       resize: false,
@@ -36,7 +36,7 @@ define( require => {
     this.panelOptions = _.extend( defaultOptions, options ); // @private
 
     // @private - arrange control panels vertically
-    var vBox = new VBox( this.panelOptions );
+    const vBox = new VBox( this.panelOptions );
     this.addChild( vBox );
 
     this.mutate( options );

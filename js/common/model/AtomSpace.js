@@ -42,7 +42,7 @@ define( require => {
 
     // when a particle has been removed from an atom, remove it from the space as well
     // no need to remove listener, exists for life of sim
-    var self = this;
+    const self = this;
     this.particleRemovedFromAtomEmitter.addListener( function( particle ) {
       self.removeParticle( particle );
     } );
@@ -84,7 +84,7 @@ define( require => {
      * @public
      */
     removeParticle: function( alphaParticle ) {
-      var index = this.particles.indexOf( alphaParticle );
+      const index = this.particles.indexOf( alphaParticle );
       if ( index > -1 ) {
         this.particles.splice( index, 1 );
         this.removeParticleFromEmptySpace( alphaParticle );
@@ -98,7 +98,7 @@ define( require => {
      * @private
      */
     removeParticleFromEmptySpace: function( alphaParticle ) {
-      var index = this.particlesInEmptySpace.indexOf( alphaParticle );
+      const index = this.particlesInEmptySpace.indexOf( alphaParticle );
       if ( index > -1 ) {
         alphaParticle.isInSpace = false;
         this.particlesInEmptySpace.splice( index, 1 );
@@ -121,11 +121,11 @@ define( require => {
      * @private
      */
     transitionParticlesToAtoms: function() {
-      for ( var i = 0; i < this.particlesInEmptySpace.length; i++ ) {
-        var particle = this.particlesInEmptySpace[ i ];
+      for ( let i = 0; i < this.particlesInEmptySpace.length; i++ ) {
+        const particle = this.particlesInEmptySpace[ i ];
 
-        for ( var j = 0; j < this.atoms.length; j++ ) {
-          var atom = this.atoms[ j ];
+        for ( let j = 0; j < this.atoms.length; j++ ) {
+          const atom = this.atoms[ j ];
 
           if ( particle.preparedAtom !== atom && atom.boundingCircle.containsPoint( particle.positionProperty.get() ) ) {
             particle.prepareBoundingBox( atom );
@@ -163,8 +163,8 @@ define( require => {
      * @public
      */
     transitionParticlesToSpace: function() {
-      for ( var i = 0; i < this.particles.length; i++ ) {
-        var particle = this.particles[ i ];
+      for ( let i = 0; i < this.particles.length; i++ ) {
+        const particle = this.particles[ i ];
 
         if ( !particle.isInSpace ) {
           // if the particle leaves the bounding circle of its atom, add it back into empty space
@@ -191,18 +191,18 @@ define( require => {
       this.transitionParticlesToSpace();
 
       // move particles in empty space straight through
-      for ( var i = 0 ; i < this.particles.length; i++ ) {
-        var alphaParticle = this.particles[ i ];
+      for ( let i = 0 ; i < this.particles.length; i++ ) {
+        const alphaParticle = this.particles[ i ];
 
         if ( !alphaParticle.atom ) {
-          var speed = alphaParticle.speedProperty.get();
-          var distance = speed * dt;
-          var direction = alphaParticle.orientationProperty.get();
-          var dx = Math.cos( direction ) * distance;
-          var dy = Math.sin( direction ) * distance;
-          var position = alphaParticle.positionProperty.get();
-          var x = position.x + dx;
-          var y = position.y + dy;
+          const speed = alphaParticle.speedProperty.get();
+          const distance = speed * dt;
+          const direction = alphaParticle.orientationProperty.get();
+          const dx = Math.cos( direction ) * distance;
+          const dy = Math.sin( direction ) * distance;
+          const position = alphaParticle.positionProperty.get();
+          const x = position.x + dx;
+          const y = position.y + dy;
           alphaParticle.positionProperty.set( new Vector2( x, y ) );
         }
       }
@@ -221,12 +221,12 @@ define( require => {
      */
     checkAtomBounds: function() {
     // make sure that none of the atoms overlap each other
-      for ( var i = 0; i < this.atoms.length - 1; i++ ) {
-        for ( var j = i + 1; j < this.atoms.length; j++ ) {
+      for ( let i = 0; i < this.atoms.length - 1; i++ ) {
+        for ( let j = i + 1; j < this.atoms.length; j++ ) {
           // get the atom bounds and erode slightly because bounds should perfectly overlap at edges
-          var atom1Bounds = this.atoms[ i ].boundingRect.bounds;
-          var atom2Bounds = this.atoms[ j ].boundingRect.bounds;
-          var boundsIntersect = atom1Bounds.intersectsBounds( atom2Bounds );
+          const atom1Bounds = this.atoms[ i ].boundingRect.bounds;
+          const atom2Bounds = this.atoms[ j ].boundingRect.bounds;
+          const boundsIntersect = atom1Bounds.intersectsBounds( atom2Bounds );
           assert && assert( !boundsIntersect, 'Atom bounds intersect' );
         }
       }

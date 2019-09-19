@@ -70,8 +70,8 @@ define( require => {
     this.preparedBoundingBox = null;
 
     // @private - save new particle location
-    var self = this;
-    var positionListener = function( position ) {
+    const self = this;
+    const positionListener = function( position ) {
       self.positions.push( new Vector2( position.x, position.y ) );
     };
     this.positionProperty.link( positionListener );
@@ -103,13 +103,13 @@ define( require => {
 
       // if there are less than two positions, return a vector pointing in the initial orientation
       if ( this.positions.length < 2 ) {
-        var orientation = this.orientationProperty.get();
+        const orientation = this.orientationProperty.get();
         return new Vector2( Math.cos( orientation ), Math.sin( orientation ) ).normalized();
       }
 
-      var position1 = this.positions[ this.positions.length - 2 ];
-      var position2 = this.positions[ this.positions.length - 1 ];
-      var direction = new Vector2( position2.x - position1.x, position2.y - position1.y );
+      const position1 = this.positions[ this.positions.length - 2 ];
+      const position2 = this.positions[ this.positions.length - 1 ];
+      const direction = new Vector2( position2.x - position1.x, position2.y - position1.y );
 
       return direction.normalized();
     },
@@ -125,13 +125,13 @@ define( require => {
     prepareBoundingBox: function( atom ) {
 
       // get the angle of the vector orthogonal to the direction of movement
-      var direction = this.getDirection();
-      var perpendicular = direction.perpendicular;
+      const direction = this.getDirection();
+      const perpendicular = direction.perpendicular;
 
-      var rotationAngle = perpendicular.angle;
+      const rotationAngle = perpendicular.angle;
       this.preparedRotationAngle = rotationAngle;
 
-      var transformedShape = atom.boundingRect.transformed( Matrix3.rotationAroundPoint( rotationAngle, atom.position ) );
+      const transformedShape = atom.boundingRect.transformed( Matrix3.rotationAroundPoint( rotationAngle, atom.position ) );
       this.preparedBoundingBox = transformedShape;
     }
 

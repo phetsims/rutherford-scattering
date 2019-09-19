@@ -28,7 +28,7 @@ define( require => {
    */
   function PlumPuddingAtomScreen() {
 
-    var options = {
+    const options = {
       name: plumPuddingAtomString,
       backgroundColorProperty: RSColorProfile.backgroundColorProperty,
       homeScreenIcon: new Image( screenIcon )

@@ -17,8 +17,8 @@ define( require => {
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // a11y strings
-  var observationWindowString = RSA11yStrings.observationWindow.value;
-  var nucleusSpaceDescriptionString = RSA11yStrings.nucleusSpaceDescription.value;
+  const observationWindowString = RSA11yStrings.observationWindow.value;
+  const nucleusSpaceDescriptionString = RSA11yStrings.nucleusSpaceDescription.value;
 
   /**
    * @param {RSBaseModel} model
@@ -53,7 +53,7 @@ define( require => {
     // updated correctly - when marked as 'dirty', the atom node will be explicitly redrawn to ensure that
     // it looks correct in the space
     // does not need to be unlinked, space will exist for life of sim
-    var self = this;
+    const self = this;
     model.stepEmitter.addListener( function( dt ) {
       if ( self.atomNode.isDirty ) {
         if ( dt ) {
@@ -84,8 +84,8 @@ define( require => {
         return;
       }
 
-      var x = this.centerX - this.atomNode.image.width / 2;
-      var y = this.centerY - this.atomNode.image.height / 2;
+      const x = this.centerX - this.atomNode.image.width / 2;
+      const y = this.centerY - this.atomNode.image.height / 2;
       context.drawImage( this.atomNode.image, x, y, this.atomNode.image.width, this.atomNode.image.height );
     }
 

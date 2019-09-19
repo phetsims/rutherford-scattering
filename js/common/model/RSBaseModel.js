@@ -58,7 +58,7 @@ define( require => {
     this.stepEmitter = new Emitter( { parameters: [ { valueType: 'number' } ] } );
 
     // no need to unlink this property as base model will exist for life of sim
-    var userInteractionListener = userInteraction => {
+    const userInteractionListener = userInteraction => {
       if ( userInteraction ) {
         this.removeAllParticles();
       }
@@ -85,7 +85,7 @@ define( require => {
      * @public
      */
     getVisibleSpace: function() {
-      var visibleSpace;
+      let visibleSpace;
       this.atomSpaces.forEach( function( space ) {
         if ( space.isVisible ) {
           visibleSpace = space;
@@ -116,7 +116,7 @@ define( require => {
      */
     removeParticle: function( alphaParticle ) {
       // remove the particle from the visible space
-      var visibleSpace = this.getVisibleSpace();
+      const visibleSpace = this.getVisibleSpace();
       visibleSpace.removeParticle( alphaParticle );
 
       // remove the particle from its atom if scattered
@@ -125,7 +125,7 @@ define( require => {
       } );
 
       // remove the particle from the base model
-      var index = this.particles.indexOf( alphaParticle );
+      const index = this.particles.indexOf( alphaParticle );
       if ( index > -1 ) {
         this.particles.splice( index, 1 );
       }
@@ -137,7 +137,7 @@ define( require => {
      */
     removeAllParticles: function() {
       // remove the particles from the visible space
-      var visibleSpace = this.getVisibleSpace();
+      const visibleSpace = this.getVisibleSpace();
       visibleSpace.removeAllParticles();
 
       // remove all particles from the atoms
@@ -179,7 +179,7 @@ define( require => {
      * @protected
      */
     cullParticles: function() {
-      var self = this;
+      const self = this;
       this.particles.forEach( function( particle ) {
         if ( !self.bounds.containsPoint( particle.positionProperty.get() ) ) {
           self.removeParticle( particle );

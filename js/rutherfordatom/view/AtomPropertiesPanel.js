@@ -30,21 +30,21 @@ define( require => {
   const numberOfProtonsString = require( 'string!RUTHERFORD_SCATTERING/numberOfProtons' );
 
   // a11y strings
-  var atomSettingsString = RSA11yStrings.atomSettings.value;
-  var protonsValuePatternString = RSA11yStrings.protonsValuePattern.value;
-  var protonSliderDescriptionString = RSA11yStrings.protonSliderDescription.value;
-  var neutronsValuePatternString = RSA11yStrings.neutronsValuePattern.value;
-  var neutronSliderDescriptionString = RSA11yStrings.neutronSliderDescription.value;
+  const atomSettingsString = RSA11yStrings.atomSettings.value;
+  const protonsValuePatternString = RSA11yStrings.protonsValuePattern.value;
+  const protonSliderDescriptionString = RSA11yStrings.protonSliderDescription.value;
+  const neutronsValuePatternString = RSA11yStrings.neutronsValuePattern.value;
+  const neutronSliderDescriptionString = RSA11yStrings.neutronSliderDescription.value;
 
   // global, tracking where fingers are for multitouch support
   // must persist beyond lifetime of the panel so that fingers are tracked when new
   // panels are created for scene or color profile changes
-  var FINGER_TRACKER = {};
+  const FINGER_TRACKER = {};
 
   // specific interaction properties for the rutherford atom portion, for multitouch
   // Not specific to an instance of an AtomPropertiesPanel, values of the interaction state Properties should
   // persist beyond when scene or color profile changes
-  var interactionPropertyGroup = {
+  const interactionPropertyGroup = {
     leftProtonButtonInteractionProperty: new Property( false ),
     rightProtonButtonInteractionProperty: new Property( false ),
     protonSliderInteractionProperty: new Property( false ),
@@ -63,14 +63,14 @@ define( require => {
   function AtomPropertiesPanel( content, options ) {
 
     // Add the title of the panel content
-    var atomPropertiesText = new Text( atomString, {
+    const atomPropertiesText = new Text( atomString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColorProfile.panelTitleColorProperty,
       maxWidth: 225
     } );
 
-    var panelBox = new VBox( {
+    const panelBox = new VBox( {
       children: [ atomPropertiesText, content ],
       align: 'left',
       spacing: RSConstants.PANEL_CHILD_SPACING
@@ -162,23 +162,23 @@ define( require => {
     this.protonCountProperty = model.protonCountProperty;
 
     // each element must have a unique interaction property to support multitouch, see #104
-    var leftProtonButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
-    var rightProtonButtonInteractionProperty = interactionPropertyGroup.rightProtonButtonInteractionProperty;
-    var leftNeutronButtonInteractionProperty = interactionPropertyGroup.leftNeutronButtonInteractionProperty;
-    var rightNeutronButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
-    var protonSliderInteractionProperty = interactionPropertyGroup.protonSliderInteractionProperty;
-    var neutronSliderInteractionProperty = interactionPropertyGroup.neutronSliderInteractionProperty;
+    const leftProtonButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
+    const rightProtonButtonInteractionProperty = interactionPropertyGroup.rightProtonButtonInteractionProperty;
+    const leftNeutronButtonInteractionProperty = interactionPropertyGroup.leftNeutronButtonInteractionProperty;
+    const rightNeutronButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
+    const protonSliderInteractionProperty = interactionPropertyGroup.protonSliderInteractionProperty;
+    const neutronSliderInteractionProperty = interactionPropertyGroup.neutronSliderInteractionProperty;
 
     // these properties are true when any of the dependencies are true
-    var protonPanelInteractionProperty = DerivedProperty.or( [ leftProtonButtonInteractionProperty, rightProtonButtonInteractionProperty, protonSliderInteractionProperty ] );
-    var neutronPanelInteractionProperty = DerivedProperty.or( [ leftNeutronButtonInteractionProperty, rightNeutronButtonInteractionProperty, neutronSliderInteractionProperty ] );
+    const protonPanelInteractionProperty = DerivedProperty.or( [ leftProtonButtonInteractionProperty, rightProtonButtonInteractionProperty, protonSliderInteractionProperty ] );
+    const neutronPanelInteractionProperty = DerivedProperty.or( [ leftNeutronButtonInteractionProperty, rightNeutronButtonInteractionProperty, neutronSliderInteractionProperty ] );
 
     // must be disposed
-    var self = this;
-    var protonInteractionListener = function( protonInteraction ) {
+    const self = this;
+    const protonInteractionListener = function( protonInteraction ) {
       self.protonInteractionProperty.set( protonInteraction );
     };
-    var neutronInteractionListener = function( neutronInteraction ) {
+    const neutronInteractionListener = function( neutronInteraction ) {
       self.neutronInteractionProperty.set( neutronInteraction );
     };
     protonPanelInteractionProperty.link( protonInteractionListener );
@@ -192,7 +192,7 @@ define( require => {
      * @param  {string} sliderID
      * @param  {Property.<boolean>} interactionProperty
      */
-    var addFinger = function( sliderID, interactionProperty ) {
+    const addFinger = function( sliderID, interactionProperty ) {
       interactionProperty.set( true );
       if ( !FINGER_TRACKER[ sliderID ] && FINGER_TRACKER[ sliderID ] !== 0 ) {
         FINGER_TRACKER[ sliderID ] = 1; // first time finger is down on this thumb
@@ -210,7 +210,7 @@ define( require => {
      * @param  {Property.<boolean>} interactionProperty
      * @param  {Property.<number>} countProperty
      */
-    var removeFinger = function( sliderID, interactionProperty, countProperty ) {
+    const removeFinger = function( sliderID, interactionProperty, countProperty ) {
       FINGER_TRACKER[ sliderID ]--;
       assert && assert( FINGER_TRACKER[ sliderID ] >= 0, 'at least 0 fingers must be using the slider' );
       countProperty.set( Util.roundSymmetric( countProperty.value ) ); // proper resolution for nucleons
@@ -219,8 +219,8 @@ define( require => {
       }
     };
 
-    var sliderWidth = options.minWidth * 0.75;
-    var numberControlOptions = {
+    const sliderWidth = options.minWidth * 0.75;
+    const numberControlOptions = {
       layoutFunction: NumberControl.createLayoutFunction3( {
         ySpacing: 3,
         alignTitle: 'left',
@@ -252,10 +252,10 @@ define( require => {
     };
 
     // allowable range for proton values
-    var protonCountRange = new RangeWithValue( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT,
+    const protonCountRange = new RangeWithValue( RSConstants.MIN_PROTON_COUNT, RSConstants.MAX_PROTON_COUNT,
       RSConstants.DEFAULT_PROTON_COUNT );
 
-    var protonMajorTicks = [
+    const protonMajorTicks = [
       {
         value: protonCountRange.min,
         label: new Text( protonCountRange.min, {
@@ -275,11 +275,11 @@ define( require => {
     ];
 
     // will track whether we are pressing and holding arrow buttons down
-    var rightProtonButtonDown = false;
-    var leftProtonButtonDown = false;
+    let rightProtonButtonDown = false;
+    let leftProtonButtonDown = false;
 
     // Number control for protons
-    var protonNumberControlOptions = _.extend( {}, numberControlOptions );
+    const protonNumberControlOptions = _.extend( {}, numberControlOptions );
     protonNumberControlOptions.titleNodeOptions = _.extend( {},
       numberControlOptions.titleNodeOptions, { fill: RSColorProfile.protonsLabelColorProperty } );
     protonNumberControlOptions.arrowButtonOptions = {
@@ -317,7 +317,7 @@ define( require => {
         descriptionContent: protonSliderDescriptionString,
         containerTagName: 'div'
       } );
-    var protonNumberControl = new NumberControl( numberOfProtonsString, this.protonCountProperty, protonCountRange, protonNumberControlOptions );
+    const protonNumberControl = new NumberControl( numberOfProtonsString, this.protonCountProperty, protonCountRange, protonNumberControlOptions );
 
     function protonCountListener() {
 
@@ -333,10 +333,10 @@ define( require => {
 
     this.protonCountProperty.link( protonCountListener );
 
-    var neutronCountRange = new RangeWithValue( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
+    const neutronCountRange = new RangeWithValue( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
       RSConstants.DEFAULT_NEUTRON_COUNT );
 
-    var neutronMajorTicks = [ {
+    const neutronMajorTicks = [ {
       value: neutronCountRange.min,
       label: new Text( neutronCountRange.min, {
         font: RSConstants.PANEL_TICK_FONT,
@@ -355,11 +355,11 @@ define( require => {
     ];
 
     // will track whether we are pressing and holding arrow buttons down
-    var leftNeutronButtonDown = false;
-    var rightNeutronButtonDown = false;
+    let leftNeutronButtonDown = false;
+    let rightNeutronButtonDown = false;
 
     // Number control for protons
-    var neutronNumberControlOptions = _.extend( {}, numberControlOptions );
+    const neutronNumberControlOptions = _.extend( {}, numberControlOptions );
     neutronNumberControlOptions.titleNodeOptions = _.extend( {},
       numberControlOptions.titleNodeOptions, { fill: RSColorProfile.neutronsLabelColorProperty }
     );
@@ -400,7 +400,7 @@ define( require => {
         rightNeutronButtonDown = true;
       }
     };
-    var neutronNumberControl = new NumberControl( numberOfNeutronsString, this.neutronCountProperty, neutronCountRange, neutronNumberControlOptions );
+    const neutronNumberControl = new NumberControl( numberOfNeutronsString, this.neutronCountProperty, neutronCountRange, neutronNumberControlOptions );
 
     function neutronCountListener() {
 

@@ -15,7 +15,7 @@ define( require => {
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
-  var RSConstants = {
+  const RSConstants = {
 
     //----------------------------------------------------------------------------
     // Model

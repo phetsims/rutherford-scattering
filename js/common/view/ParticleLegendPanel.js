@@ -25,7 +25,7 @@ define( require => {
   const legendString = require( 'string!RUTHERFORD_SCATTERING/legend' );
 
   // constants
-  var LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;
+  const LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;
 
   /**
    * @param {VBox} children - content to be contained in the panel
@@ -35,7 +35,7 @@ define( require => {
   function ParticleLegendPanel( content, options ) {
 
     // the title for the panel
-    var legendText = new Text( legendString, {
+    const legendText = new Text( legendString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColorProfile.panelTitleColorProperty,
@@ -43,7 +43,7 @@ define( require => {
     } );
 
     // title with content, aligned
-    var contentVBox = new VBox( {
+    const contentVBox = new VBox( {
       children: [ legendText, content ],
       align: 'left',
       spacing: RSConstants.PANEL_CHILD_SPACING
@@ -72,9 +72,9 @@ define( require => {
    */
   function createParticleRow( particleNode, titleString ) {
 
-    var hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
-    var titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSColorProfile.panelLabelColorProperty, maxWidth: 175 } );
-    var hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
+    const hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
+    const titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSColorProfile.panelLabelColorProperty, maxWidth: 175 } );
+    const hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
 
     // container for one row in the legend
     return new HBox( {
@@ -135,8 +135,8 @@ define( require => {
     }, options );
 
     // i18n - make align boxes for all items so that they are the same height, important when strings change size
-    var alignGroup = new AlignGroup( { matchHorizontal: false } );
-    var children = [];
+    const alignGroup = new AlignGroup( { matchHorizontal: false } );
+    const children = [];
     content.forEach( function( item ) {
       children.push( alignGroup.createBox( item ) );
     } );

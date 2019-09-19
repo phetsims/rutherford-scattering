@@ -11,7 +11,7 @@ define( require => {
   // modules
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
-  var RSQueryParameters = QueryStringMachine.getAll( {
+  const RSQueryParameters = QueryStringMachine.getAll( {
 
     // show shapes around each atom to show the transform of the atomic bounds as a particle enters the bounding box
     showDebugShapes: { type: 'flag' },

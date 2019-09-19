@@ -29,7 +29,7 @@ define( require => {
     // create a nucleus model containing protons and neutrons
     this.rutherfordNucleus = new RutherfordNucleus( protonCountProperty, neutronCountProperty );
 
-    var rutherfordAtom = new RutherfordAtom( this.particleRemovedFromAtomEmitter, protonCountProperty, new Vector2( 0, 0 ), this.bounds.width );
+    const rutherfordAtom = new RutherfordAtom( this.particleRemovedFromAtomEmitter, protonCountProperty, new Vector2( 0, 0 ), this.bounds.width );
     this.atoms.push( rutherfordAtom );
 
     // make sure that atom bounds are OK

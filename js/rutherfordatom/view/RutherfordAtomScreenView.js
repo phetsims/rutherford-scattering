@@ -38,10 +38,10 @@ define( require => {
   const pattern0NuclearScaleString = require( 'string!RUTHERFORD_SCATTERING/pattern.0nuclearScale' );
 
   // a11yStrings
-  var switchScaleString = RSA11yStrings.switchScale.value;
-  var switchScaleDescriptionString = RSA11yStrings.switchScaleDescription.value;
-  var nuclearScaleViewString = RSA11yStrings.nuclearScaleView.value;
-  var atomicScaleViewString = RSA11yStrings.atomicScaleView.value;
+  const switchScaleString = RSA11yStrings.switchScale.value;
+  const switchScaleDescriptionString = RSA11yStrings.switchScaleDescription.value;
+  const nuclearScaleViewString = RSA11yStrings.nuclearScaleView.value;
+  const atomicScaleViewString = RSA11yStrings.atomicScaleView.value;
 
   // images
   const atomImage = require( 'image!RUTHERFORD_SCATTERING/Atom.png' );
@@ -53,42 +53,42 @@ define( require => {
    */
   function RutherfordAtomScreenView( model ) {
 
-    var nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, '1.5 x 10<sup>-13</sup>' );
-    var atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>' );
+    const nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, '1.5 x 10<sup>-13</sup>' );
+    const atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>' );
 
     RSBaseScreenView.call( this, model, nucleusScaleString, createSpaceNode, {
       includeElectronLegend: false
     } );
 
     // scale info for the 'atom' scene, only visible when atom scene is selected
-    var atomicScaleInfoNode = new ScaleInfoNode( atomicScaleString, this.spaceNode.getWidth(), {
+    const atomicScaleInfoNode = new ScaleInfoNode( atomicScaleString, this.spaceNode.getWidth(), {
       center: this.scaleInfoNode.center
     } );
     this.addChild( atomicScaleInfoNode );
 
     // create the panels of the control panel on the right
-    var createPanels = function() {
+    const createPanels = function() {
 
-      var legendContent;
-      var atomSceneVisible = model.sceneProperty.value === 'atom';
+      let legendContent;
+      const atomSceneVisible = model.sceneProperty.value === 'atom';
 
       // create content for the control panels
-      var atomLegendContent = AtomParticleLegendPanel.createPanelContent( { resize: false } );
-      var nuclearLegendContent = NuclearParticleLegendPanel.createPanelContent( {
+      const atomLegendContent = AtomParticleLegendPanel.createPanelContent( { resize: false } );
+      const nuclearLegendContent = NuclearParticleLegendPanel.createPanelContent( {
         resize: false,
         includeElectron: false,
         includePlumPudding: false
       } );
-      var particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.energyInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
-      var atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
+      const particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.energyInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
+      const atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
 
       // make sure that content for all panels are aligned and the legend content is aligned to the left
       // this content does not include title
-      var contentAlignGroup = new AlignGroup( { matchVertical: false } );
-      var atomContentBox = contentAlignGroup.createBox( atomLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
-      var nuclearContentBox = contentAlignGroup.createBox( nuclearLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
-      var particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
-      var atromPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
+      const contentAlignGroup = new AlignGroup( { matchVertical: false } );
+      const atomContentBox = contentAlignGroup.createBox( atomLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
+      const nuclearContentBox = contentAlignGroup.createBox( nuclearLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
+      const particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
+      const atromPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
 
       // create content for the legend panels
       if ( atomSceneVisible ) {
@@ -99,10 +99,10 @@ define( require => {
       }
 
       // create the panels
-      var panelOptions = { resize: false };
-      var legendPanel = atomSceneVisible ? new AtomParticleLegendPanel( legendContent, panelOptions ) : new NuclearParticleLegendPanel( legendContent, panelOptions );
-      var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
-      var atomPropertiesPanel = new AtomPropertiesPanel( atromPropertiesContentBox, panelOptions );
+      const panelOptions = { resize: false };
+      const legendPanel = atomSceneVisible ? new AtomParticleLegendPanel( legendContent, panelOptions ) : new NuclearParticleLegendPanel( legendContent, panelOptions );
+      const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
+      const atomPropertiesPanel = new AtomPropertiesPanel( atromPropertiesContentBox, panelOptions );
 
       return [
         legendPanel,
@@ -113,7 +113,7 @@ define( require => {
 
     // when various panels are added/removed due to changing color profile or scene, reset the accessible order
     var self = this;
-    var restoreAccessibleOrder = function() {
+    const restoreAccessibleOrder = function() {
       self.playAreaNode.accessibleOrder = [
         self.gunNode
       ];
@@ -130,8 +130,8 @@ define( require => {
     // should be updated, and the control/legend panels need to change
     // no need to unlink, screen view exists for life of sim
     model.sceneProperty.link( function( scene ) {
-      var beam = self.beamNode;
-      var atomSceneVisible = scene === 'atom';
+      const beam = self.beamNode;
+      const atomSceneVisible = scene === 'atom';
 
       // update visibility of scene specific scale info
       self.scaleInfoNode.visible = !atomSceneVisible;
@@ -148,7 +148,7 @@ define( require => {
       }
 
       // create the new control panel
-      var panels = createPanels();
+      const panels = createPanels();
       controlPanel = self.createControlPanel( panels );
       self.addChild( controlPanel );
 
@@ -157,8 +157,8 @@ define( require => {
 
     // create radio buttons for the scene - new buttons must be created
     // every time the color profile changes
-    var nucleusIcon = RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 );
-    var buttonOptions = { scale: 0.18 };
+    const nucleusIcon = RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 );
+    const buttonOptions = { scale: 0.18 };
 
     /**
      * Create the RadioButonGroup that will act as the scene selection control in this sim.
@@ -166,7 +166,7 @@ define( require => {
      * @param {Image} atomIconImage - the icon for the atomic scene, changes with color profile
      * @returns {RadioButtonGroup} - returns a RadioButtonGroup that must be disposed when profile changes
      */
-    var createRadioButtons = function( atomIconImage ) {
+    const createRadioButtons = function( atomIconImage ) {
       return new RadioButtonGroup( model.sceneProperty, [
         { value: 'atom', node: new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
         { value: 'nucleus', node: nucleusIcon, labelContent: nuclearScaleViewString }
@@ -204,10 +204,10 @@ define( require => {
       self.sceneRadioButtonGroup.dispose();
 
       // get the correct image for the 'atom' scene icon
-      var iconImage = ( profileName === ColorProfile.PROJECTOR_COLOR_PROFILE_NAME ) ? atomProjectorImage : atomImage;
+      const iconImage = ( profileName === ColorProfile.PROJECTOR_COLOR_PROFILE_NAME ) ? atomProjectorImage : atomImage;
 
       // create the new radio button group
-      var newButtonGroup = createRadioButtons( iconImage );
+      const newButtonGroup = createRadioButtons( iconImage );
       self.sceneRadioButtonGroup = newButtonGroup;
       self.controlAreaNode.addChild( newButtonGroup );
 
@@ -235,26 +235,26 @@ define( require => {
   var createSpaceNode = function( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) {
 
     // create the single nucleus representation scene
-    var nucleusSpaceNode = new NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+    const nucleusSpaceNode = new NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: canvasBounds
     } );
 
     // create the multiple atom representation scene
-    var atomSpaceNode = new AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+    const atomSpaceNode = new AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: canvasBounds
     } );
 
     if ( RSQueryParameters.showErrorCount ) {
       // show the number of particles that were removed from the space in error
-      var errorCountPattern = 'Error count: {{numRemoved}}';
-      var errorText = new Text( '', {
+      const errorCountPattern = 'Error count: {{numRemoved}}';
+      const errorText = new Text( '', {
         font: new PhetFont( 18 ),
         fill: 'red',
         leftBottom: atomSpaceNode.leftTop
       } );
       atomSpaceNode.addChild( errorText );
 
-      var atomsRemoved = 0;
+      let atomsRemoved = 0;
       model.atomSpace.particleRemovedFromAtomEmitter.addListener( function( particle ) {
         atomsRemoved += 1;
         errorText.text = StringUtils.fillIn( errorCountPattern, {
@@ -272,7 +272,7 @@ define( require => {
     // update which scene is visible and remove all particles
     // no need to unlink, screen view exists for life of sim
     model.sceneProperty.link( function( scene ) {
-      var nucleusVisible = scene === 'nucleus';
+      const nucleusVisible = scene === 'nucleus';
 
       // set visibility of model space
       model.nucleusSpace.isVisible = nucleusVisible;

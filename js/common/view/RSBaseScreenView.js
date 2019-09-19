@@ -39,14 +39,14 @@ define( require => {
   const alphaParticlesString = require( 'string!RUTHERFORD_SCATTERING/alphaParticles' );
 
   // a11y strings
-  var toggleAlphaParticleString = RSA11yStrings.toggleAlphaParticle.value;
-  var alphaParticlesHelpTextString = RSA11yStrings.alphaParticlesHelpText.value;
+  const toggleAlphaParticleString = RSA11yStrings.toggleAlphaParticle.value;
+  const alphaParticlesHelpTextString = RSA11yStrings.alphaParticlesHelpText.value;
 
-  var otherViewingStreamingOptionsString = RSA11yStrings.otherViewingStreamingOptions.value;
-  var otherOptionsDescriptionString = RSA11yStrings.otherOptionsDescription.value;
+  const otherViewingStreamingOptionsString = RSA11yStrings.otherViewingStreamingOptions.value;
+  const otherOptionsDescriptionString = RSA11yStrings.otherOptionsDescription.value;
 
   // constants
-  var GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
+  const GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
 
   /**
    * @param {RSBaseModel} model
@@ -67,7 +67,7 @@ define( require => {
     }, options );
 
     ScreenView.call( this, options );
-    var self = this;
+    const self = this;
 
     // properties
     this.showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
@@ -89,7 +89,7 @@ define( require => {
     } );
     this.addChild( this.gunNode );
 
-    var alphaParticlesText = new Text( alphaParticlesString, {
+    const alphaParticlesText = new Text( alphaParticlesString, {
       centerX: this.gunNode.centerX,
       top: this.gunNode.bottom + 15,
       font: new PhetFont( 15 ),
@@ -114,26 +114,26 @@ define( require => {
     this.addChild( this.targetMaterialNode );
 
     // tiny box that indicates what will be zoomed
-    var tinyBoxNode = new TinyBox( {
+    const tinyBoxNode = new TinyBox( {
       centerX: self.targetMaterialNode.centerX,
       centerY: self.targetMaterialNode.centerY
     } );
     this.addChild( tinyBoxNode );
 
     // atom animation space
-    var spaceNodeX = this.targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN - RSConstants.SPACE_BUFFER;
-    var spaceNodeY = RSConstants.PANEL_TOP_MARGIN - RSConstants.SPACE_BUFFER;
-    var spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
+    const spaceNodeX = this.targetMaterialNode.right + RSConstants.TARGET_SPACE_MARGIN - RSConstants.SPACE_BUFFER;
+    const spaceNodeY = RSConstants.PANEL_TOP_MARGIN - RSConstants.SPACE_BUFFER;
+    const spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
       spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
       spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
-    var modelViewTransform = new ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
+    const modelViewTransform = new ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
 
     // @protected for layout in subtypes
     this.spaceNode = createSpaceNode( model, this.showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
     this.addChild( this.spaceNode );
 
     // dashed lines that connect the tiny box and space
-    var dashedLines = new Path( new Shape()
+    const dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.centerX, tinyBoxNode.top )
       .lineTo( self.spaceNode.left, self.spaceNode.top )
       .moveTo( tinyBoxNode.centerX, tinyBoxNode.bottom )
@@ -151,7 +151,7 @@ define( require => {
     this.addChild( this.scaleInfoNode );
 
     // play/pause button
-    var playPauseButton = new PlayPauseButton( model.runningProperty, {
+    const playPauseButton = new PlayPauseButton( model.runningProperty, {
       bottom: this.scaleInfoNode.bottom + 60,
       centerX: this.scaleInfoNode.centerX - 25,
       radius: 23
@@ -159,7 +159,7 @@ define( require => {
     this.addChild( playPauseButton );
 
     // step button to manually step the animation.
-    var stepButton = new StepForwardButton( {
+    const stepButton = new StepForwardButton( {
       isPlayingProperty: model.runningProperty,
       listener: function() { model.manualStep(); },
       centerY: playPauseButton.centerY,
@@ -169,7 +169,7 @@ define( require => {
     this.addChild( stepButton );
 
     // reset all button
-    var resetAllButton = new ResetAllButton( {
+    const resetAllButton = new ResetAllButton( {
       listener: function() {
         self.showAlphaTraceProperty.reset();
         model.reset();
@@ -180,7 +180,7 @@ define( require => {
     this.addChild( resetAllButton );
 
     // a11y
-    var viewingStreamingOptionsNode = new Node( {
+    const viewingStreamingOptionsNode = new Node( {
       tagName: 'div',
       labelTagName: 'h3',
       labelContent: otherViewingStreamingOptionsString,

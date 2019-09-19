@@ -17,9 +17,9 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  var BACK_DEPTH = 4;
-  var BACK_OFFSET = 0.10;
-  var BOX_SIZE = new Dimension2( 10, 10 );
+  const BACK_DEPTH = 4;
+  const BACK_OFFSET = 0.10;
+  const BOX_SIZE = new Dimension2( 10, 10 );
 
   /**
    * @param {Object} [options]
@@ -33,7 +33,7 @@ define( require => {
       lineWidth: 1
     }, options );
 
-    var topNode = new Path( new Shape()
+    const topNode = new Path( new Shape()
       .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
       .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
       .lineTo( BOX_SIZE.width, BACK_DEPTH )

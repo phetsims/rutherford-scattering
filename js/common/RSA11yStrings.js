@@ -13,7 +13,7 @@ define( require => {
   // modules
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
-  var RSA11yStrings = {
+  const RSA11yStrings = {
 
     screenSummary: {
       value: 'On this screen, the Play Area has a source that can stream Alpha particles onto a thin foil. A highly ' +
@@ -103,7 +103,7 @@ define( require => {
   };
 
   if ( phet.chipper.queryParameters.stringTest === 'xss' ) {
-    for ( var key in RSA11yStrings ) {
+    for ( const key in RSA11yStrings ) {
       RSA11yStrings[ key ].value += '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2NkYGD4DwABCQEBtxmN7wAAAABJRU5ErkJggg==" onload="window.location.href=atob(\'aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1kUXc0dzlXZ1hjUQ==\')" />';
     }
   }

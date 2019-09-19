@@ -21,9 +21,9 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  var ARROW_HEAD_WIDTH = 12;
-  var ARROW_HEAD_HEIGHT = 12;
-  var ARROW_TAIL_MARGIN = 5;
+  const ARROW_HEAD_WIDTH = 12;
+  const ARROW_HEAD_HEIGHT = 12;
+  const ARROW_TAIL_MARGIN = 5;
 
   /**
    * @param {string} label - the label to place in the middle of the arrows
@@ -38,16 +38,16 @@ define( require => {
     }, options );
 
     // scale text
-    var labelText = new RichText( label, {
+    const labelText = new RichText( label, {
       font: options.font,
       fill: RSColorProfile.panelLabelColorProperty,
       maxWidth: 0.9 * width
     } );
 
     // left arrow
-    var arrowWidth = ( width - labelText.getWidth() ) / 2;
-    var leftArrowX = labelText.left - arrowWidth;
-    var leftArrowNode = new ArrowNode( labelText.left - ARROW_TAIL_MARGIN, labelText.centerY,
+    const arrowWidth = ( width - labelText.getWidth() ) / 2;
+    const leftArrowX = labelText.left - arrowWidth;
+    const leftArrowNode = new ArrowNode( labelText.left - ARROW_TAIL_MARGIN, labelText.centerY,
       leftArrowX, labelText.centerY, {
         headHeight: ARROW_HEAD_HEIGHT,
         headWidth: ARROW_HEAD_WIDTH,
@@ -56,8 +56,8 @@ define( require => {
       } );
 
     // right arrow
-    var rightArrowX = labelText.right + arrowWidth;
-    var rightArrowNode = new ArrowNode( labelText.right + ARROW_TAIL_MARGIN, labelText.centerY,
+    const rightArrowX = labelText.right + arrowWidth;
+    const rightArrowNode = new ArrowNode( labelText.right + ARROW_TAIL_MARGIN, labelText.centerY,
       rightArrowX, labelText.centerY, {
         headHeight: ARROW_HEAD_HEIGHT,
         headWidth: ARROW_HEAD_WIDTH,
@@ -66,12 +66,12 @@ define( require => {
       } );
 
     // end markers
-    var leftMarker = new Path( new Shape().moveTo( leftArrowX, labelText.bounds.minY ).lineTo( leftArrowX, labelText.bounds.maxY ), {
+    const leftMarker = new Path( new Shape().moveTo( leftArrowX, labelText.bounds.minY ).lineTo( leftArrowX, labelText.bounds.maxY ), {
       stroke: RSColorProfile.panelLabelColorProperty,
       lineWidth: 1.5
     } );
 
-    var rightMarker = new Path( new Shape().moveTo( rightArrowX, labelText.bounds.minY ).lineTo( rightArrowX, labelText.bounds.maxY ), {
+    const rightMarker = new Path( new Shape().moveTo( rightArrowX, labelText.bounds.minY ).lineTo( rightArrowX, labelText.bounds.maxY ), {
       stroke: RSColorProfile.panelLabelColorProperty,
       lineWidth: 1.5
     } );

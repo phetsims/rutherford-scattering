@@ -43,7 +43,7 @@ define( require => {
     createPanelContent: function( options ) {
 
       // add the legend particle entries
-      var content = [];
+      const content = [];
       content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleus(), nucleusString ) );
       content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createEnergyLevel(), electronEnergyLevelString ) );
       content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createParticleTrace(), alphaParticleTraceString ) );

@@ -49,7 +49,7 @@ define( require => {
       }, options );
 
       // {Array.<Node>} - children for the content, gets wrapped in AlignBoxes in createPanelContent
-      var content = [];
+      const content = [];
       if ( options.includeElectron ) {
         content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
       }

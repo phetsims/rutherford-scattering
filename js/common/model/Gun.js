@@ -18,9 +18,9 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var MAX_PARTICLES = 20;
-  var GUN_INTENSITY = 1;
-  var X0_MIN_FRACTION = 0.04; // closest particle can get horizontally to atom as a fraction of atomic bounds
+  const MAX_PARTICLES = 20;
+  const GUN_INTENSITY = 1;
+  const X0_MIN_FRACTION = 0.04; // closest particle can get horizontally to atom as a fraction of atomic bounds
 
   /**
    * {RSBaseModel} model
@@ -39,10 +39,10 @@ define( require => {
     // so this correction ensure that this does not happen
     // map values determined empirically
     // @private - to prevent function instantiation every animation frame
-    var width1 = 20;
-    var width2 = this.model.bounds.width;
-    var correction1 = 2;
-    var correction2 = 10;
+    const width1 = 20;
+    const width2 = this.model.bounds.width;
+    const correction1 = 2;
+    const correction2 = 10;
     this.correctionFunction = new LinearFunction( width1, width2, correction1, correction2 );
 
     // @public {boolean} is the gun on?
@@ -59,25 +59,25 @@ define( require => {
      */
     step: function( dt ) {
 
-      var initialSpeed = this.model.alphaParticleEnergyProperty.get();
+      const initialSpeed = this.model.alphaParticleEnergyProperty.get();
 
       this.dtSinceGunFired += ( GUN_INTENSITY * dt );
       this.dtPerGunFired = ( this.model.bounds.width / initialSpeed ) / MAX_PARTICLES;
 
       if ( this.onProperty.get() && this.dtSinceGunFired >= this.dtPerGunFired ) {
 
-        var ySign = ( phet.joist.random.nextDouble() < 0.5 ? 1 : -1 );
+        const ySign = ( phet.joist.random.nextDouble() < 0.5 ? 1 : -1 );
 
         // random position withing model bounds
-        var rand = phet.joist.random.nextDouble();
-        var particleX = ySign * rand * this.model.bounds.width / 2;
+        const rand = phet.joist.random.nextDouble();
+        let particleX = ySign * rand * this.model.bounds.width / 2;
 
         // make sure that the particle was not directly fired at an atom to prevent trajectory failure
-        var self = this;
-        var xMin = X0_MIN_FRACTION * this.model.bounds.width;
+        const self = this;
+        const xMin = X0_MIN_FRACTION * this.model.bounds.width;
         this.model.getVisibleSpace().atoms.forEach( function ( atom ) {
           if ( Math.abs( particleX - atom.position.x ) < xMin ) {
-            var correction = self.correctionFunction( atom.boundingRect.bounds.width );
+            const correction = self.correctionFunction( atom.boundingRect.bounds.width );
             if ( particleX > atom.position.x ) {
               // particle is to the right of nucleus, push it farther away
               particleX += correction;
@@ -87,10 +87,10 @@ define( require => {
             }
           }
         } );
-        var particleY = this.model.bounds.minY;
+        const particleY = this.model.bounds.minY;
 
-        var initialPosition = new Vector2( particleX, particleY );
-        var alphaParticle = new AlphaParticle( {
+        const initialPosition = new Vector2( particleX, particleY );
+        const alphaParticle = new AlphaParticle( {
           speed: initialSpeed,
           defaultSpeed: initialSpeed,
           position: initialPosition

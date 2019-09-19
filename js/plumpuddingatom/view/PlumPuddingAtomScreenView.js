@@ -28,16 +28,16 @@ define( require => {
    */
   function PlumPuddingAtomScreenView( model ) {
 
-    var scaleString = StringUtils.format( pattern0AtomicScaleString, '3.0 x 10<sup>-10</sup>' );
+    const scaleString = StringUtils.format( pattern0AtomicScaleString, '3.0 x 10<sup>-10</sup>' );
 
     RSBaseScreenView.call( this, model, scaleString, createSpaceNode, {
       includePlumPuddingLegend: true
     } );
 
     // create the new control panel
-    var propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty,
+    const propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty,
       model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
-    var legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
+    const legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
       resize: false,
       includeElectron: true,
       includePlumPudding: true
@@ -45,14 +45,14 @@ define( require => {
 
     // handle alignment for the panels, should have exactly the same width, but the legend content should be aligned
     // to the left
-    var contentAlignGroup = new AlignGroup( { matchVertical: false } );
-    var particleContentBox = contentAlignGroup.createBox( propertiesPanelContent );
-    var legendContentBox = contentAlignGroup.createBox( legendPanelContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
+    const contentAlignGroup = new AlignGroup( { matchVertical: false } );
+    const particleContentBox = contentAlignGroup.createBox( propertiesPanelContent );
+    const legendContentBox = contentAlignGroup.createBox( legendPanelContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
 
-    var particlePropertiesPanel = new AlphaParticlePropertiesPanel( particleContentBox, { resize: false } );
-    var legendPanel = new NuclearParticleLegendPanel( legendContentBox, { resize: false } );
+    const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particleContentBox, { resize: false } );
+    const legendPanel = new NuclearParticleLegendPanel( legendContentBox, { resize: false } );
 
-    var panels = [
+    const panels = [
       legendPanel,
       particlePropertiesPanel
     ];
@@ -77,7 +77,7 @@ define( require => {
    * @returns {Node}
    */
   var createSpaceNode = function( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) {
-    var plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+    const plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: canvasBounds
     } );
 

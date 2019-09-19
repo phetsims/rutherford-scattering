@@ -20,23 +20,23 @@ define( require => {
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
-  var SPECULAR_HIGHLITE_COLOR = 'rgb(200,200,200)';
-  var ELECTRON_COLOR = 'rgb(135,135,205)';
-  var PROTON_COLOR = 'rgb(255,69,0)';
-  var NEUTRON_COLOR = 'rgb(192,192,192)';
-  var PARTICLE_COLOR = 'rgb(255,0,255)';
-  var ENERGY_LEVEL_COLOR = 'rgb(128,128,128)';
-  var ELECTRON_RADIUS = 2.5;
-  var PROTON_RADIUS = 4;
-  var NEUTRON_RADIUS = 4;
-  var PARTICLE_RADIUS = 2;
-  var NUCLEUS_RADIUS = 2;
-  var ENERGY_LEVEL_LINE_LENGTH = 5;
+  const SPECULAR_HIGHLITE_COLOR = 'rgb(200,200,200)';
+  const ELECTRON_COLOR = 'rgb(135,135,205)';
+  const PROTON_COLOR = 'rgb(255,69,0)';
+  const NEUTRON_COLOR = 'rgb(192,192,192)';
+  const PARTICLE_COLOR = 'rgb(255,0,255)';
+  const ENERGY_LEVEL_COLOR = 'rgb(128,128,128)';
+  const ELECTRON_RADIUS = 2.5;
+  const PROTON_RADIUS = 4;
+  const NEUTRON_RADIUS = 4;
+  const PARTICLE_RADIUS = 2;
+  const NUCLEUS_RADIUS = 2;
+  const ENERGY_LEVEL_LINE_LENGTH = 5;
 
   // images
   const plumPuddingImage = require( 'image!RUTHERFORD_SCATTERING/plumPuddingIcon.png' );
 
-  var ParticleNodeFactory = {
+  const ParticleNodeFactory = {
 
     /**
      * Creates an electron node.
@@ -225,7 +225,7 @@ define( require => {
     context.arc( x, y, radius, 0, 2 * Math.PI, false);
 
     // create the radial gradient from the center of the arc
-    var gradient = context.createRadialGradient( x + radius * 0.1, y + radius * 0.7, 0.2, x + -radius * 0.2, y + -radius * 0.3, radius * 2 );
+    const gradient = context.createRadialGradient( x + radius * 0.1, y + radius * 0.7, 0.2, x + -radius * 0.2, y + -radius * 0.3, radius * 2 );
     gradient.addColorStop( 0, SPECULAR_HIGHLITE_COLOR );
     gradient.addColorStop( 0.33, color );
     gradient.addColorStop( 1, 'black' );

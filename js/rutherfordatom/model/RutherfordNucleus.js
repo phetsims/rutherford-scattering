@@ -26,13 +26,13 @@ define( require => {
     ParticleAtom.call( this, {
       nucleonRadius: 3
     } );
-    var self = this;
-    var particle;
+    const self = this;
+    let particle;
 
     // update number of nucleons of a particular type and move all to destination
-    var configureNucleus = function( nucleonCount, particleType ) {
-      var particleCount = Util.toFixedNumber( nucleonCount, 0 );
-      var nucleons = particleType === 'proton' ? self.protons : self.neutrons;
+    const configureNucleus = function( nucleonCount, particleType ) {
+      const particleCount = Util.toFixedNumber( nucleonCount, 0 );
+      const nucleons = particleType === 'proton' ? self.protons : self.neutrons;
       while( nucleons.length !== particleCount ) {
         if ( particleCount - nucleons.length > 0 ) {
           particle = new Particle( particleType );
@@ -46,8 +46,8 @@ define( require => {
       self.moveAllParticlesToDestination();
     };
 
-    var protonObserver = function( protonCount ) { configureNucleus( protonCount, 'proton' ); };
-    var neutronObserver = function( neutronCount ) { configureNucleus( neutronCount, 'neutron' ); };
+    const protonObserver = function( protonCount ) { configureNucleus( protonCount, 'proton' ); };
+    const neutronObserver = function( neutronCount ) { configureNucleus( neutronCount, 'neutron' ); };
     protonCountProperty.link( protonObserver );
     neutronCountProperty.link( neutronObserver );
 

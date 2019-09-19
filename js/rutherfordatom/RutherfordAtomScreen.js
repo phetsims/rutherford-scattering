@@ -28,13 +28,13 @@ define( require => {
   function RutherfordAtomScreen() {
 
     // create an icon for the rutherford atom screen with default number of protons and neutrons
-    var homeScreenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
+    const homeScreenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
       RSConstants.DEFAULT_PROTON_COUNT, RSConstants.DEFAULT_NEUTRON_COUNT
     ), {
       fill: RSColorProfile.screenIconFillColorProperty
     } );
 
-    var options = {
+    const options = {
       name: rutherfordAtomString,
       backgroundColorProperty: RSColorProfile.backgroundColorProperty,
       homeScreenIcon: homeScreenIcon

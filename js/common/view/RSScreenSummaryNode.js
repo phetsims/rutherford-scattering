@@ -14,7 +14,7 @@ define( require => {
   const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
-  var screenSummaryString = RSA11yStrings.screenSummary.value;
+  const screenSummaryString = RSA11yStrings.screenSummary.value;
 
   /**
    * @constructor

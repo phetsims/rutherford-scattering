@@ -34,12 +34,12 @@ define( require => {
 
     // plum pudding image - calc image scale and center positioning
     this.atomNode = new PlumPuddingAtomNode();
-    var scale = Math.min( this.width, this.height ) /
+    const scale = Math.min( this.width, this.height ) /
                 ( Math.max( this.atomNode.width, this.atomNode.height ) );
-    var imageWidth = this.atomNode.width * scale;
-    var imageHeight = this.atomNode.height * scale;
-    var imageX = this.bounds.centerX - imageWidth / 2;
-    var imageY = this.bounds.centerY - imageHeight / 2;
+    const imageWidth = this.atomNode.width * scale;
+    const imageHeight = this.atomNode.height * scale;
+    const imageX = this.bounds.centerX - imageWidth / 2;
+    const imageY = this.bounds.centerY - imageHeight / 2;
     this.atomNodeRect = { x: imageX, y: imageY, width: imageWidth, height: imageHeight };
 
     this.invalidatePaint();

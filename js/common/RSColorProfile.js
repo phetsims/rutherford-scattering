@@ -20,7 +20,7 @@ define( require => {
   // the 'default' value provided.
   // NOTE: This is NOT provided to clients directly, but each of these are passed to the Property constructor,
   // see ColorProfile.js
-  var RSColorProfile = new ColorProfile( [ 'default', 'projector' ], {
+  const RSColorProfile = new ColorProfile( [ 'default', 'projector' ], {
     backgroundColor: {
       default: new Color( 0, 0, 0 ),
       projector: new Color( 255, 255, 255 )

@@ -36,16 +36,16 @@ define( require => {
   const showTracesString = require( 'string!RUTHERFORD_SCATTERING/showTraces' );
 
   // a11y strings
-  var alphaParticleSettingsString = RSA11yStrings.alphaParticleSettings.value;
-  var energySliderDescriptionString = RSA11yStrings.energySliderDescription.value;
-  var tracesString = RSA11yStrings.traces.value;
-  var traceCheckboxDescriptionString = RSA11yStrings.traceCheckboxDescription.value;
+  const alphaParticleSettingsString = RSA11yStrings.alphaParticleSettings.value;
+  const energySliderDescriptionString = RSA11yStrings.energySliderDescription.value;
+  const tracesString = RSA11yStrings.traces.value;
+  const traceCheckboxDescriptionString = RSA11yStrings.traceCheckboxDescription.value;
 
   // constants
   // global, tracks fingers on the slider for multitouch support
   // must persist beyond individual panel instances so multitouch is supported
   // when a panel is created or destroyed
-  var FINGER_TRACKER = {};
+  const FINGER_TRACKER = {};
 
   /**
    * Constructor for a Alpha Particle Properties control panel.
@@ -57,14 +57,14 @@ define( require => {
   function AlphaParticlePropertiesPanel( content, options ) {
 
     // the title for the panel
-    var alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
+    const alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColorProfile.panelTitleColorProperty,
       maxWidth: 215
     } );
 
-    var contentVBox = new VBox( {
+    const contentVBox = new VBox( {
       children: [ alphaParticlePropertiesText, content ],
       align: 'left',
       spacing: RSConstants.PANEL_CHILD_SPACING
@@ -147,19 +147,19 @@ define( require => {
     // @private
     this.energyInteractionProperty = energyInteractionProperty;
 
-    var energyText = new Text( energyString, {
+    const energyText = new Text( energyString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
       fill: RSColorProfile.panelLabelColorProperty,
       maxWidth: 210
     } );
-    var minEnergyText = new Text( minEnergyString, {
+    const minEnergyText = new Text( minEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSColorProfile.panelSliderLabelColorProperty,
       maxWidth: options.maxWidth / 5,
       pickable: false
     } );
-    var maxEnergyText = new Text( maxEnergyString, {
+    const maxEnergyText = new Text( maxEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSColorProfile.panelSliderLabelColorProperty,
       maxWidth: options.maxWidth / 5,
@@ -167,14 +167,14 @@ define( require => {
     } );
 
     // slider title
-    var energyTextStrut = new HStrut( options.minWidth * 0.05 );
-    var energyTitleBox = new HBox( { children: [ energyTextStrut, energyText ] } );
+    const energyTextStrut = new HStrut( options.minWidth * 0.05 );
+    const energyTitleBox = new HBox( { children: [ energyTextStrut, energyText ] } );
 
     /**
      * Track fingers for multitouch, adding a finger count to the slider and setting the proper
      * interaction properties.
      */
-    var addFinger = function( elementID ) {
+    const addFinger = function( elementID ) {
       energyInteractionProperty.set( true );
       if ( !FINGER_TRACKER[ elementID ] && FINGER_TRACKER[ elementID ] !== 0 ) {
         FINGER_TRACKER[ elementID ] = 1; // first time finger is down on this thumb
@@ -188,7 +188,7 @@ define( require => {
      * Remove a finger from an element for multitouch support, removing a finger count from a particular element
      * and setting the interaction properties appropriately.
      */
-    var removeFinger = function( elementID ) {
+    const removeFinger = function( elementID ) {
       FINGER_TRACKER[ elementID ]--;
       assert && assert( FINGER_TRACKER[ elementID ] >= 0, 'at least 0 fingers must be using the slider' );
       if ( FINGER_TRACKER[ elementID ] === 0 ) {
@@ -197,8 +197,8 @@ define( require => {
     };
 
     // particle engery slider
-    var sliderWidth = options.minWidth * 0.75;
-    var particleEnergySlider = new HSlider( alphaParticleEnergyProperty, new Range(
+    const sliderWidth = options.minWidth * 0.75;
+    const particleEnergySlider = new HSlider( alphaParticleEnergyProperty, new Range(
       RSConstants.MIN_ALPHA_ENERGY,
       RSConstants.MAX_ALPHA_ENERGY
     ), {
@@ -232,20 +232,20 @@ define( require => {
 
     // place the slider in a container rectangle so that the layout does not change when the thumb is at the halfway
     // mark
-    var thumbWidth = RSConstants.PANEL_SLIDER_THUMB_DIMENSION.width + 2;
-    var rectHeight = 5; // something small so that it doesn't interfere with the layout
-    var containerRect = new Rectangle( -thumbWidth / 2, -rectHeight, sliderWidth + thumbWidth, rectHeight );
+    const thumbWidth = RSConstants.PANEL_SLIDER_THUMB_DIMENSION.width + 2;
+    const rectHeight = 5; // something small so that it doesn't interfere with the layout
+    const containerRect = new Rectangle( -thumbWidth / 2, -rectHeight, sliderWidth + thumbWidth, rectHeight );
     containerRect.addChild( particleEnergySlider );
 
     // show traces
-    var showTraceStrut = new HStrut( options.minWidth * 0.05 );
-    var showTraceText = new Text( showTracesString, {
+    const showTraceStrut = new HStrut( options.minWidth * 0.05 );
+    const showTraceText = new Text( showTracesString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
       fill: RSColorProfile.panelLabelColorProperty,
       maxWidth: 180
     } );
-    var showTraceCheckbox = new Checkbox( showTraceText, showTracesProperty, {
+    const showTraceCheckbox = new Checkbox( showTraceText, showTracesProperty, {
       checkboxColor: RSColorProfile.panelLabelColorProperty,
       checkboxColorBackground: RSColorProfile.panelColorProperty,
 
@@ -255,7 +255,7 @@ define( require => {
       descriptionContent: traceCheckboxDescriptionString,
       containerTagName: 'div'
     } );
-    var showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckbox ] } );
+    const showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckbox ] } );
 
     VBox.call( this, {
       spacing: RSConstants.PANEL_CHILD_SPACING,

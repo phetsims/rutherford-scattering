@@ -24,13 +24,13 @@ define( require => {
     // @public (read-only)
     this.position = position;
 
-    var halfWidth = boundingWidth / 2;
+    const halfWidth = boundingWidth / 2;
 
     // @public (read-only) - bounding rect is always square
     this.boundingRect = Shape.rectangle( position.x - halfWidth, position.y - halfWidth, boundingWidth, boundingWidth );
 
     // @public (read-only) circle which contains the entire bounding box for the atom
-    var radius = Math.sqrt( halfWidth * halfWidth + halfWidth * halfWidth );
+    const radius = Math.sqrt( halfWidth * halfWidth + halfWidth * halfWidth );
     this.boundingCircle = Shape.circle( position.x, position.y, radius );
 
     // @private - array of particles that are currently in the bounding box of this atom
@@ -59,7 +59,7 @@ define( require => {
      * @public
      */
     removeParticle: function( alphaParticle ) {
-      var index = this.particles.indexOf( alphaParticle );
+      const index = this.particles.indexOf( alphaParticle );
       if ( index > -1 ) {
         this.particles.splice( index, 1 );
       }
@@ -88,7 +88,7 @@ define( require => {
      * @private
      */
     moveParticles: function( dt ) {
-      var self = this;
+      const self = this;
       this.particles.forEach( function( particle ) {
         self.moveParticle( particle, dt );
       } );
@@ -99,7 +99,7 @@ define( require => {
      * @protected
      */
     cullParticles: function() {
-      var self = this;
+      const self = this;
       this.particles.forEach( function( particle ) {
         if ( !self.bounds.containsPoint( particle.positionProperty.get() ) ) {
           self.removeParticle( particle );

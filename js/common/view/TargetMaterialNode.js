@@ -18,11 +18,11 @@ define( require => {
   const Shape = require( 'KITE/Shape' );
 
   // constants
-  var BACK_DEPTH = 30;
-  var BACK_OFFSET = 0.10;
-  var BOX_SIZE = new Dimension2( 120, 120 );
-  var BACK_COLOR = '#8c7e29';
-  var FRONT_COLOR = '#d6cb86';
+  const BACK_DEPTH = 30;
+  const BACK_OFFSET = 0.10;
+  const BOX_SIZE = new Dimension2( 120, 120 );
+  const BACK_COLOR = '#8c7e29';
+  const FRONT_COLOR = '#d6cb86';
 
   /**
    * @param {Object} [options]
@@ -33,7 +33,7 @@ define( require => {
     options = options || {};
 
     // top face, in perspective
-    var topNode = new Path( new Shape()
+    const topNode = new Path( new Shape()
       .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
       .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
       .lineTo( BOX_SIZE.width, BACK_DEPTH )

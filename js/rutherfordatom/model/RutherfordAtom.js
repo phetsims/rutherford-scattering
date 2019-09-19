@@ -87,53 +87,53 @@ define( require => {
       // apply a rotation to the particle coordinate frame if nececssary so that
       // the trajectory algorithm can proceed as if the particle were moving straight
       // up the space - this is required by the trajectory model, see trajectories.pdf
-      var rotationAngle = alphaParticle.rotationAngle;
-      var correctedInitialPosition = this.rotatePointAround( alphaParticle.initialPosition, this.position, -rotationAngle );
-      var correctedPosition = this.rotatePointAround( alphaParticle.positionProperty.get(), this.position, -rotationAngle );
+      const rotationAngle = alphaParticle.rotationAngle;
+      const correctedInitialPosition = this.rotatePointAround( alphaParticle.initialPosition, this.position, -rotationAngle );
+      const correctedPosition = this.rotatePointAround( alphaParticle.positionProperty.get(), this.position, -rotationAngle );
 
       // algorithm fails for x=0, so use this min value
-      var X0_MIN = 0.00001;
+      const X0_MIN = 0.00001;
 
       // Divisor for L used in the calculation of D.
-      var L_DIVISOR = 8;
+      const L_DIVISOR = 8;
 
       //-------------------------------------------------------------------------------
       // misc constants that we'll need
       //-------------------------------------------------------------------------------
 
-      var L = this.boundingRect.bounds.getWidth();
+      const L = this.boundingRect.bounds.getWidth();
 
-      var p = this.protonCountProperty.get(); // protons in the atom's nucleus
-      var pd = RSConstants.DEFAULT_PROTON_COUNT; // default setting for the sim
+      const p = this.protonCountProperty.get(); // protons in the atom's nucleus
+      const pd = RSConstants.DEFAULT_PROTON_COUNT; // default setting for the sim
 
-      var s = alphaParticle.speedProperty.get();  // particle's current speed
-      var s0 = alphaParticle.speedProperty.initialValue; // speed when it left the gun
-      var sd = RSConstants.DEFAULT_ALPHA_ENERGY; // default setting for the sim
+      const s = alphaParticle.speedProperty.get();  // particle's current speed
+      const s0 = alphaParticle.speedProperty.initialValue; // speed when it left the gun
+      const sd = RSConstants.DEFAULT_ALPHA_ENERGY; // default setting for the sim
 
       //-------------------------------------------------------------------------------
       // (x0,y0) : the alpha particle's initial position, relative to the atom's center.
       //-------------------------------------------------------------------------------
 
       // var initialPosition = alphaParticle.initialPosition;
-      var relativeInitialPosition = correctedInitialPosition.minus( this.position );
+      const relativeInitialPosition = correctedInitialPosition.minus( this.position );
 
-      var x0 = Math.abs( relativeInitialPosition.x );
+      let x0 = Math.abs( relativeInitialPosition.x );
       if ( x0 < X0_MIN ) {
         x0 = X0_MIN; // algorithm fails for x0 < X0_MIN
       }
 
-      var y0 = relativeInitialPosition.y;
+      const y0 = relativeInitialPosition.y;
 
       //-------------------------------------------------------------------------------
       // (x,y) : the alpha particle's current position, relative to the atom's center
       //-------------------------------------------------------------------------------
 
       // var position = alphaParticle.positionProperty.get();
-      var relativePosition = correctedPosition.minus( this.position );
+      const relativePosition = correctedPosition.minus( this.position );
 
-      var x = relativePosition.x;
-      var y = relativePosition.y;
-      var xWasNegative = false;
+      let x = relativePosition.x;
+      const y = relativePosition.y;
+      let xWasNegative = false;
       if ( x < 0 ) {
         // This algorithm fails for x < 0, so adjust accordingly.
         x *= -1;
@@ -150,79 +150,79 @@ define( require => {
         return;
       }
 
-      var D = ( L / L_DIVISOR ) * ( p / pd ) * ( ( sd * sd ) / ( s0 * s0 ) );
+      const D = ( L / L_DIVISOR ) * ( p / pd ) * ( ( sd * sd ) / ( s0 * s0 ) );
 
       //-------------------------------------------------------------------------------
       // calculate new alpha particle position, in Polar coordinates
       //-------------------------------------------------------------------------------
 
       // check intermediate values to handle potential algorithm failures
-      var i0 = ( x0 * x0 ) + ( y0 * y0 );
+      const i0 = ( x0 * x0 ) + ( y0 * y0 );
       if ( i0 < 0 ) {
         this.removeParticle( alphaParticle, true, '162' );
         return;
       }
 
       // b, horizontal distance to atom's center at y == negative infinity
-      var b1 = Math.sqrt( i0 );
+      const b1 = Math.sqrt( i0 );
 
       // check intermediate values to handle potential algorithm failures
-      var i1 = ( -2 * D * b1 ) - ( 2 * D * y0 ) + ( x0 * x0 );
+      const i1 = ( -2 * D * b1 ) - ( 2 * D * y0 ) + ( x0 * x0 );
       if ( i1 < 0 ) {
         this.removeParticle( alphaParticle, true, '172' );
         return;
       }
 
-      var b = 0.5 * ( x0 + Math.sqrt( i1 ) );
+      const b = 0.5 * ( x0 + Math.sqrt( i1 ) );
 
       // convert current position to Polar coordinates, measured counterclockwise from the -y axis
 
       // check intermediate values to handle potential algorithm failures
-      var i2 = ( x * x ) + ( y * y );
+      const i2 = ( x * x ) + ( y * y );
       if ( i2 < 0 ) {
         this.removeParticle( alphaParticle, true, '183' );
         return;
       }
 
-      var r = Math.sqrt( i2 );
-      var phi = Math.atan2( x, -y );
+      const r = Math.sqrt( i2 );
+      const phi = Math.atan2( x, -y );
 
       // new position (in Polar coordinates) and speed
-      var t1 = ( ( b * Math.cos( phi ) ) - ( ( D / 2 ) * Math.sin( phi ) ) );
+      const t1 = ( ( b * Math.cos( phi ) ) - ( ( D / 2 ) * Math.sin( phi ) ) );
 
       // check intermediate values to handle potential algorithm failures
-      var i3 = Math.pow( b, 4 ) + ( r * r * t1 * t1 );
+      const i3 = Math.pow( b, 4 ) + ( r * r * t1 * t1 );
       if ( i3 < 0 ) {
         this.removeParticle( alphaParticle, true, '196' );
         return;
       }
-      var phiNew = phi + ( ( b * b * s * dt ) / ( r * Math.sqrt( i3 ) ) );
+      const phiNew = phi + ( ( b * b * s * dt ) / ( r * Math.sqrt( i3 ) ) );
 
       // check intermediate values to handle potential algorithm failures
-      var i4 = ( ( b * Math.sin( phiNew ) ) + ( ( D / 2 ) * ( Math.cos( phiNew ) - 1 ) ) );
+      const i4 = ( ( b * Math.sin( phiNew ) ) + ( ( D / 2 ) * ( Math.cos( phiNew ) - 1 ) ) );
       if ( i4 < 0 ) {
         this.removeParticle( alphaParticle, true, '204' );
         return;
       }
-      var rNew = Math.abs( ( b * b ) / i4 );
+      const rNew = Math.abs( ( b * b ) / i4 );
 
       // handle potential algorithm failures
       if ( rNew === 0 ) {
         this.removeParticle( alphaParticle, true, '211' );
         return;
       }
-      var sNew = s0 * Math.sqrt( 1 - ( D / rNew ) );
+      const sNew = s0 * Math.sqrt( 1 - ( D / rNew ) );
 
       //-------------------------------------------------------------------------------
       // convert to Cartesian coordinates
       //-------------------------------------------------------------------------------
 
-      var xNew = rNew * Math.sin( phiNew );
+      let xNew = rNew * Math.sin( phiNew );
       if ( xWasNegative ) {
         xNew *= -1; // restore the sign
       }
 
-      var yNew = -rNew * Math.cos( phiNew );
+      const yNew = -rNew * Math.cos( phiNew );
 
       //-------------------------------------------------------------------------------
       // handle potential algorithm failures
@@ -238,7 +238,7 @@ define( require => {
       //-------------------------------------------------------------------------------
 
       // get the change in position relative to the atom's center, and rotate back to space coordinates
-      var delta = new Vector2( xNew, yNew ).minus( relativePosition );
+      const delta = new Vector2( xNew, yNew ).minus( relativePosition );
       delta.rotate( alphaParticle.rotationAngle );
 
       // update the position of the particle in its space coordinates
@@ -260,15 +260,15 @@ define( require => {
      */
     rotatePointAround: function( point, rotatePoint, angle ) {
 
-        var sinAngle = Math.sin( angle );
-        var cosAngle = Math.cos( angle );
+        const sinAngle = Math.sin( angle );
+        const cosAngle = Math.cos( angle );
 
         // translate the point back to the origin by subtracting the pivot point
-        var translatedPosition = point.minus( rotatePoint );
+        const translatedPosition = point.minus( rotatePoint );
 
         // rotate the point with the equivalent rotation matrix
-        var xNew = translatedPosition.x * cosAngle - translatedPosition.y * sinAngle;
-        var yNew = translatedPosition.x * sinAngle + translatedPosition.y * cosAngle;
+        const xNew = translatedPosition.x * cosAngle - translatedPosition.y * sinAngle;
+        const yNew = translatedPosition.x * sinAngle + translatedPosition.y * cosAngle;
 
         // translate the point back
         return new Vector2( xNew, yNew ).plus( rotatePoint );

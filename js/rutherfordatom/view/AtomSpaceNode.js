@@ -20,8 +20,8 @@ define( require => {
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // a11y strings
-  var observationWindowString = RSA11yStrings.observationWindow.value;
-  var atomSpaceDescriptionString = RSA11yStrings.atomSpaceDescription.value;
+  const observationWindowString = RSA11yStrings.observationWindow.value;
+  const atomSpaceDescriptionString = RSA11yStrings.atomSpaceDescription.value;
 
   /**
    * @param {RSBaseModel} model
@@ -49,7 +49,7 @@ define( require => {
     this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );
 
     ParticleSpaceNode.call( this, model.atomSpace, showAlphaTraceProperty, modelViewTransform, options );
-    var self = this;
+    const self = this;
 
     if ( RSQueryParameters.showDebugShapes ) {
       model.atomSpace.particleTransitionedEmitter.addListener( function( particle ) {
@@ -77,8 +77,8 @@ define( require => {
         return;
       }
 
-      var x = this.centerX - this.atomsNode.image.width / 2;
-      var y = this.centerY - this.atomsNode.image.height / 2;
+      const x = this.centerX - this.atomsNode.image.width / 2;
+      const y = this.centerY - this.atomsNode.image.height / 2;
       context.drawImage( this.atomsNode.image, x, y, this.atomsNode.image.width, this.atomsNode.image.height );
     }
   } ); // inherit

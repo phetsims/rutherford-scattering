@@ -20,12 +20,12 @@ define( require => {
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
   // constants
-  var MIN_NUCLEUS_RADIUS = 20; // view coordinates
-  var OUTLINE_LINE_WIDTH = 1.5;
-  var OUTLINE_LINE_DASH = [ 2, 3 ];
-  var MIN_PARTICLE_COUNT = RSConstants.MIN_PROTON_COUNT + RSConstants.MIN_NEUTRON_COUNT;
-  var MAX_PARTICLE_COUNT = RSConstants.MAX_PROTON_COUNT + RSConstants.MAX_NEUTRON_COUNT;
-  var PARTICLE_COUNT_EXP = 0.333;
+  const MIN_NUCLEUS_RADIUS = 20; // view coordinates
+  const OUTLINE_LINE_WIDTH = 1.5;
+  const OUTLINE_LINE_DASH = [ 2, 3 ];
+  const MIN_PARTICLE_COUNT = RSConstants.MIN_PROTON_COUNT + RSConstants.MIN_NEUTRON_COUNT;
+  const MAX_PARTICLE_COUNT = RSConstants.MAX_PROTON_COUNT + RSConstants.MAX_NEUTRON_COUNT;
+  const PARTICLE_COUNT_EXP = 0.333;
 
   /**
    * The Rutherford atom is build by randomly drawing proton & neutron images to a CanvasNode. This canvas is then
@@ -40,7 +40,7 @@ define( require => {
   function RutherfordNucleusNode( userInteractionProperty, protonCountProperty, neutronCountProperty, rutherfordNucleus, options ) {
 
     // max radius of an atom with MAX protons & neutrons
-    var maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
+    const maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
                     Math.pow( MAX_PARTICLE_COUNT, PARTICLE_COUNT_EXP );
 
     // set canvasBounds based on max radius of atom
@@ -49,7 +49,7 @@ define( require => {
 
     CanvasNode.call( this, options );
 
-    var self = this;
+    const self = this;
 
     // @private
     this.userInteractionProperty = userInteractionProperty;
@@ -83,7 +83,7 @@ define( require => {
     this.timeSinceDirty = 0; // ms
 
     // generate proton image - asynchronous
-    var protonNode = ParticleNodeFactory.createProton();
+    const protonNode = ParticleNodeFactory.createProton();
     protonNode.toImage( function( image, x, y ) {
       self.protonImage = image;
       self.updateAtomImage();
@@ -91,7 +91,7 @@ define( require => {
     } );
 
     // generate neutron image - asynchronous
-    var neutronNode = ParticleNodeFactory.createNeutron();
+    const neutronNode = ParticleNodeFactory.createNeutron();
     neutronNode.toImage( function( image, x, y ) {
       self.neutronImage = image;
       self.updateAtomImage();
@@ -99,7 +99,7 @@ define( require => {
     } );
 
     // update atom image when proton count changes
-    var protonCountListener = function( propertyValue ) {
+    const protonCountListener = function( propertyValue ) {
       self.numberOfProtons = propertyValue;
       self.renderAtomOutline = self.userInteractionProperty.value;  // Only render the outline when interacting
       self.updateAtomImage();
@@ -108,7 +108,7 @@ define( require => {
     protonCountProperty.link( protonCountListener );
 
     // update atom image when neutron count changes
-    var neutronCountListener = function( propertyValue ) {
+    const neutronCountListener = function( propertyValue ) {
       self.numberOfNeutrons = propertyValue;
       self.renderAtomOutline = self.userInteractionProperty.value; // Only render the outline when interacting
       self.updateAtomImage();
@@ -117,7 +117,7 @@ define( require => {
     neutronCountProperty.link( neutronCountListener );
 
     // update atom image when user interaction stops
-    var userInteractionListener = function( userInteraction ) {
+    const userInteractionListener = function( userInteraction ) {
       if ( self.renderAtomOutline ) {
         self.renderAtomOutline = false;
         self.updateAtomImage();
@@ -154,15 +154,15 @@ define( require => {
     updateAtomImage: function() {
 
       // Calculate the radius of the nucleus
-      var currentParticles = this.numberOfProtons + this.numberOfNeutrons;
-      var C = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP );
+      const currentParticles = this.numberOfProtons + this.numberOfNeutrons;
+      const C = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP );
       this.radius = C * Math.pow( currentParticles, PARTICLE_COUNT_EXP );
       assert && assert( this.radius > 0, 'Rutherford atom radius <= 0' );
 
       this.invalidatePaint();
 
       // generate atom image - asynchronous
-      var self = this;
+      const self = this;
       this.toImage( function( image, x, y ) {
         // @public (read-only)
         self.image = image;
@@ -177,7 +177,7 @@ define( require => {
      */
     paintCanvas: function( context ) {
 
-      var bounds = this.canvasBounds;
+      const bounds = this.canvasBounds;
 
       // clear
       context.clearRect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
@@ -199,7 +199,7 @@ define( require => {
           return;
         }
 
-        var boundPaintNucleus = paintNucleusIcon.bind( this, this.rutherfordNucleus, bounds, context, 'canvasImage' );
+        const boundPaintNucleus = paintNucleusIcon.bind( this, this.rutherfordNucleus, bounds, context, 'canvasImage' );
         boundPaintNucleus();
 
         // notify as dirty so that the nucleus gets redrawn
@@ -219,9 +219,9 @@ define( require => {
     RutherfordNucleusIcon: function( protonCount, neutronCount ) {
 
       // create static properties and nucleus for the icon
-      var protonCountProperty = new Property( protonCount );
-      var neutronCountProperty = new Property( neutronCount );
-      var nucleus = new RutherfordNucleus( protonCountProperty, neutronCountProperty );
+      const protonCountProperty = new Property( protonCount );
+      const neutronCountProperty = new Property( neutronCount );
+      const nucleus = new RutherfordNucleus( protonCountProperty, neutronCountProperty );
 
       return new IconCanvasNode( nucleus );
     }
@@ -242,8 +242,8 @@ define( require => {
     this.nucleus = nucleus;
 
     // max radius of an atom with MAX protons & neutrons
-    var numberOfParticles = nucleus.protonCountProperty.get() + nucleus.neutronCountProperty.get();
-    var maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
+    const numberOfParticles = nucleus.protonCountProperty.get() + nucleus.neutronCountProperty.get();
+    const maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
                     Math.pow( numberOfParticles, PARTICLE_COUNT_EXP );
 
     // @private - used to center elements drawn in the context
@@ -283,12 +283,12 @@ define( require => {
    * @param  {string} render - 'canvasArc' | 'canvasImage', determines rendering method, see above
    */
   var paintNucleusIcon = function( nucleus, nucleusBounds, context, render ) {
-    var protons = nucleus.protons.getArray().slice( 0 );
-    var neutrons = nucleus.neutrons.getArray().slice( 0 );
-    var nucleons = protons.concat( neutrons );
+    const protons = nucleus.protons.getArray().slice( 0 );
+    const neutrons = nucleus.neutrons.getArray().slice( 0 );
+    const nucleons = protons.concat( neutrons );
 
     // get the number of layers in the particle
-    var zLayer = 0;
+    let zLayer = 0;
     nucleons.forEach( function( nucleon ) {
       if ( nucleon.zLayerProperty.get() > zLayer ) {
         zLayer = nucleon.zLayerProperty.get();
@@ -296,12 +296,12 @@ define( require => {
     } );
 
     // add the layers, starting from the largest which is in the back
-    var self = this;
+    const self = this;
     for ( var i = zLayer; i  >= 0; i-- ) {
       nucleons.forEach( function( nucleon ) {
         if ( nucleon.zLayerProperty.get() === i ) {
-          var xN = nucleon.positionProperty.get().x;
-          var yN = nucleon.positionProperty.get().y;
+          let xN = nucleon.positionProperty.get().x;
+          let yN = nucleon.positionProperty.get().y;
 
           if ( render === 'canvasArc' ) {
             // drawing with arcs is a little slower, but the result is less pixilated, so
