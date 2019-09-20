@@ -9,6 +9,7 @@ define( require => {
   'use strict';
 
   // modules
+  const platform = require( 'PHET_CORE/platform' );
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const Circle = require( 'SCENERY/nodes/Circle' );
   const Image = require( 'SCENERY/nodes/Image' );
@@ -222,10 +223,16 @@ define( require => {
   var drawParticleWithCanvas = function( x, y, radius, color, context ) {
     // draw the circle
     context.beginPath();
-    context.arc( x, y, radius, 0, 2 * Math.PI, false);
+    context.arc( x, y, radius, 0, 2 * Math.PI, false );
+
+    var useConcentric = !!platform.safari;
+    var x0 = useConcentric ? x - 0.066 : x + radius * 0.1;
+    var y0 = useConcentric ? y + 0.2 * radius : y + radius * 0.7;
+    var x1 = useConcentric ? x - 0.066 : x + -radius * 0.2;
+    var y1 = useConcentric ? y + 0.2 * radius : y + -radius * 0.3;
 
     // create the radial gradient from the center of the arc
-    const gradient = context.createRadialGradient( x + radius * 0.1, y + radius * 0.7, 0.2, x + -radius * 0.2, y + -radius * 0.3, radius * 2 );
+    var gradient = context.createRadialGradient( x0, y0, 0.2, x1, y1, radius * 2 );
     gradient.addColorStop( 0, SPECULAR_HIGHLITE_COLOR );
     gradient.addColorStop( 0.33, color );
     gradient.addColorStop( 1, 'black' );
