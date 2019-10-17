@@ -12,7 +12,6 @@ define( require => {
 
   // modules
   const inherit = require( 'PHET_CORE/inherit' );
-  const merge = require( 'PHET_CORE/merge' );
   const OptionsDialog = require( 'JOIST/OptionsDialog' );
   const ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
   const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
@@ -26,11 +25,11 @@ define( require => {
 
     const projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
 
-    VBox.call( this, merge( {
+    VBox.call( this, {
       children: [ projectorCheckbox ],
       spacing: OptionsDialog.DEFAULT_SPACING,
       align: 'left'
-    } ) );
+    } );
   }
 
   rutherfordScattering.register( 'MenuOptionsNode', MenuOptionsNode );
