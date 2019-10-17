@@ -12,6 +12,7 @@ define( require => {
   const AlphaParticle = require( 'RUTHERFORD_SCATTERING/common/model/AlphaParticle' );
   const Emitter = require( 'AXON/Emitter' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -23,7 +24,7 @@ define( require => {
    */
   function AtomSpace( protonCountProperty, bounds, options ) {
 
-    options = _.extend( {
+    options = merge( {
       atomWidth: bounds.width // width of each atom in the space, width of space by default
     }, options );
 

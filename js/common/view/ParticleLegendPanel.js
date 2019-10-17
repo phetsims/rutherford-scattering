@@ -14,6 +14,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
@@ -49,7 +50,7 @@ define( require => {
       spacing: RSConstants.PANEL_CHILD_SPACING
     } );
 
-    options = _.extend( {
+    options = merge( {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -123,7 +124,7 @@ define( require => {
    */
   function ParticleLegendPanelContent( content, options ) {
 
-    options = _.extend( {
+    options = merge( {
       xMargin: 5,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,

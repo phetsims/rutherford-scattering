@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   const RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
@@ -31,7 +32,7 @@ define( require => {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    options = _.extend( {
+    options = merge( {
 
       // a11y
       tagName: 'div',

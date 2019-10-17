@@ -13,6 +13,7 @@ define( require => {
   // modules
   const AtomCollectionNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/AtomCollectionNode' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   const Path = require( 'SCENERY/nodes/Path' );
   const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
@@ -34,7 +35,7 @@ define( require => {
 
     assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    options = _.extend( {
+    options = merge( {
       particleStyle: 'particle',
 
       // a11y

@@ -12,6 +12,7 @@ define( require => {
   // modules
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const RichText = require( 'SCENERY/nodes/RichText' );
@@ -33,7 +34,7 @@ define( require => {
    */
   function ScaleInfoNode( label, width, options ) {
 
-    options = _.extend( {
+    options = merge( {
       font: RSConstants.SCALE_TITLE_FONT
     }, options );
 

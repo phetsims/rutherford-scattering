@@ -10,6 +10,7 @@ define( require => {
 
   // modules
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -21,7 +22,7 @@ define( require => {
    */
   function BeamNode( visibleProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       fill: '#8f8f8f'
     }, options );
 

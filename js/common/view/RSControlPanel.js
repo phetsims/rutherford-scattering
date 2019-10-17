@@ -12,6 +12,7 @@ define( require => {
 
   // modules
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -33,7 +34,7 @@ define( require => {
       resize: false,
       children: panels
     };
-    this.panelOptions = _.extend( defaultOptions, options ); // @private
+    this.panelOptions = merge( defaultOptions, options ); // @private
 
     // @private - arrange control panels vertically
     const vBox = new VBox( this.panelOptions );

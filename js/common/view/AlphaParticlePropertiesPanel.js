@@ -17,6 +17,7 @@ define( require => {
   const HSlider = require( 'SUN/HSlider' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const Range = require( 'DOT/Range' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -70,7 +71,7 @@ define( require => {
       spacing: RSConstants.PANEL_CHILD_SPACING
     } );
 
-    options = _.extend( {
+    options = merge( {
       xMargin: RSConstants.PANEL_X_MARGIN,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -134,7 +135,7 @@ define( require => {
    */
   function AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,

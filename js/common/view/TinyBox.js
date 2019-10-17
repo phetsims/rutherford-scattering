@@ -11,6 +11,7 @@ define( require => {
   // modules
   const Dimension2 = require( 'DOT/Dimension2' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -27,7 +28,7 @@ define( require => {
    */
   function TinyBox( options ) {
 
-    options = _.extend( {
+    options = merge( {
       fill: 'black',
       stroke: 'white',
       lineWidth: 1

@@ -15,6 +15,7 @@ define( require => {
   // modules
   const inherit = require( 'PHET_CORE/inherit' );
   const Matrix3 = require( 'DOT/Matrix3' );
+  const merge = require( 'PHET_CORE/merge' );
   const Property = require( 'AXON/Property' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -25,7 +26,7 @@ define( require => {
    */
   function AlphaParticle( options ) {
 
-    options = _.extend( {
+    options = merge( {
       speed: 0,
       defaultSpeed: 0,
       position: new Vector2( 0, 0 ),  // {Vector2} initial position

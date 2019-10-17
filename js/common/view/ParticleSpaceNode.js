@@ -16,6 +16,7 @@ define( require => {
   const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   const Color = require( 'SCENERY/util/Color' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
   const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
@@ -43,7 +44,7 @@ define( require => {
     // the bounds should be eroded by 10 so it appears that particles glide into the space
     options.canvasBounds = options.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
 
-    options = _.extend( {
+    options = merge( {
       particleStyle: 'nucleus', // 'nucleus'|'particle'
       particleTraceColor: new Color(255,0,255)
     }, options );

@@ -12,6 +12,7 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
   const Panel = require( 'SUN/Panel' );
   const Property = require( 'AXON/Property' );
@@ -76,7 +77,7 @@ define( require => {
       spacing: RSConstants.PANEL_CHILD_SPACING
     } );
 
-    options = _.extend( {
+    options = merge( {
       xMargin: RSConstants.PANEL_X_MARGIN,
       yMargin: 10,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -144,7 +145,7 @@ define( require => {
    */
   function AtomPropertiesPanelContent( model, options ) {
 
-    options = _.extend( {
+    options = merge( {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -279,8 +280,8 @@ define( require => {
     let leftProtonButtonDown = false;
 
     // Number control for protons
-    const protonNumberControlOptions = _.extend( {}, numberControlOptions );
-    protonNumberControlOptions.titleNodeOptions = _.extend( {},
+    const protonNumberControlOptions = merge( {}, numberControlOptions );
+    protonNumberControlOptions.titleNodeOptions = merge( {},
       numberControlOptions.titleNodeOptions, { fill: RSColorProfile.protonsLabelColorProperty } );
     protonNumberControlOptions.arrowButtonOptions = {
       leftStart: function() {
@@ -300,7 +301,7 @@ define( require => {
         model.removeAllParticles();
       }
     };
-    protonNumberControlOptions.sliderOptions = _.extend( {},
+    protonNumberControlOptions.sliderOptions = merge( {},
       numberControlOptions.sliderOptions, {
         majorTicks: protonMajorTicks,
 
@@ -359,11 +360,11 @@ define( require => {
     let rightNeutronButtonDown = false;
 
     // Number control for protons
-    const neutronNumberControlOptions = _.extend( {}, numberControlOptions );
-    neutronNumberControlOptions.titleNodeOptions = _.extend( {},
+    const neutronNumberControlOptions = merge( {}, numberControlOptions );
+    neutronNumberControlOptions.titleNodeOptions = merge( {},
       numberControlOptions.titleNodeOptions, { fill: RSColorProfile.neutronsLabelColorProperty }
     );
-    neutronNumberControlOptions.sliderOptions = _.extend( {},
+    neutronNumberControlOptions.sliderOptions = merge( {},
       numberControlOptions.sliderOptions, {
         majorTicks: neutronMajorTicks,
 

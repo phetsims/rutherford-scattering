@@ -14,6 +14,7 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LaserPointerNode = require( 'SCENERY_PHET/LaserPointerNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
@@ -57,7 +58,7 @@ define( require => {
    */
   function RSBaseScreenView( model, scaleString, createSpaceNode, options ) {
 
-    options = _.extend( {
+    options = merge( {
       includeElectronLegend: true, // should the particle legend include an entry for the electron?
       includePlumPuddingLegend: false, // should the particle legend include an entry for the plum pudding cloud?
       additionalControlPanels: null, // {Panel[]|null} additional control panels, added below the common panels
