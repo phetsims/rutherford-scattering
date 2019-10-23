@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.9-rc.1 Tue Oct 15 2019 19:33:37 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# rutherford-scattering 1.1.9-rc.1 Wed Oct 23 2019 09:47:10 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -21,8 +21,8 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "774c5775c0831cb85a4b0adf01b32ae9d35ff8a4",
-    "branch": "HEAD"
+    "sha": "4a4e530c73e05d53b641ddf81fe26d44e1dabfc8",
+    "branch": "rutherford-scattering-1.1"
   },
   "kite": {
     "sha": "08b2dbf93e335ca47400981a957d8fbe3b307c20",
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "99c0e67bb8442b7f4af53375b54dc175d3a1230a",
+    "sha": "c5e794cca8901051ebd612cf887914e7161d53cf",
     "branch": "1.1"
   },
   "scenery": {
