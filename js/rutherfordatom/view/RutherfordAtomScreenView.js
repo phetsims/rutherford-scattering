@@ -115,7 +115,7 @@ define( require => {
     var self = this;
     const restoreAccessibleOrder = function() {
       self.pdomPlayAreaNode.accessibleOrder = [ self.gunNode ];
-      self.controlAreaNode.accessibleOrder = _.uniq( self.controlAreaNode.accessibleOrder.concat( [
+      self.pdomControlAreaNode.accessibleOrder = _.uniq( self.pdomControlAreaNode.accessibleOrder.concat( [
         self.controlPanel,
         self.sceneRadioButtonGroup
       ].filter( _.identity ) ) );
@@ -191,14 +191,14 @@ define( require => {
 
     // @private
     self.sceneRadioButtonGroup = createRadioButtons( atomImage );
-    this.controlAreaNode.addChild( self.sceneRadioButtonGroup );
+    this.pdomControlAreaNode.addChild( self.sceneRadioButtonGroup );
 
     // if the bacgrkound, panel or stroke colors change, draw a new button group
     // no need to unlink, screen view exists for life of sim
     RSColorProfile.profileNameProperty.link( function( profileName ) {
 
       // remove and dispose of the old button group
-      self.controlAreaNode.removeChild( self.sceneRadioButtonGroup );
+      self.pdomControlAreaNode.removeChild( self.sceneRadioButtonGroup );
       self.sceneRadioButtonGroup.dispose();
 
       // get the correct image for the 'atom' scene icon
@@ -207,7 +207,7 @@ define( require => {
       // create the new radio button group
       const newButtonGroup = createRadioButtons( iconImage );
       self.sceneRadioButtonGroup = newButtonGroup;
-      self.controlAreaNode.addChild( newButtonGroup );
+      self.pdomControlAreaNode.addChild( newButtonGroup );
 
       // add laser, all control panels, and scene buttons to accessibleOrder, must be set after
       // creating new radio buttons

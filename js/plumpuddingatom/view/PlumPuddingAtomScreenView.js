@@ -61,8 +61,8 @@ define( require => {
 
     this.pdomPlayAreaNode.accessibleOrder = [ this.gunNode ];
     if ( controlPanel ) {
-      const newOrder = _.union( [ controlPanel ], this.controlAreaNode.accessibleOrder );
-      this.controlAreaNode.setAccessibleOrder( newOrder );
+      const newOrder = _.union( [ controlPanel ], this.pdomControlAreaNode.accessibleOrder );
+      this.pdomControlAreaNode.setAccessibleOrder( newOrder );
     }
   }
 

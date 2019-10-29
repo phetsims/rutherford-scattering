@@ -140,7 +140,7 @@ define( require => {
       .moveTo( tinyBoxNode.centerX, tinyBoxNode.bottom )
       .lineTo( self.spaceNode.left, self.spaceNode.bottom ), {
       stroke: 'grey',
-      lineDash: [5, 5]
+      lineDash: [ 5, 5 ]
     } );
     this.addChild( dashedLines );
 
@@ -189,7 +189,7 @@ define( require => {
     } );
     this.addChild( viewingStreamingOptionsNode );
 
-    this.controlAreaNode.accessibleOrder = [null, viewingStreamingOptionsNode, playPauseButton, stepButton, resetAllButton];
+    this.pdomControlAreaNode.accessibleOrder = [ null, viewingStreamingOptionsNode, playPauseButton, stepButton, resetAllButton ];
   }
 
   rutherfordScattering.register( 'RSBaseScreenView', RSBaseScreenView );
