@@ -114,9 +114,7 @@ define( require => {
     // when various panels are added/removed due to changing color profile or scene, reset the accessible order
     var self = this;
     const restoreAccessibleOrder = function() {
-      self.playAreaNode.accessibleOrder = [
-        self.gunNode
-      ];
+      self.pdomPlayAreaNode.accessibleOrder = [ self.gunNode ];
       self.controlAreaNode.accessibleOrder = _.uniq( self.controlAreaNode.accessibleOrder.concat( [
         self.controlPanel,
         self.sceneRadioButtonGroup
@@ -286,7 +284,7 @@ define( require => {
     } );
 
     return new Node( {
-      children: [nucleusSpaceNode, atomSpaceNode]
+      children: [ nucleusSpaceNode, atomSpaceNode ]
     } );
   };
 
