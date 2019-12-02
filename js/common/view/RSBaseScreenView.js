@@ -127,7 +127,7 @@ define( require => {
     const spaceNodeBounds = new Bounds2( spaceNodeX, spaceNodeY,
       spaceNodeX + RSConstants.SPACE_NODE_WIDTH,
       spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
-    const modelViewTransform = new ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
+    const modelViewTransform = ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
 
     // @protected for layout in subtypes
     this.spaceNode = createSpaceNode( model, this.showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
