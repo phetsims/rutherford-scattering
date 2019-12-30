@@ -22,7 +22,7 @@ define( require => {
   const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // constants
   const SPACE_BORDER_WIDTH = 2;
@@ -193,7 +193,7 @@ define( require => {
 
               // only the last FADEOUT_SEGMENTS should be visible, map i to the opacity
               const length = particle.positions.length;
-              const alpha = Util.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
+              const alpha = Utils.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
               const strokeStyle = StringUtils.format( self.particleTraceColorWithFade, alpha );
               context.strokeStyle = strokeStyle;
               context.stroke();

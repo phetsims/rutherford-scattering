@@ -14,7 +14,7 @@ define( require => {
   const Particle = require( 'SHRED/model/Particle' );
   const ParticleAtom = require( 'SHRED/model/ParticleAtom' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   /**
    * @param {Property.<number>} protonCountProperty
@@ -31,7 +31,7 @@ define( require => {
 
     // update number of nucleons of a particular type and move all to destination
     const configureNucleus = function( nucleonCount, particleType ) {
-      const particleCount = Util.toFixedNumber( nucleonCount, 0 );
+      const particleCount = Utils.toFixedNumber( nucleonCount, 0 );
       const nucleons = particleType === 'proton' ? self.protons : self.neutrons;
       while( nucleons.length !== particleCount ) {
         if ( particleCount - nucleons.length > 0 ) {

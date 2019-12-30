@@ -22,7 +22,7 @@ define( require => {
   const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
@@ -214,7 +214,7 @@ define( require => {
     const removeFinger = function( sliderID, interactionProperty, countProperty ) {
       FINGER_TRACKER[ sliderID ]--;
       assert && assert( FINGER_TRACKER[ sliderID ] >= 0, 'at least 0 fingers must be using the slider' );
-      countProperty.set( Util.roundSymmetric( countProperty.value ) ); // proper resolution for nucleons
+      countProperty.set( Utils.roundSymmetric( countProperty.value ) ); // proper resolution for nucleons
       if ( FINGER_TRACKER[ sliderID ] === 0 ) {
         interactionProperty.set( false );
       }
