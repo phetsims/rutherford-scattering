@@ -288,5 +288,4 @@ define( require => {
   rutherfordScattering.register( 'AlphaParticlePropertiesPanelContent', AlphaParticlePropertiesPanelContent );
 
   return AlphaParticlePropertiesPanel;
-
 } );

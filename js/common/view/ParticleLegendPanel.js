@@ -74,7 +74,11 @@ define( require => {
   function createParticleRow( particleNode, titleString ) {
 
     const hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
-    const titleText = new Text( titleString, { font: RSConstants.PANEL_PROPERTY_FONT, fill: RSColorProfile.panelLabelColorProperty, maxWidth: 175 } );
+    const titleText = new Text( titleString, {
+      font: RSConstants.PANEL_PROPERTY_FONT,
+      fill: RSColorProfile.panelLabelColorProperty,
+      maxWidth: 175
+    } );
     const hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
 
     // container for one row in the legend
@@ -156,5 +160,4 @@ define( require => {
   inherit( VBox, ParticleLegendPanelContent );
 
   return ParticleLegendPanel;
-
 } );

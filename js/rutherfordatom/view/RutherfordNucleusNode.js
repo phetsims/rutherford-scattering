@@ -338,5 +338,4 @@ define( require => {
   };
 
   return RutherfordNucleusNode;
-
-} ); // define
+} );

@@ -88,5 +88,4 @@ define( require => {
   rutherfordScattering.register( 'RSConstants', RSConstants );
 
   return RSConstants;
-
 } );
