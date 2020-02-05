@@ -18,7 +18,7 @@ define( require => {
 
   /**
    * @constructor
-   * @param {Object} options
+   * @param {Object} [options]
    */
   function RSScreenSummaryNode( options ) {
     Node.call( this, {

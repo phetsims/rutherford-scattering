@@ -30,11 +30,12 @@ define( require => {
   const PARTICLE_TRACE_WIDTH = 1.5;
   const FADEOUT_SEGMENTS = 80;
 
+  // TODO: Should the options object be renamed to 'config' because it has a required field?
   /**
    * @param {atomSpace} atomSpace - space containing atoms and particles
    * @param {Property} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param {Object} options - must contain a canvasBounds attribute of type Bounds2
+   * @param {Object} [options] - must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
   function ParticleSpaceNode( atomSpace, showAlphaTraceProperty, modelViewTransform, options ) {

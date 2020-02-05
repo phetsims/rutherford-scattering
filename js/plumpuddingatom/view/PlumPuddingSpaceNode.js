@@ -16,11 +16,12 @@ define( require => {
   const PlumPuddingAtomNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomNode' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
+  // TODO: Should the options be renamed to 'config' because there is a required field?
   /**
    * @param {RSBaseModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param {Object} options - must provide {Bounds2} canvasBounds
+   * @param {Object} [options] - must provide {Bounds2} canvasBounds
    * @constructor
    */
   function PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {

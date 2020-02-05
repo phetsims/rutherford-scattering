@@ -21,11 +21,12 @@ define( require => {
   const observationWindowString = RSA11yStrings.observationWindow.value;
   const nucleusSpaceDescriptionString = RSA11yStrings.nucleusSpaceDescription.value;
 
+  // TODO: Should the options parameter be renamed to config if it "must provide canvasBounds"?
   /**
    * @param {RSBaseModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view transform
-   * @param {Object} options - must provide {Bounds2} canvasBounds
+   * @param {Object} [options] - must provide {Bounds2} canvasBounds
    * @constructor
    */
   function NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {

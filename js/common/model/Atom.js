@@ -17,7 +17,7 @@ define( require => {
    * Constructor.
    * @param {Vector2} position
    * @param {number} boundingWidth
-   * @param {Object} options
+   * @param {Object} [options]
    */
   function Atom( position, boundingWidth, options ) {
 

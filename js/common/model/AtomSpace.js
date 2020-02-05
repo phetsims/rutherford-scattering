@@ -20,7 +20,7 @@ define( require => {
    * Constructor.
    * @param {Property.<number>} protonCountProperty
    * @param {Bounds2} bounds
-   * @param {Object} options
+   * @param {Object} [options]
    */
   function AtomSpace( protonCountProperty, bounds, options ) {
 

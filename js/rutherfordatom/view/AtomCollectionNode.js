@@ -31,7 +31,7 @@ define( require => {
    *
    * @param {RutherfordAtomSpace} atomSpace - AtomSpace containing the atoms
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} options`
+   * @param {Object} [options]
    * @constructor
    */
   function AtomCollectionNode( atomSpace, modelViewTransform, options ) {

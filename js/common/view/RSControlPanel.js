@@ -21,7 +21,7 @@ define( require => {
   /**
    * Constructor.
    * @param {array.<Panel>} panels
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function RSControlPanel( panels, options ) {

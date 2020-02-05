@@ -24,7 +24,7 @@ define( require => {
    * @param {Property.<number>} protonCountProperty
    * @param {Vector2} position
    * @param {number} boundingWidth
-   * @param {Object} options
+   * @param {Object} [options]
    */
   function RutherfordAtom( particleRemovedEmitter, protonCountProperty, position, boundingWidth, options ) {
 

@@ -30,7 +30,7 @@ define( require => {
 
   /**
    * @param {VBox} children - content to be contained in the panel
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function ParticleLegendPanel( content, options ) {
