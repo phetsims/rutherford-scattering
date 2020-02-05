@@ -24,19 +24,18 @@ define( require => {
   const observationWindowString = RSA11yStrings.observationWindow.value;
   const atomSpaceDescriptionString = RSA11yStrings.atomSpaceDescription.value;
 
-  // TODO: Should the options parameter be renamed to config if it "must provide canvasBounds"?
   /**
    * @param {RSBaseModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view transform
-   * @param {Object} [options] - must provide {Bounds2} canvasBounds
+   * @param {Object} config - must provide {Bounds2} canvasBounds
    * @constructor
    */
-  function AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
+  function AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
 
-    assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+    assert && assert( config && config.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    options = merge( {
+    config = merge( {
       particleStyle: 'particle',
 
       // a11y
@@ -45,12 +44,12 @@ define( require => {
       labelContent: observationWindowString,
       descriptionContent: atomSpaceDescriptionString,
       appendDescription: true
-    }, options );
+    }, config );
 
     // @private - generates an image for the collection of atoms
     this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );
 
-    ParticleSpaceNode.call( this, model.atomSpace, showAlphaTraceProperty, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model.atomSpace, showAlphaTraceProperty, modelViewTransform, config );
     const self = this;
 
     if ( RSQueryParameters.showDebugShapes ) {

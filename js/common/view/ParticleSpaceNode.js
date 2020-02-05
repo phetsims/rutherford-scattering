@@ -30,29 +30,28 @@ define( require => {
   const PARTICLE_TRACE_WIDTH = 1.5;
   const FADEOUT_SEGMENTS = 80;
 
-  // TODO: Should the options object be renamed to 'config' because it has a required field?
   /**
    * @param {atomSpace} atomSpace - space containing atoms and particles
    * @param {Property} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param {Object} [options] - must contain a canvasBounds attribute of type Bounds2
+   * @param {Object} config - must contain a canvasBounds attribute of type Bounds2
    * @constructor
    */
-  function ParticleSpaceNode( atomSpace, showAlphaTraceProperty, modelViewTransform, options ) {
+  function ParticleSpaceNode( atomSpace, showAlphaTraceProperty, modelViewTransform, config ) {
 
-    assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+    assert && assert( config && config.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
     // the bounds should be eroded by 10 so it appears that particles glide into the space
-    options.canvasBounds = options.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
+    config.canvasBounds = config.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
 
-    options = merge( {
+    config = merge( {
       particleStyle: 'nucleus', // 'nucleus'|'particle'
       particleTraceColor: new Color(255,0,255)
-    }, options );
-    this.particleStyle = options.particleStyle;
-    this.particleTraceColor = options.particleTraceColor;
+    }, config );
+    this.particleStyle = config.particleStyle;
+    this.particleTraceColor = config.particleTraceColor;
 
-    CanvasNode.call( this, options );
+    CanvasNode.call( this, config );
 
     const self = this;
 
@@ -69,7 +68,7 @@ define( require => {
     this.showAlphaTraceProperty = showAlphaTraceProperty;
 
     // @private
-    this.particleTraceColorWithFade = 'rgba(' + options.particleTraceColor.r + ',' + options.particleTraceColor.g + ',' + options.particleTraceColor.b + ',{0})';
+    this.particleTraceColorWithFade = 'rgba(' + config.particleTraceColor.r + ',' + config.particleTraceColor.g + ',' + config.particleTraceColor.b + ',{0})';
 
     // @private - the area to be used as the 'viewport', border not included
     this.clipRect = {

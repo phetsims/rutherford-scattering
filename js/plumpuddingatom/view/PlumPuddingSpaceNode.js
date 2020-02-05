@@ -16,23 +16,22 @@ define( require => {
   const PlumPuddingAtomNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomNode' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
 
-  // TODO: Should the options be renamed to 'config' because there is a required field?
   /**
    * @param {RSBaseModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param {Object} [options] - must provide {Bounds2} canvasBounds
+   * @param {Object} config - must provide {Bounds2} canvasBounds
    * @constructor
    */
-  function PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
+  function PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
 
-    assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+    assert && assert( config && config.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    options = merge( {
+    config = merge( {
       particleTraceColor: new Color( 'grey' )
-    }, options );
+    }, config );
 
-    ParticleSpaceNode.call( this, model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, config );
 
     // plum pudding image - calc image scale and center positioning
     this.atomNode = new PlumPuddingAtomNode();

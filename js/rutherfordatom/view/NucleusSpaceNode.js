@@ -21,19 +21,18 @@ define( require => {
   const observationWindowString = RSA11yStrings.observationWindow.value;
   const nucleusSpaceDescriptionString = RSA11yStrings.nucleusSpaceDescription.value;
 
-  // TODO: Should the options parameter be renamed to config if it "must provide canvasBounds"?
   /**
    * @param {RSBaseModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
    * @param {ModelViewTransform2} modelViewTransform - model to view transform
-   * @param {Object} [options] - must provide {Bounds2} canvasBounds
+   * @param {Object} config - must provide {Bounds2} canvasBounds
    * @constructor
    */
-  function NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, options ) {
+  function NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
 
-    assert && assert( options && options.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+    assert && assert( config && config.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
 
-    options = merge( {
+    config = merge( {
 
       // a11y
       tagName: 'div',
@@ -41,9 +40,9 @@ define( require => {
       labelContent: observationWindowString,
       descriptionContent: nucleusSpaceDescriptionString,
       appendDescription: true
-    }, options );
+    }, config );
 
-    ParticleSpaceNode.call( this, model.nucleusSpace, showAlphaTraceProperty, modelViewTransform, options );
+    ParticleSpaceNode.call( this, model.nucleusSpace, showAlphaTraceProperty, modelViewTransform, config );
 
     // @private - atom image generator
     this.atomNode = new RutherfordNucleusNode( model.userInteractionProperty, model.protonCountProperty,
