@@ -1,4 +1,4 @@
-// Copyright 2016-2019, University of Colorado Boulder
+// Copyright 2016-2020, University of Colorado Boulder
 
 /**
  * Model for the Rutherford Atom space, responsible for atoms of the model and model bounds.

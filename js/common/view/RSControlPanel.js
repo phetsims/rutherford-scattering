@@ -1,4 +1,4 @@
-// Copyright 2016-2019, University of Colorado Boulder
+// Copyright 2016-2020, University of Colorado Boulder
 
 /**
  * Collection of all control panels in a screen of this sim.  Different scenes in a single
