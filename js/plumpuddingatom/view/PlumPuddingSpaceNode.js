@@ -12,6 +12,7 @@ define( require => {
   const Color = require( 'SCENERY/util/Color' );
   const inherit = require( 'PHET_CORE/inherit' );
   const merge = require( 'PHET_CORE/merge' );
+  const required = require( 'PHET_CORE/required' );
   const ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   const PlumPuddingAtomNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomNode' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -24,10 +25,8 @@ define( require => {
    * @constructor
    */
   function PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
-
-    assert && assert( config && config.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
-
     config = merge( {
+      canvasBounds: required( config.canvasBounds ),
       particleTraceColor: new Color( 'grey' )
     }, config );
 

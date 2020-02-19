@@ -18,6 +18,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const merge = require( 'PHET_CORE/merge' );
   const ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
+  const required = require( 'PHET_CORE/required' );
   const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
   const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -38,16 +39,17 @@ define( require => {
    * @constructor
    */
   function ParticleSpaceNode( atomSpace, showAlphaTraceProperty, modelViewTransform, config ) {
+    config = merge( {
 
-    assert && assert( config && config.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
+      // {Bounds2}
+      canvasBounds: required( config.canvasBounds ),
+      particleStyle: 'nucleus', // 'nucleus'|'particle'
+      particleTraceColor: new Color(255,0,255)
+    }, config );
 
     // the bounds should be eroded by 10 so it appears that particles glide into the space
     config.canvasBounds = config.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
 
-    config = merge( {
-      particleStyle: 'nucleus', // 'nucleus'|'particle'
-      particleTraceColor: new Color(255,0,255)
-    }, config );
     this.particleStyle = config.particleStyle;
     this.particleTraceColor = config.particleTraceColor;
 

@@ -16,6 +16,7 @@ define( require => {
   const merge = require( 'PHET_CORE/merge' );
   const ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const required = require( 'PHET_CORE/required' );
   const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   const RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -32,10 +33,10 @@ define( require => {
    * @constructor
    */
   function AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
-
-    assert && assert( config && config.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
-
     config = merge( {
+
+      // {Bounds2}
+      canvasBounds: required( config.canvasBounds ),
       particleStyle: 'particle',
 
       // a11y

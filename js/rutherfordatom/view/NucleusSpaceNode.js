@@ -13,6 +13,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const merge = require( 'PHET_CORE/merge' );
   const ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
+  const required = require( 'PHET_CORE/required' );
   const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
   const RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
   const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
@@ -29,10 +30,10 @@ define( require => {
    * @constructor
    */
   function NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
-
-    assert && assert( config && config.hasOwnProperty( 'canvasBounds' ), 'No canvasBounds specified.' );
-
     config = merge( {
+
+      // {Bounds2}
+      canvasBounds: required( config.canvasBounds ),
 
       // a11y
       tagName: 'div',
