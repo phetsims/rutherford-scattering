@@ -5,29 +5,25 @@
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
 
-define( require => {
-  'use strict';
+import inherit from '../../../../phet-core/js/inherit.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import rutherfordScattering from '../../rutherfordScattering.js';
+import RSA11yStrings from '../RSA11yStrings.js';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+const screenSummaryString = RSA11yStrings.screenSummary.value;
 
-  const screenSummaryString = RSA11yStrings.screenSummary.value;
+/**
+ * @constructor
+ * @param {Object} [options]
+ */
+function RSScreenSummaryNode( options ) {
+  Node.call( this, {
+    tagName: 'p',
+    innerContent: screenSummaryString
+  } );
+}
 
-  /**
-   * @constructor
-   * @param {Object} [options]
-   */
-  function RSScreenSummaryNode( options ) {
-    Node.call( this, {
-      tagName: 'p',
-      innerContent: screenSummaryString
-    } );
-  }
+rutherfordScattering.register( 'RSScreenSummaryNode', RSScreenSummaryNode );
 
-  rutherfordScattering.register( 'RSScreenSummaryNode', RSScreenSummaryNode );
-
-  return inherit( Node, RSScreenSummaryNode );
-} );
+inherit( Node, RSScreenSummaryNode );
+export default RSScreenSummaryNode;

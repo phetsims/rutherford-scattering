@@ -7,32 +7,28 @@
  * @author Jesse Greenberg
  */
 
-define( require => {
-  'use strict';
+import OptionsDialog from '../../../../joist/js/OptionsDialog.js';
+import ProjectorModeCheckbox from '../../../../joist/js/ProjectorModeCheckbox.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import rutherfordScattering from '../../rutherfordScattering.js';
+import RSColorProfile from '../RSColorProfile.js';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const OptionsDialog = require( 'JOIST/OptionsDialog' );
-  const ProjectorModeCheckbox = require( 'JOIST/ProjectorModeCheckbox' );
-  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+/**
+ * @constructor
+ */
+function MenuOptionsNode() {
 
-  /**
-   * @constructor
-   */
-  function MenuOptionsNode() {
+  const projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
 
-    const projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
+  VBox.call( this, {
+    children: [ projectorCheckbox ],
+    spacing: OptionsDialog.DEFAULT_SPACING,
+    align: 'left'
+  } );
+}
 
-    VBox.call( this, {
-      children: [ projectorCheckbox ],
-      spacing: OptionsDialog.DEFAULT_SPACING,
-      align: 'left'
-    } );
-  }
+rutherfordScattering.register( 'MenuOptionsNode', MenuOptionsNode );
 
-  rutherfordScattering.register( 'MenuOptionsNode', MenuOptionsNode );
-
-  return inherit( VBox, MenuOptionsNode );
-} );
+inherit( VBox, MenuOptionsNode );
+export default MenuOptionsNode;

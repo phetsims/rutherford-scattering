@@ -5,67 +5,62 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Color = require( 'SCENERY/util/Color' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const merge = require( 'PHET_CORE/merge' );
-  const required = require( 'PHET_CORE/required' );
-  const ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
-  const PlumPuddingAtomNode = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomNode' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import required from '../../../../phet-core/js/required.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
+import rutherfordScattering from '../../rutherfordScattering.js';
+import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
+
+/**
+ * @param {RSBaseModel} model
+ * @param {Property.<boolean>} showAlphaTraceProperty
+ * @param {ModelViewTransform2} modelViewTransform - model to view  transform
+ * @param {Object} config - must provide {Bounds2} canvasBounds
+ * @constructor
+ */
+function PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
+  config = merge( {
+    canvasBounds: required( config.canvasBounds ),
+    particleTraceColor: new Color( 'grey' )
+  }, config );
+
+  ParticleSpaceNode.call( this, model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, config );
+
+  // plum pudding image - calc image scale and center positioning
+  this.atomNode = new PlumPuddingAtomNode();
+  const scale = Math.min( this.width, this.height ) /
+                ( Math.max( this.atomNode.width, this.atomNode.height ) );
+  const imageWidth = this.atomNode.width * scale;
+  const imageHeight = this.atomNode.height * scale;
+  const imageX = this.bounds.centerX - imageWidth / 2;
+  const imageY = this.bounds.centerY - imageHeight / 2;
+  this.atomNodeRect = { x: imageX, y: imageY, width: imageWidth, height: imageHeight };
+
+  this.invalidatePaint();
+}
+
+rutherfordScattering.register( 'PlumPuddingSpaceNode', PlumPuddingSpaceNode );
+
+export default inherit( ParticleSpaceNode, PlumPuddingSpaceNode, {
 
   /**
-   * @param {RSBaseModel} model
-   * @param {Property.<boolean>} showAlphaTraceProperty
-   * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param {Object} config - must provide {Bounds2} canvasBounds
-   * @constructor
+   * Draws the background image
+   *
+   * @param {CanvasRenderingContext2D} context
+   * @override
+   * @protected
    */
-  function PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
-    config = merge( {
-      canvasBounds: required( config.canvasBounds ),
-      particleTraceColor: new Color( 'grey' )
-    }, config );
-
-    ParticleSpaceNode.call( this, model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, config );
-
-    // plum pudding image - calc image scale and center positioning
-    this.atomNode = new PlumPuddingAtomNode();
-    const scale = Math.min( this.width, this.height ) /
-                ( Math.max( this.atomNode.width, this.atomNode.height ) );
-    const imageWidth = this.atomNode.width * scale;
-    const imageHeight = this.atomNode.height * scale;
-    const imageX = this.bounds.centerX - imageWidth / 2;
-    const imageY = this.bounds.centerY - imageHeight / 2;
-    this.atomNodeRect = { x: imageX, y: imageY, width: imageWidth, height: imageHeight };
-
-    this.invalidatePaint();
-  }
-
-  rutherfordScattering.register( 'PlumPuddingSpaceNode', PlumPuddingSpaceNode );
-
-  return inherit( ParticleSpaceNode, PlumPuddingSpaceNode, {
-
-    /**
-     * Draws the background image
-     *
-     * @param {CanvasRenderingContext2D} context
-     * @override
-     * @protected
-     */
-    paintSpace: function( context ) {
-      // Slight chance the image used isn't available. In that case, return & try again on next frame
-      if ( this.atomNode.image === null ) {
-        return;
-      }
-
-      context.drawImage( this.atomNode.image, this.atomNodeRect.x, this.atomNodeRect.y,
-        this.atomNodeRect.width, this.atomNodeRect.height );
+  paintSpace: function( context ) {
+    // Slight chance the image used isn't available. In that case, return & try again on next frame
+    if ( this.atomNode.image === null ) {
+      return;
     }
 
-  } );
+    context.drawImage( this.atomNode.image, this.atomNodeRect.x, this.atomNodeRect.y,
+      this.atomNodeRect.width, this.atomNodeRect.height );
+  }
 
 } );

@@ -9,214 +9,210 @@
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
-  const Color = require( 'SCENERY/util/Color' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
-  const required = require( 'PHET_CORE/required' );
-  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  const Utils = require( 'DOT/Utils' );
+import Utils from '../../../../dot/js/Utils.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import required from '../../../../phet-core/js/required.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import rutherfordScattering from '../../rutherfordScattering.js';
+import RSColorProfile from '../RSColorProfile.js';
+import RSConstants from '../RSConstants.js';
+import ParticleNodeFactory from './ParticleNodeFactory.js';
 
-  // constants
-  const SPACE_BORDER_WIDTH = 2;
-  const SPACE_BORDER_COLOR = 'grey';
-  const PARTICLE_TRACE_WIDTH = 1.5;
-  const FADEOUT_SEGMENTS = 80;
+// constants
+const SPACE_BORDER_WIDTH = 2;
+const SPACE_BORDER_COLOR = 'grey';
+const PARTICLE_TRACE_WIDTH = 1.5;
+const FADEOUT_SEGMENTS = 80;
+
+/**
+ * @param {atomSpace} atomSpace - space containing atoms and particles
+ * @param {Property} showAlphaTraceProperty
+ * @param {ModelViewTransform2} modelViewTransform - model to view  transform
+ * @param {Object} config - must contain a canvasBounds attribute of type Bounds2
+ * @constructor
+ */
+function ParticleSpaceNode( atomSpace, showAlphaTraceProperty, modelViewTransform, config ) {
+  config = merge( {
+
+    // {Bounds2}
+    canvasBounds: required( config.canvasBounds ),
+    particleStyle: 'nucleus', // 'nucleus'|'particle'
+    particleTraceColor: new Color( 255, 0, 255 )
+  }, config );
+
+  // the bounds should be eroded by 10 so it appears that particles glide into the space
+  config.canvasBounds = config.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
+
+  this.particleStyle = config.particleStyle;
+  this.particleTraceColor = config.particleTraceColor;
+
+  CanvasNode.call( this, config );
+
+  const self = this;
+
+  // @private
+  this.atomSpace = atomSpace;
+
+  // @private
+  this.alphaParticleImage = null;
+
+  // @private - model to view coordinate transform
+  this.modelViewTransform = modelViewTransform;
+
+  // @private
+  this.showAlphaTraceProperty = showAlphaTraceProperty;
+
+  // @private
+  this.particleTraceColorWithFade = 'rgba(' + config.particleTraceColor.r + ',' + config.particleTraceColor.g + ',' + config.particleTraceColor.b + ',{0})';
+
+  // @private - the area to be used as the 'viewport', border not included
+  this.clipRect = {
+    x: this.canvasBounds.getX() + SPACE_BORDER_WIDTH / 2,
+    y: this.canvasBounds.getY() + SPACE_BORDER_WIDTH / 2,
+    width: this.canvasBounds.getWidth() - SPACE_BORDER_WIDTH,
+    height: this.canvasBounds.getHeight() - SPACE_BORDER_WIDTH
+  };
+
+  // create a single alpha particle image to use for rendering all particles - asynchronous
+  let alphaParticle;
+  if ( this.particleStyle === 'nucleus' ) {
+    alphaParticle = ParticleNodeFactory.createNucleusAlpha();
+  }
+  else if ( this.particleStyle === 'particle' ) {
+    alphaParticle = ParticleNodeFactory.createParticleAlpha();
+  }
+  alphaParticle.toImage( function( image, x, y ) {
+    self.alphaParticleImage = image;
+    self.particleImageHalfWidth = self.alphaParticleImage.width / 2;
+    self.particleImageHalfHeight = self.alphaParticleImage.height / 2;
+  } );
+
+  this.invalidatePaint();
+}
+
+rutherfordScattering.register( 'ParticleSpaceNode', ParticleSpaceNode );
+
+export default inherit( CanvasNode, ParticleSpaceNode, {
 
   /**
-   * @param {atomSpace} atomSpace - space containing atoms and particles
-   * @param {Property} showAlphaTraceProperty
-   * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param {Object} config - must contain a canvasBounds attribute of type Bounds2
-   * @constructor
+   * A no/op function to be implemented by derived objects
+   * @param {CanvasRenderingContext2D} context
+   * @protected
    */
-  function ParticleSpaceNode( atomSpace, showAlphaTraceProperty, modelViewTransform, config ) {
-    config = merge( {
+  paintSpace: function( context ) {
+    assert && assert( false, 'subtype needs to implement' );
+  },
 
-      // {Bounds2}
-      canvasBounds: required( config.canvasBounds ),
-      particleStyle: 'nucleus', // 'nucleus'|'particle'
-      particleTraceColor: new Color(255,0,255)
-    }, config );
-
-    // the bounds should be eroded by 10 so it appears that particles glide into the space
-    config.canvasBounds = config.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
-
-    this.particleStyle = config.particleStyle;
-    this.particleTraceColor = config.particleTraceColor;
-
-    CanvasNode.call( this, config );
+  /**
+   * @param {CanvasRenderingContext2D} context
+   * @override
+   * @private
+   */
+  paintCanvas: function( context ) {
 
     const self = this;
 
-    // @private
-    this.atomSpace = atomSpace;
+    const bounds = this.canvasBounds;
+    const renderTrace = self.showAlphaTraceProperty.value;
 
-    // @private
-    this.alphaParticleImage = null;
+    // clear
+    context.clearRect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
 
-    // @private - model to view coordinate transform
-    this.modelViewTransform = modelViewTransform;
+    // border
+    context.beginPath();
+    context.lineWidth = SPACE_BORDER_WIDTH;
+    context.strokeStyle = SPACE_BORDER_COLOR;
+    context.rect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
+    context.stroke();
 
-    // @private
-    this.showAlphaTraceProperty = showAlphaTraceProperty;
+    // viewport clip
+    context.beginPath();
+    context.strokeStyle = 'transparent';
+    context.fillStyle = RSColorProfile.backgroundColorProperty.get().toCSS();
+    context.rect( this.clipRect.x, this.clipRect.y, this.clipRect.width, this.clipRect.height );
+    context.stroke();
+    context.fill();
+    context.clip();
 
-    // @private
-    this.particleTraceColorWithFade = 'rgba(' + config.particleTraceColor.r + ',' + config.particleTraceColor.g + ',' + config.particleTraceColor.b + ',{0})';
+    // render derived space
+    this.paintSpace( context );
 
-    // @private - the area to be used as the 'viewport', border not included
-    this.clipRect = {
-      x: this.canvasBounds.getX() + SPACE_BORDER_WIDTH / 2,
-      y: this.canvasBounds.getY() + SPACE_BORDER_WIDTH / 2,
-      width: this.canvasBounds.getWidth() - SPACE_BORDER_WIDTH,
-      height: this.canvasBounds.getHeight() - SPACE_BORDER_WIDTH
-    };
-
-    // create a single alpha particle image to use for rendering all particles - asynchronous
-    let alphaParticle;
-    if ( this.particleStyle === 'nucleus' ) {
-      alphaParticle = ParticleNodeFactory.createNucleusAlpha();
+    // Slight chance the image used isn't loaded. In that case, return & try again on next frame
+    if ( self.alphaParticleImage === null ) {
+      return;
     }
-    else if ( this.particleStyle === 'particle' ) {
-      alphaParticle = ParticleNodeFactory.createParticleAlpha();
-    }
-    alphaParticle.toImage( function( image, x, y ) {
-      self.alphaParticleImage = image;
-      self.particleImageHalfWidth = self.alphaParticleImage.width / 2;
-      self.particleImageHalfHeight = self.alphaParticleImage.height / 2;
-    } );
 
-    this.invalidatePaint();
-  }
+    // render all alpha particles & corresponding traces in the space
+    self.renderAlphaParticles( context, this.atomSpace, renderTrace );
+  },
 
-  rutherfordScattering.register( 'ParticleSpaceNode', ParticleSpaceNode );
+  /**
+   * Render alpha particles that belong to a parent particleContainer
+   * @param  {Context2D} context
+   * @param  {Atom|AtomSpace} particleContainer
+   * @param  {boolean} renderTrace
+   * @private
+   */
+  renderAlphaParticles: function( context, particleContainer, renderTrace ) {
+    const self = this;
 
-  return inherit( CanvasNode, ParticleSpaceNode, {
+    if ( renderTrace ) {
 
-    /**
-     * A no/op function to be implemented by derived objects
-     * @param {CanvasRenderingContext2D} context
-     * @protected
-     */
-    paintSpace: function( context ) {
-      assert && assert( false, 'subtype needs to implement' );
-    },
-
-    /**
-     * @param {CanvasRenderingContext2D} context
-     * @override
-     * @private
-     */
-    paintCanvas: function( context ) {
-
-      const self = this;
-
-      const bounds = this.canvasBounds;
-      const renderTrace = self.showAlphaTraceProperty.value;
-
-      // clear
-      context.clearRect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
-
-      // border
-      context.beginPath();
-      context.lineWidth = SPACE_BORDER_WIDTH;
-      context.strokeStyle = SPACE_BORDER_COLOR;
-      context.rect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
-      context.stroke();
-
-      // viewport clip
-      context.beginPath();
-      context.strokeStyle = 'transparent';
-      context.fillStyle = RSColorProfile.backgroundColorProperty.get().toCSS();
-      context.rect( this.clipRect.x, this.clipRect.y, this.clipRect.width, this.clipRect.height );
-      context.stroke();
-      context.fill();
-      context.clip();
-
-      // render derived space
-      this.paintSpace( context );
-
-      // Slight chance the image used isn't loaded. In that case, return & try again on next frame
-      if ( self.alphaParticleImage === null ) {
-        return;
+      // if style is 'nucleus' we can get away with rendering with one path for performance
+      if ( self.particleStyle === 'nucleus' ) {
+        context.beginPath();
+        context.lineWidth = PARTICLE_TRACE_WIDTH;
+        context.strokeStyle = self.particleTraceColor.getCanvasStyle();
       }
+    }
 
-      // render all alpha particles & corresponding traces in the space
-      self.renderAlphaParticles( context, this.atomSpace, renderTrace );
-    },
+    particleContainer.particles.forEach( function( particle ) {
 
-    /**
-     * Render alpha particles that belong to a parent particleContainer
-     * @param  {Context2D} context
-     * @param  {Atom|AtomSpace} particleContainer
-     * @param  {boolean} renderTrace
-     * @private
-     */
-    renderAlphaParticles: function( context, particleContainer, renderTrace ) {
-      const self = this;
-
+      // render the traces (if enabled)
       if ( renderTrace ) {
 
-        // if style is 'nucleus' we can get away with rendering with one path for performance
-        if ( self.particleStyle === 'nucleus' ) {
-          context.beginPath();
-          context.lineWidth = PARTICLE_TRACE_WIDTH;
-          context.strokeStyle = self.particleTraceColor.getCanvasStyle();
-        }
-      }
+        // add trace segments
+        for ( let i = 1; i < particle.positions.length; i++ ) {
+          if ( self.particleStyle === 'particle' ) {
 
-      particleContainer.particles.forEach( function( particle ) {
+            // if the style is of a 'particle', each segment needs a new path to create the gradient effect
+            context.beginPath();
+          }
 
-        // render the traces (if enabled)
-        if ( renderTrace ) {
+          const segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i - 1 ] );
+          context.moveTo( segmentStartViewPosition.x, segmentStartViewPosition.y );
+          const segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i ] );
+          context.lineTo( segmentEndViewPosition.x, segmentEndViewPosition.y );
 
-          // add trace segments
-          for ( let i = 1; i < particle.positions.length; i++ ) {
-            if ( self.particleStyle === 'particle' ) {
+          if ( self.particleStyle === 'particle' ) {
 
-              // if the style is of a 'particle', each segment needs a new path to create the gradient effect
-              context.beginPath();
-            }
-
-            const segmentStartViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i - 1 ] );
-            context.moveTo( segmentStartViewPosition.x, segmentStartViewPosition.y );
-            const segmentEndViewPosition = self.modelViewTransform.modelToViewPosition( particle.positions[ i ] );
-            context.lineTo( segmentEndViewPosition.x, segmentEndViewPosition.y );
-
-            if ( self.particleStyle === 'particle' ) {
-
-              // only the last FADEOUT_SEGMENTS should be visible, map i to the opacity
-              const length = particle.positions.length;
-              const alpha = Utils.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
-              const strokeStyle = StringUtils.format( self.particleTraceColorWithFade, alpha );
-              context.strokeStyle = strokeStyle;
-              context.stroke();
-              context.closePath();
-            }
+            // only the last FADEOUT_SEGMENTS should be visible, map i to the opacity
+            const length = particle.positions.length;
+            const alpha = Utils.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
+            const strokeStyle = StringUtils.format( self.particleTraceColorWithFade, alpha );
+            context.strokeStyle = strokeStyle;
+            context.stroke();
+            context.closePath();
           }
         }
+      }
 
-        // render particle
-        const particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.positionProperty.get() );
-        context.drawImage( self.alphaParticleImage,
-          particleViewPosition.x - self.particleImageHalfWidth,
-          particleViewPosition.y - self.particleImageHalfHeight );
-      } );
+      // render particle
+      const particleViewPosition = self.modelViewTransform.modelToViewPosition( particle.positionProperty.get() );
+      context.drawImage( self.alphaParticleImage,
+        particleViewPosition.x - self.particleImageHalfWidth,
+        particleViewPosition.y - self.particleImageHalfHeight );
+    } );
 
-      // render traces as single path in nucleus representation for performance
-      if ( renderTrace ) {
-        if ( self.particleStyle === 'nucleus' ) {
-          context.stroke();
-        }
+    // render traces as single path in nucleus representation for performance
+    if ( renderTrace ) {
+      if ( self.particleStyle === 'nucleus' ) {
+        context.stroke();
       }
     }
-  } ); // inherit
-} ); // define
+  }
+} ); // inherit

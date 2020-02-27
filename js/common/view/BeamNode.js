@@ -5,35 +5,31 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const RSConstants = require( 'RUTHERFORD_SCATTERING/common/RSConstants' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import rutherfordScattering from '../../rutherfordScattering.js';
+import RSConstants from '../RSConstants.js';
 
-  /**
-   * @param {Property.<boolean>} visibleProperty - is the beam visible?
-   * @param {Object} [options]
-   * @constructor
-   */
-  function BeamNode( visibleProperty, options ) {
+/**
+ * @param {Property.<boolean>} visibleProperty - is the beam visible?
+ * @param {Object} [options]
+ * @constructor
+ */
+function BeamNode( visibleProperty, options ) {
 
-    options = merge( {
-      fill: '#8f8f8f'
-    }, options );
+  options = merge( {
+    fill: '#8f8f8f'
+  }, options );
 
-    Rectangle.call( this, 0, 0, RSConstants.BEAM_SIZE.width, RSConstants.BEAM_SIZE.height, options );
+  Rectangle.call( this, 0, 0, RSConstants.BEAM_SIZE.width, RSConstants.BEAM_SIZE.height, options );
 
-    // no need to unlink, this instance exists for the lifetime of the sim
-    visibleProperty.linkAttribute( this, 'visible' );
-  }
+  // no need to unlink, this instance exists for the lifetime of the sim
+  visibleProperty.linkAttribute( this, 'visible' );
+}
 
-  rutherfordScattering.register( 'BeamNode', BeamNode );
+rutherfordScattering.register( 'BeamNode', BeamNode );
 
-  return inherit( Rectangle, BeamNode );
-
-} ); // define
+inherit( Rectangle, BeamNode );
+export default BeamNode;

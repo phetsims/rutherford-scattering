@@ -5,27 +5,20 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import plumPuddingImage from '../../../images/plumPudding_png.js';
+import rutherfordScattering from '../../rutherfordScattering.js';
 
-  // images
-  const plumPuddingImage = require( 'image!RUTHERFORD_SCATTERING/plumPudding.png' );
+/**
+ * @param {Object} [options]
+ * @constructor
+ */
+function PlumPuddingAtomNode( options ) {
+  Image.call( this, plumPuddingImage, options );
+}
 
-  /**
-   * @param {Object} [options]
-   * @constructor
-   */
-  function PlumPuddingAtomNode( options ) {
-    Image.call( this, plumPuddingImage, options );
-  }
+rutherfordScattering.register( 'PlumPuddingAtomNode', PlumPuddingAtomNode );
 
-  rutherfordScattering.register( 'PlumPuddingAtomNode', PlumPuddingAtomNode );
-
-  return inherit( Image, PlumPuddingAtomNode, {} ); // inherit
-
-} ); // define
+export default inherit( Image, PlumPuddingAtomNode, {} ); // inherit

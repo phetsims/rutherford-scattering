@@ -8,100 +8,95 @@
  * @author Dave Schmitz (Schmitzware)
  * @author Jesse Greenberg
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Circle = require( 'SCENERY/nodes/Circle' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const ParticleNodeFactory = require( 'RUTHERFORD_SCATTERING/common/view/ParticleNodeFactory' );
-  const Path = require( 'SCENERY/nodes/Path' );
-  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  const RSQueryParameters = require( 'RUTHERFORD_SCATTERING/common/RSQueryParameters' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import RSColorProfile from '../../common/RSColorProfile.js';
+import RSQueryParameters from '../../common/RSQueryParameters.js';
+import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
+import rutherfordScattering from '../../rutherfordScattering.js';
 
-  // constants
-  const IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV
-  const RADIUS_SCALE = 5.95; // scale to make the radii visible in the space, chosen empirically
-  const ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
+// constants
+const IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV
+const RADIUS_SCALE = 5.95; // scale to make the radii visible in the space, chosen empirically
+const ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
 
-  /**
-   * Constructor.
-   *
-   * @param {RutherfordAtomSpace} atomSpace - AtomSpace containing the atoms
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
-   * @constructor
-   */
-  function AtomCollectionNode( atomSpace, modelViewTransform, options ) {
+/**
+ * Constructor.
+ *
+ * @param {RutherfordAtomSpace} atomSpace - AtomSpace containing the atoms
+ * @param {ModelViewTransform2} modelViewTransform
+ * @param {Object} [options]
+ * @constructor
+ */
+function AtomCollectionNode( atomSpace, modelViewTransform, options ) {
 
-    Node.call( this, options );
-    const self = this;
+  Node.call( this, options );
+  const self = this;
 
-    // @public (read-only) {null|HTMLImageElement} - This node will eventually be drawn with canvas with
-    // context.drawImage. The image is created asynchronously in this constructor.
-    this.image = null;
+  // @public (read-only) {null|HTMLImageElement} - This node will eventually be drawn with canvas with
+  // context.drawImage. The image is created asynchronously in this constructor.
+  this.image = null;
 
-    // draw each atom in the space - called every time the color profile changes
-    const drawAtomCollection = function() {
+  // draw each atom in the space - called every time the color profile changes
+  const drawAtomCollection = function() {
 
-      // remove the all children
-      self.removeAllChildren();
-      atomSpace.atoms.forEach( function( atom ) {
+    // remove the all children
+    self.removeAllChildren();
+    atomSpace.atoms.forEach( function( atom ) {
 
-        // a small circle represents each nucleus
-        const nucleusCircle = ParticleNodeFactory.createNucleus();
-        nucleusCircle.center = modelViewTransform.modelToViewPosition( atom.position );
-        self.addChild( nucleusCircle );
+      // a small circle represents each nucleus
+      const nucleusCircle = ParticleNodeFactory.createNucleus();
+      nucleusCircle.center = modelViewTransform.modelToViewPosition( atom.position );
+      self.addChild( nucleusCircle );
 
-        // create the radii - concentric circles with dashed lines spaced proportionally to the Bohr
-        // energies
-        const getScaledRadius = function( index ) {
-          let radius = 0;
+      // create the radii - concentric circles with dashed lines spaced proportionally to the Bohr
+      // energies
+      const getScaledRadius = function( index ) {
+        let radius = 0;
 
-          // sum the Bohr energies up to this index
-          for ( let i = 1; i <= index; i++ ) {
-            const bohrEnergy = IONIZATION_ENERGY / ( i * i );
-            radius += bohrEnergy; // radius will be scaled by this sum
-          }
-          return radius * RADIUS_SCALE;
-        };
-
-        // draw the radii
-        for ( let i = ENERGY_LEVELS; i > 0 ; i-- ) {
-          const scaledRadius = getScaledRadius( i );
-          const radius = new Circle( scaledRadius, { stroke: 'grey', lineDash: [ 5, 5 ], center: nucleusCircle.center } );
-          self.addChild( radius );
+        // sum the Bohr energies up to this index
+        for ( let i = 1; i <= index; i++ ) {
+          const bohrEnergy = IONIZATION_ENERGY / ( i * i );
+          radius += bohrEnergy; // radius will be scaled by this sum
         }
+        return radius * RADIUS_SCALE;
+      };
 
-        // draw the bounds of each nucleus
-        if ( RSQueryParameters.showDebugShapes ) {
-          const boundsRectangle = new Path( modelViewTransform.modelToViewShape( atom.boundingRect ), { stroke: 'red' } );
-          self.addChild( boundsRectangle );
+      // draw the radii
+      for ( let i = ENERGY_LEVELS; i > 0; i-- ) {
+        const scaledRadius = getScaledRadius( i );
+        const radius = new Circle( scaledRadius, { stroke: 'grey', lineDash: [ 5, 5 ], center: nucleusCircle.center } );
+        self.addChild( radius );
+      }
 
-          const boundingCircle = new Path( modelViewTransform.modelToViewShape( atom.boundingCircle ), { stroke: 'red' } );
-          self.addChild( boundingCircle );
-        }
-      } );
-    };
+      // draw the bounds of each nucleus
+      if ( RSQueryParameters.showDebugShapes ) {
+        const boundsRectangle = new Path( modelViewTransform.modelToViewShape( atom.boundingRect ), { stroke: 'red' } );
+        self.addChild( boundsRectangle );
 
-    // Draw to image whenever the color changes so this can be drawn to a CanvasNode. The only color that changes is
-    // nucleusColorProperty (used in ParticleNodeFactory.createNucleus()) and we link directly to that color rather
-    // than profileNameProperty so that we redraw the image if that color changes from
-    // rutherford-scattering-colors.hmtl. No need to unlink, this instance exists for life of sim
-    RSColorProfile.nucleusColorProperty.link( function() {
-      drawAtomCollection();
-
-      // update the image
-      self.image = self.toImage( function( image, x, y ) {
-        self.image = image;
-      } );
+        const boundingCircle = new Path( modelViewTransform.modelToViewShape( atom.boundingCircle ), { stroke: 'red' } );
+        self.addChild( boundingCircle );
+      }
     } );
-  }
+  };
 
-  rutherfordScattering.register( 'AtomCollectionNode', AtomCollectionNode );
+  // Draw to image whenever the color changes so this can be drawn to a CanvasNode. The only color that changes is
+  // nucleusColorProperty (used in ParticleNodeFactory.createNucleus()) and we link directly to that color rather
+  // than profileNameProperty so that we redraw the image if that color changes from
+  // rutherford-scattering-colors.hmtl. No need to unlink, this instance exists for life of sim
+  RSColorProfile.nucleusColorProperty.link( function() {
+    drawAtomCollection();
 
-  return inherit( Node, AtomCollectionNode ); // inherit
+    // update the image
+    self.image = self.toImage( function( image, x, y ) {
+      self.image = image;
+    } );
+  } );
+}
 
-} ); // define
+rutherfordScattering.register( 'AtomCollectionNode', AtomCollectionNode );
+
+export default inherit( Node, AtomCollectionNode ); // inherit

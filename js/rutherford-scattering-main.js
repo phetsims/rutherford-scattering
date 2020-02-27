@@ -5,46 +5,42 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const FocusOverlay = require( 'SCENERY/overlays/FocusOverlay' );
-  const MenuOptionsNode = require( 'RUTHERFORD_SCATTERING/common/view/MenuOptionsNode' );
-  const PlumPuddingAtomScreen = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/PlumPuddingAtomScreen' );
-  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  const RutherfordAtomScreen = require( 'RUTHERFORD_SCATTERING/rutherfordatom/RutherfordAtomScreen' );
-  const Sim = require( 'JOIST/Sim' );
-  const SimLauncher = require( 'JOIST/SimLauncher' );
+import Sim from '../../joist/js/Sim.js';
+import SimLauncher from '../../joist/js/SimLauncher.js';
+import FocusOverlay from '../../scenery/js/overlays/FocusOverlay.js';
+import RSColorProfile from './common/RSColorProfile.js';
+import MenuOptionsNode from './common/view/MenuOptionsNode.js';
+import PlumPuddingAtomScreen from './plumpuddingatom/PlumPuddingAtomScreen.js';
+import rutherfordScatteringStrings from './rutherford-scattering-strings.js';
+import RutherfordAtomScreen from './rutherfordatom/RutherfordAtomScreen.js';
 
-  // strings
-  const rutherfordScatteringTitleString = require( 'string!RUTHERFORD_SCATTERING/rutherford-scattering.title' );
+const rutherfordScatteringTitleString = rutherfordScatteringStrings[ 'rutherford-scattering' ].title;
 
-  const simOptions = {
-    credits: {
-      leadDesign: 'Amy Hanson, Sam McKagan',
-      softwareDevelopment: 'Jesse Greenberg, Chris Malley, Dave Schmitz',
-      team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
-            'Noah Podolefsky, Amy Rouinfar, Carl Weiman',
-      qualityAssurance: 'Steele Dalton, Amanda Davis, Bryce Griebenow, Andrea Lin, Ben Roberts, Kathryn Woessner, Bryan Yoelin',
-      graphicArts: '',
-      thanks: ''
-    },
+const simOptions = {
+  credits: {
+    leadDesign: 'Amy Hanson, Sam McKagan',
+    softwareDevelopment: 'Jesse Greenberg, Chris Malley, Dave Schmitz',
+    team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
+          'Noah Podolefsky, Amy Rouinfar, Carl Weiman',
+    qualityAssurance: 'Steele Dalton, Amanda Davis, Bryce Griebenow, Andrea Lin, Ben Roberts, Kathryn Woessner, Bryan Yoelin',
+    graphicArts: '',
+    thanks: ''
+  },
 
-    // Creates content for the Options dialog
-    createOptionsDialogContent: () => new MenuOptionsNode()
-  };
+  // Creates content for the Options dialog
+  createOptionsDialogContent: () => new MenuOptionsNode()
+};
 
-  // group focus highlights are synced with color profile
-  FocusOverlay.setInnerGroupHighlightColor( RSColorProfile.innerGroupHighlightColorProperty );
-  FocusOverlay.setOuterGroupHighlightColor( RSColorProfile.outerGroupHighlightColorProperty );
+// group focus highlights are synced with color profile
+FocusOverlay.setInnerGroupHighlightColor( RSColorProfile.innerGroupHighlightColorProperty );
+FocusOverlay.setOuterGroupHighlightColor( RSColorProfile.outerGroupHighlightColorProperty );
 
-  SimLauncher.launch( function() {
-    const screens = [
-      new RutherfordAtomScreen(),
-      new PlumPuddingAtomScreen()
-    ];
-    const sim = new Sim( rutherfordScatteringTitleString, screens, simOptions );
-    sim.start();
-  } );
+SimLauncher.launch( function() {
+  const screens = [
+    new RutherfordAtomScreen(),
+    new PlumPuddingAtomScreen()
+  ];
+  const sim = new Sim( rutherfordScatteringTitleString, screens, simOptions );
+  sim.start();
 } );

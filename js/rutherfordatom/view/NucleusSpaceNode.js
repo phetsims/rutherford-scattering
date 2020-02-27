@@ -6,91 +6,86 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const inherit = require( 'PHET_CORE/inherit' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ParticleSpaceNode = require( 'RUTHERFORD_SCATTERING/common/view/ParticleSpaceNode' );
-  const required = require( 'PHET_CORE/required' );
-  const RSA11yStrings = require( 'RUTHERFORD_SCATTERING/common/RSA11yStrings' );
-  const RutherfordNucleusNode = require( 'RUTHERFORD_SCATTERING/rutherfordatom/view/RutherfordNucleusNode' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import required from '../../../../phet-core/js/required.js';
+import RSA11yStrings from '../../common/RSA11yStrings.js';
+import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
+import rutherfordScattering from '../../rutherfordScattering.js';
+import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
-  // a11y strings
-  const observationWindowString = RSA11yStrings.observationWindow.value;
-  const nucleusSpaceDescriptionString = RSA11yStrings.nucleusSpaceDescription.value;
+// a11y strings
+const observationWindowString = RSA11yStrings.observationWindow.value;
+const nucleusSpaceDescriptionString = RSA11yStrings.nucleusSpaceDescription.value;
 
-  /**
-   * @param {RSBaseModel} model
-   * @param {Property.<boolean>} showAlphaTraceProperty
-   * @param {ModelViewTransform2} modelViewTransform - model to view transform
-   * @param {Object} config - must provide {Bounds2} canvasBounds
-   * @constructor
-   */
-  function NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
-    config = merge( {
+/**
+ * @param {RSBaseModel} model
+ * @param {Property.<boolean>} showAlphaTraceProperty
+ * @param {ModelViewTransform2} modelViewTransform - model to view transform
+ * @param {Object} config - must provide {Bounds2} canvasBounds
+ * @constructor
+ */
+function NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
+  config = merge( {
 
-      // {Bounds2}
-      canvasBounds: required( config.canvasBounds ),
+    // {Bounds2}
+    canvasBounds: required( config.canvasBounds ),
 
-      // a11y
-      tagName: 'div',
-      labelTagName: 'h3',
-      labelContent: observationWindowString,
-      descriptionContent: nucleusSpaceDescriptionString,
-      appendDescription: true
-    }, config );
+    // a11y
+    tagName: 'div',
+    labelTagName: 'h3',
+    labelContent: observationWindowString,
+    descriptionContent: nucleusSpaceDescriptionString,
+    appendDescription: true
+  }, config );
 
-    ParticleSpaceNode.call( this, model.nucleusSpace, showAlphaTraceProperty, modelViewTransform, config );
+  ParticleSpaceNode.call( this, model.nucleusSpace, showAlphaTraceProperty, modelViewTransform, config );
 
-    // @private - atom image generator
-    this.atomNode = new RutherfordNucleusNode( model.userInteractionProperty, model.protonCountProperty,
-      model.neutronCountProperty, model.nucleusSpace.rutherfordNucleus );
+  // @private - atom image generator
+  this.atomNode = new RutherfordNucleusNode( model.userInteractionProperty, model.protonCountProperty,
+    model.neutronCountProperty, model.nucleusSpace.rutherfordNucleus );
 
-    this.invalidatePaint();
+  this.invalidatePaint();
 
-    // workaround for an issue where the asynchronous images for the RutherfordNuclues weren't getting
-    // updated correctly - when marked as 'dirty', the atom node will be explicitly redrawn to ensure that
-    // it looks correct in the space
-    // does not need to be unlinked, space will exist for life of sim
-    const self = this;
-    model.stepEmitter.addListener( function( dt ) {
-      if ( self.atomNode.isDirty ) {
-        if ( dt ) {
-          self.atomNode.timeSinceDirty += dt;
-          self.atomNode.updateAtomImage();
-          self.atomNode.invalidatePaint();
-          if ( self.atomNode.timeSinceDirty > 1 ) {
-            self.atomNode.isDirty = false;
-          }
+  // workaround for an issue where the asynchronous images for the RutherfordNuclues weren't getting
+  // updated correctly - when marked as 'dirty', the atom node will be explicitly redrawn to ensure that
+  // it looks correct in the space
+  // does not need to be unlinked, space will exist for life of sim
+  const self = this;
+  model.stepEmitter.addListener( function( dt ) {
+    if ( self.atomNode.isDirty ) {
+      if ( dt ) {
+        self.atomNode.timeSinceDirty += dt;
+        self.atomNode.updateAtomImage();
+        self.atomNode.invalidatePaint();
+        if ( self.atomNode.timeSinceDirty > 1 ) {
+          self.atomNode.isDirty = false;
         }
       }
-    } );
-  }
+    }
+  } );
+}
 
-  rutherfordScattering.register( 'NucleusSpaceNode', NucleusSpaceNode );
+rutherfordScattering.register( 'NucleusSpaceNode', NucleusSpaceNode );
 
-  return inherit( ParticleSpaceNode, NucleusSpaceNode, {
+export default inherit( ParticleSpaceNode, NucleusSpaceNode, {
 
-    /**
-     * @param {CanvasRenderingContext2D} context
-     * @override
-     * @protected
-     */
-    paintSpace: function( context ) {
+  /**
+   * @param {CanvasRenderingContext2D} context
+   * @override
+   * @protected
+   */
+  paintSpace: function( context ) {
 
-      // Slight chance the image used isn't available. In that case, return & try again on next frame
-      if ( this.atomNode.image === null ) {
-        return;
-      }
-
-      const x = this.centerX - this.atomNode.image.width / 2;
-      const y = this.centerY - this.atomNode.image.height / 2;
-      context.drawImage( this.atomNode.image, x, y, this.atomNode.image.width, this.atomNode.image.height );
+    // Slight chance the image used isn't available. In that case, return & try again on next frame
+    if ( this.atomNode.image === null ) {
+      return;
     }
 
-  } ); // inherit
+    const x = this.centerX - this.atomNode.image.width / 2;
+    const y = this.centerY - this.atomNode.image.height / 2;
+    context.drawImage( this.atomNode.image, x, y, this.atomNode.image.width, this.atomNode.image.height );
+  }
 
-} ); // define
+} ); // inherit

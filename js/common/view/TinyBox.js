@@ -5,49 +5,46 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Dimension2 = require( 'DOT/Dimension2' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Node = require( 'SCENERY/nodes/Node' );
-  const Path = require( 'SCENERY/nodes/Path' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  const Shape = require( 'KITE/Shape' );
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Shape from '../../../../kite/js/Shape.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import rutherfordScattering from '../../rutherfordScattering.js';
 
-  // constants
-  const BACK_DEPTH = 4;
-  const BACK_OFFSET = 0.10;
-  const BOX_SIZE = new Dimension2( 10, 10 );
+// constants
+const BACK_DEPTH = 4;
+const BACK_OFFSET = 0.10;
+const BOX_SIZE = new Dimension2( 10, 10 );
 
-  /**
-   * @param {Object} [options]
-   * @constructor
-   */
-  function TinyBox( options ) {
+/**
+ * @param {Object} [options]
+ * @constructor
+ */
+function TinyBox( options ) {
 
-    options = merge( {
-      fill: 'black',
-      stroke: 'white',
-      lineWidth: 1
-    }, options );
+  options = merge( {
+    fill: 'black',
+    stroke: 'white',
+    lineWidth: 1
+  }, options );
 
-    const topNode = new Path( new Shape()
-      .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
-      .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
-      .lineTo( BOX_SIZE.width, BACK_DEPTH )
-      .lineTo( 0, BACK_DEPTH )
-      .close(), options );
+  const topNode = new Path( new Shape()
+    .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
+    .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
+    .lineTo( BOX_SIZE.width, BACK_DEPTH )
+    .lineTo( 0, BACK_DEPTH )
+    .close(), options );
 
-    assert && assert( !options.children, 'additional children not supported' );
-    options.children = [ topNode ];
+  assert && assert( !options.children, 'additional children not supported' );
+  options.children = [ topNode ];
 
-    Node.call( this, options );
-  }
+  Node.call( this, options );
+}
 
-  rutherfordScattering.register( 'TinyBox', TinyBox );
+rutherfordScattering.register( 'TinyBox', TinyBox );
 
-  return inherit( Node, TinyBox );
-} );
+inherit( Node, TinyBox );
+export default TinyBox;

@@ -5,42 +5,38 @@
  *
  * @author Dave Schmitz (Schmitzware)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Image = require( 'SCENERY/nodes/Image' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const PlumPuddingAtomModel = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/model/PlumPuddingAtomModel' );
-  const PlumPuddingAtomScreenView = require( 'RUTHERFORD_SCATTERING/plumpuddingatom/view/PlumPuddingAtomScreenView' );
-  const RSColorProfile = require( 'RUTHERFORD_SCATTERING/common/RSColorProfile' );
-  const rutherfordScattering = require( 'RUTHERFORD_SCATTERING/rutherfordScattering' );
-  const Screen = require( 'JOIST/Screen' );
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import Image from '../../../scenery/js/nodes/Image.js';
+import screenIcon from '../../images/PlumPuddingAtom-screen-icon_png.js';
+import RSColorProfile from '../common/RSColorProfile.js';
+import rutherfordScatteringStrings from '../rutherford-scattering-strings.js';
+import rutherfordScattering from '../rutherfordScattering.js';
+import PlumPuddingAtomModel from './model/PlumPuddingAtomModel.js';
+import PlumPuddingAtomScreenView from './view/PlumPuddingAtomScreenView.js';
 
-  // strings
-  const plumPuddingAtomString = require( 'string!RUTHERFORD_SCATTERING/plumPuddingAtom' );
+const plumPuddingAtomString = rutherfordScatteringStrings.plumPuddingAtom;
 
-  // images
-  const screenIcon = require( 'image!RUTHERFORD_SCATTERING/PlumPuddingAtom-screen-icon.png' );
 
-  /**
-   * @constructor
-   */
-  function PlumPuddingAtomScreen() {
+/**
+ * @constructor
+ */
+function PlumPuddingAtomScreen() {
 
-    const options = {
-      name: plumPuddingAtomString,
-      backgroundColorProperty: RSColorProfile.backgroundColorProperty,
-      homeScreenIcon: new Image( screenIcon )
-    };
+  const options = {
+    name: plumPuddingAtomString,
+    backgroundColorProperty: RSColorProfile.backgroundColorProperty,
+    homeScreenIcon: new Image( screenIcon )
+  };
 
-    Screen.call( this,
-      function() { return new PlumPuddingAtomModel(); },
-      function( model ) { return new PlumPuddingAtomScreenView( model ); },
-      options );
-  }
+  Screen.call( this,
+    function() { return new PlumPuddingAtomModel(); },
+    function( model ) { return new PlumPuddingAtomScreenView( model ); },
+    options );
+}
 
-  rutherfordScattering.register( 'PlumPuddingAtomScreen', PlumPuddingAtomScreen );
+rutherfordScattering.register( 'PlumPuddingAtomScreen', PlumPuddingAtomScreen );
 
-  return inherit( Screen, PlumPuddingAtomScreen );
-} );
+inherit( Screen, PlumPuddingAtomScreen );
+export default PlumPuddingAtomScreen;
