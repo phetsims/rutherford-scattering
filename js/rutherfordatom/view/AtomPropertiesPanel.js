@@ -230,7 +230,9 @@ function AtomPropertiesPanelContent( model, options ) {
     },
     numberDisplayOptions: {
       backgroundStroke: 'black',
-      font: RSConstants.PANEL_VALUE_DISPLAY_FONT
+      textOptions: {
+        font: RSConstants.PANEL_VALUE_DISPLAY_FONT
+      }
     },
     sliderOptions: {
       trackSize: new Dimension2( sliderWidth, 1 ),
