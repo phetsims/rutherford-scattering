@@ -17,7 +17,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
 import atomImage from '../../../images/Atom_png.js';
 import atomProjectorImage from '../../../images/AtomProjector_png.js';
-import RSA11yStrings from '../../common/RSA11yStrings.js';
 import RSColorProfile from '../../common/RSColorProfile.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
@@ -33,14 +32,13 @@ import AtomSpaceNode from './AtomSpaceNode.js';
 import NucleusSpaceNode from './NucleusSpaceNode.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
+// constants
 const pattern0AtomicScaleString = rutherfordScatteringStrings.pattern[ '0atomicScale' ];
 const pattern0NuclearScaleString = rutherfordScatteringStrings.pattern[ '0nuclearScale' ];
-
-// a11yStrings
-const switchScaleString = RSA11yStrings.switchScale.value;
-const switchScaleDescriptionString = RSA11yStrings.switchScaleDescription.value;
-const nuclearScaleViewString = RSA11yStrings.nuclearScaleView.value;
-const atomicScaleViewString = RSA11yStrings.atomicScaleView.value;
+const switchScaleString = rutherfordScatteringStrings.a11y.switchScale;
+const switchScaleDescriptionString = rutherfordScatteringStrings.a11y.switchScaleDescription;
+const nuclearScaleViewString = rutherfordScatteringStrings.a11y.nuclearScaleView;
+const atomicScaleViewString = rutherfordScatteringStrings.a11y.atomicScaleView;
 
 
 /**

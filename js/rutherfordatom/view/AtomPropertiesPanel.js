@@ -17,22 +17,22 @@ import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import RSA11yStrings from '../../common/RSA11yStrings.js';
 import RSColorProfile from '../../common/RSColorProfile.js';
 import RSConstants from '../../common/RSConstants.js';
 import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
+// constants
 const atomString = rutherfordScatteringStrings.atom;
 const numberOfNeutronsString = rutherfordScatteringStrings.numberOfNeutrons;
 const numberOfProtonsString = rutherfordScatteringStrings.numberOfProtons;
+const atomSettingsString = rutherfordScatteringStrings.a11y.atomSettings;
 
-// a11y strings
-const atomSettingsString = RSA11yStrings.atomSettings.value;
-const protonsValuePatternString = RSA11yStrings.protonsValuePattern.value;
-const protonSliderDescriptionString = RSA11yStrings.protonSliderDescription.value;
-const neutronsValuePatternString = RSA11yStrings.neutronsValuePattern.value;
-const neutronSliderDescriptionString = RSA11yStrings.neutronSliderDescription.value;
+// TODO: make these template vars again when working on descriptions
+const protonsValuePatternString = rutherfordScatteringStrings.a11y.protonsValuePattern;
+const protonSliderDescriptionString = rutherfordScatteringStrings.a11y.protonSliderDescription;
+const neutronsValuePatternString = rutherfordScatteringStrings.a11y.neutronsValuePattern;
+const neutronSliderDescriptionString = rutherfordScatteringStrings.a11y.neutronSliderDescription;
 
 // global, tracking where fingers are for multitouch support
 // must persist beyond lifetime of the panel so that fingers are tracked when new

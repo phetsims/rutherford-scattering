@@ -10,14 +10,14 @@
 import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
-import RSA11yStrings from '../../common/RSA11yStrings.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
+import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
-// a11y strings
-const observationWindowString = RSA11yStrings.observationWindow.value;
-const nucleusSpaceDescriptionString = RSA11yStrings.nucleusSpaceDescription.value;
+// constants
+const observationWindowString = rutherfordScatteringStrings.a11y.observationWindow;
+const nucleusSpaceDescriptionString = rutherfordScatteringStrings.a11y.nucleusSpaceDescription;
 
 /**
  * @param {RSBaseModel} model

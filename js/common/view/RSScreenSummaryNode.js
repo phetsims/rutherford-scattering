@@ -7,10 +7,11 @@
 
 import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RSA11yStrings from '../RSA11yStrings.js';
 
-const screenSummaryString = RSA11yStrings.screenSummary.value;
+// constants
+const screenSummaryString = rutherfordScatteringStrings.a11y.screenSummary;
 
 /**
  * @constructor

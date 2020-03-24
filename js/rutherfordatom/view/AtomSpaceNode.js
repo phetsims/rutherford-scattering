@@ -12,15 +12,15 @@ import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import RSA11yStrings from '../../common/RSA11yStrings.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
+import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import AtomCollectionNode from './AtomCollectionNode.js';
 
-// a11y strings
-const observationWindowString = RSA11yStrings.observationWindow.value;
-const atomSpaceDescriptionString = RSA11yStrings.atomSpaceDescription.value;
+// constants
+const observationWindowString = rutherfordScatteringStrings.a11y.observationWindow;
+const atomSpaceDescriptionString = rutherfordScatteringStrings.a11y.atomSpaceDescription;
 
 /**
  * @param {RSBaseModel} model

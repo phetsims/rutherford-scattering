@@ -23,23 +23,20 @@ import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RSA11yStrings from '../RSA11yStrings.js';
 import RSColorProfile from '../RSColorProfile.js';
 import RSConstants from '../RSConstants.js';
 
+// constants
 const alphaParticlePropertiesString = rutherfordScatteringStrings.alphaParticleProperties;
 const energyString = rutherfordScatteringStrings.energy;
 const maxEnergyString = rutherfordScatteringStrings.maxEnergy;
 const minEnergyString = rutherfordScatteringStrings.minEnergy;
 const showTracesString = rutherfordScatteringStrings.showTraces;
+const alphaParticleSettingsString = rutherfordScatteringStrings.a11y.alphaParticleSettings;
+const energySliderDescriptionString = rutherfordScatteringStrings.a11y.energySliderDescription;
+const tracesString = rutherfordScatteringStrings.a11y.traces;
+const traceCheckboxDescriptionString = rutherfordScatteringStrings.a11y.traceCheckboxDescription;
 
-// a11y strings
-const alphaParticleSettingsString = RSA11yStrings.alphaParticleSettings.value;
-const energySliderDescriptionString = RSA11yStrings.energySliderDescription.value;
-const tracesString = RSA11yStrings.traces.value;
-const traceCheckboxDescriptionString = RSA11yStrings.traceCheckboxDescription.value;
-
-// constants
 // global, tracks fingers on the slider for multitouch support
 // must persist beyond individual panel instances so multitouch is supported
 // when a panel is created or destroyed
