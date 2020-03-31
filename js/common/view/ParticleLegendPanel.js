@@ -15,7 +15,7 @@ import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColorProfile from '../RSColorProfile.js';
 import RSConstants from '../RSConstants.js';

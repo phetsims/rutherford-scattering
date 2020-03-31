@@ -7,7 +7,7 @@
 
 import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 // constants

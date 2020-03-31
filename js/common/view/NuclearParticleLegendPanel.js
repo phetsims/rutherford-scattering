@@ -9,7 +9,7 @@
 
 import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import ParticleLegendPanel from './ParticleLegendPanel.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';

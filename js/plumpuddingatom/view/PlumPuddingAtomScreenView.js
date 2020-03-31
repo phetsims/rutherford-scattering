@@ -13,7 +13,7 @@ import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropert
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingSpaceNode from './PlumPuddingSpaceNode.js';
 

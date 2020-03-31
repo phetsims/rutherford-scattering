@@ -19,7 +19,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import RSColorProfile from '../../common/RSColorProfile.js';
 import RSConstants from '../../common/RSConstants.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 // constants

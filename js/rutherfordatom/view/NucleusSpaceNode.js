@@ -11,7 +11,7 @@ import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 

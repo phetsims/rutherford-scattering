@@ -11,7 +11,7 @@ import inherit from '../../../phet-core/js/inherit.js';
 import Image from '../../../scenery/js/nodes/Image.js';
 import screenIcon from '../../images/PlumPuddingAtom-screen-icon_png.js';
 import RSColorProfile from '../common/RSColorProfile.js';
-import rutherfordScatteringStrings from '../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../rutherfordScattering.js';
 import PlumPuddingAtomModel from './model/PlumPuddingAtomModel.js';
 import PlumPuddingAtomScreenView from './view/PlumPuddingAtomScreenView.js';

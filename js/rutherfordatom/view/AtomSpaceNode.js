@@ -14,7 +14,7 @@ import required from '../../../../phet-core/js/required.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import AtomCollectionNode from './AtomCollectionNode.js';
 

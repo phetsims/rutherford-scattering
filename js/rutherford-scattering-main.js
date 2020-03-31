@@ -12,7 +12,7 @@ import FocusOverlay from '../../scenery/js/overlays/FocusOverlay.js';
 import RSColorProfile from './common/RSColorProfile.js';
 import MenuOptionsNode from './common/view/MenuOptionsNode.js';
 import PlumPuddingAtomScreen from './plumpuddingatom/PlumPuddingAtomScreen.js';
-import rutherfordScatteringStrings from './rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from './rutherfordScatteringStrings.js';
 import RutherfordAtomScreen from './rutherfordatom/RutherfordAtomScreen.js';
 
 const rutherfordScatteringTitleString = rutherfordScatteringStrings[ 'rutherford-scattering' ].title;

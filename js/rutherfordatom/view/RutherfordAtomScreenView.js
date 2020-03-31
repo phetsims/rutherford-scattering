@@ -24,7 +24,7 @@ import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendP
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import ScaleInfoNode from '../../common/view/ScaleInfoNode.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import AtomParticleLegendPanel from './AtomParticleLegendPanel.js';
 import AtomPropertiesPanel from './AtomPropertiesPanel.js';

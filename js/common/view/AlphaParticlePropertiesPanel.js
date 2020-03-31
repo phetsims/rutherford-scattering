@@ -21,7 +21,7 @@ import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColorProfile from '../RSColorProfile.js';
 import RSConstants from '../RSConstants.js';

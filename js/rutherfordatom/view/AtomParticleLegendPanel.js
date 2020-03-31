@@ -10,7 +10,7 @@
 import inherit from '../../../../phet-core/js/inherit.js';
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
-import rutherfordScatteringStrings from '../../rutherford-scattering-strings.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 const alphaParticleTraceString = rutherfordScatteringStrings.alphaParticleTrace;
