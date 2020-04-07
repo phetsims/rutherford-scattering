@@ -74,7 +74,7 @@ function AlphaParticlePropertiesPanel( content, options ) {
     fill: RSColorProfile.panelColorProperty,
     stroke: RSColorProfile.panelBorderColorProperty,
 
-    // a11y
+    // pdom
     tagName: 'div',
     labelTagName: 'h3',
     labelContent: alphaParticleSettingsString
@@ -213,7 +213,7 @@ function AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaPa
       removeFinger( 'particleEnergySlider' );
     },
 
-    // a11y
+    // pdom
     keyboardStep: 5,
     shiftKeyboardStep: 1,
     pageKeyboardStep: 10,
@@ -244,7 +244,7 @@ function AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaPa
     checkboxColor: RSColorProfile.panelLabelColorProperty,
     checkboxColorBackground: RSColorProfile.panelColorProperty,
 
-    // a11y
+    // pdom
     labelContent: tracesString,
     labelTagName: 'label',
     descriptionContent: traceCheckboxDescriptionString,

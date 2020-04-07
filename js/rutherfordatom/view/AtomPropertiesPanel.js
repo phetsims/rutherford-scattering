@@ -245,7 +245,7 @@ function AtomPropertiesPanelContent( model, options ) {
       majorTickLength: 15,
       tickLabelSpacing: 2,
 
-      // a11y
+      // pdom
       keyboardStep: 5,
       pageKeyboardStep: 10
     }
@@ -311,7 +311,7 @@ function AtomPropertiesPanelContent( model, options ) {
       startDrag: function() { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
       endDrag: function() { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, self.protonCountProperty ); },
 
-      // a11y
+      // pdom
       labelContent: protonsValuePatternString,
       labelTagName: 'label',
       descriptionContent: protonSliderDescriptionString,
@@ -374,7 +374,7 @@ function AtomPropertiesPanelContent( model, options ) {
       startDrag: function() { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
       endDrag: function() { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, self.neutronCountProperty ); },
 
-      // a11y
+      // pdom
       labelContent: neutronsValuePatternString,
       labelTagName: 'label',
       descriptionContent: neutronSliderDescriptionString,

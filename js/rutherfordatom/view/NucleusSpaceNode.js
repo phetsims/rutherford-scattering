@@ -32,7 +32,7 @@ function NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, co
     // {Bounds2}
     canvasBounds: required( config.canvasBounds ),
 
-    // a11y
+    // pdom
     tagName: 'div',
     labelTagName: 'h3',
     labelContent: observationWindowString,

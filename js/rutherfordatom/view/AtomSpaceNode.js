@@ -36,7 +36,7 @@ function AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, confi
     canvasBounds: required( config.canvasBounds ),
     particleStyle: 'particle',
 
-    // a11y
+    // pdom
     tagName: 'div',
     labelTagName: 'h3',
     labelContent: observationWindowString,

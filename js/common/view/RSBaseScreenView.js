@@ -57,7 +57,7 @@ function RSBaseScreenView( model, scaleString, createSpaceNode, options ) {
     includePlumPuddingLegend: false, // should the particle legend include an entry for the plum pudding cloud?
     additionalControlPanels: null, // {Panel[]|null} additional control panels, added below the common panels
 
-    // a11y
+    // pdom
     screenSummaryContent: new RSScreenSummaryNode()
   }, options );
 
@@ -174,7 +174,7 @@ function RSBaseScreenView( model, scaleString, createSpaceNode, options ) {
   } );
   this.addChild( resetAllButton );
 
-  // a11y
+  // pdom
   const viewingStreamingOptionsNode = new Node( {
     tagName: 'div',
     labelTagName: 'h3',
