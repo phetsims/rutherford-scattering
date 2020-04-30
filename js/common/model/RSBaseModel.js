@@ -65,7 +65,7 @@ function RSBaseModel( userInteractionProperty ) {
 
 rutherfordScattering.register( 'RSBaseModel', RSBaseModel );
 
-export default inherit( Object, RSBaseModel, {
+inherit( Object, RSBaseModel, {
 
   /**
    * Registers a listener to be called at each step of the model execution
@@ -227,3 +227,5 @@ export default inherit( Object, RSBaseModel, {
   }
 
 } );
+
+export default RSBaseModel;

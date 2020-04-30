@@ -47,7 +47,7 @@ function Gun( model ) {
 
 rutherfordScattering.register( 'Gun', Gun );
 
-export default inherit( Object, Gun, {
+inherit( Object, Gun, {
 
   /**
    * {number} dt - time step
@@ -106,3 +106,5 @@ export default inherit( Object, Gun, {
   }
 
 } );
+
+export default Gun;

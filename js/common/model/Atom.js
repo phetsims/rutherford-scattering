@@ -37,7 +37,7 @@ function Atom( position, boundingWidth, options ) {
 
 rutherfordScattering.register( 'Atom', Atom );
 
-export default inherit( Object, Atom, {
+inherit( Object, Atom, {
 
   /**
    * @param {AlphaParticle} alphaParticle
@@ -141,3 +141,5 @@ export default inherit( Object, Atom, {
   }
 
 } );
+
+export default Atom;

@@ -51,7 +51,7 @@ function AtomSpace( protonCountProperty, bounds, options ) {
 
 rutherfordScattering.register( 'AtomSpace', AtomSpace );
 
-export default inherit( Object, AtomSpace, {
+inherit( Object, AtomSpace, {
 
   /**
    * Add a particle to this space, and track it as being in the empty space
@@ -230,3 +230,5 @@ export default inherit( Object, AtomSpace, {
     }
   }
 } );
+
+export default AtomSpace;
