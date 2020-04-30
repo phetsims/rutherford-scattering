@@ -29,7 +29,7 @@ function AtomParticleLegendPanel( content, options ) {
 
 rutherfordScattering.register( 'AtomParticleLegendPanel', AtomParticleLegendPanel );
 
-export default inherit( ParticleLegendPanel, AtomParticleLegendPanel, {}, {
+inherit( ParticleLegendPanel, AtomParticleLegendPanel, {}, {
 
   /**
    * Create the content that is to be contained in this panel.
@@ -48,3 +48,5 @@ export default inherit( ParticleLegendPanel, AtomParticleLegendPanel, {}, {
     return ParticleLegendPanel.createPanelContent( content, options );
   }
 } );
+
+export default AtomParticleLegendPanel;

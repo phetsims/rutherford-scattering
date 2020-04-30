@@ -51,7 +51,7 @@ function RSControlPanel( panels, options ) {
 
 rutherfordScattering.register( 'RSControlPanel', RSControlPanel );
 
-export default inherit( Node, RSControlPanel, {
+inherit( Node, RSControlPanel, {
 
   /**
    * Dispose the control panel.  A new control panel is created every time the color scheme
@@ -62,3 +62,5 @@ export default inherit( Node, RSControlPanel, {
     Node.prototype.dispose.call( this );
   }
 } );
+
+export default RSControlPanel;

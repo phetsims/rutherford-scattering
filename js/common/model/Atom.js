@@ -140,4 +140,4 @@ export default inherit( Object, Atom, {
     this.removeAllParticles();
   }
 
-} ); // inherit
+} );

@@ -57,7 +57,7 @@ function RutherfordNucleus( protonCountProperty, neutronCountProperty ) {
 
 rutherfordScattering.register( 'RutherfordNucleus', RutherfordNucleus );
 
-export default inherit( ParticleAtom, RutherfordNucleus, {
+inherit( ParticleAtom, RutherfordNucleus, {
 
   /**
    * Make nucleus eligible for garbage collection.
@@ -66,3 +66,5 @@ export default inherit( ParticleAtom, RutherfordNucleus, {
     this.disposeRutherfordNucleus();
   }
 } );
+
+export default RutherfordNucleus;

@@ -32,7 +32,7 @@ function NuclearParticleLegendPanel( content, options ) {
 
 rutherfordScattering.register( 'NuclearParticleLegendPanel', NuclearParticleLegendPanel );
 
-export default inherit( ParticleLegendPanel, NuclearParticleLegendPanel, {}, {
+inherit( ParticleLegendPanel, NuclearParticleLegendPanel, {}, {
 
   /**
    * Create the panel content that is to be in this control panel.
@@ -61,3 +61,5 @@ export default inherit( ParticleLegendPanel, NuclearParticleLegendPanel, {}, {
     return ParticleLegendPanel.createPanelContent( content, options );
   }
 } );
+
+export default NuclearParticleLegendPanel;

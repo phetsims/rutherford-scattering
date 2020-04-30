@@ -44,7 +44,7 @@ function PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform
 
 rutherfordScattering.register( 'PlumPuddingSpaceNode', PlumPuddingSpaceNode );
 
-export default inherit( ParticleSpaceNode, PlumPuddingSpaceNode, {
+inherit( ParticleSpaceNode, PlumPuddingSpaceNode, {
 
   /**
    * Draws the background image
@@ -64,3 +64,5 @@ export default inherit( ParticleSpaceNode, PlumPuddingSpaceNode, {
   }
 
 } );
+
+export default PlumPuddingSpaceNode;

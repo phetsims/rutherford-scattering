@@ -105,4 +105,4 @@ export default inherit( Object, Gun, {
     this.onProperty.reset();
   }
 
-} ); // inherit
+} );

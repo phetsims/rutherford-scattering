@@ -58,7 +58,7 @@ function RutherfordAtomModel() {
 
 rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );
 
-export default inherit( RSBaseModel, RutherfordAtomModel, {
+inherit( RSBaseModel, RutherfordAtomModel, {
 
   reset: function() {
     this.protonCountProperty.reset();
@@ -71,3 +71,5 @@ export default inherit( RSBaseModel, RutherfordAtomModel, {
     RSBaseModel.prototype.reset.call( this );
   }
 } );
+
+export default RutherfordAtomModel;

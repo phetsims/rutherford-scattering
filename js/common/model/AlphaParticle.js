@@ -83,7 +83,7 @@ function AlphaParticle( options ) {
 
 rutherfordScattering.register( 'AlphaParticle', AlphaParticle );
 
-export default inherit( Object, AlphaParticle, {
+inherit( Object, AlphaParticle, {
 
   // @public
   dispose: function() {
@@ -132,5 +132,6 @@ export default inherit( Object, AlphaParticle, {
     const transformedShape = atom.boundingRect.transformed( Matrix3.rotationAroundPoint( rotationAngle, atom.position ) );
     this.preparedBoundingBox = transformedShape;
   }
+} );
 
-} );  // inherit
+export default AlphaParticle;

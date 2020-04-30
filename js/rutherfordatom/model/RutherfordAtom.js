@@ -35,7 +35,7 @@ function RutherfordAtom( particleRemovedEmitter, protonCountProperty, position, 
 
 rutherfordScattering.register( 'RutherfordAtom', RutherfordAtom );
 
-export default inherit( Atom, RutherfordAtom, {
+inherit( Atom, RutherfordAtom, {
 
   /**
    * Remove a particle.  Most of the time, a particle needs to be removed from this atom but kept in
@@ -271,4 +271,6 @@ export default inherit( Atom, RutherfordAtom, {
     return new Vector2( xNew, yNew ).plus( rotatePoint );
   }
 
-} ); // inherit
+} );
+
+export default RutherfordAtom;

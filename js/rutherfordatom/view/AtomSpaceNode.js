@@ -62,7 +62,7 @@ function AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, confi
 
 rutherfordScattering.register( 'AtomSpaceNode', AtomSpaceNode );
 
-export default inherit( ParticleSpaceNode, AtomSpaceNode, {
+inherit( ParticleSpaceNode, AtomSpaceNode, {
 
   /**
    * @param {CanvasRenderingContext2D} context
@@ -80,4 +80,6 @@ export default inherit( ParticleSpaceNode, AtomSpaceNode, {
     const y = this.centerY - this.atomsNode.image.height / 2;
     context.drawImage( this.atomsNode.image, x, y, this.atomsNode.image.width, this.atomsNode.image.height );
   }
-} ); // inherit
+} );
+
+export default AtomSpaceNode;

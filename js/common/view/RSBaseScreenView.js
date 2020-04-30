@@ -188,7 +188,7 @@ function RSBaseScreenView( model, scaleString, createSpaceNode, options ) {
 
 rutherfordScattering.register( 'RSBaseScreenView', RSBaseScreenView );
 
-export default inherit( ScreenView, RSBaseScreenView, {
+inherit( ScreenView, RSBaseScreenView, {
 
   /**
    * Create a control panel - used by subtypes to generate a control panel from a set
@@ -205,3 +205,5 @@ export default inherit( ScreenView, RSBaseScreenView, {
     } );
   }
 } );
+
+export default RSBaseScreenView;

@@ -96,7 +96,7 @@ function ParticleSpaceNode( atomSpace, showAlphaTraceProperty, modelViewTransfor
 
 rutherfordScattering.register( 'ParticleSpaceNode', ParticleSpaceNode );
 
-export default inherit( CanvasNode, ParticleSpaceNode, {
+inherit( CanvasNode, ParticleSpaceNode, {
 
   /**
    * A no/op function to be implemented by derived objects
@@ -215,4 +215,6 @@ export default inherit( CanvasNode, ParticleSpaceNode, {
       }
     }
   }
-} ); // inherit
+} );
+
+export default ParticleSpaceNode;

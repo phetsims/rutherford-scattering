@@ -226,4 +226,4 @@ export default inherit( Object, RSBaseModel, {
     this.runningProperty.reset();
   }
 
-} ); // inherit
+} );
