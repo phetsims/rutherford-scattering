@@ -281,5 +281,5 @@ var createSpaceNode = function( model, showAlphaTraceProperty, modelViewTransfor
     children: [ nucleusSpaceNode, atomSpaceNode ]
   } );
 };
-
-export default inherit( RSBaseScreenView, RutherfordAtomScreenView, {} );
+inherit( RSBaseScreenView, RutherfordAtomScreenView );
+export default RutherfordAtomScreenView;

@@ -98,5 +98,5 @@ function AtomCollectionNode( atomSpace, modelViewTransform, options ) {
 }
 
 rutherfordScattering.register( 'AtomCollectionNode', AtomCollectionNode );
-
-export default inherit( Node, AtomCollectionNode ); // inherit
+inherit( Node, AtomCollectionNode );
+export default AtomCollectionNode;

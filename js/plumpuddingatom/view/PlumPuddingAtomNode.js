@@ -20,5 +20,5 @@ function PlumPuddingAtomNode( options ) {
 }
 
 rutherfordScattering.register( 'PlumPuddingAtomNode', PlumPuddingAtomNode );
-
-export default inherit( Image, PlumPuddingAtomNode, {} ); // inherit
+inherit( Image, PlumPuddingAtomNode );
+export default PlumPuddingAtomNode;
