@@ -7,7 +7,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import FocusOverlay from '../../scenery/js/overlays/FocusOverlay.js';
 import RSColorProfile from './common/RSColorProfile.js';
 import MenuOptionsNode from './common/view/MenuOptionsNode.js';
@@ -36,7 +36,7 @@ const simOptions = {
 FocusOverlay.setInnerGroupHighlightColor( RSColorProfile.innerGroupHighlightColorProperty );
 FocusOverlay.setOuterGroupHighlightColor( RSColorProfile.outerGroupHighlightColorProperty );
 
-SimLauncher.launch( function() {
+simLauncher.launch( function() {
   const screens = [
     new RutherfordAtomScreen(),
     new PlumPuddingAtomScreen()
