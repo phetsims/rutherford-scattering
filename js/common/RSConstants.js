@@ -79,7 +79,6 @@ const RSConstants = {
   //----------------------------------------------------------------------------
   ATOM_BEAM_FILL: 'rgba(143,143,143,0.4)',
   NUCLEUS_BEAM_FILL: 'rgba(143,143,143,1)'
-
 };
 
 rutherfordScattering.register( 'RSConstants', RSConstants );
