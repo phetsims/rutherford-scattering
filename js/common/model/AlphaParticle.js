@@ -67,7 +67,7 @@ function AlphaParticle( options ) {
   // the particle enters the bounding circle of the atom
   this.preparedBoundingBox = null;
 
-  // @private - save new particle location
+  // @private - save new particle position
   const self = this;
   const positionListener = function( position ) {
     self.positions.push( new Vector2( position.x, position.y ) );

@@ -206,7 +206,7 @@ function ParticleNode( radius, color, options ) {
 inherit( Circle, ParticleNode );
 
 /**
- * Draw a particle on a canvas using the provided context.  The particle is at location (x,y) in the
+ * Draw a particle on a canvas using the provided context.  The particle is at position (x,y) in the
  * coordinate frames of the canvas.
  *
  * @param  {number} x
