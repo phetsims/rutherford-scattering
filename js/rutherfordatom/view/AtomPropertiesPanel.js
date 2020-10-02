@@ -19,8 +19,8 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import RSColorProfile from '../../common/RSColorProfile.js';
 import RSConstants from '../../common/RSConstants.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 
 // constants
 const atomString = rutherfordScatteringStrings.atom;
@@ -51,84 +51,75 @@ const interactionPropertyGroup = {
   neutronSliderInteractionProperty: new Property( false )
 };
 
-/**
- * Constructor for a Atom Properties control panel.
- *
- * @param {AtomPropertiesPanelContent} content - Content contained by the panel
- * @param {Object} [options]
- * @constructor
- */
-function AtomPropertiesPanel( content, options ) {
+class AtomPropertiesPanel extends Panel {
+  /**
+   * @param {AtomPropertiesPanelContent} content - Content contained by the panel
+   * @param {Object} [options]
+   */
+  constructor( content, options ) {
 
-  // Add the title of the panel content
-  const atomPropertiesText = new Text( atomString, {
-    font: RSConstants.PANEL_TITLE_FONT,
-    fontWeight: 'bold',
-    fill: RSColorProfile.panelTitleColorProperty,
-    maxWidth: 225
-  } );
+    // Add the title of the panel content
+    const atomPropertiesText = new Text( atomString, {
+      font: RSConstants.PANEL_TITLE_FONT,
+      fontWeight: 'bold',
+      fill: RSColorProfile.panelTitleColorProperty,
+      maxWidth: 225
+    } );
 
-  const panelBox = new VBox( {
-    children: [ atomPropertiesText, content ],
-    align: 'left',
-    spacing: RSConstants.PANEL_CHILD_SPACING
-  } );
+    const panelBox = new VBox( {
+      children: [ atomPropertiesText, content ],
+      align: 'left',
+      spacing: RSConstants.PANEL_CHILD_SPACING
+    } );
 
-  options = merge( {
-    xMargin: RSConstants.PANEL_X_MARGIN,
-    yMargin: 10,
-    minWidth: RSConstants.PANEL_MIN_WIDTH,
-    maxWidth: RSConstants.PANEL_MAX_WIDTH,
-    align: 'center',
-    resize: false,
-    fill: RSColorProfile.panelColorProperty,
-    stroke: RSColorProfile.panelBorderColorProperty,
+    options = merge( {
+      xMargin: RSConstants.PANEL_X_MARGIN,
+      yMargin: 10,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      maxWidth: RSConstants.PANEL_MAX_WIDTH,
+      align: 'center',
+      resize: false,
+      fill: RSColorProfile.panelColorProperty,
+      stroke: RSColorProfile.panelBorderColorProperty,
 
-    tagName: 'div',
-    labelTagName: 'h3',
-    labelContent: atomSettingsString
-  }, options );
+      tagName: 'div',
+      labelTagName: 'h3',
+      labelContent: atomSettingsString
+    }, options );
 
-  Panel.call( this, panelBox, options );
+    super( panelBox, options );
 
-  // ensure that panel is eligible for garbage collection, a panel is created and destroyed every time
-  // scene or color scheme changes so it si important that everything is disposed
-  // @private
-  this.disposeAtomPropertiesPanel = function() {
-    content.dispose();
-  };
-}
+    // ensure that panel is eligible for garbage collection, a panel is created and destroyed every time
+    // scene or color scheme changes so it si important that everything is disposed
+    // @private
+    this.disposeAtomPropertiesPanel = function() {
+      content.dispose();
+    };
+  }
 
-rutherfordScattering.register( 'AtomPropertiesPanel', AtomPropertiesPanel );
-
-inherit( Panel, AtomPropertiesPanel, {
+  /**
+   * create content for the panel
+   *
+   * @param model
+   * @returns {Node}
+   * @public
+   */
+  static createPanelContent( model, options ) {
+    return new AtomPropertiesPanelContent( model, options );
+  }
 
   /**
    * Dispose this panel - this panel can be created and destroyed frequently so
    * it is important to dispose of all panel elements.
    *
    * @public
+   * @override
    */
-  dispose: function() {
-    Panel.prototype.dispose.call( this );
+  dispose() {
+    super.dispose();
     this.disposeAtomPropertiesPanel();
   }
-}, {
-
-  /**
-   * create content for the panel
-   *
-   * @param  {Property.<boolean>} protonInteractionProperty
-   * @param  {Property.<boolean>} neutronInteractionProperty
-   * @param  {Property.<number>} protonCountProperty
-   * @param  {Property.<number>} neutronCountProperty
-   * @param  {Object} options
-   * @public
-   */
-  createPanelContent: function( model, options ) {
-    return new AtomPropertiesPanelContent( model, options );
-  }
-} );
+}
 
 /**
  * Create the content for the AtomPropertiesPanel. This does not include the panel title.
@@ -464,4 +455,5 @@ inherit( VBox, AtomPropertiesPanelContent, {
 
 rutherfordScattering.register( 'AtomPropertiesPanelContent', AtomPropertiesPanelContent );
 
+rutherfordScattering.register( 'AtomPropertiesPanel', AtomPropertiesPanel );
 export default AtomPropertiesPanel;
