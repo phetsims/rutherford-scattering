@@ -7,7 +7,6 @@
  * @author Jesse Greenberg
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
@@ -15,8 +14,8 @@ import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import RSColorProfile from '../RSColorProfile.js';
 import RSConstants from '../RSConstants.js';
 
@@ -25,40 +24,63 @@ const legendString = rutherfordScatteringStrings.legend;
 // constants
 const LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;
 
-/**
- * @param {VBox} children - content to be contained in the panel
- * @param {Object} [options]
- * @constructor
- */
-function ParticleLegendPanel( content, options ) {
+class ParticleLegendPanel extends Panel {
 
-  // the title for the panel
-  const legendText = new Text( legendString, {
-    font: RSConstants.PANEL_TITLE_FONT,
-    fontWeight: 'bold',
-    fill: RSColorProfile.panelTitleColorProperty,
-    maxWidth: 225
-  } );
+  /**
+   * @param {Node} content - content to be contained in the panel
+   * @param {Object} [options]
+   */
+  constructor( content, options ) {
 
-  // title with content, aligned
-  const contentVBox = new VBox( {
-    children: [ legendText, content ],
-    align: 'left',
-    spacing: RSConstants.PANEL_CHILD_SPACING
-  } );
+    // the title for the panel
+    const legendText = new Text( legendString, {
+      font: RSConstants.PANEL_TITLE_FONT,
+      fontWeight: 'bold',
+      fill: RSColorProfile.panelTitleColorProperty,
+      maxWidth: 225
+    } );
 
-  options = merge( {
-    xMargin: 15,
-    yMargin: 8,
-    minWidth: RSConstants.PANEL_MIN_WIDTH,
-    maxWidth: RSConstants.PANEL_MAX_WIDTH,
-    align: 'left',
-    fill: RSColorProfile.panelColorProperty,
-    stroke: RSColorProfile.panelBorderColorProperty,
-    itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
-  }, options );
+    // title with content, aligned
+    const contentVBox = new VBox( {
+      children: [ legendText, content ],
+      align: 'left',
+      spacing: RSConstants.PANEL_CHILD_SPACING
+    } );
 
-  Panel.call( this, contentVBox, options );
+    options = merge( {
+      xMargin: 15,
+      yMargin: 8,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      maxWidth: RSConstants.PANEL_MAX_WIDTH,
+      align: 'left',
+      fill: RSColorProfile.panelColorProperty,
+      stroke: RSColorProfile.panelBorderColorProperty,
+      itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
+    }, options );
+
+    super( contentVBox, options );
+  }
+
+  /**
+   * Create a box containing one row for the legend panel
+   *
+   * @param  {Node} particleNode
+   * @param  {string} titleString
+   * @returns {HBox}
+   * @protected
+   */
+  static createParticleBox( particleNode, titleString ) {
+    return createParticleRow( particleNode, titleString );
+  }
+
+  /**
+   * Create content which will be contained in the panel.
+   * @returns {Node}
+   * @public
+   */
+  static createPanelContent( content, options ) {
+    return new ParticleLegendPanelContent( content, options );
+  }
 }
 
 /**
@@ -88,72 +110,48 @@ function createParticleRow( particleNode, titleString ) {
   } );
 }
 
-rutherfordScattering.register( 'ParticleLegendPanel', ParticleLegendPanel );
-
-inherit( Panel, ParticleLegendPanel, {}, {
-
-  /**
-   * Create a box containing one row for the legend panel
-   *
-   * @param  {Node} particleNode
-   * @param  {string} titleString
-   * @returns {HBox}
-   * @protected
-   */
-  createParticleBox: function( particleNode, titleString ) {
-    return createParticleRow( particleNode, titleString );
-  },
-
-  /**
-   * Create content which will be contained in the panel.
-   *
-   * @returns {type}  description
-   * @public
-   */
-  createPanelContent: function( content, options ) {
-    return new ParticleLegendPanelContent( content, options );
-  },
-
-  // for aligning with other panels in the various screens, legend content should be left aligned
-  LEGEND_CONTENT_ALIGN: 'left'
-} );
+// @public for aligning with other panels in the various screens, legend content should be left aligned
+ParticleLegendPanel.LEGEND_CONTENT_ALIGN = 'left';
 
 /**
- * Creates the content for the panel, does not include the title.
- * @param {Array.<Node>} content
- * @param {Object} [options]
+ * Content for the panel, does not include the title.
  */
-function ParticleLegendPanelContent( content, options ) {
+class ParticleLegendPanelContent extends VBox {
 
-  options = merge( {
-    xMargin: 5,
-    yMargin: 8,
-    minWidth: RSConstants.PANEL_MIN_WIDTH,
-    maxWidth: RSConstants.PANEL_MAX_WIDTH,
-    align: 'left',
-    fill: RSColorProfile.panelColorProperty,
-    stroke: RSColorProfile.panelBorderColorProperty,
-    itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
-  }, options );
+  /**
+   *
+   * @param {Array.<Node>} content
+   * @param {Object} [options]
+   */
+  constructor( content, options ) {
 
-  // i18n - make align boxes for all items so that they are the same height, important when strings change size
-  const alignGroup = new AlignGroup( { matchHorizontal: false } );
-  const children = [];
-  content.forEach( function( item ) {
-    children.push( alignGroup.createBox( item ) );
-  } );
+    options = merge( {
+      xMargin: 5,
+      yMargin: 8,
+      minWidth: RSConstants.PANEL_MIN_WIDTH,
+      maxWidth: RSConstants.PANEL_MAX_WIDTH,
+      align: 'left',
+      fill: RSColorProfile.panelColorProperty,
+      stroke: RSColorProfile.panelBorderColorProperty,
+      itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
+    }, options );
 
-  VBox.call( this, {
-    spacing: options.itemVerticalSpacing,
-    top: 0,
-    right: 0,
-    align: 'left',
-    children: children
-  } );
+    // i18n - make align boxes for all items so that they are the same height, important when strings change size
+    const alignGroup = new AlignGroup( { matchHorizontal: false } );
+    const children = [];
+    content.forEach( function( item ) {
+      children.push( alignGroup.createBox( item ) );
+    } );
+
+    super( {
+      spacing: options.itemVerticalSpacing,
+      top: 0,
+      right: 0,
+      align: 'left',
+      children: children
+    } );
+  }
 }
 
-rutherfordScattering.register( 'ParticleLegendPanelContent', ParticleLegendPanelContent );
-
-inherit( VBox, ParticleLegendPanelContent );
-
+rutherfordScattering.register( 'ParticleLegendPanel', ParticleLegendPanel );
 export default ParticleLegendPanel;

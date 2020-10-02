@@ -7,37 +7,33 @@
  * @author Jesse Greenberg
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 
 const alphaParticleTraceString = rutherfordScatteringStrings.alphaParticleTrace;
 const electronEnergyLevelString = rutherfordScatteringStrings.electronEnergyLevel;
 const nucleusString = rutherfordScatteringStrings.nucleus;
 
-/**
- * Constructor.
- * @param {VBox} content
- * @param {Object} [options]
- * @constructor
- */
-function AtomParticleLegendPanel( content, options ) {
-  ParticleLegendPanel.call( this, content, options );
-}
+class AtomParticleLegendPanel extends ParticleLegendPanel {
 
-rutherfordScattering.register( 'AtomParticleLegendPanel', AtomParticleLegendPanel );
-
-inherit( ParticleLegendPanel, AtomParticleLegendPanel, {}, {
+  /**
+   * @param {Node} content
+   * @param {Object} [options]
+   */
+  constructor( content, options ) {
+    super( content, options );
+  }
 
   /**
    * Create the content that is to be contained in this panel.
    *
    * @param  {Object} [options]
-   * @returns {VBox}
+   * @returns {Node}
+   * @public
    */
-  createPanelContent: function( options ) {
+  static createPanelContent( options ) {
 
     // add the legend particle entries
     const content = [];
@@ -47,6 +43,7 @@ inherit( ParticleLegendPanel, AtomParticleLegendPanel, {}, {
 
     return ParticleLegendPanel.createPanelContent( content, options );
   }
-} );
+}
 
+rutherfordScattering.register( 'AtomParticleLegendPanel', AtomParticleLegendPanel );
 export default AtomParticleLegendPanel;

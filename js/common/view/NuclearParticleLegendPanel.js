@@ -7,10 +7,9 @@
  * @author Jesse Greenberg
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import ParticleLegendPanel from './ParticleLegendPanel.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
 
@@ -20,27 +19,23 @@ const neutronString = rutherfordScatteringStrings.neutron;
 const positiveChargeString = rutherfordScatteringStrings.positiveCharge;
 const protonString = rutherfordScatteringStrings.proton;
 
-/**
- *
- * @param {VBox} content
- * @param {Object} [options]
- * @constructor
- */
-function NuclearParticleLegendPanel( content, options ) {
-  ParticleLegendPanel.call( this, content, options );
-}
+class NuclearParticleLegendPanel extends ParticleLegendPanel {
 
-rutherfordScattering.register( 'NuclearParticleLegendPanel', NuclearParticleLegendPanel );
-
-inherit( ParticleLegendPanel, NuclearParticleLegendPanel, {}, {
+  /**
+   * @param {Node} content
+   * @param {Object} [options]
+   */
+  constructor( content, options ) {
+    super( content, options );
+  }
 
   /**
    * Create the panel content that is to be in this control panel.
-   *
    * @param  {Object} options
-   * @returns {VBox}
+   * @returns {Node}
+   * @public
    */
-  createPanelContent: function( options ) {
+  static createPanelContent( options ) {
 
     options = merge( {
       includeElectron: true // should the panel include an entry for the electron?
@@ -60,6 +55,7 @@ inherit( ParticleLegendPanel, NuclearParticleLegendPanel, {}, {
 
     return ParticleLegendPanel.createPanelContent( content, options );
   }
-} );
+}
 
+rutherfordScattering.register( 'NuclearParticleLegendPanel', NuclearParticleLegendPanel );
 export default NuclearParticleLegendPanel;
