@@ -6,19 +6,18 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import plumPuddingImage from '../../../images/plumPudding_png.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
-/**
- * @param {Object} [options]
- * @constructor
- */
-function PlumPuddingAtomNode( options ) {
-  Image.call( this, plumPuddingImage, options );
+class PlumPuddingAtomNode extends Image {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+    super( plumPuddingImage, options );
+  }
 }
 
 rutherfordScattering.register( 'PlumPuddingAtomNode', PlumPuddingAtomNode );
-inherit( Image, PlumPuddingAtomNode );
 export default PlumPuddingAtomNode;
