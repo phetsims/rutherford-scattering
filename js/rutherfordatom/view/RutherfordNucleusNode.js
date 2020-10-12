@@ -280,8 +280,8 @@ inherit( CanvasNode, IconCanvasNode, {
  * @param  {string} render - 'canvasArc' | 'canvasImage', determines rendering method, see above
  */
 var paintNucleusIcon = function( nucleus, nucleusBounds, context, render ) {
-  const protons = nucleus.protons.getArray().slice( 0 );
-  const neutrons = nucleus.neutrons.getArray().slice( 0 );
+  const protons = nucleus.protons.slice();
+  const neutrons = nucleus.neutrons.slice();
   const nucleons = protons.concat( neutrons );
 
   // get the number of layers in the particle
