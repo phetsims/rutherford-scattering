@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ColorProfile from '../../../../scenery-phet/js/ColorProfile.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -24,8 +23,8 @@ import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendP
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import ScaleInfoNode from '../../common/view/ScaleInfoNode.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import AtomParticleLegendPanel from './AtomParticleLegendPanel.js';
 import AtomPropertiesPanel from './AtomPropertiesPanel.js';
 import AtomSpaceNode from './AtomSpaceNode.js';
@@ -40,178 +39,177 @@ const switchScaleDescriptionString = rutherfordScatteringStrings.a11y.switchScal
 const nuclearScaleViewString = rutherfordScatteringStrings.a11y.nuclearScaleView;
 const atomicScaleViewString = rutherfordScatteringStrings.a11y.atomicScaleView;
 
-
-/**
- * @param {RutherfordAtomModel} model
- * @constructor
- */
-function RutherfordAtomScreenView( model ) {
-
-  const nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, '1.5 x 10<sup>-13</sup>' );
-  const atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>' );
-
-  RSBaseScreenView.call( this, model, nucleusScaleString, createSpaceNode, {
-    includeElectronLegend: false
-  } );
-
-  // scale info for the 'atom' scene, only visible when atom scene is selected
-  const atomicScaleInfoNode = new ScaleInfoNode( atomicScaleString, this.spaceNode.getWidth(), {
-    center: this.scaleInfoNode.center
-  } );
-  this.addChild( atomicScaleInfoNode );
-
-  // create the panels of the control panel on the right
-  const createPanels = function() {
-
-    let legendContent;
-    const atomSceneVisible = model.sceneProperty.value === 'atom';
-
-    // create content for the control panels
-    const atomLegendContent = AtomParticleLegendPanel.createPanelContent( { resize: false } );
-    const nuclearLegendContent = NuclearParticleLegendPanel.createPanelContent( {
-      resize: false,
-      includeElectron: false,
-      includePlumPudding: false
-    } );
-    const particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.energyInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
-    const atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
-
-    // make sure that content for all panels are aligned and the legend content is aligned to the left
-    // this content does not include title
-    const contentAlignGroup = new AlignGroup( { matchVertical: false } );
-    const atomContentBox = contentAlignGroup.createBox( atomLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
-    const nuclearContentBox = contentAlignGroup.createBox( nuclearLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
-    const particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
-    const atromPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
-
-    // create content for the legend panels
-    if ( atomSceneVisible ) {
-      legendContent = atomContentBox;
-    }
-    else {
-      legendContent = nuclearContentBox;
-    }
-
-    // create the panels
-    const panelOptions = { resize: false };
-    const legendPanel = atomSceneVisible ? new AtomParticleLegendPanel( legendContent, panelOptions ) : new NuclearParticleLegendPanel( legendContent, panelOptions );
-    const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
-    const atomPropertiesPanel = new AtomPropertiesPanel( atromPropertiesContentBox, panelOptions );
-
-    return [
-      legendPanel,
-      particlePropertiesPanel,
-      atomPropertiesPanel
-    ];
-  };
-
-  // when various panels are added/removed due to changing color profile or scene, reset the accessible order
-  var self = this;
-  const restoreAccessibleOrder = function() {
-    self.pdomPlayAreaNode.accessibleOrder = [ self.gunNode ];
-    self.pdomControlAreaNode.accessibleOrder = _.uniq( self.pdomControlAreaNode.accessibleOrder.concat( [
-      self.controlPanel,
-      self.sceneRadioButtonGroup
-    ].filter( _.identity ) ) );
-  };
-
-  // {Node} control panel is created below by sceneProperty listener, to correspond to scene
-  let controlPanel = null;
-
-  // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
-  // should be updated, and the control/legend panels need to change
-  // no need to unlink, screen view exists for life of sim
-  model.sceneProperty.link( function( scene ) {
-    const beam = self.beamNode;
-    const atomSceneVisible = scene === 'atom';
-
-    // update visibility of scene specific scale info
-    self.scaleInfoNode.visible = !atomSceneVisible;
-    atomicScaleInfoNode.visible = atomSceneVisible;
-
-    // recenter the gun beam and set new fill
-    beam.centerX = self.gunNode.centerX;
-    beam.fill = atomSceneVisible ? RSColorProfile.atomBeamColorProperty : RSColorProfile.nucleusBeamColorProperty;
-
-    // dispose and remove the old control panel
-    if ( controlPanel ) {
-      self.removeChild( controlPanel );
-      controlPanel.dispose();
-    }
-
-    // create the new control panel
-    const panels = createPanels();
-    controlPanel = self.createControlPanel( panels );
-    self.addChild( controlPanel );
-
-    restoreAccessibleOrder();
-  } );
-
-  // create radio buttons for the scene - new buttons must be created
-  // every time the color profile changes
-  const nucleusIcon = RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 );
-  const buttonOptions = { scale: 0.18 };
+class RutherfordAtomScreenView extends RSBaseScreenView {
 
   /**
-   * Create the RadioButonGroup that will act as the scene selection control in this sim.
-   *
-   * @param {Image} atomIconImage - the icon for the atomic scene, changes with color profile
-   * @returns {RadioButtonGroup} - returns a RadioButtonGroup that must be disposed when profile changes
+   * @param {RutherfordAtomModel} model
    */
-  const createRadioButtons = function( atomIconImage ) {
-    return new RadioButtonGroup( model.sceneProperty, [
-      { value: 'atom', node: new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
-      { value: 'nucleus', node: nucleusIcon, labelContent: nuclearScaleViewString }
-    ], {
-      orientation: 'vertical',
-      spacing: 15,
-      left: self.targetMaterialNode.left,
-      top: self.spaceNode.top,
-      baseColor: RSColorProfile.panelColorProperty.value, // TODO: update this when requested
-      deselectedStroke: RSColorProfile.panelBorderColorProperty.value, // TODO: update this when requested
-      selectedStroke: RSColorProfile.radioButtonBorderColorProperty, // TODO: update this when requested
-      buttonContentYMargin: 8,
-      selectedLineWidth: 2,
-      deselectedLineWidth: 1.5,
-      maxWidth: self.targetMaterialNode.width,
+  constructor( model ) {
 
-      tagName: 'div',
-      descriptionContent: switchScaleDescriptionString,
-      labelTagName: 'h3',
-      labelContent: switchScaleString,
-      appendDescription: true
+    const nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, '1.5 x 10<sup>-13</sup>' );
+    const atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>' );
+
+    super( model, nucleusScaleString, createSpaceNode, {
+      includeElectronLegend: false
     } );
-  };
 
-  // @private
-  self.sceneRadioButtonGroup = createRadioButtons( atomImage );
-  this.pdomControlAreaNode.addChild( self.sceneRadioButtonGroup );
+    // scale info for the 'atom' scene, only visible when atom scene is selected
+    const atomicScaleInfoNode = new ScaleInfoNode( atomicScaleString, this.spaceNode.getWidth(), {
+      center: this.scaleInfoNode.center
+    } );
+    this.addChild( atomicScaleInfoNode );
 
-  // if the bacgrkound, panel or stroke colors change, draw a new button group
-  // no need to unlink, screen view exists for life of sim
-  RSColorProfile.profileNameProperty.link( function( profileName ) {
+    // create the panels of the control panel on the right
+    const createPanels = function() {
 
-    // remove and dispose of the old button group
-    self.pdomControlAreaNode.removeChild( self.sceneRadioButtonGroup );
-    self.sceneRadioButtonGroup.dispose();
+      let legendContent;
+      const atomSceneVisible = model.sceneProperty.value === 'atom';
 
-    // get the correct image for the 'atom' scene icon
-    const iconImage = ( profileName === ColorProfile.PROJECTOR_COLOR_PROFILE_NAME ) ? atomProjectorImage : atomImage;
+      // create content for the control panels
+      const atomLegendContent = AtomParticleLegendPanel.createPanelContent( { resize: false } );
+      const nuclearLegendContent = NuclearParticleLegendPanel.createPanelContent( {
+        resize: false,
+        includeElectron: false,
+        includePlumPudding: false
+      } );
+      const particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.energyInteractionProperty, model.alphaParticleEnergyProperty, self.showAlphaTraceProperty, { resize: false } );
+      const atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
 
-    // create the new radio button group
-    const newButtonGroup = createRadioButtons( iconImage );
-    self.sceneRadioButtonGroup = newButtonGroup;
-    self.pdomControlAreaNode.addChild( newButtonGroup );
+      // make sure that content for all panels are aligned and the legend content is aligned to the left
+      // this content does not include title
+      const contentAlignGroup = new AlignGroup( { matchVertical: false } );
+      const atomContentBox = contentAlignGroup.createBox( atomLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
+      const nuclearContentBox = contentAlignGroup.createBox( nuclearLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
+      const particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
+      const atromPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
 
-    // add laser, all control panels, and scene buttons to accessibleOrder, must be set after
-    // creating new radio buttons
+      // create content for the legend panels
+      if ( atomSceneVisible ) {
+        legendContent = atomContentBox;
+      }
+      else {
+        legendContent = nuclearContentBox;
+      }
+
+      // create the panels
+      const panelOptions = { resize: false };
+      const legendPanel = atomSceneVisible ? new AtomParticleLegendPanel( legendContent, panelOptions ) : new NuclearParticleLegendPanel( legendContent, panelOptions );
+      const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
+      const atomPropertiesPanel = new AtomPropertiesPanel( atromPropertiesContentBox, panelOptions );
+
+      return [
+        legendPanel,
+        particlePropertiesPanel,
+        atomPropertiesPanel
+      ];
+    };
+
+    // when various panels are added/removed due to changing color profile or scene, reset the accessible order
+    var self = this;
+    const restoreAccessibleOrder = function() {
+      self.pdomPlayAreaNode.accessibleOrder = [ self.gunNode ];
+      self.pdomControlAreaNode.accessibleOrder = _.uniq( self.pdomControlAreaNode.accessibleOrder.concat( [
+        self.controlPanel,
+        self.sceneRadioButtonGroup
+      ].filter( _.identity ) ) );
+    };
+
+    // {Node} control panel is created below by sceneProperty listener, to correspond to scene
+    let controlPanel = null;
+
+    // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
+    // should be updated, and the control/legend panels need to change
+    // no need to unlink, screen view exists for life of sim
+    model.sceneProperty.link( function( scene ) {
+      const beam = self.beamNode;
+      const atomSceneVisible = scene === 'atom';
+
+      // update visibility of scene specific scale info
+      self.scaleInfoNode.visible = !atomSceneVisible;
+      atomicScaleInfoNode.visible = atomSceneVisible;
+
+      // recenter the gun beam and set new fill
+      beam.centerX = self.gunNode.centerX;
+      beam.fill = atomSceneVisible ? RSColorProfile.atomBeamColorProperty : RSColorProfile.nucleusBeamColorProperty;
+
+      // dispose and remove the old control panel
+      if ( controlPanel ) {
+        self.removeChild( controlPanel );
+        controlPanel.dispose();
+      }
+
+      // create the new control panel
+      const panels = createPanels();
+      controlPanel = self.createControlPanel( panels );
+      self.addChild( controlPanel );
+
+      restoreAccessibleOrder();
+    } );
+
+    // create radio buttons for the scene - new buttons must be created
+    // every time the color profile changes
+    const nucleusIcon = RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 );
+    const buttonOptions = { scale: 0.18 };
+
+    /**
+     * Create the RadioButonGroup that will act as the scene selection control in this sim.
+     *
+     * @param {Image} atomIconImage - the icon for the atomic scene, changes with color profile
+     * @returns {RadioButtonGroup} - returns a RadioButtonGroup that must be disposed when profile changes
+     */
+    const createRadioButtons = function( atomIconImage ) {
+      return new RadioButtonGroup( model.sceneProperty, [
+        { value: 'atom', node: new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
+        { value: 'nucleus', node: nucleusIcon, labelContent: nuclearScaleViewString }
+      ], {
+        orientation: 'vertical',
+        spacing: 15,
+        left: self.targetMaterialNode.left,
+        top: self.spaceNode.top,
+        baseColor: RSColorProfile.panelColorProperty.value, // TODO: update this when requested
+        deselectedStroke: RSColorProfile.panelBorderColorProperty.value, // TODO: update this when requested
+        selectedStroke: RSColorProfile.radioButtonBorderColorProperty, // TODO: update this when requested
+        buttonContentYMargin: 8,
+        selectedLineWidth: 2,
+        deselectedLineWidth: 1.5,
+        maxWidth: self.targetMaterialNode.width,
+
+        tagName: 'div',
+        descriptionContent: switchScaleDescriptionString,
+        labelTagName: 'h3',
+        labelContent: switchScaleString,
+        appendDescription: true
+      } );
+    };
+
+    // @private
+    self.sceneRadioButtonGroup = createRadioButtons( atomImage );
+    this.pdomControlAreaNode.addChild( self.sceneRadioButtonGroup );
+
+    // if the bacgrkound, panel or stroke colors change, draw a new button group
+    // no need to unlink, screen view exists for life of sim
+    RSColorProfile.profileNameProperty.link( function( profileName ) {
+
+      // remove and dispose of the old button group
+      self.pdomControlAreaNode.removeChild( self.sceneRadioButtonGroup );
+      self.sceneRadioButtonGroup.dispose();
+
+      // get the correct image for the 'atom' scene icon
+      const iconImage = ( profileName === ColorProfile.PROJECTOR_COLOR_PROFILE_NAME ) ? atomProjectorImage : atomImage;
+
+      // create the new radio button group
+      const newButtonGroup = createRadioButtons( iconImage );
+      self.sceneRadioButtonGroup = newButtonGroup;
+      self.pdomControlAreaNode.addChild( newButtonGroup );
+
+      // add laser, all control panels, and scene buttons to accessibleOrder, must be set after
+      // creating new radio buttons
+      restoreAccessibleOrder();
+    } );
+
     restoreAccessibleOrder();
-  } );
-
-  restoreAccessibleOrder();
+  }
 }
-
-rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );
 
 /**
  * Create the node in which atoms and alpha particles are rendered.  Node contains both
@@ -222,9 +220,8 @@ rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenV
  * @param {ModelViewTransform2} modelViewTransform
  * @param {Bounds2} canvasBounds
  * @returns {Node}
- * @protected
  */
-var createSpaceNode = function( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) {
+function createSpaceNode( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) {
 
   // create the single nucleus representation scene
   const nucleusSpaceNode = new NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
@@ -280,6 +277,7 @@ var createSpaceNode = function( model, showAlphaTraceProperty, modelViewTransfor
   return new Node( {
     children: [ nucleusSpaceNode, atomSpaceNode ]
   } );
-};
-inherit( RSBaseScreenView, RutherfordAtomScreenView );
+}
+
+rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );
 export default RutherfordAtomScreenView;
