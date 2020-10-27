@@ -13,7 +13,7 @@ import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import atomImage from '../../../images/Atom_png.js';
 import atomProjectorImage from '../../../images/AtomProjector_png.js';
 import RSColorProfile from '../../common/RSColorProfile.js';
@@ -155,10 +155,10 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
      * Create the RadioButonGroup that will act as the scene selection control in this sim.
      *
      * @param {Image} atomIconImage - the icon for the atomic scene, changes with color profile
-     * @returns {RadioButtonGroup} - returns a RadioButtonGroup that must be disposed when profile changes
+     * @returns {RectangularRadioButtonGroup} - returns a RectangularRadioButtonGroup that must be disposed when profile changes
      */
     const createRadioButtons = function( atomIconImage ) {
-      return new RadioButtonGroup( model.sceneProperty, [
+      return new RectangularRadioButtonGroup( model.sceneProperty, [
         { value: 'atom', node: new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
         { value: 'nucleus', node: nucleusIcon, labelContent: nuclearScaleViewString }
       ], {
