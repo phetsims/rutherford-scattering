@@ -9,26 +9,23 @@
 
 import OptionsDialog from '../../../../joist/js/OptionsDialog.js';
 import ProjectorModeCheckbox from '../../../../joist/js/ProjectorModeCheckbox.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColorProfile from '../RSColorProfile.js';
 
-/**
- * @constructor
- */
-function MenuOptionsNode() {
-
-  const projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
-
-  VBox.call( this, {
-    children: [ projectorCheckbox ],
-    spacing: OptionsDialog.DEFAULT_SPACING,
-    align: 'left'
-  } );
+class MenuOptionsNode extends VBox {
+  constructor() {
+  
+    const projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
+  
+    super( {
+      children: [ projectorCheckbox ],
+      spacing: OptionsDialog.DEFAULT_SPACING,
+      align: 'left'
+    } );
+  }
 }
 
 rutherfordScattering.register( 'MenuOptionsNode', MenuOptionsNode );
 
-inherit( VBox, MenuOptionsNode );
 export default MenuOptionsNode;

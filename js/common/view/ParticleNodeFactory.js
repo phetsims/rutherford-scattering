@@ -6,7 +6,6 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import platform from '../../../../phet-core/js/platform.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
@@ -40,7 +39,7 @@ const ParticleNodeFactory = {
    * @returns {Node}
    * @public
    */
-  createElectron: function() {
+  createElectron() {
     return new Node( {
       children: [
         new ParticleNode( ELECTRON_RADIUS, ELECTRON_COLOR )
@@ -53,7 +52,7 @@ const ParticleNodeFactory = {
    * @returns {Node}
    * @public
    */
-  createProton: function() {
+  createProton() {
     return new Node( {
       children: [
         new ParticleNode( PROTON_RADIUS, PROTON_COLOR )
@@ -66,7 +65,7 @@ const ParticleNodeFactory = {
    * @returns {Node}
    * @public
    */
-  createNeutron: function() {
+  createNeutron() {
     return new Node( {
       children: [
         new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR )
@@ -81,7 +80,7 @@ const ParticleNodeFactory = {
    * @param  {number} y
    * @param  {CanvasRenderingContext2D} context
    */
-  drawProtonWithCanvas: function( x, y, context ) {
+  drawProtonWithCanvas( x, y, context ) {
     drawParticleWithCanvas( x, y, PROTON_RADIUS, PROTON_COLOR, context );
   },
 
@@ -92,7 +91,7 @@ const ParticleNodeFactory = {
    * @param  {number} y
    * @param  {CanvasRenderingContext2D} context
    */
-  drawNeutronWithCanvas: function( x, y, context ) {
+  drawNeutronWithCanvas( x, y, context ) {
     drawParticleWithCanvas( x, y, NEUTRON_RADIUS, NEUTRON_COLOR, context );
   },
 
@@ -101,7 +100,7 @@ const ParticleNodeFactory = {
    * @returns {Node}
    * @public
    */
-  createNucleus: function() {
+  createNucleus() {
     return new Node( {
       children: [
         new Circle( NUCLEUS_RADIUS, { fill: RSColorProfile.nucleusColorProperty } )
@@ -113,7 +112,7 @@ const ParticleNodeFactory = {
    * Create an icon for the legend describing the energy level of an electron
    * @returns {Node} [description]
    */
-  createEnergyLevel: function() {
+  createEnergyLevel() {
     return new Node( {
       children: [
         new Line( 0, 0, ENERGY_LEVEL_LINE_LENGTH, 0, { stroke: ENERGY_LEVEL_COLOR } ),
@@ -127,7 +126,7 @@ const ParticleNodeFactory = {
    * Create an icon for the legend describing the particle trace, represented as an arrow
    * @returns {Node}
    */
-  createParticleTrace: function() {
+  createParticleTrace() {
     return new Node( {
       children: [
         new ArrowNode( 0, 0, 20, 0, {
@@ -144,7 +143,7 @@ const ParticleNodeFactory = {
    * @returns {Node}
    * @public
    */
-  createNucleusAlpha: function() {
+  createNucleusAlpha() {
     return new Node( {
       children: [
         new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, { x: NEUTRON_RADIUS - 1, y: -NEUTRON_RADIUS } ),
@@ -160,7 +159,7 @@ const ParticleNodeFactory = {
    * @returns {Node}
    * @public
    */
-  createParticleAlpha: function() {
+  createParticleAlpha() {
     return new Node( {
       children: [
         new Circle( PARTICLE_RADIUS, { fill: PARTICLE_COLOR } )
@@ -173,7 +172,7 @@ const ParticleNodeFactory = {
    * @returns {Node}
    * @public
    */
-  createPlumPuddingIcon: function() {
+  createPlumPuddingIcon() {
     return new Node( {
       children: [
         new Image( plumPuddingImage, { scale: 0.06 } )
@@ -185,25 +184,25 @@ const ParticleNodeFactory = {
 
 rutherfordScattering.register( 'ParticleNodeFactory', ParticleNodeFactory );
 
-/**
- * @param {number} radius
- * @param {Color|String} color
- * @param {Object} [options]
- * @constructor
- * @private
- */
-function ParticleNode( radius, color, options ) {
-  options = options || {};
-  assert && assert( !options.fill );
+class ParticleNode extends Circle {
 
-  options.fill = new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
-    .addColorStop( 0, SPECULAR_HIGHLITE_COLOR )
-    .addColorStop( 0.33, color )
-    .addColorStop( 1, 'black' );
-  Circle.call( this, radius, options );
+  /**
+   * @param {number} radius
+   * @param {Color|String} color
+   * @param {Object} [options]
+   * @private
+   */
+  constructor( radius, color, options ) {
+    options = options || {};
+    assert && assert( !options.fill );
+  
+    options.fill = new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
+      .addColorStop( 0, SPECULAR_HIGHLITE_COLOR )
+      .addColorStop( 0.33, color )
+      .addColorStop( 1, 'black' );
+    super( radius, options );
+  }
 }
-
-inherit( Circle, ParticleNode );
 
 /**
  * Draw a particle on a canvas using the provided context.  The particle is at position (x,y) in the
@@ -214,9 +213,8 @@ inherit( Circle, ParticleNode );
  * @param  {number} radius
  * @param  {string} color
  * @param  {CanvasRenderingContext2D} context
- * @private
  */
-var drawParticleWithCanvas = function( x, y, radius, color, context ) {
+const drawParticleWithCanvas = ( x, y, radius, color, context ) => {
   // draw the circle
   context.beginPath();
   context.arc( x, y, radius, 0, 2 * Math.PI, false );

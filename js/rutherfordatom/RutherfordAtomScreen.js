@@ -33,8 +33,8 @@ class RutherfordAtomScreen extends Screen {
     };
 
     super(
-      function() { return new RutherfordAtomModel(); },
-      function( model ) { return new RutherfordAtomScreenView( model ); },
+      () => new RutherfordAtomModel(),
+      model =>  new RutherfordAtomScreenView( model ),
       options
     );
   }

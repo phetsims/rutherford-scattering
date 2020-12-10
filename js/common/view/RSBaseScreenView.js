@@ -13,11 +13,11 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import StepForwardButton from '../../../../scenery-phet/js/buttons/StepForwardButton.js';
-import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -62,8 +62,6 @@ class RSBaseScreenView extends ScreenView {
     }, options );
 
     super( options );
-    const self = this;
-
     // properties
     this.showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
@@ -110,8 +108,8 @@ class RSBaseScreenView extends ScreenView {
 
     // tiny box that indicates what will be zoomed
     const tinyBoxNode = new TinyBox( {
-      centerX: self.targetMaterialNode.centerX,
-      centerY: self.targetMaterialNode.centerY
+      centerX: this.targetMaterialNode.centerX,
+      centerY: this.targetMaterialNode.centerY
     } );
     this.addChild( tinyBoxNode );
 
@@ -130,9 +128,9 @@ class RSBaseScreenView extends ScreenView {
     // dashed lines that connect the tiny box and space
     const dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.centerX, tinyBoxNode.top )
-      .lineTo( self.spaceNode.left, self.spaceNode.top )
+      .lineTo( this.spaceNode.left, this.spaceNode.top )
       .moveTo( tinyBoxNode.centerX, tinyBoxNode.bottom )
-      .lineTo( self.spaceNode.left, self.spaceNode.bottom ), {
+      .lineTo( this.spaceNode.left, this.spaceNode.bottom ), {
       stroke: 'grey',
       lineDash: [ 5, 5 ]
     } );
@@ -156,7 +154,7 @@ class RSBaseScreenView extends ScreenView {
     // step button to manually step the animation.
     const stepButton = new StepForwardButton( {
       isPlayingProperty: model.runningProperty,
-      listener: function() { model.manualStep(); },
+      listener: () => { model.manualStep(); },
       centerY: playPauseButton.centerY,
       centerX: this.scaleInfoNode.centerX + 25,
       radius: 15
@@ -165,8 +163,8 @@ class RSBaseScreenView extends ScreenView {
 
     // reset all button
     const resetAllButton = new ResetAllButton( {
-      listener: function() {
-        self.showAlphaTraceProperty.reset();
+      listener: () => {
+        this.showAlphaTraceProperty.reset();
         model.reset();
       },
       right: this.layoutBounds.maxX - 48,

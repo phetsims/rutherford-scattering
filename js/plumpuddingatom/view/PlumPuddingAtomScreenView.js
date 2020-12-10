@@ -72,18 +72,18 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
  * @param {Bounds2} canvasBounds
  * @returns {Node}
  */
-function createSpaceNode( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) {
+const createSpaceNode = ( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) => {
   const plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
     canvasBounds: canvasBounds
   } );
 
   // redraw the space node on model step
-  model.addStepListener( function( dt ) {
+  model.addStepListener( dt => {
     plumPuddingSpaceNode.invalidatePaint();
   } );
 
   return plumPuddingSpaceNode;
-}
+};
 
 rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
 export default PlumPuddingAtomScreenView;

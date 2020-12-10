@@ -10,32 +10,27 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
-import Atom from '../../common/model/Atom.js';
 import RSConstants from '../../common/RSConstants.js';
+import Atom from '../../common/model/Atom.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
-/**
- * Constructor.
- * @param {Emitter} particleRemovedEmitter
- * @param {Property.<number>} protonCountProperty
- * @param {Vector2} position
- * @param {number} boundingWidth
- * @param {Object} [options]
- */
-function RutherfordAtom( particleRemovedEmitter, protonCountProperty, position, boundingWidth, options ) {
+class RutherfordAtom extends Atom {
 
-  Atom.call( this, position, boundingWidth, options );
-
-  // @private
-  this.protonCountProperty = protonCountProperty;
-  this.particleRemovedemitter = particleRemovedEmitter;
-
-}
-
-rutherfordScattering.register( 'RutherfordAtom', RutherfordAtom );
-
-inherit( Atom, RutherfordAtom, {
+  /**
+   * @param {Emitter} particleRemovedEmitter
+   * @param {Property.<number>} protonCountProperty
+   * @param {Vector2} position
+   * @param {number} boundingWidth
+   * @param {Object} [options]
+   */
+  constructor( particleRemovedEmitter, protonCountProperty, position, boundingWidth, options ) {
+  
+    super( position, boundingWidth, options );
+  
+    // @private
+    this.protonCountProperty = protonCountProperty;
+    this.particleRemovedemitter = particleRemovedEmitter;
+  }
 
   /**
    * Remove a particle.  Most of the time, a particle needs to be removed from this atom but kept in
@@ -45,13 +40,13 @@ inherit( Atom, RutherfordAtom, {
    * @param  {boolean} isError
    * @public
    */
-  removeParticle: function( particle, isError, line ) {
-    Atom.prototype.removeParticle.call( this, particle );
+  removeParticle( particle, isError, line ) {
+    super.removeParticle( particle );
 
     if ( isError ) {
       this.particleRemovedemitter.emit( particle );
     }
-  },
+  }
 
   /**
    * ASSUMPTIONS MADE IN THIS ALGORITHM:
@@ -79,7 +74,7 @@ inherit( Atom, RutherfordAtom, {
    * @override
    * @protected
    */
-  moveParticle: function( alphaParticle, dt ) {
+  moveParticle( alphaParticle, dt ) {
 
     // apply a rotation to the particle coordinate frame if nececssary so that
     // the trajectory algorithm can proceed as if the particle were moving straight
@@ -111,7 +106,7 @@ inherit( Atom, RutherfordAtom, {
     // (x0,y0) : the alpha particle's initial position, relative to the atom's center.
     //-------------------------------------------------------------------------------
 
-    // var initialPosition = alphaParticle.initialPosition;
+    // const initialPosition = alphaParticle.initialPosition;
     const relativeInitialPosition = correctedInitialPosition.minus( this.position );
 
     let x0 = Math.abs( relativeInitialPosition.x );
@@ -125,7 +120,7 @@ inherit( Atom, RutherfordAtom, {
     // (x,y) : the alpha particle's current position, relative to the atom's center
     //-------------------------------------------------------------------------------
 
-    // var position = alphaParticle.positionProperty.get();
+    // const position = alphaParticle.positionProperty.get();
     const relativePosition = correctedPosition.minus( this.position );
 
     let x = relativePosition.x;
@@ -244,18 +239,19 @@ inherit( Atom, RutherfordAtom, {
 
     alphaParticle.orientationProperty.set( phiNew );
 
-  },
+  }
 
   /**
    * Rotate the point around another origin point, returning a new Vector2.
    * Vector2 does not support RotateAround, should this be moved there?
+   * @private
    *
    * @param  {Vector2} point - the point to rotate
    * @param  {Vector2} rotatePoint - the point to rotate around
    * @param  {number} angle
    * @returns {Vector2}
    */
-  rotatePointAround: function( point, rotatePoint, angle ) {
+  rotatePointAround( point, rotatePoint, angle ) {
 
     const sinAngle = Math.sin( angle );
     const cosAngle = Math.cos( angle );
@@ -270,7 +266,8 @@ inherit( Atom, RutherfordAtom, {
     // translate the point back
     return new Vector2( xNew, yNew ).plus( rotatePoint );
   }
+}
 
-} );
+rutherfordScattering.register( 'RutherfordAtom', RutherfordAtom );
 
 export default RutherfordAtom;

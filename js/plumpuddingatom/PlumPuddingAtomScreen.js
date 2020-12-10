@@ -30,8 +30,8 @@ class PlumPuddingAtomScreen extends Screen {
     };
 
     super(
-      function() { return new PlumPuddingAtomModel(); },
-      function( model ) { return new PlumPuddingAtomScreenView( model ); },
+      () => new PlumPuddingAtomModel(),
+      model => new PlumPuddingAtomScreenView( model ),
       options
     );
   }

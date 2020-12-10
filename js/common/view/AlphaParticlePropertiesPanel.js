@@ -42,6 +42,7 @@ const traceCheckboxDescriptionString = rutherfordScatteringStrings.a11y.traceChe
 const FINGER_TRACKER = {};
 
 class AlphaParticlePropertiesPanel extends Panel {
+  
   /**
    * @param {AlphaParticlePropertiesPanelContent} content - content for the panel
    * @param {Object} [options]
@@ -80,7 +81,7 @@ class AlphaParticlePropertiesPanel extends Panel {
     super( contentVBox, options );
 
     // @private - make panel eligible for garbage collection
-    this.disposeAlphaParticlePropertiesPanel = function() {
+    this.disposeAlphaParticlePropertiesPanel = () => {
       content.dispose();
     };
   }
@@ -158,7 +159,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
      * Track fingers for multitouch, adding a finger count to the slider and setting the proper
      * interaction properties.
      */
-    const addFinger = function( elementID ) {
+    const addFinger = elementID => {
       energyInteractionProperty.set( true );
       if ( !FINGER_TRACKER[ elementID ] && FINGER_TRACKER[ elementID ] !== 0 ) {
         FINGER_TRACKER[ elementID ] = 1; // first time finger is down on this thumb
@@ -172,7 +173,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
      * Remove a finger from an element for multitouch support, removing a finger count from a particular element
      * and setting the interaction properties appropriately.
      */
-    const removeFinger = function( elementID ) {
+    const removeFinger = elementID => {
       FINGER_TRACKER[ elementID ]--;
       assert && assert( FINGER_TRACKER[ elementID ] >= 0, 'at least 0 fingers must be using the slider' );
       if ( FINGER_TRACKER[ elementID ] === 0 ) {
@@ -195,10 +196,10 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       thumbTouchAreaXDilation: 15,
       thumbTouchAreaYDilation: 12,
-      startDrag: function() { // called when the pointer is pressed
+      startDrag: () => { // called when the pointer is pressed
         addFinger( 'particleEnergySlider' );
       },
-      endDrag: function() { // called when the pointer is released
+      endDrag: () => { // called when the pointer is released
         removeFinger( 'particleEnergySlider' );
       },
 
@@ -254,7 +255,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
     this.energyInteractionProperty = energyInteractionProperty;
 
     // @private
-    this.disposeContent = function() {
+    this.disposeContent = () => {
       showTraceCheckbox.dispose();
       particleEnergySlider.dispose();
     };

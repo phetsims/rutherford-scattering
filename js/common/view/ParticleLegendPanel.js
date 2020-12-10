@@ -90,7 +90,7 @@ class ParticleLegendPanel extends Panel {
  * @returns {HBox}
  * @private
  */
-function createParticleRow( particleNode, titleString ) {
+const createParticleRow = ( particleNode, titleString ) => {
 
   const hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
   const titleText = new Text( titleString, {
@@ -108,7 +108,7 @@ function createParticleRow( particleNode, titleString ) {
     align: 'center',
     children: [ hStrut1, particleNode, hStrut2, titleText ]
   } );
-}
+};
 
 // @public for aligning with other panels in the various screens, legend content should be left aligned
 ParticleLegendPanel.LEGEND_CONTENT_ALIGN = 'left';
@@ -139,7 +139,7 @@ class ParticleLegendPanelContent extends VBox {
     // i18n - make align boxes for all items so that they are the same height, important when strings change size
     const alignGroup = new AlignGroup( { matchHorizontal: false } );
     const children = [];
-    content.forEach( function( item ) {
+    content.forEach( item => {
       children.push( alignGroup.createBox( item ) );
     } );
 

@@ -36,7 +36,7 @@ const simOptions = {
 FocusOverlay.setInnerGroupHighlightColor( RSColorProfile.innerGroupHighlightColorProperty );
 FocusOverlay.setOuterGroupHighlightColor( RSColorProfile.outerGroupHighlightColorProperty );
 
-simLauncher.launch( function() {
+simLauncher.launch( () => {
   const screens = [
     new RutherfordAtomScreen(),
     new PlumPuddingAtomScreen()

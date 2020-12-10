@@ -8,7 +8,6 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
@@ -19,32 +18,33 @@ const BACK_DEPTH = 4;
 const BACK_OFFSET = 0.10;
 const BOX_SIZE = new Dimension2( 10, 10 );
 
-/**
- * @param {Object} [options]
- * @constructor
- */
-function TinyBox( options ) {
-
-  options = merge( {
-    fill: 'black',
-    stroke: 'white',
-    lineWidth: 1
-  }, options );
-
-  const topNode = new Path( new Shape()
-    .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
-    .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
-    .lineTo( BOX_SIZE.width, BACK_DEPTH )
-    .lineTo( 0, BACK_DEPTH )
-    .close(), options );
-
-  assert && assert( !options.children, 'additional children not supported' );
-  options.children = [ topNode ];
-
-  Node.call( this, options );
+class TinyBox extends Node {
+  
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+  
+    options = merge( {
+      fill: 'black',
+      stroke: 'white',
+      lineWidth: 1
+    }, options );
+  
+    const topNode = new Path( new Shape()
+      .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
+      .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
+      .lineTo( BOX_SIZE.width, BACK_DEPTH )
+      .lineTo( 0, BACK_DEPTH )
+      .close(), options );
+  
+    assert && assert( !options.children, 'additional children not supported' );
+    options.children = [ topNode ];
+  
+    super( options );
+  }
 }
 
 rutherfordScattering.register( 'TinyBox', TinyBox );
 
-inherit( Node, TinyBox );
 export default TinyBox;

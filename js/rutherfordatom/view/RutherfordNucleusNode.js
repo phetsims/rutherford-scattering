@@ -8,7 +8,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import RSColorProfile from '../../common/RSColorProfile.js';
 import RSConstants from '../../common/RSConstants.js';
@@ -24,131 +23,127 @@ const MIN_PARTICLE_COUNT = RSConstants.MIN_PROTON_COUNT + RSConstants.MIN_NEUTRO
 const MAX_PARTICLE_COUNT = RSConstants.MAX_PROTON_COUNT + RSConstants.MAX_NEUTRON_COUNT;
 const PARTICLE_COUNT_EXP = 0.333;
 
-/**
- * The Rutherford atom is build by randomly drawing proton & neutron images to a CanvasNode. This canvas is then
- * rendered to an Image.
- *
- * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
- * @param {Property.<boolean>} protonCountProperty
- * @param {Property.<boolean>} neutronCountProperty
- * @param {Object} [options]
- * @constructor
- */
-function RutherfordNucleusNode( userInteractionProperty, protonCountProperty, neutronCountProperty, rutherfordNucleus, options ) {
+class RutherfordNucleusNode extends CanvasNode {
 
-  // max radius of an atom with MAX protons & neutrons
-  const maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
-                    Math.pow( MAX_PARTICLE_COUNT, PARTICLE_COUNT_EXP );
+  /**
+   * The Rutherford atom is build by randomly drawing proton & neutron images to a CanvasNode. This canvas is then
+   * rendered to an Image.
+   *
+   * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
+   * @param {Property.<boolean>} protonCountProperty
+   * @param {Property.<boolean>} neutronCountProperty
+   * @param {Object} [options]
+   */
+  constructor( userInteractionProperty, protonCountProperty, neutronCountProperty, rutherfordNucleus, options ) {
 
-  // set canvasBounds based on max radius of atom
-  options = options || {};
-  options.canvasBounds = new Bounds2( 0, 0, 2 * maxRadius, 2 * maxRadius );
+    // max radius of an atom with MAX protons & neutrons
+    const maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
+                      Math.pow( MAX_PARTICLE_COUNT, PARTICLE_COUNT_EXP );
 
-  CanvasNode.call( this, options );
+    // set canvasBounds based on max radius of atom
+    options = options || {};
+    options.canvasBounds = new Bounds2( 0, 0, 2 * maxRadius, 2 * maxRadius );
 
-  const self = this;
+    super( options );
 
-  // @private
-  this.userInteractionProperty = userInteractionProperty;
+    // @private
+    this.userInteractionProperty = userInteractionProperty;
 
-  // @private
-  this.rutherfordNucleus = rutherfordNucleus;
+    // @private
+    this.rutherfordNucleus = rutherfordNucleus;
 
-  // @private - switch to render the outline or full atom
-  this.renderAtomOutline = false;
+    // @private - switch to render the outline or full atom
+    this.renderAtomOutline = false;
 
-  // @private - the final rendered Rutherford atom
-  this.image = null;
+    // @private - the final rendered Rutherford atom
+    this.image = null;
 
-  // @private - the image to use as the proton
-  self.protonImage = null;
+    // @private - the image to use as the proton
+    this.protonImage = null;
 
-  // @private - the image to use as the neutron
-  self.neutronImage = null;
+    // @private - the image to use as the neutron
+    this.neutronImage = null;
 
-  // @private
-  this.radius = MIN_NUCLEUS_RADIUS;
+    // @private
+    this.radius = MIN_NUCLEUS_RADIUS;
 
-  // @private
-  this.numberOfProtons = RSConstants.MIN_PROTON_COUNT;
+    // @private
+    this.numberOfProtons = RSConstants.MIN_PROTON_COUNT;
 
-  // @private
-  this.numberOfNeutrons = RSConstants.MIN_NEUTRON_COUNT;
+    // @private
+    this.numberOfNeutrons = RSConstants.MIN_NEUTRON_COUNT;
 
-  // @private - flags that track when it is time to redraw the nucleus
-  this.isDirty = false;
-  this.timeSinceDirty = 0; // ms
+    // @private - flags that track when it is time to redraw the nucleus
+    this.isDirty = false;
+    this.timeSinceDirty = 0; // ms
 
-  // generate proton image - asynchronous
-  const protonNode = ParticleNodeFactory.createProton();
-  protonNode.toImage( function( image, x, y ) {
-    self.protonImage = image;
-    self.updateAtomImage();
-    self.timeSinceDirty = 0;
-  } );
+    // generate proton image - asynchronous
+    const protonNode = ParticleNodeFactory.createProton();
+    protonNode.toImage( ( image, x, y ) => {
+      this.protonImage = image;
+      this.updateAtomImage();
+      this.timeSinceDirty = 0;
+    } );
 
-  // generate neutron image - asynchronous
-  const neutronNode = ParticleNodeFactory.createNeutron();
-  neutronNode.toImage( function( image, x, y ) {
-    self.neutronImage = image;
-    self.updateAtomImage();
-    self.timeSinceDirty = 0;
-  } );
+    // generate neutron image - asynchronous
+    const neutronNode = ParticleNodeFactory.createNeutron();
+    neutronNode.toImage( ( image, x, y ) => {
+      this.neutronImage = image;
+      this.updateAtomImage();
+      this.timeSinceDirty = 0;
+    } );
 
-  // update atom image when proton count changes
-  const protonCountListener = function( propertyValue ) {
-    self.numberOfProtons = propertyValue;
-    self.renderAtomOutline = self.userInteractionProperty.value;  // Only render the outline when interacting
-    self.updateAtomImage();
-    self.timeSinceDirty = 0;
-  };
-  protonCountProperty.link( protonCountListener );
+    // update atom image when proton count changes
+    const protonCountListener = propertyValue => {
+      this.numberOfProtons = propertyValue;
+      this.renderAtomOutline = this.userInteractionProperty.value;  // Only render the outline when interacting
+      this.updateAtomImage();
+      this.timeSinceDirty = 0;
+    };
+    protonCountProperty.link( protonCountListener );
 
-  // update atom image when neutron count changes
-  const neutronCountListener = function( propertyValue ) {
-    self.numberOfNeutrons = propertyValue;
-    self.renderAtomOutline = self.userInteractionProperty.value; // Only render the outline when interacting
-    self.updateAtomImage();
-    self.timeSinceDirty = 0;
-  };
-  neutronCountProperty.link( neutronCountListener );
+    // update atom image when neutron count changes
+    const neutronCountListener = propertyValue => {
+      this.numberOfNeutrons = propertyValue;
+      this.renderAtomOutline = this.userInteractionProperty.value; // Only render the outline when interacting
+      this.updateAtomImage();
+      this.timeSinceDirty = 0;
+    };
+    neutronCountProperty.link( neutronCountListener );
 
-  // update atom image when user interaction stops
-  const userInteractionListener = function( userInteraction ) {
-    if ( self.renderAtomOutline ) {
-      self.renderAtomOutline = false;
-      self.updateAtomImage();
-      self.timeSinceDirty = 0;
-    }
-  };
-  userInteractionProperty.link( userInteractionListener );
+    // update atom image when user interaction stops
+    const userInteractionListener = userInteraction => {
+      if ( this.renderAtomOutline ) {
+        this.renderAtomOutline = false;
+        this.updateAtomImage();
+        this.timeSinceDirty = 0;
+      }
+    };
+    userInteractionProperty.link( userInteractionListener );
 
-  this.invalidatePaint();
+    this.invalidatePaint();
 
-  // @private
-  this.disposeRutherfordNucleusNode = function() {
-    protonCountProperty.unlink( protonCountListener );
-    neutronCountProperty.unlink( neutronCountListener );
-    userInteractionProperty.unlink( userInteractionListener );
-  };
-}
-
-rutherfordScattering.register( 'RutherfordNucleusNode', RutherfordNucleusNode );
-
-inherit( CanvasNode, RutherfordNucleusNode, {
+    // @private
+    this.disposeRutherfordNucleusNode = () => {
+      protonCountProperty.unlink( protonCountListener );
+      neutronCountProperty.unlink( neutronCountListener );
+      userInteractionProperty.unlink( userInteractionListener );
+    };
+  }
 
   /**
    * Make this node eligible for garbage collection
+   * @public
    */
-  dispose: function() {
+  dispose() {
     this.disposeRutherfordNucleusNode();
-  },
+  }
 
   /**
    * renders a new atom image based on proton/neutron counts
    * @private
    */
-  updateAtomImage: function() {
+  updateAtomImage() {
 
     // Calculate the radius of the nucleus
     const currentParticles = this.numberOfProtons + this.numberOfNeutrons;
@@ -159,20 +154,18 @@ inherit( CanvasNode, RutherfordNucleusNode, {
     this.invalidatePaint();
 
     // generate atom image - asynchronous
-    const self = this;
-    this.toImage( function( image, x, y ) {
+    this.toImage( ( image, x, y ) => {
       // @public (read-only)
-      self.image = image;
+      this.image = image;
     } );
-
-  },
+  }
 
   /**
    * Renders the Rutherford atom either as a simple radius outline or as a detailed proton/neutron atom
    * @param {CanvasRenderingContext2D} context
    * @private
    */
-  paintCanvas: function( context ) {
+  paintCanvas( context ) {
 
     const bounds = this.canvasBounds;
 
@@ -204,7 +197,6 @@ inherit( CanvasNode, RutherfordNucleusNode, {
     }
   }
 
-}, {
 
   /**
    * Create an icon of the Rutherford Nucleus with the desired number of protons and neutrons.
@@ -213,7 +205,7 @@ inherit( CanvasNode, RutherfordNucleusNode, {
    * @param {number} neutronCount
    * @public
    */
-  RutherfordNucleusIcon: function( protonCount, neutronCount ) {
+  static RutherfordNucleusIcon( protonCount, neutronCount ) {
 
     // create static properties and nucleus for the icon
     const protonCountProperty = new Property( protonCount );
@@ -222,39 +214,40 @@ inherit( CanvasNode, RutherfordNucleusNode, {
 
     return new IconCanvasNode( nucleus );
   }
-
-} ); // inherit
-
-/**
- * Constructor for an icon representation of the Rutherford Nucleus.  This has no attached listeners,
- * and is a static representation of the nucleus.
- *
- * @param  {RutherfordNucleus} nucleus
- * @param  {Object} options
- * @constructor
- */
-function IconCanvasNode( nucleus, options ) {
-
-  // @private
-  this.nucleus = nucleus;
-
-  // max radius of an atom with MAX protons & neutrons
-  const numberOfParticles = nucleus.protonCountProperty.get() + nucleus.neutronCountProperty.get();
-  const maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
-                    Math.pow( numberOfParticles, PARTICLE_COUNT_EXP );
-
-  // @private - used to center elements drawn in the context
-  this.nucleusBounds = new Bounds2( 0, 0, 2 * maxRadius, 2 * maxRadius );
-
-  // set canvasBounds based on max radius of atom
-  options = options || {};
-  options.canvasBounds = this.nucleusBounds;
-  CanvasNode.call( this, options );
-
-  this.invalidatePaint();
 }
 
-inherit( CanvasNode, IconCanvasNode, {
+rutherfordScattering.register( 'RutherfordNucleusNode', RutherfordNucleusNode );
+
+class IconCanvasNode extends CanvasNode {
+
+  /**
+   * Constructor for an icon representation of the Rutherford Nucleus.  This has no attached listeners,
+   * and is a static representation of the nucleus.
+   *
+   * @param  {RutherfordNucleus} nucleus
+   * @param  {Object} options
+   */
+  constructor( nucleus, options ) {
+
+    // max radius of an atom with MAX protons & neutrons
+    const numberOfParticles = nucleus.protonCountProperty.get() + nucleus.neutronCountProperty.get();
+    const maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
+                      Math.pow( numberOfParticles, PARTICLE_COUNT_EXP );
+
+    // used to center elements drawn in the context
+    var nucleusBounds = new Bounds2( 0, 0, 2 * maxRadius, 2 * maxRadius );
+
+    // set canvasBounds based on max radius of atom
+    options = options || {};
+    options.canvasBounds = nucleusBounds;
+    super( options );
+
+    // @private
+    this.nucleusBounds = nucleusBounds;
+    this.nucleus = nucleus;
+
+    this.invalidatePaint();
+  }
 
   /**
    * Paint function for the canvas node
@@ -262,11 +255,12 @@ inherit( CanvasNode, IconCanvasNode, {
    * @param  {CanvasRenderingContext2D} context
    * @protected @override
    */
-  paintCanvas: function( context ) {
+  paintCanvas( context ) {
+
     // paint the nucleus with canvas arcs - slower than image, but better resolution for icons
-    paintNucleusIcon( this.nucleus, this.nucleusBounds, context, 'canvasArc' );
+    paintNucleusIcon.bind( this )(this.nucleus, this.canvasBounds, context, 'canvasArc' );
   }
-} );
+}
 
 /**
  * Paint a nucleus icon with canvas.  A 'render method' is used to determine the style of rendering.
@@ -279,23 +273,22 @@ inherit( CanvasNode, IconCanvasNode, {
  * @param  {CanvasRenderingContext2D} context
  * @param  {string} render - 'canvasArc' | 'canvasImage', determines rendering method, see above
  */
-var paintNucleusIcon = function( nucleus, nucleusBounds, context, render ) {
+const paintNucleusIcon = function( nucleus, nucleusBounds, context, render ) {
   const protons = nucleus.protons.slice();
   const neutrons = nucleus.neutrons.slice();
   const nucleons = protons.concat( neutrons );
 
   // get the number of layers in the particle
   let zLayer = 0;
-  nucleons.forEach( function( nucleon ) {
+  nucleons.forEach( nucleon => {
     if ( nucleon.zLayerProperty.get() > zLayer ) {
       zLayer = nucleon.zLayerProperty.get();
     }
   } );
 
   // add the layers, starting from the largest which is in the back
-  const self = this;
-  for ( var i = zLayer; i >= 0; i-- ) {
-    nucleons.forEach( function( nucleon ) {
+  for ( let i = zLayer; i >= 0; i-- ) {
+    nucleons.forEach( nucleon => {
       if ( nucleon.zLayerProperty.get() === i ) {
         let xN = nucleon.positionProperty.get().x;
         let yN = nucleon.positionProperty.get().y;
@@ -319,14 +312,14 @@ var paintNucleusIcon = function( nucleus, nucleusBounds, context, render ) {
           // should be used when rendering a nucleus that should change frequently and rapidly
 
           // if drawing with images, offset by bounds of the image
-          xN += ( self.center.x - self.neutronImage.width / 2 );
-          yN += ( self.center.y - self.neutronImage.height / 2 );
+          xN += ( this.center.x - this.neutronImage.width / 2 );
+          yN += ( this.center.y - this.neutronImage.height / 2 );
 
           if ( nucleon.type === 'neutron' ) {
-            context.drawImage( self.neutronImage, xN, yN, self.neutronImage.width, self.neutronImage.height );
+            context.drawImage( this.neutronImage, xN, yN, this.neutronImage.width, this.neutronImage.height );
           }
           else {
-            context.drawImage( self.protonImage, xN, yN, self.protonImage.width, self.protonImage.height );
+            context.drawImage( this.protonImage, xN, yN, this.protonImage.width, this.protonImage.height );
           }
         }
       }

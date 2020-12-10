@@ -8,50 +8,46 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import AlphaParticle from './AlphaParticle.js';
 
-/**
- * Constructor.
- * @param {Property.<number>} protonCountProperty
- * @param {Bounds2} bounds
- * @param {Object} [options]
- */
-function AtomSpace( protonCountProperty, bounds, options ) {
-
-  options = merge( {
-    atomWidth: bounds.width // width of each atom in the space, width of space by default
-  }, options );
-
-  // @public (read-only)
-  this.atoms = [];
-  this.particles = []; // all particles contained by this space
-  this.particlesInEmptySpace = []; // all particles in empty space, excluding those that are in an atom
-  this.bounds = bounds;
-  this.atomWidth = options.atomWidth;
-
-  // emitter which signifies that a particle has been transitioned to a new atom
-  this.particleTransitionedEmitter = new Emitter( { parameters: [ { valueType: AlphaParticle } ] } );
-
-  // @public - emitter which signifies that a particle has been removed from an atom
-  this.particleRemovedFromAtomEmitter = new Emitter( { parameters: [ { valueType: AlphaParticle } ] } );
-
-  // when a particle has been removed from an atom, remove it from the space as well
-  // no need to remove listener, exists for life of sim
-  const self = this;
-  this.particleRemovedFromAtomEmitter.addListener( function( particle ) {
-    self.removeParticle( particle );
-  } );
-
-  // @public - whether this space is visible or not
-  this.isVisible = true;
-}
-
-rutherfordScattering.register( 'AtomSpace', AtomSpace );
-
-inherit( Object, AtomSpace, {
+class AtomSpace {
+  
+  /**
+   * Constructor.
+   * @param {Property.<number>} protonCountProperty
+   * @param {Bounds2} bounds
+   * @param {Object} [options]
+   */
+  constructor( protonCountProperty, bounds, options ) {
+  
+    options = merge( {
+      atomWidth: bounds.width // width of each atom in the space, width of space by default
+    }, options );
+  
+    // @public (read-only)
+    this.atoms = [];
+    this.particles = []; // all particles contained by this space
+    this.particlesInEmptySpace = []; // all particles in empty space, excluding those that are in an atom
+    this.bounds = bounds;
+    this.atomWidth = options.atomWidth;
+  
+    // emitter which signifies that a particle has been transitioned to a new atom
+    this.particleTransitionedEmitter = new Emitter( { parameters: [ { valueType: AlphaParticle } ] } );
+  
+    // @public - emitter which signifies that a particle has been removed from an atom
+    this.particleRemovedFromAtomEmitter = new Emitter( { parameters: [ { valueType: AlphaParticle } ] } );
+  
+    // when a particle has been removed from an atom, remove it from the space as well
+    // no need to remove listener, exists for life of sim
+    this.particleRemovedFromAtomEmitter.addListener( particle => {
+      this.removeParticle( particle );
+    } );
+  
+    // @public - whether this space is visible or not
+    this.isVisible = true;
+  }
 
   /**
    * Add a particle to this space, and track it as being in the empty space
@@ -59,10 +55,10 @@ inherit( Object, AtomSpace, {
    * @param {AlphaParticle} alphaParticle
    * @public
    */
-  addParticle: function( alphaParticle ) {
+  addParticle( alphaParticle ) {
     this.particles.push( alphaParticle );
     this.addParticleToEmptySpace( alphaParticle );
-  },
+  }
 
   /**
    * Add a particle to empty space.  Particles in the empty space
@@ -71,23 +67,23 @@ inherit( Object, AtomSpace, {
    * @param {AlphaParticle} alphaParticle
    * @private
    */
-  addParticleToEmptySpace: function( alphaParticle ) {
+  addParticleToEmptySpace( alphaParticle ) {
     alphaParticle.isInSpace = true;
     this.particlesInEmptySpace.push( alphaParticle );
-  },
+  }
 
   /**
    * Remove a particle from this space amd the model entirely.
    * @param  {AlphaParticle} alphaParticle
    * @public
    */
-  removeParticle: function( alphaParticle ) {
+  removeParticle( alphaParticle ) {
     const index = this.particles.indexOf( alphaParticle );
     if ( index > -1 ) {
       this.particles.splice( index, 1 );
       this.removeParticleFromEmptySpace( alphaParticle );
     }
-  },
+  }
 
   /**
    * Remove a particle from empty space.  The particle may still be associated
@@ -95,21 +91,22 @@ inherit( Object, AtomSpace, {
    * @param  {AlphaParticle} alphaParticle
    * @private
    */
-  removeParticleFromEmptySpace: function( alphaParticle ) {
+  removeParticleFromEmptySpace( alphaParticle ) {
     const index = this.particlesInEmptySpace.indexOf( alphaParticle );
     if ( index > -1 ) {
       alphaParticle.isInSpace = false;
       this.particlesInEmptySpace.splice( index, 1 );
     }
-  },
+  }
 
   /**
    * Remove all particles from the space, including those that are in the empty space.
+   * @public
    */
-  removeAllParticles: function() {
+  removeAllParticles() {
     this.particles.length = 0;
     this.particlesInEmptySpace.length = 0;
-  },
+  }
 
   /**
    * Transition a particle in empty space to an atom if the particle hits atomic bounds.  If the particle hits
@@ -118,7 +115,7 @@ inherit( Object, AtomSpace, {
    * the trajectory until the particle reaches a new atom.
    * @private
    */
-  transitionParticlesToAtoms: function() {
+  transitionParticlesToAtoms() {
     for ( let i = 0; i < this.particlesInEmptySpace.length; i++ ) {
       const particle = this.particlesInEmptySpace[ i ];
 
@@ -153,14 +150,14 @@ inherit( Object, AtomSpace, {
         }
       }
     }
-  },
+  }
 
   /**
    * Once the particle leaves the bounding circle of an atom, add it back to the space so that it
    * can be added to a new particle for multiple deflections if necessary.
    * @public
    */
-  transitionParticlesToSpace: function() {
+  transitionParticlesToSpace() {
     for ( let i = 0; i < this.particles.length; i++ ) {
       const particle = this.particles[ i ];
 
@@ -172,7 +169,7 @@ inherit( Object, AtomSpace, {
         }
       }
     }
-  },
+  }
 
   /**
    * All particles that are in the space and not contained by an atom need to move straight through.
@@ -180,7 +177,7 @@ inherit( Object, AtomSpace, {
    * that atom.  The atom will then handle the particle's trajectory through space.
    * @private
    */
-  moveParticles: function( dt ) {
+  moveParticles( dt ) {
 
     // move particles into atoms if they reach atomic bounds
     this.transitionParticlesToAtoms();
@@ -206,10 +203,10 @@ inherit( Object, AtomSpace, {
     }
 
     // move particles contained by atomic bounds
-    this.atoms.forEach( function( atom ) {
+    this.atoms.forEach( atom => {
       atom.moveParticles( dt );
     } );
-  },
+  }
 
   /**
    * Check to make sure that the atom bounds do not overlap each other.
@@ -217,7 +214,7 @@ inherit( Object, AtomSpace, {
    * have been instantiated.
    * @public
    */
-  checkAtomBounds: function() {
+  checkAtomBounds() {
     // make sure that none of the atoms overlap each other
     for ( let i = 0; i < this.atoms.length - 1; i++ ) {
       for ( let j = i + 1; j < this.atoms.length; j++ ) {
@@ -229,6 +226,8 @@ inherit( Object, AtomSpace, {
       }
     }
   }
-} );
+}
+
+rutherfordScattering.register( 'AtomSpace', AtomSpace );
 
 export default AtomSpace;

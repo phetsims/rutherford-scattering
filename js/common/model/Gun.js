@@ -9,7 +9,6 @@
 import Property from '../../../../axon/js/Property.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import AlphaParticle from './AlphaParticle.js';
 
@@ -18,42 +17,40 @@ const MAX_PARTICLES = 20;
 const GUN_INTENSITY = 1;
 const X0_MIN_FRACTION = 0.04; // closest particle can get horizontally to atom as a fraction of atomic bounds
 
-/**
- * {RSBaseModel} model
- * @constructor
- */
-function Gun( model ) {
+class Gun {
+  
+  /**
+   * {RSBaseModel} model
+   */
+  constructor( model ) {
+  
+    // @private
+    this.model = model;
+  
+    // @private
+    this.dtSinceGunFired = 0;
+  
+    // function to correct the initial position of the particle if necessary
+    // the trajectory algorithm fails if particle is too close to nucleus,
+    // so this correction ensure that this does not happen
+    // map values determined empirically
+    // @private - to prevent function instantiation every animation frame
+    const width1 = 20;
+    const width2 = this.model.bounds.width;
+    const correction1 = 2;
+    const correction2 = 10;
+    this.correctionFunction = new LinearFunction( width1, width2, correction1, correction2 );
+  
+    // @public {boolean} is the gun on?
+    this.onProperty = new Property( false );
+  }
 
-  // @private
-  this.model = model;
-
-  // @private
-  this.dtSinceGunFired = 0;
-
-  // function to correct the initial position of the particle if necessary
-  // the trajectory algorithm fails if particle is too close to nucleus,
-  // so this correction ensure that this does not happen
-  // map values determined empirically
-  // @private - to prevent function instantiation every animation frame
-  const width1 = 20;
-  const width2 = this.model.bounds.width;
-  const correction1 = 2;
-  const correction2 = 10;
-  this.correctionFunction = new LinearFunction( width1, width2, correction1, correction2 );
-
-  // @public {boolean} is the gun on?
-  this.onProperty = new Property( false );
-}
-
-rutherfordScattering.register( 'Gun', Gun );
-
-inherit( Object, Gun, {
 
   /**
    * {number} dt - time step
    * @public
    */
-  step: function( dt ) {
+  step( dt ) {
 
     const initialSpeed = this.model.alphaParticleEnergyProperty.get();
 
@@ -69,11 +66,10 @@ inherit( Object, Gun, {
       let particleX = ySign * rand * this.model.bounds.width / 2;
 
       // make sure that the particle was not directly fired at an atom to prevent trajectory failure
-      const self = this;
       const xMin = X0_MIN_FRACTION * this.model.bounds.width;
-      this.model.getVisibleSpace().atoms.forEach( function( atom ) {
+      this.model.getVisibleSpace().atoms.forEach( atom => {
         if ( Math.abs( particleX - atom.position.x ) < xMin ) {
-          const correction = self.correctionFunction( atom.boundingRect.bounds.width );
+          const correction = this.correctionFunction( atom.boundingRect.bounds.width );
           if ( particleX > atom.position.x ) {
             // particle is to the right of nucleus, push it farther away
             particleX += correction;
@@ -95,16 +91,17 @@ inherit( Object, Gun, {
 
       this.dtSinceGunFired = this.dtSinceGunFired % this.dtPerGunFired;
     }
-  },
+  }
 
   /**
    * Reset the gun to its initial state, which is off
    * @public
    */
-  reset: function() {
+  reset() {
     this.onProperty.reset();
   }
+}
 
-} );
+rutherfordScattering.register( 'Gun', Gun );
 
 export default Gun;

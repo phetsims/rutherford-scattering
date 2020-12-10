@@ -8,68 +8,63 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import AtomCollectionNode from './AtomCollectionNode.js';
 
 // constants
 const observationWindowString = rutherfordScatteringStrings.a11y.observationWindow;
 const atomSpaceDescriptionString = rutherfordScatteringStrings.a11y.atomSpaceDescription;
 
-/**
- * @param {RSBaseModel} model
- * @param {Property.<boolean>} showAlphaTraceProperty
- * @param {ModelViewTransform2} modelViewTransform - model to view transform
- * @param {Object} config - must provide {Bounds2} canvasBounds
- * @constructor
- */
-function AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, config ) {
-  config = merge( {
+class AtomSpaceNode extends ParticleSpaceNode {
 
-    // {Bounds2}
-    canvasBounds: required( config.canvasBounds ),
-    particleStyle: 'particle',
+  /**
+   * @param {RSBaseModel} model
+   * @param {Property.<boolean>} showAlphaTraceProperty
+   * @param {ModelViewTransform2} modelViewTransform - model to view transform
+   * @param {Object} config - must provide {Bounds2} canvasBounds
+   */
+  constructor( model, showAlphaTraceProperty, modelViewTransform, config ) {
+    config = merge( {
 
-    // pdom
-    tagName: 'div',
-    labelTagName: 'h3',
-    labelContent: observationWindowString,
-    descriptionContent: atomSpaceDescriptionString,
-    appendDescription: true
-  }, config );
+      // {Bounds2}
+      canvasBounds: required( config.canvasBounds ),
+      particleStyle: 'particle',
 
-  // @private - generates an image for the collection of atoms
-  this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );
+      // pdom
+      tagName: 'div',
+      labelTagName: 'h3',
+      labelContent: observationWindowString,
+      descriptionContent: atomSpaceDescriptionString,
+      appendDescription: true
+    }, config );
 
-  ParticleSpaceNode.call( this, model.atomSpace, showAlphaTraceProperty, modelViewTransform, config );
-  const self = this;
+    super( model.atomSpace, showAlphaTraceProperty, modelViewTransform, config );
 
-  if ( RSQueryParameters.showDebugShapes ) {
-    model.atomSpace.particleTransitionedEmitter.addListener( function( particle ) {
-      // a particle has been transitioned to a new atom - show the bounding box of the particle
-      self.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), {
-        stroke: 'rgb(114,183,188)'
-      } ) );
-    } );
+    // @private - generates an image for the collection of atoms
+    this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );
+
+    if ( RSQueryParameters.showDebugShapes ) {
+      model.atomSpace.particleTransitionedEmitter.addListener( particle => {
+        // a particle has been transitioned to a new atom - show the bounding box of the particle
+        this.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), {
+          stroke: 'rgb(114,183,188)'
+        } ) );
+      } );
+    }
   }
-}
-
-rutherfordScattering.register( 'AtomSpaceNode', AtomSpaceNode );
-
-inherit( ParticleSpaceNode, AtomSpaceNode, {
 
   /**
    * @param {CanvasRenderingContext2D} context
    * @override
    * @protected
    */
-  paintSpace: function( context ) {
+  paintSpace( context ) {
 
     // Slight chance the image used isn't available. In that case, return & try again on next frame
     if ( !this.atomsNode.image ) {
@@ -80,6 +75,8 @@ inherit( ParticleSpaceNode, AtomSpaceNode, {
     const y = this.centerY - this.atomsNode.image.height / 2;
     context.drawImage( this.atomsNode.image, x, y, this.atomsNode.image.width, this.atomsNode.image.height );
   }
-} );
+}
+
+rutherfordScattering.register( 'AtomSpaceNode', AtomSpaceNode );
 
 export default AtomSpaceNode;

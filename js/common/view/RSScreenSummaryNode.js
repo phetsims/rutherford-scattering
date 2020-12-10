@@ -5,26 +5,26 @@
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 
 // constants
 const screenSummaryString = rutherfordScatteringStrings.a11y.screenSummary;
 
-/**
- * @constructor
- * @param {Object} [options]
- */
-function RSScreenSummaryNode( options ) {
-  Node.call( this, {
-    tagName: 'p',
-    innerContent: screenSummaryString
-  } );
+class RSScreenSummaryNode extends Node {
+	
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+    super( {
+      tagName: 'p',
+      innerContent: screenSummaryString
+    } );
+  }
 }
 
 rutherfordScattering.register( 'RSScreenSummaryNode', RSScreenSummaryNode );
 
-inherit( Node, RSScreenSummaryNode );
 export default RSScreenSummaryNode;

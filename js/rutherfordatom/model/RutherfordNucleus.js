@@ -24,33 +24,32 @@ class RutherfordNucleus extends ParticleAtom {
       nucleonRadius: 3
     } );
 
-    const self = this;
     let particle;
 
     // update number of nucleons of a particular type and move all to destination
-    const configureNucleus = function( nucleonCount, particleType ) {
+    const configureNucleus = ( nucleonCount, particleType ) => {
       const particleCount = Utils.toFixedNumber( nucleonCount, 0 );
-      const nucleons = particleType === 'proton' ? self.protons : self.neutrons;
+      const nucleons = particleType === 'proton' ? this.protons : this.neutrons;
       while ( nucleons.length !== particleCount ) {
         if ( particleCount - nucleons.length > 0 ) {
           particle = new Particle( particleType );
-          self.addParticle( particle );
+          this.addParticle( particle );
         }
         else {
-          self.extractParticle( particleType );
-          self.reconfigureNucleus();
+          this.extractParticle( particleType );
+          this.reconfigureNucleus();
         }
       }
-      self.moveAllParticlesToDestination();
+      this.moveAllParticlesToDestination();
     };
 
-    const protonObserver = function( protonCount ) { configureNucleus( protonCount, 'proton' ); };
-    const neutronObserver = function( neutronCount ) { configureNucleus( neutronCount, 'neutron' ); };
+    const protonObserver = protonCount => { configureNucleus( protonCount, 'proton' ); };
+    const neutronObserver = neutronCount => { configureNucleus( neutronCount, 'neutron' ); };
     protonCountProperty.link( protonObserver );
     neutronCountProperty.link( neutronObserver );
 
     // @private
-    this.disposeRutherfordNucleus = function() {
+    this.disposeRutherfordNucleus = () => {
       protonCountProperty.unlink( protonObserver );
       neutronCountProperty.unlink( neutronObserver );
     };
