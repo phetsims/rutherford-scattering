@@ -7,6 +7,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -59,10 +60,10 @@ class Gun {
 
     if ( this.onProperty.get() && this.dtSinceGunFired >= this.dtPerGunFired ) {
 
-      const ySign = ( phet.joist.random.nextDouble() < 0.5 ? 1 : -1 );
+      const ySign = ( dotRandom.nextDouble() < 0.5 ? 1 : -1 );
 
       // random position withing model bounds
-      const rand = phet.joist.random.nextDouble();
+      const rand = dotRandom.nextDouble();
       let particleX = ySign * rand * this.model.bounds.width / 2;
 
       // make sure that the particle was not directly fired at an atom to prevent trajectory failure
