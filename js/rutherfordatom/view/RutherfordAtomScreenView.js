@@ -105,9 +105,9 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     };
 
     // when various panels are added/removed due to changing color profile or scene, reset the accessible order
-    const restoreAccessibleOrder = () => {
-      this.pdomPlayAreaNode.accessibleOrder = [ this.gunNode ];
-      this.pdomControlAreaNode.accessibleOrder = _.uniq( this.pdomControlAreaNode.accessibleOrder.concat( [
+    const restorePDOMOrder = () => {
+      this.pdomPlayAreaNode.pdomOrder = [ this.gunNode ];
+      this.pdomControlAreaNode.pdomOrder = _.uniq( this.pdomControlAreaNode.pdomOrder.concat( [
         this.controlPanel,
         this.sceneRadioButtonGroup
       ].filter( _.identity ) ) );
@@ -142,7 +142,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       controlPanel = this.createControlPanel( panels );
       this.addChild( controlPanel );
 
-      restoreAccessibleOrder();
+      restorePDOMOrder();
     } );
 
     // create radio buttons for the scene - new buttons must be created
@@ -199,12 +199,12 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       this.sceneRadioButtonGroup = newButtonGroup;
       this.pdomControlAreaNode.addChild( newButtonGroup );
 
-      // add laser, all control panels, and scene buttons to accessibleOrder, must be set after
+      // add laser, all control panels, and scene buttons to pdomOrder, must be set after
       // creating new radio buttons
-      restoreAccessibleOrder();
+      restorePDOMOrder();
     } );
 
-    restoreAccessibleOrder();
+    restorePDOMOrder();
   }
 }
 

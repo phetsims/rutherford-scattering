@@ -181,7 +181,7 @@ class RSBaseScreenView extends ScreenView {
     } );
     this.addChild( viewingStreamingOptionsNode );
 
-    this.pdomControlAreaNode.accessibleOrder = [ null, viewingStreamingOptionsNode, playPauseButton, stepButton, resetAllButton ];
+    this.pdomControlAreaNode.pdomOrder = [ null, viewingStreamingOptionsNode, playPauseButton, stepButton, resetAllButton ];
   }
 
   /**
