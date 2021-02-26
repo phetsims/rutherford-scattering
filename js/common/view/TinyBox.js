@@ -19,28 +19,28 @@ const BACK_OFFSET = 0.10;
 const BOX_SIZE = new Dimension2( 10, 10 );
 
 class TinyBox extends Node {
-  
+
   /**
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     options = merge( {
       fill: 'black',
       stroke: 'white',
       lineWidth: 1
     }, options );
-  
+
     const topNode = new Path( new Shape()
       .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
       .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
       .lineTo( BOX_SIZE.width, BACK_DEPTH )
       .lineTo( 0, BACK_DEPTH )
       .close(), options );
-  
+
     assert && assert( !options.children, 'additional children not supported' );
     options.children = [ topNode ];
-  
+
     super( options );
   }
 }

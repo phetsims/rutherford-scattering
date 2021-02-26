@@ -24,9 +24,9 @@ class RutherfordAtom extends Atom {
    * @param {Object} [options]
    */
   constructor( particleRemovedEmitter, protonCountProperty, position, boundingWidth, options ) {
-  
+
     super( position, boundingWidth, options );
-  
+
     // @private
     this.protonCountProperty = protonCountProperty;
     this.particleRemovedemitter = particleRemovedEmitter;

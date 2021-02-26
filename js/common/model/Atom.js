@@ -10,29 +10,29 @@ import Shape from '../../../../kite/js/Shape.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 class Atom {
-  
+
   /**
    * @param {Vector2} position
    * @param {number} boundingWidth
    * @param {Object} [options]
    */
   constructor( position, boundingWidth, options ) {
-  
+
     // @public (read-only)
     this.position = position;
-  
+
     const halfWidth = boundingWidth / 2;
-  
+
     // @public (read-only) - bounding rect is always square
     this.boundingRect = Shape.rectangle( position.x - halfWidth, position.y - halfWidth, boundingWidth, boundingWidth );
-  
+
     // @public (read-only) circle which contains the entire bounding box for the atom
     const radius = Math.sqrt( halfWidth * halfWidth + halfWidth * halfWidth );
     this.boundingCircle = Shape.circle( position.x, position.y, radius );
-  
+
     // @private - array of particles that are currently in the bounding box of this atom
     this.particles = [];
-  
+
   }
 
 

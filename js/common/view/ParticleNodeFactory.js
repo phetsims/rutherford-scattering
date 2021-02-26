@@ -195,7 +195,7 @@ class ParticleNode extends Circle {
   constructor( radius, color, options ) {
     options = options || {};
     assert && assert( !options.fill );
-  
+
     options.fill = new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
       .addColorStop( 0, SPECULAR_HIGHLITE_COLOR )
       .addColorStop( 0.33, color )

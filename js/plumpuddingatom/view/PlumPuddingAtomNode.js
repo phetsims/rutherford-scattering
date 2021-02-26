@@ -11,7 +11,7 @@ import plumPuddingImage from '../../../images/plumPudding_png.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 class PlumPuddingAtomNode extends Image {
-	
+
   /**
    * @param {Object} [options]
    */

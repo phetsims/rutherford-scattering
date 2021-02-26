@@ -258,7 +258,7 @@ class IconCanvasNode extends CanvasNode {
   paintCanvas( context ) {
 
     // paint the nucleus with canvas arcs - slower than image, but better resolution for icons
-    paintNucleusIcon.bind( this )(this.nucleus, this.canvasBounds, context, 'canvasArc' );
+    paintNucleusIcon.bind( this )( this.nucleus, this.canvasBounds, context, 'canvasArc' );
   }
 }
 

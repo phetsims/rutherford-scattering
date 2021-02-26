@@ -13,22 +13,22 @@ import RutherfordAtom from './RutherfordAtom.js';
 import RutherfordNucleus from './RutherfordNucleus.js';
 
 class RutherfordNucleusSpace extends AtomSpace {
-	
+
   /**
    * @param {Property.<number>} protonCountProperty
    * @param {Property.<number>} neutronCountProperty
    * @param {Bounds2} bounds
    */
   constructor( protonCountProperty, neutronCountProperty, bounds ) {
-  
+
     super( protonCountProperty, bounds );
-  
+
     // create a nucleus model containing protons and neutrons
     this.rutherfordNucleus = new RutherfordNucleus( protonCountProperty, neutronCountProperty );
-  
+
     const rutherfordAtom = new RutherfordAtom( this.particleRemovedFromAtomEmitter, protonCountProperty, new Vector2( 0, 0 ), this.bounds.width );
     this.atoms.push( rutherfordAtom );
-  
+
     // make sure that atom bounds are OK
     this.checkAtomBounds();
   }

@@ -12,19 +12,19 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
 
 class BeamNode extends Rectangle {
-	
+
   /**
    * @param {Property.<boolean>} visibleProperty - is the beam visible?
    * @param {Object} [options]
    */
   constructor( visibleProperty, options ) {
-  
+
     options = merge( {
       fill: '#8f8f8f'
     }, options );
-  
+
     super( 0, 0, RSConstants.BEAM_SIZE.width, RSConstants.BEAM_SIZE.height, options );
-  
+
     // no need to unlink, this instance exists for the lifetime of the sim
     visibleProperty.linkAttribute( this, 'visible' );
   }

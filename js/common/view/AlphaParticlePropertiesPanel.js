@@ -42,7 +42,7 @@ const traceCheckboxDescriptionString = rutherfordScatteringStrings.a11y.traceChe
 const FINGER_TRACKER = {};
 
 class AlphaParticlePropertiesPanel extends Panel {
-  
+
   /**
    * @param {AlphaParticlePropertiesPanelContent} content - content for the panel
    * @param {Object} [options]

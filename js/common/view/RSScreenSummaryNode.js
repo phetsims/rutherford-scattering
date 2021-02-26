@@ -13,7 +13,7 @@ import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 const screenSummaryString = rutherfordScatteringStrings.a11y.screenSummary;
 
 class RSScreenSummaryNode extends Node {
-	
+
   /**
    * @param {Object} [options]
    */

@@ -14,46 +14,46 @@ import RSConstants from '../RSConstants.js';
 import Gun from './Gun.js';
 
 class RSBaseModel {
-  
+
   /**
    * @param {Property} userInteractionProperty - true while the user is interacting with something that should stop
    *                                             and remove all particles from the atom space.
    */
   constructor( userInteractionProperty ) {
-  
+
     assert && assert( RSConstants.SPACE_NODE_WIDTH === RSConstants.SPACE_NODE_HEIGHT, 'Space must be square.' );
-  
+
     // @public {number}
     this.alphaParticleEnergyProperty = new Property( RSConstants.DEFAULT_ALPHA_ENERGY );
-  
+
     // @public {boolean}
     this.runningProperty = new Property( true );
-  
+
     // @public
     this.userInteractionProperty = userInteractionProperty;
-  
+
     // @public (read-only) model computation space
     this.bounds = new Bounds2(
       -RSConstants.SPACE_NODE_WIDTH / 4,
       -RSConstants.SPACE_NODE_HEIGHT / 4,
       RSConstants.SPACE_NODE_WIDTH / 4,
       RSConstants.SPACE_NODE_HEIGHT / 4 );
-  
+
     // @public (read-only) - {AlphaParticle[]} all active alpha particle models
     this.particles = [];
-  
+
     // @protected - {Array.<RutherfordAtomSpace|PlumPuddingAtomSpace|RutherfordNucleusSpace>}
     this.atomSpaces = [];
-  
+
     // @protected - manual step size used when sim is paused
     this.maunalStepDt = 1 / 60;
-  
+
     // @protected - the gun which introduces (aka. 'shoots') alpha particles
     this.gun = new Gun( this );
-  
+
     // @protected - used to signal when a sim step has occurred
     this.stepEmitter = new Emitter( { parameters: [ { valueType: 'number' } ] } );
-  
+
     // no need to unlink this property as base model will exist for life of sim
     const userInteractionListener = userInteraction => {
       if ( userInteraction ) {

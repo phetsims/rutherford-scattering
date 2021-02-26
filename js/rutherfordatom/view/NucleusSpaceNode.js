@@ -19,7 +19,7 @@ const observationWindowString = rutherfordScatteringStrings.a11y.observationWind
 const nucleusSpaceDescriptionString = rutherfordScatteringStrings.a11y.nucleusSpaceDescription;
 
 class NucleusSpaceNode extends ParticleSpaceNode {
-  
+
   /**
    * @param {RSBaseModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
@@ -28,10 +28,10 @@ class NucleusSpaceNode extends ParticleSpaceNode {
    */
   constructor( model, showAlphaTraceProperty, modelViewTransform, config ) {
     config = merge( {
-  
+
       // {Bounds2}
       canvasBounds: required( config.canvasBounds ),
-  
+
       // pdom
       tagName: 'div',
       labelTagName: 'h3',
@@ -39,15 +39,15 @@ class NucleusSpaceNode extends ParticleSpaceNode {
       descriptionContent: nucleusSpaceDescriptionString,
       appendDescription: true
     }, config );
-  
+
     super( model.nucleusSpace, showAlphaTraceProperty, modelViewTransform, config );
-  
+
     // @private - atom image generator
     this.atomNode = new RutherfordNucleusNode( model.userInteractionProperty, model.protonCountProperty,
       model.neutronCountProperty, model.nucleusSpace.rutherfordNucleus );
-  
+
     this.invalidatePaint();
-  
+
     // workaround for an issue where the asynchronous images for the RutherfordNuclues weren't getting
     // updated correctly - when marked as 'dirty', the atom node will be explicitly redrawn to ensure that
     // it looks correct in the space

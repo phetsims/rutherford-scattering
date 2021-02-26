@@ -11,7 +11,7 @@ import AtomSpace from '../../common/model/AtomSpace.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 class PlumPuddingAtomSpace extends AtomSpace {
-	
+
   /**
    * @param {Property.<number>} protonCountProperty
    * @param {Bounds2} bounds

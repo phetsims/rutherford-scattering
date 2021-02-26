@@ -23,37 +23,37 @@ const RADIUS_SCALE = 5.95; // scale to make the radii visible in the space, chos
 const ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
 
 class AtomCollectionNode extends Node {
-  
+
   /**
    * @param {RutherfordAtomSpace} atomSpace - AtomSpace containing the atoms
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Object} [options]
    */
   constructor( atomSpace, modelViewTransform, options ) {
-  
+
     super( options );
-  
+
     // @public (read-only) {null|HTMLImageElement} - This node will eventually be drawn with canvas with
     // context.drawImage. The image is created asynchronously in this constructor.
     this.image = null;
-  
+
     // draw each atom in the space - called every time the color profile changes
     const drawAtomCollection = () => {
-  
+
       // remove the all children
       this.removeAllChildren();
       atomSpace.atoms.forEach( atom => {
-  
+
         // a small circle represents each nucleus
         const nucleusCircle = ParticleNodeFactory.createNucleus();
         nucleusCircle.center = modelViewTransform.modelToViewPosition( atom.position );
         this.addChild( nucleusCircle );
-  
+
         // create the radii - concentric circles with dashed lines spaced proportionally to the Bohr
         // energies
         const getScaledRadius = index => {
           let radius = 0;
-  
+
           // sum the Bohr energies up to this index
           for ( let i = 1; i <= index; i++ ) {
             const bohrEnergy = IONIZATION_ENERGY / ( i * i );
@@ -61,32 +61,32 @@ class AtomCollectionNode extends Node {
           }
           return radius * RADIUS_SCALE;
         };
-  
+
         // draw the radii
         for ( let i = ENERGY_LEVELS; i > 0; i-- ) {
           const scaledRadius = getScaledRadius( i );
           const radius = new Circle( scaledRadius, { stroke: 'grey', lineDash: [ 5, 5 ], center: nucleusCircle.center } );
           this.addChild( radius );
         }
-  
+
         // draw the bounds of each nucleus
         if ( RSQueryParameters.showDebugShapes ) {
           const boundsRectangle = new Path( modelViewTransform.modelToViewShape( atom.boundingRect ), { stroke: 'red' } );
           this.addChild( boundsRectangle );
-  
+
           const boundingCircle = new Path( modelViewTransform.modelToViewShape( atom.boundingCircle ), { stroke: 'red' } );
           this.addChild( boundingCircle );
         }
       } );
     };
-  
+
     // Draw to image whenever the color changes so this can be drawn to a CanvasNode. The only color that changes is
     // nucleusColorProperty (used in ParticleNodeFactory.createNucleus()) and we link directly to that color rather
     // than profileNameProperty so that we redraw the image if that color changes from
     // rutherford-scattering-colors.hmtl. No need to unlink, this instance exists for life of sim
     RSColorProfile.nucleusColorProperty.link( () => {
       drawAtomCollection();
-  
+
       // update the image
       this.image = this.toImage( ( image, x, y ) => {
         this.image = image;

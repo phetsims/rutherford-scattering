@@ -15,9 +15,9 @@ import RSColorProfile from '../RSColorProfile.js';
 
 class MenuOptionsNode extends VBox {
   constructor() {
-  
+
     const projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
-  
+
     super( {
       children: [ projectorCheckbox ],
       spacing: OptionsDialog.DEFAULT_SPACING,

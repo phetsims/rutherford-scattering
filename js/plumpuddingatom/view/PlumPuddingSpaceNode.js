@@ -14,7 +14,7 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
 
 class PlumPuddingSpaceNode extends ParticleSpaceNode {
-  
+
   /**
    * @param {RSBaseModel} model
    * @param {Property.<boolean>} showAlphaTraceProperty
@@ -26,9 +26,9 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
       canvasBounds: required( config.canvasBounds ),
       particleTraceColor: new Color( 'grey' )
     }, config );
-  
+
     super( model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, config );
-  
+
     // plum pudding image - calc image scale and center positioning
     this.atomNode = new PlumPuddingAtomNode();
     const scale = Math.min( this.width, this.height ) /
@@ -38,7 +38,7 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
     const imageX = this.bounds.centerX - imageWidth / 2;
     const imageY = this.bounds.centerY - imageHeight / 2;
     this.atomNodeRect = { x: imageX, y: imageY, width: imageWidth, height: imageHeight };
-  
+
     this.invalidatePaint();
   }
 

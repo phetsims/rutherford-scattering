@@ -157,27 +157,27 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
      * @returns {RectangularRadioButtonGroup} - returns a RectangularRadioButtonGroup that must be disposed when profile changes
      */
     const createRadioButtons = atomIconImage => new RectangularRadioButtonGroup( model.sceneProperty, [
-        { value: 'atom', node: new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
-        { value: 'nucleus', node: nucleusIcon, labelContent: nuclearScaleViewString }
-      ], {
-        orientation: 'vertical',
-        spacing: 15,
-        left: this.targetMaterialNode.left,
-        top: this.spaceNode.top,
-        baseColor: RSColorProfile.panelColorProperty.value, // TODO: update this when requested
-        deselectedStroke: RSColorProfile.panelBorderColorProperty.value, // TODO: update this when requested
-        selectedStroke: RSColorProfile.radioButtonBorderColorProperty, // TODO: update this when requested
-        buttonContentYMargin: 8,
-        selectedLineWidth: 2,
-        deselectedLineWidth: 1.5,
-        maxWidth: this.targetMaterialNode.width,
+      { value: 'atom', node: new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
+      { value: 'nucleus', node: nucleusIcon, labelContent: nuclearScaleViewString }
+    ], {
+      orientation: 'vertical',
+      spacing: 15,
+      left: this.targetMaterialNode.left,
+      top: this.spaceNode.top,
+      baseColor: RSColorProfile.panelColorProperty.value, // TODO: update this when requested
+      deselectedStroke: RSColorProfile.panelBorderColorProperty.value, // TODO: update this when requested
+      selectedStroke: RSColorProfile.radioButtonBorderColorProperty, // TODO: update this when requested
+      buttonContentYMargin: 8,
+      selectedLineWidth: 2,
+      deselectedLineWidth: 1.5,
+      maxWidth: this.targetMaterialNode.width,
 
-        tagName: 'div',
-        descriptionContent: switchScaleDescriptionString,
-        labelTagName: 'h3',
-        labelContent: switchScaleString,
-        appendDescription: true
-      } );
+      tagName: 'div',
+      descriptionContent: switchScaleDescriptionString,
+      labelTagName: 'h3',
+      labelContent: switchScaleString,
+      appendDescription: true
+    } );
 
     // @private
     this.sceneRadioButtonGroup = createRadioButtons( atomImage );

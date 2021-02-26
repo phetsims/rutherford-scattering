@@ -21,14 +21,14 @@ const BACK_COLOR = '#8c7e29';
 const FRONT_COLOR = '#d6cb86';
 
 class TargetMaterialNode extends Node {
-  
+
   /**
    * @param {Object} [options]
    */
   constructor( options ) {
-  
+
     options = options || {};
-  
+
     // top face, in perspective
     const topNode = new Path( new Shape()
       .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )
@@ -40,10 +40,10 @@ class TargetMaterialNode extends Node {
       stroke: 'black',
       lineWidth: 1
     } );
-  
+
     assert && assert( !options.children, 'additional children not supported' );
     options.children = [ topNode ];
-  
+
     super( options );
   }
 }

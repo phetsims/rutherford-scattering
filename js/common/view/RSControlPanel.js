@@ -22,9 +22,9 @@ class RSControlPanel extends Node {
    * @param {Object} [options]
    */
   constructor( panels, options ) {
-  
+
     super();
-  
+
     const defaultOptions = {
       spacing: RSConstants.PANEL_VERTICAL_MARGIN,
       align: 'left',
@@ -32,13 +32,13 @@ class RSControlPanel extends Node {
       children: panels
     };
     this.panelOptions = merge( defaultOptions, options ); // @private
-  
+
     // @private - arrange control panels vertically
     const vBox = new VBox( this.panelOptions );
     this.addChild( vBox );
-  
+
     this.mutate( options );
-  
+
     // disposal to prevent memory leak - this is important because a new
     // control panel is created every time the scene or color scheme changes
     // @private

@@ -37,36 +37,36 @@ class ParticleSpaceNode extends CanvasNode {
    */
   constructor( atomSpace, showAlphaTraceProperty, modelViewTransform, config ) {
     config = merge( {
-  
+
       // {Bounds2}
       canvasBounds: required( config.canvasBounds ),
       particleStyle: 'nucleus', // 'nucleus'|'particle'
       particleTraceColor: new Color( 255, 0, 255 )
     }, config );
-  
+
     // the bounds should be eroded by 10 so it appears that particles glide into the space
     config.canvasBounds = config.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
-  
+
     super( config );
 
     this.particleStyle = config.particleStyle;
     this.particleTraceColor = config.particleTraceColor;
-  
+
     // @private
     this.atomSpace = atomSpace;
-  
+
     // @private
     this.alphaParticleImage = null;
-  
+
     // @private - model to view coordinate transform
     this.modelViewTransform = modelViewTransform;
-  
+
     // @private
     this.showAlphaTraceProperty = showAlphaTraceProperty;
-  
+
     // @private
     this.particleTraceColorWithFade = 'rgba(' + config.particleTraceColor.r + ',' + config.particleTraceColor.g + ',' + config.particleTraceColor.b + ',{0})';
-  
+
     // @private - the area to be used as the 'viewport', border not included
     this.clipRect = {
       x: this.canvasBounds.getX() + SPACE_BORDER_WIDTH / 2,
@@ -74,7 +74,7 @@ class ParticleSpaceNode extends CanvasNode {
       width: this.canvasBounds.getWidth() - SPACE_BORDER_WIDTH,
       height: this.canvasBounds.getHeight() - SPACE_BORDER_WIDTH
     };
-  
+
     // create a single alpha particle image to use for rendering all particles - asynchronous
     let alphaParticle;
     if ( this.particleStyle === 'nucleus' ) {
@@ -88,7 +88,7 @@ class ParticleSpaceNode extends CanvasNode {
       this.particleImageHalfWidth = this.alphaParticleImage.width / 2;
       this.particleImageHalfHeight = this.alphaParticleImage.height / 2;
     } );
-  
+
     this.invalidatePaint();
   }
 

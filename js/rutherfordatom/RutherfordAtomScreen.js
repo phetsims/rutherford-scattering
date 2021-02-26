@@ -34,7 +34,7 @@ class RutherfordAtomScreen extends Screen {
 
     super(
       () => new RutherfordAtomModel(),
-      model =>  new RutherfordAtomScreenView( model ),
+      model => new RutherfordAtomScreenView( model ),
       options
     );
   }

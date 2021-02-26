@@ -19,18 +19,18 @@ const GUN_INTENSITY = 1;
 const X0_MIN_FRACTION = 0.04; // closest particle can get horizontally to atom as a fraction of atomic bounds
 
 class Gun {
-  
+
   /**
    * {RSBaseModel} model
    */
   constructor( model ) {
-  
+
     // @private
     this.model = model;
-  
+
     // @private
     this.dtSinceGunFired = 0;
-  
+
     // function to correct the initial position of the particle if necessary
     // the trajectory algorithm fails if particle is too close to nucleus,
     // so this correction ensure that this does not happen
@@ -41,7 +41,7 @@ class Gun {
     const correction1 = 2;
     const correction2 = 10;
     this.correctionFunction = new LinearFunction( width1, width2, correction1, correction2 );
-  
+
     // @public {boolean} is the gun on?
     this.onProperty = new Property( false );
   }

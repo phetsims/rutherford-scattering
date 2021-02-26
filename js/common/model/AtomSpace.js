@@ -13,7 +13,7 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 import AlphaParticle from './AlphaParticle.js';
 
 class AtomSpace {
-  
+
   /**
    * Constructor.
    * @param {Property.<number>} protonCountProperty
@@ -21,30 +21,30 @@ class AtomSpace {
    * @param {Object} [options]
    */
   constructor( protonCountProperty, bounds, options ) {
-  
+
     options = merge( {
       atomWidth: bounds.width // width of each atom in the space, width of space by default
     }, options );
-  
+
     // @public (read-only)
     this.atoms = [];
     this.particles = []; // all particles contained by this space
     this.particlesInEmptySpace = []; // all particles in empty space, excluding those that are in an atom
     this.bounds = bounds;
     this.atomWidth = options.atomWidth;
-  
+
     // emitter which signifies that a particle has been transitioned to a new atom
     this.particleTransitionedEmitter = new Emitter( { parameters: [ { valueType: AlphaParticle } ] } );
-  
+
     // @public - emitter which signifies that a particle has been removed from an atom
     this.particleRemovedFromAtomEmitter = new Emitter( { parameters: [ { valueType: AlphaParticle } ] } );
-  
+
     // when a particle has been removed from an atom, remove it from the space as well
     // no need to remove listener, exists for life of sim
     this.particleRemovedFromAtomEmitter.addListener( particle => {
       this.removeParticle( particle );
     } );
-  
+
     // @public - whether this space is visible or not
     this.isVisible = true;
   }
