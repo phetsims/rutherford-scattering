@@ -83,7 +83,7 @@ class RSBaseModel {
     this.atomSpaces.forEach( space => {
       if ( space.isVisible ) {
         visibleSpace = space;
-        return;
+        
       }
     } );
     assert && assert( visibleSpace, 'There must be a visible space' );
