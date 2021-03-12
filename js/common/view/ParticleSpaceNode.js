@@ -65,7 +65,7 @@ class ParticleSpaceNode extends CanvasNode {
     this.showAlphaTraceProperty = showAlphaTraceProperty;
 
     // @private
-    this.particleTraceColorWithFade = 'rgba(' + config.particleTraceColor.r + ',' + config.particleTraceColor.g + ',' + config.particleTraceColor.b + ',{0})';
+    this.particleTraceColorWithFade = `rgba(${config.particleTraceColor.r},${config.particleTraceColor.g},${config.particleTraceColor.b},{0})`;
 
     // @private - the area to be used as the 'viewport', border not included
     this.clipRect = {
