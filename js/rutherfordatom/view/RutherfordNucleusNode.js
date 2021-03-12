@@ -235,7 +235,7 @@ class IconCanvasNode extends CanvasNode {
                       Math.pow( numberOfParticles, PARTICLE_COUNT_EXP );
 
     // used to center elements drawn in the context
-    var nucleusBounds = new Bounds2( 0, 0, 2 * maxRadius, 2 * maxRadius );
+    const nucleusBounds = new Bounds2( 0, 0, 2 * maxRadius, 2 * maxRadius );
 
     // set canvasBounds based on max radius of atom
     options = options || {};

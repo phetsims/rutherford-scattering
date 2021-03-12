@@ -219,14 +219,14 @@ const drawParticleWithCanvas = ( x, y, radius, color, context ) => {
   context.beginPath();
   context.arc( x, y, radius, 0, 2 * Math.PI, false );
 
-  var useConcentric = !!platform.safari;
-  var x0 = useConcentric ? x - 0.066 : x + radius * 0.1;
-  var y0 = useConcentric ? y + 0.2 * radius : y + radius * 0.7;
-  var x1 = useConcentric ? x - 0.066 : x + -radius * 0.2;
-  var y1 = useConcentric ? y + 0.2 * radius : y + -radius * 0.3;
+  const useConcentric = !!platform.safari;
+  const x0 = useConcentric ? x - 0.066 : x + radius * 0.1;
+  const y0 = useConcentric ? y + 0.2 * radius : y + radius * 0.7;
+  const x1 = useConcentric ? x - 0.066 : x + -radius * 0.2;
+  const y1 = useConcentric ? y + 0.2 * radius : y + -radius * 0.3;
 
   // create the radial gradient from the center of the arc
-  var gradient = context.createRadialGradient( x0, y0, 0.2, x1, y1, radius * 2 );
+  const gradient = context.createRadialGradient( x0, y0, 0.2, x1, y1, radius * 2 );
   gradient.addColorStop( 0, SPECULAR_HIGHLITE_COLOR );
   gradient.addColorStop( 0.33, color );
   gradient.addColorStop( 1, 'black' );
