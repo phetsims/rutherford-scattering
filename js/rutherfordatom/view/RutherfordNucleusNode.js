@@ -121,6 +121,9 @@ class RutherfordNucleusNode extends CanvasNode {
     };
     userInteractionProperty.link( userInteractionListener );
 
+    // @private - paint function for the Nucleus, bound to this CanvasNode
+    this.boundPaintNucleus = paintNucleusIcon.bind( this );
+
     this.invalidatePaint();
 
     // @private
@@ -189,8 +192,7 @@ class RutherfordNucleusNode extends CanvasNode {
         return;
       }
 
-      const boundPaintNucleus = paintNucleusIcon.bind( this, this.rutherfordNucleus, bounds, context, 'canvasImage' );
-      boundPaintNucleus();
+      this.boundPaintNucleus( this.rutherfordNucleus, bounds, context, 'canvasImage' );
 
       // notify as dirty so that the nucleus gets redrawn
       this.isDirty = true;
@@ -246,6 +248,9 @@ class IconCanvasNode extends CanvasNode {
     this.nucleusBounds = nucleusBounds;
     this.nucleus = nucleus;
 
+    // @private - listener to paint the icon, bound to this CanvasNode
+    this.boundPaintNucleusIcon = paintNucleusIcon.bind( this );
+
     this.invalidatePaint();
   }
 
@@ -258,7 +263,7 @@ class IconCanvasNode extends CanvasNode {
   paintCanvas( context ) {
 
     // paint the nucleus with canvas arcs - slower than image, but better resolution for icons
-    paintNucleusIcon.bind( this )( this.nucleus, this.canvasBounds, context, 'canvasArc' );
+    this.boundPaintNucleusIcon( this.nucleus, this.canvasBounds, context, 'canvasArc' );
   }
 }
 
