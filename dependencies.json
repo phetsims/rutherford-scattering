@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.10-rc.1 Fri May 07 2021 11:46:47 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# rutherford-scattering 1.1.10-rc.1 Mon May 10 2021 12:22:21 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -45,20 +45,20 @@
     "branch": "HEAD"
   },
   "phetmarks": {
-    "sha": "1ac26ce3cd592f5b591a1e426f128a29267c53fb",
-    "branch": "HEAD"
+    "sha": "7dc873f9e0037d6bfc1d0aef8e56d727bde745e9",
+    "branch": "rutherford-scattering-1.1"
   },
   "query-string-machine": {
     "sha": "21fd2a0a6535b8e82d0db9adf42cbca3403b6410",
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "ebcc34857371199ecd18eb0d2fe8db0b4935f864",
+    "sha": "d2fb50e02727e873cd5e6cab1d14da8abbc97e25",
     "branch": "1.1"
   },
   "scenery": {
     "sha": "520374d606c44f4b857db1917d23f48e27b947aa",
-    "branch": "rutherford-scattering-1.1"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "9942abf465964bf25654faae0676d1886bbe4747",
