@@ -1,4 +1,4 @@
-// Copyright 2016-2020, University of Colorado Boulder
+// Copyright 2016-2021, University of Colorado Boulder
 
 /**
  * Visual representation of a collection of rutherford atoms. This draws the actual nuclei and electron shells in the
