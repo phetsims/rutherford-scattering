@@ -13,6 +13,7 @@ import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
+import colorProfileProperty from '../../../../scenery/js/util/colorProfileProperty.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import atomProjectorImage from '../../../images/AtomProjector_png.js';
 import atomImage from '../../../images/Atom_png.js';
@@ -185,7 +186,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
 
     // if the background, panel or stroke colors change, draw a new button group
     // no need to unlink, screen view exists for life of sim
-    RSColorProfile.profileNameProperty.link( profileName => {
+    colorProfileProperty.link( profileName => {
 
       // remove and dispose of the old button group
       this.pdomControlAreaNode.removeChild( this.sceneRadioButtonGroup );
