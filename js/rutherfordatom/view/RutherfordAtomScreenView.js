@@ -183,7 +183,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     this.sceneRadioButtonGroup = createRadioButtons( atomImage );
     this.pdomControlAreaNode.addChild( this.sceneRadioButtonGroup );
 
-    // if the bacgrkound, panel or stroke colors change, draw a new button group
+    // if the background, panel or stroke colors change, draw a new button group
     // no need to unlink, screen view exists for life of sim
     RSColorProfile.profileNameProperty.link( profileName => {
 
