@@ -14,8 +14,7 @@ import rutherfordScattering from '../rutherfordScattering.js';
 
 // Initial colors for each profile, by string key.  If a projector color is not defined, it will take
 // the 'default' value provided.
-// NOTE: This is NOT provided to clients directly, but each of these are passed to the Property constructor,
-// see ColorProfile.js
+// NOTE: This is NOT provided to clients directly, but each of these are passed to the Property constructor.
 const RSColorProfile = {
   backgroundColorProperty: new ProfileColorProperty( 'backgroundColor', {
     default: new Color( 0, 0, 0 ),

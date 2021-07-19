@@ -7,12 +7,12 @@
  */
 
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import ColorProfile from '../../../../scenery-phet/js/ColorProfile.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
+import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
 import colorProfileProperty from '../../../../scenery/js/util/colorProfileProperty.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import atomProjectorImage from '../../../images/AtomProjector_png.js';
@@ -193,7 +193,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       this.sceneRadioButtonGroup.dispose();
 
       // get the correct image for the 'atom' scene icon
-      const iconImage = ( profileName === ColorProfile.PROJECTOR_COLOR_PROFILE_NAME ) ? atomProjectorImage : atomImage;
+      const iconImage = ( profileName === SceneryConstants.PROJECTOR_COLOR_PROFILE_NAME ) ? atomProjectorImage : atomImage;
 
       // create the new radio button group
       const newButtonGroup = createRadioButtons( iconImage );
