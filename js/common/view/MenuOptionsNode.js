@@ -11,12 +11,11 @@ import OptionsDialog from '../../../../joist/js/OptionsDialog.js';
 import ProjectorModeCheckbox from '../../../../joist/js/ProjectorModeCheckbox.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RSColorProfile from '../RSColorProfile.js';
 
 class MenuOptionsNode extends VBox {
   constructor() {
 
-    const projectorCheckbox = new ProjectorModeCheckbox( RSColorProfile );
+    const projectorCheckbox = new ProjectorModeCheckbox();
 
     super( {
       children: [ projectorCheckbox ],
