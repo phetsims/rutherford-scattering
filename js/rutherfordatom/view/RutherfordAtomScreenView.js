@@ -193,7 +193,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       this.sceneRadioButtonGroup.dispose();
 
       // get the correct image for the 'atom' scene icon
-      const iconImage = ( profileName === SceneryConstants.PROJECTOR_COLOR_PROFILE_NAME ) ? atomProjectorImage : atomImage;
+      const iconImage = ( profileName === SceneryConstants.PROJECTOR_COLOR_PROFILE ) ? atomProjectorImage : atomImage;
 
       // create the new radio button group
       const newButtonGroup = createRadioButtons( iconImage );
