@@ -15,7 +15,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
 import plumPuddingImage from '../../../images/plumPuddingIcon_png.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RSColorProfile from '../RSColorProfile.js';
+import RSColors from '../RSColors.js';
 
 // constants
 const SPECULAR_HIGHLITE_COLOR = 'rgb(200,200,200)';
@@ -103,7 +103,7 @@ const ParticleNodeFactory = {
   createNucleus() {
     return new Node( {
       children: [
-        new Circle( NUCLEUS_RADIUS, { fill: RSColorProfile.nucleusColorProperty } )
+        new Circle( NUCLEUS_RADIUS, { fill: RSColors.nucleusColorProperty } )
       ]
     } );
   },

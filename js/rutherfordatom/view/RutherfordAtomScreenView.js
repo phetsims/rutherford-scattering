@@ -17,7 +17,7 @@ import colorProfileProperty from '../../../../scenery/js/util/colorProfileProper
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import atomProjectorImage from '../../../images/AtomProjector_png.js';
 import atomImage from '../../../images/Atom_png.js';
-import RSColorProfile from '../../common/RSColorProfile.js';
+import RSColors from '../../common/RSColors.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
@@ -130,7 +130,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
 
       // recenter the gun beam and set new fill
       beam.centerX = this.gunNode.centerX;
-      beam.fill = atomSceneVisible ? RSColorProfile.atomBeamColorProperty : RSColorProfile.nucleusBeamColorProperty;
+      beam.fill = atomSceneVisible ? RSColors.atomBeamColorProperty : RSColors.nucleusBeamColorProperty;
 
       // dispose and remove the old control panel
       if ( controlPanel ) {
@@ -165,9 +165,9 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       spacing: 15,
       left: this.targetMaterialNode.left,
       top: this.spaceNode.top,
-      baseColor: RSColorProfile.panelColorProperty.value, // TODO: update this when requested
-      deselectedStroke: RSColorProfile.panelBorderColorProperty.value, // TODO: update this when requested
-      selectedStroke: RSColorProfile.radioButtonBorderColorProperty, // TODO: update this when requested
+      baseColor: RSColors.panelColorProperty.value, // TODO: update this when requested
+      deselectedStroke: RSColors.panelBorderColorProperty.value, // TODO: update this when requested
+      selectedStroke: RSColors.radioButtonBorderColorProperty, // TODO: update this when requested
       buttonContentYMargin: 8,
       selectedLineWidth: 2,
       deselectedLineWidth: 1.5,

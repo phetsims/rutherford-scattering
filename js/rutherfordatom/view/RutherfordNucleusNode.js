@@ -9,7 +9,7 @@
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
-import RSColorProfile from '../../common/RSColorProfile.js';
+import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -181,7 +181,7 @@ class RutherfordNucleusNode extends CanvasNode {
       context.beginPath();
       context.lineWidth = OUTLINE_LINE_WIDTH;
       context.setLineDash( OUTLINE_LINE_DASH );
-      context.strokeStyle = RSColorProfile.nucleusOutlineColorProperty.get().toCSS();
+      context.strokeStyle = RSColors.nucleusOutlineColorProperty.get().toCSS();
       context.arc( this.centerX, this.centerY, this.radius, 0, 2 * Math.PI );
       context.stroke();
     }

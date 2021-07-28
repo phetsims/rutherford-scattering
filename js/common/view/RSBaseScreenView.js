@@ -23,7 +23,7 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
-import RSColorProfile from '../RSColorProfile.js';
+import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 import BeamNode from './BeamNode.js';
 import RSControlPanel from './RSControlPanel.js';
@@ -86,7 +86,7 @@ class RSBaseScreenView extends ScreenView {
       centerX: this.gunNode.centerX,
       top: this.gunNode.bottom + 15,
       font: new PhetFont( 15 ),
-      fill: RSColorProfile.panelLabelColorProperty,
+      fill: RSColors.panelLabelColorProperty,
       maxWidth: 210
     } );
     this.addChild( alphaParticlesText );
@@ -95,7 +95,7 @@ class RSBaseScreenView extends ScreenView {
     this.beamNode = new BeamNode( model.gun.onProperty, {
       centerX: this.gunNode.centerX,
       bottom: this.gunNode.top,
-      fill: RSColorProfile.atomBeamColorProperty
+      fill: RSColors.atomBeamColorProperty
     } );
     this.addChild( this.beamNode );
 

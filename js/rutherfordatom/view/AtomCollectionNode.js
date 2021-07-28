@@ -12,7 +12,7 @@
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import RSColorProfile from '../../common/RSColorProfile.js';
+import RSColors from '../../common/RSColors.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -84,7 +84,7 @@ class AtomCollectionNode extends Node {
     // nucleusColorProperty (used in ParticleNodeFactory.createNucleus()) and we link directly to that color rather
     // than profileNameProperty so that we redraw the image if that color changes from
     // rutherford-scattering-colors.hmtl. No need to unlink, this instance exists for life of sim
-    RSColorProfile.nucleusColorProperty.link( () => {
+    RSColors.nucleusColorProperty.link( () => {
       drawAtomCollection();
 
       // update the image

@@ -17,7 +17,7 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RSColorProfile from '../RSColorProfile.js';
+import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
 
@@ -125,7 +125,7 @@ class ParticleSpaceNode extends CanvasNode {
     // viewport clip
     context.beginPath();
     context.strokeStyle = 'transparent';
-    context.fillStyle = RSColorProfile.backgroundColorProperty.get().toCSS();
+    context.fillStyle = RSColors.backgroundColorProperty.get().toCSS();
     context.rect( this.clipRect.x, this.clipRect.y, this.clipRect.width, this.clipRect.height );
     context.stroke();
     context.fill();

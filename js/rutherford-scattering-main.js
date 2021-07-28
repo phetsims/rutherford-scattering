@@ -9,7 +9,7 @@
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import HighlightOverlay from '../../scenery/js/overlays/HighlightOverlay.js';
-import RSColorProfile from './common/RSColorProfile.js';
+import RSColors from './common/RSColors.js';
 import MenuOptionsNode from './common/view/MenuOptionsNode.js';
 import PlumPuddingAtomScreen from './plumpuddingatom/PlumPuddingAtomScreen.js';
 import rutherfordScatteringStrings from './rutherfordScatteringStrings.js';
@@ -33,8 +33,8 @@ const simOptions = {
 };
 
 // group focus highlights are synced with color profile
-HighlightOverlay.setInnerGroupHighlightColor( RSColorProfile.innerGroupHighlightColorProperty );
-HighlightOverlay.setOuterGroupHighlightColor( RSColorProfile.outerGroupHighlightColorProperty );
+HighlightOverlay.setInnerGroupHighlightColor( RSColors.innerGroupHighlightColorProperty );
+HighlightOverlay.setOuterGroupHighlightColor( RSColors.outerGroupHighlightColorProperty );
 
 simLauncher.launch( () => {
   const screens = [

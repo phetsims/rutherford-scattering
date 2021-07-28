@@ -14,7 +14,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RSColorProfile from '../RSColorProfile.js';
+import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
 // constants
@@ -38,7 +38,7 @@ class ScaleInfoNode extends Node {
     // scale text
     const labelText = new RichText( label, {
       font: options.font,
-      fill: RSColorProfile.panelLabelColorProperty,
+      fill: RSColors.panelLabelColorProperty,
       maxWidth: 0.9 * width
     } );
 
@@ -50,7 +50,7 @@ class ScaleInfoNode extends Node {
         headHeight: ARROW_HEAD_HEIGHT,
         headWidth: ARROW_HEAD_WIDTH,
         tailWidth: 2,
-        fill: RSColorProfile.panelLabelColorProperty
+        fill: RSColors.panelLabelColorProperty
       } );
 
     // right arrow
@@ -60,17 +60,17 @@ class ScaleInfoNode extends Node {
         headHeight: ARROW_HEAD_HEIGHT,
         headWidth: ARROW_HEAD_WIDTH,
         tailWidth: 2,
-        fill: RSColorProfile.panelLabelColorProperty
+        fill: RSColors.panelLabelColorProperty
       } );
 
     // end markers
     const leftMarker = new Path( new Shape().moveTo( leftArrowX, labelText.bounds.minY ).lineTo( leftArrowX, labelText.bounds.maxY ), {
-      stroke: RSColorProfile.panelLabelColorProperty,
+      stroke: RSColors.panelLabelColorProperty,
       lineWidth: 1.5
     } );
 
     const rightMarker = new Path( new Shape().moveTo( rightArrowX, labelText.bounds.minY ).lineTo( rightArrowX, labelText.bounds.maxY ), {
-      stroke: RSColorProfile.panelLabelColorProperty,
+      stroke: RSColors.panelLabelColorProperty,
       lineWidth: 1.5
     } );
 

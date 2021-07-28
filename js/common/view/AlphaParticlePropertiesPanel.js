@@ -22,7 +22,7 @@ import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
-import RSColorProfile from '../RSColorProfile.js';
+import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
 // constants
@@ -53,7 +53,7 @@ class AlphaParticlePropertiesPanel extends Panel {
     const alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelTitleColorProperty,
+      fill: RSColors.panelTitleColorProperty,
       maxWidth: 215
     } );
 
@@ -69,8 +69,8 @@ class AlphaParticlePropertiesPanel extends Panel {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'center',
-      fill: RSColorProfile.panelColorProperty,
-      stroke: RSColorProfile.panelBorderColorProperty,
+      fill: RSColors.panelColorProperty,
+      stroke: RSColors.panelBorderColorProperty,
 
       // pdom
       tagName: 'div',
@@ -128,25 +128,25 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSColorProfile.panelColorProperty,
-      stroke: RSColorProfile.panelBorderColorProperty
+      fill: RSColors.panelColorProperty,
+      stroke: RSColors.panelBorderColorProperty
     }, options );
 
     const energyText = new Text( energyString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelLabelColorProperty,
+      fill: RSColors.panelLabelColorProperty,
       maxWidth: 210
     } );
     const minEnergyText = new Text( minEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
-      fill: RSColorProfile.panelSliderLabelColorProperty,
+      fill: RSColors.panelSliderLabelColorProperty,
       maxWidth: options.maxWidth / 5,
       pickable: false
     } );
     const maxEnergyText = new Text( maxEnergyString, {
       font: RSConstants.PANEL_TICK_FONT,
-      fill: RSColorProfile.panelSliderLabelColorProperty,
+      fill: RSColors.panelSliderLabelColorProperty,
       maxWidth: options.maxWidth / 5,
       pickable: false
     } );
@@ -187,9 +187,9 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       RSConstants.MIN_ALPHA_ENERGY,
       RSConstants.MAX_ALPHA_ENERGY
     ), {
-      trackFill: RSColorProfile.panelSliderLabelColorProperty,
-      trackStroke: RSColorProfile.panelSliderLabelColorProperty,
-      majorTickStroke: RSColorProfile.panelSliderLabelColorProperty,
+      trackFill: RSColors.panelSliderLabelColorProperty,
+      trackStroke: RSColors.panelSliderLabelColorProperty,
+      majorTickStroke: RSColors.panelSliderLabelColorProperty,
       majorTickLength: 15,
       tickLabelSpacing: 2,
       trackSize: new Dimension2( sliderWidth, 1 ),
@@ -227,12 +227,12 @@ class AlphaParticlePropertiesPanelContent extends VBox {
     const showTraceText = new Text( showTracesString, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelLabelColorProperty,
+      fill: RSColors.panelLabelColorProperty,
       maxWidth: 180
     } );
     const showTraceCheckbox = new Checkbox( showTraceText, showTracesProperty, {
-      checkboxColor: RSColorProfile.panelLabelColorProperty,
-      checkboxColorBackground: RSColorProfile.panelColorProperty,
+      checkboxColor: RSColors.panelLabelColorProperty,
+      checkboxColorBackground: RSColors.panelColorProperty,
 
       // pdom
       labelContent: tracesString,

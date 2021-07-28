@@ -16,7 +16,7 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
-import RSColorProfile from '../RSColorProfile.js';
+import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
 const legendString = rutherfordScatteringStrings.legend;
@@ -36,7 +36,7 @@ class ParticleLegendPanel extends Panel {
     const legendText = new Text( legendString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelTitleColorProperty,
+      fill: RSColors.panelTitleColorProperty,
       maxWidth: 225
     } );
 
@@ -53,8 +53,8 @@ class ParticleLegendPanel extends Panel {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSColorProfile.panelColorProperty,
-      stroke: RSColorProfile.panelBorderColorProperty,
+      fill: RSColors.panelColorProperty,
+      stroke: RSColors.panelBorderColorProperty,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
 
@@ -95,7 +95,7 @@ const createParticleRow = ( particleNode, titleString ) => {
   const hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
   const titleText = new Text( titleString, {
     font: RSConstants.PANEL_PROPERTY_FONT,
-    fill: RSColorProfile.panelLabelColorProperty,
+    fill: RSColors.panelLabelColorProperty,
     maxWidth: 175
   } );
   const hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
@@ -131,8 +131,8 @@ class ParticleLegendPanelContent extends VBox {
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSColorProfile.panelColorProperty,
-      stroke: RSColorProfile.panelBorderColorProperty,
+      fill: RSColors.panelColorProperty,
+      stroke: RSColors.panelBorderColorProperty,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
 

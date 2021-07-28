@@ -16,7 +16,7 @@ import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import RSColorProfile from '../../common/RSColorProfile.js';
+import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
@@ -61,7 +61,7 @@ class AtomPropertiesPanel extends Panel {
     const atomPropertiesText = new Text( atomString, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
-      fill: RSColorProfile.panelTitleColorProperty,
+      fill: RSColors.panelTitleColorProperty,
       maxWidth: 225
     } );
 
@@ -78,8 +78,8 @@ class AtomPropertiesPanel extends Panel {
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'center',
       resize: false,
-      fill: RSColorProfile.panelColorProperty,
-      stroke: RSColorProfile.panelBorderColorProperty,
+      fill: RSColors.panelColorProperty,
+      stroke: RSColors.panelBorderColorProperty,
 
       tagName: 'div',
       labelTagName: 'h3',
@@ -139,8 +139,8 @@ class AtomPropertiesPanelContent extends VBox {
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
       resize: false,
-      fill: RSColorProfile.panelColorProperty,
-      stroke: RSColorProfile.panelBorderColorProperty
+      fill: RSColors.panelColorProperty,
+      stroke: RSColors.panelBorderColorProperty
     }, options );
 
     // each element must have a unique interaction property to support multitouch, see #104
@@ -219,12 +219,12 @@ class AtomPropertiesPanelContent extends VBox {
       },
       sliderOptions: {
         trackSize: new Dimension2( sliderWidth, 1 ),
-        trackFill: RSColorProfile.panelSliderLabelColorProperty,
-        trackStroke: RSColorProfile.panelSliderLabelColorProperty,
+        trackFill: RSColors.panelSliderLabelColorProperty,
+        trackStroke: RSColors.panelSliderLabelColorProperty,
         thumbCenterLineStroke: 'white',
         thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
 
-        majorTickStroke: RSColorProfile.panelSliderLabelColorProperty,
+        majorTickStroke: RSColors.panelSliderLabelColorProperty,
         majorTickLength: 15,
         tickLabelSpacing: 2,
 
@@ -243,7 +243,7 @@ class AtomPropertiesPanelContent extends VBox {
         value: protonCountRange.min,
         label: new Text( protonCountRange.min, {
           font: RSConstants.PANEL_TICK_FONT,
-          fill: RSColorProfile.panelSliderLabelColorProperty,
+          fill: RSColors.panelSliderLabelColorProperty,
           pickable: false
         } )
       },
@@ -251,7 +251,7 @@ class AtomPropertiesPanelContent extends VBox {
         value: protonCountRange.max,
         label: new Text( protonCountRange.max, {
           font: RSConstants.PANEL_TICK_FONT,
-          fill: RSColorProfile.panelSliderLabelColorProperty,
+          fill: RSColors.panelSliderLabelColorProperty,
           pickable: false
         } )
       }
@@ -264,7 +264,7 @@ class AtomPropertiesPanelContent extends VBox {
     // Number control for protons
     const protonNumberControlOptions = merge( {}, numberControlOptions );
     protonNumberControlOptions.titleNodeOptions = merge( {},
-      numberControlOptions.titleNodeOptions, { fill: RSColorProfile.protonsLabelColorProperty } );
+      numberControlOptions.titleNodeOptions, { fill: RSColors.protonsLabelColorProperty } );
     protonNumberControlOptions.arrowButtonOptions = {
       leftStart: () => {
         leftProtonButtonDown = true;
@@ -323,7 +323,7 @@ class AtomPropertiesPanelContent extends VBox {
       value: neutronCountRange.min,
       label: new Text( neutronCountRange.min, {
         font: RSConstants.PANEL_TICK_FONT,
-        fill: RSColorProfile.panelSliderLabelColorProperty,
+        fill: RSColors.panelSliderLabelColorProperty,
         pickable: false
       } )
     },
@@ -331,7 +331,7 @@ class AtomPropertiesPanelContent extends VBox {
         value: neutronCountRange.max,
         label: new Text( neutronCountRange.max, {
           font: RSConstants.PANEL_TICK_FONT,
-          fill: RSColorProfile.panelSliderLabelColorProperty,
+          fill: RSColors.panelSliderLabelColorProperty,
           pickable: false
         } )
       }
@@ -344,7 +344,7 @@ class AtomPropertiesPanelContent extends VBox {
     // Number control for protons
     const neutronNumberControlOptions = merge( {}, numberControlOptions );
     neutronNumberControlOptions.titleNodeOptions = merge( {},
-      numberControlOptions.titleNodeOptions, { fill: RSColorProfile.neutronsLabelColorProperty }
+      numberControlOptions.titleNodeOptions, { fill: RSColors.neutronsLabelColorProperty }
     );
     neutronNumberControlOptions.sliderOptions = merge( {},
       numberControlOptions.sliderOptions, {
