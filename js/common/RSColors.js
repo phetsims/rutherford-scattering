@@ -16,67 +16,67 @@ import rutherfordScattering from '../rutherfordScattering.js';
 // the 'default' value provided.
 // NOTE: This is NOT provided to clients directly, but each of these are passed to the Property constructor.
 const RSColors = {
-  backgroundColorProperty: new ProfileColorProperty( 'backgroundColor', {
+  backgroundColorProperty: new ProfileColorProperty( rutherfordScattering, 'backgroundColor', {
     default: new Color( 0, 0, 0 ),
     projector: new Color( 255, 255, 255 )
   } ),
-  panelColorProperty: new ProfileColorProperty( 'panelColor', {
+  panelColorProperty: new ProfileColorProperty( rutherfordScattering, 'panelColor', {
     default: new Color( 0, 0, 0 ),
     projector: new Color( 255, 255, 255 )
   } ),
-  radioButtonBorderColorProperty: new ProfileColorProperty( 'radioButtonBorderColor', {
+  radioButtonBorderColorProperty: new ProfileColorProperty( rutherfordScattering, 'radioButtonBorderColor', {
     default: new Color( 200, 200, 95 ),
     projector: new Color( 49, 193, 221 )
   } ),
-  panelBorderColorProperty: new ProfileColorProperty( 'panelBorderColor', {
+  panelBorderColorProperty: new ProfileColorProperty( rutherfordScattering, 'panelBorderColor', {
     default: new Color( 128, 128, 128 ),
     projector: new Color( 128, 128, 128 )
   } ),
-  panelTitleColorProperty: new ProfileColorProperty( 'panelTitleColor', {
+  panelTitleColorProperty: new ProfileColorProperty( rutherfordScattering, 'panelTitleColor', {
     default: new Color( 200, 200, 95 ),
     projector: new Color( 0, 0, 0 )
   } ),
-  panelLabelColorProperty: new ProfileColorProperty( 'panelLabelColor', {
+  panelLabelColorProperty: new ProfileColorProperty( rutherfordScattering, 'panelLabelColor', {
     default: new Color( 210, 210, 210 ),
     projector: new Color( 0, 0, 0 )
   } ),
-  protonsLabelColorProperty: new ProfileColorProperty( 'protonsLabelColor', {
+  protonsLabelColorProperty: new ProfileColorProperty( rutherfordScattering, 'protonsLabelColor', {
     default: new Color( 185, 50, 8 ),
     projector: new Color( 185, 50, 8 )
   } ),
-  neutronsLabelColorProperty: new ProfileColorProperty( 'neutronsLabelColor', {
+  neutronsLabelColorProperty: new ProfileColorProperty( rutherfordScattering, 'neutronsLabelColor', {
     default: new Color( 160, 160, 160 ),
     projector: new Color( 125, 125, 125 )
   } ),
-  atomBeamColorProperty: new ProfileColorProperty( 'atomBeamColor', {
+  atomBeamColorProperty: new ProfileColorProperty( rutherfordScattering, 'atomBeamColor', {
     default: new Color( 143, 143, 143, 0.4 ),
     projector: new Color( 143, 143, 143, 0.4 )
   } ),
-  nucleusBeamColorProperty: new ProfileColorProperty( 'nucleusBeamColor', {
+  nucleusBeamColorProperty: new ProfileColorProperty( rutherfordScattering, 'nucleusBeamColor', {
     default: new Color( 143, 143, 143 ),
     projector: new Color( 163, 163, 163 )
   } ),
-  nucleusColorProperty: new ProfileColorProperty( 'nucleusColor', {
+  nucleusColorProperty: new ProfileColorProperty( rutherfordScattering, 'nucleusColor', {
     default: new Color( 200, 200, 95 ),
     projector: new Color( 128, 128, 0 )
   } ),
-  panelSliderLabelColorProperty: new ProfileColorProperty( 'panelSliderLabelColor', {
+  panelSliderLabelColorProperty: new ProfileColorProperty( rutherfordScattering, 'panelSliderLabelColor', {
     default: new Color( 180, 180, 180 ),
     projector: new Color( 0, 0, 0 )
   } ),
-  screenIconFillColorProperty: new ProfileColorProperty( 'screenIconFillColor', {
+  screenIconFillColorProperty: new ProfileColorProperty( rutherfordScattering, 'screenIconFillColor', {
     default: new Color( 0, 0, 0 ),
     projector: new Color( 0, 0, 0 )
   } ),
-  nucleusOutlineColorProperty: new ProfileColorProperty( 'nucleusOutlineColor', {
+  nucleusOutlineColorProperty: new ProfileColorProperty( rutherfordScattering, 'nucleusOutlineColor', {
     default: new Color( 255, 255, 255 ),
     projector: new Color( 0, 0, 0 )
   } ),
-  innerGroupHighlightColorProperty: new ProfileColorProperty( 'innerGroupHighlightColor', {
+  innerGroupHighlightColorProperty: new ProfileColorProperty( rutherfordScattering, 'innerGroupHighlightColor', {
     default: FocusHighlightPath.INNER_DARK_GROUP_FOCUS_COLOR,
     projector: FocusHighlightPath.INNER_LIGHT_GROUP_FOCUS_COLOR
   } ),
-  outerGroupHighlightColorProperty: new ProfileColorProperty( 'outerGroupHighlightColor', {
+  outerGroupHighlightColorProperty: new ProfileColorProperty( rutherfordScattering, 'outerGroupHighlightColor', {
     default: FocusHighlightPath.OUTER_DARK_GROUP_FOCUS_COLOR,
     projector: FocusHighlightPath.OUTER_LIGHT_GROUP_FOCUS_COLOR
   } )
