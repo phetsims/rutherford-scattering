@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
@@ -153,7 +154,7 @@ class RSBaseScreenView extends ScreenView {
 
     // step button to manually step the animation.
     const stepButton = new StepForwardButton( {
-      isPlayingProperty: model.runningProperty,
+      enabledProperty: DerivedProperty.not( model.runningProperty ),
       listener: () => { model.manualStep(); },
       centerY: playPauseButton.centerY,
       centerX: this.scaleInfoNode.centerX + 25,
