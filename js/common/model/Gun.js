@@ -70,7 +70,7 @@ class Gun {
       const xMin = X0_MIN_FRACTION * this.model.bounds.width;
       this.model.getVisibleSpace().atoms.forEach( atom => {
         if ( Math.abs( particleX - atom.position.x ) < xMin ) {
-          const correction = this.correctionFunction( atom.boundingRect.bounds.width );
+          const correction = this.correctionFunction.evaluate( atom.boundingRect.bounds.width );
           if ( particleX > atom.position.x ) {
             // particle is to the right of nucleus, push it farther away
             particleX += correction;
