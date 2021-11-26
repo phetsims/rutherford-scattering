@@ -8,7 +8,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
-import Color from '../../../../scenery/js/util/Color.js';
+import { Color } from '../../../../scenery/js/imports.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';

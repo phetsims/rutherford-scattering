@@ -8,12 +8,12 @@
 
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import AlignGroup from '../../../../scenery/js/nodes/AlignGroup.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
-import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
-import colorProfileProperty from '../../../../scenery/js/util/colorProfileProperty.js';
+import { AlignGroup } from '../../../../scenery/js/imports.js';
+import { Image } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import { Text } from '../../../../scenery/js/imports.js';
+import { SceneryConstants } from '../../../../scenery/js/imports.js';
+import { colorProfileProperty } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import atomProjectorImage from '../../../images/AtomProjector_png.js';
 import atomImage from '../../../images/Atom_png.js';

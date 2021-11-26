@@ -5,7 +5,7 @@
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
 
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
 

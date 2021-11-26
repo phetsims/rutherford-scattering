@@ -11,12 +11,12 @@
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
-import HBox from '../../../../scenery/js/nodes/HBox.js';
-import HStrut from '../../../../scenery/js/nodes/HStrut.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
-import VBox from '../../../../scenery/js/nodes/VBox.js';
-import VStrut from '../../../../scenery/js/nodes/VStrut.js';
+import { HBox } from '../../../../scenery/js/imports.js';
+import { HStrut } from '../../../../scenery/js/imports.js';
+import { Rectangle } from '../../../../scenery/js/imports.js';
+import { Text } from '../../../../scenery/js/imports.js';
+import { VBox } from '../../../../scenery/js/imports.js';
+import { VStrut } from '../../../../scenery/js/imports.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';

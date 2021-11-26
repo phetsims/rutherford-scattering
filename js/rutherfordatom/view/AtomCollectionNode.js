@@ -9,9 +9,9 @@
  * @author Jesse Greenberg
  */
 
-import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import Path from '../../../../scenery/js/nodes/Path.js';
+import { Circle } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import { Path } from '../../../../scenery/js/imports.js';
 import RSColors from '../../common/RSColors.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';

@@ -9,7 +9,7 @@
 
 import OptionsDialog from '../../../../joist/js/OptionsDialog.js';
 import ProjectorModeCheckbox from '../../../../joist/js/ProjectorModeCheckbox.js';
-import VBox from '../../../../scenery/js/nodes/VBox.js';
+import { VBox } from '../../../../scenery/js/imports.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 class MenuOptionsNode extends VBox {

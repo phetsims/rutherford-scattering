@@ -8,11 +8,11 @@
 
 import platform from '../../../../phet-core/js/platform.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
-import Line from '../../../../scenery/js/nodes/Line.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
-import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
+import { Circle } from '../../../../scenery/js/imports.js';
+import { Image } from '../../../../scenery/js/imports.js';
+import { Line } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
+import { RadialGradient } from '../../../../scenery/js/imports.js';
 import plumPuddingImage from '../../../images/plumPuddingIcon_png.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColors from '../RSColors.js';

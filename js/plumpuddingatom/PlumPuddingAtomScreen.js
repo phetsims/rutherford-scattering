@@ -8,7 +8,7 @@
 
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
-import Image from '../../../scenery/js/nodes/Image.js';
+import { Image } from '../../../scenery/js/imports.js';
 import screenIcon from '../../images/PlumPuddingAtom-screen-icon_png.js';
 import RSColors from '../common/RSColors.js';
 import rutherfordScattering from '../rutherfordScattering.js';

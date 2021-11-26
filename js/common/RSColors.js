@@ -7,9 +7,9 @@
  * @author Jesse Greenberg
  */
 
-import FocusHighlightPath from '../../../scenery/js/accessibility/FocusHighlightPath.js';
-import Color from '../../../scenery/js/util/Color.js';
-import ProfileColorProperty from '../../../scenery/js/util/ProfileColorProperty.js';
+import { FocusHighlightPath } from '../../../scenery/js/imports.js';
+import { Color } from '../../../scenery/js/imports.js';
+import { ProfileColorProperty } from '../../../scenery/js/imports.js';
 import rutherfordScattering from '../rutherfordScattering.js';
 
 // Initial colors for each profile, by string key.  If a projector color is not defined, it will take
