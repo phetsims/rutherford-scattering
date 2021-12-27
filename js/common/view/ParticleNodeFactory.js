@@ -13,7 +13,7 @@ import { Image } from '../../../../scenery/js/imports.js';
 import { Line } from '../../../../scenery/js/imports.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import { RadialGradient } from '../../../../scenery/js/imports.js';
-import plumPuddingImage from '../../../images/plumPuddingIcon_png.js';
+import plumPuddingIcon_png from '../../../images/plumPuddingIcon_png.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColors from '../RSColors.js';
 
@@ -175,7 +175,7 @@ const ParticleNodeFactory = {
   createPlumPuddingIcon() {
     return new Node( {
       children: [
-        new Image( plumPuddingImage, { scale: 0.06 } )
+        new Image( plumPuddingIcon_png, { scale: 0.06 } )
       ]
     } );
   }

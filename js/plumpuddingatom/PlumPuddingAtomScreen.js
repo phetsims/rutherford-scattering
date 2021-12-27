@@ -9,7 +9,7 @@
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import { Image } from '../../../scenery/js/imports.js';
-import screenIcon from '../../images/PlumPuddingAtom-screen-icon_png.js';
+import plumPuddingAtomScreenIcon_png from '../../images/plumPuddingAtomScreenIcon_png.js';
 import RSColors from '../common/RSColors.js';
 import rutherfordScattering from '../rutherfordScattering.js';
 import rutherfordScatteringStrings from '../rutherfordScatteringStrings.js';
@@ -22,7 +22,7 @@ class PlumPuddingAtomScreen extends Screen {
     const options = {
       name: rutherfordScatteringStrings.plumPuddingAtom,
       backgroundColorProperty: RSColors.backgroundColorProperty,
-      homeScreenIcon: new ScreenIcon( new Image( screenIcon ), {
+      homeScreenIcon: new ScreenIcon( new Image( plumPuddingAtomScreenIcon_png ), {
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1,
         fill: RSColors.screenIconFillColorProperty

@@ -7,7 +7,7 @@
  */
 
 import { Image } from '../../../../scenery/js/imports.js';
-import plumPuddingImage from '../../../images/plumPudding_png.js';
+import plumPudding_png from '../../../images/plumPudding_png.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 class PlumPuddingAtomNode extends Image {
@@ -16,7 +16,7 @@ class PlumPuddingAtomNode extends Image {
    * @param {Object} [options]
    */
   constructor( options ) {
-    super( plumPuddingImage, options );
+    super( plumPudding_png, options );
   }
 }
 

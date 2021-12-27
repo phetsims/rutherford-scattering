@@ -15,8 +15,8 @@ import { Text } from '../../../../scenery/js/imports.js';
 import { SceneryConstants } from '../../../../scenery/js/imports.js';
 import { colorProfileProperty } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import atomProjectorImage from '../../../images/AtomProjector_png.js';
-import atomImage from '../../../images/Atom_png.js';
+import atomProjector_png from '../../../images/atomProjector_png.js';
+import atom_png from '../../../images/atom_png.js';
 import RSColors from '../../common/RSColors.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
@@ -181,7 +181,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     } );
 
     // @private
-    this.sceneRadioButtonGroup = createRadioButtons( atomImage );
+    this.sceneRadioButtonGroup = createRadioButtons( atom_png );
     this.pdomControlAreaNode.addChild( this.sceneRadioButtonGroup );
 
     // if the background, panel or stroke colors change, draw a new button group
@@ -193,7 +193,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       this.sceneRadioButtonGroup.dispose();
 
       // get the correct image for the 'atom' scene icon
-      const iconImage = ( profileName === SceneryConstants.PROJECTOR_COLOR_PROFILE ) ? atomProjectorImage : atomImage;
+      const iconImage = ( profileName === SceneryConstants.PROJECTOR_COLOR_PROFILE ) ? atomProjector_png : atom_png;
 
       // create the new radio button group
       const newButtonGroup = createRadioButtons( iconImage );
