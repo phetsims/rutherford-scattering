@@ -230,7 +230,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       fill: RSColors.panelLabelColorProperty,
       maxWidth: 180
     } );
-    const showTraceCheckbox = new Checkbox( showTraceText, showTracesProperty, {
+    const showTraceCheckbox = new Checkbox( showTracesProperty, showTraceText, {
       checkboxColor: RSColors.panelLabelColorProperty,
       checkboxColorBackground: RSColors.panelColorProperty,
 
