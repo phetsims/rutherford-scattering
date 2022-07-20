@@ -8,15 +8,10 @@
 
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignGroup } from '../../../../scenery/js/imports.js';
-import { Image } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { SceneryConstants } from '../../../../scenery/js/imports.js';
-import { colorProfileProperty } from '../../../../scenery/js/imports.js';
+import { AlignGroup, colorProfileProperty, Image, Node, SceneryConstants, Text } from '../../../../scenery/js/imports.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import atomProjector_png from '../../../images/atomProjector_png.js';
 import atom_png from '../../../images/atom_png.js';
+import atomProjector_png from '../../../images/atomProjector_png.js';
 import RSColors from '../../common/RSColors.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';

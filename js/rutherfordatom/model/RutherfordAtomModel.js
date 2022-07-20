@@ -9,8 +9,8 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import RSConstants from '../../common/RSConstants.js';
 import RSBaseModel from '../../common/model/RSBaseModel.js';
+import RSConstants from '../../common/RSConstants.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordAtomSpace from './RutherfordAtomSpace.js';
 import RutherfordNucleusSpace from './RutherfordNucleusSpace.js';

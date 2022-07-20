@@ -12,8 +12,8 @@ import { HighlightOverlay } from '../../scenery/js/imports.js';
 import RSColors from './common/RSColors.js';
 import MenuOptionsNode from './common/view/MenuOptionsNode.js';
 import PlumPuddingAtomScreen from './plumpuddingatom/PlumPuddingAtomScreen.js';
-import rutherfordScatteringStrings from './rutherfordScatteringStrings.js';
 import RutherfordAtomScreen from './rutherfordatom/RutherfordAtomScreen.js';
+import rutherfordScatteringStrings from './rutherfordScatteringStrings.js';
 
 const rutherfordScatteringTitleString = rutherfordScatteringStrings[ 'rutherford-scattering' ].title;
 

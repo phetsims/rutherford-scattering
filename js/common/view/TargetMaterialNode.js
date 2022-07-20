@@ -8,9 +8,7 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { LinearGradient } from '../../../../scenery/js/imports.js';
+import { LinearGradient, Node, Path } from '../../../../scenery/js/imports.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 // constants

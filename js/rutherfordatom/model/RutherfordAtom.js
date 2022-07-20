@@ -10,8 +10,8 @@
  */
 
 import Vector2 from '../../../../dot/js/Vector2.js';
-import RSConstants from '../../common/RSConstants.js';
 import Atom from '../../common/model/Atom.js';
+import RSConstants from '../../common/RSConstants.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordAtom extends Atom {
