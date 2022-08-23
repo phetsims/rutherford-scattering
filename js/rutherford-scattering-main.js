@@ -6,14 +6,15 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
+import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import { HighlightOverlay } from '../../scenery/js/imports.js';
 import RSColors from './common/RSColors.js';
-import MenuOptionsNode from './common/view/MenuOptionsNode.js';
 import PlumPuddingAtomScreen from './plumpuddingatom/PlumPuddingAtomScreen.js';
 import RutherfordAtomScreen from './rutherfordatom/RutherfordAtomScreen.js';
 import rutherfordScatteringStrings from './rutherfordScatteringStrings.js';
+
 
 const rutherfordScatteringTitleString = rutherfordScatteringStrings[ 'rutherford-scattering' ].title;
 
@@ -28,8 +29,11 @@ const simOptions = {
     thanks: ''
   },
 
-  // Creates content for the Options dialog
-  createOptionsDialogContent: () => new MenuOptionsNode()
+  preferencesModel: new PreferencesModel( {
+    visualOptions: {
+      supportsProjectorMode: true
+    }
+  } )
 };
 
 // group focus highlights are synced with color profile
