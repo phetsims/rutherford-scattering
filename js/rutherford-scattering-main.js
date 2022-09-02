@@ -16,7 +16,7 @@ import RutherfordAtomScreen from './rutherfordatom/RutherfordAtomScreen.js';
 import rutherfordScatteringStrings from './rutherfordScatteringStrings.js';
 
 
-const rutherfordScatteringTitleString = rutherfordScatteringStrings[ 'rutherford-scattering' ].title;
+const rutherfordScatteringTitleStringProperty = rutherfordScatteringStrings[ 'rutherford-scattering' ].titleStringProperty;
 
 const simOptions = {
   credits: {
@@ -45,6 +45,6 @@ simLauncher.launch( () => {
     new RutherfordAtomScreen(),
     new PlumPuddingAtomScreen()
   ];
-  const sim = new Sim( rutherfordScatteringTitleString, screens, simOptions );
+  const sim = new Sim( rutherfordScatteringTitleStringProperty, screens, simOptions );
   sim.start();
 } );
