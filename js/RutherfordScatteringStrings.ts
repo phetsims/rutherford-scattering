@@ -111,8 +111,8 @@ type StringsType = {
   }
 };
 
-const rutherfordScatteringStrings = getStringModule( 'RUTHERFORD_SCATTERING' ) as StringsType;
+const RutherfordScatteringStrings = getStringModule( 'RUTHERFORD_SCATTERING' ) as StringsType;
 
-rutherfordScattering.register( 'rutherfordScatteringStrings', rutherfordScatteringStrings );
+rutherfordScattering.register( 'RutherfordScatteringStrings', RutherfordScatteringStrings );
 
-export default rutherfordScatteringStrings;
+export default RutherfordScatteringStrings;

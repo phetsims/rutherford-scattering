@@ -12,7 +12,7 @@ import { Image } from '../../../scenery/js/imports.js';
 import plumPuddingAtomScreenIcon_png from '../../images/plumPuddingAtomScreenIcon_png.js';
 import RSColors from '../common/RSColors.js';
 import rutherfordScattering from '../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../RutherfordScatteringStrings.js';
 import PlumPuddingAtomModel from './model/PlumPuddingAtomModel.js';
 import PlumPuddingAtomScreenView from './view/PlumPuddingAtomScreenView.js';
 
@@ -20,7 +20,7 @@ class PlumPuddingAtomScreen extends Screen {
   constructor() {
 
     const options = {
-      name: rutherfordScatteringStrings.plumPuddingAtom,
+      name: RutherfordScatteringStrings.plumPuddingAtom,
       backgroundColorProperty: RSColors.backgroundColorProperty,
       homeScreenIcon: new ScreenIcon( new Image( plumPuddingAtomScreenIcon_png ), {
         maxIconWidthProportion: 1,

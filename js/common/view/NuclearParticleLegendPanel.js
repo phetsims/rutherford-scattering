@@ -9,15 +9,15 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import ParticleLegendPanel from './ParticleLegendPanel.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
 
-const alphaParticleString = rutherfordScatteringStrings.alphaParticle;
-const electronString = rutherfordScatteringStrings.electron;
-const neutronString = rutherfordScatteringStrings.neutron;
-const positiveChargeString = rutherfordScatteringStrings.positiveCharge;
-const protonString = rutherfordScatteringStrings.proton;
+const alphaParticleString = RutherfordScatteringStrings.alphaParticle;
+const electronString = RutherfordScatteringStrings.electron;
+const neutronString = RutherfordScatteringStrings.neutron;
+const positiveChargeString = RutherfordScatteringStrings.positiveCharge;
+const protonString = RutherfordScatteringStrings.proton;
 
 class NuclearParticleLegendPanel extends ParticleLegendPanel {
 

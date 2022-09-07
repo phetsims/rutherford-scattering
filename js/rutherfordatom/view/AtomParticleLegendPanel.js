@@ -10,11 +10,11 @@
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 
-const alphaParticleTraceString = rutherfordScatteringStrings.alphaParticleTrace;
-const electronEnergyLevelString = rutherfordScatteringStrings.electronEnergyLevel;
-const nucleusString = rutherfordScatteringStrings.nucleus;
+const alphaParticleTraceString = RutherfordScatteringStrings.alphaParticleTrace;
+const electronEnergyLevelString = RutherfordScatteringStrings.electronEnergyLevel;
+const nucleusString = RutherfordScatteringStrings.nucleus;
 
 class AtomParticleLegendPanel extends ParticleLegendPanel {
 

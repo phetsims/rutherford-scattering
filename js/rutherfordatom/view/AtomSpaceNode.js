@@ -14,12 +14,12 @@ import { Path } from '../../../../scenery/js/imports.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import AtomCollectionNode from './AtomCollectionNode.js';
 
 // constants
-const observationWindowString = rutherfordScatteringStrings.a11y.observationWindow;
-const atomSpaceDescriptionString = rutherfordScatteringStrings.a11y.atomSpaceDescription;
+const observationWindowString = RutherfordScatteringStrings.a11y.observationWindow;
+const atomSpaceDescriptionString = RutherfordScatteringStrings.a11y.atomSpaceDescription;
 
 class AtomSpaceNode extends ParticleSpaceNode {
 

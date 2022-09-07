@@ -16,20 +16,20 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
 // constants
-const alphaParticlePropertiesString = rutherfordScatteringStrings.alphaParticleProperties;
-const energyString = rutherfordScatteringStrings.energy;
-const maxEnergyString = rutherfordScatteringStrings.maxEnergy;
-const minEnergyString = rutherfordScatteringStrings.minEnergy;
-const showTracesString = rutherfordScatteringStrings.showTraces;
-const alphaParticleSettingsString = rutherfordScatteringStrings.a11y.alphaParticleSettings;
-const energySliderDescriptionString = rutherfordScatteringStrings.a11y.energySliderDescription;
-const tracesString = rutherfordScatteringStrings.a11y.traces;
-const traceCheckboxDescriptionString = rutherfordScatteringStrings.a11y.traceCheckboxDescription;
+const alphaParticlePropertiesString = RutherfordScatteringStrings.alphaParticleProperties;
+const energyString = RutherfordScatteringStrings.energy;
+const maxEnergyString = RutherfordScatteringStrings.maxEnergy;
+const minEnergyString = RutherfordScatteringStrings.minEnergy;
+const showTracesString = RutherfordScatteringStrings.showTraces;
+const alphaParticleSettingsString = RutherfordScatteringStrings.a11y.alphaParticleSettings;
+const energySliderDescriptionString = RutherfordScatteringStrings.a11y.energySliderDescription;
+const tracesString = RutherfordScatteringStrings.a11y.traces;
+const traceCheckboxDescriptionString = RutherfordScatteringStrings.a11y.traceCheckboxDescription;
 
 // global, tracks fingers on the slider for multitouch support
 // must persist beyond individual panel instances so multitouch is supported

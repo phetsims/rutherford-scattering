@@ -11,12 +11,12 @@ import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
 // constants
-const observationWindowString = rutherfordScatteringStrings.a11y.observationWindow;
-const nucleusSpaceDescriptionString = rutherfordScatteringStrings.a11y.nucleusSpaceDescription;
+const observationWindowString = RutherfordScatteringStrings.a11y.observationWindow;
+const nucleusSpaceDescriptionString = RutherfordScatteringStrings.a11y.nucleusSpaceDescription;
 
 class NucleusSpaceNode extends ParticleSpaceNode {
 

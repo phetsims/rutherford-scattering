@@ -11,11 +11,11 @@ import merge from '../../../../phet-core/js/merge.js';
 import { AlignGroup, HBox, HStrut, Text, VBox } from '../../../../scenery/js/imports.js';
 import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
-const legendString = rutherfordScatteringStrings.legend;
+const legendString = RutherfordScatteringStrings.legend;
 
 // constants
 const LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;

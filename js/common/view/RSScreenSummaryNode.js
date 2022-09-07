@@ -7,10 +7,10 @@
 
 import { Node } from '../../../../scenery/js/imports.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 
 // constants
-const screenSummaryString = rutherfordScatteringStrings.a11y.screenSummary;
+const screenSummaryString = RutherfordScatteringStrings.a11y.screenSummary;
 
 class RSScreenSummaryNode extends Node {
 

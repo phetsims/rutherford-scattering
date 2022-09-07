@@ -11,7 +11,7 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import RSColors from '../common/RSColors.js';
 import RSConstants from '../common/RSConstants.js';
 import rutherfordScattering from '../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../RutherfordScatteringStrings.js';
 import RutherfordAtomModel from './model/RutherfordAtomModel.js';
 import RutherfordAtomScreenView from './view/RutherfordAtomScreenView.js';
 import RutherfordNucleusNode from './view/RutherfordNucleusNode.js';
@@ -27,7 +27,7 @@ class RutherfordAtomScreen extends Screen {
     } );
 
     const options = {
-      name: rutherfordScatteringStrings.rutherfordAtom,
+      name: RutherfordScatteringStrings.rutherfordAtom,
       backgroundColorProperty: RSColors.backgroundColorProperty,
       homeScreenIcon: homeScreenIcon
     };

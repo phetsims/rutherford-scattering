@@ -20,7 +20,7 @@ import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import ScaleInfoNode from '../../common/view/ScaleInfoNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import AtomParticleLegendPanel from './AtomParticleLegendPanel.js';
 import AtomPropertiesPanel from './AtomPropertiesPanel.js';
 import AtomSpaceNode from './AtomSpaceNode.js';
@@ -28,12 +28,12 @@ import NucleusSpaceNode from './NucleusSpaceNode.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
 // constants
-const pattern0AtomicScaleString = rutherfordScatteringStrings.pattern[ '0atomicScale' ];
-const pattern0NuclearScaleString = rutherfordScatteringStrings.pattern[ '0nuclearScale' ];
-const switchScaleString = rutherfordScatteringStrings.a11y.switchScale;
-const switchScaleDescriptionString = rutherfordScatteringStrings.a11y.switchScaleDescription;
-const nuclearScaleViewString = rutherfordScatteringStrings.a11y.nuclearScaleView;
-const atomicScaleViewString = rutherfordScatteringStrings.a11y.atomicScaleView;
+const pattern0AtomicScaleString = RutherfordScatteringStrings.pattern[ '0atomicScale' ];
+const pattern0NuclearScaleString = RutherfordScatteringStrings.pattern[ '0nuclearScale' ];
+const switchScaleString = RutherfordScatteringStrings.a11y.switchScale;
+const switchScaleDescriptionString = RutherfordScatteringStrings.a11y.switchScaleDescription;
+const nuclearScaleViewString = RutherfordScatteringStrings.a11y.nuclearScaleView;
+const atomicScaleViewString = RutherfordScatteringStrings.a11y.atomicScaleView;
 
 class RutherfordAtomScreenView extends RSBaseScreenView {
 

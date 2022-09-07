@@ -18,19 +18,19 @@ import Panel from '../../../../sun/js/Panel.js';
 import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 
 // constants
-const atomString = rutherfordScatteringStrings.atom;
-const numberOfNeutronsString = rutherfordScatteringStrings.numberOfNeutrons;
-const numberOfProtonsString = rutherfordScatteringStrings.numberOfProtons;
-const atomSettingsString = rutherfordScatteringStrings.a11y.atomSettings;
+const atomString = RutherfordScatteringStrings.atom;
+const numberOfNeutronsString = RutherfordScatteringStrings.numberOfNeutrons;
+const numberOfProtonsString = RutherfordScatteringStrings.numberOfProtons;
+const atomSettingsString = RutherfordScatteringStrings.a11y.atomSettings;
 
 // TODO: make these template vars again when working on descriptions
-const protonsValuePatternString = rutherfordScatteringStrings.a11y.protonsValuePattern;
-const protonSliderDescriptionString = rutherfordScatteringStrings.a11y.protonSliderDescription;
-const neutronsValuePatternString = rutherfordScatteringStrings.a11y.neutronsValuePattern;
-const neutronSliderDescriptionString = rutherfordScatteringStrings.a11y.neutronSliderDescription;
+const protonsValuePatternString = RutherfordScatteringStrings.a11y.protonsValuePattern;
+const protonSliderDescriptionString = RutherfordScatteringStrings.a11y.protonSliderDescription;
+const neutronsValuePatternString = RutherfordScatteringStrings.a11y.neutronsValuePattern;
+const neutronSliderDescriptionString = RutherfordScatteringStrings.a11y.neutronSliderDescription;
 
 // global, tracking where fingers are for multitouch support
 // must persist beyond lifetime of the panel so that fingers are tracked when new

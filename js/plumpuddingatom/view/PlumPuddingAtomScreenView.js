@@ -13,10 +13,10 @@ import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendP
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import rutherfordScatteringStrings from '../../rutherfordScatteringStrings.js';
+import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import PlumPuddingSpaceNode from './PlumPuddingSpaceNode.js';
 
-const pattern0AtomicScaleString = rutherfordScatteringStrings.pattern[ '0atomicScale' ];
+const pattern0AtomicScaleString = RutherfordScatteringStrings.pattern[ '0atomicScale' ];
 
 class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
