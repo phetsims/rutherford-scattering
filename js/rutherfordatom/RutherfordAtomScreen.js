@@ -27,7 +27,7 @@ class RutherfordAtomScreen extends Screen {
     } );
 
     const options = {
-      name: RutherfordScatteringStrings.rutherfordAtom,
+      name: RutherfordScatteringStrings.rutherfordAtomStringProperty,
       backgroundColorProperty: RSColors.backgroundColorProperty,
       homeScreenIcon: homeScreenIcon
     };

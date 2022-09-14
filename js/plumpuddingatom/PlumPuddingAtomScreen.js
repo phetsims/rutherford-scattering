@@ -20,7 +20,7 @@ class PlumPuddingAtomScreen extends Screen {
   constructor() {
 
     const options = {
-      name: RutherfordScatteringStrings.plumPuddingAtom,
+      name: RutherfordScatteringStrings.plumPuddingAtomStringProperty,
       backgroundColorProperty: RSColors.backgroundColorProperty,
       homeScreenIcon: new ScreenIcon( new Image( plumPuddingAtomScreenIcon_png ), {
         maxIconWidthProportion: 1,
