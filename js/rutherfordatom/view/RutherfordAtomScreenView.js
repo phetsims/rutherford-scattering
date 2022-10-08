@@ -153,8 +153,8 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
      * @returns {RectangularRadioButtonGroup} - returns a RectangularRadioButtonGroup that must be disposed when profile changes
      */
     const createRadioButtons = atomIconImage => new RectangularRadioButtonGroup( model.sceneProperty, [
-      { value: 'atom', node: new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
-      { value: 'nucleus', node: nucleusIcon, labelContent: nuclearScaleViewString }
+      { value: 'atom', createNode: tandem => new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
+      { value: 'nucleus', createNode: tandem => nucleusIcon, labelContent: nuclearScaleViewString }
     ], {
       orientation: 'vertical',
       spacing: 15,
