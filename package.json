@@ -10,7 +10,6 @@
     "grunt": "~1.5.3"
   },
   "phet": {
-    "colorProfiles": [ "default", "projector" ],
     "requirejsNamespace": "RUTHERFORD_SCATTERING",
     "phetLibs": [
       "shred"
@@ -21,7 +20,13 @@
       "adapted-from-phet"
     ],
     "simulation": true,
-    "supportsOutputJS": true
+    "supportsOutputJS": true,
+    "simFeatures": {
+      "colorProfiles": [
+        "default",
+        "projector"
+      ]
+    }
   },
   "eslintConfig": {
     "extends": "../chipper/eslint/sim_eslintrc.js"
