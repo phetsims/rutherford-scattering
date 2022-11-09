@@ -141,20 +141,16 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       restorePDOMOrder();
     } );
 
-    // create radio buttons for the scene - new buttons must be created
-    // every time the color profile changes
-    const nucleusIcon = RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 );
-    const buttonOptions = { scale: 0.18 };
-
     /**
-     * Create the RadioButonGroup that will act as the scene selection control in this sim.
+     * Create the RadioButonGroup that will act as the scene selection control in this sim. New buttons must be
+     * created every time the color profile changes.
      *
      * @param {Image} atomIconImage - the icon for the atomic scene, changes with color profile
      * @returns {RectangularRadioButtonGroup} - returns a RectangularRadioButtonGroup that must be disposed when profile changes
      */
     const createRadioButtons = atomIconImage => new RectangularRadioButtonGroup( model.sceneProperty, [
-      { value: 'atom', createNode: tandem => new Image( atomIconImage, buttonOptions ), labelContent: atomicScaleViewString },
-      { value: 'nucleus', createNode: tandem => nucleusIcon, labelContent: nuclearScaleViewString }
+      { value: 'atom', createNode: tandem => new Image( atomIconImage, { scale: 0.18 } ), labelContent: atomicScaleViewString },
+      { value: 'nucleus', createNode: tandem => RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 ), labelContent: nuclearScaleViewString }
     ], {
       orientation: 'vertical',
       spacing: 15,
