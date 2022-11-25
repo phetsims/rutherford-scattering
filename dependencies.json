@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "c7540d4be543f6368aafff1821867993281bea06",
+    "sha": "e638ce9bbee92d7ef17e19d2d99755b43f8e9fc4",
     "branch": "HEAD"
   },
   "kite": {
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "72d4cbe5206d43449056eb2241632ea19fad3b96",
+    "sha": "a005fc0cdacefe8dd71faa88e8fc08c53b0e33b5",
     "branch": "1.1"
   },
   "scenery": {
