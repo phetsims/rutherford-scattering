@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "0b9052d8fd3eba29410eeda6ab77d9f28360bc3c",
+    "sha": "ee8f6ee5994b271a412060a77bdeae0b2826c0ee",
     "branch": "HEAD"
   },
   "dot": {
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "7c28fe324b8a5f15f7a7307cf2c2b45581f78547",
+    "sha": "2de18cac8681f33ceaf1ece2c9dac485b52b5f90",
     "branch": "1.1"
   },
   "scenery": {
