@@ -239,7 +239,7 @@ const createSpaceNode = ( model, showAlphaTraceProperty, modelViewTransform, can
     let atomsRemoved = 0;
     model.atomSpace.particleRemovedFromAtomEmitter.addListener( particle => {
       atomsRemoved += 1;
-      errorText.text = StringUtils.fillIn( errorCountPattern, {
+      errorText.string = StringUtils.fillIn( errorCountPattern, {
         numRemoved: atomsRemoved
       } );
     } );
