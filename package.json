@@ -21,6 +21,10 @@
       "adapted-from-phet"
     ],
     "accessible": true,
-    "simulation": true
+    "simulation": true,
+    "screenNameKeys": [
+      "RUTHERFORD_SCATTERING/rutherfordAtom",
+      "RUTHERFORD_SCATTERING/plumPuddingAtom"
+    ]
   }
 }
