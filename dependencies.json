@@ -2,90 +2,90 @@
   "comment": "# rutherford-scattering 1.1.0-dev.4 Wed Mar 14 2018 16:12:24 GMT-0800 (Alaskan Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
-    "branch": "master"
+    "branch": "main"
   },
   "axon": {
     "sha": "20693a43ee108035da751254e865df70ce5295b5",
-    "branch": "master"
+    "branch": "main"
   },
   "brand": {
     "sha": "89d28f6309a83eb51b6c1fc0130e76ad7935f09e",
-    "branch": "master"
+    "branch": "main"
   },
   "chipper": {
     "sha": "907c2ae796330d1e9c2e4a97e42081d0854d018b",
-    "branch": "master"
+    "branch": "main"
   },
   "dot": {
     "sha": "0dd6ee8e4b6a024c22ca2a3989d800dd5a9cc315",
-    "branch": "master"
+    "branch": "main"
   },
   "joist": {
     "sha": "c6cecc1fbb728b164519eb1e3050826f22d2935c",
-    "branch": "master"
+    "branch": "main"
   },
   "kite": {
     "sha": "b607147875dca2c350235f96d4f5546617bc6e4b",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-core": {
     "sha": "d8804eee9268f549ba6ebf257fd10f8e1c015452",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-io": {
     "sha": "e4b5ae9b2f6d76a540eea655a21d92d2d93fa83f",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-io-website": {
     "sha": "fb0329a3f2472e376168c33fd219961ac5c8cea9",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-io-wrapper-classroom-activity": {
     "sha": "c84e30463c42773a3bf69f6d7facde15c73fd1d4",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-io-wrapper-lab-book": {
     "sha": "ebf7c7dc298be156c107f44ab4f7b8aa0cc95ba2",
-    "branch": "master"
+    "branch": "main"
   },
   "phet-io-wrappers": {
     "sha": "ce57c3e2f2c7bab7dbd262fe9708a9592377fafd",
-    "branch": "master"
+    "branch": "main"
   },
   "phetcommon": {
     "sha": "a5a7478c10f309e671375027fed463ff9f0d5a1a",
-    "branch": "master"
+    "branch": "main"
   },
   "query-string-machine": {
     "sha": "c379f1dbd589dda8f3cc2507dbe9a50d12e05857",
-    "branch": "master"
+    "branch": "main"
   },
   "rutherford-scattering": {
     "sha": "5d82aef20875dcd76628fb0bb8632b06bd373fd1",
-    "branch": "master"
+    "branch": "main"
   },
   "scenery": {
     "sha": "141b24189ec4564acaa2edcc24cc7b756b80f810",
-    "branch": "master"
+    "branch": "main"
   },
   "scenery-phet": {
     "sha": "82fc5c64508cdfe8e05b6a683b88d0331944f727",
-    "branch": "master"
+    "branch": "main"
   },
   "sherpa": {
     "sha": "9c6ec322fc2577bbbdc588bb67765dfdb76b49a9",
-    "branch": "master"
+    "branch": "main"
   },
   "shred": {
     "sha": "efdaacf14391cfd88506492cc7f7a57c94fc8956",
-    "branch": "master"
+    "branch": "main"
   },
   "sun": {
     "sha": "a0f6451b10d7a0171987de0eeb68cb0328e17a76",
-    "branch": "master"
+    "branch": "main"
   },
   "tandem": {
     "sha": "7f499d9e1b8b26d94f4ccfa032ec8064c0e64daa",
-    "branch": "master"
+    "branch": "main"
   }
 }
