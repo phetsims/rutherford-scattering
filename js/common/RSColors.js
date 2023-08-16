@@ -7,7 +7,7 @@
  * @author Jesse Greenberg
  */
 
-import { Color, FocusHighlightPath, ProfileColorProperty } from '../../../scenery/js/imports.js';
+import { Color, HighlightPath, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import rutherfordScattering from '../rutherfordScattering.js';
 
 // Initial colors for each profile, by string key.  If a projector color is not defined, it will take
@@ -71,12 +71,12 @@ const RSColors = {
     projector: new Color( 0, 0, 0 )
   } ),
   innerGroupHighlightColorProperty: new ProfileColorProperty( rutherfordScattering, 'innerGroupHighlightColor', {
-    default: FocusHighlightPath.INNER_DARK_GROUP_FOCUS_COLOR,
-    projector: FocusHighlightPath.INNER_LIGHT_GROUP_FOCUS_COLOR
+    default: HighlightPath.INNER_DARK_GROUP_FOCUS_COLOR,
+    projector: HighlightPath.INNER_LIGHT_GROUP_FOCUS_COLOR
   } ),
   outerGroupHighlightColorProperty: new ProfileColorProperty( rutherfordScattering, 'outerGroupHighlightColor', {
-    default: FocusHighlightPath.OUTER_DARK_GROUP_FOCUS_COLOR,
-    projector: FocusHighlightPath.OUTER_LIGHT_GROUP_FOCUS_COLOR
+    default: HighlightPath.OUTER_DARK_GROUP_FOCUS_COLOR,
+    projector: HighlightPath.OUTER_LIGHT_GROUP_FOCUS_COLOR
   } )
 };
 
