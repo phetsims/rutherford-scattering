@@ -15,8 +15,8 @@ the trajectories.pdf document.
 
 There is also a second screen that allows the user to see a 'Macro' view of the sample.  
 In this view, there are a collection of nuclei and the particles will scatter off of each
-of these nuclei.  The majority of particles will travel through the space without Scattering
-at all.  Changing the energy or the number of protons will effect the scatter behavior, as in
+of these nuclei. The majority of particles will travel through the space without Scattering
+at all. Changing the energy or the number of protons will effect the scatter behavior, as in
 the 'Nucleus' scene.
 
 Plum Pudding:
