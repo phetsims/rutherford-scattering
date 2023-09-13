@@ -26,7 +26,7 @@ const numberOfNeutronsString = RutherfordScatteringStrings.numberOfNeutrons;
 const numberOfProtonsString = RutherfordScatteringStrings.numberOfProtons;
 const atomSettingsString = RutherfordScatteringStrings.a11y.atomSettings;
 
-// TODO: make these template vars again when working on descriptions
+// TODO: make these template vars again when working on descriptions https://github.com/phetsims/tasks/issues/1129
 const protonsValuePatternString = RutherfordScatteringStrings.a11y.protonsValuePattern;
 const protonSliderDescriptionString = RutherfordScatteringStrings.a11y.protonSliderDescription;
 const neutronsValuePatternString = RutherfordScatteringStrings.a11y.neutronsValuePattern;
