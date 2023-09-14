@@ -157,11 +157,11 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       left: this.targetMaterialNode.left,
       top: this.spaceNode.top,
       radioButtonOptions: {
-        baseColor: RSColors.panelColorProperty.value, // TODO: update this when requested https://github.com/phetsims/tasks/issues/1129
+        baseColor: RSColors.panelColorProperty.value, //TODO https://github.com/phetsims/rutherford-scattering/issues/177 update this when requested
         yMargin: 8,
         buttonAppearanceStrategyOptions: {
-          deselectedStroke: RSColors.panelBorderColorProperty.value, // TODO: update this when requested https://github.com/phetsims/tasks/issues/1129
-          selectedStroke: RSColors.radioButtonBorderColorProperty, // TODO: update this when requested https://github.com/phetsims/tasks/issues/1129
+          deselectedStroke: RSColors.panelBorderColorProperty.value, //TODO https://github.com/phetsims/rutherford-scattering/issues/177 update this when requested
+          selectedStroke: RSColors.radioButtonBorderColorProperty, //TODO https://github.com/phetsims/rutherford-scattering/issues/177 update this when requested
           selectedLineWidth: 2,
           deselectedLineWidth: 1.5
         }
