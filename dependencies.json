@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.21-rc.1 Thu Dec 07 2023 15:26:38 GMT-0700 (Mountain Standard Time)",
+  "comment": "# rutherford-scattering 1.1.21 Mon Dec 11 2023 19:11:49 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "28989153eee82d827f156350fb69225a8de54097",
+    "sha": "1937f74229e3437e3839554e8263b1d4edd96a6f",
     "branch": "1.1"
   },
   "scenery": {
