@@ -23,7 +23,7 @@ const simOptions = {
     leadDesign: 'Amy Hanson, Sam McKagan',
     softwareDevelopment: 'Jesse Greenberg, Chris Malley, Dave Schmitz',
     team: 'Wendy Adams, Michael Dubson, Noah Finkelstein, Danielle Harlow, Ariel Paul, Kathy Perkins, ' +
-          'Noah Podolefsky, Amy Rouinfar, Carl Weiman',
+          'Noah Podolefsky, Amy Rouinfar, Carl Wieman',
     qualityAssurance: 'Steele Dalton, Amanda Davis, Bryce Griebenow, Andrea Lin, Ben Roberts, Kathryn Woessner, Bryan Yoelin',
     graphicArts: '',
     thanks: ''
