@@ -13,7 +13,7 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "37f7f907b9915646088488bfc6a7ca1535cf6a67",
+    "sha": "9b02f59d12ca335f2f80a7f9f29aacb9c28c3cdc",
     "branch": "HEAD"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "e638ce9bbee92d7ef17e19d2d99755b43f8e9fc4",
+    "sha": "06cca91668a727e0e83c12e646f4b2e7b88cd7b6",
     "branch": "HEAD"
   },
   "kite": {
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "ebd099c6de0dd5e290c4282f7a7b1bb2a4b2cd14",
+    "sha": "8defdee8244dffb85225ef086a9ecd2fabb6971d",
     "branch": "1.1"
   },
   "scenery": {
