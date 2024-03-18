@@ -41,7 +41,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "f2d076bf80cbb40f018b149279f3aaccf8fb458b",
+    "sha": "a7dc8b0c8e83f9d0debf75460686691ae0fd38bc",
     "branch": "HEAD"
   },
   "phetmarks": {
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "02aad5896f29142727483d32e34083519db525c1",
+    "sha": "67cf4c7eed4bba82294ea5f3d9c761328b8a70c3",
     "branch": "1.1"
   },
   "scenery": {
