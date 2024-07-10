@@ -53,11 +53,11 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "cbc488d110365d320519189fcbc3b9297b5ae2d4",
+    "sha": "7c35e0aa4439cbe25947f567f872af572d46a954",
     "branch": "1.1"
   },
   "scenery": {
-    "sha": "980426dffc6e691e7bbc0dc4607bd6bd70c4d511",
+    "sha": "1a8f36cd1d8c65ea25c1c3577a960c94cffad65d",
     "branch": "HEAD"
   },
   "scenery-phet": {
