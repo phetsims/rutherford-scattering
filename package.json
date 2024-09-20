@@ -42,7 +42,7 @@
         ],
         "parserOptions": {
           "project": [
-            "../rutherford-scattering/tsconfig.json"
+            "../chipper/tsconfig/eslint-all/tsconfig.json"
           ]
         }
       }
