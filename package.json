@@ -32,8 +32,5 @@
       "RUTHERFORD_SCATTERING/rutherfordAtom",
       "RUTHERFORD_SCATTERING/plumPuddingAtom"
     ]
-  },
-  "eslintConfig": {
-    "extends": "../chipper/eslint/sim_eslintrc.js"
   }
 }
