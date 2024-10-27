@@ -5,23 +5,20 @@
  * @author Michael Kauzmann (PhET Interactive Simulations)
  */
 
-import { Node } from '../../../../scenery/js/imports.js';
+import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 
 // constants
 const screenSummaryString = RutherfordScatteringStrings.a11y.screenSummary;
 
-class RSScreenSummaryNode extends Node {
+class RSScreenSummaryNode extends ScreenSummaryContent {
 
   /**
    * @param {Object} [options]
    */
   constructor( options ) {
-    super( {
-      tagName: 'p',
-      innerContent: screenSummaryString
-    } );
+    super( screenSummaryString );
   }
 }
 
