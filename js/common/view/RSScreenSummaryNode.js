@@ -1,4 +1,4 @@
-// Copyright 2018-2022, University of Colorado Boulder
+// Copyright 2018-2024, University of Colorado Boulder
 
 /**
  * A consistent Scene Summary node that can be used in all screen views.
