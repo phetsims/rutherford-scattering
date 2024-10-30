@@ -73,9 +73,11 @@ class RSBaseScreenView extends ScreenView {
       topColor: 'rgb(211, 140, 70)',
       highlightColor: 'rgb(229, 186, 144)',
       bottomColor: 'rgb(106, 70, 35)',
-      buttonColor: 'rgb(0, 203, 230)',
+      buttonOptions: {
+        baseColor: 'rgb(0, 203, 230)',
+        rotation: -GUN_ROTATION // so button lighting is correct
+      },
       rotation: GUN_ROTATION, // pointing up
-      buttonRotation: -GUN_ROTATION, // so button lighting is correct
       accessibleName: toggleAlphaParticleString,
       helpText: alphaParticlesHelpTextString
     } );
