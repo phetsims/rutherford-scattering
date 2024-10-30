@@ -76,8 +76,8 @@ class RSBaseScreenView extends ScreenView {
       buttonColor: 'rgb(0, 203, 230)',
       rotation: GUN_ROTATION, // pointing up
       buttonRotation: -GUN_ROTATION, // so button lighting is correct
-      buttonAccessibleName: toggleAlphaParticleString,
-      buttonHelpText: alphaParticlesHelpTextString
+      accessibleName: toggleAlphaParticleString,
+      helpText: alphaParticlesHelpTextString
     } );
     this.addChild( this.gunNode );
 
