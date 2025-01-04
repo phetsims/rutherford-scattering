@@ -18,7 +18,11 @@ class RSScreenSummaryNode extends ScreenSummaryContent {
    * @param {Object} [options]
    */
   constructor( options ) {
-    super( screenSummaryString );
+    super( {
+      additionalContent: [
+        screenSummaryString
+      ]
+    } );
   }
 }
 
