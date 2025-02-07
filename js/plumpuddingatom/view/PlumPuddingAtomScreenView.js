@@ -7,7 +7,7 @@
  */
 
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import { AlignGroup } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';

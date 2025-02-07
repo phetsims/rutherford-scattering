@@ -10,7 +10,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
-import { Path } from '../../../../scenery/js/imports.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';

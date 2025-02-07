@@ -8,7 +8,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import { CanvasNode } from '../../../../scenery/js/imports.js';
+import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';

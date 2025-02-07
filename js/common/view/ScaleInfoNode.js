@@ -7,10 +7,12 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-import { Shape } from '../../../../kite/js/imports.js';
+import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { Node, Path, RichText } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import RichText from '../../../../scenery/js/nodes/RichText.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';

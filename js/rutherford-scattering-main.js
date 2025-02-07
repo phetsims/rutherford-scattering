@@ -9,7 +9,7 @@
 import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
-import { HighlightOverlay } from '../../scenery/js/imports.js';
+import HighlightOverlay from '../../scenery/js/overlays/HighlightOverlay.js';
 import RSColors from './common/RSColors.js';
 import PlumPuddingAtomScreen from './plumpuddingatom/PlumPuddingAtomScreen.js';
 import RutherfordAtomScreen from './rutherfordatom/RutherfordAtomScreen.js';

@@ -9,7 +9,8 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { Node, VBox } from '../../../../scenery/js/imports.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
 

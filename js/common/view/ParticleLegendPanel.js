@@ -8,7 +8,11 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { AlignGroup, HBox, HStrut, Text, VBox } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import HStrut from '../../../../scenery/js/nodes/HStrut.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';

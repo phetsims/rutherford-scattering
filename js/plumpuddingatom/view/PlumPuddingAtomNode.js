@@ -6,7 +6,7 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-import { Image } from '../../../../scenery/js/imports.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 

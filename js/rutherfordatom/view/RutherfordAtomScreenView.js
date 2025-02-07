@@ -8,7 +8,12 @@
 
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignGroup, colorProfileProperty, Image, Node, SceneryConstants, Text } from '../../../../scenery/js/imports.js';
+import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import Image from '../../../../scenery/js/nodes/Image.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
+import colorProfileProperty from '../../../../scenery/js/util/colorProfileProperty.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import atom_png from '../../../images/atom_png.js';
 import atomProjector_png from '../../../images/atomProjector_png.js';
