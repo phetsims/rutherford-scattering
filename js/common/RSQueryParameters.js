@@ -6,6 +6,7 @@
  * @author Jesse Greenberg
  */
 
+import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
 import rutherfordScattering from '../rutherfordScattering.js';
 
 const RSQueryParameters = QueryStringMachine.getAll( {
