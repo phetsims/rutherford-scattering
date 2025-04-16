@@ -34,8 +34,7 @@ class NucleusSpaceNode extends ParticleSpaceNode {
 
       // pdom
       tagName: 'div',
-      labelTagName: 'h3',
-      labelContent: observationWindowString,
+      accessibleHeading: observationWindowString,
       descriptionContent: nucleusSpaceDescriptionString,
       appendDescription: true
     }, config );

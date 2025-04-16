@@ -177,9 +177,7 @@ class RSBaseScreenView extends ScreenView {
 
     // pdom
     const viewingStreamingOptionsNode = new Node( {
-      tagName: 'div',
-      labelTagName: 'h3',
-      labelContent: otherViewingStreamingOptionsString,
+      accessibleHeading: otherViewingStreamingOptionsString,
       descriptionContent: otherOptionsDescriptionString
     } );
     this.addChild( viewingStreamingOptionsNode );

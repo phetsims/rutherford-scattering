@@ -81,9 +81,8 @@ class AtomPropertiesPanel extends Panel {
       fill: RSColors.panelColorProperty,
       stroke: RSColors.panelBorderColorProperty,
 
-      tagName: 'div',
-      labelTagName: 'h3',
-      labelContent: atomSettingsString
+      // pdom
+      accessibleHeading: atomSettingsString
     }, options );
 
     super( panelBox, options );

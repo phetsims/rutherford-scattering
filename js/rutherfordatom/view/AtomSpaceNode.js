@@ -37,9 +37,7 @@ class AtomSpaceNode extends ParticleSpaceNode {
       particleStyle: 'particle',
 
       // pdom
-      tagName: 'div',
-      labelTagName: 'h3',
-      labelContent: observationWindowString,
+      accessibleHeading: observationWindowString,
       descriptionContent: atomSpaceDescriptionString,
       appendDescription: true
     }, config );

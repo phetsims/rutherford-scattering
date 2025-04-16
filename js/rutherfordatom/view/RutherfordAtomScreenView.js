@@ -185,11 +185,8 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       },
       maxWidth: this.targetMaterialNode.width,
 
-      tagName: 'div',
-      descriptionContent: switchScaleDescriptionString,
-      labelTagName: 'h3',
-      labelContent: switchScaleString,
-      appendDescription: true
+      accessibleName: switchScaleString,
+      descriptionContent: switchScaleDescriptionString
     } );
 
     // @private

@@ -73,9 +73,7 @@ class AlphaParticlePropertiesPanel extends Panel {
       stroke: RSColors.panelBorderColorProperty,
 
       // pdom
-      tagName: 'div',
-      labelTagName: 'h3',
-      labelContent: alphaParticleSettingsString
+      accessibleHeading: alphaParticleSettingsString
     }, options );
 
     super( contentVBox, options );
