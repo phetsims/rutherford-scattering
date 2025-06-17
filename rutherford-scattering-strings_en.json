@@ -106,7 +106,7 @@
       "value": "Atom Settings"
     },
     "protonsValuePattern": {
-      "value": "Protons {protons}"
+      "value": "Protons"
     },
     "protonsPerAtomValuePattern": {
       "value": "Protons per Atom {protons}"
@@ -115,7 +115,7 @@
       "value": "Adjust number of protons per atom in foil."
     },
     "neutronsValuePattern": {
-      "value": "Neutrons {neutrons}"
+      "value": "Neutrons"
     },
     "neutronsPerAtomValuePattern": {
       "value": "Neutrons per Atom {neutrons}"
