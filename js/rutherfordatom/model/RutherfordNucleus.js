@@ -10,6 +10,7 @@
 import Utils from '../../../../dot/js/Utils.js';
 import Particle from '../../../../shred/js/model/Particle.js';
 import ParticleAtom from '../../../../shred/js/model/ParticleAtom.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordNucleus extends ParticleAtom {
@@ -21,7 +22,8 @@ class RutherfordNucleus extends ParticleAtom {
   constructor( protonCountProperty, neutronCountProperty ) {
 
     super( {
-      nucleonRadius: 3
+      nucleonRadius: 3,
+      tandem: Tandem.OPT_OUT // opt out until this sim is set up for phet-io
     } );
 
     let particle;
