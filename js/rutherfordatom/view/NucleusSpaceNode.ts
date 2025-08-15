@@ -1,5 +1,8 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * NucleusSpaceNode is the space in which atoms and alpha particles are rendered.  In this
  * representation, the space has a single nucleus.

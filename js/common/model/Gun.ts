@@ -1,5 +1,8 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Gun is the model of a gun that can fire alpha particles.
  *

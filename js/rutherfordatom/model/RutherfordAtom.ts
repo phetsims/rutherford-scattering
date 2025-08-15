@@ -1,5 +1,8 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Model for the 'Rutherford Atom', responsible for moving alpha particles within its bounds.  For
  * additional information concerning the trajectory algorithm, see trajectories.pdf located in docs

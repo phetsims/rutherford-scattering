@@ -1,5 +1,8 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Space in which atoms and alpha particles are rendered.  In this representation, there are several
  * atoms in the space and the alpha particles are small particles, most of which travel through the

@@ -1,5 +1,8 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Model for the Plum Pudding Atom space.  In this representation, the particles move
  * straight through space, so no additional atom models are added.

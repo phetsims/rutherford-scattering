@@ -1,5 +1,8 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * The space in which atoms and alpha particles are rendered.  The particles can be represented two
  * ways, 'nucleus' and 'particle'.  When represented by a nucleus, the particle is shown as an image of

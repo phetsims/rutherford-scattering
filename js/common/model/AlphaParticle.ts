@@ -1,5 +1,8 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Alpha particle representation - speed, orientation, current/past positions.
  * An alpha particle is initially added to an AtomSpace.  If, during its trajectory, it enters

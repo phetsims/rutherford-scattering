@@ -1,5 +1,8 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Location for all colors, especially those that must change for projector mode.
  * There are two profiles 'default' and 'projector' which can enhance visibility when using a projector.

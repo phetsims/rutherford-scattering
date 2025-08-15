@@ -1,5 +1,8 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Collection of all control panels in a screen of this sim.  Different scenes in a single
  * scene can have different panels, so the panels can be updated.

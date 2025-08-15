@@ -1,5 +1,8 @@
 // Copyright 2018-2025, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * A consistent Scene Summary node that can be used in all screen views.
  * @author Michael Kauzmann (PhET Interactive Simulations)

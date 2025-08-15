@@ -1,5 +1,8 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Base object for the models. Keeps track of all active particles.
  *

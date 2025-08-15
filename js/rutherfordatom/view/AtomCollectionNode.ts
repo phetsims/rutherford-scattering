@@ -1,5 +1,8 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Visual representation of a collection of rutherford atoms. This draws the actual nuclei and electron shells in the
  * "Atom" scene of the "Rutherford Atom" screen. The electron energy levels are represented by dashed

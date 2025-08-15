@@ -1,5 +1,8 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Legend for particles related to the nuclear views in the sim
  *

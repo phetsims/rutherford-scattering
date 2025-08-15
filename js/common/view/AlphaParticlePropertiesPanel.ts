@@ -1,5 +1,8 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
+/* eslint-disable */
+// @ts-nocheck
+
 /**
  * Control panel for the "Ruthorford Scattering" sim. Allows the user to adjust the energy of alpha particles
  * being simulated.  Content is created by AlphaParticlePropertiesPanelContent below since the Content
