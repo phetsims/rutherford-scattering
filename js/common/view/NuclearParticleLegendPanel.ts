@@ -11,6 +11,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import ParticleLegendPanel from './ParticleLegendPanel.js';
@@ -38,7 +39,7 @@ class NuclearParticleLegendPanel extends ParticleLegendPanel {
    * @returns {Node}
    * @public
    */
-  static createPanelContent( options ) {
+  static createPanelContent( options: IntentionalAny ): IntentionalAny {
 
     options = merge( {
       includeElectron: true // should the panel include an entry for the electron?

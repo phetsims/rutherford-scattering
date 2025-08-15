@@ -10,6 +10,7 @@
  * @author Jesse Greenberg
  */
 
+import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -36,7 +37,7 @@ class AtomParticleLegendPanel extends ParticleLegendPanel {
    * @returns {Node}
    * @public
    */
-  static createPanelContent( options ) {
+  static createPanelContent( options: IntentionalAny ): IntentionalAny {
 
     // add the legend particle entries
     const content = [];

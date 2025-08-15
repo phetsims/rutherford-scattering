@@ -17,14 +17,12 @@ import Property from '../../../../axon/js/Property.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
+import type RutherfordAtom from '../../rutherfordatom/model/RutherfordAtom.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 class AlphaParticle {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  public constructor( options?: object ) {
 
     options = merge( {
       speed: 0,
@@ -83,8 +81,7 @@ class AlphaParticle {
 
   }
 
-  // @public
-  dispose() {
+  public dispose(): void {
     this.disposeAlphaParticle();
   }
 
@@ -92,10 +89,8 @@ class AlphaParticle {
    * Get the direction that this particle is travelling in space coordinates as a vector
    * of unit length.  The vector is created from the latest positions in the array since
    * the particle orientation is bound to the second quadrant.
-   * @returns {Vector2}
-   * @public
    */
-  getDirection() {
+  public getDirection(): Vector2 {
 
     // if there are less than two positions, return a vector pointing in the initial orientation
     if ( this.positions.length < 2 ) {
@@ -115,10 +110,8 @@ class AlphaParticle {
    * the atom's bounds transformed so that the bottom edge is orthogonal to the orientation
    * of the particle.  The prepared box is set as soon as a particle enters the bounding circle
    * containing the atom.
-   * @param {RutherfordAtom} atom
-   * @public
    */
-  prepareBoundingBox( atom ) {
+  public prepareBoundingBox( atom: RutherfordAtom ): void {
 
     // get the angle of the vector orthogonal to the direction of movement
     const direction = this.getDirection();
