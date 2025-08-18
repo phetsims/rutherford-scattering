@@ -1,8 +1,5 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Base object for the models. Keeps track of all active particles.
  *
@@ -11,54 +8,64 @@
 
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
+import TEmitter from '../../../../axon/js/TEmitter.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
+import AlphaParticle from './AlphaParticle.js';
+import AtomSpace from './AtomSpace.js';
 import Gun from './Gun.js';
 
 class RSBaseModel {
 
+  public readonly alphaParticleEnergyProperty: Property<number>;
+  public readonly runningProperty: Property<boolean>;
+  public readonly userInteractionProperty: Property<boolean>;
+  public readonly bounds: Bounds2;
+  public readonly particles: AlphaParticle[];
+  protected readonly atomSpaces: AtomSpace[];
+  protected readonly manualStepDt: number;
+  protected readonly gun: Gun;
+  protected readonly stepEmitter: TEmitter<[ number ]>;
+
   /**
-   * @param {Property} userInteractionProperty - true while the user is interacting with something that should stop
+   * @param userInteractionProperty - true while the user is interacting with something that should stop
    *                                             and remove all particles from the atom space.
    */
-  constructor( userInteractionProperty ) {
+  public constructor( userInteractionProperty: Property<boolean> ) {
 
     assert && assert( RSConstants.SPACE_NODE_WIDTH === RSConstants.SPACE_NODE_HEIGHT, 'Space must be square.' );
 
-    // @public {number}
+    // model computation space
     this.alphaParticleEnergyProperty = new Property( RSConstants.DEFAULT_ALPHA_ENERGY );
 
-    // @public {boolean}
     this.runningProperty = new Property( true );
 
-    // @public
     this.userInteractionProperty = userInteractionProperty;
 
-    // @public (read-only) model computation space
+    // model computation space
     this.bounds = new Bounds2(
       -RSConstants.SPACE_NODE_WIDTH / 4,
       -RSConstants.SPACE_NODE_HEIGHT / 4,
       RSConstants.SPACE_NODE_WIDTH / 4,
       RSConstants.SPACE_NODE_HEIGHT / 4 );
 
-    // @public (read-only) - {AlphaParticle[]} all active alpha particle models
+    // all active alpha particle models
     this.particles = [];
 
-    // @protected - {Array.<RutherfordAtomSpace|PlumPuddingAtomSpace|RutherfordNucleusSpace>}
     this.atomSpaces = [];
 
-    // @protected - manual step size used when sim is paused
-    this.maunalStepDt = 1 / 60;
+    // manual step size used when sim is paused
+    this.manualStepDt = 1 / 60;
 
-    // @protected - the gun which introduces (aka. 'shoots') alpha particles
+    // the gun which introduces (aka. 'shoots') alpha particles
     this.gun = new Gun( this );
 
-    // @protected - used to signal when a sim step has occurred
-    this.stepEmitter = new Emitter( { parameters: [ { valueType: 'number' } ] } );
+    // used to signal when a sim step has occurred
+    this.stepEmitter = new Emitter<[ number ]>( { parameters: [ { valueType: 'number' } ] } );
 
     // no need to unlink this property as base model will exist for life of sim
-    const userInteractionListener = userInteraction => {
+    const userInteractionListener = ( userInteraction: boolean ): void => {
       if ( userInteraction ) {
         this.removeAllParticles();
       }
@@ -69,20 +76,17 @@ class RSBaseModel {
 
   /**
    * Registers a listener to be called at each step of the model execution
-   * @param {function()} listener
-   * @public
+   * @param listener
    */
-  addStepListener( listener ) {
+  public addStepListener( listener: () => void ): void {
     this.stepEmitter.addListener( listener );
   }
 
   /**
    * Get the space which is currently visible.
-   * @returns {AtomSpace}
-   * @public
    */
-  getVisibleSpace() {
-    let visibleSpace;
+  public getVisibleSpace(): AtomSpace {
+    let visibleSpace: AtomSpace | undefined;
     this.atomSpaces.forEach( space => {
       if ( space.isVisible ) {
         visibleSpace = space;
@@ -90,15 +94,14 @@ class RSBaseModel {
     } );
     assert && assert( visibleSpace, 'There must be a visible space' );
 
-    return visibleSpace;
+    return visibleSpace!;
   }
 
   /**
    * Add a particle to the visible space.
-   * @param {AlphaParticle} alphaParticle
-   * @public
+   * @param alphaParticle
    */
-  addParticle( alphaParticle ) {
+  public addParticle( alphaParticle: AlphaParticle ): void {
     this.particles.push( alphaParticle );
 
     // add the particle to the space
@@ -107,10 +110,9 @@ class RSBaseModel {
 
   /**
    * Remove a particle from the visible space
-   * @param {AlphaParticle} alphaParticle
-   * @public
+   * @param alphaParticle
    */
-  removeParticle( alphaParticle ) {
+  public removeParticle( alphaParticle: AlphaParticle ): void {
     // remove the particle from the visible space
     const visibleSpace = this.getVisibleSpace();
     visibleSpace.removeParticle( alphaParticle );
@@ -129,9 +131,8 @@ class RSBaseModel {
 
   /**
    * Remove all particles from this model and its atoms.
-   * @public
    */
-  removeAllParticles() {
+  public removeAllParticles(): void {
     // remove the particles from the visible space
     const visibleSpace = this.getVisibleSpace();
     visibleSpace.removeAllParticles();
@@ -146,25 +147,23 @@ class RSBaseModel {
       particle.dispose();
     } );
     this.particles.length = 0;
-    this.stepEmitter.emit( this.maunalStepDt );
+    this.stepEmitter.emit( this.manualStepDt );
   }
 
   /**
    * A stub function to be implemented by derived objects. This just makes certain one is implemented.
-   * @param {AlphaParticle} alphaParticle
-   * @param {number} dt
-   * @protected
+   * @param alphaParticle
+   * @param dt
    */
-  moveParticle( alphaParticle, dt ) {
+  protected moveParticle( alphaParticle: AlphaParticle, dt: number ): void {
     assert && assert( false, 'No moveParticle model function implemented.' );
   }
 
   /**
    * Move all particles in the visible space.
-   * @param {number} dt
-   * @private
+   * @param dt
    */
-  moveParticles( dt ) {
+  private moveParticles( dt: number ): void {
 
     // move particles owned by the visible space
     this.getVisibleSpace().moveParticles( dt );
@@ -172,9 +171,8 @@ class RSBaseModel {
 
   /**
    * Culls alpha particles that have left the bounds of model space.
-   * @protected
    */
-  cullParticles() {
+  protected cullParticles(): void {
     this.particles.forEach( particle => {
       if ( !this.bounds.containsPoint( particle.positionProperty.get() ) ) {
         this.removeParticle( particle );
@@ -183,10 +181,9 @@ class RSBaseModel {
   }
 
   /**
-   * {number} dt - time step
-   * @public
+   * @param dt - time step
    */
-  step( dt ) {
+  public step( dt: number ): void {
     if ( this.runningProperty.get() && !this.userInteractionProperty.value && dt < 1 ) {
       this.gun.step( dt );
 
@@ -202,22 +199,18 @@ class RSBaseModel {
 
   /**
    * Step one frame manually.  Assuming 60 frames per second.
-   * @public
    */
-  manualStep() {
+  public manualStep(): void {
     if ( !this.userInteractionProperty.value ) {
-      this.gun.step( this.maunalStepDt );
-      this.moveParticles( this.maunalStepDt );
+      this.gun.step( this.manualStepDt );
+      this.moveParticles( this.manualStepDt );
       this.cullParticles();
     }
 
-    this.stepEmitter.emit( this.maunalStepDt );
+    this.stepEmitter.emit( this.manualStepDt );
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.gun.reset();
     this.removeAllParticles();
     this.alphaParticleEnergyProperty.reset();

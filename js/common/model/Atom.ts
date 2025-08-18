@@ -9,41 +9,58 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
+import TEmitter from '../../../../axon/js/TEmitter.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import AlphaParticle from './AlphaParticle.js';
 
 class Atom {
 
-  /**
-   * @param {Vector2} position
-   * @param {number} boundingWidth
-   * @param {Object} [options]
-   */
-  constructor( position, boundingWidth, options ) {
+  // (read-only)
+  public readonly position: Vector2;
 
-    // @public (read-only)
+  // (read-only) - bounding rect is always square
+  public readonly boundingRect: Shape;
+
+  // (read-only) circle which contains the entire bounding box for the atom
+  public readonly boundingCircle: Shape;
+
+  // array of particles that are currently in the bounding box of this atom
+  public particles: AlphaParticle[] = [];
+
+  // Properties that should be implemented by subclasses
+  protected stepEmitter!: TEmitter;
+  protected bounds!: Bounds2;
+  protected running!: boolean;
+  protected userInteraction!: boolean;
+  protected gun!: any; // Gun type - will be properly typed in subclasses
+  protected manualStepDt!: number;
+
+  /**
+   * @param position
+   * @param boundingWidth
+   * @param options
+   */
+  public constructor( position: Vector2, boundingWidth: number, options?: object ) {
+
     this.position = position;
 
     const halfWidth = boundingWidth / 2;
 
-    // @public (read-only) - bounding rect is always square
     this.boundingRect = Shape.rectangle( position.x - halfWidth, position.y - halfWidth, boundingWidth, boundingWidth );
 
-    // @public (read-only) circle which contains the entire bounding box for the atom
     const radius = Math.sqrt( halfWidth * halfWidth + halfWidth * halfWidth );
     this.boundingCircle = Shape.circle( position.x, position.y, radius );
-
-    // @private - array of particles that are currently in the bounding box of this atom
-    this.particles = [];
 
   }
 
 
   /**
-   * @param {AlphaParticle} alphaParticle
-   * @public
+   * @param alphaParticle
    */
-  addParticle( alphaParticle ) {
+  public addParticle( alphaParticle: AlphaParticle ): void {
     this.particles.push( alphaParticle );
 
     // the 'initial position' for the particle relative to the atom center needs to be set once the particle enters
@@ -52,39 +69,33 @@ class Atom {
   }
 
   /**
-   * @param {AlphaParticle} alphaParticle
-   * @public
+   * @param alphaParticle
    */
-  removeParticle( alphaParticle ) {
+  public removeParticle( alphaParticle: AlphaParticle ): void {
     const index = this.particles.indexOf( alphaParticle );
     if ( index > -1 ) {
       this.particles.splice( index, 1 );
     }
   }
 
-  /**
-   * @public
-   */
-  removeAllParticles() {
+  public removeAllParticles(): void {
     this.particles.length = 0;
     this.stepEmitter.emit();
   }
 
   /**
    * A stub function to be implemented by derived objects. This just makes certain one is implemented.
-   * @param {AlphaParticle} alphaParticle
-   * @param {number} dt
-   * @protected
+   * @param alphaParticle
+   * @param dt
    */
-  moveParticle( alphaParticle, dt ) {
+  protected moveParticle( alphaParticle: AlphaParticle, dt: number ): void {
     assert && assert( false, 'No moveParticle model function implemented.' );
   }
 
   /**
-   * @param {number} dt
-   * @private
+   * @param dt
    */
-  moveParticles( dt ) {
+  public moveParticles( dt: number ): void {
     this.particles.forEach( particle => {
       this.moveParticle( particle, dt );
     } );
@@ -92,9 +103,8 @@ class Atom {
 
   /**
    * Culls alpha particles that have left the bounds of space.
-   * @protected
    */
-  cullParticles() {
+  protected cullParticles(): void {
     this.particles.forEach( particle => {
       if ( !this.bounds.containsPoint( particle.positionProperty.get() ) ) {
         this.removeParticle( particle );
@@ -103,10 +113,9 @@ class Atom {
   }
 
   /**
-   * {number} dt - time step
-   * @public
+   * @param dt - time step
    */
-  step( dt ) {
+  public step( dt: number ): void {
     if ( this.running && !this.userInteraction && dt < 1 ) {
       this.gun.step( dt );
       this.moveParticles( dt );
@@ -118,22 +127,18 @@ class Atom {
 
   /**
    * Step one frame manually.  Assuming 60 frames per second.
-   * @public
    */
-  manualStep() {
+  public manualStep(): void {
     if ( !this.userInteraction ) {
-      this.gun.step( this.maunalStepDt );
-      this.moveParticles( this.maunalStepDt );
+      this.gun.step( this.manualStepDt );
+      this.moveParticles( this.manualStepDt );
       this.cullParticles();
     }
 
     this.stepEmitter.emit();
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.gun.reset();
     this.removeAllParticles();
   }

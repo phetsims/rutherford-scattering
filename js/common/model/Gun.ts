@@ -1,7 +1,5 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
 
 /**
  * Gun is the model of a gun that can fire alpha particles.
@@ -15,6 +13,7 @@ import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import AlphaParticle from './AlphaParticle.js';
+import RSBaseModel from './RSBaseModel.js';
 
 // constants
 const MAX_PARTICLES = 20;
@@ -23,38 +22,41 @@ const X0_MIN_FRACTION = 0.04; // closest particle can get horizontally to atom a
 
 class Gun {
 
-  /**
-   * {RSBaseModel} model
-   */
-  constructor( model ) {
+  private model: RSBaseModel;
+  private dtSinceGunFired: number;
+  private correctionFunction: LinearFunction;
+  private dtPerGunFired = 0; // TODO: Is this the proper default? https://github.com/phetsims/rutherford-scattering/issues/181
+  public onProperty: Property<boolean>;
 
-    // @private
+  /**
+   * @param model
+   */
+  public constructor( model: RSBaseModel ) {
+
     this.model = model;
 
-    // @private
     this.dtSinceGunFired = 0;
 
     // function to correct the initial position of the particle if necessary
     // the trajectory algorithm fails if particle is too close to nucleus,
     // so this correction ensure that this does not happen
     // map values determined empirically
-    // @private - to prevent function instantiation every animation frame
+    // to prevent function instantiation every animation frame
     const width1 = 20;
     const width2 = this.model.bounds.width;
     const correction1 = 2;
     const correction2 = 10;
     this.correctionFunction = new LinearFunction( width1, width2, correction1, correction2 );
 
-    // @public {boolean} is the gun on?
-    this.onProperty = new Property( false );
+    // is the gun on?
+    this.onProperty = new Property<boolean>( false );
   }
 
 
   /**
-   * {number} dt - time step
-   * @public
+   * @param dt - time step
    */
-  step( dt ) {
+  public step( dt: number ): void {
 
     const initialSpeed = this.model.alphaParticleEnergyProperty.get();
 
@@ -99,9 +101,8 @@ class Gun {
 
   /**
    * Reset the gun to its initial state, which is off
-   * @public
    */
-  reset() {
+  public reset(): void {
     this.onProperty.reset();
   }
 }

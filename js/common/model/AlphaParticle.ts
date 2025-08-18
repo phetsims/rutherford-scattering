@@ -17,10 +17,57 @@ import Property from '../../../../axon/js/Property.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
-import type RutherfordAtom from '../../rutherfordatom/model/RutherfordAtom.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import Atom from './Atom.js';
 
 class AlphaParticle {
+
+  public speedProperty: Property<number>;
+  public defaultSpeedProperty: Property<number>;
+  public positionProperty: Property<Vector2>;
+  public orientationProperty: Property<number>;
+
+  // the position coordinates used for trace rendering
+  public readonly positions = [];
+
+  // initial position of the particle in a new bounding box, must be set
+  // once a particle enters the bounding box of an atom
+  public initialPosition = new Vector2( 0, 0 );
+
+  // atom this particle is being deflected by
+  public atom: Atom = null;
+
+  // next atom for this particle, set once it has entered a new atom bounding circle
+  public preparedAtom: Atom = null;
+
+  // shape which is the bounding box for the atom this particle belongs to,
+  // set once the particle enters the bounding box of the atom
+  public boundingBox: Shape = null;
+
+  // angle of rotation of this particle relative to the vertical in space coordinates (Math.PI)
+  // used to adjust coordinates of the atomic bounding box for the trajectory algorithm
+  public rotationAngle: number = null;
+
+  // same as rotation angle, but prepared as soon as the particle enters the bounding circle
+  // of the atom nucleus - applied once particle enters bounding box
+  public preparedRotationAngle;
+
+  // is this particle in the atom space or does it belong to an atom?
+  public isInSpace = true;
+
+  // transformed shape for the bounding box of the next atom, set once
+  // the particle enters the bounding circle of the atom
+  public preparedBoundingBox: Shape = null;
+
+  // @private - save new particle position
+  private positionListener = position => {
+    this.positions.push( new Vector2( position.x, position.y ) );
+  };
+
+  // @private
+  private disposeAlphaParticle = () => {
+    this.positionProperty.unlink( positionListener );
+  };
 
   public constructor( options?: object ) {
 
@@ -36,49 +83,7 @@ class AlphaParticle {
     this.positionProperty = new Property( options.position );
     this.orientationProperty = new Property( options.orientation );
 
-    // @public (read-only) - the position coordinates used for trace rendering
-    this.positions = [];
-
-    // @public - initial position of the particle in a new bounding box, must be set
-    // once a particle enters the bounding box of an atom
-    this.initialPosition = new Vector2( 0, 0 );
-
-    // @public - atom this particle is being deflected by
-    this.atom = null;
-
-    // @public - next atom for this particle, set once it has entered a new atom bounding circle
-    this.preparedAtom = null;
-
-    // @public {Shape} - shape which is the bounding box for the atom this particle belongs to,
-    // set once the particle enters the bounding box of the atom
-    this.boundingBox = null;
-
-    // @public - angle of rotation of this particle relative to the vertical in space coordinates (Math.PI)
-    // used to adjust coordinates of the atomic bounding box for the trajectory algorithm
-    this.rotationAngle = null;
-
-    // @public - same as rotation angle, but prepared as soon as the particle enters the bounding circle
-    // of the atom nucleus - applied once particle enters bounding box
-    this.preparedRotationAngle;
-
-    // @public - is this particle in the atom space or does it belong to an atom?
-    this.isInSpace = true;
-
-    // @public {Shape} - transformed shape for the bounding box of the next atom, set once
-    // the particle enters the bounding circle of the atom
-    this.preparedBoundingBox = null;
-
-    // @private - save new particle position
-    const positionListener = position => {
-      this.positions.push( new Vector2( position.x, position.y ) );
-    };
     this.positionProperty.link( positionListener );
-
-    // @private
-    this.disposeAlphaParticle = () => {
-      this.positionProperty.unlink( positionListener );
-    };
-
   }
 
   public dispose(): void {
@@ -111,7 +116,7 @@ class AlphaParticle {
    * of the particle.  The prepared box is set as soon as a particle enters the bounding circle
    * containing the atom.
    */
-  public prepareBoundingBox( atom: RutherfordAtom ): void {
+  public prepareBoundingBox( atom: Atom ): void {
 
     // get the angle of the vector orthogonal to the direction of movement
     const direction = this.getDirection();
