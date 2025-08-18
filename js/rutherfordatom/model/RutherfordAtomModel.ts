@@ -19,7 +19,7 @@ import RutherfordAtomSpace from './RutherfordAtomSpace.js';
 import RutherfordNucleusSpace from './RutherfordNucleusSpace.js';
 
 class RutherfordAtomModel extends RSBaseModel {
-  constructor() {
+  public constructor() {
 
     // interactions that create dependencies for the DerivedProperties that will track user interaction, generally
     // used by control panels to prevent multitouch issues by tracking when the user is changing something
@@ -56,10 +56,7 @@ class RutherfordAtomModel extends RSBaseModel {
 
   }
 
-  /**
-   * @public
-   */
-  reset() {
+  public reset(): void {
     this.protonCountProperty.reset();
     this.neutronCountProperty.reset();
     this.sceneProperty.reset();

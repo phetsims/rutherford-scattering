@@ -15,7 +15,11 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomSpace from './PlumPuddingAtomSpace.js';
 
 class PlumPuddingAtomModel extends RSBaseModel {
-  constructor() {
+
+  // space containing the atom
+  public readonly plumPuddingSpace: PlumPuddingAtomSpace;
+
+  public constructor() {
 
     // a property to track user interaction - only one element will change this in this screen,
     // so a DerivedProperty is not necessary as in RutherfordAtomModel
@@ -23,12 +27,9 @@ class PlumPuddingAtomModel extends RSBaseModel {
 
     super( userInteractionProperty );
 
-    // @public (read-only) - space containing the atom
     this.plumPuddingSpace = new PlumPuddingAtomSpace( this.protonCountProperty, this.bounds );
 
-    // @public (read-only)
-    this.atomSpaces = [ this.plumPuddingSpace ];
-
+    this.atomSpaces.push( this.plumPuddingSpace );
   }
 }
 
