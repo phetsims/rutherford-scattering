@@ -9,6 +9,7 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -16,11 +17,7 @@ import RSConstants from '../RSConstants.js';
 
 class BeamNode extends Rectangle {
 
-  /**
-   * @param {Property.<boolean>} visibleProperty - is the beam visible?
-   * @param {Object} [options]
-   */
-  constructor( visibleProperty, options ) {
+  public constructor( visibleProperty: Property<boolean>, options?: Object ) {
 
     options = merge( {
       fill: '#8f8f8f'

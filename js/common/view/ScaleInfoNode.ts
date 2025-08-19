@@ -28,11 +28,10 @@ const ARROW_TAIL_MARGIN = 5;
 class ScaleInfoNode extends Node {
 
   /**
-   * @param {string} label - the label to place in the middle of the arrows
-   * @param {number} width - the desired width of the Node
-   * @param {Object} [options]
+   * @param label - the label to place in the middle of the arrows
+   * @param width - the desired width of the Node
    */
-  constructor( label, width, options ) {
+  public constructor( label: string, width: number, options?: Object ) {
 
     options = merge( {
       font: RSConstants.SCALE_TITLE_FONT

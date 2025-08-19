@@ -9,7 +9,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
@@ -29,6 +32,7 @@ import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import ScaleInfoNode from '../../common/view/ScaleInfoNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import AtomParticleLegendPanel from './AtomParticleLegendPanel.js';
 import AtomPropertiesPanel from './AtomPropertiesPanel.js';
 import AtomSpaceNode from './AtomSpaceNode.js';
@@ -45,10 +49,7 @@ const atomicScaleViewString = RutherfordScatteringStrings.a11y.atomicScaleView;
 
 class RutherfordAtomScreenView extends RSBaseScreenView {
 
-  /**
-   * @param {RutherfordAtomModel} model
-   */
-  constructor( model ) {
+  public constructor( model: RutherfordAtomModel ) {
 
     const nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, '1.5 x 10<sup>-13</sup>' );
     const atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>' );
@@ -152,11 +153,9 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     /**
      * Create the RadioButonGroup that will act as the scene selection control in this sim. New buttons must be
      * created every time the color profile changes.
-     *
-     * @param {Image} atomIconImage - the icon for the atomic scene, changes with color profile
-     * @returns {RectangularRadioButtonGroup} - returns a RectangularRadioButtonGroup that must be disposed when profile changes
+     * @param atomIconImage - the icon for the atomic scene, changes with color profile
      */
-    const createRadioButtons = atomIconImage => new RectangularRadioButtonGroup( model.sceneProperty, [
+    const createRadioButtons = ( atomIconImage: Image ): RectangularRadioButtonGroup => new RectangularRadioButtonGroup( model.sceneProperty, [
       {
         value: 'atom',
         createNode: () => new Image( atomIconImage, { scale: 0.18 } ),
@@ -224,14 +223,8 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
 /**
  * Create the node in which atoms and alpha particles are rendered.  Node contains both
  * scene representations, and visibility is controlled from this node.
- *
- * @param {RutherfordAtomModel} model
- * @param {Property.<boolean>} showAlphaTraceProperty
- * @param {ModelViewTransform2} modelViewTransform
- * @param {Bounds2} canvasBounds
- * @returns {Node}
  */
-const createSpaceNode = ( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) => {
+const createSpaceNode = ( model: RutherfordAtomModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, canvasBounds: Bounds2 ): Node => {
 
   // create the single nucleus representation scene
   const nucleusSpaceNode = new NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {

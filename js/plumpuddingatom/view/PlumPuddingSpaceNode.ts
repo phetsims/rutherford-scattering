@@ -9,9 +9,12 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Color from '../../../../scenery/js/util/Color.js';
+import RSBaseModel from '../../common/model/RSBaseModel.js';
 import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
@@ -19,12 +22,12 @@ import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
 class PlumPuddingSpaceNode extends ParticleSpaceNode {
 
   /**
-   * @param {RSBaseModel} model
-   * @param {Property.<boolean>} showAlphaTraceProperty
-   * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param {Object} config - must provide {Bounds2} canvasBounds
+   * @param model
+   * @param showAlphaTraceProperty
+   * @param modelViewTransform - model to view  transform
+   * @param config - must provide {Bounds2} canvasBounds
    */
-  constructor( model, showAlphaTraceProperty, modelViewTransform, config ) {
+  public constructor( model: RSBaseModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, config: Object ) {
     config = merge( {
       canvasBounds: required( config.canvasBounds ),
       particleTraceColor: new Color( 'grey' )
@@ -48,12 +51,8 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
 
   /**
    * Draws the background image
-   *
-   * @param {CanvasRenderingContext2D} context
-   * @override
-   * @protected
    */
-  paintSpace( context ) {
+  protected override paintSpace( context: CanvasRenderingContext2D ): void {
     // Slight chance the image used isn't available. In that case, return & try again on next frame
     if ( this.atomNode.image === null ) {
       return;

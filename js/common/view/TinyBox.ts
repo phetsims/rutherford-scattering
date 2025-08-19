@@ -23,10 +23,7 @@ const BOX_SIZE = new Dimension2( 10, 10 );
 
 class TinyBox extends Node {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  public constructor( options?: Object ) {
 
     options = merge( {
       fill: 'black',

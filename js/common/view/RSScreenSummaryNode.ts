@@ -17,10 +17,7 @@ const screenSummaryString = RutherfordScatteringStrings.a11y.screenSummary;
 
 class RSScreenSummaryNode extends ScreenSummaryContent {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  public constructor( options?: Object ) {
     super( {
       additionalContent: [
         screenSummaryString

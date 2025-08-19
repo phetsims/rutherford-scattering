@@ -12,6 +12,7 @@
  * @author Jesse Greenberg
  */
 
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
@@ -19,6 +20,7 @@ import RSColors from '../../common/RSColors.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import RutherfordAtomSpace from '../model/RutherfordAtomSpace.js';
 
 // constants
 const IONIZATION_ENERGY = 13.6; // energy required to ionize hydrogen, in eV
@@ -28,11 +30,10 @@ const ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
 class AtomCollectionNode extends Node {
 
   /**
-   * @param {RutherfordAtomSpace} atomSpace - AtomSpace containing the atoms
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
+   * @param atomSpace - AtomSpace containing the atoms
+   * @param modelViewTransform
    */
-  constructor( atomSpace, modelViewTransform, options ) {
+  public constructor( atomSpace: RutherfordAtomSpace, modelViewTransform: ModelViewTransform2, options?: Object ) {
 
     super( options );
 

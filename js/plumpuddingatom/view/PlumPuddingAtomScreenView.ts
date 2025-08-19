@@ -9,24 +9,26 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
+import Property from '../../../../axon/js/Property.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingSpaceNode from './PlumPuddingSpaceNode.js';
 
 const pattern0AtomicScaleString = RutherfordScatteringStrings.pattern[ '0atomicScale' ];
 
 class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
-  /**
-   * @param {PlumPuddingAtomModel} model
-   */
-  constructor( model ) {
+  public constructor( model: PlumPuddingAtomModel ) {
 
     const scaleString = StringUtils.format( pattern0AtomicScaleString, '3.0 x 10<sup>-10</sup>' );
 
@@ -69,13 +71,8 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
 /**
  * Create the node in which atoms and alpha particles are rendered.
- * @param {PlumPuddingAtomModel} model
- * @param {Property.<boolean>} showAlphaTraceProperty
- * @param {ModelViewTransform2} modelViewTransform
- * @param {Bounds2} canvasBounds
- * @returns {Node}
  */
-const createSpaceNode = ( model, showAlphaTraceProperty, modelViewTransform, canvasBounds ) => {
+const createSpaceNode = ( model: PlumPuddingAtomModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, canvasBounds: Bounds2 ): Node => {
   const plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
     canvasBounds: canvasBounds
   } );

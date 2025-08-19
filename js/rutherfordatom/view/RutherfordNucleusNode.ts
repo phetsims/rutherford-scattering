@@ -31,13 +31,11 @@ class RutherfordNucleusNode extends CanvasNode {
   /**
    * The Rutherford atom is build by randomly drawing proton & neutron images to a CanvasNode. This canvas is then
    * rendered to an Image.
-   *
-   * @param {Property.<boolean>} userInteractionProperty - is the user changing the model
-   * @param {Property.<boolean>} protonCountProperty
-   * @param {Property.<boolean>} neutronCountProperty
-   * @param {Object} [options]
+   * @param userInteractionProperty - is the user changing the model
+   * @param protonCountProperty
+   * @param neutronCountProperty
    */
-  constructor( userInteractionProperty, protonCountProperty, neutronCountProperty, rutherfordNucleus, options ) {
+  public constructor( userInteractionProperty: Property<boolean>, protonCountProperty: Property<number>, neutronCountProperty: Property<number>, rutherfordNucleus: RutherfordNucleus, options?: Object ) {
 
     // max radius of an atom with MAX protons & neutrons
     const maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
@@ -139,17 +137,15 @@ class RutherfordNucleusNode extends CanvasNode {
 
   /**
    * Make this node eligible for garbage collection
-   * @public
    */
-  dispose() {
+  public dispose(): void {
     this.disposeRutherfordNucleusNode();
   }
 
   /**
    * renders a new atom image based on proton/neutron counts
-   * @private
    */
-  updateAtomImage() {
+  private updateAtomImage(): void {
 
     // Calculate the radius of the nucleus
     const currentParticles = this.numberOfProtons + this.numberOfNeutrons;
@@ -168,10 +164,8 @@ class RutherfordNucleusNode extends CanvasNode {
 
   /**
    * Renders the Rutherford atom either as a simple radius outline or as a detailed proton/neutron atom
-   * @param {CanvasRenderingContext2D} context
-   * @private
    */
-  paintCanvas( context ) {
+  private paintCanvas( context: CanvasRenderingContext2D ): void {
 
     const bounds = this.canvasBounds;
 
@@ -205,12 +199,8 @@ class RutherfordNucleusNode extends CanvasNode {
 
   /**
    * Create an icon of the Rutherford Nucleus with the desired number of protons and neutrons.
-   *
-   * @param {number} protonCount
-   * @param {number} neutronCount
-   * @public
    */
-  static RutherfordNucleusIcon( protonCount, neutronCount ) {
+  public static RutherfordNucleusIcon( protonCount: number, neutronCount: number ): IconCanvasNode {
 
     // create static properties and nucleus for the icon
     const protonCountProperty = new Property( protonCount );
@@ -228,11 +218,8 @@ class IconCanvasNode extends CanvasNode {
   /**
    * Constructor for an icon representation of the Rutherford Nucleus.  This has no attached listeners,
    * and is a static representation of the nucleus.
-   *
-   * @param  {RutherfordNucleus} nucleus
-   * @param  {Object} options
    */
-  constructor( nucleus, options ) {
+  public constructor( nucleus: RutherfordNucleus, options?: Object ) {
 
     // max radius of an atom with MAX protons & neutrons
     const numberOfParticles = nucleus.protonCountProperty.get() + nucleus.neutronCountProperty.get();
@@ -259,11 +246,8 @@ class IconCanvasNode extends CanvasNode {
 
   /**
    * Paint function for the canvas node
-   *
-   * @param  {CanvasRenderingContext2D} context
-   * @protected @override
    */
-  paintCanvas( context ) {
+  protected override paintCanvas( context: CanvasRenderingContext2D ): void {
 
     // paint the nucleus with canvas arcs - slower than image, but better resolution for icons
     this.boundPaintNucleusIcon( this.nucleus, this.canvasBounds, context, 'canvasArc' );

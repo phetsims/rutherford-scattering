@@ -12,21 +12,17 @@
  * @author Jesse Greenberg
  */
 
+import Emitter from '../../../../axon/js/Emitter.js';
+import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import AlphaParticle from '../../common/model/AlphaParticle.js';
 import Atom from '../../common/model/Atom.js';
 import RSConstants from '../../common/RSConstants.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordAtom extends Atom {
 
-  /**
-   * @param {Emitter} particleRemovedEmitter
-   * @param {Property.<number>} protonCountProperty
-   * @param {Vector2} position
-   * @param {number} boundingWidth
-   * @param {Object} [options]
-   */
-  constructor( particleRemovedEmitter, protonCountProperty, position, boundingWidth, options ) {
+  public constructor( particleRemovedEmitter: Emitter, protonCountProperty: Property<number>, position: Vector2, boundingWidth: number, options?: Object ) {
 
     super( position, boundingWidth, options );
 
@@ -39,11 +35,8 @@ class RutherfordAtom extends Atom {
    * Remove a particle.  Most of the time, a particle needs to be removed from this atom but kept in
    * the space so that a new atom can pick it up if necessary.  On error, notify the space so that
    * the particle can be removed entirely from the model.
-   * @param  {AlphaParticle}  particle
-   * @param  {boolean} isError
-   * @public
    */
-  removeParticle( particle, isError, line ) {
+  public removeParticle( particle: AlphaParticle, isError: boolean, line: any ): void {
     super.removeParticle( particle );
 
     if ( isError ) {
@@ -71,13 +64,8 @@ class RutherfordAtom extends Atom {
    * to fail as the alpha particle's horizontal position (x) gets closer
    * to zero. So the Gun model is calibrated to fire alpha particles
    * with some min initial x value.
-   *
-   * @param {AlphaParticle} alphaParticle
-   * @param {number} dt
-   * @override
-   * @protected
    */
-  moveParticle( alphaParticle, dt ) {
+  protected override moveParticle( alphaParticle: AlphaParticle, dt: number ): void {
 
     // apply a rotation to the particle coordinate frame if nececssary so that
     // the trajectory algorithm can proceed as if the particle were moving straight
@@ -247,14 +235,11 @@ class RutherfordAtom extends Atom {
   /**
    * Rotate the point around another origin point, returning a new Vector2.
    * Vector2 does not support RotateAround, should this be moved there?
-   * @private
-   *
-   * @param  {Vector2} point - the point to rotate
-   * @param  {Vector2} rotatePoint - the point to rotate around
-   * @param  {number} angle
-   * @returns {Vector2}
+   * @param point - the point to rotate
+   * @param rotatePoint - the point to rotate around
+   * @param angle
    */
-  rotatePointAround( point, rotatePoint, angle ) {
+  private rotatePointAround( point: Vector2, rotatePoint: Vector2, angle: number ): Vector2 {
 
     const sinAngle = Math.sin( angle );
     const cosAngle = Math.cos( angle );

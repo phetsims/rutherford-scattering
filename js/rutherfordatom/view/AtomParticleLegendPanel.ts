@@ -11,6 +11,7 @@
  */
 
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -22,22 +23,14 @@ const nucleusString = RutherfordScatteringStrings.nucleus;
 
 class AtomParticleLegendPanel extends ParticleLegendPanel {
 
-  /**
-   * @param {Node} content
-   * @param {Object} [options]
-   */
-  constructor( content, options ) {
+  public constructor( content: Node, options?: Object ) {
     super( content, options );
   }
 
   /**
    * Create the content that is to be contained in this panel.
-   *
-   * @param  {Object} [options]
-   * @returns {Node}
-   * @public
    */
-  static createPanelContent( options: IntentionalAny ): IntentionalAny {
+  public static createPanelContent( options: IntentionalAny ): IntentionalAny {
 
     // add the legend particle entries
     const content = [];

@@ -25,10 +25,7 @@ const FRONT_COLOR = '#d6cb86';
 
 class TargetMaterialNode extends Node {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  public constructor( options?: Object ) {
 
     options = options || {};
 

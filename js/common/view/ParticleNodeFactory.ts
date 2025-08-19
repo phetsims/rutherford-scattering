@@ -15,6 +15,7 @@ import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
 import plumPuddingIcon_png from '../../../images/plumPuddingIcon_png.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -39,10 +40,8 @@ const ParticleNodeFactory = {
 
   /**
    * Creates an electron node.
-   * @returns {Node}
-   * @public
    */
-  createElectron() {
+  createElectron(): Node {
     return new Node( {
       children: [
         new ParticleNode( ELECTRON_RADIUS, ELECTRON_COLOR )
@@ -52,10 +51,8 @@ const ParticleNodeFactory = {
 
   /**
    * Creates a proton node.
-   * @returns {Node}
-   * @public
    */
-  createProton() {
+  createProton(): Node {
     return new Node( {
       children: [
         new ParticleNode( PROTON_RADIUS, PROTON_COLOR )
@@ -65,10 +62,8 @@ const ParticleNodeFactory = {
 
   /**
    * Creates a neutron node.
-   * @returns {Node}
-   * @public
    */
-  createNeutron() {
+  createNeutron(): Node {
     return new Node( {
       children: [
         new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR )
@@ -78,32 +73,22 @@ const ParticleNodeFactory = {
 
   /**
    * Draw a proton with canvas using the provided context
-   *
-   * @param  {number} x
-   * @param  {number} y
-   * @param  {CanvasRenderingContext2D} context
    */
-  drawProtonWithCanvas( x, y, context ) {
+  drawProtonWithCanvas( x: number, y: number, context: CanvasRenderingContext2D ): void {
     drawParticleWithCanvas( x, y, PROTON_RADIUS, PROTON_COLOR, context );
   },
 
   /**
    * Draw a neutron with canvas using the provided context
-   *
-   * @param  {number} x
-   * @param  {number} y
-   * @param  {CanvasRenderingContext2D} context
    */
-  drawNeutronWithCanvas( x, y, context ) {
+  drawNeutronWithCanvas( x: number, y: number, context: CanvasRenderingContext2D ): void {
     drawParticleWithCanvas( x, y, NEUTRON_RADIUS, NEUTRON_COLOR, context );
   },
 
   /**
    * Creates a nucleus node, represented by a small circle.
-   * @returns {Node}
-   * @public
    */
-  createNucleus() {
+  createNucleus(): Node {
     return new Node( {
       children: [
         new Circle( NUCLEUS_RADIUS, { fill: RSColors.nucleusColorProperty } )
@@ -113,9 +98,8 @@ const ParticleNodeFactory = {
 
   /**
    * Create an icon for the legend describing the energy level of an electron
-   * @returns {Node} [description]
    */
-  createEnergyLevel() {
+  createEnergyLevel(): Node {
     return new Node( {
       children: [
         new Line( 0, 0, ENERGY_LEVEL_LINE_LENGTH, 0, { stroke: ENERGY_LEVEL_COLOR } ),
@@ -127,9 +111,8 @@ const ParticleNodeFactory = {
 
   /**
    * Create an icon for the legend describing the particle trace, represented as an arrow
-   * @returns {Node}
    */
-  createParticleTrace() {
+  createParticleTrace(): Node {
     return new Node( {
       children: [
         new ArrowNode( 0, 0, 20, 0, {
@@ -143,10 +126,8 @@ const ParticleNodeFactory = {
 
   /**
    * Creates an alpha particle node, represented by two protons and two neutrons.
-   * @returns {Node}
-   * @public
    */
-  createNucleusAlpha() {
+  createNucleusAlpha(): Node {
     return new Node( {
       children: [
         new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR, { x: NEUTRON_RADIUS - 1, y: -NEUTRON_RADIUS } ),
@@ -159,10 +140,8 @@ const ParticleNodeFactory = {
 
   /**
    * Creates an alpha particle node, represented by a small circle.
-   * @returns {Node}
-   * @public
    */
-  createParticleAlpha() {
+  createParticleAlpha(): Node {
     return new Node( {
       children: [
         new Circle( PARTICLE_RADIUS, { fill: PARTICLE_COLOR } )
@@ -172,10 +151,8 @@ const ParticleNodeFactory = {
 
   /**
    * Creates a plum pudding image.
-   * @returns {Node}
-   * @public
    */
-  createPlumPuddingIcon() {
+  createPlumPuddingIcon(): Node {
     return new Node( {
       children: [
         new Image( plumPuddingIcon_png, { scale: 0.06 } )
@@ -189,13 +166,7 @@ rutherfordScattering.register( 'ParticleNodeFactory', ParticleNodeFactory );
 
 class ParticleNode extends Circle {
 
-  /**
-   * @param {number} radius
-   * @param {Color|String} color
-   * @param {Object} [options]
-   * @private
-   */
-  constructor( radius, color, options ) {
+  private constructor( radius: number, color: Color | string, options?: Object ) {
     options = options || {};
     assert && assert( !options.fill );
 

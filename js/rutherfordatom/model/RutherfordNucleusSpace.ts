@@ -9,6 +9,8 @@
  * @author Jesse Greenberg
  */
 
+import Property from '../../../../axon/js/Property.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import AtomSpace from '../../common/model/AtomSpace.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -17,12 +19,7 @@ import RutherfordNucleus from './RutherfordNucleus.js';
 
 class RutherfordNucleusSpace extends AtomSpace {
 
-  /**
-   * @param {Property.<number>} protonCountProperty
-   * @param {Property.<number>} neutronCountProperty
-   * @param {Bounds2} bounds
-   */
-  constructor( protonCountProperty, neutronCountProperty, bounds ) {
+  public constructor( protonCountProperty: Property<number>, neutronCountProperty: Property<number>, bounds: Bounds2 ) {
 
     super( protonCountProperty, bounds );
 

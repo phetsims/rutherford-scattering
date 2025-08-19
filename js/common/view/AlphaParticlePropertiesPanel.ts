@@ -11,12 +11,14 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import HStrut from '../../../../scenery/js/nodes/HStrut.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VStrut from '../../../../scenery/js/nodes/VStrut.js';
@@ -46,11 +48,7 @@ const FINGER_TRACKER = {};
 
 class AlphaParticlePropertiesPanel extends Panel {
 
-  /**
-   * @param {AlphaParticlePropertiesPanelContent} content - content for the panel
-   * @param {Object} [options]
-   */
-  constructor( content, options ) {
+  public constructor( content: AlphaParticlePropertiesPanelContent, options?: Object ) {
 
     // the title for the panel
     const alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
@@ -89,24 +87,16 @@ class AlphaParticlePropertiesPanel extends Panel {
 
   /**
    * Create the panel content for this panel.
-   *
-   * @param  {Property.<boolean>} energyInteractionProperty
-   * @param  {Property.<boolean>} alphaParticleEnergyProperty
-   * @param  {Property.<boolean>} showTracesProperty
-   * @param  {Object} [options]
-   * @returns {Node}
-   * @public
    */
-  static createPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
+  public static createPanelContent( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<boolean>, showTracesProperty: Property<boolean>, options?: Object ): Node {
     return new AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options );
   }
 
   /**
    * dispose - this panel is created and destroyed every time the scene and color scheme changes
    * so it is important to fully dispose of all elements.
-   * @public
    */
-  dispose() {
+  public dispose(): void {
     this.disposeAlphaParticlePropertiesPanel();
     super.dispose();
   }
@@ -115,13 +105,7 @@ class AlphaParticlePropertiesPanel extends Panel {
 rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
 
 class AlphaParticlePropertiesPanelContent extends VBox {
-  /**
-   * @param  {Property.<boolean>} energyInteractionProperty
-   * @param  {Property.<boolean>} alphaParticleEnergyProperty
-   * @param  {Property.<boolean>} showTracesProperty
-   * @param  {Object} [options]
-   */
-  constructor( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options ) {
+  public constructor( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<boolean>, showTracesProperty: Property<boolean>, options?: Object ) {
 
     options = merge( {
       xMargin: 15,
@@ -262,11 +246,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeContent();
     super.dispose();
   }

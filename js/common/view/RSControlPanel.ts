@@ -14,6 +14,7 @@
 import merge from '../../../../phet-core/js/merge.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
 
@@ -21,10 +22,8 @@ class RSControlPanel extends Node {
 
   /**
    * Constructor.
-   * @param {array.<Panel>} panels
-   * @param {Object} [options]
    */
-  constructor( panels, options ) {
+  public constructor( panels: Array<Panel>, options?: Object ) {
 
     super();
 
@@ -56,9 +55,8 @@ class RSControlPanel extends Node {
   /**
    * Dispose the control panel.  A new control panel is created every time the color scheme
    * and scene property changes so it is important to dispose of all elements.
-   * @public
    */
-  dispose() {
+  public dispose(): void {
     this.disposeRSControlPanel();
     super.dispose();
   }

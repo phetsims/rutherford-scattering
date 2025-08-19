@@ -25,8 +25,10 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
+import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RSBaseModel from '../model/RSBaseModel.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 import BeamNode from './BeamNode.js';
@@ -46,15 +48,16 @@ const otherOptionsDescriptionString = RutherfordScatteringStrings.a11y.otherOpti
 
 const GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
 
+type CreateSpaceNode = ( model: RSBaseModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, spaceNodeBounds: Bounds2 ) => Node;
+
 class RSBaseScreenView extends ScreenView {
 
   /**
-   * @param {RSBaseModel} model
-   * @param {string} scaleString
-   * @param {function(RSBaseModel, Property.<boolean>, ModelViewTransform2, Bounds2 ): Node} createSpaceNode
-   * @param {Object} [options]
+   * @param model
+   * @param scaleString
+   * @param createSpaceNode
    */
-  constructor( model, scaleString, createSpaceNode, options ) {
+  public constructor( model: RSBaseModel, scaleString: string, createSpaceNode: CreateSpaceNode, options?: Object ) {
 
     options = merge( {
       includeElectronLegend: true, // should the particle legend include an entry for the electron?
@@ -191,12 +194,8 @@ class RSBaseScreenView extends ScreenView {
   /**
    * Create a control panel - used by subtypes to generate a control panel from a set
    * of panels.
-   *
-   * @param  {array.<Panel>} panels
-   * @returns {RSControlPanel}
-   * @protected
    */
-  createControlPanel( panels ) {
+  protected createControlPanel( panels: Array<Panel> ): RSControlPanel {
     return new RSControlPanel( panels, {
       top: this.spaceNode.top,
       left: this.spaceNode.right + RSConstants.PANEL_SPACE_MARGIN

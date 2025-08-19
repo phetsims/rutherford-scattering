@@ -29,11 +29,7 @@ const LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;
 
 class ParticleLegendPanel extends Panel {
 
-  /**
-   * @param {Node} content - content to be contained in the panel
-   * @param {Object} [options]
-   */
-  constructor( content, options ) {
+  public constructor( content: Node, options?: Object ) {
 
     // the title for the panel
     const legendText = new Text( legendString, {
@@ -66,22 +62,15 @@ class ParticleLegendPanel extends Panel {
 
   /**
    * Create a box containing one row for the legend panel
-   *
-   * @param  {Node} particleNode
-   * @param  {string} titleString
-   * @returns {HBox}
-   * @protected
    */
-  static createParticleBox( particleNode, titleString ) {
+  protected static createParticleBox( particleNode: Node, titleString: string ): HBox {
     return createParticleRow( particleNode, titleString );
   }
 
   /**
    * Create content which will be contained in the panel.
-   * @returns {Node}
-   * @public
    */
-  static createPanelContent( content, options ) {
+  public static createPanelContent( content: Array<Node>, options: Object ): Node {
     return new ParticleLegendPanelContent( content, options );
   }
 }
@@ -121,12 +110,7 @@ ParticleLegendPanel.LEGEND_CONTENT_ALIGN = 'left';
  */
 class ParticleLegendPanelContent extends VBox {
 
-  /**
-   *
-   * @param {Array.<Node>} content
-   * @param {Object} [options]
-   */
-  constructor( content, options ) {
+  public constructor( content: Array<Node>, options?: Object ) {
 
     options = merge( {
       xMargin: 5,

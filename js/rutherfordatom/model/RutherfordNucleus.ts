@@ -10,6 +10,7 @@
  * @author Jesse Greenberg
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Particle from '../../../../shred/js/model/Particle.js';
 import ParticleAtom from '../../../../shred/js/model/ParticleAtom.js';
@@ -18,11 +19,7 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordNucleus extends ParticleAtom {
 
-  /**
-   * @param {Property.<number>} protonCountProperty
-   * @param {Property.<number>} neutronCountProperty
-   */
-  constructor( protonCountProperty, neutronCountProperty ) {
+  public constructor( protonCountProperty: Property<number>, neutronCountProperty: Property<number> ) {
 
     super( {
       nucleonRadius: 3,
@@ -60,11 +57,7 @@ class RutherfordNucleus extends ParticleAtom {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeRutherfordNucleus();
     super.dispose();
   }

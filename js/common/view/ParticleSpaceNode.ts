@@ -13,13 +13,17 @@
  * @author Jesse Greenberg
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import required from '../../../../phet-core/js/required.js';
+import { ParticleContainer } from '../../../../phetcommon/js/model/ParticleContainer.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import AtomSpace from '../model/AtomSpace.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
@@ -33,12 +37,12 @@ const FADEOUT_SEGMENTS = 80;
 class ParticleSpaceNode extends CanvasNode {
 
   /**
-   * @param {atomSpace} atomSpace - space containing atoms and particles
-   * @param {Property} showAlphaTraceProperty
-   * @param {ModelViewTransform2} modelViewTransform - model to view  transform
-   * @param {Object} config - must contain a canvasBounds attribute of type Bounds2
+   * @param atomSpace - space containing atoms and particles
+   * @param showAlphaTraceProperty
+   * @param modelViewTransform - model to view  transform
+   * @param config - must contain a canvasBounds attribute of type Bounds2
    */
-  constructor( atomSpace, showAlphaTraceProperty, modelViewTransform, config ) {
+  public constructor( atomSpace: AtomSpace, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, config: Object ) {
     config = merge( {
 
       // {Bounds2}
@@ -98,19 +102,12 @@ class ParticleSpaceNode extends CanvasNode {
 
   /**
    * A no/op function to be implemented by derived objects
-   * @param {CanvasRenderingContext2D} context
-   * @protected
    */
-  paintSpace( context ) {
+  protected paintSpace( context: CanvasRenderingContext2D ): void {
     assert && assert( false, 'subtype needs to implement' );
   }
 
-  /**
-   * @param {CanvasRenderingContext2D} context
-   * @override
-   * @private
-   */
-  paintCanvas( context ) {
+  protected override paintCanvas( context: CanvasRenderingContext2D ): void {
 
     const bounds = this.canvasBounds;
     const renderTrace = this.showAlphaTraceProperty.value;
@@ -148,12 +145,8 @@ class ParticleSpaceNode extends CanvasNode {
 
   /**
    * Render alpha particles that belong to a parent particleContainer
-   * @param  {Context2D} context
-   * @param  {Atom|AtomSpace} particleContainer
-   * @param  {boolean} renderTrace
-   * @private
    */
-  renderAlphaParticles( context, particleContainer, renderTrace ) {
+  private renderAlphaParticles( context: CanvasRenderingContext2D, particleContainer: ParticleContainer<Atom|AtomSpace>, renderTrace: boolean ): void {
     if ( renderTrace ) {
 
       // if style is 'nucleus' we can get away with rendering with one path for performance

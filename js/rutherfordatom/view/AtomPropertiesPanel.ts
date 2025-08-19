@@ -17,12 +17,14 @@ import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 
 // constants
 const atomString = RutherfordScatteringStrings.atom;
@@ -54,11 +56,7 @@ const interactionPropertyGroup = {
 };
 
 class AtomPropertiesPanel extends Panel {
-  /**
-   * @param {AtomPropertiesPanelContent} content - Content contained by the panel
-   * @param {Object} [options]
-   */
-  constructor( content, options ) {
+  public constructor( content: AtomPropertiesPanelContent, options?: Object ) {
 
     // Add the title of the panel content
     const atomPropertiesText = new Text( atomString, {
@@ -100,23 +98,16 @@ class AtomPropertiesPanel extends Panel {
 
   /**
    * create content for the panel
-   *
-   * @param model
-   * @returns {Node}
-   * @public
    */
-  static createPanelContent( model, options ) {
+  public static createPanelContent( model: RutherfordAtomModel, options?: Object ): Node {
     return new AtomPropertiesPanelContent( model, options );
   }
 
   /**
    * Dispose this panel - this panel can be created and destroyed frequently so
    * it is important to dispose of all panel elements.
-   *
-   * @public
-   * @override
    */
-  dispose() {
+  public override dispose(): void {
     super.dispose();
     this.disposeAtomPropertiesPanel();
   }
@@ -125,14 +116,8 @@ class AtomPropertiesPanel extends Panel {
 class AtomPropertiesPanelContent extends VBox {
   /**
    * Create the content for the AtomPropertiesPanel. This does not include the panel title.
-   *
-   * @param  {Property.<boolean>} protonInteractionProperty
-   * @param  {Property.<boolean>} neutronInteractionProperty
-   * @param  {Property.<number>} protonCountProperty
-   * @param  {Property.<number>} neutronCountProperty
-   * @param  {Object} [options]
    */
-  constructor( model, options ) {
+  public constructor( model: any, options?: Object ) {
 
     options = merge( {
       xMargin: 15,
@@ -171,11 +156,8 @@ class AtomPropertiesPanelContent extends VBox {
     /**
      * Track fingers for multitouch, adding a finger count to a particular element and setting
      * the interaction properties correctly.
-     *
-     * @param  {string} sliderID
-     * @param  {Property.<boolean>} interactionProperty
      */
-    const addFinger = ( sliderID, interactionProperty ) => {
+    const addFinger = ( sliderID: string, interactionProperty: Property<boolean> ): void => {
       interactionProperty.set( true );
       if ( !FINGER_TRACKER[ sliderID ] && FINGER_TRACKER[ sliderID ] !== 0 ) {
         FINGER_TRACKER[ sliderID ] = 1; // first time finger is down on this thumb
@@ -188,12 +170,8 @@ class AtomPropertiesPanelContent extends VBox {
     /**
      * Remove a finger from an element for multitouch support, removing a finger count from a particular element
      * and setting the interaction properties appropriately.
-     *
-     * @param  {string} sliderID
-     * @param  {Property.<boolean>} interactionProperty
-     * @param  {Property.<number>} countProperty
      */
-    const removeFinger = ( sliderID, interactionProperty, countProperty ) => {
+    const removeFinger = ( sliderID: string, interactionProperty: Property<boolean>, countProperty: Property<number> ): void => {
       FINGER_TRACKER[ sliderID ]--;
       assert && assert( FINGER_TRACKER[ sliderID ] >= 0, 'at least 0 fingers must be using the slider' );
       countProperty.set( Utils.roundSymmetric( countProperty.value ) ); // proper resolution for nucleons
@@ -443,9 +421,8 @@ class AtomPropertiesPanelContent extends VBox {
 
   /**
    * Make eligible for garbage collection.
-   * @public
    */
-  dispose() {
+  public dispose(): void {
     this.disposeContent();
     super.dispose();
   }
