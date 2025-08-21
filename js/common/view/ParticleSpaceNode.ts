@@ -15,18 +15,25 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import required from '../../../../phet-core/js/required.js';
 import { ParticleContainer } from '../../../../phetcommon/js/model/ParticleContainer.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
+import CanvasNode, { CanvasNodeOptions } from '../../../../scenery/js/nodes/CanvasNode.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import AtomSpace from '../model/AtomSpace.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
+
+type SelfOptions = {
+  particleStyle?: string;
+  particleTraceColor?: Color;
+};
+
+export type ParticleSpaceNodeOptions = SelfOptions & CanvasNodeOptions;
 
 // constants
 const SPACE_BORDER_WIDTH = 2;
@@ -40,24 +47,24 @@ class ParticleSpaceNode extends CanvasNode {
    * @param atomSpace - space containing atoms and particles
    * @param showAlphaTraceProperty
    * @param modelViewTransform - model to view  transform
-   * @param config - must contain a canvasBounds attribute of type Bounds2
+   * @param providedOptions - must contain a canvasBounds attribute of type Bounds2
    */
-  public constructor( atomSpace: AtomSpace, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, config: Object ) {
-    config = merge( {
+  public constructor( atomSpace: AtomSpace, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, providedOptions: ParticleSpaceNodeOptions ) {
+    const options = optionize<ParticleSpaceNodeOptions, SelfOptions, CanvasNodeOptions>()( {
 
       // {Bounds2}
-      canvasBounds: required( config.canvasBounds ),
+      canvasBounds: required( providedOptions.canvasBounds ),
       particleStyle: 'nucleus', // 'nucleus'|'particle'
       particleTraceColor: new Color( 255, 0, 255 )
-    }, config );
+    }, providedOptions );
 
     // the bounds should be eroded by 10 so it appears that particles glide into the space
-    config.canvasBounds = config.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
+    options.canvasBounds = options.canvasBounds.eroded( RSConstants.SPACE_BUFFER );
 
-    super( config );
+    super( options );
 
-    this.particleStyle = config.particleStyle;
-    this.particleTraceColor = config.particleTraceColor;
+    this.particleStyle = options.particleStyle;
+    this.particleTraceColor = options.particleTraceColor;
 
     // @private
     this.atomSpace = atomSpace;
@@ -72,7 +79,7 @@ class ParticleSpaceNode extends CanvasNode {
     this.showAlphaTraceProperty = showAlphaTraceProperty;
 
     // @private
-    this.particleTraceColorWithFade = `rgba(${config.particleTraceColor.r},${config.particleTraceColor.g},${config.particleTraceColor.b},{0})`;
+    this.particleTraceColorWithFade = `rgba(${options.particleTraceColor.r},${options.particleTraceColor.g},${options.particleTraceColor.b},{0})`;
 
     // @private - the area to be used as the 'viewport', border not included
     this.clipRect = {

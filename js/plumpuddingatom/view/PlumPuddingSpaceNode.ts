@@ -10,14 +10,18 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import required from '../../../../phet-core/js/required.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import RSBaseModel from '../../common/model/RSBaseModel.js';
-import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
+import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type PlumPuddingSpaceNodeOptions = SelfOptions & ParticleSpaceNodeOptions;
 
 class PlumPuddingSpaceNode extends ParticleSpaceNode {
 
@@ -25,15 +29,15 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
    * @param model
    * @param showAlphaTraceProperty
    * @param modelViewTransform - model to view  transform
-   * @param config - must provide {Bounds2} canvasBounds
+   * @param providedOptions - must provide {Bounds2} canvasBounds
    */
-  public constructor( model: RSBaseModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, config: Object ) {
-    config = merge( {
-      canvasBounds: required( config.canvasBounds ),
+  public constructor( model: RSBaseModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, providedOptions: PlumPuddingSpaceNodeOptions ) {
+    const options = optionize<PlumPuddingSpaceNodeOptions, SelfOptions, ParticleSpaceNodeOptions>()( {
+      canvasBounds: required( providedOptions.canvasBounds ),
       particleTraceColor: new Color( 'grey' )
-    }, config );
+    }, providedOptions );
 
-    super( model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, config );
+    super( model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, options );
 
     // plum pudding image - calc image scale and center positioning
     this.atomNode = new PlumPuddingAtomNode();
