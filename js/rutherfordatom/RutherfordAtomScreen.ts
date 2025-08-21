@@ -1,8 +1,5 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Rutherford screen & model construction
  *
@@ -11,6 +8,7 @@
 
 import Screen from '../../../joist/js/Screen.js';
 import ScreenIcon from '../../../joist/js/ScreenIcon.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import RSColors from '../common/RSColors.js';
 import RSConstants from '../common/RSConstants.js';
 import rutherfordScattering from '../rutherfordScattering.js';
@@ -19,8 +17,8 @@ import RutherfordAtomModel from './model/RutherfordAtomModel.js';
 import RutherfordAtomScreenView from './view/RutherfordAtomScreenView.js';
 import RutherfordNucleusNode from './view/RutherfordNucleusNode.js';
 
-class RutherfordAtomScreen extends Screen {
-  constructor() {
+class RutherfordAtomScreen extends Screen<RutherfordAtomModel, RutherfordAtomScreenView> {
+  public constructor() {
 
     // create an icon for the rutherford atom screen with default number of protons and neutrons
     const homeScreenIcon = new ScreenIcon( RutherfordNucleusNode.RutherfordNucleusIcon(
@@ -32,7 +30,8 @@ class RutherfordAtomScreen extends Screen {
     const options = {
       name: RutherfordScatteringStrings.rutherfordAtomStringProperty,
       backgroundColorProperty: RSColors.backgroundColorProperty,
-      homeScreenIcon: homeScreenIcon
+      homeScreenIcon: homeScreenIcon,
+      tandem: Tandem.OPT_OUT
     };
 
     super(

@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * BeamNode is the beam the comes out of the gun.
  *
@@ -11,17 +8,19 @@
 
 import Property from '../../../../axon/js/Property.js';
 import merge from '../../../../phet-core/js/merge.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
 
 class BeamNode extends Rectangle {
 
-  public constructor( visibleProperty: Property<boolean>, options?: Object ) {
+  public constructor( visibleProperty: Property<boolean>, providedOptions?: RectangleOptions ) {
 
-    options = merge( {
+    // TODO https://github.com/phetsims/rutherford-scattering/issues/181 Optionize
+    // eslint-disable-next-line phet/bad-typescript-text
+    const options = merge( {
       fill: '#8f8f8f'
-    }, options );
+    }, providedOptions );
 
     super( 0, 0, RSConstants.BEAM_SIZE.width, RSConstants.BEAM_SIZE.height, options );
 

@@ -27,6 +27,8 @@ class RSBaseModel {
   protected readonly manualStepDt: number;
   protected readonly gun: Gun;
   protected readonly stepEmitter: TEmitter<[ number ]>;
+  protected readonly protonCountProperty: Property<number>;
+  protected readonly neutronCountProperty: Property<number>;
 
   /**
    * @param userInteractionProperty - true while the user is interacting with something that should stop
@@ -40,6 +42,10 @@ class RSBaseModel {
     this.alphaParticleEnergyProperty = new Property( RSConstants.DEFAULT_ALPHA_ENERGY );
 
     this.runningProperty = new Property( true );
+
+    this.protonCountProperty = new Property( RSConstants.DEFAULT_PROTON_COUNT );
+
+    this.neutronCountProperty = new Property( RSConstants.DEFAULT_NEUTRON_COUNT );
 
     this.userInteractionProperty = userInteractionProperty;
 

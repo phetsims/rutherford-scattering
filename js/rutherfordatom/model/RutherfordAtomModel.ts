@@ -13,7 +13,6 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import RSBaseModel from '../../common/model/RSBaseModel.js';
-import RSConstants from '../../common/RSConstants.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordAtomSpace from './RutherfordAtomSpace.js';
 import RutherfordNucleusSpace from './RutherfordNucleusSpace.js';
@@ -37,12 +36,6 @@ class RutherfordAtomModel extends RSBaseModel {
     this.energyInteractionProperty = energyInteractionProperty;
     this.protonInteractionProperty = protonInteractionProperty;
     this.neutronInteractionProperty = neutronInteractionProperty;
-
-    // @public {number}
-    this.protonCountProperty = new Property( RSConstants.DEFAULT_PROTON_COUNT );
-
-    // @public {number}
-    this.neutronCountProperty = new Property( RSConstants.DEFAULT_NEUTRON_COUNT );
 
     // @public {string} - scene to display, 'atom'|'nucleus'
     this.sceneProperty = new Property( 'atom' );

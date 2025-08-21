@@ -22,7 +22,7 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordAtom extends Atom {
 
-  public constructor( particleRemovedEmitter: Emitter, protonCountProperty: Property<number>, position: Vector2, boundingWidth: number, options?: Object ) {
+  public constructor( particleRemovedEmitter: Emitter<[ AlphaParticle ]>, protonCountProperty: Property<number>, position: Vector2, boundingWidth: number, options?: Object ) {
 
     super( position, boundingWidth, options );
 
@@ -36,7 +36,7 @@ class RutherfordAtom extends Atom {
    * the space so that a new atom can pick it up if necessary.  On error, notify the space so that
    * the particle can be removed entirely from the model.
    */
-  public removeParticle( particle: AlphaParticle, isError: boolean, line: any ): void {
+  public removeParticle( particle: AlphaParticle, isError?: boolean, line?: any ): void {
     super.removeParticle( particle );
 
     if ( isError ) {

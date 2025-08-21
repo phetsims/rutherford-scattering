@@ -1,8 +1,5 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Model for the Rutherford Atom space, responsible for atoms of the model.
  *
@@ -18,6 +15,8 @@ import RutherfordAtom from './RutherfordAtom.js';
 import RutherfordNucleus from './RutherfordNucleus.js';
 
 class RutherfordNucleusSpace extends AtomSpace {
+
+  public readonly rutherfordNucleus: RutherfordNucleus;
 
   public constructor( protonCountProperty: Property<number>, neutronCountProperty: Property<number>, bounds: Bounds2 ) {
 

@@ -142,7 +142,7 @@ class AtomSpace {
             }
             // immediately set the atom so it stops traveling farther into the box
             particle.atom = particle.preparedAtom;
-            particle.preparedAtom.addParticle( particle );
+            particle.preparedAtom!.addParticle( particle );
 
             particle.boundingBox = particle.preparedBoundingBox;
             particle.rotationAngle = particle.preparedRotationAngle;
@@ -164,7 +164,7 @@ class AtomSpace {
 
       if ( !particle.isInSpace ) {
         // if the particle leaves the bounding circle of its atom, add it back into empty space
-        if ( !particle.atom.boundingCircle.containsPoint( particle.positionProperty.get() ) ) {
+        if ( !particle.atom!.boundingCircle.containsPoint( particle.positionProperty.get() ) ) {
           // once the particle exits the atom's bounding box, remove it
           this.addParticleToEmptySpace( particle );
         }
