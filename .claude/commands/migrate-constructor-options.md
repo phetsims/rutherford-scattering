@@ -10,7 +10,7 @@ Migrate all options parameters in constructors in the file @$ARGUMENTS from Java
    - Make sure to visit every occurrence of this variable in its scope.
    - Note that there may be multiple constructors or other methods with `options`, so take care.
 
-2. Change `merge` to `optionize`
+2. Change `merge` to `optionize` or `combineOptions` if there's no class specific options.
 
 3. Example transformation:
 ```typescript

@@ -14,9 +14,18 @@ import Property from '../../../../axon/js/Property.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import Atom from './Atom.js';
+
+type SelfOptions = {
+  speed?: number;
+  defaultSpeed?: number;
+  position?: Vector2;
+  orientation?: number;
+};
+
+type AlphaParticleOptions = SelfOptions;
 
 class AlphaParticle {
 
@@ -61,11 +70,9 @@ class AlphaParticle {
 
   private disposeAlphaParticle: () => void;
 
-  public constructor( providedOptions?: object ) {
+  public constructor( providedOptions?: AlphaParticleOptions ) {
 
-    // TODO https://github.com/phetsims/rutherford-scattering/issues/181 Optionize
-    // eslint-disable-next-line phet/bad-typescript-text
-    const options = merge( {
+    const options = optionize<AlphaParticleOptions, SelfOptions>()( {
       speed: 0,
       defaultSpeed: 0,
       position: new Vector2( 0, 0 ),  // {Vector2} initial position

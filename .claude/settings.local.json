@@ -1,5 +1,9 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(grep:*)"
+    ],
     "defaultMode": "acceptEdits"
   }
 }

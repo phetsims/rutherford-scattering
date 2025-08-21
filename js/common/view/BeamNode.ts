@@ -7,18 +7,20 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { type EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
 
+type SelfOptions = EmptySelfOptions;
+
+type BeamNodeOptions = SelfOptions & RectangleOptions;
+
 class BeamNode extends Rectangle {
 
-  public constructor( visibleProperty: Property<boolean>, providedOptions?: RectangleOptions ) {
+  public constructor( visibleProperty: Property<boolean>, providedOptions?: BeamNodeOptions ) {
 
-    // TODO https://github.com/phetsims/rutherford-scattering/issues/181 Optionize
-    // eslint-disable-next-line phet/bad-typescript-text
-    const options = merge( {
+    const options = optionize<BeamNodeOptions, SelfOptions, RectangleOptions>()( {
       fill: '#8f8f8f'
     }, providedOptions );
 

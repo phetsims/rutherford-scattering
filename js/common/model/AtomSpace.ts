@@ -10,14 +10,16 @@ import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import AlphaParticle from './AlphaParticle.js';
 import Atom from './Atom.js';
 
-type AtomSpaceOptions = {
-  atomWidth: number;
+type SelfOptions = {
+  atomWidth?: number;
 };
+
+type AtomSpaceOptions = SelfOptions;
 
 class AtomSpace {
 
@@ -35,7 +37,7 @@ class AtomSpace {
    */
   public constructor( protonCountProperty: Property<number>, bounds: Bounds2, providedOptions?: AtomSpaceOptions ) {
 
-    const options = combineOptions<AtomSpaceOptions>( {
+    const options = optionize<AtomSpaceOptions, SelfOptions>()( {
       atomWidth: bounds.width // width of each atom in the space, width of space by default
     }, providedOptions );
 

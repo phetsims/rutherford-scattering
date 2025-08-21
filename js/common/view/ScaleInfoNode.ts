@@ -8,12 +8,12 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
-import { TextOptions } from '../../../../scenery/js/nodes/Text.js';
+import Font from '../../../../scenery/js/util/Font.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
@@ -23,11 +23,17 @@ const ARROW_HEAD_WIDTH = 12;
 const ARROW_HEAD_HEIGHT = 12;
 const ARROW_TAIL_MARGIN = 5;
 
+type SelfOptions = {
+  font?: Font;
+};
+
+type ScaleInfoNodeOptions = SelfOptions & NodeOptions;
+
 class ScaleInfoNode extends Node {
 
-  public constructor( label: string, width: number, providedOptions?: TextOptions ) {
+  public constructor( label: string, width: number, providedOptions?: ScaleInfoNodeOptions ) {
 
-    const options = combineOptions<TextOptions>( {
+    const options = optionize<ScaleInfoNodeOptions, SelfOptions, NodeOptions>()( {
       font: RSConstants.SCALE_TITLE_FONT
     }, providedOptions );
 
