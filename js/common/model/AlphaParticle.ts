@@ -1,8 +1,5 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Alpha particle representation - speed, orientation, current/past positions.
  * An alpha particle is initially added to an AtomSpace.  If, during its trajectory, it enters
@@ -16,6 +13,7 @@
 import Property from '../../../../axon/js/Property.js';
 import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import Shape from '../../../../kite/js/Shape.js';
 import merge from '../../../../phet-core/js/merge.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import Atom from './Atom.js';
@@ -28,62 +26,66 @@ class AlphaParticle {
   public orientationProperty: Property<number>;
 
   // the position coordinates used for trace rendering
-  public readonly positions = [];
+  public readonly positions: Vector2[] = [];
 
   // initial position of the particle in a new bounding box, must be set
   // once a particle enters the bounding box of an atom
   public initialPosition = new Vector2( 0, 0 );
 
   // atom this particle is being deflected by
-  public atom: Atom = null;
+  public atom: Atom | null = null;
 
   // next atom for this particle, set once it has entered a new atom bounding circle
-  public preparedAtom: Atom = null;
+  public preparedAtom: Atom | null = null;
 
   // shape which is the bounding box for the atom this particle belongs to,
   // set once the particle enters the bounding box of the atom
-  public boundingBox: Shape = null;
+  public boundingBox: Shape | null = null;
 
   // angle of rotation of this particle relative to the vertical in space coordinates (Math.PI)
   // used to adjust coordinates of the atomic bounding box for the trajectory algorithm
-  public rotationAngle: number = null;
+  public rotationAngle: number | null = null;
 
   // same as rotation angle, but prepared as soon as the particle enters the bounding circle
   // of the atom nucleus - applied once particle enters bounding box
-  public preparedRotationAngle;
+  public preparedRotationAngle: number | null = null;
 
   // is this particle in the atom space or does it belong to an atom?
   public isInSpace = true;
 
   // transformed shape for the bounding box of the next atom, set once
   // the particle enters the bounding circle of the atom
-  public preparedBoundingBox: Shape = null;
+  public preparedBoundingBox: Shape | null = null;
 
-  // @private - save new particle position
-  private positionListener = position => {
-    this.positions.push( new Vector2( position.x, position.y ) );
-  };
+  private positionListener: ( position: Vector2 ) => void;
 
-  // @private
-  private disposeAlphaParticle = () => {
-    this.positionProperty.unlink( positionListener );
-  };
+  private disposeAlphaParticle: () => void;
 
-  public constructor( options?: object ) {
+  public constructor( providedOptions?: object ) {
 
-    options = merge( {
+    // TODO https://github.com/phetsims/rutherford-scattering/issues/181 Optionize
+    // eslint-disable-next-line phet/bad-typescript-text
+    const options = merge( {
       speed: 0,
       defaultSpeed: 0,
       position: new Vector2( 0, 0 ),  // {Vector2} initial position
       orientation: Math.PI / 2  // {number} in radians
-    }, options );
+    }, providedOptions );
 
     this.speedProperty = new Property( options.speed );
     this.defaultSpeedProperty = new Property( options.defaultSpeed );
     this.positionProperty = new Property( options.position );
     this.orientationProperty = new Property( options.orientation );
 
-    this.positionProperty.link( positionListener );
+  this.positionListener = ( position: Vector2 ) => {
+      this.positions.push( new Vector2( position.x, position.y ) );
+    };
+
+  this.disposeAlphaParticle = () => {
+      this.positionProperty.unlink( this.positionListener );
+    };
+
+    this.positionProperty.link( this.positionListener );
   }
 
   public dispose(): void {
@@ -128,7 +130,7 @@ class AlphaParticle {
     const transformedShape = atom.boundingRect.transformed( Matrix3.rotationAroundPoint( rotationAngle, atom.position ) );
     this.preparedBoundingBox = transformedShape;
   }
-} // constructor
+}
 
 rutherfordScattering.register( 'AlphaParticle', AlphaParticle );
 

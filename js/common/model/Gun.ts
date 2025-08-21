@@ -1,6 +1,5 @@
 // Copyright 2016-2021, University of Colorado Boulder
 
-
 /**
  * Gun is the model of a gun that can fire alpha particles.
  *
@@ -28,9 +27,6 @@ class Gun {
   private dtPerGunFired = 0; // TODO: Is this the proper default? https://github.com/phetsims/rutherford-scattering/issues/181
   public onProperty: Property<boolean>;
 
-  /**
-   * @param model
-   */
   public constructor( model: RSBaseModel ) {
 
     this.model = model;
@@ -52,10 +48,6 @@ class Gun {
     this.onProperty = new Property<boolean>( false );
   }
 
-
-  /**
-   * @param dt - time step
-   */
   public step( dt: number ): void {
 
     const initialSpeed = this.model.alphaParticleEnergyProperty.get();

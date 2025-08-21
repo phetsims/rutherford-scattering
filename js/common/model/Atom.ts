@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Base object for atoms. Keeps track of active particles within its bounds.
  *
@@ -13,18 +10,19 @@ import TEmitter from '../../../../axon/js/TEmitter.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import AlphaParticle from './AlphaParticle.js';
+import Gun from './Gun.js';
 
 class Atom {
 
-  // (read-only)
   public readonly position: Vector2;
 
-  // (read-only) - bounding rect is always square
+  // bounding rect is always square
   public readonly boundingRect: Shape;
 
-  // (read-only) circle which contains the entire bounding box for the atom
+  // circle which contains the entire bounding box for the atom
   public readonly boundingCircle: Shape;
 
   // array of particles that are currently in the bounding box of this atom
@@ -35,7 +33,7 @@ class Atom {
   protected bounds!: Bounds2;
   protected running!: boolean;
   protected userInteraction!: boolean;
-  protected gun!: any; // Gun type - will be properly typed in subclasses
+  protected gun: Gun | null = null;
   protected manualStepDt!: number;
 
   /**
@@ -117,6 +115,7 @@ class Atom {
    */
   public step( dt: number ): void {
     if ( this.running && !this.userInteraction && dt < 1 ) {
+      affirm( this.gun, 'Gun should be initialized' );
       this.gun.step( dt );
       this.moveParticles( dt );
       this.cullParticles();
@@ -126,10 +125,11 @@ class Atom {
   }
 
   /**
-   * Step one frame manually.  Assuming 60 frames per second.
+   * Step one frame manually. Assuming 60 frames per second.
    */
   public manualStep(): void {
     if ( !this.userInteraction ) {
+      affirm( this.gun, 'Gun should be initialized' );
       this.gun.step( this.manualStepDt );
       this.moveParticles( this.manualStepDt );
       this.cullParticles();
@@ -139,6 +139,7 @@ class Atom {
   }
 
   public reset(): void {
+    affirm( this.gun, 'Gun should be initialized' );
     this.gun.reset();
     this.removeAllParticles();
   }
