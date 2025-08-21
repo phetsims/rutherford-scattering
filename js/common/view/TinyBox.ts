@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Indicates the portion of the target material that is shown in the exploded view.
  *
@@ -11,9 +8,9 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import Path from '../../../../scenery/js/nodes/Path.js';
+import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
 // constants
@@ -23,13 +20,15 @@ const BOX_SIZE = new Dimension2( 10, 10 );
 
 class TinyBox extends Node {
 
-  public constructor( options?: Object ) {
+  public constructor( providedOptions?: PathOptions ) {
 
-    options = merge( {
+    // TODO: This could be just a Path!!! https://github.com/phetsims/rutherford-scattering/issues/181
+
+    const options = combineOptions<PathOptions>( {
       fill: 'black',
       stroke: 'white',
       lineWidth: 1
-    }, options );
+    }, providedOptions );
 
     const topNode = new Path( new Shape()
       .moveTo( BACK_OFFSET * BOX_SIZE.width, 0 )

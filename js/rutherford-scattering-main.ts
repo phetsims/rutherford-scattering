@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Main entry point for the sim.
  *
@@ -21,6 +18,8 @@ import RutherfordScatteringStrings from './RutherfordScatteringStrings.js';
 
 const rutherfordScatteringTitleStringProperty = RutherfordScatteringStrings[ 'rutherford-scattering' ].titleStringProperty;
 
+// TODO https://github.com/phetsims/rutherford-scattering/issues/181 Optionize
+// eslint-disable-next-line phet/bad-typescript-text
 const simOptions = {
   credits: {
     leadDesign: 'Amy Hanson, Sam McKagan',

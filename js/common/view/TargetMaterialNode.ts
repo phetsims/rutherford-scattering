@@ -1,18 +1,16 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
- * The material target which which the particle gun is directed towards.
+ * The material target which the particle gun is directed towards.
  *
  * @author Dave Schmitz (Schmitzware)
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import Path from '../../../../scenery/js/nodes/Path.js';
+import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 
@@ -25,9 +23,12 @@ const FRONT_COLOR = '#d6cb86';
 
 class TargetMaterialNode extends Node {
 
-  public constructor( options?: Object ) {
+  // TODO: This could be just a Path!!! https://github.com/phetsims/rutherford-scattering/issues/181
 
-    options = options || {};
+  public constructor( providedOptions?: PathOptions ) {
+
+    const options = combineOptions<PathOptions>( {
+    }, providedOptions );
 
     // top face, in perspective
     const topNode = new Path( new Shape()

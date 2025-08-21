@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Builds the UI scale label w/ arrows & end markers
  * i.e.  |<--------- label ---------->|
@@ -11,11 +8,12 @@
  */
 
 import Shape from '../../../../kite/js/Shape.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
+import { TextOptions } from '../../../../scenery/js/nodes/Text.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
@@ -27,15 +25,11 @@ const ARROW_TAIL_MARGIN = 5;
 
 class ScaleInfoNode extends Node {
 
-  /**
-   * @param label - the label to place in the middle of the arrows
-   * @param width - the desired width of the Node
-   */
-  public constructor( label: string, width: number, options?: Object ) {
+  public constructor( label: string, width: number, providedOptions?: TextOptions ) {
 
-    options = merge( {
+    const options = combineOptions<TextOptions>( {
       font: RSConstants.SCALE_TITLE_FONT
-    }, options );
+    }, providedOptions );
 
     // scale text
     const labelText = new RichText( label, {

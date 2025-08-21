@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Model for the Rutherford Nucleus.  Has Protons, and neutrons which can change in number.
  *
@@ -19,6 +16,8 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordNucleus extends ParticleAtom {
 
+  private disposeRutherfordNucleus: () => void;
+
   public constructor( protonCountProperty: Property<number>, neutronCountProperty: Property<number> ) {
 
     super( {
@@ -29,7 +28,7 @@ class RutherfordNucleus extends ParticleAtom {
     let particle;
 
     // update number of nucleons of a particular type and move all to destination
-    const configureNucleus = ( nucleonCount, particleType ) => {
+    const configureNucleus = ( nucleonCount: number, particleType: 'proton' | 'neutron' ) => {
       const particleCount = Utils.toFixedNumber( nucleonCount, 0 );
       const nucleons = particleType === 'proton' ? this.protons : this.neutrons;
       while ( nucleons.length !== particleCount ) {
@@ -45,12 +44,11 @@ class RutherfordNucleus extends ParticleAtom {
       this.moveAllParticlesToDestination();
     };
 
-    const protonObserver = protonCount => { configureNucleus( protonCount, 'proton' ); };
-    const neutronObserver = neutronCount => { configureNucleus( neutronCount, 'neutron' ); };
+    const protonObserver = ( protonCount: number ) => { configureNucleus( protonCount, 'proton' ); };
+    const neutronObserver = ( neutronCount: number ) => { configureNucleus( neutronCount, 'neutron' ); };
     protonCountProperty.link( protonObserver );
     neutronCountProperty.link( neutronObserver );
 
-    // @private
     this.disposeRutherfordNucleus = () => {
       protonCountProperty.unlink( protonObserver );
       neutronCountProperty.unlink( neutronObserver );
