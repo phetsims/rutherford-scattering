@@ -38,7 +38,7 @@ type ContentSelfOptions = {
   itemVerticalSpacing?: number;
 };
 
-type ParticleLegendPanelContentOptions = ContentSelfOptions & VBoxOptions;
+export type ParticleLegendPanelContentOptions = ContentSelfOptions & VBoxOptions;
 
 export type ParticleLegendPanelOptions = ParticleLegendPanelSelfOptions;
 
@@ -85,7 +85,7 @@ class ParticleLegendPanel extends Panel {
   /**
    * Create content which will be contained in the panel.
    */
-  public static createPanelContent( content: Array<Node>, providedOptions?: ParticleLegendPanelContentOptions ): Node {
+  public static createPanel( content: Array<Node>, providedOptions?: ParticleLegendPanelContentOptions ): Node {
     return new ParticleLegendPanelContent( content, providedOptions );
   }
 }

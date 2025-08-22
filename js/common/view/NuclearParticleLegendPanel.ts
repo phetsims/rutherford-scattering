@@ -1,8 +1,5 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Legend for particles related to the nuclear views in the sim
  *
@@ -15,7 +12,7 @@ import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
-import ParticleLegendPanel, { ParticleLegendPanelOptions } from './ParticleLegendPanel.js';
+import ParticleLegendPanel, { ParticleLegendPanelContentOptions, ParticleLegendPanelOptions } from './ParticleLegendPanel.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
 
 const alphaParticleString = RutherfordScatteringStrings.alphaParticle;
@@ -29,7 +26,7 @@ type SelfOptions = {
   includePlumPudding?: boolean;
 };
 
-type NuclearParticleLegendPanelContentOptions = SelfOptions;
+type NuclearParticleLegendPanelContentOptions = SelfOptions & ParticleLegendPanelContentOptions;
 
 class NuclearParticleLegendPanel extends ParticleLegendPanel {
 
@@ -43,7 +40,8 @@ class NuclearParticleLegendPanel extends ParticleLegendPanel {
   public static createPanelContent( providedOptions?: NuclearParticleLegendPanelContentOptions ): IntentionalAny {
 
     const options = optionize<NuclearParticleLegendPanelContentOptions, SelfOptions>()( {
-      includeElectron: true // should the panel include an entry for the electron?
+      includeElectron: true,
+      includePlumPudding: true // TODO: This wasn't here originally, please verify that this default is correct https://github.com/phetsims/rutherford-scattering/issues/181
     }, providedOptions );
 
     // {Array.<Node>} - children for the content, gets wrapped in AlignBoxes in createPanelContent
@@ -58,7 +56,7 @@ class NuclearParticleLegendPanel extends ParticleLegendPanel {
       content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createPlumPuddingIcon(), positiveChargeString ) );
     }
 
-    return ParticleLegendPanel.createPanelContent( content, options );
+    return ParticleLegendPanel.createPanel( content, options );
   }
 }
 

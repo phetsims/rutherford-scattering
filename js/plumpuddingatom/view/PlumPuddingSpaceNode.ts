@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * PlumPuddingSpaceNode is the space in which atoms and alpha particles are rendered.
  *
@@ -14,9 +11,9 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import required from '../../../../phet-core/js/required.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import RSBaseModel from '../../common/model/RSBaseModel.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
+import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -25,6 +22,9 @@ type PlumPuddingSpaceNodeOptions = SelfOptions & ParticleSpaceNodeOptions;
 
 class PlumPuddingSpaceNode extends ParticleSpaceNode {
 
+  private readonly atomNode: PlumPuddingAtomNode;
+  private readonly atomNodeRect: { x: number; y: number; width: number; height: number };
+
   /**
    * @param model
    * @param showAlphaTraceProperty
@@ -32,7 +32,7 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
    * @param providedOptions - must provide {Bounds2} canvasBounds
    */
   public constructor(
-    model: RSBaseModel,
+    model: PlumPuddingAtomModel,
     showAlphaTraceProperty: Property<boolean>,
     modelViewTransform: ModelViewTransform2,
     providedOptions: PlumPuddingSpaceNodeOptions
@@ -52,6 +52,8 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
     const imageHeight = this.atomNode.height * scale;
     const imageX = this.bounds.centerX - imageWidth / 2;
     const imageY = this.bounds.centerY - imageHeight / 2;
+
+    // TODO: Should this be a proper Rect or something? https://github.com/phetsims/rutherford-scattering/issues/181
     this.atomNodeRect = { x: imageX, y: imageY, width: imageWidth, height: imageHeight };
 
     this.invalidatePaint();

@@ -1,8 +1,5 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Legend for particles related to the atom screens and scenes in the sim.
  *
@@ -10,9 +7,8 @@
  * @author Jesse Greenberg
  */
 
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import ParticleLegendPanel, { ParticleLegendPanelOptions } from '../../common/view/ParticleLegendPanel.js';
+import ParticleLegendPanel, { ParticleLegendPanelContentOptions, ParticleLegendPanelOptions } from '../../common/view/ParticleLegendPanel.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
@@ -30,7 +26,7 @@ class AtomParticleLegendPanel extends ParticleLegendPanel {
   /**
    * Create the content that is to be contained in this panel.
    */
-  public static createPanelContent( options: IntentionalAny ): IntentionalAny {
+  public static createPanelContent( providedOptions?: ParticleLegendPanelContentOptions ): Node {
 
     // add the legend particle entries
     const content = [];
@@ -38,7 +34,7 @@ class AtomParticleLegendPanel extends ParticleLegendPanel {
     content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createEnergyLevel(), electronEnergyLevelString ) );
     content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createParticleTrace(), alphaParticleTraceString ) );
 
-    return ParticleLegendPanel.createPanelContent( content, options );
+    return ParticleLegendPanel.createPanel( content, providedOptions );
   }
 }
 

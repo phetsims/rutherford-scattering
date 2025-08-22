@@ -12,7 +12,7 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 
 class PlumPuddingAtomNode extends Image {
 
-  public constructor( options: ImageOptions ) {
+  public constructor( options?: ImageOptions ) {
     super( plumPudding_png, options );
   }
 }
