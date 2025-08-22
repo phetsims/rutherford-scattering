@@ -1,8 +1,5 @@
 // Copyright 2016-2022, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Model for the 'Rutherford Atom' screen.
  *
@@ -18,6 +15,23 @@ import RutherfordAtomSpace from './RutherfordAtomSpace.js';
 import RutherfordNucleusSpace from './RutherfordNucleusSpace.js';
 
 class RutherfordAtomModel extends RSBaseModel {
+
+  // Interaction with the energy slider
+  public readonly energyInteractionProperty: Property<boolean>;
+  
+  // Interaction with the proton count slider
+  public readonly protonInteractionProperty: Property<boolean>;
+  
+  // Interaction with the neutron count slider
+  public readonly neutronInteractionProperty: Property<boolean>;
+  
+  // Scene to display, 'atom'|'nucleus'
+  public readonly sceneProperty: Property<string>;
+  
+  // Spaces containing the atoms
+  public readonly atomSpace: RutherfordAtomSpace;
+  public readonly nucleusSpace: RutherfordNucleusSpace;
+
   public constructor() {
 
     // interactions that create dependencies for the DerivedProperties that will track user interaction, generally
@@ -26,30 +40,27 @@ class RutherfordAtomModel extends RSBaseModel {
     const protonInteractionProperty = new Property( false ); // interaction with the proton count slider
     const neutronInteractionProperty = new Property( false ); // interaction with the neutron count slider
 
-    // @public - create a derived property for user interaction, so that the an interaction occurs when any dependency
-    // is true
+    // create a derived property for user interaction,
+    // so that an interaction occurs when any dependency is true
     const userInteractionProperty = DerivedProperty.or( [ energyInteractionProperty, protonInteractionProperty, neutronInteractionProperty ] );
 
     super( userInteractionProperty );
 
-    // @public
     this.energyInteractionProperty = energyInteractionProperty;
     this.protonInteractionProperty = protonInteractionProperty;
     this.neutronInteractionProperty = neutronInteractionProperty;
 
-    // @public {string} - scene to display, 'atom'|'nucleus'
     this.sceneProperty = new Property( 'atom' );
 
-    // @public (read-only) - spaces containing the atoms
     this.atomSpace = new RutherfordAtomSpace( this.protonCountProperty, this.bounds );
     this.nucleusSpace = new RutherfordNucleusSpace( this.protonCountProperty, this.neutronCountProperty, this.bounds );
 
-    // @public (read-only)
-    this.atomSpaces = [ this.atomSpace, this.nucleusSpace ];
+    this.atomSpaces.push( this.atomSpace );
+    this.atomSpaces.push( this.nucleusSpace );
 
   }
 
-  public reset(): void {
+  public override reset(): void {
     this.protonCountProperty.reset();
     this.neutronCountProperty.reset();
     this.sceneProperty.reset();

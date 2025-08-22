@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Space in which atoms and alpha particles are rendered.  In this representation, there are several
  * atoms in the space and the alpha particles are small particles, most of which travel through the
@@ -16,11 +13,11 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import required from '../../../../phet-core/js/required.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import RSBaseModel from '../../common/model/RSBaseModel.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import AtomCollectionNode from './AtomCollectionNode.js';
 
 // constants
@@ -33,8 +30,10 @@ type AtomSpaceNodeOptions = SelfOptions & ParticleSpaceNodeOptions;
 
 class AtomSpaceNode extends ParticleSpaceNode {
 
+  private readonly atomsNode: AtomCollectionNode;
+
   public constructor(
-    model: RSBaseModel,
+    model: RutherfordAtomModel,
     showAlphaTraceProperty: Property<boolean>,
     modelViewTransform: ModelViewTransform2,
     providedOptions: AtomSpaceNodeOptions
@@ -53,13 +52,13 @@ class AtomSpaceNode extends ParticleSpaceNode {
 
     super( model.atomSpace, showAlphaTraceProperty, modelViewTransform, options );
 
-    // @private - generates an image for the collection of atoms
+    // generates an image for the collection of atoms
     this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );
 
     if ( RSQueryParameters.showDebugShapes ) {
       model.atomSpace.particleTransitionedEmitter.addListener( particle => {
         // a particle has been transitioned to a new atom - show the bounding box of the particle
-        this.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox ), {
+        this.addChild( new Path( modelViewTransform.modelToViewShape( particle.preparedBoundingBox! ), {
           stroke: 'rgb(114,183,188)'
         } ) );
       } );

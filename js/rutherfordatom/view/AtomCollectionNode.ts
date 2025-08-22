@@ -29,11 +29,13 @@ const ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
 
 class AtomCollectionNode extends Node {
 
+  public image: null | HTMLImageElement;
+
   public constructor( atomSpace: RutherfordAtomSpace, modelViewTransform: ModelViewTransform2, options?: NodeOptions ) {
 
     super( options );
 
-    // @public (read-only) {null|HTMLImageElement} - This node will eventually be drawn with canvas with
+    // This node will eventually be drawn with canvas with
     // context.drawImage. The image is created asynchronously in this constructor.
     this.image = null;
 
@@ -88,7 +90,8 @@ class AtomCollectionNode extends Node {
       drawAtomCollection();
 
       // update the image
-      this.image = this.toImage( ( image, x, y ) => {
+      // TODO: This was using the void return to set this.image, let's double check if removing is fine https://github.com/phetsims/rutherford-scattering/issues/181
+      this.toImage( ( image, x, y ) => {
         this.image = image;
       } );
     } );
