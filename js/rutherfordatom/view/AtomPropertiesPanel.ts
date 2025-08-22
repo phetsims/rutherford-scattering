@@ -61,6 +61,8 @@ type AtomPropertiesPanelOptions = SelfOptions & PanelOptions;
 
 class AtomPropertiesPanel extends Panel {
 
+  private readonly disposeAtomPropertiesPanel: () => void;
+
   public constructor( content: AtomPropertiesPanelContent, providedOptions?: AtomPropertiesPanelOptions ) {
 
     // Add the title of the panel content
@@ -95,7 +97,6 @@ class AtomPropertiesPanel extends Panel {
 
     // ensure that panel is eligible for garbage collection, a panel is created and destroyed every time
     // scene or color scheme changes so it si important that everything is disposed
-    // @private
     this.disposeAtomPropertiesPanel = () => {
       content.dispose();
     };
@@ -123,6 +124,13 @@ type ContentSelfOptions = EmptySelfOptions;
 type AtomPropertiesPanelContentOptions = ContentSelfOptions & VBoxOptions;
 
 class AtomPropertiesPanelContent extends VBox {
+
+  private readonly protonInteractionProperty: Property<boolean>;
+  private readonly neutronInteractionProperty: Property<boolean>;
+  private readonly neutronCountProperty: Property<number>;
+  private readonly protonCountProperty: Property<number>;
+  private readonly disposeContent: () => void;
+
   /**
    * Create the content for the AtomPropertiesPanel. This does not include the panel title.
    */
@@ -396,7 +404,6 @@ class AtomPropertiesPanelContent extends VBox {
       children: [ protonNumberControl, neutronNumberControl ]
     } );
 
-    // @private
     this.protonInteractionProperty = model.protonInteractionProperty;
     this.neutronInteractionProperty = model.neutronInteractionProperty;
     this.neutronCountProperty = model.neutronCountProperty;

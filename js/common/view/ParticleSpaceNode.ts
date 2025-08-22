@@ -43,6 +43,17 @@ const FADEOUT_SEGMENTS = 80;
 
 class ParticleSpaceNode extends CanvasNode {
 
+  private readonly particleStyle: string;
+  private readonly particleTraceColor: Color;
+  private readonly atomSpace: AtomSpace;
+  private alphaParticleImage: HTMLImageElement | null = null;
+  private readonly modelViewTransform: ModelViewTransform2;
+  private readonly showAlphaTraceProperty: Property<boolean>;
+  private readonly particleTraceColorWithFade: string;
+  private readonly clipRect: { x: number; y: number; width: number; height: number };
+  private particleImageHalfWidth: number = 0;
+  private particleImageHalfHeight: number = 0;
+
   /**
    * @param atomSpace - space containing atoms and particles
    * @param showAlphaTraceProperty
@@ -65,23 +76,11 @@ class ParticleSpaceNode extends CanvasNode {
 
     this.particleStyle = options.particleStyle;
     this.particleTraceColor = options.particleTraceColor;
-
-    // @private
     this.atomSpace = atomSpace;
-
-    // @private
-    this.alphaParticleImage = null;
-
-    // @private - model to view coordinate transform
     this.modelViewTransform = modelViewTransform;
-
-    // @private
     this.showAlphaTraceProperty = showAlphaTraceProperty;
-
-    // @private
     this.particleTraceColorWithFade = `rgba(${options.particleTraceColor.r},${options.particleTraceColor.g},${options.particleTraceColor.b},{0})`;
-
-    // @private - the area to be used as the 'viewport', border not included
+    
     this.clipRect = {
       x: this.canvasBounds.getX() + SPACE_BORDER_WIDTH / 2,
       y: this.canvasBounds.getY() + SPACE_BORDER_WIDTH / 2,

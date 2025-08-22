@@ -29,6 +29,9 @@ type RSControlPanelOptions = SelfOptions & NodeOptions;
 
 class RSControlPanel extends Node {
 
+  private readonly panelOptions: RSControlPanelOptions;
+  private readonly disposeRSControlPanel: () => void;
+
   /**
    * Constructor.
    */
@@ -43,9 +46,8 @@ class RSControlPanel extends Node {
       children: panels
     }, providedOptions );
     
-    this.panelOptions = options; // @private
+    this.panelOptions = options;
 
-    // @private - arrange control panels vertically
     const vBox = new VBox( this.panelOptions );
     this.addChild( vBox );
 
@@ -53,7 +55,6 @@ class RSControlPanel extends Node {
 
     // disposal to prevent memory leak - this is important because a new
     // control panel is created every time the scene or color scheme changes
-    // @private
     this.disposeRSControlPanel = () => {
       this.panelOptions.children.forEach( panel => {
         panel.dispose();

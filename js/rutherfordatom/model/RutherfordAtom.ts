@@ -22,6 +22,9 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordAtom extends Atom {
 
+  private readonly protonCountProperty: Property<number>;
+  private readonly particleRemovedEmitter: Emitter<[ AlphaParticle ]>;
+
   public constructor(
     particleRemovedEmitter: Emitter<[ AlphaParticle ]>,
     protonCountProperty: Property<number>,
@@ -31,9 +34,8 @@ class RutherfordAtom extends Atom {
 
     super( position, boundingWidth );
 
-    // @private
     this.protonCountProperty = protonCountProperty;
-    this.particleRemovedemitter = particleRemovedEmitter;
+    this.particleRemovedEmitter = particleRemovedEmitter;
   }
 
   /**
@@ -45,7 +47,7 @@ class RutherfordAtom extends Atom {
     super.removeParticle( particle );
 
     if ( isError ) {
-      this.particleRemovedemitter.emit( particle );
+      this.particleRemovedEmitter.emit( particle );
     }
   }
 

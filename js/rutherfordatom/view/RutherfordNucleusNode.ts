@@ -28,6 +28,20 @@ const PARTICLE_COUNT_EXP = 0.333;
 
 class RutherfordNucleusNode extends CanvasNode {
 
+  private readonly userInteractionProperty: Property<boolean>;
+  private readonly rutherfordNucleus: RutherfordNucleus;
+  private renderAtomOutline: boolean = false;
+  private image: HTMLImageElement | null = null;
+  private protonImage: HTMLImageElement | null = null;
+  private neutronImage: HTMLImageElement | null = null;
+  private radius: number = MIN_NUCLEUS_RADIUS;
+  private numberOfProtons: number = RSConstants.MIN_PROTON_COUNT;
+  private numberOfNeutrons: number = RSConstants.MIN_NEUTRON_COUNT;
+  public isDirty: boolean = false; // accessed from outside, so public
+  public timeSinceDirty: number = 0; // accessed from outside, so public
+  private readonly boundPaintNucleus: ( context: CanvasRenderingContext2D ) => void;
+  private readonly disposeRutherfordNucleusNode: () => void;
+
   /**
    * The Rutherford atom is build by randomly drawing proton & neutron images to a CanvasNode. This canvas is then
    * rendered to an Image.
@@ -50,36 +64,8 @@ class RutherfordNucleusNode extends CanvasNode {
 
     super( options );
 
-    // @private
     this.userInteractionProperty = userInteractionProperty;
-
-    // @private
     this.rutherfordNucleus = rutherfordNucleus;
-
-    // @private - switch to render the outline or full atom
-    this.renderAtomOutline = false;
-
-    // @private - the final rendered Rutherford atom
-    this.image = null;
-
-    // @private - the image to use as the proton
-    this.protonImage = null;
-
-    // @private - the image to use as the neutron
-    this.neutronImage = null;
-
-    // @private
-    this.radius = MIN_NUCLEUS_RADIUS;
-
-    // @private
-    this.numberOfProtons = RSConstants.MIN_PROTON_COUNT;
-
-    // @private
-    this.numberOfNeutrons = RSConstants.MIN_NEUTRON_COUNT;
-
-    // @private - flags that track when it is time to redraw the nucleus
-    this.isDirty = false;
-    this.timeSinceDirty = 0; // ms
 
     // generate proton image - asynchronous
     const protonNode = ParticleNodeFactory.createProton();
@@ -125,12 +111,10 @@ class RutherfordNucleusNode extends CanvasNode {
     };
     userInteractionProperty.link( userInteractionListener );
 
-    // @private - paint function for the Nucleus, bound to this CanvasNode
     this.boundPaintNucleus = paintNucleusIcon.bind( this );
 
     this.invalidatePaint();
 
-    // @private
     this.disposeRutherfordNucleusNode = () => {
       protonCountProperty.unlink( protonCountListener );
       neutronCountProperty.unlink( neutronCountListener );
