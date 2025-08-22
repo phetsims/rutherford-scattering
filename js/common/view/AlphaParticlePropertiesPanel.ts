@@ -14,9 +14,9 @@
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
-import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -24,7 +24,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import HSlider from '../../../../sun/js/HSlider.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import RSColors from '../RSColors.js';
@@ -46,9 +46,17 @@ const traceCheckboxDescriptionString = RutherfordScatteringStrings.a11y.traceChe
 // when a panel is created or destroyed
 const FINGER_TRACKER = {};
 
+type SelfOptions = EmptySelfOptions;
+
+type AlphaParticlePropertiesPanelOptions = SelfOptions & PanelOptions;
+
+type ContentSelfOptions = EmptySelfOptions;
+
+type AlphaParticlePropertiesPanelContentOptions = ContentSelfOptions & VBoxOptions;
+
 class AlphaParticlePropertiesPanel extends Panel {
 
-  public constructor( content: AlphaParticlePropertiesPanelContent, options?: Object ) {
+  public constructor( content: AlphaParticlePropertiesPanelContent, providedOptions?: AlphaParticlePropertiesPanelOptions ) {
 
     // the title for the panel
     const alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
@@ -64,7 +72,7 @@ class AlphaParticlePropertiesPanel extends Panel {
       spacing: RSConstants.PANEL_CHILD_SPACING
     } );
 
-    options = merge( {
+    const options = optionize<AlphaParticlePropertiesPanelOptions, SelfOptions, PanelOptions>()( {
       xMargin: RSConstants.PANEL_X_MARGIN,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -75,7 +83,7 @@ class AlphaParticlePropertiesPanel extends Panel {
 
       // pdom
       accessibleHeading: alphaParticleSettingsString
-    }, options );
+    }, providedOptions );
 
     super( contentVBox, options );
 
@@ -88,8 +96,8 @@ class AlphaParticlePropertiesPanel extends Panel {
   /**
    * Create the panel content for this panel.
    */
-  public static createPanelContent( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<boolean>, showTracesProperty: Property<boolean>, options?: Object ): Node {
-    return new AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, options );
+  public static createPanelContent( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<boolean>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ): Node {
+    return new AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, providedOptions );
   }
 
   /**
@@ -105,9 +113,9 @@ class AlphaParticlePropertiesPanel extends Panel {
 rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
 
 class AlphaParticlePropertiesPanelContent extends VBox {
-  public constructor( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<boolean>, showTracesProperty: Property<boolean>, options?: Object ) {
+  public constructor( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<boolean>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ) {
 
-    options = merge( {
+    const options = optionize<AlphaParticlePropertiesPanelContentOptions, ContentSelfOptions, VBoxOptions>()( {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -115,7 +123,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       align: 'left',
       fill: RSColors.panelColorProperty,
       stroke: RSColors.panelBorderColorProperty
-    }, options );
+    }, providedOptions );
 
     const energyText = new Text( energyString, {
       font: RSConstants.PANEL_PROPERTY_FONT,

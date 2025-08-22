@@ -11,7 +11,7 @@
 
 import platform from '../../../../phet-core/js/platform.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import Circle from '../../../../scenery/js/nodes/Circle.js';
+import Circle, { CircleOptions } from '../../../../scenery/js/nodes/Circle.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -164,17 +164,24 @@ const ParticleNodeFactory = {
 
 rutherfordScattering.register( 'ParticleNodeFactory', ParticleNodeFactory );
 
+type ParticleNodeSelfOptions = EmptySelfOptions;
+
+type ParticleNodeOptions = ParticleNodeSelfOptions & CircleOptions;
+
 class ParticleNode extends Circle {
 
-  private constructor( radius: number, color: Color | string, options?: Object ) {
-    options = options || {};
+  private constructor( radius: number, color: Color | string, providedOptions?: ParticleNodeOptions ) {
+    const options = providedOptions || {};
     assert && assert( !options.fill );
 
-    options.fill = new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
-      .addColorStop( 0, SPECULAR_HIGHLITE_COLOR )
-      .addColorStop( 0.33, color )
-      .addColorStop( 1, 'black' );
-    super( radius, options );
+    const finalOptions = {
+      ...options,
+      fill: new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
+        .addColorStop( 0, SPECULAR_HIGHLITE_COLOR )
+        .addColorStop( 0.33, color )
+        .addColorStop( 1, 'black' )
+    };
+    super( radius, finalOptions );
   }
 }
 

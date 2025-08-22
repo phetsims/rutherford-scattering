@@ -12,7 +12,7 @@
 
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
+import ParticleLegendPanel, { ParticleLegendPanelOptions } from '../../common/view/ParticleLegendPanel.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
@@ -23,7 +23,7 @@ const nucleusString = RutherfordScatteringStrings.nucleus;
 
 class AtomParticleLegendPanel extends ParticleLegendPanel {
 
-  public constructor( content: Node, options?: Object ) {
+  public constructor( content: Node, options?: ParticleLegendPanelOptions ) {
     super( content, options );
   }
 

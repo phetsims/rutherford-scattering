@@ -12,13 +12,13 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import required from '../../../../phet-core/js/required.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RSBaseModel from '../../common/model/RSBaseModel.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
-import ParticleSpaceNode from '../../common/view/ParticleSpaceNode.js';
+import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import AtomCollectionNode from './AtomCollectionNode.js';
@@ -27,28 +27,31 @@ import AtomCollectionNode from './AtomCollectionNode.js';
 const observationWindowString = RutherfordScatteringStrings.a11y.observationWindow;
 const atomSpaceDescriptionString = RutherfordScatteringStrings.a11y.atomSpaceDescription;
 
+type SelfOptions = EmptySelfOptions;
+
+type AtomSpaceNodeOptions = SelfOptions & ParticleSpaceNodeOptions;
+
 class AtomSpaceNode extends ParticleSpaceNode {
 
-  /**
-   * @param model
-   * @param showAlphaTraceProperty
-   * @param modelViewTransform - model to view transform
-   * @param config - must provide {Bounds2} canvasBounds
-   */
-  public constructor( model: RSBaseModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, config: Object ) {
-    config = merge( {
+  public constructor(
+    model: RSBaseModel,
+    showAlphaTraceProperty: Property<boolean>,
+    modelViewTransform: ModelViewTransform2,
+    providedOptions: AtomSpaceNodeOptions
+  ) {
+    const options = optionize<AtomSpaceNodeOptions, SelfOptions, ParticleSpaceNodeOptions>()( {
 
       // {Bounds2}
-      canvasBounds: required( config.canvasBounds ),
+      canvasBounds: required( providedOptions.canvasBounds ),
       particleStyle: 'particle',
 
       // pdom
       accessibleHeading: observationWindowString,
       descriptionContent: atomSpaceDescriptionString,
       appendDescription: true
-    }, config );
+    }, providedOptions );
 
-    super( model.atomSpace, showAlphaTraceProperty, modelViewTransform, config );
+    super( model.atomSpace, showAlphaTraceProperty, modelViewTransform, options );
 
     // @private - generates an image for the collection of atoms
     this.atomsNode = new AtomCollectionNode( model.atomSpace, modelViewTransform );

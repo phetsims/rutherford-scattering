@@ -31,7 +31,12 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
    * @param modelViewTransform - model to view  transform
    * @param providedOptions - must provide {Bounds2} canvasBounds
    */
-  public constructor( model: RSBaseModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, providedOptions: PlumPuddingSpaceNodeOptions ) {
+  public constructor(
+    model: RSBaseModel,
+    showAlphaTraceProperty: Property<boolean>,
+    modelViewTransform: ModelViewTransform2,
+    providedOptions: PlumPuddingSpaceNodeOptions
+  ) {
     const options = optionize<PlumPuddingSpaceNodeOptions, SelfOptions, ParticleSpaceNodeOptions>()( {
       canvasBounds: required( providedOptions.canvasBounds ),
       particleTraceColor: new Color( 'grey' )

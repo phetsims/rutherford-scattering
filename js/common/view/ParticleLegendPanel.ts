@@ -10,13 +10,14 @@
  * @author Jesse Greenberg
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
-import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import HStrut from '../../../../scenery/js/nodes/HStrut.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import RSColors from '../RSColors.js';
@@ -27,9 +28,23 @@ const legendString = RutherfordScatteringStrings.legend;
 // constants
 const LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;
 
+type SelfOptions = {
+  itemVerticalSpacing?: number;
+};
+
+type ParticleLegendPanelSelfOptions = SelfOptions & PanelOptions;
+
+type ContentSelfOptions = {
+  itemVerticalSpacing?: number;
+};
+
+type ParticleLegendPanelContentOptions = ContentSelfOptions & VBoxOptions;
+
+export type ParticleLegendPanelOptions = ParticleLegendPanelSelfOptions;
+
 class ParticleLegendPanel extends Panel {
 
-  public constructor( content: Node, options?: Object ) {
+  public constructor( content: Node, options?: ParticleLegendPanelOptions ) {
 
     // the title for the panel
     const legendText = new Text( legendString, {
@@ -46,7 +61,7 @@ class ParticleLegendPanel extends Panel {
       spacing: RSConstants.PANEL_CHILD_SPACING
     } );
 
-    options = merge( {
+    const internalOptions = optionize<ParticleLegendPanelOptions, SelfOptions, PanelOptions>()( {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -57,7 +72,7 @@ class ParticleLegendPanel extends Panel {
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, options );
 
-    super( contentVBox, options );
+    super( contentVBox, internalOptions );
   }
 
   /**
@@ -70,8 +85,8 @@ class ParticleLegendPanel extends Panel {
   /**
    * Create content which will be contained in the panel.
    */
-  public static createPanelContent( content: Array<Node>, options: Object ): Node {
-    return new ParticleLegendPanelContent( content, options );
+  public static createPanelContent( content: Array<Node>, providedOptions?: ParticleLegendPanelContentOptions ): Node {
+    return new ParticleLegendPanelContent( content, providedOptions );
   }
 }
 
@@ -102,6 +117,7 @@ const createParticleRow = ( particleNode, titleString ) => {
   } );
 };
 
+// TODO: Fix this uglyness https://github.com/phetsims/rutherford-scattering/issues/181
 // @public for aligning with other panels in the various screens, legend content should be left aligned
 ParticleLegendPanel.LEGEND_CONTENT_ALIGN = 'left';
 
@@ -110,9 +126,9 @@ ParticleLegendPanel.LEGEND_CONTENT_ALIGN = 'left';
  */
 class ParticleLegendPanelContent extends VBox {
 
-  public constructor( content: Array<Node>, options?: Object ) {
+  public constructor( content: Array<Node>, providedOptions?: ParticleLegendPanelContentOptions ) {
 
-    options = merge( {
+    const options = optionize<ParticleLegendPanelContentOptions, ContentSelfOptions, VBoxOptions>()( {
       xMargin: 5,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -121,7 +137,7 @@ class ParticleLegendPanelContent extends VBox {
       fill: RSColors.panelColorProperty,
       stroke: RSColors.panelBorderColorProperty,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
-    }, options );
+    }, providedOptions );
 
     // i18n - make align boxes for all items so that they are the same height, important when strings change size
     const alignGroup = new AlignGroup( { matchHorizontal: false } );

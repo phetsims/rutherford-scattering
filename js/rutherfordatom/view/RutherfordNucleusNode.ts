@@ -11,7 +11,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
+import CanvasNode, { CanvasNodeOptions } from '../../../../scenery/js/nodes/CanvasNode.js';
 import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
@@ -31,11 +31,14 @@ class RutherfordNucleusNode extends CanvasNode {
   /**
    * The Rutherford atom is build by randomly drawing proton & neutron images to a CanvasNode. This canvas is then
    * rendered to an Image.
-   * @param userInteractionProperty - is the user changing the model
-   * @param protonCountProperty
-   * @param neutronCountProperty
    */
-  public constructor( userInteractionProperty: Property<boolean>, protonCountProperty: Property<number>, neutronCountProperty: Property<number>, rutherfordNucleus: RutherfordNucleus, options?: Object ) {
+  public constructor(
+    userInteractionProperty: Property<boolean>,
+    protonCountProperty: Property<number>,
+    neutronCountProperty: Property<number>,
+    rutherfordNucleus: RutherfordNucleus,
+    options?: CanvasNodeOptions
+  ) {
 
     // max radius of an atom with MAX protons & neutrons
     const maxRadius = MIN_NUCLEUS_RADIUS / Math.pow( MIN_PARTICLE_COUNT, PARTICLE_COUNT_EXP ) *
@@ -219,7 +222,7 @@ class IconCanvasNode extends CanvasNode {
    * Constructor for an icon representation of the Rutherford Nucleus.  This has no attached listeners,
    * and is a static representation of the nucleus.
    */
-  public constructor( nucleus: RutherfordNucleus, options?: Object ) {
+  public constructor( nucleus: RutherfordNucleus, options?: CanvasNodeOptions ) {
 
     // max radius of an atom with MAX protons & neutrons
     const numberOfParticles = nucleus.protonCountProperty.get() + nucleus.neutronCountProperty.get();

@@ -11,35 +11,45 @@
  * @author Jesse Greenberg
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
+
+type SelfOptions = {
+  spacing?: number;
+  align?: string;
+  resize?: boolean;
+  children?: Array<Panel>;
+};
+
+type RSControlPanelOptions = SelfOptions & NodeOptions;
 
 class RSControlPanel extends Node {
 
   /**
    * Constructor.
    */
-  public constructor( panels: Array<Panel>, options?: Object ) {
+  public constructor( panels: Array<Panel>, providedOptions?: RSControlPanelOptions ) {
 
     super();
 
-    const defaultOptions = {
+    const options = optionize<RSControlPanelOptions, SelfOptions, NodeOptions>()( {
       spacing: RSConstants.PANEL_VERTICAL_MARGIN,
       align: 'left',
       resize: false,
       children: panels
-    };
-    this.panelOptions = merge( defaultOptions, options ); // @private
+    }, providedOptions );
+    
+    this.panelOptions = options; // @private
 
     // @private - arrange control panels vertically
     const vBox = new VBox( this.panelOptions );
     this.addChild( vBox );
 
-    this.mutate( options );
+    this.mutate( providedOptions );
 
     // disposal to prevent memory leak - this is important because a new
     // control panel is created every time the scene or color scheme changes

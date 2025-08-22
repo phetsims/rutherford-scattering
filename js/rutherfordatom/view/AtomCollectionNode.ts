@@ -14,7 +14,7 @@
 
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RSColors from '../../common/RSColors.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
@@ -29,11 +29,7 @@ const ENERGY_LEVELS = 6; // number of energy levels/radii to show for the atom
 
 class AtomCollectionNode extends Node {
 
-  /**
-   * @param atomSpace - AtomSpace containing the atoms
-   * @param modelViewTransform
-   */
-  public constructor( atomSpace: RutherfordAtomSpace, modelViewTransform: ModelViewTransform2, options?: Object ) {
+  public constructor( atomSpace: RutherfordAtomSpace, modelViewTransform: ModelViewTransform2, options?: NodeOptions ) {
 
     super( options );
 

@@ -13,9 +13,9 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import ScreenView from '../../../../joist/js/ScreenView.js';
+import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
 import Shape from '../../../../kite/js/Shape.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -48,6 +48,14 @@ const otherOptionsDescriptionString = RutherfordScatteringStrings.a11y.otherOpti
 
 const GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
 
+type SelfOptions = {
+  includeElectronLegend?: boolean;
+  includePlumPuddingLegend?: boolean;
+  additionalControlPanels?: Panel[] | null;
+};
+
+type RSBaseScreenViewOptions = SelfOptions & ScreenViewOptions;
+
 type CreateSpaceNode = ( model: RSBaseModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, spaceNodeBounds: Bounds2 ) => Node;
 
 class RSBaseScreenView extends ScreenView {
@@ -57,16 +65,16 @@ class RSBaseScreenView extends ScreenView {
    * @param scaleString
    * @param createSpaceNode
    */
-  public constructor( model: RSBaseModel, scaleString: string, createSpaceNode: CreateSpaceNode, options?: Object ) {
+  public constructor( model: RSBaseModel, scaleString: string, createSpaceNode: CreateSpaceNode, providedOptions?: RSBaseScreenViewOptions ) {
 
-    options = merge( {
+    const options = optionize<RSBaseScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
       includeElectronLegend: true, // should the particle legend include an entry for the electron?
       includePlumPuddingLegend: false, // should the particle legend include an entry for the plum pudding cloud?
       additionalControlPanels: null, // {Panel[]|null} additional control panels, added below the common panels
 
       // pdom
       screenSummaryContent: new RSScreenSummaryNode()
-    }, options );
+    }, providedOptions );
 
     super( options );
     // properties

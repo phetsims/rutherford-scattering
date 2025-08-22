@@ -10,12 +10,12 @@
  * @author Jesse Greenberg
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
-import ParticleLegendPanel from './ParticleLegendPanel.js';
+import ParticleLegendPanel, { ParticleLegendPanelOptions } from './ParticleLegendPanel.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
 
 const alphaParticleString = RutherfordScatteringStrings.alphaParticle;
@@ -24,20 +24,27 @@ const neutronString = RutherfordScatteringStrings.neutron;
 const positiveChargeString = RutherfordScatteringStrings.positiveCharge;
 const protonString = RutherfordScatteringStrings.proton;
 
+type SelfOptions = {
+  includeElectron?: boolean;
+  includePlumPudding?: boolean;
+};
+
+type NuclearParticleLegendPanelContentOptions = SelfOptions;
+
 class NuclearParticleLegendPanel extends ParticleLegendPanel {
 
-  public constructor( content: Node, options?: Object ) {
+  public constructor( content: Node, options?: ParticleLegendPanelOptions ) {
     super( content, options );
   }
 
   /**
    * Create the panel content that is to be in this control panel.
    */
-  public static createPanelContent( options: IntentionalAny ): IntentionalAny {
+  public static createPanelContent( providedOptions?: NuclearParticleLegendPanelContentOptions ): IntentionalAny {
 
-    options = merge( {
+    const options = optionize<NuclearParticleLegendPanelContentOptions, SelfOptions>()( {
       includeElectron: true // should the panel include an entry for the electron?
-    }, options );
+    }, providedOptions );
 
     // {Array.<Node>} - children for the content, gets wrapped in AlignBoxes in createPanelContent
     const content = [];

@@ -36,12 +36,7 @@ class Atom {
   protected gun: Gun | null = null;
   protected manualStepDt!: number;
 
-  /**
-   * @param position
-   * @param boundingWidth
-   * @param options
-   */
-  public constructor( position: Vector2, boundingWidth: number, options?: object ) {
+  public constructor( position: Vector2, boundingWidth: number ) {
 
     this.position = position;
 

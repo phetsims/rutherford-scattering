@@ -14,12 +14,12 @@ import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
-import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -55,8 +55,13 @@ const interactionPropertyGroup = {
   neutronSliderInteractionProperty: new Property( false )
 };
 
+type SelfOptions = EmptySelfOptions;
+
+type AtomPropertiesPanelOptions = SelfOptions & PanelOptions;
+
 class AtomPropertiesPanel extends Panel {
-  public constructor( content: AtomPropertiesPanelContent, options?: Object ) {
+
+  public constructor( content: AtomPropertiesPanelContent, providedOptions?: AtomPropertiesPanelOptions ) {
 
     // Add the title of the panel content
     const atomPropertiesText = new Text( atomString, {
@@ -72,7 +77,7 @@ class AtomPropertiesPanel extends Panel {
       spacing: RSConstants.PANEL_CHILD_SPACING
     } );
 
-    options = merge( {
+    const options = optionize<AtomPropertiesPanelOptions, SelfOptions, PanelOptions>()( {
       xMargin: RSConstants.PANEL_X_MARGIN,
       yMargin: 10,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -84,7 +89,7 @@ class AtomPropertiesPanel extends Panel {
 
       // pdom
       accessibleHeading: atomSettingsString
-    }, options );
+    }, providedOptions );
 
     super( panelBox, options );
 
@@ -99,8 +104,8 @@ class AtomPropertiesPanel extends Panel {
   /**
    * create content for the panel
    */
-  public static createPanelContent( model: RutherfordAtomModel, options?: Object ): Node {
-    return new AtomPropertiesPanelContent( model, options );
+  public static createPanelContent( model: RutherfordAtomModel, providedOptions?: AtomPropertiesPanelContentOptions ): Node {
+    return new AtomPropertiesPanelContent( model, providedOptions );
   }
 
   /**
@@ -113,13 +118,17 @@ class AtomPropertiesPanel extends Panel {
   }
 }
 
+type ContentSelfOptions = EmptySelfOptions;
+
+type AtomPropertiesPanelContentOptions = ContentSelfOptions & VBoxOptions;
+
 class AtomPropertiesPanelContent extends VBox {
   /**
    * Create the content for the AtomPropertiesPanel. This does not include the panel title.
    */
-  public constructor( model: any, options?: Object ) {
+  public constructor( model: any, providedOptions?: AtomPropertiesPanelContentOptions ) {
 
-    options = merge( {
+    const options = optionize<AtomPropertiesPanelContentOptions, ContentSelfOptions, VBoxOptions>()( {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -128,7 +137,7 @@ class AtomPropertiesPanelContent extends VBox {
       resize: false,
       fill: RSColors.panelColorProperty,
       stroke: RSColors.panelBorderColorProperty
-    }, options );
+    }, providedOptions );
 
     // each element must have a unique interaction property to support multitouch, see #104
     const leftProtonButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
@@ -242,8 +251,8 @@ class AtomPropertiesPanelContent extends VBox {
     let leftProtonButtonDown = false;
 
     // Number control for protons
-    const protonNumberControlOptions = merge( {}, numberControlOptions );
-    protonNumberControlOptions.titleNodeOptions = merge( {},
+    const protonNumberControlOptions = optionize<typeof numberControlOptions>()( {}, numberControlOptions );
+    protonNumberControlOptions.titleNodeOptions = optionize<typeof numberControlOptions.titleNodeOptions>()( {},
       numberControlOptions.titleNodeOptions, { fill: RSColors.protonsLabelColorProperty } );
     protonNumberControlOptions.arrowButtonOptions = {
       leftStart: () => {
@@ -263,7 +272,7 @@ class AtomPropertiesPanelContent extends VBox {
         model.removeAllParticles();
       }
     };
-    protonNumberControlOptions.sliderOptions = merge( {},
+    protonNumberControlOptions.sliderOptions = optionize<typeof numberControlOptions.sliderOptions>()( {},
       numberControlOptions.sliderOptions, {
         majorTicks: protonMajorTicks,
 
@@ -321,12 +330,12 @@ class AtomPropertiesPanelContent extends VBox {
     let leftNeutronButtonDown = false;
     let rightNeutronButtonDown = false;
 
-    // Number control for protons
-    const neutronNumberControlOptions = merge( {}, numberControlOptions );
-    neutronNumberControlOptions.titleNodeOptions = merge( {},
+    // Number control for neutrons
+    const neutronNumberControlOptions = optionize<typeof numberControlOptions>()( {}, numberControlOptions );
+    neutronNumberControlOptions.titleNodeOptions = optionize<typeof numberControlOptions.titleNodeOptions>()( {},
       numberControlOptions.titleNodeOptions, { fill: RSColors.neutronsLabelColorProperty }
     );
-    neutronNumberControlOptions.sliderOptions = merge( {},
+    neutronNumberControlOptions.sliderOptions = optionize<typeof numberControlOptions.sliderOptions>()( {},
       numberControlOptions.sliderOptions, {
         majorTicks: neutronMajorTicks,
 
