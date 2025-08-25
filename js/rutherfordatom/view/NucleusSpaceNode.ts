@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * NucleusSpaceNode is the space in which atoms and alpha particles are rendered.  In this
  * representation, the space has a single nucleus.
@@ -14,10 +11,10 @@ import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import required from '../../../../phet-core/js/required.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import RSBaseModel from '../../common/model/RSBaseModel.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
 // constants
@@ -30,8 +27,10 @@ type NucleusSpaceNodeOptions = SelfOptions & ParticleSpaceNodeOptions;
 
 class NucleusSpaceNode extends ParticleSpaceNode {
 
+  private readonly atomNode: RutherfordNucleusNode;
+
   public constructor(
-    model: RSBaseModel,
+    model: RutherfordAtomModel,
     showAlphaTraceProperty: Property<boolean>,
     modelViewTransform: ModelViewTransform2,
     providedOptions: NucleusSpaceNodeOptions
@@ -50,7 +49,7 @@ class NucleusSpaceNode extends ParticleSpaceNode {
 
     super( model.nucleusSpace, showAlphaTraceProperty, modelViewTransform, options );
 
-    // @private - atom image generator
+    // atom image generator
     this.atomNode = new RutherfordNucleusNode( model.userInteractionProperty, model.protonCountProperty,
       model.neutronCountProperty, model.nucleusSpace.rutherfordNucleus );
 

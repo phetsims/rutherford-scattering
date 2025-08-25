@@ -10,6 +10,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import CanvasNode, { CanvasNodeOptions } from '../../../../scenery/js/nodes/CanvasNode.js';
 import RSColors from '../../common/RSColors.js';
@@ -28,26 +29,26 @@ const PARTICLE_COUNT_EXP = 0.333;
 
 class RutherfordNucleusNode extends CanvasNode {
 
-  private readonly userInteractionProperty: Property<boolean>;
-  private readonly rutherfordNucleus: RutherfordNucleus;
-  private renderAtomOutline: boolean = false;
-  private image: HTMLImageElement | null = null;
-  private protonImage: HTMLImageElement | null = null;
-  private neutronImage: HTMLImageElement | null = null;
-  private radius: number = MIN_NUCLEUS_RADIUS;
-  private numberOfProtons: number = RSConstants.MIN_PROTON_COUNT;
-  private numberOfNeutrons: number = RSConstants.MIN_NEUTRON_COUNT;
+  public readonly userInteractionProperty: TReadOnlyProperty<boolean>;
+  public readonly rutherfordNucleus: RutherfordNucleus;
+  public renderAtomOutline: boolean = false;
+  public image: HTMLImageElement | null = null;
+  public protonImage: HTMLImageElement | null = null;
+  public neutronImage: HTMLImageElement | null = null;
+  public radius: number = MIN_NUCLEUS_RADIUS;
+  public numberOfProtons: number = RSConstants.MIN_PROTON_COUNT;
+  public numberOfNeutrons: number = RSConstants.MIN_NEUTRON_COUNT;
   public isDirty: boolean = false; // accessed from outside, so public
   public timeSinceDirty: number = 0; // accessed from outside, so public
-  private readonly boundPaintNucleus: ( context: CanvasRenderingContext2D ) => void;
-  private readonly disposeRutherfordNucleusNode: () => void;
+  public readonly boundPaintNucleus: ( context: CanvasRenderingContext2D ) => void;
+  public readonly disposeRutherfordNucleusNode: () => void;
 
   /**
    * The Rutherford atom is build by randomly drawing proton & neutron images to a CanvasNode. This canvas is then
    * rendered to an Image.
    */
   public constructor(
-    userInteractionProperty: Property<boolean>,
+    userInteractionProperty: TReadOnlyProperty<boolean>,
     protonCountProperty: Property<number>,
     neutronCountProperty: Property<number>,
     rutherfordNucleus: RutherfordNucleus,
@@ -132,7 +133,7 @@ class RutherfordNucleusNode extends CanvasNode {
   /**
    * renders a new atom image based on proton/neutron counts
    */
-  private updateAtomImage(): void {
+  public updateAtomImage(): void {
 
     // Calculate the radius of the nucleus
     const currentParticles = this.numberOfProtons + this.numberOfNeutrons;

@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Factory for creating particle nodes.
  *
@@ -11,6 +8,8 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
+import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import platform from '../../../../phet-core/js/platform.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Circle, { CircleOptions } from '../../../../scenery/js/nodes/Circle.js';
@@ -172,18 +171,16 @@ type ParticleNodeOptions = ParticleNodeSelfOptions & CircleOptions;
 
 class ParticleNode extends Circle {
 
-  private constructor( radius: number, color: Color | string, providedOptions?: ParticleNodeOptions ) {
-    const options = providedOptions || {};
-    assert && assert( !options.fill );
+  public constructor( radius: number, color: Color | string, providedOptions?: ParticleNodeOptions ) {
+    affirm( providedOptions && !providedOptions.fill, 'ParticleNode sets fill, do not provide it in options' );
 
-    const finalOptions = {
-      ...options,
+    const options = combineOptions<ParticleNodeOptions>( {
       fill: new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
         .addColorStop( 0, SPECULAR_HIGHLITE_COLOR )
         .addColorStop( 0.33, color )
         .addColorStop( 1, 'black' )
-    };
-    super( radius, finalOptions );
+    }, providedOptions );
+    super( radius, options );
   }
 }
 
@@ -197,7 +194,12 @@ class ParticleNode extends Circle {
  * @param  {string} color
  * @param  {CanvasRenderingContext2D} context
  */
-const drawParticleWithCanvas = ( x, y, radius, color, context ) => {
+const drawParticleWithCanvas = (
+  x: number,
+  y: number,
+  radius: number,
+  color: string,
+  context: CanvasRenderingContext2D ) => {
   // draw the circle
   context.beginPath();
   context.arc( x, y, radius, 0, 2 * Math.PI, false );

@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Visual representation of a collection of rutherford atoms. This draws the actual nuclei and electron shells in the
  * "Atom" scene of the "Rutherford Atom" screen. The electron energy levels are represented by dashed
@@ -53,7 +50,7 @@ class AtomCollectionNode extends Node {
 
         // create the radii - concentric circles with dashed lines spaced proportionally to the Bohr
         // energies
-        const getScaledRadius = index => {
+        const getScaledRadius = ( index: number ) => {
           let radius = 0;
 
           // sum the Bohr energies up to this index
