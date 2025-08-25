@@ -15,11 +15,11 @@ import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import ParticleLegendPanel, { ParticleLegendPanelContentOptions, ParticleLegendPanelOptions } from './ParticleLegendPanel.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
 
-const alphaParticleString = RutherfordScatteringStrings.alphaParticle;
-const electronString = RutherfordScatteringStrings.electron;
-const neutronString = RutherfordScatteringStrings.neutron;
-const positiveChargeString = RutherfordScatteringStrings.positiveCharge;
-const protonString = RutherfordScatteringStrings.proton;
+const alphaParticleStringProperty = RutherfordScatteringStrings.alphaParticleStringProperty;
+const electronStringProperty = RutherfordScatteringStrings.electronStringProperty;
+const neutronStringProperty = RutherfordScatteringStrings.neutronStringProperty;
+const positiveChargeStringProperty = RutherfordScatteringStrings.positiveChargeStringProperty;
+const protonStringProperty = RutherfordScatteringStrings.protonStringProperty;
 
 type SelfOptions = {
   includeElectron?: boolean;
@@ -47,13 +47,13 @@ class NuclearParticleLegendPanel extends ParticleLegendPanel {
     // {Array.<Node>} - children for the content, gets wrapped in AlignBoxes in createPanelContent
     const content = [];
     if ( options.includeElectron ) {
-      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createElectron(), electronString ) );
+      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createElectron(), electronStringProperty ) );
     }
-    content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createProton(), protonString ) );
-    content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNeutron(), neutronString ) );
-    content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleString ) );
+    content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createProton(), protonStringProperty ) );
+    content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNeutron(), neutronStringProperty ) );
+    content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createNucleusAlpha(), alphaParticleStringProperty ) );
     if ( options.includePlumPudding ) {
-      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createPlumPuddingIcon(), positiveChargeString ) );
+      content.push( ParticleLegendPanel.createParticleBox( ParticleNodeFactory.createPlumPuddingIcon(), positiveChargeStringProperty ) );
     }
 
     return ParticleLegendPanel.createPanel( content, options );

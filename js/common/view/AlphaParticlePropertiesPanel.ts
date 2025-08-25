@@ -56,7 +56,7 @@ type AlphaParticlePropertiesPanelContentOptions = ContentSelfOptions & VBoxOptio
 
 class AlphaParticlePropertiesPanel extends Panel {
 
-  public constructor( content: AlphaParticlePropertiesPanelContent, providedOptions?: AlphaParticlePropertiesPanelOptions ) {
+  public constructor( content: Node, providedOptions?: AlphaParticlePropertiesPanelOptions ) {
 
     // the title for the panel
     const alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
@@ -96,7 +96,7 @@ class AlphaParticlePropertiesPanel extends Panel {
   /**
    * Create the panel content for this panel.
    */
-  public static createPanelContent( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<boolean>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ): Node {
+  public static createPanelContent( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ): Node {
     return new AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, providedOptions );
   }
 

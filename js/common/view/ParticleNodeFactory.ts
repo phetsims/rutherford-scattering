@@ -6,6 +6,8 @@
 /**
  * Factory for creating particle nodes.
  *
+ * TODO: All these are creating Node within nodes, seems unnecessary. https://github.com/phetsims/rutherford-scattering/issues/181
+ *
  * @author Dave Schmitz (Schmitzware)
  */
 

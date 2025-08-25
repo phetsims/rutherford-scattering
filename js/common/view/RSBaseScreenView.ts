@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Base type for ScreenViews
  *
@@ -56,9 +53,31 @@ type SelfOptions = {
 
 type RSBaseScreenViewOptions = SelfOptions & ScreenViewOptions;
 
-type CreateSpaceNode = ( model: RSBaseModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, spaceNodeBounds: Bounds2 ) => Node;
+type CreateSpaceNode = (
+  model: RSBaseModel,
+  showAlphaTraceProperty: Property<boolean>,
+  modelViewTransform: ModelViewTransform2,
+  spaceNodeBounds: Bounds2
+) => Node;
 
 class RSBaseScreenView extends ScreenView {
+
+  public readonly showAlphaTraceProperty: Property<boolean>;
+  
+  // Alpha particle gun for layout in subtypes
+  protected readonly gunNode: LaserPointerNode;
+  
+  // Alpha particle beam
+  protected readonly beamNode: BeamNode;
+  
+  // Alpha particle source target for layout in subtypes
+  protected readonly targetMaterialNode: TargetMaterialNode;
+  
+  // Space node for layout in subtypes
+  protected readonly spaceNode: Node;
+  
+  // Scale info, visibility can be manipulated by subtypes
+  protected readonly scaleInfoNode: ScaleInfoNode;
 
   /**
    * @param model
@@ -77,10 +96,9 @@ class RSBaseScreenView extends ScreenView {
     }, providedOptions );
 
     super( options );
-    // properties
+    
     this.showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
-    // @protected for layout in subtypes, alpha particle gun
     this.gunNode = new LaserPointerNode( model.gun.onProperty, {
       left: this.layoutBounds.left + 75,
       top: this.layoutBounds.centerY + 50,
@@ -108,7 +126,6 @@ class RSBaseScreenView extends ScreenView {
     } );
     this.addChild( alphaParticlesText );
 
-    // @protected, alpha particle beam
     this.beamNode = new BeamNode( model.gun.onProperty, {
       centerX: this.gunNode.centerX,
       bottom: this.gunNode.top,
@@ -116,7 +133,6 @@ class RSBaseScreenView extends ScreenView {
     } );
     this.addChild( this.beamNode );
 
-    // @protected for layout in subtypes, alpha particle source target
     this.targetMaterialNode = new TargetMaterialNode( {
       centerX: this.beamNode.centerX,
       bottom: this.beamNode.top
@@ -138,7 +154,6 @@ class RSBaseScreenView extends ScreenView {
       spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
     const modelViewTransform = ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
 
-    // @protected for layout in subtypes
     this.spaceNode = createSpaceNode( model, this.showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
     this.addChild( this.spaceNode );
 
@@ -153,7 +168,6 @@ class RSBaseScreenView extends ScreenView {
     } );
     this.addChild( dashedLines );
 
-    // @protected, visibility can be manipulated by subtypes - scale info
     this.scaleInfoNode = new ScaleInfoNode( scaleString, this.spaceNode.getWidth(), {
       centerX: this.spaceNode.centerX,
       top: this.spaceNode.bottom + 10

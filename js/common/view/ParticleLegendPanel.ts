@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Legend for all the particles in the sim.
  *
@@ -10,10 +7,11 @@
  * @author Jesse Greenberg
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
-import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -38,11 +36,14 @@ type ContentSelfOptions = {
   itemVerticalSpacing?: number;
 };
 
-export type ParticleLegendPanelContentOptions = ContentSelfOptions & VBoxOptions;
+export type ParticleLegendPanelContentOptions = ContentSelfOptions & PanelOptions;
 
 export type ParticleLegendPanelOptions = ParticleLegendPanelSelfOptions;
 
 class ParticleLegendPanel extends Panel {
+
+  // for aligning with other panels in the various screens, legend content should be left aligned
+  public static readonly LEGEND_CONTENT_ALIGN: 'left';
 
   public constructor( content: Node, options?: ParticleLegendPanelOptions ) {
 
@@ -78,7 +79,7 @@ class ParticleLegendPanel extends Panel {
   /**
    * Create a box containing one row for the legend panel
    */
-  protected static createParticleBox( particleNode: Node, titleString: string ): HBox {
+  protected static createParticleBox( particleNode: Node, titleString: TReadOnlyProperty<string> ): HBox {
     return createParticleRow( particleNode, titleString );
   }
 
@@ -92,12 +93,8 @@ class ParticleLegendPanel extends Panel {
 
 /**
  * Build one row in the legend consisting of an image and label
- * @param {Node} particleNode
- * @param {string} titleString
- * @returns {HBox}
- * @private
  */
-const createParticleRow = ( particleNode, titleString ) => {
+const createParticleRow = ( particleNode: Node, titleString: TReadOnlyProperty<string> ) => {
 
   const hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
   const titleText = new Text( titleString, {
@@ -117,10 +114,6 @@ const createParticleRow = ( particleNode, titleString ) => {
   } );
 };
 
-// TODO: Fix this uglyness https://github.com/phetsims/rutherford-scattering/issues/181
-// @public for aligning with other panels in the various screens, legend content should be left aligned
-ParticleLegendPanel.LEGEND_CONTENT_ALIGN = 'left';
-
 /**
  * Content for the panel, does not include the title.
  */
@@ -128,7 +121,7 @@ class ParticleLegendPanelContent extends VBox {
 
   public constructor( content: Array<Node>, providedOptions?: ParticleLegendPanelContentOptions ) {
 
-    const options = optionize<ParticleLegendPanelContentOptions, ContentSelfOptions, VBoxOptions>()( {
+    const options = optionize<ParticleLegendPanelContentOptions, ContentSelfOptions, PanelOptions>()( {
       xMargin: 5,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -141,7 +134,7 @@ class ParticleLegendPanelContent extends VBox {
 
     // i18n - make align boxes for all items so that they are the same height, important when strings change size
     const alignGroup = new AlignGroup( { matchHorizontal: false } );
-    const children = [];
+    const children: Node[] = [];
     content.forEach( item => {
       children.push( alignGroup.createBox( item ) );
     } );

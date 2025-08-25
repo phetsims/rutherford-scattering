@@ -71,14 +71,20 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
 /**
  * Create the node in which atoms and alpha particles are rendered.
+ * TODO: This whole thing is a mess and should be done better https://github.com/phetsims/rutherford-scattering/issues/181
  */
-const createSpaceNode = ( model: PlumPuddingAtomModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, canvasBounds: Bounds2 ): Node => {
+const createSpaceNode = (
+  model: PlumPuddingAtomModel,
+  showAlphaTraceProperty: Property<boolean>,
+  modelViewTransform: ModelViewTransform2,
+  canvasBounds: Bounds2
+): Node => {
   const plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
     canvasBounds: canvasBounds
   } );
 
   // redraw the space node on model step
-  model.addStepListener( dt => {
+  model.addStepListener( () => {
     plumPuddingSpaceNode.invalidatePaint();
   } );
 
