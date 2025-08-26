@@ -34,9 +34,7 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
     } );
 
     // create the new control panel
-    // TODO: Fix this https://github.com/phetsims/rutherford-scattering/issues/181
-    // @ts-expect-error @typescript-eslint/prefer-ts-expect-error
-    const propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty,
+    const propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent(
       model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
     const legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
       resize: false,

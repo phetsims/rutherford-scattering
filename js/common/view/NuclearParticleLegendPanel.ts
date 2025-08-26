@@ -8,7 +8,6 @@
  */
 
 import optionize from '../../../../phet-core/js/optionize.js';
-import IntentionalAny from '../../../../phet-core/js/types/IntentionalAny.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
@@ -37,7 +36,7 @@ class NuclearParticleLegendPanel extends ParticleLegendPanel {
   /**
    * Create the panel content that is to be in this control panel.
    */
-  public static createPanelContent( providedOptions?: NuclearParticleLegendPanelContentOptions ): IntentionalAny {
+  public static createPanelContent( providedOptions?: NuclearParticleLegendPanelContentOptions ): Node {
 
     const options = optionize<NuclearParticleLegendPanelContentOptions, SelfOptions>()( {
       includeElectron: true,

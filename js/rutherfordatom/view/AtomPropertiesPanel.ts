@@ -34,11 +34,6 @@ const atomSettingsString = RutherfordScatteringStrings.a11y.atomSettings;
 // const neutronsValuePatternString = RutherfordScatteringStrings.a11y.neutronsValuePattern;
 // const neutronSliderDescriptionString = RutherfordScatteringStrings.a11y.neutronSliderDescription;
 
-// global, tracking where fingers are for multitouch support
-// must persist beyond lifetime of the panel so that fingers are tracked when new
-// panels are created for scene or color profile changes
-// const FINGER_TRACKER = {};
-
 // specific interaction properties for the rutherford atom portion, for multitouch
 // Not specific to an instance of an AtomPropertiesPanel, values of the interaction state Properties should
 // persist beyond when scene or color profile changes
@@ -143,7 +138,7 @@ class AtomPropertiesPanelContent extends VBox {
       stroke: RSColors.panelBorderColorProperty
     }, providedOptions );
 
-    // each element must have a unique interaction property to support multitouch, see #104
+    // each element must have a unique interaction property to support multitouch, see https://github.com/phetsims/rutherford-scattering/issues/104
     const leftProtonButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
     const rightProtonButtonInteractionProperty = interactionPropertyGroup.rightProtonButtonInteractionProperty;
     const leftNeutronButtonInteractionProperty = interactionPropertyGroup.leftNeutronButtonInteractionProperty;
@@ -164,36 +159,6 @@ class AtomPropertiesPanelContent extends VBox {
     };
     protonPanelInteractionProperty.link( protonInteractionListener );
     neutronPanelInteractionProperty.link( neutronInteractionListener );
-    // end of multitouch set up
-
-    /**
-     * Track fingers for multitouch, adding a finger count to a particular element and setting
-     * the interaction properties correctly.
-     */
-      // TODO: https://github.com/phetsims/rutherford-scattering/issues/181
-
-      // const addFinger = ( sliderID: string, interactionProperty: Property<boolean> ): void => {
-      //   interactionProperty.set( true );
-      //   if ( !FINGER_TRACKER[ sliderID ] && FINGER_TRACKER[ sliderID ] !== 0 ) {
-      //     FINGER_TRACKER[ sliderID ] = 1; // first time finger is down on this thumb
-      //   }
-      //   else {
-      //     FINGER_TRACKER[ sliderID ]++;
-      //   }
-      // };
-      //
-      // /**
-      //  * Remove a finger from an element for multitouch support, removing a finger count from a particular element
-      //  * and setting the interaction properties appropriately.
-      //  */
-      // const removeFinger = ( sliderID: string, interactionProperty: Property<boolean>, countProperty: Property<number> ): void => {
-      //   FINGER_TRACKER[ sliderID ]--;
-      //   assert && assert( FINGER_TRACKER[ sliderID ] >= 0, 'at least 0 fingers must be using the slider' );
-      //   countProperty.set( Utils.roundSymmetric( countProperty.value ) ); // proper resolution for nucleons
-      //   if ( FINGER_TRACKER[ sliderID ] === 0 ) {
-      //     interactionProperty.set( false );
-      //   }
-      // };
 
     const sliderWidth = options.minWidth * 0.75;
     const numberControlOptions: NumberControlOptions = {
@@ -285,11 +250,6 @@ class AtomPropertiesPanelContent extends VBox {
         thumbFill: 'rgb(220, 58, 10)',
         thumbFillHighlighted: 'rgb(270, 108, 60)'
 
-        // Individual callbacks for each component of the NumberControl to support multitouch
-        // TODO: https://github.com/phetsims/rutherford-scattering/issues/181
-        // startDrag: () => { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
-        // endDrag: () => { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, this.protonCountProperty ); },
-
         // pdom
         // TODO: a11y https://github.com/phetsims/rutherford-scattering/issues/181
         // labelContent: protonsValuePatternString,
@@ -365,12 +325,6 @@ class AtomPropertiesPanelContent extends VBox {
 
         thumbFill: 'rgb(130, 130, 130)',
         thumbFillHighlighted: 'rgb(180, 180, 180)'
-
-        // Individual callbacks for each component of the NumberControl to support multitouch
-        // TODO: https://github.com/phetsims/rutherford-scattering/issues/181
-
-        // startDrag: () => { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
-        // endDrag: () => { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, this.neutronCountProperty ); },
 
         // pdom
         // TODO: https://github.com/phetsims/rutherford-scattering/issues/181

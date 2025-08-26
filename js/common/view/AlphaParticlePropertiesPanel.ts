@@ -38,11 +38,6 @@ const energySliderDescriptionString = RutherfordScatteringStrings.a11y.energySli
 const tracesString = RutherfordScatteringStrings.a11y.traces;
 const traceCheckboxDescriptionString = RutherfordScatteringStrings.a11y.traceCheckboxDescription;
 
-// global, tracks fingers on the slider for multitouch support
-// must persist beyond individual panel instances so multitouch is supported
-// when a panel is created or destroyed
-// const FINGER_TRACKER: Map<string, number> = new Map();
-
 type SelfOptions = EmptySelfOptions;
 
 type AlphaParticlePropertiesPanelOptions = SelfOptions & PanelOptions;
@@ -95,8 +90,8 @@ class AlphaParticlePropertiesPanel extends Panel {
   /**
    * Create the panel content for this panel.
    */
-  public static createPanelContent( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ): Node {
-    return new AlphaParticlePropertiesPanelContent( energyInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, providedOptions );
+  public static createPanelContent( alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ): Node {
+    return new AlphaParticlePropertiesPanelContent( alphaParticleEnergyProperty, showTracesProperty, providedOptions );
   }
 
   /**
@@ -115,10 +110,9 @@ rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticleProp
 // TODO: Extending VBox but using PanelOptions, https://github.com/phetsims/rutherford-scattering/issues/181
 class AlphaParticlePropertiesPanelContent extends VBox {
 
-  private energyInteractionProperty: Property<boolean>;
   private disposeContent: () => void;
 
-  public constructor( energyInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ) {
+  public constructor( alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ) {
 
     const options = optionize<AlphaParticlePropertiesPanelContentOptions, ContentSelfOptions, PanelOptions>()( {
       xMargin: 15,
@@ -153,33 +147,6 @@ class AlphaParticlePropertiesPanelContent extends VBox {
     const energyTextStrut = new HStrut( options.minWidth * 0.05 );
     const energyTitleBox = new HBox( { children: [ energyTextStrut, energyText ] } );
 
-    /**
-     * Track fingers for multitouch, adding a finger count to the slider and setting the proper
-     * interaction properties.
-     */
-      // TODO: Isn't finger tracking handled by default??? https://github.com/phetsims/rutherford-scattering/issues/181
-      // const addFinger = ( elementID: string ) => {
-      //   energyInteractionProperty.set( true );
-      //   if ( !FINGER_TRACKER.get( elementID ) && FINGER_TRACKER.get( elementID ) !== 0 ) {
-      //     FINGER_TRACKER.set( elementID, 1 ); // first time finger is down on this thumb
-      //   }
-      //   else {
-      //     FINGER_TRACKER[ elementID ]++;
-      //   }
-      // };
-      //
-      // /**
-      //  * Remove a finger from an element for multitouch support, removing a finger count from a particular element
-      //  * and setting the interaction properties appropriately.
-      //  */
-      // const removeFinger = ( elementID: string ) => {
-      //   FINGER_TRACKER[ elementID ]--;
-      //   assert && assert( FINGER_TRACKER[ elementID ] >= 0, 'at least 0 fingers must be using the slider' );
-      //   if ( FINGER_TRACKER[ elementID ] === 0 ) {
-      //     energyInteractionProperty.set( false );
-      //   }
-      // };
-
       // particle engery slider
     const sliderWidth = options.minWidth * 0.75;
     const particleEnergySlider = new HSlider( alphaParticleEnergyProperty, new Range(
@@ -195,13 +162,6 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       thumbTouchAreaXDilation: 15,
       thumbTouchAreaYDilation: 12,
-      // TODO: Same finger tracking question as above https://github.com/phetsims/rutherford-scattering/issues/181
-      // startDrag: () => { // called when the pointer is pressed
-      //   addFinger( 'particleEnergySlider' );
-      // },
-      // endDrag: () => { // called when the pointer is released
-      //   removeFinger( 'particleEnergySlider' );
-      // },
 
       // pdom
       keyboardStep: 5,
@@ -250,8 +210,6 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       resize: false,
       children: [ energyTitleBox, containerRect, new VStrut( 5 ), showTraceBox ]
     } );
-
-    this.energyInteractionProperty = energyInteractionProperty;
 
     this.disposeContent = () => {
       showTraceCheckbox.dispose();
