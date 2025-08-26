@@ -7,7 +7,7 @@
  */
 
 import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
-import Sim from '../../joist/js/Sim.js';
+import Sim, { SimOptions } from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import HighlightOverlay from '../../scenery/js/overlays/HighlightOverlay.js';
 import RSColors from './common/RSColors.js';
@@ -18,9 +18,7 @@ import RutherfordScatteringStrings from './RutherfordScatteringStrings.js';
 
 const rutherfordScatteringTitleStringProperty = RutherfordScatteringStrings[ 'rutherford-scattering' ].titleStringProperty;
 
-// TODO https://github.com/phetsims/rutherford-scattering/issues/181 Optionize
-// eslint-disable-next-line phet/bad-typescript-text
-const simOptions = {
+const simOptions: SimOptions = {
   credits: {
     leadDesign: 'Amy Hanson, Sam McKagan',
     softwareDevelopment: 'Jesse Greenberg, Chris Malley, Dave Schmitz',

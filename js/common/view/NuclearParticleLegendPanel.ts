@@ -41,7 +41,7 @@ class NuclearParticleLegendPanel extends ParticleLegendPanel {
 
     const options = optionize<NuclearParticleLegendPanelContentOptions, SelfOptions>()( {
       includeElectron: true,
-      includePlumPudding: true // TODO: This wasn't here originally, please verify that this default is correct https://github.com/phetsims/rutherford-scattering/issues/181
+      includePlumPudding: true
     }, providedOptions );
 
     // {Array.<Node>} - children for the content, gets wrapped in AlignBoxes in createPanelContent

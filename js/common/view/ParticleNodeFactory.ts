@@ -8,7 +8,6 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import platform from '../../../../phet-core/js/platform.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -172,8 +171,6 @@ type ParticleNodeOptions = ParticleNodeSelfOptions & CircleOptions;
 class ParticleNode extends Circle {
 
   public constructor( radius: number, color: Color | string, providedOptions?: ParticleNodeOptions ) {
-    affirm( providedOptions && !providedOptions.fill, 'ParticleNode sets fill, do not provide it in options' );
-
     const options = combineOptions<ParticleNodeOptions>( {
       fill: new RadialGradient( radius * 0.1, radius * 0.7, 0.2, -radius * 0.2, -radius * 0.3, radius * 2 )
         .addColorStop( 0, SPECULAR_HIGHLITE_COLOR )

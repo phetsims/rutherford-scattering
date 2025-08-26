@@ -56,19 +56,19 @@ type RSBaseScreenViewOptions = SelfOptions & ScreenViewOptions;
 abstract class RSBaseScreenView extends ScreenView {
 
   public readonly showAlphaTraceProperty: Property<boolean>;
-  
+
   // Alpha particle gun for layout in subtypes
   protected readonly gunNode: LaserPointerNode;
-  
+
   // Alpha particle beam
   protected readonly beamNode: BeamNode;
-  
+
   // Alpha particle source target for layout in subtypes
   protected readonly targetMaterialNode: TargetMaterialNode;
-  
+
   // Space node for layout in subtypes
   protected readonly spaceNode: Node;
-  
+
   // Scale info, visibility can be manipulated by subtypes
   protected readonly scaleInfoNode: ScaleInfoNode;
 
@@ -77,7 +77,6 @@ abstract class RSBaseScreenView extends ScreenView {
   /**
    * @param model
    * @param scaleString
-   * @param createSpaceNode
    */
   public constructor( model: RSBaseModel, scaleString: string, providedOptions?: RSBaseScreenViewOptions ) {
 
@@ -91,7 +90,7 @@ abstract class RSBaseScreenView extends ScreenView {
     }, providedOptions );
 
     super( options );
-    
+
     this.showAlphaTraceProperty = new Property( RSConstants.DEFAULT_SHOW_TRACES );
 
     this.gunNode = new LaserPointerNode( model.gun.onProperty, {
@@ -152,7 +151,7 @@ abstract class RSBaseScreenView extends ScreenView {
     this.spaceNode = this.createSpaceNode( model, this.showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
     this.addChild( this.spaceNode );
 
-    this.controlPanel = this.createControlPanel([]);
+    this.controlPanel = this.createControlPanel( [] );
 
     // dashed lines that connect the tiny box and space
     const dashedLines = new Path( new Shape()

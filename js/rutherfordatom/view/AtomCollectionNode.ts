@@ -87,7 +87,6 @@ class AtomCollectionNode extends Node {
       drawAtomCollection();
 
       // update the image
-      // TODO: This was using the void return to set this.image, let's double check if removing is fine https://github.com/phetsims/rutherford-scattering/issues/181
       this.toImage( ( image, x, y ) => {
         this.image = image;
       } );

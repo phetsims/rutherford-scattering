@@ -71,12 +71,12 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
   /**
    * Create the node in which atoms and alpha particles are rendered.
    */
-  public override createSpaceNode = (
+  public override createSpaceNode(
     model: PlumPuddingAtomModel,
     showAlphaTraceProperty: Property<boolean>,
     modelViewTransform: ModelViewTransform2,
     canvasBounds: Bounds2
-  ): Node => {
+  ): Node {
     const plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
       canvasBounds: canvasBounds
     } );
