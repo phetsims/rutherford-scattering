@@ -35,7 +35,7 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
     // create the new control panel
     const propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent(
-      model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+      model.userInteractionProperty, model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
     const legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
       resize: false,
       includeElectron: true,

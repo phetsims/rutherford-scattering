@@ -116,8 +116,6 @@ type AtomPropertiesPanelContentOptions = ContentSelfOptions & PanelOptions;
 
 class AtomPropertiesPanelContent extends VBox {
 
-  private readonly protonInteractionProperty: Property<boolean>;
-  private readonly neutronInteractionProperty: Property<boolean>;
   private readonly neutronCountProperty: Property<number>;
   private readonly protonCountProperty: Property<number>;
   private readonly disposeContent: () => void;
@@ -152,10 +150,10 @@ class AtomPropertiesPanelContent extends VBox {
 
     // must be disposed
     const protonInteractionListener = ( protonInteraction: boolean ) => {
-      model.protonInteractionProperty.set( protonInteraction );
+      model.userInteractionProperty.set( protonInteraction );
     };
     const neutronInteractionListener = ( neutronInteraction: boolean ) => {
-      model.neutronInteractionProperty.set( neutronInteraction );
+      model.userInteractionProperty.set( neutronInteraction );
     };
     protonPanelInteractionProperty.link( protonInteractionListener );
     neutronPanelInteractionProperty.link( neutronInteractionListener );
@@ -359,8 +357,6 @@ class AtomPropertiesPanelContent extends VBox {
       children: [ protonNumberControl, neutronNumberControl ]
     } );
 
-    this.protonInteractionProperty = model.protonInteractionProperty;
-    this.neutronInteractionProperty = model.neutronInteractionProperty;
     this.neutronCountProperty = model.neutronCountProperty;
     this.protonCountProperty = model.protonCountProperty;
 

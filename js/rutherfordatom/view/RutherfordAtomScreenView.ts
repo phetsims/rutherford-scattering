@@ -77,7 +77,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
         includeElectron: false,
         includePlumPudding: false
       } );
-      const particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+      const particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty, model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
       const atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
 
       // make sure that content for all panels are aligned and the legend content is aligned to the left

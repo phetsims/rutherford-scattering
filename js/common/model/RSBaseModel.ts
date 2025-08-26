@@ -9,7 +9,6 @@
 import Emitter from '../../../../axon/js/Emitter.js';
 import Property from '../../../../axon/js/Property.js';
 import TEmitter from '../../../../axon/js/TEmitter.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
@@ -21,7 +20,7 @@ class RSBaseModel {
 
   public readonly alphaParticleEnergyProperty: Property<number>;
   public readonly runningProperty: Property<boolean>;
-  public readonly userInteractionProperty: TReadOnlyProperty<boolean>;
+  public readonly userInteractionProperty: Property<boolean>;
   public readonly bounds: Bounds2;
   public readonly gun: Gun;
   public readonly particles: AlphaParticle[];
@@ -31,11 +30,7 @@ class RSBaseModel {
   public readonly stepEmitter: TEmitter<[ number ]>;
   public readonly neutronCountProperty: Property<number>;
 
-  /**
-   * @param userInteractionProperty - true while the user is interacting with something that should stop
-   *                                             and remove all particles from the atom space.
-   */
-  public constructor( userInteractionProperty: TReadOnlyProperty<boolean> ) {
+  public constructor() {
 
     assert && assert( RSConstants.SPACE_NODE_WIDTH === RSConstants.SPACE_NODE_HEIGHT, 'Space must be square.' );
 
@@ -48,7 +43,7 @@ class RSBaseModel {
 
     this.neutronCountProperty = new Property( RSConstants.DEFAULT_NEUTRON_COUNT );
 
-    this.userInteractionProperty = userInteractionProperty;
+    this.userInteractionProperty = new Property( false );
 
     // model computation space
     this.bounds = new Bounds2(
@@ -222,6 +217,7 @@ class RSBaseModel {
     this.removeAllParticles();
     this.alphaParticleEnergyProperty.reset();
     this.runningProperty.reset();
+    this.userInteractionProperty.reset();
   }
 }
 
