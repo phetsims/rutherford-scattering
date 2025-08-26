@@ -7,6 +7,7 @@
  */
 
 import Emitter from '../../../../axon/js/Emitter.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import TEmitter from '../../../../axon/js/TEmitter.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -18,16 +19,16 @@ import Gun from './Gun.js';
 
 class RSBaseModel {
 
-  public readonly alphaParticleEnergyProperty: Property<number>;
   public readonly runningProperty: Property<boolean>;
   public readonly userInteractionProperty: Property<boolean>;
   public readonly bounds: Bounds2;
   public readonly gun: Gun;
   public readonly particles: AlphaParticle[];
-  public readonly protonCountProperty: Property<number>;
   public readonly atomSpaces: AtomSpace[];
   public readonly manualStepDt: number;
   public readonly stepEmitter: TEmitter<[ number ]>;
+  public readonly alphaParticleEnergyProperty: Property<number>;
+  public readonly protonCountProperty: Property<number>;
   public readonly neutronCountProperty: Property<number>;
 
   public constructor() {
@@ -40,7 +41,6 @@ class RSBaseModel {
     this.runningProperty = new Property( true );
 
     this.protonCountProperty = new Property( RSConstants.DEFAULT_PROTON_COUNT );
-
     this.neutronCountProperty = new Property( RSConstants.DEFAULT_NEUTRON_COUNT );
 
     this.userInteractionProperty = new Property( false );
@@ -66,13 +66,12 @@ class RSBaseModel {
     // used to signal when a sim step has occurred
     this.stepEmitter = new Emitter<[ number ]>( { parameters: [ { valueType: 'number' } ] } );
 
-    // no need to unlink this property as base model will exist for life of sim
-    const userInteractionListener = ( userInteraction: boolean ): void => {
-      if ( userInteraction ) {
+    Multilink.lazyMultilink(
+      [ this.protonCountProperty, this.neutronCountProperty, this.alphaParticleEnergyProperty, this.userInteractionProperty ],
+      () => {
         this.removeAllParticles();
       }
-    };
-    this.userInteractionProperty.link( userInteractionListener );
+    );
   }
 
 
@@ -218,6 +217,8 @@ class RSBaseModel {
     this.alphaParticleEnergyProperty.reset();
     this.runningProperty.reset();
     this.userInteractionProperty.reset();
+    this.protonCountProperty.reset();
+    this.neutronCountProperty.reset();
   }
 }
 

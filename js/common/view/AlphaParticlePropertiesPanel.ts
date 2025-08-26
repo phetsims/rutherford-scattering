@@ -90,8 +90,8 @@ class AlphaParticlePropertiesPanel extends Panel {
   /**
    * Create the panel content for this panel.
    */
-  public static createPanelContent( userInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ): Node {
-    return new AlphaParticlePropertiesPanelContent( userInteractionProperty, alphaParticleEnergyProperty, showTracesProperty, providedOptions );
+  public static createPanelContent( alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ): Node {
+    return new AlphaParticlePropertiesPanelContent( alphaParticleEnergyProperty, showTracesProperty, providedOptions );
   }
 
   /**
@@ -112,7 +112,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
 
   private disposeContent: () => void;
 
-  public constructor( userInteractionProperty: Property<boolean>, alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ) {
+  public constructor( alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ) {
 
     const options = optionize<AlphaParticlePropertiesPanelContentOptions, ContentSelfOptions, PanelOptions>()( {
       xMargin: 15,
@@ -162,13 +162,6 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       thumbTouchAreaXDilation: 15,
       thumbTouchAreaYDilation: 12,
-
-      startDrag: () => {
-        userInteractionProperty.value = true;
-      },
-      endDrag: () => {
-        userInteractionProperty.value = false;
-      },
 
       // pdom
       keyboardStep: 5,

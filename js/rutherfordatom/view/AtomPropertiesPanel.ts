@@ -6,8 +6,6 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
@@ -33,18 +31,6 @@ const atomSettingsString = RutherfordScatteringStrings.a11y.atomSettings;
 // const protonSliderDescriptionString = RutherfordScatteringStrings.a11y.protonSliderDescription;
 // const neutronsValuePatternString = RutherfordScatteringStrings.a11y.neutronsValuePattern;
 // const neutronSliderDescriptionString = RutherfordScatteringStrings.a11y.neutronSliderDescription;
-
-// specific interaction properties for the rutherford atom portion, for multitouch
-// Not specific to an instance of an AtomPropertiesPanel, values of the interaction state Properties should
-// persist beyond when scene or color profile changes
-const interactionPropertyGroup = {
-  leftProtonButtonInteractionProperty: new Property( false ),
-  rightProtonButtonInteractionProperty: new Property( false ),
-  protonSliderInteractionProperty: new Property( false ),
-  leftNeutronButtonInteractionProperty: new Property( false ),
-  rightNeutronButtonInteractionProperty: new Property( false ),
-  neutronSliderInteractionProperty: new Property( false )
-};
 
 type SelfOptions = EmptySelfOptions;
 
@@ -115,9 +101,6 @@ type ContentSelfOptions = EmptySelfOptions;
 type AtomPropertiesPanelContentOptions = ContentSelfOptions & PanelOptions;
 
 class AtomPropertiesPanelContent extends VBox {
-
-  private readonly neutronCountProperty: Property<number>;
-  private readonly protonCountProperty: Property<number>;
   private readonly disposeContent: () => void;
 
   /**
@@ -135,28 +118,6 @@ class AtomPropertiesPanelContent extends VBox {
       fill: RSColors.panelColorProperty,
       stroke: RSColors.panelBorderColorProperty
     }, providedOptions );
-
-    // each element must have a unique interaction property to support multitouch, see https://github.com/phetsims/rutherford-scattering/issues/104
-    const leftProtonButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
-    const rightProtonButtonInteractionProperty = interactionPropertyGroup.rightProtonButtonInteractionProperty;
-    const leftNeutronButtonInteractionProperty = interactionPropertyGroup.leftNeutronButtonInteractionProperty;
-    const rightNeutronButtonInteractionProperty = interactionPropertyGroup.leftProtonButtonInteractionProperty;
-    const protonSliderInteractionProperty = interactionPropertyGroup.protonSliderInteractionProperty;
-    const neutronSliderInteractionProperty = interactionPropertyGroup.neutronSliderInteractionProperty;
-
-    // these properties are true when any of the dependencies are true
-    const protonPanelInteractionProperty = DerivedProperty.or( [ leftProtonButtonInteractionProperty, rightProtonButtonInteractionProperty, protonSliderInteractionProperty ] );
-    const neutronPanelInteractionProperty = DerivedProperty.or( [ leftNeutronButtonInteractionProperty, rightNeutronButtonInteractionProperty, neutronSliderInteractionProperty ] );
-
-    // must be disposed
-    const protonInteractionListener = ( protonInteraction: boolean ) => {
-      model.userInteractionProperty.set( protonInteraction );
-    };
-    const neutronInteractionListener = ( neutronInteraction: boolean ) => {
-      model.userInteractionProperty.set( neutronInteraction );
-    };
-    protonPanelInteractionProperty.link( protonInteractionListener );
-    neutronPanelInteractionProperty.link( neutronInteractionListener );
 
     const sliderWidth = options.minWidth * 0.75;
     const numberControlOptions: NumberControlOptions = {
@@ -215,32 +176,10 @@ class AtomPropertiesPanelContent extends VBox {
       }
     ];
 
-    // will track whether we are pressing and holding arrow buttons down
-    let rightProtonButtonDown = false;
-    let leftProtonButtonDown = false;
-
     // Number control for protons
     const protonNumberControlOptions = combineOptions<NumberControlOptions>( {
       titleNodeOptions: {
         fill: RSColors.protonsLabelColorProperty
-      },
-      arrowButtonOptions: {
-        leftStart: () => {
-          leftProtonButtonDown = true;
-        },
-        leftEnd: () => {
-          leftProtonButtonInteractionProperty.set( false );
-          leftProtonButtonDown = false;
-          model.removeAllParticles();
-        },
-        rightStart: () => {
-          rightProtonButtonDown = true;
-        },
-        rightEnd: () => {
-          rightProtonButtonInteractionProperty.set( false );
-          rightProtonButtonDown = false;
-          model.removeAllParticles();
-        }
       },
       sliderOptions: {
         majorTicks: protonMajorTicks,
@@ -256,21 +195,8 @@ class AtomPropertiesPanelContent extends VBox {
         // containerTagName: 'div'
       }
     }, numberControlOptions );
+
     const protonNumberControl = new NumberControl( numberOfProtonsString, model.protonCountProperty, protonCountRange, protonNumberControlOptions );
-
-    function protonCountListener(): void {
-
-      // if we are still pressing the arrow buttons while neutron count is changing, we are pressing and holding -
-      // update the interaction Properties so that the dashed circle appears
-      if ( leftProtonButtonDown ) {
-        leftProtonButtonInteractionProperty.set( true );
-      }
-      if ( rightProtonButtonDown ) {
-        rightProtonButtonInteractionProperty.set( true );
-      }
-    }
-
-    model.protonCountProperty.link( protonCountListener );
 
     const neutronCountRange = new RangeWithValue( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
       RSConstants.DEFAULT_NEUTRON_COUNT );
@@ -293,31 +219,9 @@ class AtomPropertiesPanelContent extends VBox {
       }
     ];
 
-    // will track whether we are pressing and holding arrow buttons down
-    let leftNeutronButtonDown = false;
-    let rightNeutronButtonDown = false;
-
     // Number control for neutrons
     const neutronNumberControlOptions = combineOptions<NumberControlOptions>( {
       titleNodeOptions: { fill: RSColors.neutronsLabelColorProperty },
-      arrowButtonOptions: {
-        leftEnd: () => {
-          leftNeutronButtonInteractionProperty.set( false );
-          leftNeutronButtonDown = false;
-          model.removeAllParticles();
-        },
-        rightEnd: () => {
-          rightNeutronButtonInteractionProperty.set( false );
-          rightNeutronButtonDown = false;
-          model.removeAllParticles();
-        },
-        leftStart: () => {
-          leftNeutronButtonDown = true;
-        },
-        rightStart: () => {
-          rightNeutronButtonDown = true;
-        }
-      },
       sliderOptions: {
         majorTicks: neutronMajorTicks,
 
@@ -335,18 +239,6 @@ class AtomPropertiesPanelContent extends VBox {
 
     const neutronNumberControl = new NumberControl( numberOfNeutronsString, model.neutronCountProperty, neutronCountRange, neutronNumberControlOptions );
 
-    function neutronCountListener(): void {
-
-      // if we are still pressing the arrow buttons while neutron count is changing, we are pressing and holding -
-      // update the interaction Properties so that the dashed circle appears
-      if ( leftNeutronButtonDown ) {
-        leftNeutronButtonInteractionProperty.set( true );
-      }
-      if ( rightNeutronButtonDown ) {
-        rightNeutronButtonInteractionProperty.set( true );
-      }
-    }
-
     // main panel content
     super( {
       spacing: RSConstants.PANEL_CHILD_SPACING * 2.1,
@@ -357,31 +249,10 @@ class AtomPropertiesPanelContent extends VBox {
       children: [ protonNumberControl, neutronNumberControl ]
     } );
 
-    this.neutronCountProperty = model.neutronCountProperty;
-    this.protonCountProperty = model.protonCountProperty;
-
-    this.neutronCountProperty.link( neutronCountListener );
-
     this.disposeContent = () => {
-      // NOTE: Disposing arrow buttons causes an assertion failure, see axon #77.
-      // However, there is no indication of a memory leak even though these are commented
-      // dispose arrow buttons
-      // this.protonMinusButton.dispose();
-      // this.protonPlusButton.dispose();
-      // this.neutronMinusButton.dispose();
-      // this.neutronPlusButton.dispose();
-
-      // dispose listeners attached to proton/neutron count Properties
-      this.neutronCountProperty.unlink( neutronCountListener );
-      this.protonCountProperty.unlink( protonCountListener );
-
       // dispose number controls
       protonNumberControl.dispose();
       neutronNumberControl.dispose();
-
-      // dispose the derived properties
-      protonPanelInteractionProperty.dispose();
-      neutronPanelInteractionProperty.dispose();
     };
   }
 

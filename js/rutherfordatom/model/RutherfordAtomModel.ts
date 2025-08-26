@@ -37,8 +37,6 @@ class RutherfordAtomModel extends RSBaseModel {
   }
 
   public override reset(): void {
-    this.protonCountProperty.reset();
-    this.neutronCountProperty.reset();
     this.sceneProperty.reset();
 
     super.reset();

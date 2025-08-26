@@ -170,7 +170,6 @@ class RutherfordNucleusNode extends NucleusCanvasNode {
     // update atom image when user interaction stops
     const userInteractionListener = () => {
       if ( this.renderAtomOutline ) {
-        this.renderAtomOutline = false;
         this.updateAtomImage();
         this.timeSinceDirty = 0;
       }
