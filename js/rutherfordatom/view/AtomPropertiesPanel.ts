@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Control panel to adjust the number of protons and neutrons used in the sim
  *
@@ -13,10 +10,9 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
-import Utils from '../../../../dot/js/Utils.js';
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
-import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
+import optionize, { combineOptions, EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import NumberControl, { NumberControlOptions } from '../../../../scenery-phet/js/NumberControl.js';
+import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
@@ -33,15 +29,15 @@ const numberOfProtonsString = RutherfordScatteringStrings.numberOfProtons;
 const atomSettingsString = RutherfordScatteringStrings.a11y.atomSettings;
 
 //TODO https://github.com/phetsims/rutherford-scattering/issues/178 make these template vars again when working on descriptions
-const protonsValuePatternString = RutherfordScatteringStrings.a11y.protonsValuePattern;
-const protonSliderDescriptionString = RutherfordScatteringStrings.a11y.protonSliderDescription;
-const neutronsValuePatternString = RutherfordScatteringStrings.a11y.neutronsValuePattern;
-const neutronSliderDescriptionString = RutherfordScatteringStrings.a11y.neutronSliderDescription;
+// const protonsValuePatternString = RutherfordScatteringStrings.a11y.protonsValuePattern;
+// const protonSliderDescriptionString = RutherfordScatteringStrings.a11y.protonSliderDescription;
+// const neutronsValuePatternString = RutherfordScatteringStrings.a11y.neutronsValuePattern;
+// const neutronSliderDescriptionString = RutherfordScatteringStrings.a11y.neutronSliderDescription;
 
 // global, tracking where fingers are for multitouch support
 // must persist beyond lifetime of the panel so that fingers are tracked when new
 // panels are created for scene or color profile changes
-const FINGER_TRACKER = {};
+// const FINGER_TRACKER = {};
 
 // specific interaction properties for the rutherford atom portion, for multitouch
 // Not specific to an instance of an AtomPropertiesPanel, values of the interaction state Properties should
@@ -121,7 +117,7 @@ class AtomPropertiesPanel extends Panel {
 
 type ContentSelfOptions = EmptySelfOptions;
 
-type AtomPropertiesPanelContentOptions = ContentSelfOptions & VBoxOptions;
+type AtomPropertiesPanelContentOptions = ContentSelfOptions & PanelOptions;
 
 class AtomPropertiesPanelContent extends VBox {
 
@@ -134,9 +130,9 @@ class AtomPropertiesPanelContent extends VBox {
   /**
    * Create the content for the AtomPropertiesPanel. This does not include the panel title.
    */
-  public constructor( model: any, providedOptions?: AtomPropertiesPanelContentOptions ) {
+  public constructor( model: RutherfordAtomModel, providedOptions?: AtomPropertiesPanelContentOptions ) {
 
-    const options = optionize<AtomPropertiesPanelContentOptions, ContentSelfOptions, VBoxOptions>()( {
+    const options = optionize<AtomPropertiesPanelContentOptions, ContentSelfOptions, PanelOptions>()( {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
@@ -160,10 +156,10 @@ class AtomPropertiesPanelContent extends VBox {
     const neutronPanelInteractionProperty = DerivedProperty.or( [ leftNeutronButtonInteractionProperty, rightNeutronButtonInteractionProperty, neutronSliderInteractionProperty ] );
 
     // must be disposed
-    const protonInteractionListener = protonInteraction => {
+    const protonInteractionListener = ( protonInteraction: boolean ) => {
       model.protonInteractionProperty.set( protonInteraction );
     };
-    const neutronInteractionListener = neutronInteraction => {
+    const neutronInteractionListener = ( neutronInteraction: boolean ) => {
       model.neutronInteractionProperty.set( neutronInteraction );
     };
     protonPanelInteractionProperty.link( protonInteractionListener );
@@ -174,31 +170,33 @@ class AtomPropertiesPanelContent extends VBox {
      * Track fingers for multitouch, adding a finger count to a particular element and setting
      * the interaction properties correctly.
      */
-    const addFinger = ( sliderID: string, interactionProperty: Property<boolean> ): void => {
-      interactionProperty.set( true );
-      if ( !FINGER_TRACKER[ sliderID ] && FINGER_TRACKER[ sliderID ] !== 0 ) {
-        FINGER_TRACKER[ sliderID ] = 1; // first time finger is down on this thumb
-      }
-      else {
-        FINGER_TRACKER[ sliderID ]++;
-      }
-    };
+      // TODO: https://github.com/phetsims/rutherford-scattering/issues/181
 
-    /**
-     * Remove a finger from an element for multitouch support, removing a finger count from a particular element
-     * and setting the interaction properties appropriately.
-     */
-    const removeFinger = ( sliderID: string, interactionProperty: Property<boolean>, countProperty: Property<number> ): void => {
-      FINGER_TRACKER[ sliderID ]--;
-      assert && assert( FINGER_TRACKER[ sliderID ] >= 0, 'at least 0 fingers must be using the slider' );
-      countProperty.set( Utils.roundSymmetric( countProperty.value ) ); // proper resolution for nucleons
-      if ( FINGER_TRACKER[ sliderID ] === 0 ) {
-        interactionProperty.set( false );
-      }
-    };
+      // const addFinger = ( sliderID: string, interactionProperty: Property<boolean> ): void => {
+      //   interactionProperty.set( true );
+      //   if ( !FINGER_TRACKER[ sliderID ] && FINGER_TRACKER[ sliderID ] !== 0 ) {
+      //     FINGER_TRACKER[ sliderID ] = 1; // first time finger is down on this thumb
+      //   }
+      //   else {
+      //     FINGER_TRACKER[ sliderID ]++;
+      //   }
+      // };
+      //
+      // /**
+      //  * Remove a finger from an element for multitouch support, removing a finger count from a particular element
+      //  * and setting the interaction properties appropriately.
+      //  */
+      // const removeFinger = ( sliderID: string, interactionProperty: Property<boolean>, countProperty: Property<number> ): void => {
+      //   FINGER_TRACKER[ sliderID ]--;
+      //   assert && assert( FINGER_TRACKER[ sliderID ] >= 0, 'at least 0 fingers must be using the slider' );
+      //   countProperty.set( Utils.roundSymmetric( countProperty.value ) ); // proper resolution for nucleons
+      //   if ( FINGER_TRACKER[ sliderID ] === 0 ) {
+      //     interactionProperty.set( false );
+      //   }
+      // };
 
     const sliderWidth = options.minWidth * 0.75;
-    const numberControlOptions = {
+    const numberControlOptions: NumberControlOptions = {
       layoutFunction: NumberControl.createLayoutFunction3( {
         ySpacing: 3,
         alignTitle: 'left',
@@ -259,47 +257,50 @@ class AtomPropertiesPanelContent extends VBox {
     let leftProtonButtonDown = false;
 
     // Number control for protons
-    const protonNumberControlOptions = optionize<typeof numberControlOptions>()( {}, numberControlOptions );
-    protonNumberControlOptions.titleNodeOptions = optionize<typeof numberControlOptions.titleNodeOptions>()( {},
-      numberControlOptions.titleNodeOptions, { fill: RSColors.protonsLabelColorProperty } );
-    protonNumberControlOptions.arrowButtonOptions = {
-      leftStart: () => {
-        leftProtonButtonDown = true;
+    const protonNumberControlOptions = combineOptions<NumberControlOptions>( {
+      titleNodeOptions: {
+        fill: RSColors.protonsLabelColorProperty
       },
-      leftEnd: () => {
-        leftProtonButtonInteractionProperty.set( false );
-        leftProtonButtonDown = false;
-        model.removeAllParticles();
+      arrowButtonOptions: {
+        leftStart: () => {
+          leftProtonButtonDown = true;
+        },
+        leftEnd: () => {
+          leftProtonButtonInteractionProperty.set( false );
+          leftProtonButtonDown = false;
+          model.removeAllParticles();
+        },
+        rightStart: () => {
+          rightProtonButtonDown = true;
+        },
+        rightEnd: () => {
+          rightProtonButtonInteractionProperty.set( false );
+          rightProtonButtonDown = false;
+          model.removeAllParticles();
+        }
       },
-      rightStart: () => {
-        rightProtonButtonDown = true;
-      },
-      rightEnd: () => {
-        rightProtonButtonInteractionProperty.set( false );
-        rightProtonButtonDown = false;
-        model.removeAllParticles();
-      }
-    };
-    protonNumberControlOptions.sliderOptions = optionize<typeof numberControlOptions.sliderOptions>()( {},
-      numberControlOptions.sliderOptions, {
+      sliderOptions: {
         majorTicks: protonMajorTicks,
 
         thumbFill: 'rgb(220, 58, 10)',
-        thumbFillHighlighted: 'rgb(270, 108, 60)',
+        thumbFillHighlighted: 'rgb(270, 108, 60)'
 
         // Individual callbacks for each component of the NumberControl to support multitouch
-        startDrag: () => { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
-        endDrag: () => { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, this.protonCountProperty ); },
+        // TODO: https://github.com/phetsims/rutherford-scattering/issues/181
+        // startDrag: () => { addFinger( 'protonCountSlider', protonSliderInteractionProperty ); },
+        // endDrag: () => { removeFinger( 'protonCountSlider', protonSliderInteractionProperty, this.protonCountProperty ); },
 
         // pdom
-        labelContent: protonsValuePatternString,
-        labelTagName: 'label',
-        descriptionContent: protonSliderDescriptionString,
-        containerTagName: 'div'
-      } );
+        // TODO: a11y https://github.com/phetsims/rutherford-scattering/issues/181
+        // labelContent: protonsValuePatternString,
+        // labelTagName: 'label',
+        // descriptionContent: protonSliderDescriptionString,
+        // containerTagName: 'div'
+      }
+    }, numberControlOptions );
     const protonNumberControl = new NumberControl( numberOfProtonsString, model.protonCountProperty, protonCountRange, protonNumberControlOptions );
 
-    function protonCountListener() {
+    function protonCountListener(): void {
 
       // if we are still pressing the arrow buttons while neutron count is changing, we are pressing and holding -
       // update the interaction Properties so that the dashed circle appears
@@ -339,50 +340,50 @@ class AtomPropertiesPanelContent extends VBox {
     let rightNeutronButtonDown = false;
 
     // Number control for neutrons
-    const neutronNumberControlOptions = optionize<typeof numberControlOptions>()( {}, numberControlOptions );
-    neutronNumberControlOptions.titleNodeOptions = optionize<typeof numberControlOptions.titleNodeOptions>()( {},
-      numberControlOptions.titleNodeOptions, { fill: RSColors.neutronsLabelColorProperty }
-    );
-    neutronNumberControlOptions.sliderOptions = optionize<typeof numberControlOptions.sliderOptions>()( {},
-      numberControlOptions.sliderOptions, {
+    const neutronNumberControlOptions = combineOptions<NumberControlOptions>( {
+      titleNodeOptions: { fill: RSColors.neutronsLabelColorProperty },
+      arrowButtonOptions: {
+        leftEnd: () => {
+          leftNeutronButtonInteractionProperty.set( false );
+          leftNeutronButtonDown = false;
+          model.removeAllParticles();
+        },
+        rightEnd: () => {
+          rightNeutronButtonInteractionProperty.set( false );
+          rightNeutronButtonDown = false;
+          model.removeAllParticles();
+        },
+        leftStart: () => {
+          leftNeutronButtonDown = true;
+        },
+        rightStart: () => {
+          rightNeutronButtonDown = true;
+        }
+      },
+      sliderOptions: {
         majorTicks: neutronMajorTicks,
 
         thumbFill: 'rgb(130, 130, 130)',
-        thumbFillHighlighted: 'rgb(180, 180, 180)',
+        thumbFillHighlighted: 'rgb(180, 180, 180)'
 
         // Individual callbacks for each component of the NumberControl to support multitouch
-        startDrag: () => { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
-        endDrag: () => { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, this.neutronCountProperty ); },
+        // TODO: https://github.com/phetsims/rutherford-scattering/issues/181
+
+        // startDrag: () => { addFinger( 'neutronCountSlider', neutronSliderInteractionProperty ); },
+        // endDrag: () => { removeFinger( 'neutronCountSlider', neutronSliderInteractionProperty, this.neutronCountProperty ); },
 
         // pdom
-        labelContent: neutronsValuePatternString,
-        labelTagName: 'label',
-        descriptionContent: neutronSliderDescriptionString,
-        containerTagName: 'div'
+        // TODO: https://github.com/phetsims/rutherford-scattering/issues/181
+        // labelContent: neutronsValuePatternString,
+        // labelTagName: 'label',
+        // descriptionContent: neutronSliderDescriptionString,
+        // containerTagName: 'div'
       }
-    );
+    }, numberControlOptions );
 
-    neutronNumberControlOptions.arrowButtonOptions = {
-      leftEnd: () => {
-        leftNeutronButtonInteractionProperty.set( false );
-        leftNeutronButtonDown = false;
-        model.removeAllParticles();
-      },
-      rightEnd: () => {
-        rightNeutronButtonInteractionProperty.set( false );
-        rightNeutronButtonDown = false;
-        model.removeAllParticles();
-      },
-      leftStart: () => {
-        leftNeutronButtonDown = true;
-      },
-      rightStart: () => {
-        rightNeutronButtonDown = true;
-      }
-    };
     const neutronNumberControl = new NumberControl( numberOfNeutronsString, model.neutronCountProperty, neutronCountRange, neutronNumberControlOptions );
 
-    function neutronCountListener() {
+    function neutronCountListener(): void {
 
       // if we are still pressing the arrow buttons while neutron count is changing, we are pressing and holding -
       // update the interaction Properties so that the dashed circle appears
@@ -438,7 +439,7 @@ class AtomPropertiesPanelContent extends VBox {
   /**
    * Make eligible for garbage collection.
    */
-  public dispose(): void {
+  public override dispose(): void {
     this.disposeContent();
     super.dispose();
   }

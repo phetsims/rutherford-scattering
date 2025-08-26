@@ -147,7 +147,7 @@ class AtomSpace {
             particle.preparedAtom!.addParticle( particle );
 
             particle.boundingBox = particle.preparedBoundingBox;
-            particle.rotationAngle = particle.preparedRotationAngle;
+            particle.rotationAngle = particle.preparedRotationAngle!;
 
             this.removeParticleFromEmptySpace( particle );
           }
