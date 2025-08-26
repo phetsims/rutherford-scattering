@@ -87,7 +87,7 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
     } );
 
     return plumPuddingSpaceNode;
-  };
+  }
 }
 
 rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
