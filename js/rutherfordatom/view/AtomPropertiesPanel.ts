@@ -147,6 +147,13 @@ class AtomPropertiesPanelContent extends VBox {
         majorTickLength: 15,
         tickLabelSpacing: 2,
 
+        startDrag: () => {
+          model.userInteractionProperty.value = true;
+        },
+        endDrag: () => {
+          model.userInteractionProperty.value = false;
+        },
+
         // pdom
         keyboardStep: 5,
         pageKeyboardStep: 10

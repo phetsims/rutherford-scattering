@@ -152,7 +152,6 @@ class RutherfordNucleusNode extends NucleusCanvasNode {
     // update atom image when proton count changes
     const protonCountListener = ( propertyValue: number ) => {
       this.numberOfProtons = propertyValue;
-      this.renderAtomOutline = this.userInteractionProperty.value;  // Only render the outline when interacting
       this.updateAtomImage();
       this.timeSinceDirty = 0;
     };
@@ -161,7 +160,6 @@ class RutherfordNucleusNode extends NucleusCanvasNode {
     // update atom image when neutron count changes
     const neutronCountListener = ( propertyValue: number ) => {
       this.numberOfNeutrons = propertyValue;
-      this.renderAtomOutline = this.userInteractionProperty.value; // Only render the outline when interacting
       this.updateAtomImage();
       this.timeSinceDirty = 0;
     };

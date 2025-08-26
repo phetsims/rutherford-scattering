@@ -6,7 +6,6 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import RSBaseModel from '../../common/model/RSBaseModel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomSpace from './PlumPuddingAtomSpace.js';
@@ -18,11 +17,7 @@ class PlumPuddingAtomModel extends RSBaseModel {
 
   public constructor() {
 
-    // a property to track user interaction - only one element will change this in this screen,
-    // so a DerivedProperty is not necessary as in RutherfordAtomModel
-    const userInteractionProperty = new Property( false );
-
-    super( userInteractionProperty );
+    super();
 
     this.plumPuddingSpace = new PlumPuddingAtomSpace( this.protonCountProperty, this.bounds );
 
