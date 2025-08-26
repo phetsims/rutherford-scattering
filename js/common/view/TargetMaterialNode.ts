@@ -25,6 +25,9 @@ class TargetMaterialNode extends Path {
   public constructor( providedOptions?: PathOptions ) {
 
     const options = combineOptions<PathOptions>( {
+      fill: new LinearGradient( 0, 0, 0, BACK_DEPTH ).addColorStop( 0, BACK_COLOR ).addColorStop( 1, FRONT_COLOR ),
+      stroke: 'black',
+      lineWidth: 1
     }, providedOptions );
 
     // top face, in perspective
@@ -33,11 +36,7 @@ class TargetMaterialNode extends Path {
       .lineTo( ( 1 - BACK_OFFSET ) * BOX_SIZE.width, 0 )
       .lineTo( BOX_SIZE.width, BACK_DEPTH )
       .lineTo( 0, BACK_DEPTH )
-      .close(), {
-      fill: new LinearGradient( 0, 0, 0, BACK_DEPTH ).addColorStop( 0, BACK_COLOR ).addColorStop( 1, FRONT_COLOR ),
-      stroke: 'black',
-      lineWidth: 1
-    } );
+      .close(), options );
   }
 }
 
