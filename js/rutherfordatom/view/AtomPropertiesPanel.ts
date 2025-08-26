@@ -216,7 +216,7 @@ class AtomPropertiesPanelContent extends VBox {
       },
       sliderOptions: {
         trackSize: new Dimension2( sliderWidth, 1 ),
-        trackFill: RSColors.panelSliderLabelColorProperty,
+        trackFillEnabled: RSColors.panelSliderLabelColorProperty,
         trackStroke: RSColors.panelSliderLabelColorProperty,
         thumbCenterLineStroke: 'white',
         thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,

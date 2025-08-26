@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * The space in which atoms and alpha particles are rendered.  The particles can be represented two
  * ways, 'nucleus' and 'particle'.  When represented by a nucleus, the particle is shown as an image of
@@ -15,9 +12,9 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import required from '../../../../phet-core/js/required.js';
-import { ParticleContainer } from '../../../../phetcommon/js/model/ParticleContainer.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import CanvasNode, { CanvasNodeOptions } from '../../../../scenery/js/nodes/CanvasNode.js';
@@ -51,8 +48,8 @@ class ParticleSpaceNode extends CanvasNode {
   private readonly showAlphaTraceProperty: Property<boolean>;
   private readonly particleTraceColorWithFade: string;
   private readonly clipRect: { x: number; y: number; width: number; height: number };
-  private particleImageHalfWidth: number = 0;
-  private particleImageHalfHeight: number = 0;
+  private particleImageHalfWidth = 0;
+  private particleImageHalfHeight = 0;
 
   /**
    * @param atomSpace - space containing atoms and particles
@@ -80,7 +77,7 @@ class ParticleSpaceNode extends CanvasNode {
     this.modelViewTransform = modelViewTransform;
     this.showAlphaTraceProperty = showAlphaTraceProperty;
     this.particleTraceColorWithFade = `rgba(${options.particleTraceColor.r},${options.particleTraceColor.g},${options.particleTraceColor.b},{0})`;
-    
+
     this.clipRect = {
       x: this.canvasBounds.getX() + SPACE_BORDER_WIDTH / 2,
       y: this.canvasBounds.getY() + SPACE_BORDER_WIDTH / 2,
@@ -96,6 +93,7 @@ class ParticleSpaceNode extends CanvasNode {
     else if ( this.particleStyle === 'particle' ) {
       alphaParticle = ParticleNodeFactory.createParticleAlpha();
     }
+    affirm( alphaParticle, 'There should be an alphaParticle' );
     alphaParticle.toImage( ( image, x, y ) => {
       this.alphaParticleImage = image;
       this.particleImageHalfWidth = this.alphaParticleImage.width / 2;
@@ -113,7 +111,7 @@ class ParticleSpaceNode extends CanvasNode {
     assert && assert( false, 'subtype needs to implement' );
   }
 
-  protected override paintCanvas( context: CanvasRenderingContext2D ): void {
+  public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
     const bounds = this.canvasBounds;
     const renderTrace = this.showAlphaTraceProperty.value;
@@ -152,7 +150,7 @@ class ParticleSpaceNode extends CanvasNode {
   /**
    * Render alpha particles that belong to a parent particleContainer
    */
-  private renderAlphaParticles( context: CanvasRenderingContext2D, particleContainer: ParticleContainer<Atom|AtomSpace>, renderTrace: boolean ): void {
+  private renderAlphaParticles( context: CanvasRenderingContext2D, particleContainer: AtomSpace, renderTrace: boolean ): void {
     if ( renderTrace ) {
 
       // if style is 'nucleus' we can get away with rendering with one path for performance
@@ -196,7 +194,7 @@ class ParticleSpaceNode extends CanvasNode {
 
       // render particle
       const particleViewPosition = this.modelViewTransform.modelToViewPosition( particle.positionProperty.get() );
-      context.drawImage( this.alphaParticleImage,
+      context.drawImage( this.alphaParticleImage!,
         particleViewPosition.x - this.particleImageHalfWidth,
         particleViewPosition.y - this.particleImageHalfHeight );
     } );
