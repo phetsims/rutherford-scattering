@@ -39,7 +39,6 @@ class RutherfordAtom extends Atom {
    * Remove a particle.  Most of the time, a particle needs to be removed from this atom but kept in
    * the space so that a new atom can pick it up if necessary.  On error, notify the space so that
    * the particle can be removed entirely from the model.
-   * TODO: The line parameter is seemingly not used. Can it be removed? https://github.com/phetsims/rutherford-scattering/issues/181
    */
   public override removeParticle( particle: AlphaParticle, isError?: boolean, line?: string ): void {
     super.removeParticle( particle );

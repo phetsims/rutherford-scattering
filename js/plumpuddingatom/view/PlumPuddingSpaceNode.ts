@@ -20,10 +20,12 @@ type SelfOptions = EmptySelfOptions;
 
 type PlumPuddingSpaceNodeOptions = SelfOptions & ParticleSpaceNodeOptions;
 
+type ImageRect = { x: number; y: number; width: number; height: number };
+
 class PlumPuddingSpaceNode extends ParticleSpaceNode {
 
   private readonly atomNode: PlumPuddingAtomNode;
-  private readonly atomNodeRect: { x: number; y: number; width: number; height: number };
+  private readonly atomNodeRect: ImageRect;
 
   /**
    * @param model
@@ -53,7 +55,6 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
     const imageX = this.bounds.centerX - imageWidth / 2;
     const imageY = this.bounds.centerY - imageHeight / 2;
 
-    // TODO: Should this be a proper Rect or something? https://github.com/phetsims/rutherford-scattering/issues/181
     this.atomNodeRect = { x: imageX, y: imageY, width: imageWidth, height: imageHeight };
 
     this.invalidatePaint();

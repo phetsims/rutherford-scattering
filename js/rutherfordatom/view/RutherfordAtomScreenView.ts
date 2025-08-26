@@ -41,7 +41,7 @@ import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 const pattern0AtomicScaleString = RutherfordScatteringStrings.pattern[ '0atomicScale' ];
 const pattern0NuclearScaleString = RutherfordScatteringStrings.pattern[ '0nuclearScale' ];
 const switchScaleString = RutherfordScatteringStrings.a11y.switchScale;
-// const switchScaleDescriptionString = RutherfordScatteringStrings.a11y.switchScaleDescription;
+const switchScaleDescriptionString = RutherfordScatteringStrings.a11y.switchScaleDescription;
 const nuclearScaleViewString = RutherfordScatteringStrings.a11y.nuclearScaleView;
 const atomicScaleViewString = RutherfordScatteringStrings.a11y.atomicScaleView;
 
@@ -191,10 +191,9 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       },
       maxWidth: this.targetMaterialNode.width,
 
-      accessibleName: switchScaleString
+      accessibleName: switchScaleString,
 
-      //TODO https://github.com/phetsims/rutherford-scattering/issues/181 proper description thing
-      // descriptionContent: switchScaleDescriptionString
+      accessibleHelpText: switchScaleDescriptionString
     } );
 
     this.sceneRadioButtonGroup = createRadioButtons( atom_png );

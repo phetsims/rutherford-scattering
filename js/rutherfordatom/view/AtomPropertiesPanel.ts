@@ -27,10 +27,10 @@ const numberOfProtonsString = RutherfordScatteringStrings.numberOfProtons;
 const atomSettingsString = RutherfordScatteringStrings.a11y.atomSettings;
 
 //TODO https://github.com/phetsims/rutherford-scattering/issues/178 make these template vars again when working on descriptions
-// const protonsValuePatternString = RutherfordScatteringStrings.a11y.protonsValuePattern;
-// const protonSliderDescriptionString = RutherfordScatteringStrings.a11y.protonSliderDescription;
-// const neutronsValuePatternString = RutherfordScatteringStrings.a11y.neutronsValuePattern;
-// const neutronSliderDescriptionString = RutherfordScatteringStrings.a11y.neutronSliderDescription;
+const protonsValuePatternString = RutherfordScatteringStrings.a11y.protonsValuePattern;
+const protonSliderDescriptionString = RutherfordScatteringStrings.a11y.protonSliderDescription;
+const neutronsValuePatternString = RutherfordScatteringStrings.a11y.neutronsValuePattern;
+const neutronSliderDescriptionString = RutherfordScatteringStrings.a11y.neutronSliderDescription;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -190,17 +190,12 @@ class AtomPropertiesPanelContent extends VBox {
       },
       sliderOptions: {
         majorTicks: protonMajorTicks,
-
         thumbFill: 'rgb(220, 58, 10)',
         thumbFillHighlighted: 'rgb(270, 108, 60)'
-
-        // pdom
-        // TODO: a11y https://github.com/phetsims/rutherford-scattering/issues/181
-        // labelContent: protonsValuePatternString,
-        // labelTagName: 'label',
-        // descriptionContent: protonSliderDescriptionString,
-        // containerTagName: 'div'
-      }
+      },
+      // pdom
+      accessibleName: protonsValuePatternString,
+      accessibleHelpText: protonSliderDescriptionString
     }, numberControlOptions );
 
     const protonNumberControl = new NumberControl( numberOfProtonsString, model.protonCountProperty, protonCountRange, protonNumberControlOptions );
@@ -231,17 +226,12 @@ class AtomPropertiesPanelContent extends VBox {
       titleNodeOptions: { fill: RSColors.neutronsLabelColorProperty },
       sliderOptions: {
         majorTicks: neutronMajorTicks,
-
         thumbFill: 'rgb(130, 130, 130)',
         thumbFillHighlighted: 'rgb(180, 180, 180)'
-
-        // pdom
-        // TODO: https://github.com/phetsims/rutherford-scattering/issues/181
-        // labelContent: neutronsValuePatternString,
-        // labelTagName: 'label',
-        // descriptionContent: neutronSliderDescriptionString,
-        // containerTagName: 'div'
-      }
+      },
+      // pdom
+      accessibleName: neutronsValuePatternString,
+      accessibleHelpText: neutronSliderDescriptionString,
     }, numberControlOptions );
 
     const neutronNumberControl = new NumberControl( numberOfNeutronsString, model.neutronCountProperty, neutronCountRange, neutronNumberControlOptions );
