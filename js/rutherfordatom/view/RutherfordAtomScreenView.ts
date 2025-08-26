@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * View for the 'Rutherford Atom' screen.
  *
@@ -16,6 +13,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
+import { ImageableImage } from '../../../../scenery/js/nodes/Imageable.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
@@ -43,18 +41,20 @@ import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 const pattern0AtomicScaleString = RutherfordScatteringStrings.pattern[ '0atomicScale' ];
 const pattern0NuclearScaleString = RutherfordScatteringStrings.pattern[ '0nuclearScale' ];
 const switchScaleString = RutherfordScatteringStrings.a11y.switchScale;
-const switchScaleDescriptionString = RutherfordScatteringStrings.a11y.switchScaleDescription;
+// const switchScaleDescriptionString = RutherfordScatteringStrings.a11y.switchScaleDescription;
 const nuclearScaleViewString = RutherfordScatteringStrings.a11y.nuclearScaleView;
 const atomicScaleViewString = RutherfordScatteringStrings.a11y.atomicScaleView;
 
 class RutherfordAtomScreenView extends RSBaseScreenView {
+
+  private sceneRadioButtonGroup: RectangularRadioButtonGroup<string>;
 
   public constructor( model: RutherfordAtomModel ) {
 
     const nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, '1.5 x 10<sup>-13</sup>' );
     const atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>' );
 
-    super( model, nucleusScaleString, createSpaceNode, {
+    super( model, nucleusScaleString, {
       includeElectronLegend: false
     } );
 
@@ -100,6 +100,9 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       const panelOptions = { resize: false };
       const legendPanel = atomSceneVisible ? new AtomParticleLegendPanel( legendContent, panelOptions ) : new NuclearParticleLegendPanel( legendContent, panelOptions );
       const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
+
+      // TODO: Fix https://github.com/phetsims/rutherford-scattering/issues/181
+      // @ts-expect-error
       const atomPropertiesPanel = new AtomPropertiesPanel( atromPropertiesContentBox, panelOptions );
 
       return [
@@ -112,14 +115,14 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     // when various panels are added/removed due to changing color profile or scene, reset the accessible order
     const restorePDOMOrder = () => {
       this.pdomPlayAreaNode.pdomOrder = [ this.gunNode ];
-      this.pdomControlAreaNode.pdomOrder = _.uniq( this.pdomControlAreaNode.pdomOrder.concat( [
+      this.pdomControlAreaNode.pdomOrder = _.uniq( this.pdomControlAreaNode.pdomOrder!.concat( [
         this.controlPanel,
         this.sceneRadioButtonGroup
       ].filter( _.identity ) ) );
     };
 
     // {Node} control panel is created below by sceneProperty listener, to correspond to scene
-    let controlPanel = null;
+    let controlPanel: Node;
 
     // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
     // should be updated, and the control/legend panels need to change
@@ -155,7 +158,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
      * created every time the color profile changes.
      * @param atomIconImage - the icon for the atomic scene, changes with color profile
      */
-    const createRadioButtons = ( atomIconImage: Image ): RectangularRadioButtonGroup => new RectangularRadioButtonGroup( model.sceneProperty, [
+    const createRadioButtons = ( atomIconImage: ImageableImage ): RectangularRadioButtonGroup<string> => new RectangularRadioButtonGroup( model.sceneProperty, [
       {
         value: 'atom',
         createNode: () => new Image( atomIconImage, { scale: 0.18 } ),
@@ -187,11 +190,12 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       },
       maxWidth: this.targetMaterialNode.width,
 
-      accessibleName: switchScaleString,
-      descriptionContent: switchScaleDescriptionString
+      accessibleName: switchScaleString
+
+      //TODO https://github.com/phetsims/rutherford-scattering/issues/181 proper description thing
+      // descriptionContent: switchScaleDescriptionString
     } );
 
-    // @private
     this.sceneRadioButtonGroup = createRadioButtons( atom_png );
     this.pdomControlAreaNode.addChild( this.sceneRadioButtonGroup );
 
@@ -218,69 +222,75 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
 
     restorePDOMOrder();
   }
-}
 
-/**
- * Create the node in which atoms and alpha particles are rendered.  Node contains both
- * scene representations, and visibility is controlled from this node.
- */
-const createSpaceNode = ( model: RutherfordAtomModel, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, canvasBounds: Bounds2 ): Node => {
 
-  // create the single nucleus representation scene
-  const nucleusSpaceNode = new NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
-    canvasBounds: canvasBounds
-  } );
+  /**
+   * Create the node in which atoms and alpha particles are rendered.  Node contains both
+   * scene representations, and visibility is controlled from this node.
+   */
+  public override createSpaceNode(
+    model: RutherfordAtomModel,
+    showAlphaTraceProperty: Property<boolean>,
+    modelViewTransform: ModelViewTransform2,
+    canvasBounds: Bounds2
+  ): Node {
 
-  // create the multiple atom representation scene
-  const atomSpaceNode = new AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
-    canvasBounds: canvasBounds
-  } );
-
-  if ( RSQueryParameters.showErrorCount ) {
-    // show the number of particles that were removed from the space in error
-    const errorCountPattern = 'Error count: {{numRemoved}}';
-    const errorText = new Text( '', {
-      font: new PhetFont( 18 ),
-      fill: 'red',
-      leftBottom: atomSpaceNode.leftTop
+    // create the single nucleus representation scene
+    const nucleusSpaceNode = new NucleusSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+      canvasBounds: canvasBounds
     } );
-    atomSpaceNode.addChild( errorText );
 
-    let atomsRemoved = 0;
-    model.atomSpace.particleRemovedFromAtomEmitter.addListener( particle => {
-      atomsRemoved += 1;
-      errorText.string = StringUtils.fillIn( errorCountPattern, {
-        numRemoved: atomsRemoved
+    // create the multiple atom representation scene
+    const atomSpaceNode = new AtomSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+      canvasBounds: canvasBounds
+    } );
+
+    if ( RSQueryParameters.showErrorCount ) {
+      // show the number of particles that were removed from the space in error
+      const errorCountPattern = 'Error count: {{numRemoved}}';
+      const errorText = new Text( '', {
+        font: new PhetFont( 18 ),
+        fill: 'red',
+        leftBottom: atomSpaceNode.leftTop
       } );
+      atomSpaceNode.addChild( errorText );
+
+      let atomsRemoved = 0;
+      model.atomSpace.particleRemovedFromAtomEmitter.addListener( particle => {
+        atomsRemoved += 1;
+        errorText.string = StringUtils.fillIn( errorCountPattern, {
+          numRemoved: atomsRemoved
+        } );
+      } );
+    }
+
+    // update view on model step
+    model.addStepListener( () => {
+      nucleusSpaceNode.invalidatePaint();
+      atomSpaceNode.invalidatePaint();
+    } );
+
+    // update which scene is visible and remove all particles
+    // no need to unlink, screen view exists for life of sim
+    model.sceneProperty.link( scene => {
+      const nucleusVisible = scene === 'nucleus';
+
+      // set visibility of model space
+      model.nucleusSpace.isVisible = nucleusVisible;
+      model.atomSpace.isVisible = !nucleusVisible;
+
+      // set node visibility
+      nucleusSpaceNode.visible = nucleusVisible;
+      atomSpaceNode.visible = !nucleusVisible;
+
+      model.removeAllParticles();
+    } );
+
+    return new Node( {
+      children: [ nucleusSpaceNode, atomSpaceNode ]
     } );
   }
-
-  // update view on model step
-  model.addStepListener( dt => {
-    nucleusSpaceNode.invalidatePaint();
-    atomSpaceNode.invalidatePaint();
-  } );
-
-  // update which scene is visible and remove all particles
-  // no need to unlink, screen view exists for life of sim
-  model.sceneProperty.link( scene => {
-    const nucleusVisible = scene === 'nucleus';
-
-    // set visibility of model space
-    model.nucleusSpace.isVisible = nucleusVisible;
-    model.atomSpace.isVisible = !nucleusVisible;
-
-    // set node visibility
-    nucleusSpaceNode.visible = nucleusVisible;
-    atomSpaceNode.visible = !nucleusVisible;
-
-    model.removeAllParticles();
-  } );
-
-  return new Node( {
-    children: [ nucleusSpaceNode, atomSpaceNode ]
-  } );
-};
+}
 
 rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );
 export default RutherfordAtomScreenView;

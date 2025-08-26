@@ -53,13 +53,6 @@ type SelfOptions = {
 
 type RSBaseScreenViewOptions = SelfOptions & ScreenViewOptions;
 
-type CreateSpaceNode = (
-  model: RSBaseModel,
-  showAlphaTraceProperty: Property<boolean>,
-  modelViewTransform: ModelViewTransform2,
-  spaceNodeBounds: Bounds2
-) => Node;
-
 abstract class RSBaseScreenView extends ScreenView {
 
   public readonly showAlphaTraceProperty: Property<boolean>;
@@ -78,6 +71,8 @@ abstract class RSBaseScreenView extends ScreenView {
   
   // Scale info, visibility can be manipulated by subtypes
   protected readonly scaleInfoNode: ScaleInfoNode;
+
+  protected readonly controlPanel: RSControlPanel;
 
   /**
    * @param model
@@ -156,6 +151,8 @@ abstract class RSBaseScreenView extends ScreenView {
 
     this.spaceNode = this.createSpaceNode( model, this.showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
     this.addChild( this.spaceNode );
+
+    this.controlPanel = this.createControlPanel([]);
 
     // dashed lines that connect the tiny box and space
     const dashedLines = new Path( new Shape()
