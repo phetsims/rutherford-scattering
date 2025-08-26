@@ -3,8 +3,6 @@
 /**
  * Factory for creating particle nodes.
  *
- * TODO: All these are creating Node within nodes, seems unnecessary. https://github.com/phetsims/rutherford-scattering/issues/181
- *
  * @author Dave Schmitz (Schmitzware)
  */
 
@@ -42,33 +40,21 @@ const ParticleNodeFactory = {
    * Creates an electron node.
    */
   createElectron(): Node {
-    return new Node( {
-      children: [
-        new ParticleNode( ELECTRON_RADIUS, ELECTRON_COLOR )
-      ]
-    } );
+    return new ParticleNode( ELECTRON_RADIUS, ELECTRON_COLOR );
   },
 
   /**
    * Creates a proton node.
    */
   createProton(): Node {
-    return new Node( {
-      children: [
-        new ParticleNode( PROTON_RADIUS, PROTON_COLOR )
-      ]
-    } );
+    return new ParticleNode( PROTON_RADIUS, PROTON_COLOR );
   },
 
   /**
    * Creates a neutron node.
    */
   createNeutron(): Node {
-    return new Node( {
-      children: [
-        new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR )
-      ]
-    } );
+    return new ParticleNode( NEUTRON_RADIUS, NEUTRON_COLOR );
   },
 
   /**
@@ -89,11 +75,7 @@ const ParticleNodeFactory = {
    * Creates a nucleus node, represented by a small circle.
    */
   createNucleus(): Node {
-    return new Node( {
-      children: [
-        new Circle( NUCLEUS_RADIUS, { fill: RSColors.nucleusColorProperty } )
-      ]
-    } );
+    return new Circle( NUCLEUS_RADIUS, { fill: RSColors.nucleusColorProperty } );
   },
 
   /**
@@ -113,14 +95,10 @@ const ParticleNodeFactory = {
    * Create an icon for the legend describing the particle trace, represented as an arrow
    */
   createParticleTrace(): Node {
-    return new Node( {
-      children: [
-        new ArrowNode( 0, 0, 20, 0, {
-          fill: PARTICLE_COLOR,
-          tailWidth: 2,
-          headHeight: 10
-        } )
-      ]
+    return new ArrowNode( 0, 0, 20, 0, {
+      fill: PARTICLE_COLOR,
+      tailWidth: 2,
+      headHeight: 10
     } );
   },
 
@@ -142,22 +120,14 @@ const ParticleNodeFactory = {
    * Creates an alpha particle node, represented by a small circle.
    */
   createParticleAlpha(): Node {
-    return new Node( {
-      children: [
-        new Circle( PARTICLE_RADIUS, { fill: PARTICLE_COLOR } )
-      ]
-    } );
+    return new Circle( PARTICLE_RADIUS, { fill: PARTICLE_COLOR } );
   },
 
   /**
    * Creates a plum pudding image.
    */
   createPlumPuddingIcon(): Node {
-    return new Node( {
-      children: [
-        new Image( plumPuddingIcon_png, { scale: 0.06 } )
-      ]
-    } );
+    return new Image( plumPuddingIcon_png, { scale: 0.06 } );
   }
 
 };
