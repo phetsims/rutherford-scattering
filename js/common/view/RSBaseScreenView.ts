@@ -60,7 +60,7 @@ type CreateSpaceNode = (
   spaceNodeBounds: Bounds2
 ) => Node;
 
-class RSBaseScreenView extends ScreenView {
+abstract class RSBaseScreenView extends ScreenView {
 
   public readonly showAlphaTraceProperty: Property<boolean>;
   
@@ -84,7 +84,7 @@ class RSBaseScreenView extends ScreenView {
    * @param scaleString
    * @param createSpaceNode
    */
-  public constructor( model: RSBaseModel, scaleString: string, createSpaceNode: CreateSpaceNode, providedOptions?: RSBaseScreenViewOptions ) {
+  public constructor( model: RSBaseModel, scaleString: string, providedOptions?: RSBaseScreenViewOptions ) {
 
     const options = optionize<RSBaseScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
       includeElectronLegend: true, // should the particle legend include an entry for the electron?
@@ -154,7 +154,7 @@ class RSBaseScreenView extends ScreenView {
       spaceNodeY + RSConstants.SPACE_NODE_HEIGHT );
     const modelViewTransform = ModelViewTransform2.createRectangleInvertedYMapping( model.bounds, spaceNodeBounds );
 
-    this.spaceNode = createSpaceNode( model, this.showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
+    this.spaceNode = this.createSpaceNode( model, this.showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
     this.addChild( this.spaceNode );
 
     // dashed lines that connect the tiny box and space
@@ -223,6 +223,13 @@ class RSBaseScreenView extends ScreenView {
       left: this.spaceNode.right + RSConstants.PANEL_SPACE_MARGIN
     } );
   }
+
+  protected abstract createSpaceNode(
+    model: RSBaseModel,
+    showAlphaTraceProperty: Property<boolean>,
+    modelViewTransform: ModelViewTransform2,
+    canvasBounds: Bounds2
+  ): Node;
 }
 
 rutherfordScattering.register( 'RSBaseScreenView', RSBaseScreenView );

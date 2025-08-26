@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Builds the main Plum Pudding sim screen
  *
@@ -32,11 +29,13 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
     const scaleString = StringUtils.format( pattern0AtomicScaleString, '3.0 x 10<sup>-10</sup>' );
 
-    super( model, scaleString, createSpaceNode, {
+    super( model, scaleString, {
       includePlumPuddingLegend: true
     } );
 
     // create the new control panel
+    // TODO: Fix this https://github.com/phetsims/rutherford-scattering/issues/181
+    // @ts-expect-error @typescript-eslint/prefer-ts-expect-error
     const propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent( model.userInteractionProperty,
       model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
     const legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
@@ -67,29 +66,29 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
       this.pdomControlAreaNode.setPDOMOrder( newOrder );
     }
   }
+
+
+  /**
+   * Create the node in which atoms and alpha particles are rendered.
+   */
+  public override createSpaceNode = (
+    model: PlumPuddingAtomModel,
+    showAlphaTraceProperty: Property<boolean>,
+    modelViewTransform: ModelViewTransform2,
+    canvasBounds: Bounds2
+  ): Node => {
+    const plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
+      canvasBounds: canvasBounds
+    } );
+
+    // redraw the space node on model step
+    model.addStepListener( () => {
+      plumPuddingSpaceNode.invalidatePaint();
+    } );
+
+    return plumPuddingSpaceNode;
+  };
 }
-
-/**
- * Create the node in which atoms and alpha particles are rendered.
- * TODO: This whole thing is a mess and should be done better https://github.com/phetsims/rutherford-scattering/issues/181
- */
-const createSpaceNode = (
-  model: PlumPuddingAtomModel,
-  showAlphaTraceProperty: Property<boolean>,
-  modelViewTransform: ModelViewTransform2,
-  canvasBounds: Bounds2
-): Node => {
-  const plumPuddingSpaceNode = new PlumPuddingSpaceNode( model, showAlphaTraceProperty, modelViewTransform, {
-    canvasBounds: canvasBounds
-  } );
-
-  // redraw the space node on model step
-  model.addStepListener( () => {
-    plumPuddingSpaceNode.invalidatePaint();
-  } );
-
-  return plumPuddingSpaceNode;
-};
 
 rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
 export default PlumPuddingAtomScreenView;
