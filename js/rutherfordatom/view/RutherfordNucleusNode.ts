@@ -1,8 +1,5 @@
 // Copyright 2016-2025, University of Colorado Boulder
 
-/* eslint-disable */
-// @ts-nocheck
-
 /**
  * Visual representation of a Rutherford atom
  *
@@ -12,6 +9,7 @@
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import CanvasNode, { CanvasNodeOptions } from '../../../../scenery/js/nodes/CanvasNode.js';
 import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
@@ -27,20 +25,87 @@ const MIN_PARTICLE_COUNT = RSConstants.MIN_PROTON_COUNT + RSConstants.MIN_NEUTRO
 const MAX_PARTICLE_COUNT = RSConstants.MAX_PROTON_COUNT + RSConstants.MAX_NEUTRON_COUNT;
 const PARTICLE_COUNT_EXP = 0.333;
 
-class RutherfordNucleusNode extends CanvasNode {
+/** Intermediate abstract class for nucleus canvas nodes, so they share the paintNucleusIcon method */
+abstract class NucleusCanvasNode extends CanvasNode {
+
+  public neutronImage: HTMLImageElement | null = null;
+  public protonImage: HTMLImageElement | null = null;
+
+  /**
+   * Paint a nucleus icon with canvas.  A 'render method' is used to determine the style of rendering.
+   * render options are 'canvasArc' and 'canvasImage'.  'canvasArc' is a slower option, but has better
+   * resolution, and is good for icons.  'canvasImage' is faster and is good for dynamic elements that
+   * need to change frequenly, but it tends to have poor resolution at larger scales.
+   */
+  protected paintNucleusIcon( nucleus: RutherfordNucleus, nucleusBounds: Bounds2, context: CanvasRenderingContext2D, render: string ): void {
+    const protons = nucleus.protons.slice();
+    const neutrons = nucleus.neutrons.slice();
+    const nucleons = protons.concat( neutrons );
+
+    // get the number of layers in the particle
+    let zLayer = 0;
+    nucleons.forEach( nucleon => {
+      if ( nucleon.zLayerProperty.get() > zLayer ) {
+        zLayer = nucleon.zLayerProperty.get();
+      }
+    } );
+
+    // add the layers, starting from the largest which is in the back
+    for ( let i = zLayer; i >= 0; i-- ) {
+      nucleons.forEach( nucleon => {
+        if ( nucleon.zLayerProperty.get() === i ) {
+          let xN = nucleon.positionProperty.get().x;
+          let yN = nucleon.positionProperty.get().y;
+
+          if ( render === 'canvasArc' ) {
+            // drawing with arcs is a little slower, but the result is less pixilated, so
+            // this method is good for drawing icons
+
+            // if using canvas arcs to render the nucleus, offset by center of bounds
+            xN += nucleusBounds.centerX;
+            yN += nucleusBounds.centerY;
+            if ( nucleon.type === 'neutron' ) {
+              ParticleNodeFactory.drawNeutronWithCanvas( xN, yN, context );
+            }
+            else {
+              ParticleNodeFactory.drawProtonWithCanvas( xN, yN, context );
+            }
+          }
+          else if ( render === 'canvasImage' ) {
+            // drawing with image is a bit faster but the result can be pixilated when scaled, so this
+            // should be used when rendering a nucleus that should change frequently and rapidly
+
+            affirm( this.neutronImage, 'neutron image not loaded' );
+            affirm( this.protonImage, 'proton image not loaded' );
+
+            // if drawing with images, offset by bounds of the image
+            xN += ( this.center.x - this.neutronImage.width / 2 );
+            yN += ( this.center.y - this.neutronImage.height / 2 );
+
+            if ( nucleon.type === 'neutron' ) {
+              context.drawImage( this.neutronImage, xN, yN, this.neutronImage.width, this.neutronImage.height );
+            }
+            else {
+              context.drawImage( this.protonImage, xN, yN, this.protonImage.width, this.protonImage.height );
+            }
+          }
+        }
+      } );
+    }
+  }
+}
+
+class RutherfordNucleusNode extends NucleusCanvasNode {
 
   public readonly userInteractionProperty: TReadOnlyProperty<boolean>;
   public readonly rutherfordNucleus: RutherfordNucleus;
-  public renderAtomOutline: boolean = false;
+  public renderAtomOutline = false;
   public image: HTMLImageElement | null = null;
-  public protonImage: HTMLImageElement | null = null;
-  public neutronImage: HTMLImageElement | null = null;
   public radius: number = MIN_NUCLEUS_RADIUS;
   public numberOfProtons: number = RSConstants.MIN_PROTON_COUNT;
   public numberOfNeutrons: number = RSConstants.MIN_NEUTRON_COUNT;
-  public isDirty: boolean = false; // accessed from outside, so public
-  public timeSinceDirty: number = 0; // accessed from outside, so public
-  public readonly boundPaintNucleus: ( context: CanvasRenderingContext2D ) => void;
+  public isDirty = false; // accessed from outside, so public
+  public timeSinceDirty = 0; // accessed from outside, so public
   public readonly disposeRutherfordNucleusNode: () => void;
 
   /**
@@ -85,7 +150,7 @@ class RutherfordNucleusNode extends CanvasNode {
     } );
 
     // update atom image when proton count changes
-    const protonCountListener = propertyValue => {
+    const protonCountListener = ( propertyValue: number ) => {
       this.numberOfProtons = propertyValue;
       this.renderAtomOutline = this.userInteractionProperty.value;  // Only render the outline when interacting
       this.updateAtomImage();
@@ -94,7 +159,7 @@ class RutherfordNucleusNode extends CanvasNode {
     protonCountProperty.link( protonCountListener );
 
     // update atom image when neutron count changes
-    const neutronCountListener = propertyValue => {
+    const neutronCountListener = ( propertyValue: number ) => {
       this.numberOfNeutrons = propertyValue;
       this.renderAtomOutline = this.userInteractionProperty.value; // Only render the outline when interacting
       this.updateAtomImage();
@@ -103,7 +168,7 @@ class RutherfordNucleusNode extends CanvasNode {
     neutronCountProperty.link( neutronCountListener );
 
     // update atom image when user interaction stops
-    const userInteractionListener = userInteraction => {
+    const userInteractionListener = () => {
       if ( this.renderAtomOutline ) {
         this.renderAtomOutline = false;
         this.updateAtomImage();
@@ -111,8 +176,6 @@ class RutherfordNucleusNode extends CanvasNode {
       }
     };
     userInteractionProperty.link( userInteractionListener );
-
-    this.boundPaintNucleus = paintNucleusIcon.bind( this );
 
     this.invalidatePaint();
 
@@ -126,7 +189,7 @@ class RutherfordNucleusNode extends CanvasNode {
   /**
    * Make this node eligible for garbage collection
    */
-  public dispose(): void {
+  public override dispose(): void {
     this.disposeRutherfordNucleusNode();
   }
 
@@ -144,8 +207,7 @@ class RutherfordNucleusNode extends CanvasNode {
     this.invalidatePaint();
 
     // generate atom image - asynchronous
-    this.toImage( ( image, x, y ) => {
-      // @public (read-only)
+    this.toImage( ( image: HTMLImageElement ) => {
       this.image = image;
     } );
   }
@@ -153,7 +215,7 @@ class RutherfordNucleusNode extends CanvasNode {
   /**
    * Renders the Rutherford atom either as a simple radius outline or as a detailed proton/neutron atom
    */
-  private paintCanvas( context: CanvasRenderingContext2D ): void {
+  public paintCanvas( context: CanvasRenderingContext2D ): void {
 
     const bounds = this.canvasBounds;
 
@@ -177,7 +239,7 @@ class RutherfordNucleusNode extends CanvasNode {
         return;
       }
 
-      this.boundPaintNucleus( this.rutherfordNucleus, bounds, context, 'canvasImage' );
+      this.paintNucleusIcon( this.rutherfordNucleus, this.canvasBounds, context, 'canvasArc' );
 
       // notify as dirty so that the nucleus gets redrawn
       this.isDirty = true;
@@ -201,7 +263,10 @@ class RutherfordNucleusNode extends CanvasNode {
 
 rutherfordScattering.register( 'RutherfordNucleusNode', RutherfordNucleusNode );
 
-class IconCanvasNode extends CanvasNode {
+class IconCanvasNode extends NucleusCanvasNode {
+
+  private nucleusBounds: Bounds2;
+  private nucleus: RutherfordNucleus;
 
   /**
    * Constructor for an icon representation of the Rutherford Nucleus.  This has no attached listeners,
@@ -222,12 +287,8 @@ class IconCanvasNode extends CanvasNode {
     options.canvasBounds = nucleusBounds;
     super( options );
 
-    // @private
     this.nucleusBounds = nucleusBounds;
     this.nucleus = nucleus;
-
-    // @private - listener to paint the icon, bound to this CanvasNode
-    this.boundPaintNucleusIcon = paintNucleusIcon.bind( this );
 
     this.invalidatePaint();
   }
@@ -235,76 +296,11 @@ class IconCanvasNode extends CanvasNode {
   /**
    * Paint function for the canvas node
    */
-  protected override paintCanvas( context: CanvasRenderingContext2D ): void {
+  public override paintCanvas( context: CanvasRenderingContext2D ): void {
 
     // paint the nucleus with canvas arcs - slower than image, but better resolution for icons
-    this.boundPaintNucleusIcon( this.nucleus, this.canvasBounds, context, 'canvasArc' );
+    this.paintNucleusIcon( this.nucleus, this.canvasBounds, context, 'canvasArc' );
   }
 }
-
-/**
- * Paint a nucleus icon with canvas.  A 'render method' is used to determine the style of rendering.
- * render options are 'canvasArc' and 'canvasImage'.  'canvasArc' is a slower option, but has better
- * resolution, and is good for icons.  'canvasImage' is faster and is good for dynamic elements that
- * need to change frequenly, but it tends to have poor resolution at larger scales.
- *
- * @param  {RutherfordNucleus} nucleus
- * @param  {Bounds2} nucleusBounds description
- * @param  {CanvasRenderingContext2D} context
- * @param  {string} render - 'canvasArc' | 'canvasImage', determines rendering method, see above
- */
-const paintNucleusIcon = function( nucleus, nucleusBounds, context, render ) {
-  const protons = nucleus.protons.slice();
-  const neutrons = nucleus.neutrons.slice();
-  const nucleons = protons.concat( neutrons );
-
-  // get the number of layers in the particle
-  let zLayer = 0;
-  nucleons.forEach( nucleon => {
-    if ( nucleon.zLayerProperty.get() > zLayer ) {
-      zLayer = nucleon.zLayerProperty.get();
-    }
-  } );
-
-  // add the layers, starting from the largest which is in the back
-  for ( let i = zLayer; i >= 0; i-- ) {
-    nucleons.forEach( nucleon => {
-      if ( nucleon.zLayerProperty.get() === i ) {
-        let xN = nucleon.positionProperty.get().x;
-        let yN = nucleon.positionProperty.get().y;
-
-        if ( render === 'canvasArc' ) {
-          // drawing with arcs is a little slower, but the result is less pixilated, so
-          // this method is good for drawing icons
-
-          // if using canvas arcs to render the nucleus, offset by center of bounds
-          xN += nucleusBounds.centerX;
-          yN += nucleusBounds.centerY;
-          if ( nucleon.type === 'neutron' ) {
-            ParticleNodeFactory.drawNeutronWithCanvas( xN, yN, context );
-          }
-          else {
-            ParticleNodeFactory.drawProtonWithCanvas( xN, yN, context );
-          }
-        }
-        else if ( render === 'canvasImage' ) {
-          // drawing with image is a bit faster but the result can be pixilated when scaled, so this
-          // should be used when rendering a nucleus that should change frequently and rapidly
-
-          // if drawing with images, offset by bounds of the image
-          xN += ( this.center.x - this.neutronImage.width / 2 );
-          yN += ( this.center.y - this.neutronImage.height / 2 );
-
-          if ( nucleon.type === 'neutron' ) {
-            context.drawImage( this.neutronImage, xN, yN, this.neutronImage.width, this.neutronImage.height );
-          }
-          else {
-            context.drawImage( this.protonImage, xN, yN, this.protonImage.width, this.protonImage.height );
-          }
-        }
-      }
-    } );
-  }
-};
 
 export default RutherfordNucleusNode;
