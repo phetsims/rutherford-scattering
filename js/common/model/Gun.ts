@@ -24,7 +24,7 @@ class Gun {
   private model: RSBaseModel;
   private dtSinceGunFired: number;
   private correctionFunction: LinearFunction;
-  private dtPerGunFired = 0; // TODO: Is this the proper default? https://github.com/phetsims/rutherford-scattering/issues/181
+  private dtPerGunFired: number;
   public onProperty: Property<boolean>;
 
   public constructor( model: RSBaseModel ) {
@@ -46,6 +46,9 @@ class Gun {
 
     // is the gun on?
     this.onProperty = new Property<boolean>( false );
+
+    const initialSpeed = this.model.alphaParticleEnergyProperty.get();
+    this.dtPerGunFired = ( this.model.bounds.width / initialSpeed ) / MAX_PARTICLES;
   }
 
   public step( dt: number ): void {

@@ -10,7 +10,6 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
 import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
@@ -24,15 +23,11 @@ type SelfOptions = {
 
 type RSControlPanelOptions = SelfOptions & VBoxOptions;
 
-class RSControlPanel extends Node {
-
-  // TODO: THis should be a vbox https://github.com/phetsims/rutherford-scattering/issues/181
+class RSControlPanel extends VBox {
 
   private readonly disposeRSControlPanel: () => void;
 
   public constructor( panels: Array<Panel>, providedOptions?: RSControlPanelOptions ) {
-
-    super();
 
     const options = optionize<RSControlPanelOptions, SelfOptions, VBoxOptions>()( {
       spacing: RSConstants.PANEL_VERTICAL_MARGIN,
@@ -41,15 +36,12 @@ class RSControlPanel extends Node {
       children: panels
     }, providedOptions );
     
-    const vBox = new VBox( options );
-    this.addChild( vBox );
-
-    this.mutate( providedOptions );
+    super( options );
 
     // disposal to prevent memory leak - this is important because a new
     // control panel is created every time the scene or color scheme changes
     this.disposeRSControlPanel = () => {
-      options.children && options.children.forEach( panel => {
+      this.children.forEach( panel => {
         panel.dispose();
       } );
     };
