@@ -40,7 +40,7 @@ class AtomPropertiesPanel extends Panel {
 
   private readonly disposeAtomPropertiesPanel: () => void;
 
-  public constructor( content: AtomPropertiesPanelContent, providedOptions?: AtomPropertiesPanelOptions ) {
+  public constructor( content: Node, providedOptions?: AtomPropertiesPanelOptions ) {
 
     // Add the title of the panel content
     const atomPropertiesText = new Text( atomString, {

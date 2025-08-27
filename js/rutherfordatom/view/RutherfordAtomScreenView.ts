@@ -102,8 +102,6 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       const legendPanel = atomSceneVisible ? new AtomParticleLegendPanel( legendContent, panelOptions ) : new NuclearParticleLegendPanel( legendContent, panelOptions );
       const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
 
-      // TODO: Fix https://github.com/phetsims/rutherford-scattering/issues/181
-      // @ts-expect-error
       const atomPropertiesPanel = new AtomPropertiesPanel( atromPropertiesContentBox, panelOptions );
 
       return [
