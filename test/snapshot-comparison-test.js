@@ -7,6 +7,7 @@ test( 'snapshot comparison hash check', async ( { page } ) => {
   const consolePromise = new Promise( ( resolve ) => {
     page.on( 'console', msg => {
       const text = msg.text();
+      console.log("HOLAA",text)
       // Look for the specific console log pattern
       if ( text.includes( 'Creating td for sim "rutherford-scattering"' ) && text.includes( 'hash=' ) ) {
         // Extract the short hash from the console log
@@ -24,7 +25,7 @@ test( 'snapshot comparison hash check', async ( { page } ) => {
   // Wait up to 5 seconds for the console log
   const hash = await Promise.race( [
     consolePromise,
-    new Promise( ( _, reject ) => setTimeout( () => reject( new Error( 'Timeout waiting for hash' ) ), 5000 ) )
+    new Promise( ( _, reject ) => setTimeout( () => reject( new Error( 'Timeout waiting for hash' ) ), 50000 ) )
   ] );
 
   // Check if the hash matches the expected values

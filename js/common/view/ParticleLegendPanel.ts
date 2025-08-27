@@ -11,7 +11,7 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
-import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -30,15 +30,14 @@ type SelfOptions = {
   itemVerticalSpacing?: number;
 };
 
-type ParticleLegendPanelSelfOptions = SelfOptions & PanelOptions;
-
 type ContentSelfOptions = {
+  minWidth?: number;
   itemVerticalSpacing?: number;
 };
 
-export type ParticleLegendPanelContentOptions = ContentSelfOptions & PanelOptions;
+export type ParticleLegendPanelContentOptions = ContentSelfOptions & VBoxOptions;
 
-export type ParticleLegendPanelOptions = ParticleLegendPanelSelfOptions;
+export type ParticleLegendPanelOptions = SelfOptions & PanelOptions;
 
 class ParticleLegendPanel extends Panel {
 
@@ -121,14 +120,12 @@ class ParticleLegendPanelContent extends VBox {
 
   public constructor( content: Array<Node>, providedOptions?: ParticleLegendPanelContentOptions ) {
 
-    const options = optionize<ParticleLegendPanelContentOptions, ContentSelfOptions, PanelOptions>()( {
+    const options = optionize<ParticleLegendPanelContentOptions, ContentSelfOptions, VBoxOptions>()( {
       xMargin: 5,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
       align: 'left',
-      fill: RSColors.panelColorProperty,
-      stroke: RSColors.panelBorderColorProperty,
       itemVerticalSpacing: RSConstants.PANEL_CHILD_SPACING
     }, providedOptions );
 

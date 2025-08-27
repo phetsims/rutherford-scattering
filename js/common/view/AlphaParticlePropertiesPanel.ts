@@ -13,7 +13,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
-import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
+import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -42,9 +42,11 @@ type SelfOptions = EmptySelfOptions;
 
 type AlphaParticlePropertiesPanelOptions = SelfOptions & PanelOptions;
 
-type ContentSelfOptions = EmptySelfOptions;
+type ContentSelfOptions = {
+  minWidth?: number;
+};
 
-type AlphaParticlePropertiesPanelContentOptions = ContentSelfOptions & PanelOptions;
+type AlphaParticlePropertiesPanelContentOptions = ContentSelfOptions & VBoxOptions;
 
 class AlphaParticlePropertiesPanel extends Panel {
 
@@ -107,21 +109,18 @@ class AlphaParticlePropertiesPanel extends Panel {
 rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
 
 
-// TODO: Extending VBox but using PanelOptions, https://github.com/phetsims/rutherford-scattering/issues/181
 class AlphaParticlePropertiesPanelContent extends VBox {
 
   private disposeContent: () => void;
 
   public constructor( alphaParticleEnergyProperty: Property<number>, showTracesProperty: Property<boolean>, providedOptions?: AlphaParticlePropertiesPanelContentOptions ) {
 
-    const options = optionize<AlphaParticlePropertiesPanelContentOptions, ContentSelfOptions, PanelOptions>()( {
+    const options = optionize<AlphaParticlePropertiesPanelContentOptions, ContentSelfOptions, VBoxOptions>()( {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
       maxWidth: RSConstants.PANEL_MAX_WIDTH,
-      align: 'left',
-      fill: RSColors.panelColorProperty,
-      stroke: RSColors.panelBorderColorProperty
+      align: 'left'
     }, providedOptions );
 
     const energyText = new Text( energyString, {
