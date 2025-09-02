@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(npx tsc:*)"
+    ],
+    "defaultMode": "acceptEdits"
+  }
+}
