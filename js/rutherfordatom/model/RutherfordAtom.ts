@@ -1,4 +1,4 @@
-// Copyright 2016-2022, University of Colorado Boulder
+// Copyright 2016-2025, University of Colorado Boulder
 
 /**
  * Model for the 'Rutherford Atom', responsible for moving alpha particles within its bounds.  For
