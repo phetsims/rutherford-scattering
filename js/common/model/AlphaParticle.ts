@@ -53,7 +53,7 @@ class AlphaParticle {
 
   // angle of rotation of this particle relative to the vertical in space coordinates (Math.PI)
   // used to adjust coordinates of the atomic bounding box for the trajectory algorithm
-  public rotationAngle: number = 0;
+  public rotationAngle = 0;
 
   // same as rotation angle, but prepared as soon as the particle enters the bounding circle
   // of the atom nucleus - applied once particle enters bounding box

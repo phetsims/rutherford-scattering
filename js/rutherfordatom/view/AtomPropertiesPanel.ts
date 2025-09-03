@@ -231,7 +231,7 @@ class AtomPropertiesPanelContent extends VBox {
       },
       // pdom
       accessibleName: neutronsValuePatternString,
-      accessibleHelpText: neutronSliderDescriptionString,
+      accessibleHelpText: neutronSliderDescriptionString
     }, numberControlOptions );
 
     const neutronNumberControl = new NumberControl( numberOfNeutronsString, model.neutronCountProperty, neutronCountRange, neutronNumberControlOptions );
