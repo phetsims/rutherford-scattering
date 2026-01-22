@@ -1,4 +1,4 @@
-// Copyright 2002-2016, University of Colorado Boulder
+// Copyright 2016, University of Colorado Boulder
 
 /**
  * Model for the Rutherford Nucleus.  Has Protons, and neutrons which can change in number.

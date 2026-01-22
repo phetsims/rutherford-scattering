@@ -1,4 +1,4 @@
-// Copyright 2002-2016, University of Colorado Boulder
+// Copyright 2016, University of Colorado Boulder
 
 /**
  * Visual representation of a collection of rutherford atoms.  Electron energy levels are shown around the atoms,
