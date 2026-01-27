@@ -1,0 +1,61 @@
+rutherford-scattering.title: Rutherford Scattering
+rutherfordAtom: Rutherford Atom
+plumPuddingAtom: Plum Pudding Atom
+alphaParticleProperties: Alpha Particle
+energy: Energy
+atom: Atom
+numberOfProtons: Protons
+numberOfNeutrons: Neutrons
+minEnergy: min
+maxEnergy: max
+showTraces: Traces
+alphaParticle: Alpha Particle
+alphaParticles: Alpha Particles
+positiveCharge: Positive Charge
+proton: Proton
+electron: Electron
+neutron: Neutron
+nucleus: Nucleus
+electronEnergyLevel: Electron Energy Level
+alphaParticleTrace: Alpha Particle Trace
+legend: Legend
+pattern.0atomicScale: '{0} m (atomic scale)'
+pattern.0nuclearScale: '{0} m (nuclear scale)'
+a11y:
+  screenSummary: >-
+    On this screen, the Play Area has a source that can stream Alpha particles
+    onto a thin foil. A highly magnified view of the foil is shown in an
+    observation window. Sliders adjust energy of the alpha particles and the
+    number of protons and neutrons comprising the atoms in the foil. The Control
+    Area has radio buttons to toggle between atomic and nuclear scale views,
+    buttons to pause and step incrementally through observations, and a button
+    to reset the sim. Stream alpha particles to begin observations. Look for
+    alpha particles and atom sliders to play, or read on for details about the
+    observation window.
+  observationWindow: Observation Window
+  atomSpaceDescription: >-
+    An atomic scale view of the foil is shown. Portions of five tightly packed
+    atoms are visible, with three nuclei visible in the scene.
+  nucleusSpaceDescription: >-
+    An nuclear scale view of the foil is shown. A single atomic nucleus is
+    visible with a representative number of protons and neutrons.
+  toggleAlphaParticle: Toggle Alpha Particle Stream
+  alphaParticlesHelpText: Start and stop stream of alpha particles.
+  alphaParticleSettings: Alpha Particle Settings
+  energySliderDescription: Adjust the energy of particles in the alpha particle stream
+  energy: Energy
+  traces: Traces
+  traceCheckboxDescription: Observe particles in stream with or without traces
+  atomSettings: Atom Settings
+  protonsValuePattern: Protons
+  protonsPerAtomValuePattern: Protons per Atom { $protons }
+  protonSliderDescription: Adjust number of protons per atom in foil.
+  neutronsValuePattern: Neutrons
+  neutronsPerAtomValuePattern: Neutrons per Atom { $neutrons }
+  neutronSliderDescription: Adjust number of neutrons per atom in foil.
+  atomicScaleView: Atomic Scale View
+  nuclearScaleView: Nuclear Scale View
+  switchScale: Switch Scale
+  switchScaleDescription: Observe experiments at nuclear or atomic scales.
+  otherViewingStreamingOptions: Other/Viewing/Streaming Options
+  otherOptionsDescription: Observe details by pausing continuous stream, or streaming in steps.

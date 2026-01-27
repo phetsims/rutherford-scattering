@@ -109,7 +109,7 @@
       "value": "Protons"
     },
     "protonsPerAtomValuePattern": {
-      "value": "Protons per Atom {protons}"
+      "value": "Protons per Atom { $protons }"
     },
     "protonSliderDescription": {
       "value": "Adjust number of protons per atom in foil."
@@ -118,7 +118,7 @@
       "value": "Neutrons"
     },
     "neutronsPerAtomValuePattern": {
-      "value": "Neutrons per Atom {neutrons}"
+      "value": "Neutrons per Atom { $neutrons }"
     },
     "neutronSliderDescription": {
       "value": "Adjust number of neutrons per atom in foil."
