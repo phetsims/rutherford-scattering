@@ -13,13 +13,13 @@ import required from '../../../../phet-core/js/required.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
 // constants
-const observationWindowStringProperty = RutherfordScatteringStrings.a11y.observationWindowStringProperty;
-const nucleusSpaceDescriptionStringProperty = RutherfordScatteringStrings.a11y.nucleusSpaceDescriptionStringProperty;
+const observationWindowStringProperty = RutherfordScatteringFluent.a11y.observationWindowStringProperty;
+const nucleusSpaceDescriptionStringProperty = RutherfordScatteringFluent.a11y.nucleusSpaceDescriptionStringProperty;
 
 type SelfOptions = EmptySelfOptions;
 

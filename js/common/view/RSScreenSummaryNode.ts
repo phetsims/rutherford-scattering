@@ -7,10 +7,10 @@
 
 import ScreenSummaryContent from '../../../../joist/js/ScreenSummaryContent.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 
 // constants
-const screenSummaryStringProperty = RutherfordScatteringStrings.a11y.screenSummaryStringProperty;
+const screenSummaryStringProperty = RutherfordScatteringFluent.a11y.screenSummaryStringProperty;
 
 class RSScreenSummaryNode extends ScreenSummaryContent {
 

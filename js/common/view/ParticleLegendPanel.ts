@@ -17,11 +17,11 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
-const legendStringProperty = RutherfordScatteringStrings.legendStringProperty;
+const legendStringProperty = RutherfordScatteringFluent.legendStringProperty;
 
 // constants
 const LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;

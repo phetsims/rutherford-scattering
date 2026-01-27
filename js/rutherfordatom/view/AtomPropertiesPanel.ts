@@ -17,20 +17,20 @@ import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 
 // constants
-const atomStringProperty = RutherfordScatteringStrings.atomStringProperty;
-const numberOfNeutronsStringProperty = RutherfordScatteringStrings.numberOfNeutronsStringProperty;
-const numberOfProtonsStringProperty = RutherfordScatteringStrings.numberOfProtonsStringProperty;
-const atomSettingsStringProperty = RutherfordScatteringStrings.a11y.atomSettingsStringProperty;
+const atomStringProperty = RutherfordScatteringFluent.atomStringProperty;
+const numberOfNeutronsStringProperty = RutherfordScatteringFluent.numberOfNeutronsStringProperty;
+const numberOfProtonsStringProperty = RutherfordScatteringFluent.numberOfProtonsStringProperty;
+const atomSettingsStringProperty = RutherfordScatteringFluent.a11y.atomSettingsStringProperty;
 
 //TODO https://github.com/phetsims/rutherford-scattering/issues/178 make these template vars again when working on descriptions
-const protonsValuePatternStringProperty = RutherfordScatteringStrings.a11y.protonsValuePatternStringProperty;
-const protonSliderDescriptionStringProperty = RutherfordScatteringStrings.a11y.protonSliderDescriptionStringProperty;
-const neutronsValuePatternStringProperty = RutherfordScatteringStrings.a11y.neutronsValuePatternStringProperty;
-const neutronSliderDescriptionStringProperty = RutherfordScatteringStrings.a11y.neutronSliderDescriptionStringProperty;
+const protonsValuePatternStringProperty = RutherfordScatteringFluent.a11y.protonsValuePatternStringProperty;
+const protonSliderDescriptionStringProperty = RutherfordScatteringFluent.a11y.protonSliderDescriptionStringProperty;
+const neutronsValuePatternStringProperty = RutherfordScatteringFluent.a11y.neutronsValuePatternStringProperty;
+const neutronSliderDescriptionStringProperty = RutherfordScatteringFluent.a11y.neutronSliderDescriptionStringProperty;
 
 type SelfOptions = EmptySelfOptions;
 

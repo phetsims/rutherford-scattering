@@ -10,15 +10,15 @@
 import optionize from '../../../../phet-core/js/optionize.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import ParticleLegendPanel, { ParticleLegendPanelContentOptions, ParticleLegendPanelOptions } from './ParticleLegendPanel.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
 
-const alphaParticleStringProperty = RutherfordScatteringStrings.alphaParticleStringProperty;
-const electronStringProperty = RutherfordScatteringStrings.electronStringProperty;
-const neutronStringProperty = RutherfordScatteringStrings.neutronStringProperty;
-const positiveChargeStringProperty = RutherfordScatteringStrings.positiveChargeStringProperty;
-const protonStringProperty = RutherfordScatteringStrings.protonStringProperty;
+const alphaParticleStringProperty = RutherfordScatteringFluent.alphaParticleStringProperty;
+const electronStringProperty = RutherfordScatteringFluent.electronStringProperty;
+const neutronStringProperty = RutherfordScatteringFluent.neutronStringProperty;
+const positiveChargeStringProperty = RutherfordScatteringFluent.positiveChargeStringProperty;
+const protonStringProperty = RutherfordScatteringFluent.protonStringProperty;
 
 type SelfOptions = {
   includeElectron?: boolean;

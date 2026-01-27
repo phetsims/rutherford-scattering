@@ -12,7 +12,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import RSColors from '../common/RSColors.js';
 import RSConstants from '../common/RSConstants.js';
 import rutherfordScattering from '../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from './model/RutherfordAtomModel.js';
 import RutherfordAtomScreenView from './view/RutherfordAtomScreenView.js';
 import RutherfordNucleusNode from './view/RutherfordNucleusNode.js';
@@ -28,7 +28,7 @@ class RutherfordAtomScreen extends Screen<RutherfordAtomModel, RutherfordAtomScr
     } );
 
     const options = {
-      name: RutherfordScatteringStrings.rutherfordAtomStringProperty,
+      name: RutherfordScatteringFluent.rutherfordAtomStringProperty,
       backgroundColorProperty: RSColors.backgroundColorProperty,
       homeScreenIcon: homeScreenIcon,
       tandem: Tandem.OPT_OUT

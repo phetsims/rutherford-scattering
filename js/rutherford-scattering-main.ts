@@ -13,10 +13,10 @@ import HighlightOverlay from '../../scenery/js/overlays/HighlightOverlay.js';
 import RSColors from './common/RSColors.js';
 import PlumPuddingAtomScreen from './plumpuddingatom/PlumPuddingAtomScreen.js';
 import RutherfordAtomScreen from './rutherfordatom/RutherfordAtomScreen.js';
-import RutherfordScatteringStrings from './RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from './RutherfordScatteringFluent.js';
 
 
-const rutherfordScatteringTitleStringProperty = RutherfordScatteringStrings[ 'rutherford-scattering' ].titleStringProperty;
+const rutherfordScatteringTitleStringProperty = RutherfordScatteringFluent[ 'rutherford-scattering' ].titleStringProperty;
 
 const simOptions: SimOptions = {
   credits: {

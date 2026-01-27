@@ -24,7 +24,7 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RSBaseModel from '../model/RSBaseModel.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
@@ -36,12 +36,12 @@ import TargetMaterialNode from './TargetMaterialNode.js';
 import TinyBox from './TinyBox.js';
 
 // constants
-const alphaParticlesStringProperty = RutherfordScatteringStrings.alphaParticlesStringProperty;
-const toggleAlphaParticleStringProperty = RutherfordScatteringStrings.a11y.toggleAlphaParticleStringProperty;
-const alphaParticlesHelpTextStringProperty = RutherfordScatteringStrings.a11y.alphaParticlesHelpTextStringProperty;
+const alphaParticlesStringProperty = RutherfordScatteringFluent.alphaParticlesStringProperty;
+const toggleAlphaParticleStringProperty = RutherfordScatteringFluent.a11y.toggleAlphaParticleStringProperty;
+const alphaParticlesHelpTextStringProperty = RutherfordScatteringFluent.a11y.alphaParticlesHelpTextStringProperty;
 
-const otherViewingStreamingOptionsStringProperty = RutherfordScatteringStrings.a11y.otherViewingStreamingOptionsStringProperty;
-const otherOptionsDescriptionStringProperty = RutherfordScatteringStrings.a11y.otherOptionsDescriptionStringProperty;
+const otherViewingStreamingOptionsStringProperty = RutherfordScatteringFluent.a11y.otherViewingStreamingOptionsStringProperty;
+const otherOptionsDescriptionStringProperty = RutherfordScatteringFluent.a11y.otherOptionsDescriptionStringProperty;
 
 const GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
 

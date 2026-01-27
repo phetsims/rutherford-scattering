@@ -29,7 +29,7 @@ import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import ScaleInfoNode from '../../common/view/ScaleInfoNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import AtomParticleLegendPanel from './AtomParticleLegendPanel.js';
 import AtomPropertiesPanel from './AtomPropertiesPanel.js';
@@ -38,12 +38,12 @@ import NucleusSpaceNode from './NucleusSpaceNode.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
 // constants
-const pattern0AtomicScaleString = RutherfordScatteringStrings.pattern[ '0atomicScale' ];
-const pattern0NuclearScaleString = RutherfordScatteringStrings.pattern[ '0nuclearScale' ];
-const switchScaleStringProperty = RutherfordScatteringStrings.a11y.switchScaleStringProperty;
-const switchScaleDescriptionStringProperty = RutherfordScatteringStrings.a11y.switchScaleDescriptionStringProperty;
-const nuclearScaleViewStringProperty = RutherfordScatteringStrings.a11y.nuclearScaleViewStringProperty;
-const atomicScaleViewStringProperty = RutherfordScatteringStrings.a11y.atomicScaleViewStringProperty;
+const pattern0AtomicScaleStringProperty = RutherfordScatteringFluent.pattern[ '0atomicScaleStringProperty' ];
+const pattern0NuclearScaleStringProperty = RutherfordScatteringFluent.pattern[ '0nuclearScaleStringProperty' ];
+const switchScaleStringProperty = RutherfordScatteringFluent.a11y.switchScaleStringProperty;
+const switchScaleDescriptionStringProperty = RutherfordScatteringFluent.a11y.switchScaleDescriptionStringProperty;
+const nuclearScaleViewStringProperty = RutherfordScatteringFluent.a11y.nuclearScaleViewStringProperty;
+const atomicScaleViewStringProperty = RutherfordScatteringFluent.a11y.atomicScaleViewStringProperty;
 
 class RutherfordAtomScreenView extends RSBaseScreenView {
 
@@ -51,8 +51,9 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
 
   public constructor( model: RutherfordAtomModel ) {
 
-    const nucleusScaleString = StringUtils.format( pattern0NuclearScaleString, '1.5 x 10<sup>-13</sup>' );
-    const atomicScaleString = StringUtils.format( pattern0AtomicScaleString, '6.0 x 10<sup>-10</sup>' );
+    // TODO: What to do about this one? https://github.com/phetsims/rutherford-scattering/issues/179
+    const nucleusScaleString = StringUtils.format( pattern0NuclearScaleStringProperty.value, '1.5 x 10<sup>-13</sup>' );
+    const atomicScaleString = StringUtils.format( pattern0AtomicScaleStringProperty.value, '6.0 x 10<sup>-10</sup>' );
 
     super( model, nucleusScaleString, {
       includeElectronLegend: false

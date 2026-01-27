@@ -13,7 +13,7 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import plumPuddingAtomScreenIcon_png from '../../images/plumPuddingAtomScreenIcon_png.js';
 import RSColors from '../common/RSColors.js';
 import rutherfordScattering from '../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../RutherfordScatteringFluent.js';
 import PlumPuddingAtomModel from './model/PlumPuddingAtomModel.js';
 import PlumPuddingAtomScreenView from './view/PlumPuddingAtomScreenView.js';
 
@@ -21,7 +21,7 @@ class PlumPuddingAtomScreen extends Screen<PlumPuddingAtomModel, PlumPuddingAtom
   public constructor() {
 
     const options: ScreenOptions = {
-      name: RutherfordScatteringStrings.plumPuddingAtomStringProperty,
+      name: RutherfordScatteringFluent.plumPuddingAtomStringProperty,
       backgroundColorProperty: RSColors.backgroundColorProperty,
       homeScreenIcon: new ScreenIcon( new Image( plumPuddingAtomScreenIcon_png ), {
         maxIconWidthProportion: 1,

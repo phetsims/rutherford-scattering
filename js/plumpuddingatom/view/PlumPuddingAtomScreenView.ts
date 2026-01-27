@@ -17,17 +17,18 @@ import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendP
 import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingSpaceNode from './PlumPuddingSpaceNode.js';
 
-const pattern0AtomicScaleString = RutherfordScatteringStrings.pattern[ '0atomicScale' ];
+const pattern0AtomicScaleStringProperty = RutherfordScatteringFluent.pattern[ '0atomicScaleStringProperty' ];
 
 class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
   public constructor( model: PlumPuddingAtomModel ) {
 
-    const scaleString = StringUtils.format( pattern0AtomicScaleString, '3.0 x 10<sup>-10</sup>' );
+    // TODO: What to do about this one? https://github.com/phetsims/rutherford-scattering/issues/179
+    const scaleString = StringUtils.format( pattern0AtomicScaleStringProperty.value, '3.0 x 10<sup>-10</sup>' );
 
     super( model, scaleString, {
       includePlumPuddingLegend: true

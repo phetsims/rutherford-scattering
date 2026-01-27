@@ -23,20 +23,20 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
-import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
+import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
 // constants
-const alphaParticlePropertiesStringProperty = RutherfordScatteringStrings.alphaParticlePropertiesStringProperty;
-const energyStringProperty = RutherfordScatteringStrings.energyStringProperty;
-const maxEnergyStringProperty = RutherfordScatteringStrings.maxEnergyStringProperty;
-const minEnergyStringProperty = RutherfordScatteringStrings.minEnergyStringProperty;
-const showTracesStringProperty = RutherfordScatteringStrings.showTracesStringProperty;
-const alphaParticleSettingsStringProperty = RutherfordScatteringStrings.a11y.alphaParticleSettingsStringProperty;
-const energySliderDescriptionStringProperty = RutherfordScatteringStrings.a11y.energySliderDescriptionStringProperty;
-const tracesStringProperty = RutherfordScatteringStrings.a11y.tracesStringProperty;
-const traceCheckboxDescriptionStringProperty = RutherfordScatteringStrings.a11y.traceCheckboxDescriptionStringProperty;
+const alphaParticlePropertiesStringProperty = RutherfordScatteringFluent.alphaParticlePropertiesStringProperty;
+const energyStringProperty = RutherfordScatteringFluent.energyStringProperty;
+const maxEnergyStringProperty = RutherfordScatteringFluent.maxEnergyStringProperty;
+const minEnergyStringProperty = RutherfordScatteringFluent.minEnergyStringProperty;
+const showTracesStringProperty = RutherfordScatteringFluent.showTracesStringProperty;
+const alphaParticleSettingsStringProperty = RutherfordScatteringFluent.a11y.alphaParticleSettingsStringProperty;
+const energySliderDescriptionStringProperty = RutherfordScatteringFluent.a11y.energySliderDescriptionStringProperty;
+const tracesStringProperty = RutherfordScatteringFluent.a11y.tracesStringProperty;
+const traceCheckboxDescriptionStringProperty = RutherfordScatteringFluent.a11y.traceCheckboxDescriptionStringProperty;
 
 type SelfOptions = EmptySelfOptions;
 
