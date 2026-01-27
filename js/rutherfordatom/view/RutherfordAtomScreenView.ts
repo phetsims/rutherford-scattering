@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -39,8 +40,8 @@ import NucleusSpaceNode from './NucleusSpaceNode.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
 // constants
-const pattern0AtomicScaleStringProperty = RutherfordScatteringFluent.pattern[ '0atomicScaleStringProperty' ];
-const pattern0NuclearScaleStringProperty = RutherfordScatteringFluent.pattern[ '0nuclearScaleStringProperty' ];
+const atomicScalePatternStringProperty = RutherfordScatteringFluent.pattern.atomicScaleStringProperty;
+const nuclearScalePatternStringProperty = RutherfordScatteringFluent.pattern.nuclearScaleStringProperty;
 const switchScaleStringProperty = RutherfordScatteringFluent.a11y.switchScaleStringProperty;
 const switchScaleDescriptionStringProperty = RutherfordScatteringFluent.a11y.switchScaleDescriptionStringProperty;
 const nuclearScaleViewStringProperty = RutherfordScatteringFluent.a11y.nuclearScaleViewStringProperty;
@@ -52,16 +53,23 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
 
   public constructor( model: RutherfordAtomModel ) {
 
-    // TODO: What to do about this one? https://github.com/phetsims/rutherford-scattering/issues/179
-    const nucleusScaleString = StringUtils.format( pattern0NuclearScaleStringProperty.value, '1.5 x 10<sup>-13</sup>' );
-    const atomicScaleString = StringUtils.format( pattern0AtomicScaleStringProperty.value, '6.0 x 10<sup>-10</sup>' );
+    const nucleusScaleStringProperty = new DerivedStringProperty( [ nuclearScalePatternStringProperty ], ( pattern: string ) => {
+      return StringUtils.fillIn( pattern, {
+        value: '1.5 x 10<sup>-13</sup>'
+      } );
+    } );
+    const atomicScaleStringProperty = new DerivedStringProperty( [ atomicScalePatternStringProperty ], ( pattern: string ) => {
+      return StringUtils.fillIn( pattern, {
+        value: '6.0 x 10<sup>-10</sup>'
+      } );
+    } );
 
-    super( model, nucleusScaleString, {
+    super( model, nucleusScaleStringProperty, {
       includeElectronLegend: false
     } );
 
     // scale info for the 'atom' scene, only visible when atom scene is selected
-    const atomicScaleInfoNode = new ScaleInfoNode( atomicScaleString, this.spaceNode.getWidth(), {
+    const atomicScaleInfoNode = new ScaleInfoNode( atomicScaleStringProperty, this.spaceNode.getWidth(), {
       center: this.scaleInfoNode.center
     } );
     this.addChild( atomicScaleInfoNode );

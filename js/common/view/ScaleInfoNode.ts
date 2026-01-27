@@ -7,6 +7,7 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
@@ -31,7 +32,7 @@ type ScaleInfoNodeOptions = SelfOptions & NodeOptions;
 
 class ScaleInfoNode extends Node {
 
-  public constructor( label: string, width: number, providedOptions?: ScaleInfoNodeOptions ) {
+  public constructor( label: TReadOnlyProperty<string>, width: number, providedOptions?: ScaleInfoNodeOptions ) {
 
     const options = optionize<ScaleInfoNodeOptions, SelfOptions, NodeOptions>()( {
       font: RSConstants.SCALE_TITLE_FONT
@@ -41,8 +42,11 @@ class ScaleInfoNode extends Node {
     const labelText = new RichText( label, {
       font: options.font,
       fill: RSColors.panelLabelColorProperty,
-      maxWidth: 0.9 * width
+      maxWidth: RSConstants.TEXT_MAX_WIDTH * 2
     } );
+
+    // Set the max width to the initial width to avoid redrawing the arrows
+    labelText.maxWidth = labelText.width;
 
     // left arrow
     const arrowWidth = ( width - labelText.getWidth() ) / 2;

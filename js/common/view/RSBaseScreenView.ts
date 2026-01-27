@@ -8,6 +8,7 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.js';
@@ -78,7 +79,7 @@ abstract class RSBaseScreenView extends ScreenView {
    * @param model
    * @param scaleString
    */
-  public constructor( model: RSBaseModel, scaleString: string, providedOptions?: RSBaseScreenViewOptions ) {
+  public constructor( model: RSBaseModel, scaleString: TReadOnlyProperty<string>, providedOptions?: RSBaseScreenViewOptions ) {
 
     const options = optionize<RSBaseScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
       includeElectronLegend: true, // should the particle legend include an entry for the electron?

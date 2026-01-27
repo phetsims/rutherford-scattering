@@ -62,11 +62,11 @@
   "legend": {
     "value": "Legend"
   },
-  "pattern.0atomicScale": {
-    "value": "{0} m (atomic scale)"
+  "pattern.atomicScale": {
+    "value": "{{value}} m (atomic scale)"
   },
-  "pattern.0nuclearScale": {
-    "value": "{0} m (nuclear scale)"
+  "pattern.nuclearScale": {
+    "value": "{{value}} m (nuclear scale)"
   },
   "a11y": {
     "screenSummary": {

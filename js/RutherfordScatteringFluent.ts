@@ -108,8 +108,8 @@ const RutherfordScatteringFluent = {
   alphaParticleTraceStringProperty: _.get( RutherfordScatteringStrings, 'alphaParticleTraceStringProperty' ),
   legendStringProperty: _.get( RutherfordScatteringStrings, 'legendStringProperty' ),
   pattern: {
-    "0atomicScaleStringProperty": _.get( RutherfordScatteringStrings, 'pattern.0atomicScaleStringProperty' ),
-    "0nuclearScaleStringProperty": _.get( RutherfordScatteringStrings, 'pattern.0nuclearScaleStringProperty' )
+    atomicScaleStringProperty: _.get( RutherfordScatteringStrings, 'pattern.atomicScaleStringProperty' ),
+    nuclearScaleStringProperty: _.get( RutherfordScatteringStrings, 'pattern.nuclearScaleStringProperty' )
   },
   a11y: {
     screenSummaryStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary', _.get( RutherfordScatteringStrings, 'a11y.screenSummaryStringProperty' ) ),

@@ -6,6 +6,7 @@
  * @author Dave Schmitz (Schmitzware)
  */
 
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -21,16 +22,19 @@ import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingSpaceNode from './PlumPuddingSpaceNode.js';
 
-const pattern0AtomicScaleStringProperty = RutherfordScatteringFluent.pattern[ '0atomicScaleStringProperty' ];
+const atomicScalePatternStringProperty = RutherfordScatteringFluent.pattern.atomicScaleStringProperty;
 
 class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
   public constructor( model: PlumPuddingAtomModel ) {
 
-    // TODO: What to do about this one? https://github.com/phetsims/rutherford-scattering/issues/179
-    const scaleString = StringUtils.format( pattern0AtomicScaleStringProperty.value, '3.0 x 10<sup>-10</sup>' );
+    const atomicScaleStringProperty = new DerivedStringProperty( [ atomicScalePatternStringProperty ], ( pattern: string ) => {
+      return StringUtils.fillIn( pattern, {
+        value: '3.0 x 10<sup>-10</sup>'
+      } );
+    } );
 
-    super( model, scaleString, {
+    super( model, atomicScaleStringProperty, {
       includePlumPuddingLegend: true
     } );
 

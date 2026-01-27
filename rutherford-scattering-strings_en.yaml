@@ -19,8 +19,8 @@ nucleus: Nucleus
 electronEnergyLevel: Electron Energy Level
 alphaParticleTrace: Alpha Particle Trace
 legend: Legend
-pattern.0atomicScale: '{0} m (atomic scale)'
-pattern.0nuclearScale: '{0} m (nuclear scale)'
+pattern.atomicScale: '{{value}} m (atomic scale)'
+pattern.nuclearScale: '{{value}} m (nuclear scale)'
 a11y:
   screenSummary: >-
     On this screen, the Play Area has a source that can stream Alpha particles
