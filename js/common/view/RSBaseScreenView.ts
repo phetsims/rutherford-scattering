@@ -116,7 +116,7 @@ abstract class RSBaseScreenView extends ScreenView {
       top: this.gunNode.bottom + 15,
       font: new PhetFont( 15 ),
       fill: RSColors.panelLabelColorProperty,
-      maxWidth: 210
+      maxWidth: RSConstants.TEXT_MAX_WIDTH
     } );
     this.addChild( alphaParticlesText );
 

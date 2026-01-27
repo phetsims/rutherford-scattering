@@ -22,6 +22,7 @@ import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularR
 import atom_png from '../../../images/atom_png.js';
 import atomProjector_png from '../../../images/atomProjector_png.js';
 import RSColors from '../../common/RSColors.js';
+import RSConstants from '../../common/RSConstants.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
@@ -250,7 +251,8 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       const errorText = new Text( '', {
         font: new PhetFont( 18 ),
         fill: 'red',
-        leftBottom: atomSpaceNode.leftTop
+        leftBottom: atomSpaceNode.leftTop,
+        maxWidth: RSConstants.TEXT_MAX_WIDTH
       } );
       atomSpaceNode.addChild( errorText );
 

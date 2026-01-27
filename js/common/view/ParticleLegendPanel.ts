@@ -51,7 +51,7 @@ class ParticleLegendPanel extends Panel {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelTitleColorProperty,
-      maxWidth: 225
+      maxWidth: RSConstants.TEXT_MAX_WIDTH
     } );
 
     // title with content, aligned
@@ -99,7 +99,7 @@ const createParticleRow = ( particleNode: Node, titleString: TReadOnlyProperty<s
   const titleText = new Text( titleString, {
     font: RSConstants.PANEL_PROPERTY_FONT,
     fill: RSColors.panelLabelColorProperty,
-    maxWidth: 175
+    maxWidth: RSConstants.TEXT_MAX_WIDTH
   } );
   const hStrut2 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
 

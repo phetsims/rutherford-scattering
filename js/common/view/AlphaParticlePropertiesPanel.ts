@@ -59,7 +59,7 @@ class AlphaParticlePropertiesPanel extends Panel {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelTitleColorProperty,
-      maxWidth: 215
+      maxWidth: RSConstants.TEXT_MAX_WIDTH
     } );
 
     const contentVBox = new VBox( {
@@ -119,7 +119,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       xMargin: 15,
       yMargin: 8,
       minWidth: RSConstants.PANEL_MIN_WIDTH,
-      maxWidth: RSConstants.PANEL_MAX_WIDTH,
+      maxWidth: RSConstants.TEXT_MAX_WIDTH,
       align: 'left'
     }, providedOptions );
 
@@ -127,7 +127,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelLabelColorProperty,
-      maxWidth: 210
+      maxWidth: options.maxWidth
     } );
     const minEnergyText = new Text( minEnergyStringProperty, {
       font: RSConstants.PANEL_TICK_FONT,
@@ -187,7 +187,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelLabelColorProperty,
-      maxWidth: 180
+      maxWidth: RSConstants.TEXT_MAX_WIDTH
     } );
     const showTraceCheckbox = new Checkbox( showTracesProperty, showTraceText, {
       checkboxColor: RSColors.panelLabelColorProperty,
