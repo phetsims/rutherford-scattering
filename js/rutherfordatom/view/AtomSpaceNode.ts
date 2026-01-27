@@ -21,8 +21,8 @@ import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import AtomCollectionNode from './AtomCollectionNode.js';
 
 // constants
-const observationWindowString = RutherfordScatteringStrings.a11y.observationWindow;
-const atomSpaceDescriptionString = RutherfordScatteringStrings.a11y.atomSpaceDescription;
+const observationWindowStringProperty = RutherfordScatteringStrings.a11y.observationWindowStringProperty;
+const atomSpaceDescriptionStringProperty = RutherfordScatteringStrings.a11y.atomSpaceDescriptionStringProperty;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -45,8 +45,8 @@ class AtomSpaceNode extends ParticleSpaceNode {
       particleStyle: 'particle',
 
       // pdom
-      accessibleHeading: observationWindowString,
-      descriptionContent: atomSpaceDescriptionString,
+      accessibleHeading: observationWindowStringProperty,
+      descriptionContent: atomSpaceDescriptionStringProperty,
       appendDescription: true
     }, providedOptions );
 

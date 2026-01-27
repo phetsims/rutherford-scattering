@@ -21,16 +21,16 @@ import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 
 // constants
-const atomString = RutherfordScatteringStrings.atom;
-const numberOfNeutronsString = RutherfordScatteringStrings.numberOfNeutrons;
-const numberOfProtonsString = RutherfordScatteringStrings.numberOfProtons;
-const atomSettingsString = RutherfordScatteringStrings.a11y.atomSettings;
+const atomStringProperty = RutherfordScatteringStrings.atomStringProperty;
+const numberOfNeutronsStringProperty = RutherfordScatteringStrings.numberOfNeutronsStringProperty;
+const numberOfProtonsStringProperty = RutherfordScatteringStrings.numberOfProtonsStringProperty;
+const atomSettingsStringProperty = RutherfordScatteringStrings.a11y.atomSettingsStringProperty;
 
 //TODO https://github.com/phetsims/rutherford-scattering/issues/178 make these template vars again when working on descriptions
-const protonsValuePatternString = RutherfordScatteringStrings.a11y.protonsValuePattern;
-const protonSliderDescriptionString = RutherfordScatteringStrings.a11y.protonSliderDescription;
-const neutronsValuePatternString = RutherfordScatteringStrings.a11y.neutronsValuePattern;
-const neutronSliderDescriptionString = RutherfordScatteringStrings.a11y.neutronSliderDescription;
+const protonsValuePatternStringProperty = RutherfordScatteringStrings.a11y.protonsValuePatternStringProperty;
+const protonSliderDescriptionStringProperty = RutherfordScatteringStrings.a11y.protonSliderDescriptionStringProperty;
+const neutronsValuePatternStringProperty = RutherfordScatteringStrings.a11y.neutronsValuePatternStringProperty;
+const neutronSliderDescriptionStringProperty = RutherfordScatteringStrings.a11y.neutronSliderDescriptionStringProperty;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -43,7 +43,7 @@ class AtomPropertiesPanel extends Panel {
   public constructor( content: Node, providedOptions?: AtomPropertiesPanelOptions ) {
 
     // Add the title of the panel content
-    const atomPropertiesText = new Text( atomString, {
+    const atomPropertiesText = new Text( atomStringProperty, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelTitleColorProperty,
@@ -67,7 +67,7 @@ class AtomPropertiesPanel extends Panel {
       stroke: RSColors.panelBorderColorProperty,
 
       // pdom
-      accessibleHeading: atomSettingsString
+      accessibleHeading: atomSettingsStringProperty
     }, providedOptions );
 
     super( panelBox, options );
@@ -194,11 +194,11 @@ class AtomPropertiesPanelContent extends VBox {
         thumbFillHighlighted: 'rgb(270, 108, 60)'
       },
       // pdom
-      accessibleName: protonsValuePatternString,
-      accessibleHelpText: protonSliderDescriptionString
+      accessibleName: protonsValuePatternStringProperty,
+      accessibleHelpText: protonSliderDescriptionStringProperty
     }, numberControlOptions );
 
-    const protonNumberControl = new NumberControl( numberOfProtonsString, model.protonCountProperty, protonCountRange, protonNumberControlOptions );
+    const protonNumberControl = new NumberControl( numberOfProtonsStringProperty, model.protonCountProperty, protonCountRange, protonNumberControlOptions );
 
     const neutronCountRange = new RangeWithValue( RSConstants.MIN_NEUTRON_COUNT, RSConstants.MAX_NEUTRON_COUNT,
       RSConstants.DEFAULT_NEUTRON_COUNT );
@@ -230,11 +230,11 @@ class AtomPropertiesPanelContent extends VBox {
         thumbFillHighlighted: 'rgb(180, 180, 180)'
       },
       // pdom
-      accessibleName: neutronsValuePatternString,
-      accessibleHelpText: neutronSliderDescriptionString
+      accessibleName: neutronsValuePatternStringProperty,
+      accessibleHelpText: neutronSliderDescriptionStringProperty
     }, numberControlOptions );
 
-    const neutronNumberControl = new NumberControl( numberOfNeutronsString, model.neutronCountProperty, neutronCountRange, neutronNumberControlOptions );
+    const neutronNumberControl = new NumberControl( numberOfNeutronsStringProperty, model.neutronCountProperty, neutronCountRange, neutronNumberControlOptions );
 
     // main panel content
     super( {

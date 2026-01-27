@@ -21,7 +21,7 @@ import RutherfordScatteringStrings from '../../RutherfordScatteringStrings.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
-const legendString = RutherfordScatteringStrings.legend;
+const legendStringProperty = RutherfordScatteringStrings.legendStringProperty;
 
 // constants
 const LEGEND_ITEM_HORIZONTAL_SPACING = 12.5;
@@ -47,7 +47,7 @@ class ParticleLegendPanel extends Panel {
   public constructor( content: Node, options?: ParticleLegendPanelOptions ) {
 
     // the title for the panel
-    const legendText = new Text( legendString, {
+    const legendText = new Text( legendStringProperty, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelTitleColorProperty,

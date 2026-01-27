@@ -36,12 +36,12 @@ import TargetMaterialNode from './TargetMaterialNode.js';
 import TinyBox from './TinyBox.js';
 
 // constants
-const alphaParticlesString = RutherfordScatteringStrings.alphaParticles;
-const toggleAlphaParticleString = RutherfordScatteringStrings.a11y.toggleAlphaParticle;
-const alphaParticlesHelpTextString = RutherfordScatteringStrings.a11y.alphaParticlesHelpText;
+const alphaParticlesStringProperty = RutherfordScatteringStrings.alphaParticlesStringProperty;
+const toggleAlphaParticleStringProperty = RutherfordScatteringStrings.a11y.toggleAlphaParticleStringProperty;
+const alphaParticlesHelpTextStringProperty = RutherfordScatteringStrings.a11y.alphaParticlesHelpTextStringProperty;
 
-const otherViewingStreamingOptionsString = RutherfordScatteringStrings.a11y.otherViewingStreamingOptions;
-const otherOptionsDescriptionString = RutherfordScatteringStrings.a11y.otherOptionsDescription;
+const otherViewingStreamingOptionsStringProperty = RutherfordScatteringStrings.a11y.otherViewingStreamingOptionsStringProperty;
+const otherOptionsDescriptionStringProperty = RutherfordScatteringStrings.a11y.otherOptionsDescriptionStringProperty;
 
 const GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
 
@@ -106,12 +106,12 @@ abstract class RSBaseScreenView extends ScreenView {
         rotation: -GUN_ROTATION // so button lighting is correct
       },
       rotation: GUN_ROTATION, // pointing up
-      accessibleName: toggleAlphaParticleString,
-      accessibleHelpText: alphaParticlesHelpTextString
+      accessibleName: toggleAlphaParticleStringProperty,
+      accessibleHelpText: alphaParticlesHelpTextStringProperty
     } );
     this.addChild( this.gunNode );
 
-    const alphaParticlesText = new Text( alphaParticlesString, {
+    const alphaParticlesText = new Text( alphaParticlesStringProperty, {
       centerX: this.gunNode.centerX,
       top: this.gunNode.bottom + 15,
       font: new PhetFont( 15 ),
@@ -201,8 +201,8 @@ abstract class RSBaseScreenView extends ScreenView {
 
     // pdom
     const viewingStreamingOptionsNode = new Node( {
-      accessibleHeading: otherViewingStreamingOptionsString,
-      descriptionContent: otherOptionsDescriptionString
+      accessibleHeading: otherViewingStreamingOptionsStringProperty,
+      descriptionContent: otherOptionsDescriptionStringProperty
     } );
     this.addChild( viewingStreamingOptionsNode );
 

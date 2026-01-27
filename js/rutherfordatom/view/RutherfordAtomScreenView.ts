@@ -40,10 +40,10 @@ import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 // constants
 const pattern0AtomicScaleString = RutherfordScatteringStrings.pattern[ '0atomicScale' ];
 const pattern0NuclearScaleString = RutherfordScatteringStrings.pattern[ '0nuclearScale' ];
-const switchScaleString = RutherfordScatteringStrings.a11y.switchScale;
-const switchScaleDescriptionString = RutherfordScatteringStrings.a11y.switchScaleDescription;
-const nuclearScaleViewString = RutherfordScatteringStrings.a11y.nuclearScaleView;
-const atomicScaleViewString = RutherfordScatteringStrings.a11y.atomicScaleView;
+const switchScaleStringProperty = RutherfordScatteringStrings.a11y.switchScaleStringProperty;
+const switchScaleDescriptionStringProperty = RutherfordScatteringStrings.a11y.switchScaleDescriptionStringProperty;
+const nuclearScaleViewStringProperty = RutherfordScatteringStrings.a11y.nuclearScaleViewStringProperty;
+const atomicScaleViewStringProperty = RutherfordScatteringStrings.a11y.atomicScaleViewStringProperty;
 
 class RutherfordAtomScreenView extends RSBaseScreenView {
 
@@ -162,14 +162,14 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
         value: 'atom',
         createNode: () => new Image( atomIconImage, { scale: 0.18 } ),
         options: {
-          accessibleName: atomicScaleViewString
+          accessibleName: atomicScaleViewStringProperty
         }
       },
       {
         value: 'nucleus',
         createNode: () => RutherfordNucleusNode.RutherfordNucleusIcon( 20, 20 ),
         options: {
-          accessibleName: nuclearScaleViewString
+          accessibleName: nuclearScaleViewStringProperty
         }
       }
     ], {
@@ -189,9 +189,9 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       },
       maxWidth: this.targetMaterialNode.width,
 
-      accessibleName: switchScaleString,
+      accessibleName: switchScaleStringProperty,
 
-      accessibleHelpText: switchScaleDescriptionString
+      accessibleHelpText: switchScaleDescriptionStringProperty
     } );
 
     this.sceneRadioButtonGroup = createRadioButtons( atom_png );

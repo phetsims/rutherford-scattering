@@ -28,15 +28,15 @@ import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
 // constants
-const alphaParticlePropertiesString = RutherfordScatteringStrings.alphaParticleProperties;
-const energyString = RutherfordScatteringStrings.energy;
-const maxEnergyString = RutherfordScatteringStrings.maxEnergy;
-const minEnergyString = RutherfordScatteringStrings.minEnergy;
-const showTracesString = RutherfordScatteringStrings.showTraces;
-const alphaParticleSettingsString = RutherfordScatteringStrings.a11y.alphaParticleSettings;
-const energySliderDescriptionString = RutherfordScatteringStrings.a11y.energySliderDescription;
-const tracesString = RutherfordScatteringStrings.a11y.traces;
-const traceCheckboxDescriptionString = RutherfordScatteringStrings.a11y.traceCheckboxDescription;
+const alphaParticlePropertiesStringProperty = RutherfordScatteringStrings.alphaParticlePropertiesStringProperty;
+const energyStringProperty = RutherfordScatteringStrings.energyStringProperty;
+const maxEnergyStringProperty = RutherfordScatteringStrings.maxEnergyStringProperty;
+const minEnergyStringProperty = RutherfordScatteringStrings.minEnergyStringProperty;
+const showTracesStringProperty = RutherfordScatteringStrings.showTracesStringProperty;
+const alphaParticleSettingsStringProperty = RutherfordScatteringStrings.a11y.alphaParticleSettingsStringProperty;
+const energySliderDescriptionStringProperty = RutherfordScatteringStrings.a11y.energySliderDescriptionStringProperty;
+const tracesStringProperty = RutherfordScatteringStrings.a11y.tracesStringProperty;
+const traceCheckboxDescriptionStringProperty = RutherfordScatteringStrings.a11y.traceCheckboxDescriptionStringProperty;
 
 type SelfOptions = EmptySelfOptions;
 
@@ -55,7 +55,7 @@ class AlphaParticlePropertiesPanel extends Panel {
   public constructor( content: Node, providedOptions?: AlphaParticlePropertiesPanelOptions ) {
 
     // the title for the panel
-    const alphaParticlePropertiesText = new Text( alphaParticlePropertiesString, {
+    const alphaParticlePropertiesText = new Text( alphaParticlePropertiesStringProperty, {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelTitleColorProperty,
@@ -78,7 +78,7 @@ class AlphaParticlePropertiesPanel extends Panel {
       stroke: RSColors.panelBorderColorProperty,
 
       // pdom
-      accessibleHeading: alphaParticleSettingsString
+      accessibleHeading: alphaParticleSettingsStringProperty
     }, providedOptions );
 
     super( contentVBox, options );
@@ -123,19 +123,19 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       align: 'left'
     }, providedOptions );
 
-    const energyText = new Text( energyString, {
+    const energyText = new Text( energyStringProperty, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelLabelColorProperty,
       maxWidth: 210
     } );
-    const minEnergyText = new Text( minEnergyString, {
+    const minEnergyText = new Text( minEnergyStringProperty, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSColors.panelSliderLabelColorProperty,
       maxWidth: options.maxWidth! / 5,
       pickable: false
     } );
-    const maxEnergyText = new Text( maxEnergyString, {
+    const maxEnergyText = new Text( maxEnergyStringProperty, {
       font: RSConstants.PANEL_TICK_FONT,
       fill: RSColors.panelSliderLabelColorProperty,
       maxWidth: options.maxWidth! / 5,
@@ -166,9 +166,9 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       keyboardStep: 5,
       shiftKeyboardStep: 1,
       pageKeyboardStep: 10,
-      labelContent: energyString,
+      labelContent: energyStringProperty,
       labelTagName: 'label',
-      descriptionContent: energySliderDescriptionString,
+      descriptionContent: energySliderDescriptionStringProperty,
       appendDescription: true
     } );
     particleEnergySlider.addMajorTick( RSConstants.MIN_ALPHA_ENERGY, minEnergyText );
@@ -183,7 +183,7 @@ class AlphaParticlePropertiesPanelContent extends VBox {
 
     // show traces
     const showTraceStrut = new HStrut( options.minWidth * 0.05 );
-    const showTraceText = new Text( showTracesString, {
+    const showTraceText = new Text( showTracesStringProperty, {
       font: RSConstants.PANEL_PROPERTY_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelLabelColorProperty,
@@ -194,9 +194,9 @@ class AlphaParticlePropertiesPanelContent extends VBox {
       checkboxColorBackground: RSColors.panelColorProperty,
 
       // pdom
-      labelContent: tracesString,
+      labelContent: tracesStringProperty,
       labelTagName: 'label',
-      descriptionContent: traceCheckboxDescriptionString,
+      descriptionContent: traceCheckboxDescriptionStringProperty,
       containerTagName: 'div'
     } );
     const showTraceBox = new HBox( { children: [ showTraceStrut, showTraceCheckbox ] } );
