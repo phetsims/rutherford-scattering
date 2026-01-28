@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -15,11 +14,10 @@ import ScreenView, { ScreenViewOptions } from '../../../../joist/js/ScreenView.j
 import Shape from '../../../../kite/js/Shape.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import StepForwardButton from '../../../../scenery-phet/js/buttons/StepForwardButton.js';
 import LaserPointerNode from '../../../../scenery-phet/js/LaserPointerNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -171,23 +169,24 @@ abstract class RSBaseScreenView extends ScreenView {
     } );
     this.addChild( this.scaleInfoNode );
 
-    // play/pause button
-    const playPauseButton = new PlayPauseButton( model.runningProperty, {
-      bottom: this.scaleInfoNode.bottom + 60,
-      centerX: this.scaleInfoNode.centerX - 25,
-      radius: 23
-    } );
-    this.addChild( playPauseButton );
-
-    // step button to manually step the animation.
-    const stepButton = new StepForwardButton( {
-      enabledProperty: DerivedProperty.not( model.runningProperty ),
-      listener: () => { model.manualStep(); },
-      centerY: playPauseButton.centerY,
-      centerX: this.scaleInfoNode.centerX + 25,
-      radius: 15
-    } );
-    this.addChild( stepButton );
+    // time control buttons
+    const timeControlButtons = new TimeControlNode(
+      model.runningProperty, {
+        bottom: this.scaleInfoNode.bottom + 60,
+        centerX: this.scaleInfoNode.centerX - 5,
+        playPauseStepButtonOptions: {
+          playPauseStepXSpacing: 12,
+          playPauseButtonOptions: {
+            radius: 23
+          },
+          stepForwardButtonOptions: {
+            radius: 15,
+            listener: () => { model.manualStep(); }
+          }
+        }
+      }
+    );
+    this.addChild( timeControlButtons );
 
     // reset all button
     const resetAllButton = new ResetAllButton( {
@@ -207,7 +206,7 @@ abstract class RSBaseScreenView extends ScreenView {
     } );
     this.addChild( viewingStreamingOptionsNode );
 
-    this.pdomControlAreaNode.pdomOrder = [ null, viewingStreamingOptionsNode, playPauseButton, stepButton, resetAllButton ];
+    this.pdomControlAreaNode.pdomOrder = [ null, viewingStreamingOptionsNode, timeControlButtons, resetAllButton ];
   }
 
   /**
