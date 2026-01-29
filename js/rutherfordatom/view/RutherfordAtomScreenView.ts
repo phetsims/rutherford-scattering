@@ -40,8 +40,8 @@ import NucleusSpaceNode from './NucleusSpaceNode.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
 
 // constants
-const atomicScalePatternStringProperty = RutherfordScatteringFluent.pattern.atomicScaleStringProperty;
-const nuclearScalePatternStringProperty = RutherfordScatteringFluent.pattern.nuclearScaleStringProperty;
+const atomicScalePatternStringProperty = RutherfordScatteringFluent.pattern[ '0atomicScaleStringProperty' ];
+const nuclearScalePatternStringProperty = RutherfordScatteringFluent.pattern[ '0nuclearScaleStringProperty' ];
 const switchScaleStringProperty = RutherfordScatteringFluent.a11y.switchScaleStringProperty;
 const switchScaleDescriptionStringProperty = RutherfordScatteringFluent.a11y.switchScaleDescriptionStringProperty;
 const nuclearScaleViewStringProperty = RutherfordScatteringFluent.a11y.nuclearScaleViewStringProperty;
@@ -54,14 +54,10 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
   public constructor( model: RutherfordAtomModel ) {
 
     const nucleusScaleStringProperty = new DerivedStringProperty( [ nuclearScalePatternStringProperty ], ( pattern: string ) => {
-      return StringUtils.fillIn( pattern, {
-        value: '1.5 x 10<sup>-13</sup>'
-      } );
+      return StringUtils.format( pattern, '1.5 x 10<sup>-13</sup>' );
     } );
     const atomicScaleStringProperty = new DerivedStringProperty( [ atomicScalePatternStringProperty ], ( pattern: string ) => {
-      return StringUtils.fillIn( pattern, {
-        value: '6.0 x 10<sup>-10</sup>'
-      } );
+      return StringUtils.format( pattern, '6.0 x 10<sup>-10</sup>' );
     } );
 
     super( model, nucleusScaleStringProperty, {

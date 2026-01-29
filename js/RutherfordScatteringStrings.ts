@@ -36,8 +36,8 @@ type StringsType = {
   'alphaParticleTraceStringProperty': LocalizedStringProperty;
   'legendStringProperty': LocalizedStringProperty;
   'pattern': {
-    'atomicScaleStringProperty': LocalizedStringProperty;
-    'nuclearScaleStringProperty': LocalizedStringProperty;
+    '0atomicScaleStringProperty': LocalizedStringProperty;
+    '0nuclearScaleStringProperty': LocalizedStringProperty;
   };
   'a11y': {
     'screenSummaryStringProperty': LocalizedStringProperty;

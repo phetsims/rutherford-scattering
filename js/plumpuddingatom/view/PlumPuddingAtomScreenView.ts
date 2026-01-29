@@ -22,16 +22,14 @@ import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingSpaceNode from './PlumPuddingSpaceNode.js';
 
-const atomicScalePatternStringProperty = RutherfordScatteringFluent.pattern.atomicScaleStringProperty;
+const atomicScalePatternStringProperty = RutherfordScatteringFluent.pattern[ '0atomicScaleStringProperty' ];
 
 class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
   public constructor( model: PlumPuddingAtomModel ) {
 
     const atomicScaleStringProperty = new DerivedStringProperty( [ atomicScalePatternStringProperty ], ( pattern: string ) => {
-      return StringUtils.fillIn( pattern, {
-        value: '3.0 x 10<sup>-10</sup>'
-      } );
+      return StringUtils.format( pattern, '3.0 x 10<sup>-10</sup>' );
     } );
 
     super( model, atomicScaleStringProperty, {
