@@ -8,7 +8,14 @@
  */
 
 import simEslintConfig from '../perennial-alias/js/eslint/config/sim.eslint.config.mjs';
+import banTSCommentConfig from '../perennial-alias/js/eslint/config/util/banTSCommentConfig.mjs';
 
 export default [
-  ...simEslintConfig
+  ...simEslintConfig,
+  {
+    rules: {
+      'phet/require-fluent': 'error'
+    }
+  },
+  ...banTSCommentConfig
 ];
