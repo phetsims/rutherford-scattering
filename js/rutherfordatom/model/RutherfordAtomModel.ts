@@ -13,10 +13,12 @@ import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordAtomSpace from './RutherfordAtomSpace.js';
 import RutherfordNucleusSpace from './RutherfordNucleusSpace.js';
 
+export type RutherfordAtomScenes = 'atom' | 'nucleus';
+
 class RutherfordAtomModel extends RSBaseModel {
 
   // Scene to display, 'atom'|'nucleus'
-  public readonly sceneProperty: Property<string>;
+  public readonly sceneProperty: Property<RutherfordAtomScenes>;
   
   // Spaces containing the atoms
   public readonly atomSpace: RutherfordAtomSpace;
@@ -26,7 +28,7 @@ class RutherfordAtomModel extends RSBaseModel {
 
     super();
 
-    this.sceneProperty = new Property( 'atom' );
+    this.sceneProperty = new Property<RutherfordAtomScenes>( 'atom' );
 
     this.atomSpace = new RutherfordAtomSpace( this.protonCountProperty, this.bounds );
     this.nucleusSpace = new RutherfordNucleusSpace( this.protonCountProperty, this.neutronCountProperty, this.bounds );
