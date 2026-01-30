@@ -86,6 +86,7 @@ class AlphaParticlePropertiesPanel extends Panel {
     // make panel eligible for garbage collection
     this.disposeAlphaParticlePropertiesPanel = () => {
       content.dispose();
+      alphaParticlePropertiesText.dispose();
     };
   }
 
@@ -213,6 +214,10 @@ class AlphaParticlePropertiesPanelContent extends VBox {
     this.disposeContent = () => {
       showTraceCheckbox.dispose();
       particleEnergySlider.dispose();
+      energyText.dispose();
+      minEnergyText.dispose();
+      maxEnergyText.dispose();
+      showTraceText.dispose();
     };
   }
 

@@ -41,6 +41,8 @@ export type ParticleLegendPanelOptions = SelfOptions & PanelOptions;
 
 class ParticleLegendPanel extends Panel {
 
+  private disposeParticleLegendPanel: () => void;
+
   // for aligning with other panels in the various screens, legend content should be left aligned
   public static readonly LEGEND_CONTENT_ALIGN: 'left';
 
@@ -73,6 +75,11 @@ class ParticleLegendPanel extends Panel {
     }, options );
 
     super( contentVBox, internalOptions );
+
+    this.disposeParticleLegendPanel = () => {
+      legendText.dispose();
+      content.dispose();
+    };
   }
 
   /**
@@ -88,12 +95,17 @@ class ParticleLegendPanel extends Panel {
   public static createPanel( content: Array<Node>, providedOptions?: ParticleLegendPanelContentOptions ): Node {
     return new ParticleLegendPanelContent( content, providedOptions );
   }
+
+  public override dispose(): void {
+    this.disposeParticleLegendPanel();
+    super.dispose();
+  }
 }
 
 /**
  * Build one row in the legend consisting of an image and label
  */
-const createParticleRow = ( particleNode: Node, titleString: TReadOnlyProperty<string> ) => {
+const createParticleRow = ( particleNode: Node, titleString: TReadOnlyProperty<string> ): HBox => {
 
   const hStrut1 = new HStrut( LEGEND_ITEM_HORIZONTAL_SPACING - particleNode.width / 2 );
   const titleText = new Text( titleString, {

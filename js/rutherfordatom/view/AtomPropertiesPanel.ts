@@ -76,6 +76,7 @@ class AtomPropertiesPanel extends Panel {
     // scene or color scheme changes so it si important that everything is disposed
     this.disposeAtomPropertiesPanel = () => {
       content.dispose();
+      atomPropertiesText.dispose();
     };
   }
 
