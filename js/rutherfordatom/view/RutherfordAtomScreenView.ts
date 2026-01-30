@@ -13,6 +13,7 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
+import { AlignBoxOptions } from '../../../../scenery/js/layout/nodes/AlignBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import { ImageableImage } from '../../../../scenery/js/nodes/Imageable.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -71,6 +72,7 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     this.addChild( atomicScaleInfoNode );
 
     const contentAlignGroup = new AlignGroup( { matchVertical: false } );
+    const alignBoxOptions: AlignBoxOptions = { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN, yAlign: 'stretch' };
 
     // create the panels of the control panel on the right
     const createAtomPanel = () => {
@@ -84,18 +86,14 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
 
       // make sure that content for all panels are aligned and the legend content is aligned to the left
       // this content does not include title
-      const atomContentBox = contentAlignGroup.createBox( atomLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
+      const legendContent = contentAlignGroup.createBox( atomLegendContent, alignBoxOptions );
       const particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
       const atomPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
-
-      // create content for the legend panels
-      const legendContent = atomContentBox;
 
       // create the panels
       const panelOptions = { resize: false };
       const legendPanel = new AtomParticleLegendPanel( legendContent, panelOptions );
       const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
-
       const atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContentBox, panelOptions );
 
       return [
@@ -121,18 +119,14 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
 
       // make sure that content for all panels are aligned and the legend content is aligned to the left
       // this content does not include title
-      const nuclearContentBox = contentAlignGroup.createBox( nuclearLegendContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
+      const legendContent = contentAlignGroup.createBox( nuclearLegendContent, alignBoxOptions );
       const particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
       const atromPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
-
-      // create content for the legend panels
-      const legendContent = nuclearContentBox;
 
       // create the panels
       const panelOptions = { resize: false };
       const legendPanel = new NuclearParticleLegendPanel( legendContent, panelOptions );
       const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
-
       const atomPropertiesPanel = new AtomPropertiesPanel( atromPropertiesContentBox, panelOptions );
 
       return [
