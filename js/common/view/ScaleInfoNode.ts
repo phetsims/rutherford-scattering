@@ -45,6 +45,12 @@ class ScaleInfoNode extends Node {
       maxWidth: RSConstants.TEXT_MAX_WIDTH * 2
     } );
 
+    // Making sure the labelText remains vertically centered as its bounds change
+    const initialCenterY = labelText.centerY;
+    labelText.boundsProperty.link( () => {
+      labelText.centerY = initialCenterY;
+    } );
+
     // Set the max width to the initial width to avoid redrawing the arrows
     labelText.maxWidth = labelText.width;
 
