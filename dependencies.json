@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.2.0-dev.2 Tue Jan 27 2026 15:28:38 GMT-0500 (Colombia Standard Time)",
+  "comment": "# rutherford-scattering 1.2.0-dev.3 Fri Jan 30 2026 11:13:48 GMT-0500 (Colombia Standard Time)",
   "assert": {
     "sha": "1a4637cfff70e7e8b0844dc43848a86ae89b4cf5",
     "branch": "main"
@@ -21,7 +21,7 @@
     "branch": "main"
   },
   "joist": {
-    "sha": "feb4d3aa8926304e74973aadb848f098a7829b2f",
+    "sha": "443c05277c8a29c4eb5ee32729e6b656c670428b",
     "branch": "main"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "f749d9bf2f5096a715fa492a0897563bda833d20",
+    "sha": "d42a481b537ee94f9e1171a234288af4e8f9341d",
     "branch": "main"
   },
   "phet-core": {
@@ -41,7 +41,7 @@
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "afb211389e59531400f2433fb2a4fdd1e886978c",
+    "sha": "2a1876672297b58b9bc4b0b9652bb1cd14d52184",
     "branch": "main"
   },
   "phet-io-wrappers": {
@@ -61,11 +61,11 @@
     "branch": "main"
   },
   "rutherford-scattering": {
-    "sha": "6d384e3319cf0b092bf9b7d3df579f4bdd67cb0f",
+    "sha": "c3959306b78482051f038062b22c1f4fdb8904c1",
     "branch": "main"
   },
   "scenery": {
-    "sha": "ec05bd43be3237e9cee4ea057e3f0fb47f57a33b",
+    "sha": "d1b27840df69f8c4f2c367e530541f18065fad3a",
     "branch": "main"
   },
   "scenery-phet": {
@@ -73,7 +73,7 @@
     "branch": "main"
   },
   "sherpa": {
-    "sha": "1cfb702879146dfde290d134807dd3246b762818",
+    "sha": "2ff8289402eec347800c6c03b6fdfb5132622536",
     "branch": "main"
   },
   "shred": {
