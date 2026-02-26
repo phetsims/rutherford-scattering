@@ -119,6 +119,10 @@ abstract class RSBaseScreenView extends ScreenView {
     } );
     this.addChild( alphaParticlesText );
 
+    alphaParticlesText.boundsProperty.link( () => {
+      alphaParticlesText.centerX = this.gunNode.centerX;
+    } );
+
     this.beamNode = new BeamNode( model.gun.onProperty, {
       centerX: this.gunNode.centerX,
       bottom: this.gunNode.top,

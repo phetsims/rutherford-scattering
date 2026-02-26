@@ -49,6 +49,7 @@ class ScaleInfoNode extends Node {
     const initialCenterY = labelText.centerY;
     labelText.boundsProperty.link( () => {
       labelText.centerY = initialCenterY;
+      labelText.centerX = 0;
     } );
 
     // Set the max width to the initial width to avoid redrawing the arrows
