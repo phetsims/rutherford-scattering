@@ -12,8 +12,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
-import { AlignBoxOptions } from '../../../../scenery/js/layout/nodes/AlignBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import { ImageableImage } from '../../../../scenery/js/nodes/Imageable.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -28,7 +26,6 @@ import RSConstants from '../../common/RSConstants.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
-import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import ScaleInfoNode from '../../common/view/ScaleInfoNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -71,30 +68,20 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     } );
     this.addChild( atomicScaleInfoNode );
 
-    const contentAlignGroup = new AlignGroup( { matchVertical: false } );
-    const alignBoxOptions: AlignBoxOptions = { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN, yAlign: 'stretch' };
-
     // create the panels of the control panel on the right
     const createAtomPanel = () => {
 
       // create content for the control panels
       const atomLegendContent = AtomParticleLegendPanel.createPanelContent( { resize: false } );
 
-      const particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent(
-        model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
       const atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
-
-      // make sure that content for all panels are aligned and the legend content is aligned to the left
-      // this content does not include title
-      const legendContent = contentAlignGroup.createBox( atomLegendContent, alignBoxOptions );
-      const particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
-      const atomPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
 
       // create the panels
       const panelOptions = { resize: false };
-      const legendPanel = new AtomParticleLegendPanel( legendContent, panelOptions );
-      const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
-      const atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContentBox, panelOptions );
+      const legendPanel = new AtomParticleLegendPanel( atomLegendContent, panelOptions );
+      const particlePropertiesPanel = new AlphaParticlePropertiesPanel(
+        model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+      const atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, panelOptions );
 
       return [
         legendPanel,
@@ -113,21 +100,14 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
         includeElectron: false,
         includePlumPudding: false
       } );
-      const particlePropertiesContent = AlphaParticlePropertiesPanel.createPanelContent(
-        model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
       const atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
-
-      // make sure that content for all panels are aligned and the legend content is aligned to the left
-      // this content does not include title
-      const legendContent = contentAlignGroup.createBox( nuclearLegendContent, alignBoxOptions );
-      const particlePropertiesContentBox = contentAlignGroup.createBox( particlePropertiesContent );
-      const atromPropertiesContentBox = contentAlignGroup.createBox( atomPropertiesContent );
 
       // create the panels
       const panelOptions = { resize: false };
-      const legendPanel = new NuclearParticleLegendPanel( legendContent, panelOptions );
-      const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particlePropertiesContentBox, panelOptions );
-      const atomPropertiesPanel = new AtomPropertiesPanel( atromPropertiesContentBox, panelOptions );
+      const legendPanel = new NuclearParticleLegendPanel( nuclearLegendContent, panelOptions );
+      const particlePropertiesPanel = new AlphaParticlePropertiesPanel(
+        model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+      const atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, panelOptions );
 
       return [
         legendPanel,

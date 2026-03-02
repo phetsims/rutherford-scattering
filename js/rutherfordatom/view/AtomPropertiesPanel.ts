@@ -46,7 +46,7 @@ class AtomPropertiesPanel extends Panel {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelTitleColorProperty,
-      maxWidth: RSConstants.TEXT_MAX_WIDTH
+      maxWidth: RSConstants.PANEL_TITLE_MAX_WIDTH
     } );
 
     const panelBox = new VBox( {

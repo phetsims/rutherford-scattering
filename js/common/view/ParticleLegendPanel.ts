@@ -43,9 +43,6 @@ class ParticleLegendPanel extends Panel {
 
   private disposeParticleLegendPanel: () => void;
 
-  // for aligning with other panels in the various screens, legend content should be left aligned
-  public static readonly LEGEND_CONTENT_ALIGN: 'left';
-
   public constructor( content: Node, options?: ParticleLegendPanelOptions ) {
 
     // the title for the panel
@@ -53,7 +50,7 @@ class ParticleLegendPanel extends Panel {
       font: RSConstants.PANEL_TITLE_FONT,
       fontWeight: 'bold',
       fill: RSColors.panelTitleColorProperty,
-      maxWidth: RSConstants.TEXT_MAX_WIDTH
+      maxWidth: RSConstants.PANEL_TITLE_MAX_WIDTH
     } );
 
     // title with content, aligned

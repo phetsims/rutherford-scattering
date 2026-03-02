@@ -54,10 +54,12 @@ const RSConstants = {
   PANEL_MIN_WIDTH: 230,
   PANEL_MAX_WIDTH: 250,
   TEXT_MAX_WIDTH: 140,
+  PANEL_TITLE_MAX_WIDTH: 180,
   PANEL_SPACE_MARGIN: 35,   // spacing between the particle space and the property panels
   PANEL_TOP_MARGIN: 15,   // spacing for all top panels from edge of window
   PANEL_VERTICAL_MARGIN: 10,   // vertical spacing between property panels
   PANEL_X_MARGIN: 15,
+  PANEL_Y_MARGIN: 8,
 
   TARGET_SPACE_MARGIN: 50,   // spacing from gold target material to particle space
 

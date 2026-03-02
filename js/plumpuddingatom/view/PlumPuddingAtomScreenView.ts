@@ -11,11 +11,9 @@ import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import AlignGroup from '../../../../scenery/js/layout/constraints/AlignGroup.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
-import ParticleLegendPanel from '../../common/view/ParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
@@ -37,22 +35,15 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
     } );
 
     // create the new control panel
-    const propertiesPanelContent = AlphaParticlePropertiesPanel.createPanelContent(
-      model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
     const legendPanelContent = NuclearParticleLegendPanel.createPanelContent( {
       resize: false,
       includeElectron: true,
       includePlumPudding: true
     } );
 
-    // handle alignment for the panels, should have exactly the same width, but the legend content should be aligned
-    // to the left
-    const contentAlignGroup = new AlignGroup( { matchVertical: false } );
-    const particleContentBox = contentAlignGroup.createBox( propertiesPanelContent );
-    const legendContentBox = contentAlignGroup.createBox( legendPanelContent, { xAlign: ParticleLegendPanel.LEGEND_CONTENT_ALIGN } );
-
-    const particlePropertiesPanel = new AlphaParticlePropertiesPanel( particleContentBox, { resize: false } );
-    const legendPanel = new NuclearParticleLegendPanel( legendContentBox, { resize: false } );
+    const particlePropertiesPanel = new AlphaParticlePropertiesPanel(
+      model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+    const legendPanel = new NuclearParticleLegendPanel( legendPanelContent, { resize: false } );
 
     const panels = [
       legendPanel,
