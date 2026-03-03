@@ -13,12 +13,12 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
-import { ImageableImage } from '../../../../scenery/js/nodes/Imageable.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import SceneryConstants from '../../../../scenery/js/SceneryConstants.js';
 import colorProfileProperty from '../../../../scenery/js/util/colorProfileProperty.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
+import ToggleNode from '../../../../sun/js/ToggleNode.js';
 import atom_png from '../../../images/atom_png.js';
 import atomProjector_png from '../../../images/atomProjector_png.js';
 import RSColors from '../../common/RSColors.js';
@@ -116,15 +116,6 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       ];
     };
 
-    // when various panels are added/removed due to changing color profile or scene, reset the accessible order
-    const restorePDOMOrder = () => {
-      this.pdomPlayAreaNode.pdomOrder = [ this.gunNode ];
-      this.pdomControlAreaNode.pdomOrder = _.uniq( this.pdomControlAreaNode.pdomOrder!.concat( [
-        this.controlPanel,
-        this.sceneRadioButtonGroup
-      ].filter( _.identity ) ) );
-    };
-
     // {Node} control panel is created below by sceneProperty listener, to correspond to scene
     const atomControlPanel = this.createControlPanel( createAtomPanel() );
     const nucleusControlPanel = this.createControlPanel( createNucleusPanel() );
@@ -150,19 +141,24 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       // set the visibility of the control panels
       atomControlPanel.visible = atomSceneVisible;
       nucleusControlPanel.visible = !atomSceneVisible;
-
-      restorePDOMOrder();
     } );
 
     /**
      * Create the RadioButonGroup that will act as the scene selection control in this sim. New buttons must be
      * created every time the color profile changes.
-     * @param atomIconImage - the icon for the atomic scene, changes with color profile
+     * @param colorProfileProperty - the color profile property, used to determine which image to use for the 'atom' scene button
      */
-    const createRadioButtons = ( atomIconImage: ImageableImage ): RectangularRadioButtonGroup<string> => new RectangularRadioButtonGroup( model.sceneProperty, [
+    const createRadioButtons = ( colorProfileProperty: Property<string> ): RectangularRadioButtonGroup<string> => new RectangularRadioButtonGroup( model.sceneProperty, [
       {
         value: 'atom',
-        createNode: () => new Image( atomIconImage, { scale: 0.18 } ),
+        createNode: () => new ToggleNode( colorProfileProperty, [ {
+
+          value: SceneryConstants.PROJECTOR_COLOR_PROFILE,
+          createNode: () => new Image( atomProjector_png, { scale: 0.18 } )
+        }, {
+          value: SceneryConstants.DEFAULT_COLOR_PROFILE,
+          createNode: () => new Image( atom_png, { scale: 0.18 } )
+        } ] ),
         options: {
           accessibleName: atomicScaleViewStringProperty
         }
@@ -196,31 +192,10 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       accessibleHelpText: switchScaleDescriptionStringProperty
     } );
 
-    this.sceneRadioButtonGroup = createRadioButtons( atom_png );
-    this.pdomControlAreaNode.addChild( this.sceneRadioButtonGroup );
+    this.sceneRadioButtonGroup = createRadioButtons( colorProfileProperty );
+    this.addChild( this.sceneRadioButtonGroup );
 
-    // if the background, panel or stroke colors change, draw a new button group
-    // no need to unlink, screen view exists for life of sim
-    colorProfileProperty.link( profileName => {
-
-      // remove and dispose of the old button group
-      this.pdomControlAreaNode.removeChild( this.sceneRadioButtonGroup );
-      this.sceneRadioButtonGroup.dispose();
-
-      // get the correct image for the 'atom' scene icon
-      const iconImage = ( profileName === SceneryConstants.PROJECTOR_COLOR_PROFILE ) ? atomProjector_png : atom_png;
-
-      // create the new radio button group
-      const newButtonGroup = createRadioButtons( iconImage );
-      this.sceneRadioButtonGroup = newButtonGroup;
-      this.pdomControlAreaNode.addChild( newButtonGroup );
-
-      // add laser, all control panels, and scene buttons to pdomOrder, must be set after
-      // creating new radio buttons
-      restorePDOMOrder();
-    } );
-
-    restorePDOMOrder();
+    this.setPlayAreaPDOMOrder( [ atomControlPanel, nucleusControlPanel, this.sceneRadioButtonGroup ] );
   }
 
 

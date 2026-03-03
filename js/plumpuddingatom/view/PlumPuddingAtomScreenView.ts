@@ -52,11 +52,12 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
     const controlPanel = this.createControlPanel( panels );
     this.addChild( controlPanel );
 
-    this.pdomPlayAreaNode.pdomOrder = [ this.gunNode ];
     if ( controlPanel ) {
       const newOrder = _.union( [ controlPanel ], this.pdomControlAreaNode.pdomOrder );
       this.pdomControlAreaNode.setPDOMOrder( newOrder );
     }
+
+    this.setPlayAreaPDOMOrder( panels );
   }
 
 

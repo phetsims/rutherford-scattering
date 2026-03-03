@@ -73,6 +73,10 @@ abstract class RSBaseScreenView extends ScreenView {
 
   protected readonly controlPanel: RSControlPanel;
 
+  // These elements are expose for pdom ordering.
+  private readonly timeControlButtons: TimeControlNode;
+  private readonly viewingStreamingOptionsNode: Node;
+
   /**
    * @param model
    * @param scaleString
@@ -174,7 +178,7 @@ abstract class RSBaseScreenView extends ScreenView {
     this.addChild( this.scaleInfoNode );
 
     // time control buttons
-    const timeControlButtons = new TimeControlNode(
+    this.timeControlButtons = new TimeControlNode(
       model.runningProperty, {
         bottom: this.scaleInfoNode.bottom + 60,
         centerX: this.scaleInfoNode.centerX - 5,
@@ -190,7 +194,7 @@ abstract class RSBaseScreenView extends ScreenView {
         }
       }
     );
-    this.addChild( timeControlButtons );
+    this.addChild( this.timeControlButtons );
 
     // reset all button
     const resetAllButton = new ResetAllButton( {
@@ -204,13 +208,22 @@ abstract class RSBaseScreenView extends ScreenView {
     this.addChild( resetAllButton );
 
     // pdom
-    const viewingStreamingOptionsNode = new Node( {
+    this.viewingStreamingOptionsNode = new Node( {
       accessibleHeading: otherViewingStreamingOptionsStringProperty,
       descriptionContent: otherOptionsDescriptionStringProperty
     } );
-    this.addChild( viewingStreamingOptionsNode );
+    this.addChild( this.viewingStreamingOptionsNode );
 
-    this.pdomControlAreaNode.pdomOrder = [ null, viewingStreamingOptionsNode, timeControlButtons, resetAllButton ];
+    this.pdomControlAreaNode.pdomOrder = [ resetAllButton ];
+  }
+
+  protected setPlayAreaPDOMOrder( controlPanels: Node[] ): void {
+    this.pdomPlayAreaNode.setPDOMOrder( [
+      this.gunNode,
+      this.viewingStreamingOptionsNode,
+      this.timeControlButtons,
+      ...controlPanels
+    ] );
   }
 
   /**
