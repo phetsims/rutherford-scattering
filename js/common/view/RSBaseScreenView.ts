@@ -219,6 +219,7 @@ abstract class RSBaseScreenView extends ScreenView {
 
   protected setPlayAreaPDOMOrder( controlPanels: Node[] ): void {
     this.pdomPlayAreaNode.setPDOMOrder( [
+      this.spaceNode,
       this.gunNode,
       this.viewingStreamingOptionsNode,
       this.timeControlButtons,
