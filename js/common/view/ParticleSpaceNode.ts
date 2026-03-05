@@ -11,6 +11,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize from '../../../../phet-core/js/optionize.js';
@@ -27,7 +28,7 @@ import ParticleNodeFactory from './ParticleNodeFactory.js';
 
 type SelfOptions = {
   particleStyle?: string;
-  particleTraceColor?: Color;
+  particleTraceColorProperty?: TReadOnlyProperty<Color>;
 };
 
 export type ParticleSpaceNodeOptions = SelfOptions & CanvasNodeOptions;
@@ -41,12 +42,11 @@ const FADEOUT_SEGMENTS = 80;
 class ParticleSpaceNode extends CanvasNode {
 
   private readonly particleStyle: string;
-  private readonly particleTraceColor: Color;
+  private readonly particleTraceColorProperty: TReadOnlyProperty<Color>;
   private readonly atomSpace: AtomSpace;
   private alphaParticleImage: HTMLImageElement | null = null;
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly showAlphaTraceProperty: Property<boolean>;
-  private readonly particleTraceColorWithFade: string;
   private readonly clipRect: { x: number; y: number; width: number; height: number };
   private particleImageHalfWidth = 0;
   private particleImageHalfHeight = 0;
@@ -63,7 +63,7 @@ class ParticleSpaceNode extends CanvasNode {
       // {Bounds2}
       canvasBounds: required( providedOptions.canvasBounds ),
       particleStyle: 'nucleus', // 'nucleus'|'particle'
-      particleTraceColor: new Color( 255, 0, 255 )
+      particleTraceColorProperty: new Property( new Color( 255, 0, 255 ) )
     }, providedOptions );
 
     // the bounds should be eroded by 10 so it appears that particles glide into the space
@@ -72,11 +72,10 @@ class ParticleSpaceNode extends CanvasNode {
     super( options );
 
     this.particleStyle = options.particleStyle;
-    this.particleTraceColor = options.particleTraceColor;
+    this.particleTraceColorProperty = options.particleTraceColorProperty;
     this.atomSpace = atomSpace;
     this.modelViewTransform = modelViewTransform;
     this.showAlphaTraceProperty = showAlphaTraceProperty;
-    this.particleTraceColorWithFade = `rgba(${options.particleTraceColor.r},${options.particleTraceColor.g},${options.particleTraceColor.b},{0})`;
 
     this.clipRect = {
       x: this.canvasBounds.getX() + SPACE_BORDER_WIDTH / 2,
@@ -157,7 +156,7 @@ class ParticleSpaceNode extends CanvasNode {
       if ( this.particleStyle === 'nucleus' ) {
         context.beginPath();
         context.lineWidth = PARTICLE_TRACE_WIDTH;
-        context.strokeStyle = this.particleTraceColor.getCanvasStyle();
+        context.strokeStyle = this.particleTraceColorProperty.value.getCanvasStyle();
       }
     }
 
@@ -184,7 +183,8 @@ class ParticleSpaceNode extends CanvasNode {
             // only the last FADEOUT_SEGMENTS should be visible, map i to the opacity
             const length = particle.positions.length;
             const alpha = Utils.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
-            const strokeStyle = StringUtils.format( this.particleTraceColorWithFade, alpha );
+            const color = this.particleTraceColorProperty.value;
+            const strokeStyle = StringUtils.format( `rgba(${color.r},${color.g},${color.b},{0})`, alpha );
             context.strokeStyle = strokeStyle;
             context.stroke();
             context.closePath();

@@ -79,6 +79,10 @@ const RSColors = {
   outerGroupHighlightColorProperty: new ProfileColorProperty( rutherfordScattering, 'outerGroupHighlightColor', {
     default: HighlightPath.OUTER_DARK_GROUP_FOCUS_COLOR,
     projector: HighlightPath.OUTER_LIGHT_GROUP_FOCUS_COLOR
+  } ),
+  plumPuddingTraceColorProperty: new ProfileColorProperty( rutherfordScattering, 'plumPuddingTraceColor', {
+    default: new Color( '#C4C4C4' ),
+    projector: new Color( '#212121' )
   } )
 };
 

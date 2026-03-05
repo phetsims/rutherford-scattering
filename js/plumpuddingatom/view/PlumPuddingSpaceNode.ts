@@ -10,8 +10,8 @@ import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import required from '../../../../phet-core/js/required.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import Color from '../../../../scenery/js/util/Color.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
+import RSColors from '../../common/RSColors.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
@@ -41,7 +41,7 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
   ) {
     const options = optionize<PlumPuddingSpaceNodeOptions, SelfOptions, ParticleSpaceNodeOptions>()( {
       canvasBounds: required( providedOptions.canvasBounds ),
-      particleTraceColor: new Color( 'grey' )
+      particleTraceColorProperty: RSColors.plumPuddingTraceColorProperty
     }, providedOptions );
 
     super( model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, options );
