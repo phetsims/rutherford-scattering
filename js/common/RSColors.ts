@@ -95,6 +95,9 @@ const RSColors = {
   } ),
   laserPointerButtonColorProperty: new ProfileColorProperty( rutherfordScattering, 'laserPointerButtonColor', {
     default: new Color( 0, 203, 230 )
+  } ),
+  aNewColorProperty: new ProfileColorProperty( rutherfordScattering, 'aNewColor', {
+    default: new Color( 255, 0, 255 )
   } )
 };
 
