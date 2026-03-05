@@ -101,11 +101,11 @@ abstract class RSBaseScreenView extends ScreenView {
       top: this.layoutBounds.centerY + 50,
       bodySize: new Dimension2( 75, 68 ),
       nozzleSize: new Dimension2( 20, 60 ),
-      topColor: 'rgb(211, 140, 70)',
-      highlightColor: 'rgb(229, 186, 144)',
-      bottomColor: 'rgb(106, 70, 35)',
+      topColor: RSColors.laserPointerTopColorProperty,
+      highlightColor: RSColors.laserPointerHighlightColorProperty,
+      bottomColor: RSColors.laserPointerBottomColorProperty,
       buttonOptions: {
-        baseColor: 'rgb(0, 203, 230)',
+        baseColor: RSColors.laserPointerButtonColorProperty,
         rotation: -GUN_ROTATION // so button lighting is correct
       },
       rotation: GUN_ROTATION, // pointing up

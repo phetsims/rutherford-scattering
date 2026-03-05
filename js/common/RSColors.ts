@@ -83,6 +83,18 @@ const RSColors = {
   plumPuddingTraceColorProperty: new ProfileColorProperty( rutherfordScattering, 'plumPuddingTraceColor', {
     default: new Color( '#C4C4C4' ),
     projector: new Color( '#212121' )
+  } ),
+  laserPointerTopColorProperty: new ProfileColorProperty( rutherfordScattering, 'laserPointerTopColor', {
+    default: new Color( 211, 140, 70 )
+  } ),
+  laserPointerHighlightColorProperty: new ProfileColorProperty( rutherfordScattering, 'laserPointerHighlightColor', {
+    default: new Color( 229, 186, 144 )
+  } ),
+  laserPointerBottomColorProperty: new ProfileColorProperty( rutherfordScattering, 'laserPointerBottomColor', {
+    default: new Color( 106, 70, 35 )
+  } ),
+  laserPointerButtonColorProperty: new ProfileColorProperty( rutherfordScattering, 'laserPointerButtonColor', {
+    default: new Color( 0, 203, 230 )
   } )
 };
 
