@@ -85,16 +85,16 @@ const RSColors = {
     projector: new Color( '#212121' )
   } ),
   laserPointerTopColorProperty: new ProfileColorProperty( rutherfordScattering, 'laserPointerTopColor', {
-    default: new Color( 211, 140, 70 )
+    default: new Color( 217, 153, 89 )
   } ),
   laserPointerHighlightColorProperty: new ProfileColorProperty( rutherfordScattering, 'laserPointerHighlightColor', {
-    default: new Color( 229, 186, 144 )
+    default: new Color( 236, 204, 172 )
   } ),
   laserPointerBottomColorProperty: new ProfileColorProperty( rutherfordScattering, 'laserPointerBottomColor', {
-    default: new Color( 106, 70, 35 )
+    default: new Color( 198, 140, 83 )
   } ),
   laserPointerButtonColorProperty: new ProfileColorProperty( rutherfordScattering, 'laserPointerButtonColor', {
-    default: new Color( 0, 203, 230 )
+    default: new Color( 255, 0, 0 )
   } )
 };
 
