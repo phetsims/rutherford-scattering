@@ -8,8 +8,9 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import required from '../../../../phet-core/js/required.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { rasterizeNode } from '../../../../scenery/js/util/rasterizeNode.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import RSColors from '../../common/RSColors.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -18,7 +19,7 @@ import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type PlumPuddingSpaceNodeOptions = SelfOptions & ParticleSpaceNodeOptions;
+type PlumPuddingSpaceNodeOptions = SelfOptions & WithRequired<ParticleSpaceNodeOptions, 'canvasBounds'>;
 
 type ImageRect = { x: number; y: number; width: number; height: number };
 
@@ -26,6 +27,7 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
 
   private readonly atomNode: PlumPuddingAtomNode;
   private readonly atomNodeRect: ImageRect;
+  private readonly atomCanvas: HTMLImageElement | HTMLCanvasElement;
 
   /**
    * @param model
@@ -40,37 +42,28 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
     providedOptions: PlumPuddingSpaceNodeOptions
   ) {
     const options = optionize<PlumPuddingSpaceNodeOptions, SelfOptions, ParticleSpaceNodeOptions>()( {
-      canvasBounds: required( providedOptions.canvasBounds ),
       particleTraceColorProperty: RSColors.plumPuddingTraceColorProperty
     }, providedOptions );
 
     super( model.plumPuddingSpace, showAlphaTraceProperty, modelViewTransform, options );
 
-    // plum pudding image - calc image scale and center positioning
-    this.atomNode = new PlumPuddingAtomNode();
-    const scale = Math.min( this.width, this.height ) /
-                  ( Math.max( this.atomNode.width, this.atomNode.height ) );
-    const imageWidth = this.atomNode.width * scale;
-    const imageHeight = this.atomNode.height * scale;
-    const imageX = this.bounds.centerX - imageWidth / 2;
-    const imageY = this.bounds.centerY - imageHeight / 2;
+    this.atomNode = new PlumPuddingAtomNode( this.bounds );
 
-    this.atomNodeRect = { x: imageX, y: imageY, width: imageWidth, height: imageHeight };
+    // calculate center positioning of plum pudding Node
+    const imageX = this.bounds.centerX - this.atomNode.width / 2;
+    const imageY = this.bounds.centerY - this.atomNode.height / 2;
+    this.atomNodeRect = { x: imageX, y: imageY, width: this.atomNode.width, height: this.atomNode.height };
+    this.atomCanvas = rasterizeNode( this.atomNode, { useCanvas: true, wrap: false } ).image;
 
     this.invalidatePaint();
   }
 
 
   /**
-   * Draws the background image
+   * Draws the background image (pudding blob with electrons).
    */
   protected override paintSpace( context: CanvasRenderingContext2D ): void {
-    // Slight chance the image used isn't available. In that case, return & try again on next frame
-    if ( this.atomNode.image === null ) {
-      return;
-    }
-
-    context.drawImage( this.atomNode.image, this.atomNodeRect.x, this.atomNodeRect.y,
+    context.drawImage( this.atomCanvas, this.atomNodeRect.x, this.atomNodeRect.y,
       this.atomNodeRect.width, this.atomNodeRect.height );
   }
 }

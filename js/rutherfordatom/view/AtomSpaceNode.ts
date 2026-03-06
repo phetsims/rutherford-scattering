@@ -10,7 +10,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import required from '../../../../phet-core/js/required.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
@@ -26,7 +26,7 @@ const atomSpaceDescriptionStringProperty = RutherfordScatteringFluent.a11y.atomS
 
 type SelfOptions = EmptySelfOptions;
 
-type AtomSpaceNodeOptions = SelfOptions & ParticleSpaceNodeOptions;
+type AtomSpaceNodeOptions = SelfOptions & WithRequired<ParticleSpaceNodeOptions, 'canvasBounds'>;
 
 class AtomSpaceNode extends ParticleSpaceNode {
 
@@ -39,9 +39,6 @@ class AtomSpaceNode extends ParticleSpaceNode {
     providedOptions: AtomSpaceNodeOptions
   ) {
     const options = optionize<AtomSpaceNodeOptions, SelfOptions, ParticleSpaceNodeOptions>()( {
-
-      // {Bounds2}
-      canvasBounds: required( providedOptions.canvasBounds ),
       particleStyle: 'particle',
 
       // pdom
