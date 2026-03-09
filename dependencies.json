@@ -21,7 +21,7 @@
     "branch": "main"
   },
   "joist": {
-    "sha": "a423d3a6911e9fb2a6c7d1e231cca14b46a263fd",
+    "sha": "7b584aa0bb7435a367675b271d5fc8b0c41e906b",
     "branch": "main"
   },
   "kite": {
@@ -65,11 +65,11 @@
     "branch": "mouseFocusLiteral"
   },
   "scenery": {
-    "sha": "c3b30a2ea31c6a94eaf6ec8cb8b720b04ce63b1a",
+    "sha": "bab3bab90e7a588014ad7206fcaf1e03f8ae999d",
     "branch": "mouseFocusLiteral"
   },
   "scenery-phet": {
-    "sha": "76f982db81b766fc9986edfcf39e8dcd3ee8b973",
+    "sha": "8a7aa2927ead0f6bb942040c9bceecb5277aa6f2",
     "branch": "main"
   },
   "sherpa": {
@@ -85,7 +85,7 @@
     "branch": "main"
   },
   "sun": {
-    "sha": "e0b3094b0dfc9ff4331f5b4c0902777ffe56fb8f",
+    "sha": "0b763f6cb5532690ecd7c797212ca27adf52dd4f",
     "branch": "main"
   },
   "tambo": {
