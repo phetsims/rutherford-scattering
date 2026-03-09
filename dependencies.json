@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.2.0-mouseFocusLiteral.2 Mon Mar 09 2026 18:31:21 GMT-0400 (Eastern Daylight Time)",
+  "comment": "# rutherford-scattering 1.2.0-mouseFocusLiteral.3 Mon Mar 09 2026 19:30:34 GMT-0400 (Eastern Daylight Time)",
   "assert": {
     "sha": "4fa534de08d265643688965bf233cb73326c3cb7",
     "branch": "HEAD"
@@ -61,7 +61,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "39f0ea3a7ee7fd68366e7ea8f46f520bf97341d2",
+    "sha": "7ff42aed124d51ab29be53ce375aef1245250fb6",
     "branch": "mouseFocusLiteral"
   },
   "scenery": {
