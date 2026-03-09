@@ -1,11 +1,11 @@
 {
-  "comment": "# rutherford-scattering 1.2.0-dev.4 Tue Mar 03 2026 13:04:44 GMT-0800 (Pacific Standard Time)",
+  "comment": "# rutherford-scattering 1.2.0-mouseFocusLiteral.0 Mon Mar 09 2026 15:46:12 GMT-0400 (Eastern Daylight Time)",
   "assert": {
     "sha": "4fa534de08d265643688965bf233cb73326c3cb7",
     "branch": "main"
   },
   "axon": {
-    "sha": "f39f107a8c3791fb02a192ab8c83302352afa64f",
+    "sha": "30b3bef561e2aeb3d661a243681b9f7f87560044",
     "branch": "main"
   },
   "brand": {
@@ -13,7 +13,7 @@
     "branch": "main"
   },
   "chipper": {
-    "sha": "b6731ad51f0cb658e3aa79c4e1fdda335e6e2b35",
+    "sha": "13982fc774e29d6818558f36a6ef47f7e3f80018",
     "branch": "main"
   },
   "dot": {
@@ -21,7 +21,7 @@
     "branch": "main"
   },
   "joist": {
-    "sha": "735b4e7c70ae1667e657888431852b371f24714b",
+    "sha": "a423d3a6911e9fb2a6c7d1e231cca14b46a263fd",
     "branch": "main"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "main"
   },
   "perennial-alias": {
-    "sha": "12fe4c8223c169499e419d4c14c9916e74edd746",
+    "sha": "db20d3ab5010e35ac334a00ea1c206491bc59ab2",
     "branch": "main"
   },
   "phet-core": {
@@ -41,19 +41,19 @@
     "branch": "main"
   },
   "phet-io-sim-specific": {
-    "sha": "7b61f7225a767537fa63e165d1887941de29a7fa",
+    "sha": "bc0442458896f22ec32e8bd6d705dfc6063b3564",
     "branch": "main"
   },
   "phet-io-wrappers": {
-    "sha": "e0ce1a85154b004ef5e60414fa2012ecf4339269",
+    "sha": "0326b411245913ed731cbe110f9fa330a6ba85fb",
     "branch": "main"
   },
   "phetcommon": {
-    "sha": "3517f9a7c3f5cc0cab593c3e47562db967e69144",
+    "sha": "b0c29f234a943464060d573a1d1f8a99293ee3b7",
     "branch": "main"
   },
   "phetmarks": {
-    "sha": "11f35bc34cb55c7fe738acda7131721ae215c320",
+    "sha": "1307c90dac6bede112959377a096ae6c0286a888",
     "branch": "main"
   },
   "query-string-machine": {
@@ -61,15 +61,15 @@
     "branch": "main"
   },
   "rutherford-scattering": {
-    "sha": "024049500d9365e9e3d6206e692b974e0c89f63f",
-    "branch": "main"
+    "sha": "62952ca35d828371432da54cdfcd243da115a32c",
+    "branch": "mouseFocusLiteral"
   },
   "scenery": {
-    "sha": "6ac45521436e26f51c245746215e6e053d6e3532",
-    "branch": "main"
+    "sha": "c3b30a2ea31c6a94eaf6ec8cb8b720b04ce63b1a",
+    "branch": "mouseFocusLiteral"
   },
   "scenery-phet": {
-    "sha": "1da4a5db1fce18564d2ef24e85e1ce8695d8d5cc",
+    "sha": "76f982db81b766fc9986edfcf39e8dcd3ee8b973",
     "branch": "main"
   },
   "sherpa": {
@@ -77,7 +77,7 @@
     "branch": "main"
   },
   "shred": {
-    "sha": "2d1a15adb8638cda3112f74a43ba6d3d90789b01",
+    "sha": "7e7fb94c840999066e6a630012dd10279c6af87a",
     "branch": "main"
   },
   "studio": {
@@ -85,7 +85,7 @@
     "branch": "main"
   },
   "sun": {
-    "sha": "b20f38f6f384857019f70099ea2be072b2dbeddc",
+    "sha": "e0b3094b0dfc9ff4331f5b4c0902777ffe56fb8f",
     "branch": "main"
   },
   "tambo": {
