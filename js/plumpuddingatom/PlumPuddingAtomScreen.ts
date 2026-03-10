@@ -12,6 +12,7 @@ import Image from '../../../scenery/js/nodes/Image.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import plumPuddingAtomScreenIcon_png from '../../images/plumPuddingAtomScreenIcon_png.js';
 import RSColors from '../common/RSColors.js';
+import RutherfordScatteringKeyboardHelpContent from '../common/view/RutherfordScatteringKeyboardHelpContent.js';
 import rutherfordScattering from '../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../RutherfordScatteringFluent.js';
 import PlumPuddingAtomModel from './model/PlumPuddingAtomModel.js';
@@ -28,6 +29,7 @@ class PlumPuddingAtomScreen extends Screen<PlumPuddingAtomModel, PlumPuddingAtom
         maxIconHeightProportion: 1,
         fill: RSColors.screenIconFillColorProperty
       } ),
+      createKeyboardHelpNode: () => new RutherfordScatteringKeyboardHelpContent(),
       tandem: Tandem.OPT_OUT
     };
 
