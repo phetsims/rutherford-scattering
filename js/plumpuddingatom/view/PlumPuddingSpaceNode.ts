@@ -49,10 +49,10 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
 
     this.atomNode = new PlumPuddingAtomNode( this.bounds );
 
-    // calculate center positioning of plum pudding Node
-    const imageX = this.bounds.centerX - this.atomNode.width / 2;
-    const imageY = this.bounds.centerY - this.atomNode.height / 2;
-    this.atomNodeRect = { x: imageX, y: imageY, width: this.atomNode.width, height: this.atomNode.height };
+    // calculate center positioning of plum pudding Node using display dimensions (not the full-res node size)
+    const imageX = this.bounds.centerX - this.atomNode.displayWidth / 2;
+    const imageY = this.bounds.centerY - this.atomNode.displayHeight / 2;
+    this.atomNodeRect = { x: imageX, y: imageY, width: this.atomNode.displayWidth, height: this.atomNode.displayHeight };
     this.atomCanvas = rasterizeNode( this.atomNode, { useCanvas: true, wrap: false } ).image;
 
     this.invalidatePaint();

@@ -43,13 +43,20 @@ const ELECTRON_POSITIONS: [ number, number ][] = [
 
 class PlumPuddingAtomNode extends Node {
 
+  // The intended display dimensions after scaling — used by PlumPuddingSpaceNode for drawImage positioning.
+  // The node itself is kept at natural image resolution so rasterizeNode captures full detail.
+  public readonly displayWidth: number;
+  public readonly displayHeight: number;
+
   public constructor( spaceNodeBounds: Bounds2, options?: NodeOptions ) {
     super( options );
 
     // the plum pudding pngs were switched out and in order to match the exact size rendered in the original the scale
     // needs to be fudged a little bit.
     const scale = Math.min( spaceNodeBounds.width, spaceNodeBounds.height ) /
-                  ( Math.max( plumPudding_png.width, plumPudding_png.height ) ) + 0.0025;
+                  ( Math.max( plumPudding_png.width, plumPudding_png.height ) ) + 0.0005;
+
+    // Electron radius in image-pixel space: after drawImage downsamples by `scale`, the visual radius = ELECTRON_RADIUS.
     const electronRadius = ELECTRON_RADIUS / scale;
 
     this.addChild( new Image( plumPudding_png ) );
@@ -61,7 +68,10 @@ class PlumPuddingAtomNode extends Node {
       this.addChild( electron );
     }
 
-    this.setScaleMagnitude( scale );
+    // Do NOT call setScaleMagnitude — keep the node at natural image resolution so rasterizeNode
+    // captures full detail. PlumPuddingSpaceNode uses displayWidth/displayHeight for drawImage.
+    this.displayWidth = plumPudding_png.width * scale;
+    this.displayHeight = plumPudding_png.height * scale;
   }
 }
 
