@@ -62,8 +62,6 @@ type StringsType = {
     'nuclearScaleViewStringProperty': LocalizedStringProperty;
     'switchScaleStringProperty': LocalizedStringProperty;
     'switchScaleDescriptionStringProperty': LocalizedStringProperty;
-    'otherViewingStreamingOptionsStringProperty': LocalizedStringProperty;
-    'otherOptionsDescriptionStringProperty': LocalizedStringProperty;
   }
 };
 

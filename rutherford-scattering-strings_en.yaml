@@ -57,5 +57,3 @@ a11y:
   nuclearScaleView: Nuclear Scale View
   switchScale: Switch Scale
   switchScaleDescription: Observe experiments at nuclear or atomic scales.
-  otherViewingStreamingOptions: Other/Viewing/Streaming Options
-  otherOptionsDescription: Observe details by pausing continuous stream, or streaming in steps.

@@ -69,8 +69,6 @@ addToMapIfDefined( 'a11y_atomicScaleView', 'a11y.atomicScaleViewStringProperty' 
 addToMapIfDefined( 'a11y_nuclearScaleView', 'a11y.nuclearScaleViewStringProperty' );
 addToMapIfDefined( 'a11y_switchScale', 'a11y.switchScaleStringProperty' );
 addToMapIfDefined( 'a11y_switchScaleDescription', 'a11y.switchScaleDescriptionStringProperty' );
-addToMapIfDefined( 'a11y_otherViewingStreamingOptions', 'a11y.otherViewingStreamingOptionsStringProperty' );
-addToMapIfDefined( 'a11y_otherOptionsDescription', 'a11y.otherOptionsDescriptionStringProperty' );
 
 // A function that creates contents for a new Fluent file, which will be needed if any string changes.
 const createFluentFile = (): string => {
@@ -133,9 +131,7 @@ const RutherfordScatteringFluent = {
     atomicScaleViewStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_atomicScaleView', _.get( RutherfordScatteringStrings, 'a11y.atomicScaleViewStringProperty' ) ),
     nuclearScaleViewStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_nuclearScaleView', _.get( RutherfordScatteringStrings, 'a11y.nuclearScaleViewStringProperty' ) ),
     switchScaleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_switchScale', _.get( RutherfordScatteringStrings, 'a11y.switchScaleStringProperty' ) ),
-    switchScaleDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_switchScaleDescription', _.get( RutherfordScatteringStrings, 'a11y.switchScaleDescriptionStringProperty' ) ),
-    otherViewingStreamingOptionsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_otherViewingStreamingOptions', _.get( RutherfordScatteringStrings, 'a11y.otherViewingStreamingOptionsStringProperty' ) ),
-    otherOptionsDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_otherOptionsDescription', _.get( RutherfordScatteringStrings, 'a11y.otherOptionsDescriptionStringProperty' ) )
+    switchScaleDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_switchScaleDescription', _.get( RutherfordScatteringStrings, 'a11y.switchScaleDescriptionStringProperty' ) )
   }
 };
 
