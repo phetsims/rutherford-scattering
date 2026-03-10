@@ -49,15 +49,11 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
       legendPanel,
       particlePropertiesPanel
     ];
-    const controlPanel = this.createControlPanel( panels );
-    this.addChild( controlPanel );
+    const controlPanels = this.createControlPanelVBox( panels );
+    this.addChild( controlPanels );
 
-    if ( controlPanel ) {
-      const newOrder = _.union( [ controlPanel ], this.pdomControlAreaNode.pdomOrder );
-      this.pdomControlAreaNode.setPDOMOrder( newOrder );
-    }
-
-    this.setPlayAreaPDOMOrder( panels );
+    this.setPlayAreaPDOMOrder( [ controlPanels ] );
+    this.setControlAreaPDOMOrder();
   }
 
 
