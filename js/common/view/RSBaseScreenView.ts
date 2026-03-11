@@ -29,7 +29,6 @@ import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 import BeamNode from './BeamNode.js';
 import RSControlPanelVBox from './RSControlPanelVBox.js';
-import RSScreenSummaryNode from './RSScreenSummaryNode.js';
 import ScaleInfoNode from './ScaleInfoNode.js';
 import TargetMaterialNode from './TargetMaterialNode.js';
 import TinyBox from './TinyBox.js';
@@ -81,10 +80,7 @@ abstract class RSBaseScreenView extends ScreenView {
     const options = optionize<RSBaseScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
       includeElectronLegend: true, // should the particle legend include an entry for the electron?
       includePlumPuddingLegend: false, // should the particle legend include an entry for the plum pudding cloud?
-      additionalControlPanels: null, // {Panel[]|null} additional control panels, added below the common panels
-
-      // pdom
-      screenSummaryContent: new RSScreenSummaryNode()
+      additionalControlPanels: null // {Panel[]|null} additional control panels, added below the common panels
     }, providedOptions );
 
     super( options );

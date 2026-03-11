@@ -47,7 +47,12 @@ addToMapIfDefined( 'nucleus', 'nucleusStringProperty' );
 addToMapIfDefined( 'electronEnergyLevel', 'electronEnergyLevelStringProperty' );
 addToMapIfDefined( 'alphaParticleTrace', 'alphaParticleTraceStringProperty' );
 addToMapIfDefined( 'legend', 'legendStringProperty' );
-addToMapIfDefined( 'a11y_screenSummary', 'a11y.screenSummaryStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_rutherfordAtom_playArea', 'a11y.screenSummary.rutherfordAtom.playAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_rutherfordAtom_controlArea', 'a11y.screenSummary.rutherfordAtom.controlAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_rutherfordAtom_interactionHint', 'a11y.screenSummary.rutherfordAtom.interactionHintStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_plumPuddingAtom_playArea', 'a11y.screenSummary.plumPuddingAtom.playAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_plumPuddingAtom_controlArea', 'a11y.screenSummary.plumPuddingAtom.controlAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_plumPuddingAtom_interactionHint', 'a11y.screenSummary.plumPuddingAtom.interactionHintStringProperty' );
 addToMapIfDefined( 'a11y_observationWindow', 'a11y.observationWindowStringProperty' );
 addToMapIfDefined( 'a11y_atomSpaceDescription', 'a11y.atomSpaceDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_nucleusSpaceDescription', 'a11y.nucleusSpaceDescriptionStringProperty' );
@@ -110,7 +115,18 @@ const RutherfordScatteringFluent = {
     "0nuclearScaleStringProperty": _.get( RutherfordScatteringStrings, 'pattern.0nuclearScaleStringProperty' )
   },
   a11y: {
-    screenSummaryStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary', _.get( RutherfordScatteringStrings, 'a11y.screenSummaryStringProperty' ) ),
+    screenSummary: {
+      rutherfordAtom: {
+        playAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_rutherfordAtom_playArea', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.rutherfordAtom.playAreaStringProperty' ) ),
+        controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_rutherfordAtom_controlArea', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.rutherfordAtom.controlAreaStringProperty' ) ),
+        interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_rutherfordAtom_interactionHint', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.rutherfordAtom.interactionHintStringProperty' ) )
+      },
+      plumPuddingAtom: {
+        playAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_plumPuddingAtom_playArea', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.plumPuddingAtom.playAreaStringProperty' ) ),
+        controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_plumPuddingAtom_controlArea', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.plumPuddingAtom.controlAreaStringProperty' ) ),
+        interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_plumPuddingAtom_interactionHint', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.plumPuddingAtom.interactionHintStringProperty' ) )
+      }
+    },
     observationWindowStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_observationWindow', _.get( RutherfordScatteringStrings, 'a11y.observationWindowStringProperty' ) ),
     atomSpaceDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_atomSpaceDescription', _.get( RutherfordScatteringStrings, 'a11y.atomSpaceDescriptionStringProperty' ) ),
     nucleusSpaceDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_nucleusSpaceDescription', _.get( RutherfordScatteringStrings, 'a11y.nucleusSpaceDescriptionStringProperty' ) ),

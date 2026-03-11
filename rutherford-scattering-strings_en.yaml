@@ -22,16 +22,27 @@ legend: Legend
 pattern.0atomicScale: '{0} m (atomic scale)'
 pattern.0nuclearScale: '{0} m (nuclear scale)'
 a11y:
-  screenSummary: >-
-    On this screen, the Play Area has a source that can stream Alpha particles
-    onto a thin foil. A highly magnified view of the foil is shown in an
-    observation window. Sliders adjust energy of the alpha particles and the
-    number of protons and neutrons comprising the atoms in the foil. The Control
-    Area has radio buttons to toggle between atomic and nuclear scale views,
-    buttons to pause and step incrementally through observations, and a button
-    to reset the sim. Stream alpha particles to begin observations. Look for
-    alpha particles and atom sliders to play, or read on for details about the
-    observation window.
+  screenSummary:
+    rutherfordAtom:
+      playArea: >-
+        A source that can stream alpha particles onto a thin foil. 
+        An observation window shows a highly magnified view of the foil. 
+        You can adjust the energy of the alpha particles and the number of protons 
+        and neutrons comprising the atoms in the foil.
+      controlArea: >-
+        You can choose between atomic and nuclear scale views of the experiment. 
+        There are buttons to pause and step incrementally through observations and a 
+        button to reset the sim.
+      interactionHint: Turn on alpha particle source to begin observations.
+    plumPuddingAtom:
+      playArea: >-
+        A source that can stream alpha particles onto a thin foil. 
+        An observation window shows a highly magnified view of the foil. 
+        You can adjust the energy of the alpha particles.
+      controlArea: >-
+        There are buttons to pause and step incrementally through observations and a 
+        button to reset the sim.
+      interactionHint: Turn on alpha particle source to begin observations.
   observationWindow: Observation Window
   atomSpaceDescription: >-
     An atomic scale view of the foil is shown. Portions of five tightly packed

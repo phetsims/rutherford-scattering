@@ -28,6 +28,7 @@ import RSQueryParameters from '../../common/RSQueryParameters.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
+import RSScreenSummaryContent from '../../common/view/RSScreenSummaryContent.js';
 import ScaleInfoNode from '../../common/view/ScaleInfoNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
@@ -60,7 +61,8 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     } );
 
     super( model, nucleusScaleStringProperty, {
-      includeElectronLegend: false
+      includeElectronLegend: false,
+      screenSummaryContent: new RSScreenSummaryContent( 'rutherfordAtom' )
     } );
 
     // scale info for the 'atom' scene, only visible when atom scene is selected

@@ -15,6 +15,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
+import RSScreenSummaryContent from '../../common/view/RSScreenSummaryContent.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
@@ -31,7 +32,8 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
     } );
 
     super( model, atomicScaleStringProperty, {
-      includePlumPuddingLegend: true
+      includePlumPuddingLegend: true,
+      screenSummaryContent: new RSScreenSummaryContent( 'plumPuddingAtom' )
     } );
 
     // create the new control panel
