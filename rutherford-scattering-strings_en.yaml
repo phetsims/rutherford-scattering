@@ -37,15 +37,15 @@ a11y:
     An atomic scale view of the foil is shown. Portions of five tightly packed
     atoms are visible, with three nuclei visible in the scene.
   nucleusSpaceDescription: >-
-    An nuclear scale view of the foil is shown. A single atomic nucleus is
+    A nuclear scale view of the foil is shown. A single nucleus is
     visible with a representative number of protons and neutrons.
-  toggleAlphaParticle: Toggle Alpha Particle Stream
+  toggleAlphaParticle: Alpha Particle Source
   alphaParticlesHelpText: Start and stop stream of alpha particles.
   alphaParticleSettings: Alpha Particle Settings
-  energySliderDescription: Adjust the energy of particles in the alpha particle stream
+  energySliderDescription: Adjust the energy of particles in the alpha particle stream.
   energy: Energy
   traces: Traces
-  traceCheckboxDescription: Observe particles in stream with or without traces
+  traceCheckboxDescription: Observe particles in stream with or without traces.
   atomSettings: Atom Settings
   protonsValuePattern: Protons
   protonsPerAtomValuePattern: Protons per Atom { $protons }
@@ -53,7 +53,7 @@ a11y:
   neutronsValuePattern: Neutrons
   neutronsPerAtomValuePattern: Neutrons per Atom { $neutrons }
   neutronSliderDescription: Adjust number of neutrons per atom in foil.
-  atomicScaleView: Atomic Scale View
-  nuclearScaleView: Nuclear Scale View
-  switchScale: Switch Scale
+  atomicScaleView: Atomic Scale
+  nuclearScaleView: Nuclear Scale
+  switchScale: Experiment View
   switchScaleDescription: Observe experiments at nuclear or atomic scales.
