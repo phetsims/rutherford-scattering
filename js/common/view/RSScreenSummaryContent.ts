@@ -1,4 +1,4 @@
-// Copyright 2018-2026, University of Colorado Boulder
+// Copyright 2026, University of Colorado Boulder
 
 /**
  * Screen summary content for Rutherford Scattering screens. Provides play area, control area,
