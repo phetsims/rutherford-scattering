@@ -9,7 +9,7 @@
     "branch": "HEAD"
   },
   "brand": {
-    "sha": "a73aa1677fa7f0d13c2acc195e268bbf52421dea",
+    "sha": "5991b8bcf05a3d07d138f4d18bde1cff73ac791f",
     "branch": "HEAD"
   },
   "chipper": {
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "be73ca8b451497599e3373ca69f0eb1d12c9cef0",
+    "sha": "5e6e2c085dc79d6eee41b11794f8b5bef8160ddc",
     "branch": "1.1"
   },
   "scenery": {
