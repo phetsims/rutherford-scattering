@@ -9,7 +9,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import required from '../../../../phet-core/js/required.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import rutherfordScattering from '../../rutherfordScattering.js';
@@ -23,7 +23,7 @@ const nucleusSpaceDescriptionStringProperty = RutherfordScatteringFluent.a11y.nu
 
 type SelfOptions = EmptySelfOptions;
 
-type NucleusSpaceNodeOptions = SelfOptions & ParticleSpaceNodeOptions;
+type NucleusSpaceNodeOptions = SelfOptions & WithRequired<ParticleSpaceNodeOptions, 'canvasBounds'>;
 
 class NucleusSpaceNode extends ParticleSpaceNode {
 
@@ -36,9 +36,6 @@ class NucleusSpaceNode extends ParticleSpaceNode {
     providedOptions: NucleusSpaceNodeOptions
   ) {
     const options = optionize<NucleusSpaceNodeOptions, SelfOptions, ParticleSpaceNodeOptions>()( {
-
-      // {Bounds2}
-      canvasBounds: required( providedOptions.canvasBounds ),
 
       // pdom
       tagName: 'div',

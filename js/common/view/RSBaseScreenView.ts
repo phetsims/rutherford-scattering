@@ -28,8 +28,7 @@ import RSBaseModel from '../model/RSBaseModel.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 import BeamNode from './BeamNode.js';
-import RSControlPanel from './RSControlPanel.js';
-import RSScreenSummaryNode from './RSScreenSummaryNode.js';
+import RSControlPanelVBox from './RSControlPanelVBox.js';
 import ScaleInfoNode from './ScaleInfoNode.js';
 import TargetMaterialNode from './TargetMaterialNode.js';
 import TinyBox from './TinyBox.js';
@@ -38,9 +37,6 @@ import TinyBox from './TinyBox.js';
 const alphaParticlesStringProperty = RutherfordScatteringFluent.alphaParticlesStringProperty;
 const toggleAlphaParticleStringProperty = RutherfordScatteringFluent.a11y.toggleAlphaParticleStringProperty;
 const alphaParticlesHelpTextStringProperty = RutherfordScatteringFluent.a11y.alphaParticlesHelpTextStringProperty;
-
-const otherViewingStreamingOptionsStringProperty = RutherfordScatteringFluent.a11y.otherViewingStreamingOptionsStringProperty;
-const otherOptionsDescriptionStringProperty = RutherfordScatteringFluent.a11y.otherOptionsDescriptionStringProperty;
 
 const GUN_ROTATION = -Math.PI / 2; // so the laser pointer points straight up
 
@@ -71,11 +67,9 @@ abstract class RSBaseScreenView extends ScreenView {
   // Scale info, visibility can be manipulated by subtypes
   protected readonly scaleInfoNode: ScaleInfoNode;
 
-  protected readonly controlPanel: RSControlPanel;
-
   // These elements are expose for pdom ordering.
   private readonly timeControlButtons: TimeControlNode;
-  private readonly viewingStreamingOptionsNode: Node;
+  private readonly resetAllButton: ResetAllButton;
 
   /**
    * @param model
@@ -86,10 +80,7 @@ abstract class RSBaseScreenView extends ScreenView {
     const options = optionize<RSBaseScreenViewOptions, SelfOptions, ScreenViewOptions>()( {
       includeElectronLegend: true, // should the particle legend include an entry for the electron?
       includePlumPuddingLegend: false, // should the particle legend include an entry for the plum pudding cloud?
-      additionalControlPanels: null, // {Panel[]|null} additional control panels, added below the common panels
-
-      // pdom
-      screenSummaryContent: new RSScreenSummaryNode()
+      additionalControlPanels: null // {Panel[]|null} additional control panels, added below the common panels
     }, providedOptions );
 
     super( options );
@@ -158,8 +149,6 @@ abstract class RSBaseScreenView extends ScreenView {
     this.spaceNode = this.createSpaceNode( model, this.showAlphaTraceProperty, modelViewTransform, spaceNodeBounds );
     this.addChild( this.spaceNode );
 
-    this.controlPanel = this.createControlPanel( [] );
-
     // dashed lines that connect the tiny box and space
     const dashedLines = new Path( new Shape()
       .moveTo( tinyBoxNode.centerX, tinyBoxNode.top )
@@ -197,7 +186,7 @@ abstract class RSBaseScreenView extends ScreenView {
     this.addChild( this.timeControlButtons );
 
     // reset all button
-    const resetAllButton = new ResetAllButton( {
+    this.resetAllButton = new ResetAllButton( {
       listener: () => {
         this.showAlphaTraceProperty.reset();
         model.reset();
@@ -205,25 +194,22 @@ abstract class RSBaseScreenView extends ScreenView {
       right: this.layoutBounds.maxX - 48,
       bottom: this.layoutBounds.bottom - 20
     } );
-    this.addChild( resetAllButton );
-
-    // pdom
-    this.viewingStreamingOptionsNode = new Node( {
-      accessibleHeading: otherViewingStreamingOptionsStringProperty,
-      descriptionContent: otherOptionsDescriptionStringProperty
-    } );
-    this.addChild( this.viewingStreamingOptionsNode );
-
-    this.pdomControlAreaNode.pdomOrder = [ resetAllButton ];
+    this.addChild( this.resetAllButton );
   }
 
   protected setPlayAreaPDOMOrder( controlPanels: Node[] ): void {
     this.pdomPlayAreaNode.setPDOMOrder( [
       this.spaceNode,
       this.gunNode,
-      this.viewingStreamingOptionsNode,
-      this.timeControlButtons,
       ...controlPanels
+    ] );
+  }
+
+  protected setControlAreaPDOMOrder( sceneRadioButtons?: Node | undefined ): void {
+    this.pdomControlAreaNode.setPDOMOrder( [
+      ...( sceneRadioButtons ? [ sceneRadioButtons ] : [] ),
+      this.timeControlButtons,
+      this.resetAllButton
     ] );
   }
 
@@ -231,8 +217,8 @@ abstract class RSBaseScreenView extends ScreenView {
    * Create a control panel - used by subtypes to generate a control panel from a set
    * of panels.
    */
-  protected createControlPanel( panels: Array<Panel> ): RSControlPanel {
-    return new RSControlPanel( panels, {
+  protected createControlPanelVBox( panels: Array<Panel> ): RSControlPanelVBox {
+    return new RSControlPanelVBox( panels, {
       top: this.spaceNode.top,
       left: this.spaceNode.right + RSConstants.PANEL_SPACE_MARGIN
     } );

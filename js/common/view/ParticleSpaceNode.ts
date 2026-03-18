@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * The space in which atoms and alpha particles are rendered.  The particles can be represented two
@@ -15,7 +15,7 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import required from '../../../../phet-core/js/required.js';
+import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import CanvasNode, { CanvasNodeOptions } from '../../../../scenery/js/nodes/CanvasNode.js';
@@ -31,7 +31,7 @@ type SelfOptions = {
   particleTraceColorProperty?: TReadOnlyProperty<Color>;
 };
 
-export type ParticleSpaceNodeOptions = SelfOptions & CanvasNodeOptions;
+export type ParticleSpaceNodeOptions = SelfOptions & WithRequired<CanvasNodeOptions, 'canvasBounds'>;
 
 // constants
 const SPACE_BORDER_WIDTH = 2;
@@ -59,9 +59,6 @@ class ParticleSpaceNode extends CanvasNode {
    */
   public constructor( atomSpace: AtomSpace, showAlphaTraceProperty: Property<boolean>, modelViewTransform: ModelViewTransform2, providedOptions: ParticleSpaceNodeOptions ) {
     const options = optionize<ParticleSpaceNodeOptions, SelfOptions, CanvasNodeOptions>()( {
-
-      // {Bounds2}
-      canvasBounds: required( providedOptions.canvasBounds ),
       particleStyle: 'nucleus', // 'nucleus'|'particle'
       particleTraceColorProperty: new Property( new Color( 255, 0, 255 ) )
     }, providedOptions );
@@ -93,7 +90,7 @@ class ParticleSpaceNode extends CanvasNode {
       alphaParticle = ParticleNodeFactory.createParticleAlpha();
     }
     affirm( alphaParticle, 'There should be an alphaParticle' );
-    alphaParticle.toImage( ( image, x, y ) => {
+    alphaParticle.toImage( image => {
       this.alphaParticleImage = image;
       this.particleImageHalfWidth = this.alphaParticleImage.width / 2;
       this.particleImageHalfHeight = this.alphaParticleImage.height / 2;
@@ -184,8 +181,7 @@ class ParticleSpaceNode extends CanvasNode {
             const length = particle.positions.length;
             const alpha = Utils.linear( length - FADEOUT_SEGMENTS, length, 0, 0.5, i );
             const color = this.particleTraceColorProperty.value;
-            const strokeStyle = StringUtils.format( `rgba(${color.r},${color.g},${color.b},{0})`, alpha );
-            context.strokeStyle = strokeStyle;
+            context.strokeStyle = StringUtils.format( `rgba(${color.r},${color.g},${color.b},{0})`, alpha );
             context.stroke();
             context.closePath();
           }

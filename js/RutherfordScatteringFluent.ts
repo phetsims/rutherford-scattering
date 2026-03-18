@@ -45,7 +45,12 @@ addToMapIfDefined( 'nucleus', 'nucleusStringProperty' );
 addToMapIfDefined( 'electronEnergyLevel', 'electronEnergyLevelStringProperty' );
 addToMapIfDefined( 'alphaParticleTrace', 'alphaParticleTraceStringProperty' );
 addToMapIfDefined( 'legend', 'legendStringProperty' );
-addToMapIfDefined( 'a11y_screenSummary', 'a11y.screenSummaryStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_rutherfordAtom_playArea', 'a11y.screenSummary.rutherfordAtom.playAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_rutherfordAtom_controlArea', 'a11y.screenSummary.rutherfordAtom.controlAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_rutherfordAtom_interactionHint', 'a11y.screenSummary.rutherfordAtom.interactionHintStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_plumPuddingAtom_playArea', 'a11y.screenSummary.plumPuddingAtom.playAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_plumPuddingAtom_controlArea', 'a11y.screenSummary.plumPuddingAtom.controlAreaStringProperty' );
+addToMapIfDefined( 'a11y_screenSummary_plumPuddingAtom_interactionHint', 'a11y.screenSummary.plumPuddingAtom.interactionHintStringProperty' );
 addToMapIfDefined( 'a11y_observationWindow', 'a11y.observationWindowStringProperty' );
 addToMapIfDefined( 'a11y_atomSpaceDescription', 'a11y.atomSpaceDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_nucleusSpaceDescription', 'a11y.nucleusSpaceDescriptionStringProperty' );
@@ -65,8 +70,6 @@ addToMapIfDefined( 'a11y_atomicScaleView', 'a11y.atomicScaleViewStringProperty' 
 addToMapIfDefined( 'a11y_nuclearScaleView', 'a11y.nuclearScaleViewStringProperty' );
 addToMapIfDefined( 'a11y_switchScale', 'a11y.switchScaleStringProperty' );
 addToMapIfDefined( 'a11y_switchScaleDescription', 'a11y.switchScaleDescriptionStringProperty' );
-addToMapIfDefined( 'a11y_otherViewingStreamingOptions', 'a11y.otherViewingStreamingOptionsStringProperty' );
-addToMapIfDefined( 'a11y_otherOptionsDescription', 'a11y.otherOptionsDescriptionStringProperty' );
 
 // A function that creates contents for a new Fluent file, which will be needed if any string changes.
 const createFluentFile = (): string => {
@@ -108,7 +111,18 @@ const RutherfordScatteringFluent = {
     "0nuclearScaleStringProperty": _.get( RutherfordScatteringStrings, 'pattern.0nuclearScaleStringProperty' )
   },
   a11y: {
-    screenSummaryStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary', _.get( RutherfordScatteringStrings, 'a11y.screenSummaryStringProperty' ) ),
+    screenSummary: {
+      rutherfordAtom: {
+        playAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_rutherfordAtom_playArea', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.rutherfordAtom.playAreaStringProperty' ) ),
+        controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_rutherfordAtom_controlArea', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.rutherfordAtom.controlAreaStringProperty' ) ),
+        interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_rutherfordAtom_interactionHint', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.rutherfordAtom.interactionHintStringProperty' ) )
+      },
+      plumPuddingAtom: {
+        playAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_plumPuddingAtom_playArea', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.plumPuddingAtom.playAreaStringProperty' ) ),
+        controlAreaStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_plumPuddingAtom_controlArea', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.plumPuddingAtom.controlAreaStringProperty' ) ),
+        interactionHintStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_screenSummary_plumPuddingAtom_interactionHint', _.get( RutherfordScatteringStrings, 'a11y.screenSummary.plumPuddingAtom.interactionHintStringProperty' ) )
+      }
+    },
     observationWindowStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_observationWindow', _.get( RutherfordScatteringStrings, 'a11y.observationWindowStringProperty' ) ),
     atomSpaceDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_atomSpaceDescription', _.get( RutherfordScatteringStrings, 'a11y.atomSpaceDescriptionStringProperty' ) ),
     nucleusSpaceDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_nucleusSpaceDescription', _.get( RutherfordScatteringStrings, 'a11y.nucleusSpaceDescriptionStringProperty' ) ),
@@ -127,9 +141,7 @@ const RutherfordScatteringFluent = {
     atomicScaleViewStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_atomicScaleView', _.get( RutherfordScatteringStrings, 'a11y.atomicScaleViewStringProperty' ) ),
     nuclearScaleViewStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_nuclearScaleView', _.get( RutherfordScatteringStrings, 'a11y.nuclearScaleViewStringProperty' ) ),
     switchScaleStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_switchScale', _.get( RutherfordScatteringStrings, 'a11y.switchScaleStringProperty' ) ),
-    switchScaleDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_switchScaleDescription', _.get( RutherfordScatteringStrings, 'a11y.switchScaleDescriptionStringProperty' ) ),
-    otherViewingStreamingOptionsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_otherViewingStreamingOptions', _.get( RutherfordScatteringStrings, 'a11y.otherViewingStreamingOptionsStringProperty' ) ),
-    otherOptionsDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_otherOptionsDescription', _.get( RutherfordScatteringStrings, 'a11y.otherOptionsDescriptionStringProperty' ) )
+    switchScaleDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_switchScaleDescription', _.get( RutherfordScatteringStrings, 'a11y.switchScaleDescriptionStringProperty' ) )
   }
 };
 

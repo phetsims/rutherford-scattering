@@ -82,7 +82,7 @@ class AtomPropertiesPanel extends Panel {
   /**
    * create content for the panel
    */
-  public static createPanelContent( model: RutherfordAtomModel, providedOptions?: AtomPropertiesPanelContentOptions ): Node {
+  public static createPanelContent( model: RutherfordAtomModel, providedOptions?: AtomPropertiesPanelContentOptions ): AtomPropertiesPanelContent {
     return new AtomPropertiesPanelContent( model, providedOptions );
   }
 
@@ -101,6 +101,8 @@ type ContentSelfOptions = EmptySelfOptions;
 type AtomPropertiesPanelContentOptions = ContentSelfOptions & PanelOptions;
 
 class AtomPropertiesPanelContent extends VBox {
+  public readonly protonNumberControl: NumberControl;
+  public readonly neutronNumberControl: NumberControl;
   private readonly disposeContent: () => void;
 
   /**
@@ -246,6 +248,9 @@ class AtomPropertiesPanelContent extends VBox {
       children: [ protonNumberControl, neutronNumberControl ]
     } );
 
+    this.protonNumberControl = protonNumberControl;
+    this.neutronNumberControl = neutronNumberControl;
+
     this.disposeContent = () => {
       // dispose number controls
       protonNumberControl.dispose();
@@ -266,4 +271,5 @@ class AtomPropertiesPanelContent extends VBox {
 rutherfordScattering.register( 'AtomPropertiesPanelContent', AtomPropertiesPanelContent );
 
 rutherfordScattering.register( 'AtomPropertiesPanel', AtomPropertiesPanel );
+export { AtomPropertiesPanelContent };
 export default AtomPropertiesPanel;

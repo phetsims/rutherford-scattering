@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Factory for creating particle nodes.
@@ -26,7 +26,7 @@ const PROTON_COLOR = 'rgb(255,69,0)';
 const NEUTRON_COLOR = 'rgb(192,192,192)';
 const PARTICLE_COLOR = 'rgb(255,0,255)';
 const ENERGY_LEVEL_COLOR = 'rgb(128,128,128)';
-const ELECTRON_RADIUS = 2.5;
+export const ELECTRON_RADIUS = 2.5;
 const PROTON_RADIUS = 4;
 const NEUTRON_RADIUS = 4;
 const PARTICLE_RADIUS = 2;
@@ -39,8 +39,8 @@ const ParticleNodeFactory = {
   /**
    * Creates an electron node.
    */
-  createElectron(): Node {
-    return new ParticleNode( ELECTRON_RADIUS, ELECTRON_COLOR );
+  createElectron( radius = ELECTRON_RADIUS ): Node {
+    return new ParticleNode( radius, ELECTRON_COLOR, { stroke: 'black', lineWidth: 1.5 } );
   },
 
   /**
