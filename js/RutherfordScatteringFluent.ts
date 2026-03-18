@@ -8,8 +8,6 @@
 import FluentLibrary from '../../chipper/js/browser-and-node/FluentLibrary.js';
 import FluentConstant from '../../chipper/js/browser/FluentConstant.js';
 import FluentContainer from '../../chipper/js/browser/FluentContainer.js';
-import type {FluentVariable} from '../../chipper/js/browser/FluentPattern.js';
-import FluentPattern from '../../chipper/js/browser/FluentPattern.js';
 import rutherfordScattering from './rutherfordScattering.js';
 import RutherfordScatteringStrings from './RutherfordScatteringStrings.js';
 
@@ -60,10 +58,8 @@ addToMapIfDefined( 'a11y_traces', 'a11y.tracesStringProperty' );
 addToMapIfDefined( 'a11y_traceCheckboxDescription', 'a11y.traceCheckboxDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_atomSettings', 'a11y.atomSettingsStringProperty' );
 addToMapIfDefined( 'a11y_protonsValuePattern', 'a11y.protonsValuePatternStringProperty' );
-addToMapIfDefined( 'a11y_protonsPerAtomValuePattern', 'a11y.protonsPerAtomValuePatternStringProperty' );
 addToMapIfDefined( 'a11y_protonSliderDescription', 'a11y.protonSliderDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_neutronsValuePattern', 'a11y.neutronsValuePatternStringProperty' );
-addToMapIfDefined( 'a11y_neutronsPerAtomValuePattern', 'a11y.neutronsPerAtomValuePatternStringProperty' );
 addToMapIfDefined( 'a11y_neutronSliderDescription', 'a11y.neutronSliderDescriptionStringProperty' );
 addToMapIfDefined( 'a11y_atomicScaleView', 'a11y.atomicScaleViewStringProperty' );
 addToMapIfDefined( 'a11y_nuclearScaleView', 'a11y.nuclearScaleViewStringProperty' );
@@ -125,10 +121,8 @@ const RutherfordScatteringFluent = {
     traceCheckboxDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_traceCheckboxDescription', _.get( RutherfordScatteringStrings, 'a11y.traceCheckboxDescriptionStringProperty' ) ),
     atomSettingsStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_atomSettings', _.get( RutherfordScatteringStrings, 'a11y.atomSettingsStringProperty' ) ),
     protonsValuePatternStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_protonsValuePattern', _.get( RutherfordScatteringStrings, 'a11y.protonsValuePatternStringProperty' ) ),
-    protonsPerAtomValuePattern: new FluentPattern<{ protons: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_protonsPerAtomValuePattern', _.get( RutherfordScatteringStrings, 'a11y.protonsPerAtomValuePatternStringProperty' ), [{"name":"protons"}] ),
     protonSliderDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_protonSliderDescription', _.get( RutherfordScatteringStrings, 'a11y.protonSliderDescriptionStringProperty' ) ),
     neutronsValuePatternStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_neutronsValuePattern', _.get( RutherfordScatteringStrings, 'a11y.neutronsValuePatternStringProperty' ) ),
-    neutronsPerAtomValuePattern: new FluentPattern<{ neutrons: FluentVariable }>( fluentSupport.bundleProperty, 'a11y_neutronsPerAtomValuePattern', _.get( RutherfordScatteringStrings, 'a11y.neutronsPerAtomValuePatternStringProperty' ), [{"name":"neutrons"}] ),
     neutronSliderDescriptionStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_neutronSliderDescription', _.get( RutherfordScatteringStrings, 'a11y.neutronSliderDescriptionStringProperty' ) ),
     atomicScaleViewStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_atomicScaleView', _.get( RutherfordScatteringStrings, 'a11y.atomicScaleViewStringProperty' ) ),
     nuclearScaleViewStringProperty: new FluentConstant( fluentSupport.bundleProperty, 'a11y_nuclearScaleView', _.get( RutherfordScatteringStrings, 'a11y.nuclearScaleViewStringProperty' ) ),

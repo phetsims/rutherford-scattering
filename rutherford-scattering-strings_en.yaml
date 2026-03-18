@@ -48,10 +48,8 @@ a11y:
   traceCheckboxDescription: Observe particles in stream with or without traces
   atomSettings: Atom Settings
   protonsValuePattern: Protons
-  protonsPerAtomValuePattern: Protons per Atom { $protons }
   protonSliderDescription: Adjust number of protons per atom in foil.
   neutronsValuePattern: Neutrons
-  neutronsPerAtomValuePattern: Neutrons per Atom { $neutrons }
   neutronSliderDescription: Adjust number of neutrons per atom in foil.
   atomicScaleView: Atomic Scale View
   nuclearScaleView: Nuclear Scale View

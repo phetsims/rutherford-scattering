@@ -53,10 +53,8 @@ type StringsType = {
     'traceCheckboxDescriptionStringProperty': LocalizedStringProperty;
     'atomSettingsStringProperty': LocalizedStringProperty;
     'protonsValuePatternStringProperty': LocalizedStringProperty;
-    'protonsPerAtomValuePatternStringProperty': LocalizedStringProperty;
     'protonSliderDescriptionStringProperty': LocalizedStringProperty;
     'neutronsValuePatternStringProperty': LocalizedStringProperty;
-    'neutronsPerAtomValuePatternStringProperty': LocalizedStringProperty;
     'neutronSliderDescriptionStringProperty': LocalizedStringProperty;
     'atomicScaleViewStringProperty': LocalizedStringProperty;
     'nuclearScaleViewStringProperty': LocalizedStringProperty;
