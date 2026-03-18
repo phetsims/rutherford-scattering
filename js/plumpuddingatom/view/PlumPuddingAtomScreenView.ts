@@ -33,7 +33,11 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
 
     super( model, atomicScaleStringProperty, {
       includePlumPuddingLegend: true,
-      screenSummaryContent: new RSScreenSummaryContent( 'plumPuddingAtom' )
+      screenSummaryContent: new RSScreenSummaryContent( {
+        playAreaContent: RutherfordScatteringFluent.a11y.screenSummary.plumPuddingAtom.playAreaStringProperty,
+        controlAreaContent: RutherfordScatteringFluent.a11y.screenSummary.plumPuddingAtom.controlAreaStringProperty,
+        interactionHintContent: RutherfordScatteringFluent.a11y.screenSummary.plumPuddingAtom.interactionHintStringProperty
+      } )
     } );
 
     // create the new control panel

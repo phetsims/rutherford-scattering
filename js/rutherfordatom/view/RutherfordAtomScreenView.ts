@@ -62,7 +62,11 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
 
     super( model, nucleusScaleStringProperty, {
       includeElectronLegend: false,
-      screenSummaryContent: new RSScreenSummaryContent( 'rutherfordAtom' )
+      screenSummaryContent: new RSScreenSummaryContent( {
+        playAreaContent: RutherfordScatteringFluent.a11y.screenSummary.rutherfordAtom.playAreaStringProperty,
+        controlAreaContent: RutherfordScatteringFluent.a11y.screenSummary.rutherfordAtom.controlAreaStringProperty,
+        interactionHintContent: RutherfordScatteringFluent.a11y.screenSummary.rutherfordAtom.interactionHintStringProperty
+      } )
     } );
 
     // scale info for the 'atom' scene, only visible when atom scene is selected
