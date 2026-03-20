@@ -20,7 +20,6 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import CanvasNode, { CanvasNodeOptions } from '../../../../scenery/js/nodes/CanvasNode.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import AtomSpace from '../model/AtomSpace.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
@@ -203,7 +202,5 @@ class ParticleSpaceNode extends CanvasNode {
     }
   }
 }
-
-rutherfordScattering.register( 'ParticleSpaceNode', ParticleSpaceNode );
 
 export default ParticleSpaceNode;

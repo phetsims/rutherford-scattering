@@ -98,6 +98,4 @@ const RSColors = {
   } )
 };
 
-rutherfordScattering.register( 'RSColors', RSColors );
-
 export default RSColors;

@@ -12,7 +12,6 @@ import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
@@ -83,7 +82,5 @@ class NucleusSpaceNode extends ParticleSpaceNode {
     context.drawImage( this.atomNode.image, x, y, this.atomNode.image.width, this.atomNode.image.height );
   }
 }
-
-rutherfordScattering.register( 'NucleusSpaceNode', NucleusSpaceNode );
 
 export default NucleusSpaceNode;

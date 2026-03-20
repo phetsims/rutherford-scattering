@@ -10,7 +10,6 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 
 // constants
 const BACK_DEPTH = 4;
@@ -35,7 +34,5 @@ class TinyBox extends Path {
       .close(), options );
   }
 }
-
-rutherfordScattering.register( 'TinyBox', TinyBox );
 
 export default TinyBox;

@@ -16,7 +16,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import RadialGradient from '../../../../scenery/js/util/RadialGradient.js';
 import plumPuddingIcon_png from '../../../images/plumPuddingIcon_png.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColors from '../RSColors.js';
 
 // constants
@@ -131,8 +130,6 @@ const ParticleNodeFactory = {
   }
 
 };
-
-rutherfordScattering.register( 'ParticleNodeFactory', ParticleNodeFactory );
 
 type ParticleNodeSelfOptions = EmptySelfOptions;
 

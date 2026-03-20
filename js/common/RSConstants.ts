@@ -9,7 +9,6 @@
 
 import Dimension2 from '../../../dot/js/Dimension2.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
-import rutherfordScattering from '../rutherfordScattering.js';
 
 // constants
 const RSConstants = {
@@ -83,7 +82,5 @@ const RSConstants = {
   ATOM_BEAM_FILL: 'rgba(143,143,143,0.4)',
   NUCLEUS_BEAM_FILL: 'rgba(143,143,143,1)'
 };
-
-rutherfordScattering.register( 'RSConstants', RSConstants );
 
 export default RSConstants;

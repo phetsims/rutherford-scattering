@@ -22,7 +22,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel from '../../../../sun/js/Panel.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RSBaseModel from '../model/RSBaseModel.js';
 import RSColors from '../RSColors.js';
@@ -232,5 +231,4 @@ abstract class RSBaseScreenView extends ScreenView {
   ): Node;
 }
 
-rutherfordScattering.register( 'RSBaseScreenView', RSBaseScreenView );
 export default RSBaseScreenView;

@@ -13,7 +13,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import { rasterizeNode } from '../../../../scenery/js/util/rasterizeNode.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import RSColors from '../../common/RSColors.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
 
@@ -67,7 +66,5 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
       this.atomNodeRect.width, this.atomNodeRect.height );
   }
 }
-
-rutherfordScattering.register( 'PlumPuddingSpaceNode', PlumPuddingSpaceNode );
 
 export default PlumPuddingSpaceNode;

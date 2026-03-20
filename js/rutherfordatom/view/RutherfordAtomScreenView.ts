@@ -30,7 +30,6 @@ import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendP
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import RSScreenSummaryContent from '../../common/view/RSScreenSummaryContent.js';
 import ScaleInfoNode from '../../common/view/ScaleInfoNode.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import AtomParticleLegendPanel from './AtomParticleLegendPanel.js';
@@ -249,5 +248,4 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
   }
 }
 
-rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );
 export default RutherfordAtomScreenView;

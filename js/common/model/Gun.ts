@@ -10,7 +10,6 @@ import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import LinearFunction from '../../../../dot/js/LinearFunction.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import AlphaParticle from './AlphaParticle.js';
 import RSBaseModel from './RSBaseModel.js';
 
@@ -101,7 +100,5 @@ class Gun {
     this.onProperty.reset();
   }
 }
-
-rutherfordScattering.register( 'Gun', Gun );
 
 export default Gun;

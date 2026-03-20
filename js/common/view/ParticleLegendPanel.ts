@@ -16,7 +16,6 @@ import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
@@ -155,5 +154,4 @@ class ParticleLegendPanelContent extends VBox {
   }
 }
 
-rutherfordScattering.register( 'ParticleLegendPanel', ParticleLegendPanel );
 export default ParticleLegendPanel;

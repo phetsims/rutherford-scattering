@@ -16,7 +16,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 
@@ -268,8 +267,5 @@ class AtomPropertiesPanelContent extends VBox {
   }
 }
 
-rutherfordScattering.register( 'AtomPropertiesPanelContent', AtomPropertiesPanelContent );
-
-rutherfordScattering.register( 'AtomPropertiesPanel', AtomPropertiesPanel );
 export { AtomPropertiesPanelContent };
 export default AtomPropertiesPanel;

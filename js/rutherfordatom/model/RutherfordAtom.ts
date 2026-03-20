@@ -15,7 +15,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import AlphaParticle from '../../common/model/AlphaParticle.js';
 import Atom from '../../common/model/Atom.js';
 import RSConstants from '../../common/RSConstants.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordAtom extends Atom {
 
@@ -259,7 +258,5 @@ class RutherfordAtom extends Atom {
     return new Vector2( xNew, yNew ).plus( rotatePoint );
   }
 }
-
-rutherfordScattering.register( 'RutherfordAtom', RutherfordAtom );
 
 export default RutherfordAtom;

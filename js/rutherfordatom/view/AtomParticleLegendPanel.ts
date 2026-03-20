@@ -10,7 +10,6 @@
 import Node from '../../../../scenery/js/nodes/Node.js';
 import ParticleLegendPanel, { ParticleLegendPanelContentOptions, ParticleLegendPanelOptions } from '../../common/view/ParticleLegendPanel.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 
 const alphaParticleTraceStringProperty = RutherfordScatteringFluent.alphaParticleTraceStringProperty;
@@ -38,5 +37,4 @@ class AtomParticleLegendPanel extends ParticleLegendPanel {
   }
 }
 
-rutherfordScattering.register( 'AtomParticleLegendPanel', AtomParticleLegendPanel );
 export default AtomParticleLegendPanel;

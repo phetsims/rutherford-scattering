@@ -9,7 +9,6 @@
 import BasicActionsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/BasicActionsKeyboardHelpSection.js';
 import SliderControlsKeyboardHelpSection from '../../../../scenery-phet/js/keyboard/help/SliderControlsKeyboardHelpSection.js';
 import TwoColumnKeyboardHelpContent from '../../../../scenery-phet/js/keyboard/help/TwoColumnKeyboardHelpContent.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 
 export default class RutherfordScatteringKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
   public constructor() {
@@ -20,5 +19,3 @@ export default class RutherfordScatteringKeyboardHelpContent extends TwoColumnKe
     );
   }
 }
-
-rutherfordScattering.register( 'RutherfordScatteringKeyboardHelpContent', RutherfordScatteringKeyboardHelpContent );

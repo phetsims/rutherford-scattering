@@ -11,7 +11,6 @@
 import optionize from '../../../../phet-core/js/optionize.js';
 import VBox, { VBoxOptions } from '../../../../scenery/js/layout/nodes/VBox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
 
 type SelfOptions = {
@@ -57,7 +56,5 @@ class RSControlPanelVBox extends VBox {
     super.dispose();
   }
 }
-
-rutherfordScattering.register( 'RSControlPanelVBox', RSControlPanelVBox );
 
 export default RSControlPanelVBox;

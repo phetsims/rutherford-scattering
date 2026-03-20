@@ -12,7 +12,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import ParticleNodeFactory, { ELECTRON_RADIUS } from '../../common/view/ParticleNodeFactory.js';
 
 // Electron positions as [x, y] pixel coordinates within the 1912 × 1700 image space,
@@ -75,5 +74,4 @@ class PlumPuddingAtomNode extends Node {
   }
 }
 
-rutherfordScattering.register( 'PlumPuddingAtomNode', PlumPuddingAtomNode );
 export default PlumPuddingAtomNode;

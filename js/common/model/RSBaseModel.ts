@@ -11,7 +11,6 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import TEmitter from '../../../../axon/js/TEmitter.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
 import AlphaParticle from './AlphaParticle.js';
 import AtomSpace from './AtomSpace.js';
@@ -221,7 +220,5 @@ class RSBaseModel {
     this.neutronCountProperty.reset();
   }
 }
-
-rutherfordScattering.register( 'RSBaseModel', RSBaseModel );
 
 export default RSBaseModel;

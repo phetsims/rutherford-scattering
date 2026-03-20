@@ -9,7 +9,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import RSBaseModel from '../../common/model/RSBaseModel.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordAtomSpace from './RutherfordAtomSpace.js';
 import RutherfordNucleusSpace from './RutherfordNucleusSpace.js';
 
@@ -44,7 +43,5 @@ class RutherfordAtomModel extends RSBaseModel {
     super.reset();
   }
 }
-
-rutherfordScattering.register( 'RutherfordAtomModel', RutherfordAtomModel );
 
 export default RutherfordAtomModel;

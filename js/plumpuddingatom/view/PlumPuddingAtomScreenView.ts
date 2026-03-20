@@ -16,7 +16,6 @@ import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropert
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
 import RSScreenSummaryContent from '../../common/view/RSScreenSummaryContent.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingSpaceNode from './PlumPuddingSpaceNode.js';
@@ -85,5 +84,4 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
   }
 }
 
-rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
 export default PlumPuddingAtomScreenView;

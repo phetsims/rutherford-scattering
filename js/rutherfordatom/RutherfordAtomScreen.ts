@@ -12,7 +12,6 @@ import Tandem from '../../../tandem/js/Tandem.js';
 import RSColors from '../common/RSColors.js';
 import RSConstants from '../common/RSConstants.js';
 import RutherfordScatteringKeyboardHelpContent from '../common/view/RutherfordScatteringKeyboardHelpContent.js';
-import rutherfordScattering from '../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from './model/RutherfordAtomModel.js';
 import RutherfordAtomScreenView from './view/RutherfordAtomScreenView.js';
@@ -44,5 +43,4 @@ class RutherfordAtomScreen extends Screen<RutherfordAtomModel, RutherfordAtomScr
   }
 }
 
-rutherfordScattering.register( 'RutherfordAtomScreen', RutherfordAtomScreen );
 export default RutherfordAtomScreen;

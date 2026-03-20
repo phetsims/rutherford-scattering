@@ -9,7 +9,6 @@
 
 import optionize from '../../../../phet-core/js/optionize.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import ParticleLegendPanel, { ParticleLegendPanelContentOptions, ParticleLegendPanelOptions } from './ParticleLegendPanel.js';
 import ParticleNodeFactory from './ParticleNodeFactory.js';
@@ -59,5 +58,4 @@ class NuclearParticleLegendPanel extends ParticleLegendPanel {
   }
 }
 
-rutherfordScattering.register( 'NuclearParticleLegendPanel', NuclearParticleLegendPanel );
 export default NuclearParticleLegendPanel;

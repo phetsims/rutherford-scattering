@@ -9,7 +9,6 @@
 
 import ScreenSummaryContent, { ScreenSummaryContentOptions } from '../../../../joist/js/ScreenSummaryContent.js';
 import WithRequired from '../../../../phet-core/js/types/WithRequired.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 
 type RSScreenSummaryContentOptions = WithRequired<ScreenSummaryContentOptions,
   'playAreaContent' | 'controlAreaContent' | 'interactionHintContent'>;
@@ -20,7 +19,5 @@ class RSScreenSummaryContent extends ScreenSummaryContent {
     super( providedOptions );
   }
 }
-
-rutherfordScattering.register( 'RSScreenSummaryContent', RSScreenSummaryContent );
 
 export default RSScreenSummaryContent;

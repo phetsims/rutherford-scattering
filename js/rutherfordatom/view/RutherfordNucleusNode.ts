@@ -14,7 +14,6 @@ import CanvasNode, { CanvasNodeOptions } from '../../../../scenery/js/nodes/Canv
 import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordNucleus from '../model/RutherfordNucleus.js';
 
 // constants
@@ -257,8 +256,6 @@ class RutherfordNucleusNode extends NucleusCanvasNode {
     return new IconCanvasNode( nucleus );
   }
 }
-
-rutherfordScattering.register( 'RutherfordNucleusNode', RutherfordNucleusNode );
 
 class IconCanvasNode extends NucleusCanvasNode {
 

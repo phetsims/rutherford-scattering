@@ -16,7 +16,6 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import RSColors from '../../common/RSColors.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordAtomSpace from '../model/RutherfordAtomSpace.js';
 
 // constants
@@ -94,5 +93,4 @@ class AtomCollectionNode extends Node {
   }
 }
 
-rutherfordScattering.register( 'AtomCollectionNode', AtomCollectionNode );
 export default AtomCollectionNode;

@@ -10,7 +10,6 @@ import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import AtomSpace from '../../common/model/AtomSpace.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordAtom from './RutherfordAtom.js';
 import RutherfordNucleus from './RutherfordNucleus.js';
 
@@ -32,7 +31,5 @@ class RutherfordNucleusSpace extends AtomSpace {
     this.checkAtomBounds();
   }
 }
-
-rutherfordScattering.register( 'RutherfordNucleusSpace', RutherfordNucleusSpace );
 
 export default RutherfordNucleusSpace;

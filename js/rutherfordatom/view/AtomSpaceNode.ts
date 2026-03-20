@@ -15,7 +15,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import AtomCollectionNode from './AtomCollectionNode.js';
@@ -74,7 +73,5 @@ class AtomSpaceNode extends ParticleSpaceNode {
     context.drawImage( this.atomsNode.image, x, y, this.atomsNode.image.width, this.atomsNode.image.height );
   }
 }
-
-rutherfordScattering.register( 'AtomSpaceNode', AtomSpaceNode );
 
 export default AtomSpaceNode;
