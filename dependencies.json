@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.26 Wed Jun 11 2025 17:10:51 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# rutherford-scattering 1.1.27-rc.1 Sat Mar 21 2026 10:47:12 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "a0719f137fb98645df9deb35d781f74948da80e7",
+    "sha": "afdb6fa372868f2877d15270b53f0911296c48d1",
     "branch": "1.1"
   },
   "scenery": {
