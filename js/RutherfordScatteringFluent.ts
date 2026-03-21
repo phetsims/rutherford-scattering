@@ -146,3 +146,5 @@ const RutherfordScatteringFluent = {
 };
 
 export default RutherfordScatteringFluent;
+
+rutherfordScattering.register('RutherfordScatteringFluent', RutherfordScatteringFluent);

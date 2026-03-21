@@ -76,4 +76,6 @@ type StringsType = {
 
 const RutherfordScatteringStrings = getStringModule( 'RUTHERFORD_SCATTERING' ) as StringsType;
 
+rutherfordScattering.register( 'RutherfordScatteringStrings', RutherfordScatteringStrings );
+
 export default RutherfordScatteringStrings;
