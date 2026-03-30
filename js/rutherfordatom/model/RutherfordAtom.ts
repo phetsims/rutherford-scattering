@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Model for the 'Rutherford Atom', responsible for moving alpha particles within its bounds.  For
@@ -15,7 +15,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import AlphaParticle from '../../common/model/AlphaParticle.js';
 import Atom from '../../common/model/Atom.js';
 import RSConstants from '../../common/RSConstants.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordAtom extends Atom {
 
@@ -259,7 +258,5 @@ class RutherfordAtom extends Atom {
     return new Vector2( xNew, yNew ).plus( rotatePoint );
   }
 }
-
-rutherfordScattering.register( 'RutherfordAtom', RutherfordAtom );
 
 export default RutherfordAtom;

@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Location for all colors, especially those that must change for projector mode.
@@ -97,7 +97,5 @@ const RSColors = {
     default: new Color( 255, 0, 0 )
   } )
 };
-
-rutherfordScattering.register( 'RSColors', RSColors );
 
 export default RSColors;

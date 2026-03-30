@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * PlumPuddingSpaceNode is the space in which atoms and alpha particles are rendered.
@@ -13,7 +13,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import { rasterizeNode } from '../../../../scenery/js/util/rasterizeNode.js';
 import ParticleSpaceNode, { ParticleSpaceNodeOptions } from '../../common/view/ParticleSpaceNode.js';
 import RSColors from '../../common/RSColors.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingAtomNode from './PlumPuddingAtomNode.js';
 
@@ -49,10 +48,10 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
 
     this.atomNode = new PlumPuddingAtomNode( this.bounds );
 
-    // calculate center positioning of plum pudding Node
-    const imageX = this.bounds.centerX - this.atomNode.width / 2;
-    const imageY = this.bounds.centerY - this.atomNode.height / 2;
-    this.atomNodeRect = { x: imageX, y: imageY, width: this.atomNode.width, height: this.atomNode.height };
+    // calculate center positioning of plum pudding Node using display dimensions (not the full-res node size)
+    const imageX = this.bounds.centerX - this.atomNode.displayWidth / 2;
+    const imageY = this.bounds.centerY - this.atomNode.displayHeight / 2;
+    this.atomNodeRect = { x: imageX, y: imageY, width: this.atomNode.displayWidth, height: this.atomNode.displayHeight };
     this.atomCanvas = rasterizeNode( this.atomNode, { useCanvas: true, wrap: false } ).image;
 
     this.invalidatePaint();
@@ -67,7 +66,5 @@ class PlumPuddingSpaceNode extends ParticleSpaceNode {
       this.atomNodeRect.width, this.atomNodeRect.height );
   }
 }
-
-rutherfordScattering.register( 'PlumPuddingSpaceNode', PlumPuddingSpaceNode );
 
 export default PlumPuddingSpaceNode;

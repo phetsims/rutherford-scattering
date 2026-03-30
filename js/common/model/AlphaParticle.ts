@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Alpha particle representation - speed, orientation, current/past positions.
@@ -15,7 +15,6 @@ import Matrix3 from '../../../../dot/js/Matrix3.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import Atom from './Atom.js';
 
 type SelfOptions = {
@@ -138,7 +137,5 @@ class AlphaParticle {
     this.preparedBoundingBox = transformedShape;
   }
 }
-
-rutherfordScattering.register( 'AlphaParticle', AlphaParticle );
 
 export default AlphaParticle;

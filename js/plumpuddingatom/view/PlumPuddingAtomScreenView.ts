@@ -15,7 +15,7 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
+import RSScreenSummaryContent from '../../common/view/RSScreenSummaryContent.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import PlumPuddingAtomModel from '../model/PlumPuddingAtomModel.js';
 import PlumPuddingSpaceNode from './PlumPuddingSpaceNode.js';
@@ -31,7 +31,12 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
     } );
 
     super( model, atomicScaleStringProperty, {
-      includePlumPuddingLegend: true
+      includePlumPuddingLegend: true,
+      screenSummaryContent: new RSScreenSummaryContent( {
+        playAreaContent: RutherfordScatteringFluent.a11y.screenSummary.plumPuddingAtom.playAreaStringProperty,
+        controlAreaContent: RutherfordScatteringFluent.a11y.screenSummary.plumPuddingAtom.controlAreaStringProperty,
+        interactionHintContent: RutherfordScatteringFluent.a11y.screenSummary.plumPuddingAtom.interactionHintStringProperty
+      } )
     } );
 
     // create the new control panel
@@ -49,15 +54,11 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
       legendPanel,
       particlePropertiesPanel
     ];
-    const controlPanel = this.createControlPanel( panels );
-    this.addChild( controlPanel );
+    const controlPanels = this.createControlPanelVBox( panels );
+    this.addChild( controlPanels );
 
-    if ( controlPanel ) {
-      const newOrder = _.union( [ controlPanel ], this.pdomControlAreaNode.pdomOrder );
-      this.pdomControlAreaNode.setPDOMOrder( newOrder );
-    }
-
-    this.setPlayAreaPDOMOrder( panels );
+    this.setPlayAreaPDOMOrder( [ controlPanels ] );
+    this.setControlAreaPDOMOrder();
   }
 
 
@@ -83,5 +84,4 @@ class PlumPuddingAtomScreenView extends RSBaseScreenView {
   }
 }
 
-rutherfordScattering.register( 'PlumPuddingAtomScreenView', PlumPuddingAtomScreenView );
 export default PlumPuddingAtomScreenView;

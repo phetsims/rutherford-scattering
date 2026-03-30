@@ -11,7 +11,7 @@ import ScreenIcon from '../../../joist/js/ScreenIcon.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import RSColors from '../common/RSColors.js';
 import RSConstants from '../common/RSConstants.js';
-import rutherfordScattering from '../rutherfordScattering.js';
+import RutherfordScatteringKeyboardHelpContent from '../common/view/RutherfordScatteringKeyboardHelpContent.js';
 import RutherfordScatteringFluent from '../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from './model/RutherfordAtomModel.js';
 import RutherfordAtomScreenView from './view/RutherfordAtomScreenView.js';
@@ -31,6 +31,7 @@ class RutherfordAtomScreen extends Screen<RutherfordAtomModel, RutherfordAtomScr
       name: RutherfordScatteringFluent.rutherfordAtomStringProperty,
       backgroundColorProperty: RSColors.backgroundColorProperty,
       homeScreenIcon: homeScreenIcon,
+      createKeyboardHelpNode: () => new RutherfordScatteringKeyboardHelpContent(),
       tandem: Tandem.OPT_OUT
     };
 
@@ -42,5 +43,4 @@ class RutherfordAtomScreen extends Screen<RutherfordAtomModel, RutherfordAtomScr
   }
 }
 
-rutherfordScattering.register( 'RutherfordAtomScreen', RutherfordAtomScreen );
 export default RutherfordAtomScreen;

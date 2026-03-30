@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Visual representation of a collection of rutherford atoms. This draws the actual nuclei and electron shells in the
@@ -16,7 +16,6 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import RSColors from '../../common/RSColors.js';
 import RSQueryParameters from '../../common/RSQueryParameters.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordAtomSpace from '../model/RutherfordAtomSpace.js';
 
 // constants
@@ -94,5 +93,4 @@ class AtomCollectionNode extends Node {
   }
 }
 
-rutherfordScattering.register( 'AtomCollectionNode', AtomCollectionNode );
 export default AtomCollectionNode;

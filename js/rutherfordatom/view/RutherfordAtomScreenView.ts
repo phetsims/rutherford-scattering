@@ -4,6 +4,7 @@
  * View for the 'Rutherford Atom' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
+ * @author Marla Schulz (PhET Interactive Simulations)
  */
 
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
@@ -27,12 +28,12 @@ import RSQueryParameters from '../../common/RSQueryParameters.js';
 import AlphaParticlePropertiesPanel from '../../common/view/AlphaParticlePropertiesPanel.js';
 import NuclearParticleLegendPanel from '../../common/view/NuclearParticleLegendPanel.js';
 import RSBaseScreenView from '../../common/view/RSBaseScreenView.js';
+import RSScreenSummaryContent from '../../common/view/RSScreenSummaryContent.js';
 import ScaleInfoNode from '../../common/view/ScaleInfoNode.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RutherfordAtomModel from '../model/RutherfordAtomModel.js';
 import AtomParticleLegendPanel from './AtomParticleLegendPanel.js';
-import AtomPropertiesPanel from './AtomPropertiesPanel.js';
+import AtomPropertiesPanel, { AtomPropertiesPanelContent } from './AtomPropertiesPanel.js';
 import AtomSpaceNode from './AtomSpaceNode.js';
 import NucleusSpaceNode from './NucleusSpaceNode.js';
 import RutherfordNucleusNode from './RutherfordNucleusNode.js';
@@ -59,7 +60,12 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     } );
 
     super( model, nucleusScaleStringProperty, {
-      includeElectronLegend: false
+      includeElectronLegend: false,
+      screenSummaryContent: new RSScreenSummaryContent( {
+        playAreaContent: RutherfordScatteringFluent.a11y.screenSummary.rutherfordAtom.playAreaStringProperty,
+        controlAreaContent: RutherfordScatteringFluent.a11y.screenSummary.rutherfordAtom.controlAreaStringProperty,
+        interactionHintContent: RutherfordScatteringFluent.a11y.screenSummary.rutherfordAtom.interactionHintStringProperty
+      } )
     } );
 
     // scale info for the 'atom' scene, only visible when atom scene is selected
@@ -68,60 +74,33 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     } );
     this.addChild( atomicScaleInfoNode );
 
-    // create the panels of the control panel on the right
-    const createAtomPanel = () => {
+    // create the legend and control panels for the atom scene
+    const panelOptions = { resize: false };
+    const atomLegendContent = AtomParticleLegendPanel.createPanelContent( panelOptions );
+    const atomLegendPanel = new AtomParticleLegendPanel( atomLegendContent, panelOptions );
 
-      // create content for the control panels
-      const atomLegendContent = AtomParticleLegendPanel.createPanelContent( { resize: false } );
+    const atomParticlePropertiesPanel = new AlphaParticlePropertiesPanel(
+      model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, panelOptions );
 
-      const atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
-
-      // create the panels
-      const panelOptions = { resize: false };
-      const legendPanel = new AtomParticleLegendPanel( atomLegendContent, panelOptions );
-      const particlePropertiesPanel = new AlphaParticlePropertiesPanel(
-        model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
-      const atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, panelOptions );
-
-      return [
-        legendPanel,
-        particlePropertiesPanel,
-        atomPropertiesPanel
-      ];
-    };
+    const atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, panelOptions );
+    const atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, panelOptions );
+    const atomControlPanels = this.createControlPanelVBox( [ atomLegendPanel, atomParticlePropertiesPanel, atomPropertiesPanel ] );
+    this.addChild( atomControlPanels );
 
 
-    // create the panels of the control panel on the right
-    const createNucleusPanel = () => {
-
-      // create content for the control panels
-      const nuclearLegendContent = NuclearParticleLegendPanel.createPanelContent( {
-        resize: false,
-        includeElectron: false,
-        includePlumPudding: false
-      } );
-      const atomPropertiesContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
-
-      // create the panels
-      const panelOptions = { resize: false };
-      const legendPanel = new NuclearParticleLegendPanel( nuclearLegendContent, panelOptions );
-      const particlePropertiesPanel = new AlphaParticlePropertiesPanel(
-        model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
-      const atomPropertiesPanel = new AtomPropertiesPanel( atomPropertiesContent, panelOptions );
-
-      return [
-        legendPanel,
-        particlePropertiesPanel,
-        atomPropertiesPanel
-      ];
-    };
-
-    // {Node} control panel is created below by sceneProperty listener, to correspond to scene
-    const atomControlPanel = this.createControlPanel( createAtomPanel() );
-    const nucleusControlPanel = this.createControlPanel( createNucleusPanel() );
-
-    this.addChild( atomControlPanel );
-    this.addChild( nucleusControlPanel );
+    // create the legend and control panels for the nucleus scene
+    const nuclearLegendContent = NuclearParticleLegendPanel.createPanelContent( {
+      resize: false,
+      includeElectron: false,
+      includePlumPudding: false
+    } );
+    const nucleusLegendPanel = new NuclearParticleLegendPanel( nuclearLegendContent, panelOptions );
+    const nucleusParticlePropertiesPanel = new AlphaParticlePropertiesPanel(
+      model.alphaParticleEnergyProperty, this.showAlphaTraceProperty, { resize: false } );
+    const nucleusAtomPropertiesContent: AtomPropertiesPanelContent = AtomPropertiesPanel.createPanelContent( model, { resize: false } );
+    const nucleusAtomPropertiesPanel = new AtomPropertiesPanel( nucleusAtomPropertiesContent, panelOptions );
+    const nucleusControlPanels = this.createControlPanelVBox( [ nucleusLegendPanel, nucleusParticlePropertiesPanel, nucleusAtomPropertiesPanel ] );
+    this.addChild( nucleusControlPanels );
 
     // for the 'Atom' scene, the beam should be semi-transparent, the scale indicator
     // should be updated, and the control/legend panels need to change
@@ -139,8 +118,8 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
       beam.fill = atomSceneVisible ? RSColors.atomBeamColorProperty : RSColors.nucleusBeamColorProperty;
 
       // set the visibility of the control panels
-      atomControlPanel.visible = atomSceneVisible;
-      nucleusControlPanel.visible = !atomSceneVisible;
+      atomControlPanels.visible = atomSceneVisible;
+      nucleusControlPanels.visible = !atomSceneVisible;
     } );
 
     /**
@@ -195,7 +174,8 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
     this.sceneRadioButtonGroup = createRadioButtons( colorProfileProperty );
     this.addChild( this.sceneRadioButtonGroup );
 
-    this.setPlayAreaPDOMOrder( [ atomControlPanel, nucleusControlPanel, this.sceneRadioButtonGroup ] );
+    this.setPlayAreaPDOMOrder( [ atomControlPanels, nucleusControlPanels ] );
+    this.setControlAreaPDOMOrder( this.sceneRadioButtonGroup );
   }
 
 
@@ -268,5 +248,4 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
   }
 }
 
-rutherfordScattering.register( 'RutherfordAtomScreenView', RutherfordAtomScreenView );
 export default RutherfordAtomScreenView;

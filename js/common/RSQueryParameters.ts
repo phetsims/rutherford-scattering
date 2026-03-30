@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Query parameters supported by this simulation.
@@ -7,7 +7,6 @@
  */
 
 import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
-import rutherfordScattering from '../rutherfordScattering.js';
 
 const RSQueryParameters = QueryStringMachine.getAll( {
 
@@ -17,7 +16,5 @@ const RSQueryParameters = QueryStringMachine.getAll( {
   // show a count of the number of times a particle is removed from the atom space in error
   showErrorCount: { type: 'flag' }
 } );
-
-rutherfordScattering.register( 'RSQueryParameters', RSQueryParameters );
 
 export default RSQueryParameters;

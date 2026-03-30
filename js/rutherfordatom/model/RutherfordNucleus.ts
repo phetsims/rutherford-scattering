@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Model for the Rutherford Nucleus.  Has Protons, and neutrons which can change in number.
@@ -12,7 +12,6 @@ import Utils from '../../../../dot/js/Utils.js';
 import Particle from '../../../../shred/js/model/Particle.js';
 import ParticleAtom from '../../../../shred/js/model/ParticleAtom.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 
 class RutherfordNucleus extends ParticleAtom {
 
@@ -61,5 +60,4 @@ class RutherfordNucleus extends ParticleAtom {
   }
 }
 
-rutherfordScattering.register( 'RutherfordNucleus', RutherfordNucleus );
 export default RutherfordNucleus;

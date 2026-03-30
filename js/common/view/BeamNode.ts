@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * BeamNode is the beam the comes out of the gun.
@@ -9,7 +9,6 @@
 import Property from '../../../../axon/js/Property.js';
 import optionize, { type EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
 import Rectangle, { RectangleOptions } from '../../../../scenery/js/nodes/Rectangle.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RSConstants from '../RSConstants.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -30,7 +29,5 @@ class BeamNode extends Rectangle {
     visibleProperty.linkAttribute( this, 'visible' );
   }
 }
-
-rutherfordScattering.register( 'BeamNode', BeamNode );
 
 export default BeamNode;

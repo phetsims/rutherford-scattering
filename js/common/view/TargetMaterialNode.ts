@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * The material target which the particle gun is directed towards.
@@ -11,7 +11,6 @@ import Shape from '../../../../kite/js/Shape.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 
 // constants
 const BACK_DEPTH = 30;
@@ -39,7 +38,5 @@ class TargetMaterialNode extends Path {
       .close(), options );
   }
 }
-
-rutherfordScattering.register( 'TargetMaterialNode', TargetMaterialNode );
 
 export default TargetMaterialNode;

@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Indicates the portion of the target material that is shown in the exploded view.
@@ -10,7 +10,6 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 
 // constants
 const BACK_DEPTH = 4;
@@ -35,7 +34,5 @@ class TinyBox extends Path {
       .close(), options );
   }
 }
-
-rutherfordScattering.register( 'TinyBox', TinyBox );
 
 export default TinyBox;

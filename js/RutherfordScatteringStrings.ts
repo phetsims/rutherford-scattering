@@ -40,7 +40,18 @@ type StringsType = {
     '0nuclearScaleStringProperty': LocalizedStringProperty;
   };
   'a11y': {
-    'screenSummaryStringProperty': LocalizedStringProperty;
+    'screenSummary': {
+      'rutherfordAtom': {
+        'playAreaStringProperty': LocalizedStringProperty;
+        'controlAreaStringProperty': LocalizedStringProperty;
+        'interactionHintStringProperty': LocalizedStringProperty;
+      };
+      'plumPuddingAtom': {
+        'playAreaStringProperty': LocalizedStringProperty;
+        'controlAreaStringProperty': LocalizedStringProperty;
+        'interactionHintStringProperty': LocalizedStringProperty;
+      }
+    };
     'observationWindowStringProperty': LocalizedStringProperty;
     'atomSpaceDescriptionStringProperty': LocalizedStringProperty;
     'nucleusSpaceDescriptionStringProperty': LocalizedStringProperty;
@@ -53,17 +64,13 @@ type StringsType = {
     'traceCheckboxDescriptionStringProperty': LocalizedStringProperty;
     'atomSettingsStringProperty': LocalizedStringProperty;
     'protonsValuePatternStringProperty': LocalizedStringProperty;
-    'protonsPerAtomValuePatternStringProperty': LocalizedStringProperty;
     'protonSliderDescriptionStringProperty': LocalizedStringProperty;
     'neutronsValuePatternStringProperty': LocalizedStringProperty;
-    'neutronsPerAtomValuePatternStringProperty': LocalizedStringProperty;
     'neutronSliderDescriptionStringProperty': LocalizedStringProperty;
     'atomicScaleViewStringProperty': LocalizedStringProperty;
     'nuclearScaleViewStringProperty': LocalizedStringProperty;
     'switchScaleStringProperty': LocalizedStringProperty;
     'switchScaleDescriptionStringProperty': LocalizedStringProperty;
-    'otherViewingStreamingOptionsStringProperty': LocalizedStringProperty;
-    'otherOptionsDescriptionStringProperty': LocalizedStringProperty;
   }
 };
 

@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Model for the Rutherford Atom space, responsible for atoms of the model and model bounds.
@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import AlphaParticle from './AlphaParticle.js';
 import Atom from './Atom.js';
 
@@ -228,7 +227,5 @@ class AtomSpace {
     }
   }
 }
-
-rutherfordScattering.register( 'AtomSpace', AtomSpace );
 
 export default AtomSpace;

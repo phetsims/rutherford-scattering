@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Base object for atoms. Keeps track of active particles within its bounds.
@@ -11,7 +11,6 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import AlphaParticle from './AlphaParticle.js';
 import Gun from './Gun.js';
 
@@ -139,7 +138,5 @@ class Atom {
     this.removeAllParticles();
   }
 }
-
-rutherfordScattering.register( 'Atom', Atom );
 
 export default Atom;

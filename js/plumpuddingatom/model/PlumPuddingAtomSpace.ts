@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Model for the Plum Pudding Atom space.  In this representation, the particles move
@@ -10,7 +10,6 @@
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import AtomSpace from '../../common/model/AtomSpace.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 
 class PlumPuddingAtomSpace extends AtomSpace {
 
@@ -18,7 +17,5 @@ class PlumPuddingAtomSpace extends AtomSpace {
     super( protonCountProperty, bounds );
   }
 }
-
-rutherfordScattering.register( 'PlumPuddingAtomSpace', PlumPuddingAtomSpace );
 
 export default PlumPuddingAtomSpace;

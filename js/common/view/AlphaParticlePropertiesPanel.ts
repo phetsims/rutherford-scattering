@@ -17,7 +17,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import HSlider from '../../../../sun/js/HSlider.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RutherfordScatteringFluent from '../../RutherfordScatteringFluent.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
@@ -159,5 +158,4 @@ class AlphaParticlePropertiesPanel extends Panel {
   }
 }
 
-rutherfordScattering.register( 'AlphaParticlePropertiesPanel', AlphaParticlePropertiesPanel );
 export default AlphaParticlePropertiesPanel;

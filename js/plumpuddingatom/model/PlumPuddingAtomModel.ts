@@ -1,4 +1,4 @@
-// Copyright 2016-2025, University of Colorado Boulder
+// Copyright 2016-2026, University of Colorado Boulder
 
 /**
  * Model for the 'Plum Pudding Atom' screen.
@@ -7,7 +7,6 @@
  */
 
 import RSBaseModel from '../../common/model/RSBaseModel.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import PlumPuddingAtomSpace from './PlumPuddingAtomSpace.js';
 
 class PlumPuddingAtomModel extends RSBaseModel {
@@ -24,7 +23,5 @@ class PlumPuddingAtomModel extends RSBaseModel {
     this.atomSpaces.push( this.plumPuddingSpace );
   }
 }
-
-rutherfordScattering.register( 'PlumPuddingAtomModel', PlumPuddingAtomModel );
 
 export default PlumPuddingAtomModel;

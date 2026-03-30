@@ -15,7 +15,6 @@ import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Font from '../../../../scenery/js/util/Font.js';
-import rutherfordScattering from '../../rutherfordScattering.js';
 import RSColors from '../RSColors.js';
 import RSConstants from '../RSConstants.js';
 
@@ -93,7 +92,5 @@ class ScaleInfoNode extends Node {
     super( options );
   }
 }
-
-rutherfordScattering.register( 'ScaleInfoNode', ScaleInfoNode );
 
 export default ScaleInfoNode;
