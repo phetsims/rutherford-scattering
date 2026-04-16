@@ -1,5 +1,5 @@
 {
-  "comment": "# rutherford-scattering 1.1.28-rc.1 Thu Apr 16 2026 18:36:08 GMT-0400 (Eastern Daylight Time)",
+  "comment": "# rutherford-scattering 1.1.28-rc.2 Thu Apr 16 2026 19:14:14 GMT-0400 (Eastern Daylight Time)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "HEAD"
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "rutherford-scattering": {
-    "sha": "9cc53ff4bf8ac8d5b7d9ba4320a66121eb811c73",
+    "sha": "2a93706d1ea322aa7f5f9f63327d0b5f00c11d06",
     "branch": "1.1"
   },
   "scenery": {
