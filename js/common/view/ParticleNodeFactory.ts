@@ -26,6 +26,7 @@ const NEUTRON_COLOR = 'rgb(192,192,192)';
 const PARTICLE_COLOR = 'rgb(255,0,255)';
 const ENERGY_LEVEL_COLOR = 'rgb(128,128,128)';
 export const ELECTRON_RADIUS = 2.5;
+export const ELECTRON_LINE_WIDTH = 0.5;
 const PROTON_RADIUS = 4;
 const NEUTRON_RADIUS = 4;
 const PARTICLE_RADIUS = 2;
@@ -38,8 +39,8 @@ const ParticleNodeFactory = {
   /**
    * Creates an electron node.
    */
-  createElectron( radius = ELECTRON_RADIUS ): Node {
-    return new ParticleNode( radius, ELECTRON_COLOR, { stroke: 'black', lineWidth: 1.5 } );
+  createElectron( radius = ELECTRON_RADIUS, lineWidth = ELECTRON_LINE_WIDTH ): Node {
+    return new ParticleNode( radius, ELECTRON_COLOR, { stroke: 'black', lineWidth: lineWidth } );
   },
 
   /**

@@ -12,7 +12,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import plumPudding_png from '../../../images/plumPudding_png.js';
-import ParticleNodeFactory, { ELECTRON_RADIUS } from '../../common/view/ParticleNodeFactory.js';
+import ParticleNodeFactory, { ELECTRON_LINE_WIDTH, ELECTRON_RADIUS } from '../../common/view/ParticleNodeFactory.js';
 
 // Electron positions as [x, y] pixel coordinates within the 1912 × 1700 image space,
 // extracted from the original plum-pudding atom PNG by providing the png to Claude code.
@@ -57,11 +57,12 @@ class PlumPuddingAtomNode extends Node {
 
     // Electron radius in image-pixel space: after drawImage downsamples by `scale`, the visual radius = ELECTRON_RADIUS.
     const electronRadius = ELECTRON_RADIUS / scale;
+    const electronLineWidth = ELECTRON_LINE_WIDTH / scale;
 
     this.addChild( new Image( plumPudding_png ) );
 
     for ( const [ x, y ] of ELECTRON_POSITIONS ) {
-      const electron = ParticleNodeFactory.createElectron( electronRadius );
+      const electron = ParticleNodeFactory.createElectron( electronRadius, electronLineWidth );
       electron.centerX = x;
       electron.centerY = y;
       this.addChild( electron );
