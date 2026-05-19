@@ -11,15 +11,12 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import CanvasNode, { CanvasNodeOptions } from '../../../../scenery/js/nodes/CanvasNode.js';
-import RSColors from '../../common/RSColors.js';
 import RSConstants from '../../common/RSConstants.js';
 import ParticleNodeFactory from '../../common/view/ParticleNodeFactory.js';
 import RutherfordNucleus from '../model/RutherfordNucleus.js';
 
 // constants
 const MIN_NUCLEUS_RADIUS = 20; // view coordinates
-const OUTLINE_LINE_WIDTH = 1.5;
-const OUTLINE_LINE_DASH = [ 2, 3 ];
 const MIN_PARTICLE_COUNT = RSConstants.MIN_PROTON_COUNT + RSConstants.MIN_NEUTRON_COUNT;
 const MAX_PARTICLE_COUNT = RSConstants.MAX_PROTON_COUNT + RSConstants.MAX_NEUTRON_COUNT;
 const PARTICLE_COUNT_EXP = 0.333;
@@ -217,29 +214,16 @@ class RutherfordNucleusNode extends NucleusCanvasNode {
 
     // clear
     context.clearRect( bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight() );
-    this.renderAtomOutline = this.userInteractionProperty.value;
 
-    // outline rendering
-    if ( this.renderAtomOutline ) {
-      context.beginPath();
-      context.lineWidth = OUTLINE_LINE_WIDTH;
-      context.setLineDash( OUTLINE_LINE_DASH );
-      context.strokeStyle = RSColors.nucleusOutlineColorProperty.get().toCSS();
-      context.arc( this.centerX, this.centerY, this.radius, 0, 2 * Math.PI );
-      context.stroke();
+    // Slight chance the images used are not loaded. In that case, return & try again on next frame
+    if ( this.protonImage === null || this.neutronImage === null ) {
+      return;
     }
-    else {  // Detailed rendering
 
-      // Slight chance the images used are not loaded. In that case, return & try again on next frame
-      if ( this.protonImage === null || this.neutronImage === null ) {
-        return;
-      }
+    this.paintNucleusIcon( this.rutherfordNucleus, this.canvasBounds, context, 'canvasArc' );
 
-      this.paintNucleusIcon( this.rutherfordNucleus, this.canvasBounds, context, 'canvasArc' );
-
-      // notify as dirty so that the nucleus gets redrawn
-      this.isDirty = true;
-    }
+    // notify as dirty so that the nucleus gets redrawn
+    this.isDirty = true;
   }
 
 
