@@ -99,7 +99,7 @@ class AlphaParticlePropertiesPanel extends Panel {
       trackSize: new Dimension2( sliderWidth, 1 ),
       thumbSize: RSConstants.PANEL_SLIDER_THUMB_DIMENSION,
       thumbTouchAreaXDilation: 15,
-      thumbTouchAreaYDilation: 12,
+      thumbTouchAreaYDilation: RSConstants.PANEL_CHILD_SPACING,
 
       // pdom
       keyboardStep: 5,
