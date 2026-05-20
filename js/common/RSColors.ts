@@ -7,7 +7,6 @@
  * @author Jesse Greenberg
  */
 
-import HighlightPath from '../../../scenery/js/accessibility/HighlightPath.js';
 import Color from '../../../scenery/js/util/Color.js';
 import ProfileColorProperty from '../../../scenery/js/util/ProfileColorProperty.js';
 import rutherfordScattering from '../rutherfordScattering.js';
@@ -71,14 +70,6 @@ const RSColors = {
   nucleusOutlineColorProperty: new ProfileColorProperty( rutherfordScattering, 'nucleusOutlineColor', {
     default: new Color( 255, 255, 255 ),
     projector: new Color( 0, 0, 0 )
-  } ),
-  innerGroupHighlightColorProperty: new ProfileColorProperty( rutherfordScattering, 'innerGroupHighlightColor', {
-    default: HighlightPath.INNER_DARK_GROUP_FOCUS_COLOR,
-    projector: HighlightPath.INNER_LIGHT_GROUP_FOCUS_COLOR
-  } ),
-  outerGroupHighlightColorProperty: new ProfileColorProperty( rutherfordScattering, 'outerGroupHighlightColor', {
-    default: HighlightPath.OUTER_DARK_GROUP_FOCUS_COLOR,
-    projector: HighlightPath.OUTER_LIGHT_GROUP_FOCUS_COLOR
   } ),
   plumPuddingTraceColorProperty: new ProfileColorProperty( rutherfordScattering, 'plumPuddingTraceColor', {
     default: new Color( '#C4C4C4' ),
