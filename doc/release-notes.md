@@ -29,7 +29,7 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 *
 -->
 
-## 1.2 (YYYY-MM-DD)
+## 1.2 (2026-05-20)
 
 ### New Features:
 * Alternative Input
@@ -39,3 +39,4 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 
 ### Other Changes:
 * Improved color contrast.
+* Nucleus adjusts to proton and neutron changes without toggling visibility.
