@@ -53,10 +53,10 @@ class RutherfordAtomScreenView extends RSBaseScreenView {
   public constructor( model: RutherfordAtomModel ) {
 
     const nucleusScaleStringProperty = new DerivedStringProperty( [ nuclearScalePatternStringProperty ], ( pattern: string ) => {
-      return StringUtils.format( pattern, '1.5 x 10<sup>-13</sup>' );
+      return StringUtils.format( pattern, StringUtils.wrapLTR( '1.5 x 10<sup>-13</sup>' ) );
     } );
     const atomicScaleStringProperty = new DerivedStringProperty( [ atomicScalePatternStringProperty ], ( pattern: string ) => {
-      return StringUtils.format( pattern, '6.0 x 10<sup>-10</sup>' );
+      return StringUtils.format( pattern, StringUtils.wrapLTR( '6.0 x 10<sup>-10</sup>' ) );
     } );
 
     super( model, nucleusScaleStringProperty, {
