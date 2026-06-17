@@ -25,7 +25,7 @@ const RSColors = {
   } ),
   radioButtonBorderColorProperty: new ProfileColorProperty( rutherfordScattering, 'radioButtonBorderColor', {
     default: new Color( 200, 200, 95 ),
-    projector: new Color( 49, 193, 221 )
+    projector: new Color( 0, 162, 194 )
   } ),
   panelBorderColorProperty: new ProfileColorProperty( rutherfordScattering, 'panelBorderColor', {
     default: new Color( 128, 128, 128 ),
@@ -40,20 +40,20 @@ const RSColors = {
     projector: new Color( 0, 0, 0 )
   } ),
   protonsLabelColorProperty: new ProfileColorProperty( rutherfordScattering, 'protonsLabelColor', {
-    default: new Color( 185, 50, 8 ),
-    projector: new Color( 185, 50, 8 )
+    default: new Color( 220, 58, 11 ),
+    projector: new Color( 220, 58, 11 )
   } ),
   neutronsLabelColorProperty: new ProfileColorProperty( rutherfordScattering, 'neutronsLabelColor', {
     default: new Color( 160, 160, 160 ),
     projector: new Color( 125, 125, 125 )
   } ),
   atomBeamColorProperty: new ProfileColorProperty( rutherfordScattering, 'atomBeamColor', {
-    default: new Color( 143, 143, 143, 0.4 ),
-    projector: new Color( 143, 143, 143, 0.4 )
+    default: new Color( 143, 143, 143, 0.7 ),
+    projector: new Color( 103, 103, 103, 0.7 )
   } ),
   nucleusBeamColorProperty: new ProfileColorProperty( rutherfordScattering, 'nucleusBeamColor', {
     default: new Color( 143, 143, 143 ),
-    projector: new Color( 163, 163, 163 )
+    projector: new Color( 103, 103, 103 )
   } ),
   nucleusColorProperty: new ProfileColorProperty( rutherfordScattering, 'nucleusColor', {
     default: new Color( 200, 200, 95 ),
